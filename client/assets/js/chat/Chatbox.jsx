@@ -39,12 +39,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick (event, value) {
-      if (value.type !== 'button') {
+    onClick (event, data) {
+      if (data.type !== 'button') {
         return;
       }
       
-      axios.post('/message', {message:value}) //js way of saying once we send a POST request to server, then if we receive a response(whatever object that comes in from the server)
+      axios.post('/message', data) //js way of saying once we send a POST request to server, then if we receive a response(whatever object that comes in from the server)
       .then((response) => {
         console.log('Response:', response);
 
@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch({
             type: 'CHAT_ADD_MESSAGE',
             payload: {
-              text: response.data,
-              type: 'message',
+              message: response.data,
+              type: 'text',
               isBot: true,
             }
           });

@@ -1,11 +1,11 @@
 const defaultState = [
   {
-    text: 'Hello, I\'m Courtney!  How can I help you?',
-    type: 'message',
+    message: 'Hello, I\'m Courtney!  How can I help you?',
+    type: 'text',
     isBot: true,
   },
   {
-    text: 'Small Claims',
+    message: 'Small Claims',
     type: 'button',
     isBot: true,
   }

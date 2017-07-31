@@ -35031,12 +35031,12 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onClick: function onClick(event, value) {
-      if (value.type !== 'button') {
+    onClick: function onClick(event, data) {
+      if (data.type !== 'button') {
         return;
       }
 
-      _axios2.default.post('/message', { message: value }) //js way of saying once we send a POST request to server, then if we receive a response(whatever object that comes in from the server)
+      _axios2.default.post('/message', data) //js way of saying once we send a POST request to server, then if we receive a response(whatever object that comes in from the server)
       .then(function (response) {
         console.log('Response:', response);
 
@@ -35044,8 +35044,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
           dispatch({
             type: 'CHAT_ADD_MESSAGE',
             payload: {
-              text: response.data,
-              type: 'message',
+              message: response.data,
+              type: 'text',
               isBot: true
             }
           });
@@ -35958,7 +35958,7 @@ var ChatBubble = function ChatBubble(props) {
   return _react2.default.createElement(
     'div',
     { className: className, onClick: props.onClick },
-    (0, _reactHtmlParser2.default)(props.text)
+    (0, _reactHtmlParser2.default)(props.message)
   );
 };
 
@@ -38923,11 +38923,11 @@ module.exports = (0, _redux.combineReducers)({
 
 
 var defaultState = [{
-  text: 'Hello, I\'m Courtney!  How can I help you?',
-  type: 'message',
+  message: 'Hello, I\'m Courtney!  How can I help you?',
+  type: 'text',
   isBot: true
 }, {
-  text: 'Small Claims',
+  message: 'Small Claims',
   type: 'button',
   isBot: true
 }];

@@ -24,14 +24,14 @@ server.get('/', (req, res) => {
 });
 
 server.post('/message', (req, res) => {
-	console.log('/message', req.body.message);
+	console.log('/message', req.body);
 	
 	// const id = uuidv1();
 	const options = {sessionId:Math.random()*1000};
 	// const options = {sessionId:req.body.sessionId};
 	//sends event request to api.ai and response to front end
-	if (req.body.message.type=='button'){
-		const msg = req.body.message.text;
+	if (req.body.type=='button'){
+		const msg = req.body.message;
 		const ev = {};
 		if (msg in events){
 			console.log(msg);
@@ -57,8 +57,8 @@ server.post('/message', (req, res) => {
 		request_to_ai.end();
 	}
 	//send text request to api.ai 
-	else if (req.body.message.type=='text'){
-		const request_to_ai = ai.textRequest(req.body.message, options);
+	else if (req.body.type=='text'){
+		const request_to_ai = ai.textRequest(req.body, options);
 		request_to_ai.on('response', (response_from_ai)=>{
 			console.log('Response:', response_from_ai.result.fulfillment);
 			const code = response_from_ai.status.code;
@@ -90,6 +90,7 @@ server.post('/message', (req, res) => {
 			console.error("Error:", error)
 		} );
 		
+		//req.body.message is supposed to be a audio file path
 		fs.readFile(req.body.message, function(error, buffer) {
 		if (error) {
 			console.log(error);

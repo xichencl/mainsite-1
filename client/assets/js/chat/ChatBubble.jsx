@@ -11,7 +11,7 @@ const ChatBubble = (props) => {
 
   return (
     <div className={className} onClick={props.onClick}>
-      { ReactHtmlParser(props.text) }
+      { ReactHtmlParser(props.message) }
     </div>
   );
 };
