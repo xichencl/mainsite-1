@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const apiai = require('apiai');
 const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
-
+const functions = require('./functions.js')
 const fs = require('fs');
 
 const PORT = 3000;
@@ -109,33 +109,22 @@ server.post('/webhook', (req, res)=>{
 	console.log('/webhook', req.body);
 	const action = req.body.result.action;
 	const response = {};
-	if (action == 'small_claims.court_lookup'){
-		//temporary test
-		const court_addresses = {'Contra Costa':'101 Summer St., Martinez, CA'};
-		
-		const params = req.body.result.parameters;
-		function get_court_address(params){
-			let locale;
-			if ('locator' in params){
-				const entity = params.locator;
-				if ('county' in entity){
-					locale = entity.county;
-				}else if ('city' in entity){
-					locale = entity.city;
-				}else{
-					locale = entity.zip-code;
-				}
-			}
-			if (locale in court_addresses){
-				return "The small claims court for "+locale+" is located at "+court_addresses[locale];
-			}else{
-				return "I cannot find any court location for "+locale+" in the State of California. Please double-check your entry.";
-			}
-		}
-		response.speech = get_court_address(params);
-		console.log('speech:', response.speech);
-		response.displayText = response.speech;
-	}
+	
+	switch (action){
+		case 'small_claims.court_lookup':
+			response.speech = functions.small_claims_court_lookup(req.body.result.parameters);
+			console.log('speech:', response.speech);
+			response.displayText = response.speech;
+			break;
+		case 'small_claims.sue_gov.resources':
+			response.speech = functions.small_claims_sue_gov_resource(req.body.result.parameters);
+			console.log('speech:', response.speech);
+			response.displayText = response.speech;
+			break;
+		default:
+			console.log("Error: no such function exists.");
+	}		
+	
 	res.setHeader('Content-Type', 'application/json');
 	res.end(JSON.stringify(response));	
 	
