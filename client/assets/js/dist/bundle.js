@@ -41200,11 +41200,39 @@ module.exports = (0, _redux.combineReducers)({
 
 
 var defaultState = [{
-  message: 'Hello, I\'m Courtney!  How can I help you?',
-  type: 'text',
+  message: "Hello, I'm Courtney!  I'm here to help you find information and resources about your case.",
+  type: 'message',
+  isBot: true
+}, {
+  message: 'Tell briefly what brought you here.',
+  type: 'message',
+  isBot: true
+}, {
+  message: 'Or you can choose a case type below.',
+  type: 'message',
   isBot: true
 }, {
   message: 'Small Claims',
+  type: 'button',
+  isBot: true
+}, {
+  message: 'Guardianship',
+  type: 'button',
+  isBot: true
+}, {
+  message: 'Family Law',
+  type: 'button',
+  isBot: true
+}, {
+  message: 'Eviction',
+  type: 'button',
+  isBot: true
+}, {
+  message: 'Domestic Violence',
+  type: 'button',
+  isBot: true
+}, {
+  message: 'Traffic',
   type: 'button',
   isBot: true
 }];
