@@ -19,7 +19,7 @@ class Chatbar extends React.Component {
         <input 
           type='text'
           placeholder='Type your message here'
-          onKeyDown={this.props.onKeyDown.bind(this)}
+          onKeyDown={(e) => this.props.onKeyDown.bind(this, e, value)()}
         />
       </div>
     );
@@ -29,14 +29,33 @@ class Chatbar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-
+	chatlog:state.chat.log
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onKeyDown (event) {
+    onKeyDown (event, data) {
+	  console.log("Message: ", data);
       if (event.keyCode === 13) {
+		  axios.post('/messge', data)
+		  .then((response) => {
+        console.log('Response:', response);
+
+        if (response.status === 200) {
+          dispatch({
+            type: 'CHAT_ADD_MESSAGE',
+            payload: {
+              message: response.data,
+              type: 'text',
+              isBot: true,
+            }
+          });
+        }
+      })
+	  .catch((error) => {
+        console.error('Error:', error);
+      });
         
       }
     }

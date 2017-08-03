@@ -14,8 +14,8 @@ const defaultState = [
 module.exports = (state = defaultState, action) => {
   switch (action.type) {
     case 'CHAT_ADD_MESSAGE': {
-      const newChat = state.slice();
-      newChat.push(action.payload);
+      const newChat = state.slice();//create a new array containing the same elements as defaultState
+      newChat.push(action.payload);//append to the end of the array
 
       return newChat;
     }

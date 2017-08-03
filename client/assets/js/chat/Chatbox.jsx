@@ -16,9 +16,10 @@ class Chatbox extends React.Component {
       <div className='grey chatbox'>
         {
           this.props.chatlog.map((value, key) => {
+			  // debugger;
             return (
               <ChatBubble 
-                { ...value } 
+                { ...value } //spread operator
                 key={key} 
                 onClick={(e) => this.props.onClick.bind(this, e, value)()}
               />
@@ -26,7 +27,7 @@ class Chatbox extends React.Component {
           })
         }
       </div>
-    );value
+    );
   }
 }
 
@@ -44,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
         return;
       }
       
-      axios.post('/message', data) //js way of saying once we send a POST request to server, then if we receive a response(whatever object that comes in from the server)
+      axios.post('/message', data) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
 
