@@ -49,29 +49,22 @@ const mapDispatchToProps = (dispatch) => {
 	
 	onKeyUp (event) {
 		if (event.keyCode === 13){
-			console.log(event.target.value);
-			// dispatch (
+			const data = {message:event.target.value, type:'text', isBot:false};
+			dispatch(
+				{
+				type: 'CHAT_ADD_MESSAGE',
+				payload: data,
+				isBot: false
+				}				
+			);
+			dispatch({
+				type: 'USER_INPUT',
+				payload:data,
+				isBot: false
+			});
+			// console.log(event.target.value);
 			
-				// {
-				// type: 'USER_INPUT',
-				// payload: {
-					// message: event.target.value,
-					// type: 'text',
-					// isBot: false,
-					// }
-				// },
-				// {
-				// type: 'CHAT_ADD_MESSAGE',
-				// payload: {
-					// message: event.target.value,
-					// type: 'text',
-					// isBot: false,
-					// }
-				// },
 			
-			// );
-			
-			const data = {message:event.target.value, type:'text', isBot:'false'};
 			axios.post('/message', data)
 			.then((response) =>{
 				console.log('Response:', response);
