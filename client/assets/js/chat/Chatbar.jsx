@@ -30,7 +30,7 @@ class Chatbar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-	chatlog:state.chat.input
+	userInput:state.chat.input
   };
 };
 
@@ -49,45 +49,46 @@ const mapDispatchToProps = (dispatch) => {
 	
 	onKeyUp (event) {
 		if (event.keyCode === 13){
-			console.log(event.target);
-			dispatch (
+			console.log(event.target.value);
+			// dispatch (
 			
-				{
-				type: 'USER_INPUT',
-				payload: {
-					message: event.target.value,
-					type: 'text',
-					isBot: false,
-					}
-				},
-				{
-				type: 'CHAT_ADD_MESSAGE',
-				payload: {
-					message: event.target.value,
-					type: 'text',
-					isBot: false,
-					}
-				},
+				// {
+				// type: 'USER_INPUT',
+				// payload: {
+					// message: event.target.value,
+					// type: 'text',
+					// isBot: false,
+					// }
+				// },
+				// {
+				// type: 'CHAT_ADD_MESSAGE',
+				// payload: {
+					// message: event.target.value,
+					// type: 'text',
+					// isBot: false,
+					// }
+				// },
 			
-			);
-			// const data = {message:event.target.value, type:'text', isBot:'false'};
-			// axios.post('/message', data)
-			// .then((response) =>{
-				// console.log('Response:', response);
-				// if (response.status === 200){
-					// dispatch({
-						// type: 'CHAT_ADD_MESSAGE',
-						// payload: {
-						  // message: response.data,
-						  // type: 'text',
-						  // isBot: true,
-						// }
-					// });
-				// }
-			// })
-			// .catch((error) => {
-			// console.error('Error:', error);
-			// });
+			// );
+			
+			const data = {message:event.target.value, type:'text', isBot:'false'};
+			axios.post('/message', data)
+			.then((response) =>{
+				console.log('Response:', response);
+				if (response.status === 200){
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: response.data,
+						  type: 'text',
+						  isBot: true,
+						}
+					});
+				}
+			})
+			.catch((error) => {
+			console.error('Error:', error);
+			});
 		  // console.log(event.target);
 			
 		}
