@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
 			//clear input bar
 			event.currentTarget.value = '';
 			
-			axios.post('/message', data)
+			axios.post('/message', {payload:data, id:this.props.sessionId})
 			.then((response) =>{
 				console.log('Response:', response);
 				if (response.status === 200){
