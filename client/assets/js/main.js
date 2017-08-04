@@ -8,7 +8,7 @@ import { BrowserRouter, Route, browserHistory } from 'react-router-dom';
 import App from './App.jsx';
 
 const reducers = combineReducers({
-  global: require('./globalReducer.js'),
+  // global: require('./globalReducer.js'),
   chat: require('./chat/reducers.js')
 });
 

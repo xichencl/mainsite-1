@@ -58,7 +58,7 @@ server.post('/message', (req, res) => {
 	}
 	//send text request to api.ai 
 	else if (req.body.type=='text'){
-		const request_to_ai = ai.textRequest(req.body, options);
+		const request_to_ai = ai.textRequest(req.body.message, options);
 		request_to_ai.on('response', (response_from_ai)=>{
 			console.log('Response:', response_from_ai.result.fulfillment);
 			const code = response_from_ai.status.code;

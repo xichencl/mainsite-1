@@ -55,6 +55,8 @@ module.exports = (state = defaultState, action) => {
 
       return newChat;
     }
+	
+	
   }
 
   return state;
