@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0px;
   padding: 0px;
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
 }
@@ -18,16 +18,16 @@ body {
 }
 
 .blue {
-  background-color: #7799FF;
+  background-color: #7799ff;
 }
 
 .grey {
-  background-color: #BBB;
-  color: #FEFEFE;
+  background-color: #bbb;
+  color: #fefefe;
 }
 
 .light-grey {
-  background-color: #DDD;
+  background-color: #ddd;
 }
 
 .chat-container {
@@ -69,18 +69,19 @@ body {
   border-radius: 4px;
   user-select: none;
 }
-
-.chat-button {
+/**********************/
+.user-chat-bubble {
   cursor: pointer;
   border-radius: 16px;
   padding-left: 4%;
   padding-right: 4%;
+  background-color: orange;
 }
 
 .blue.chat-button:hover {
-  background-color: #80A2FF;
+  background-color: #80a2ff;
 }
 
 .blue.chat-button:active {
-  background-color: #7496FC;
+  background-color: #7496fc;
 }
