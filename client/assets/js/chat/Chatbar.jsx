@@ -20,7 +20,8 @@ class Chatbar extends React.Component {
           type='text'
           placeholder='Type your message here'
 		  // onChange={this.props.onChange.bind(this)}
-          onKeyUp={this.props.onKeyUp.bind(this)}
+          // onKeyUp={(e) => this.props.onKeyUp.bind(this, e, e.target.value)()}
+		  onKeyUp ={this.props.onKeyUp.bind(this)}
         />
       </div>
     );
@@ -48,22 +49,24 @@ const mapDispatchToProps = (dispatch) => {
 	// },
 	
 	onKeyUp (event) {
+		
 		if (event.keyCode === 13){
+			console.log("message:", event.target.value);
 			const data = {message:event.target.value, type:'text', isBot:false};
+			// event.target.value = '';
 			dispatch(
 				{
 				type: 'CHAT_ADD_MESSAGE',
 				payload: data,
-				isBot: false
 				}				
 			);
 			dispatch({
 				type: 'USER_INPUT',
 				payload:data,
-				isBot: false
 			});
 			// console.log(event.target.value);
-			
+			//clear input bar
+			event.currentTarget.value = '';
 			
 			axios.post('/message', data)
 			.then((response) =>{
