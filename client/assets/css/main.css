@@ -67,16 +67,6 @@ body {
   margin: 4px;
   float: left;
   border-radius: 4px;
-  user-select: none;
-  clear: both;
-}
-/**********************/
-.user-chat-bubble {
-  cursor: pointer;
-  border-radius: 16px;
-  padding-left: 4%;
-  padding-right: 4%;
-  background-color: orange;
 }
 
 .blue.chat-button:hover {
@@ -85,4 +75,13 @@ body {
 
 .blue.chat-button:active {
   background-color: #7496fc;
+}
+
+/**************************************/
+.orange {
+  cursor: pointer;
+  border-radius: 16px;
+  padding-left: 4%;
+  padding-right: 4%;
+  background-color: orange;
 }
