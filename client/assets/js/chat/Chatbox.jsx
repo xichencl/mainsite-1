@@ -26,6 +26,13 @@ class Chatbox extends React.Component {
           );
         })}
       </div>
+
+      // if ( === 'isBot') {
+      //   className = "botBubble-position"
+      // },
+      // else {
+      //   className = "user-ch"
+      // }
     );
   }
 }
