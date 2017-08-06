@@ -8,5 +8,11 @@ const ChatContainer = () =>
     <Chatbox />
     <Chatbar />
   </div>;
+// if ( === 'isBot') {
+//   className = "botBubble-position"
+// },
+// else {
+//   className = "user-ch"
+// }
 
 export default ChatContainer;

@@ -62,12 +62,12 @@ body {
   font-weight: lighter;
 }
 
-.chat-bubble {
+/*.chat-bubble {
   padding: 8px;
   margin: 4px;
   float: left;
   border-radius: 4px;
-}
+}*/
 
 .blue.chat-button:hover {
   background-color: #80a2ff;
@@ -78,10 +78,22 @@ body {
 }
 
 /**************************************/
+.chat-bubble {
+  max-width: 20em;
+  padding: 8px;
+  margin: 4px;
+  float: left;
+  border-radius: 4px;
+}
+
 .orange {
   cursor: pointer;
   border-radius: 16px;
   padding-left: 4%;
   padding-right: 4%;
   background-color: orange;
+}
+
+.user-bubble-right {
+  float: right;
 }
