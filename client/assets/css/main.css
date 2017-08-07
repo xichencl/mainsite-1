@@ -86,9 +86,15 @@ body {
   border-radius: 4px;
 }
 
-.orange {
+.chat-button {
   cursor: pointer;
   border-radius: 16px;
+  padding-left: 4%;
+  padding-right: 4%;
+  float: left;
+}
+
+.orange {
   padding-left: 4%;
   padding-right: 4%;
   background-color: orange;
