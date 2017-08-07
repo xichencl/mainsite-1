@@ -7,7 +7,7 @@ const sessionId = uuidv1();
 
 const ChatContainer = () =>
   <div className="chat-container">
-    <Chatbox sessionId={sessionId} /> //props have to be in {} or ""
+    <Chatbox sessionId={sessionId} /> {/*props have to be in {} or ""*/}
     <Chatbar sessionId={sessionId} />
   </div>;
 
