@@ -36,7 +36,7 @@ const defaultState = [
     isBot: true
   },
   {
-    message: 'Domestic Violence',
+    message: 'Domestic Violence is very bad',
     type: 'button',
     isBot: true
   },
