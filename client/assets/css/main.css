@@ -18,16 +18,17 @@ body {
 }
 
 .blue {
-  background-color: #7799ff;
+  background-color: #7fcde5;
 }
 
 .grey {
-  background-color: #bbb;
-  color: #fefefe;
+  background-color: #f0f0f0;
+  color: #363636;
 }
 
 .light-grey {
-  background-color: #ddd;
+  background-color: #ffffff;
+  color: #363636;
 }
 
 .chat-container {
@@ -46,11 +47,12 @@ body {
 }
 
 .chatbar {
-  height: 2em;
+  height: 5em;
   width: 100%;
   padding: 16px;
   padding-left: 16px;
   padding-right: 16px;
+  border: 1px solid #939393;
   display: flex;
 }
 
@@ -72,11 +74,11 @@ body {
 }*/
 
 .blue.chat-button:hover {
-  background-color: #80a2ff;
+  background-color: red;
 }
 
 .blue.chat-button:active {
-  background-color: #7496fc;
+  background-color: pink;
 }
 
 /**************************************/
@@ -84,7 +86,7 @@ body {
   max-width: 20em;
   padding: 8px;
   margin-right: auto; /*left adjusts bubble*/
-  border-radius: 4px;
+  border-radius: 45px 45px 45px 0px;
 }
 
 .chat-button {
@@ -97,7 +99,9 @@ body {
 .orange {
   padding-left: 4%;
   padding-right: 4%;
-  background-color: orange;
+  border: 3px solid #7fcde5;
+  border-radius: 45px 45px 0px 45px;
+  background-color: #ffffff;
 }
 
 .user-bubble-right {
