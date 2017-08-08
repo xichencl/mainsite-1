@@ -21,6 +21,11 @@ body {
   background-color: #7fcde5;
 }
 
+.button-blue {
+  background-color: #b8e2ec;
+  color: #849da3;
+}
+
 .grey {
   background-color: #f0f0f0;
   color: #363636;
@@ -39,6 +44,8 @@ body {
 .chatbox {
   display: flex;
   flex-direction: column;
+  font-size: 1em;
+  line-height: 1.375em;
   margin: 0px;
   padding: 16px;
   width: 100%;
@@ -58,7 +65,7 @@ body {
 
 .chatbar input[type=text] {
   height: auto;
-  font-size: 3vh;
+  font-size: 1em;
   margin: 0px;
   background: transparent;
   border: none;
@@ -84,16 +91,24 @@ body {
 /**************************************/
 .bot-bubble-left {
   max-width: 20em;
-  padding: 8px;
+  padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 45px 45px 45px 0px;
 }
 
 .chat-button {
+  width: 7em;
+  text-align: center;
   cursor: pointer;
-  border-radius: 16px;
-  padding-left: 4%;
-  padding-right: 4%;
+  border-radius: 20px;
+  /*margin-top: 10px; /*can't do shorthand margin. ruins flow*/
+  */: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .orange {
@@ -106,6 +121,8 @@ body {
 
 .user-bubble-right {
   max-width: 20em;
-  padding: 8px;
+  padding: 20px 20px 20px 30px;
   margin-left: auto; /*right adjusts bubble*/
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

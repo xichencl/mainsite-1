@@ -5,7 +5,7 @@ const ChatBubble = props => {
   let className = 'blue bot-bubble-left';
 
   if (props.type === 'button') {
-    className += ' chat-button';
+    className += ' button-blue chat-button';
   } else if (props.isBot === false) {
     className = ' orange user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
   }
