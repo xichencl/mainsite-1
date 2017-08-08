@@ -22,8 +22,16 @@ body {
 }
 
 .button-blue {
-  background-color: #b8e2ec;
-  color: #849da3;
+  border: 2px solid #7fcde5;
+  color: #363636;
+  background-color: #ffffff;
+}
+
+.button-blue:hover {
+  background-color: #7fcde5;
+  color: #ffffff;
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
 }
 
 .grey {
@@ -73,21 +81,6 @@ body {
   font-weight: lighter;
 }
 
-/*.chat-bubble {
-  padding: 8px;
-  margin: 4px;
-  float: left;
-  border-radius: 4px;
-}*/
-
-.blue.chat-button:hover {
-  background-color: red;
-}
-
-.blue.chat-button:active {
-  background-color: pink;
-}
-
 /**************************************/
 .bot-bubble-left {
   max-width: 20em;
@@ -99,16 +92,13 @@ body {
 }
 
 .chat-button {
-  width: 7em;
+  width: 11em;
   text-align: center;
   cursor: pointer;
-  border-radius: 20px;
-  /*margin-top: 10px; /*can't do shorthand margin. ruins flow*/
-  */: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 20px 10px;
 }
 
 .orange {
