@@ -36,6 +36,8 @@ body {
 }
 
 .chatbox {
+  display: flex;
+  flex-direction: column;
   margin: 0px;
   padding: 16px;
   width: 100%;
@@ -81,8 +83,8 @@ body {
 .chat-bubble {
   max-width: 20em;
   padding: 8px;
-  margin: 4px;
-  float: left;
+  margin-right: auto;
+  /*float: left;*/
   border-radius: 4px;
 }
 
@@ -101,5 +103,8 @@ body {
 }
 
 .user-bubble-right {
-  float: right;
+  /*float: right;*/
+  max-width: 20em;
+  padding: 8px;
+  margin-left: auto;
 }

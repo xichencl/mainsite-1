@@ -7,7 +7,7 @@ const ChatBubble = props => {
   if (props.type === 'button') {
     className += ' chat-button';
   } else if (props.isBot === false) {
-    className += ' orange user-bubble-right';
+    className = ' orange user-bubble-right';
   }
 
   return (
