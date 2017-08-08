@@ -80,11 +80,10 @@ body {
 }
 
 /**************************************/
-.chat-bubble {
+.bot-bubble-left {
   max-width: 20em;
   padding: 8px;
-  margin-right: auto;
-  /*float: left;*/
+  margin-right: auto; /*left adjusts bubble*/
   border-radius: 4px;
 }
 
@@ -93,7 +92,6 @@ body {
   border-radius: 16px;
   padding-left: 4%;
   padding-right: 4%;
-  float: left;
 }
 
 .orange {
@@ -103,8 +101,7 @@ body {
 }
 
 .user-bubble-right {
-  /*float: right;*/
   max-width: 20em;
   padding: 8px;
-  margin-left: auto;
+  margin-left: auto; /*right adjusts bubble*/
 }

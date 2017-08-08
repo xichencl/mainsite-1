@@ -2,12 +2,12 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 const ChatBubble = props => {
-  let className = 'blue chat-bubble';
+  let className = 'blue bot-bubble-left';
 
   if (props.type === 'button') {
     className += ' chat-button';
   } else if (props.isBot === false) {
-    className = ' orange user-bubble-right';
+    className = ' orange user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
   }
 
   return (
