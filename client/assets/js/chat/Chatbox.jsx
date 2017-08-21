@@ -3,14 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ChatBubble from './ChatBubble.jsx';
 
-const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-const SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-const recognition = new SpeechRecognition();
-recognition.lang = 'en-US';
-const synth = window.speechSynthesis;
-const voices = synth.getVoices();
 
 
 class Chatbox extends React.Component {
