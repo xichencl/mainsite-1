@@ -11,12 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  padding: 2em;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
 .blue {
   background-color: #7fcde5;
 }
