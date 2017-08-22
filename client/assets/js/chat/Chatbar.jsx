@@ -150,6 +150,8 @@ const mapDispatchToProps = dispatch => {
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
 		if (synth && synth.speaking){
+			console.log('speech canceld');
+			recognition.abort();
 			synth.cancel();
 		}else{
 			try {
@@ -164,7 +166,11 @@ const mapDispatchToProps = dispatch => {
 			  recognition.lang = 'en-US';
 			  // const result = {};
 			  synth = window.speechSynthesis;
-			  voices = synth.getVoices();
+			  //SpeechSynthesis.getVoices is async operation
+			  voices=synth.getVoices();
+			  synth.onvoiceschanged = ()=> {
+				voices = synth.getVoices();
+			  }
 			  console.log('voices: ', voices);
 			} catch (e) {
 			  alert('your browser may not support speech recognition');
@@ -173,6 +179,8 @@ const mapDispatchToProps = dispatch => {
 		}
         recognition.start();
         recognition.onresult = e => {
+		  console.log("recog results: ", e.results);
+		  
           const userInput = e.results[e.results.length - 1][0].transcript;
           // console.log('result: ', transcript);
 		  if (!userInput || /^\s*$/.test(userInput)){
@@ -180,19 +188,24 @@ const mapDispatchToProps = dispatch => {
 		  }
           const data = { message: userInput, type: 'text', isBot: false };
           postAndDispatch(data, this.props.sessionId, speak);
-		  
+		  // recognition.stop();
         };
 
         recognition.onerror = e => {
+		  recognition.stop();
           console.error(e);
         };
 
         recognition.onend = () => {
+		  recognition.stop();
           console.log('recognition end.');
         };
       } else {
         console.log('send button clicked');
         console.log('input message', this.refs.textInput.value);
+		if (synth && synth.speaking){
+			synth.cancel();
+		}
         const userInput = this.refs.textInput.value;
 		if (!userInput || /^\s*$/.test(userInput)){
 			  return;
@@ -204,16 +217,16 @@ const mapDispatchToProps = dispatch => {
         };
         //clears textbox
         this.refs.textInput.value = '';
-        console.log('message:', data);
-		if (synth && synth.speaking){
-			synth.cancel();
-		}
+        console.log('message:', data);		
 		postAndDispatch(data, this.props.sessionId);        
       }
     },
 	onKeyUp (event) {		
 		if (event.keyCode === 13){
 			console.log("message:", event.target.value);
+			if (synth && synth.speaking){
+				synth.cancel();
+			}
 			const userInput = event.target.value;
 			if (!userInput || /^\s*$/.test(userInput)){
 			  return;
@@ -221,9 +234,7 @@ const mapDispatchToProps = dispatch => {
 			const data = {message: userInput, type:'text', isBot:false};
 			//clear input bar
 			this.refs.textInput.value = '';
-			if (synth && synth.speaking){
-				synth.cancel();
-			}
+			
 			postAndDispatch(data, this.props.sessionId);
 			
 						
