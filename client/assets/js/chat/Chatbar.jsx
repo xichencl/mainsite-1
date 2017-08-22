@@ -124,7 +124,7 @@ const mapDispatchToProps = dispatch => {
 		  utt.lang = 'en-US';
 		  utt.text = msg;
 		  // console.log(msg);
-		  utt.voice = voices[0];
+		  utt.voice = voices[1];
 		  utt.pitch = 5;
 		  utt.volume = 5;
 		  synth.speak(utt);
@@ -149,9 +149,9 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-		// if (synth && synth.speaking){
-			// synth.stop();
-		// }else{
+		if (synth && synth.speaking){
+			synth.cancel();
+		}else{
 			try {
 			  const SpeechRecognition =
 				SpeechRecognition || webkitSpeechRecognition;
@@ -165,11 +165,12 @@ const mapDispatchToProps = dispatch => {
 			  // const result = {};
 			  synth = window.speechSynthesis;
 			  voices = synth.getVoices();
+			  console.log('voices: ', voices);
 			} catch (e) {
 			  alert('your browser may not support speech recognition');
 			  return;
 			}
-		// }
+		}
         recognition.start();
         recognition.onresult = e => {
           const userInput = e.results[e.results.length - 1][0].transcript;
