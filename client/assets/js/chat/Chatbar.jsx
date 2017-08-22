@@ -4,7 +4,27 @@ import { connect, dispatch } from 'react-redux';
 import axios from 'axios';
 // import ChatButton from './ChatButton.jsx';
 
+let msg, recognition, synth, voices, utt;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+	const SpeechRecognition =
+	SpeechRecognition || webkitSpeechRecognition;
+	const SpeechGrammarList =
+	SpeechGrammarList || webkitSpeechGrammarList;
+	const SpeechRecognitionEvent =
+	SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
+	recognition = new SpeechRecognition();
+	recognition.lang = 'en-US';
+	  // const result = {};
+	  synth = window.speechSynthesis;
+	  //SpeechSynthesis.getVoices is async operation
+	  voices=synth.getVoices();
+	  synth.onvoiceschanged = ()=> {
+		voices = synth.getVoices();
+	}
+}else{
+	alert("your browser does not support speech functions");
+}
 
 class Chatbar extends React.Component {
   constructor(props) {
@@ -64,7 +84,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-   let msg, recognition, synth, voices, utt;
+   // let msg, recognition, synth, voices, utt;
    
    //send post requests to api.ai, process response, and dispatch action to reducers
    let postAndDispatch = function(data, sessionId, speak){
@@ -154,28 +174,28 @@ const mapDispatchToProps = dispatch => {
 			recognition.abort();
 			synth.cancel();
 		}else{
-			try {
-			  const SpeechRecognition =
-				SpeechRecognition || webkitSpeechRecognition;
-			  const SpeechGrammarList =
-				SpeechGrammarList || webkitSpeechGrammarList;
-			  const SpeechRecognitionEvent =
-				SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+			// try {
+			  // const SpeechRecognition =
+				// SpeechRecognition || webkitSpeechRecognition;
+			  // const SpeechGrammarList =
+				// SpeechGrammarList || webkitSpeechGrammarList;
+			  // const SpeechRecognitionEvent =
+				// SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-			  recognition = new SpeechRecognition();
-			  recognition.lang = 'en-US';
-			  // const result = {};
-			  synth = window.speechSynthesis;
-			  //SpeechSynthesis.getVoices is async operation
-			  voices=synth.getVoices();
-			  synth.onvoiceschanged = ()=> {
-				voices = synth.getVoices();
-			  }
-			  console.log('voices: ', voices);
-			} catch (e) {
-			  alert('your browser may not support speech recognition');
-			  return;
-			}
+			  // recognition = new SpeechRecognition();
+			  // recognition.lang = 'en-US';
+			  //// const result = {};
+			  // synth = window.speechSynthesis;
+			  //// SpeechSynthesis.getVoices is async operation
+			  // voices=synth.getVoices();
+			  // synth.onvoiceschanged = ()=> {
+				// voices = synth.getVoices();
+			  // }
+			  // console.log('voices: ', voices);
+			// } catch (e) {
+			  // alert('your browser may not support speech recognition');
+			  // return;
+			// }
 		}
         recognition.start();
         recognition.onresult = e => {
