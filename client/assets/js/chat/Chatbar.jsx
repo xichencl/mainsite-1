@@ -149,25 +149,27 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-        // var recognition, synth, voices;
-        try {
-          const SpeechRecognition =
-            SpeechRecognition || webkitSpeechRecognition;
-          const SpeechGrammarList =
-            SpeechGrammarList || webkitSpeechGrammarList;
-          const SpeechRecognitionEvent =
-            SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		// if (synth && synth.speaking){
+			// synth.stop();
+		// }else{
+			try {
+			  const SpeechRecognition =
+				SpeechRecognition || webkitSpeechRecognition;
+			  const SpeechGrammarList =
+				SpeechGrammarList || webkitSpeechGrammarList;
+			  const SpeechRecognitionEvent =
+				SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-          recognition = new SpeechRecognition();
-          recognition.lang = 'en-US';
-          // const result = {};
-          synth = window.speechSynthesis;
-          voices = synth.getVoices();
-        } catch (e) {
-          alert('your browser may not support speech recognition');
-          return;
-        }
-
+			  recognition = new SpeechRecognition();
+			  recognition.lang = 'en-US';
+			  // const result = {};
+			  synth = window.speechSynthesis;
+			  voices = synth.getVoices();
+			} catch (e) {
+			  alert('your browser may not support speech recognition');
+			  return;
+			}
+		// }
         recognition.start();
         recognition.onresult = e => {
           const userInput = e.results[e.results.length - 1][0].transcript;
@@ -202,6 +204,9 @@ const mapDispatchToProps = dispatch => {
         //clears textbox
         this.refs.textInput.value = '';
         console.log('message:', data);
+		if (synth && synth.speaking){
+			synth.cancel();
+		}
 		postAndDispatch(data, this.props.sessionId);        
       }
     },
@@ -215,6 +220,9 @@ const mapDispatchToProps = dispatch => {
 			const data = {message: userInput, type:'text', isBot:false};
 			//clear input bar
 			this.refs.textInput.value = '';
+			if (synth && synth.speaking){
+				synth.cancel();
+			}
 			postAndDispatch(data, this.props.sessionId);
 			
 						
