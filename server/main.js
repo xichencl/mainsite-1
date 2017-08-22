@@ -45,11 +45,11 @@ server.post('/message', (req, res) => {
 		const request_to_ai = ai.eventRequest(ev, options);
 		console.log(request_to_ai);
 		request_to_ai.on('response', (response_from_ai) => {
-			console.log('Response:', response_from_ai.result.fulfillment);
+			console.log('Response:', response_from_ai);
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200) {
-			  res.end(response_from_ai.result.fulfillment.speech);
+			  res.end(JSON.stringify(response_from_ai.result.fulfillment));
 			}
 		  });
 		request_to_ai.on('error', (error)=> {
@@ -65,7 +65,7 @@ server.post('/message', (req, res) => {
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200){
-				res.end(response_from_ai.result.fulfillment.speech);
+				res.write(JSON.stringify(response_from_ai.result.fulfillment));
 			}		
 			res.end();
 		});
@@ -83,7 +83,7 @@ server.post('/message', (req, res) => {
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200){
-				res.end(response_from_ai.result.fulfillment.speech);
+				res.end(JSON.stringify(response_from_ai.result.fulfillment));
 			}		
 			res.end();
 		});
