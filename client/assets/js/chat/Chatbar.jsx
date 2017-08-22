@@ -170,10 +170,12 @@ const mapDispatchToProps = dispatch => {
 
         recognition.start();
         recognition.onresult = e => {
-          const transcript = e.results[e.results.length - 1][0].transcript;
-          console.log('result: ', transcript);
-          // return result;
-          const data = { message: transcript, type: 'text', isBot: false };
+          const userInput = e.results[e.results.length - 1][0].transcript;
+          // console.log('result: ', transcript);
+		  if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		  }
+          const data = { message: userInput, type: 'text', isBot: false };
           postAndDispatch(data, this.props.sessionId, speak);
 		  
         };
@@ -188,8 +190,12 @@ const mapDispatchToProps = dispatch => {
       } else {
         console.log('send button clicked');
         console.log('input message', this.refs.textInput.value);
-        const data = {
-          message: this.refs.textInput.value,
+        const userInput = this.refs.textInput.value;
+		if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		 }
+		const data = {
+          message: userInput,
           type: 'text',
           isBot: false
         };
@@ -202,7 +208,11 @@ const mapDispatchToProps = dispatch => {
 	onKeyUp (event) {		
 		if (event.keyCode === 13){
 			console.log("message:", event.target.value);
-			const data = {message:event.target.value, type:'text', isBot:false};
+			const userInput = event.target.value;
+			if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		    }
+			const data = {message: userInput, type:'text', isBot:false};
 			//clear input bar
 			this.refs.textInput.value = '';
 			postAndDispatch(data, this.props.sessionId);
