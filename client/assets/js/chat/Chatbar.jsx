@@ -102,18 +102,32 @@ const mapDispatchToProps = (dispatch) => {
             .then(response => {
               console.log('Response:', response);
               if (response.status === 200) {
-                dispatch({
+                const msg = response.data.speech;
+				dispatch({
                   type: 'CHAT_ADD_MESSAGE',
                   payload: {
-                    message: response.data,
+                    message: msg,
                     type: 'text',
                     isBot: true
                   }
                 });
+				let customPayload;
+				if (response.data.messages.length >1 ){
+					//get custom payload from api.ai
+					customPayload = JSON.stringify(response.data.messages[1].payload.buttons);
+					dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: customPayload,  
+					  type: 'button',
+					  isBot: true,
+					}
+					});
+				}
               }
               const utt = new SpeechSynthesisUtterance();
               utt.lang = 'en-US';
-              utt.text = response.data;
+              utt.text = response.data.speech;
               utt.voice = voices[0];
               utt.pitch = 5;
               utt.volume = 5;
@@ -156,15 +170,29 @@ const mapDispatchToProps = (dispatch) => {
           .post('/message', { payload: data, id: this.props.sessionId })
           .then(response => {
             console.log('Response:', response);
-            if (response.status === 200) {
+            const msg = response.data.speech;
+			if (response.status === 200) {
               dispatch({
                 type: 'CHAT_ADD_MESSAGE',
                 payload: {
-                  message: response.data,
+                  message: msg,
                   type: 'text',
                   isBot: true
                 }
               });
+			  let customPayload;
+			  if (response.data.messages.length >1 ){
+				//get custom payload from api.ai
+				customPayload = JSON.stringify(response.data.messages[1].payload.buttons);
+				dispatch({
+				type: 'CHAT_ADD_MESSAGE',
+				payload: {
+				  message: customPayload,  
+				  type: 'button',
+				  isBot: true,
+				}
+				});
+			  }
             }
           })
           .catch(error => {
@@ -192,16 +220,34 @@ const mapDispatchToProps = (dispatch) => {
 			
 			axios.post('/message', {payload:data, id:this.props.sessionId})
 			.then((response) =>{
-				console.log('Response:', response);
-				if (response.status === 200){
-					dispatch({
+				console.log('response.data:', response.data);
+				const msg = response.data.speech;
+				if (response.status === 200) {
+				  dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: msg,
+					  type: 'text',
+					  isBot: true
+					}
+				  });
+				  let customPayload;
+				  if (response.data.messages.length >1 ){
+					//get custom payload from api.ai
+					// console.log("buttons:", response.data.messages[1].payload.buttons);
+					customPayload = response.data.messages[1].payload.buttons;
+					const buttons = customPayload.split('<br>')
+					buttons.filter(x=>x).forEach(btn=>{
+						dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: response.data,
-						  type: 'text',
+						  message: btn,  
+						  type: 'button',
 						  isBot: true,
 						}
+						});
 					});
+				  }
 				}
 			})
 			.catch((error) => {
