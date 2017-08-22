@@ -15,13 +15,15 @@ body {
 
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
 
-/*b {
+.stress {
+  font-size: 1em;
   font-weight: bold;
+  font-style: italic;
 }
 
 a {
   color: #ffffff;
-}*/
+}
 
 /*********************************** bot bubble/button colors ***********************************/
 
