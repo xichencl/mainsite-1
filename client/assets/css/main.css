@@ -48,6 +48,12 @@ a {
   height: 0px;
 }
 
+.button-blue:active {
+  background-color: #e3f8ff;
+  color: #363636;
+  height: 0px;
+}
+
 /*********************************** component styling ***********************************/
 
 .grey {
