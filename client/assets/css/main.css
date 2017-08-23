@@ -66,19 +66,22 @@ a {
   display: flex;
   font-size: 1em;
   line-height: 1.375em;
-  margin-bottom: 75px;
   padding: 16px;
   width: 25em;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: flex-end;
+  height: 100%;
+  margin-bottom: 75px;
 }
 
 .chat-container {
-  width: 23em;
+  width: 26em;
   height: 60vh;
   background-color: black;
   position: absolute;
   bottom: 0px;
+  height: 100%;
 }
 
 .chatbar {
