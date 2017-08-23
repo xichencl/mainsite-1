@@ -15,13 +15,15 @@ body {
 
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
 
-/*b {
+.stress {
+  font-size: 1em;
   font-weight: bold;
+  font-style: italic;
 }
 
 a {
   color: #ffffff;
-}*/
+}
 
 /*********************************** bot bubble/button colors ***********************************/
 
@@ -64,19 +66,22 @@ a {
   display: flex;
   font-size: 1em;
   line-height: 1.375em;
-  margin-bottom: 75px;
   padding: 16px;
   width: 25em;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: flex-end;
+  height: 100%;
+  margin-bottom: 75px;
 }
 
 .chat-container {
-  width: 23em;
+  width: 26em;
   height: 60vh;
   background-color: black;
   position: absolute;
   bottom: 0px;
+  height: 100%;
 }
 
 .chatbar {
@@ -212,4 +217,16 @@ a {
   transition-duration: 0s;
   transition: 0s;
   transition: 0s;
+}
+
+/*********************************** header ***********************************/
+
+.header {
+  width: 25em;
+  height: 86px;
+  background-color: rgba(255, 255, 255, .9);
+  box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.46);
+  position: absolute;
+  top: 0;
+  color: red;
 }
