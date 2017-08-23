@@ -4,8 +4,9 @@ import { connect, dispatch } from 'react-redux';
 import axios from 'axios';
 // import ChatButton from './ChatButton.jsx';
 
+//import and set up SpeechRecognition object
 let msg, recognition, synth, voices, utt;
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+try{
 	const SpeechRecognition =
 	SpeechRecognition || webkitSpeechRecognition;
 	const SpeechGrammarList =
@@ -20,10 +21,9 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
 	  //SpeechSynthesis.getVoices is async operation
 	  voices=synth.getVoices();
 	  synth.onvoiceschanged = ()=> {
-		voices = synth.getVoices();
+	     voices = synth.getVoices();
 	}
-}else{
-	alert("your browser does not support speech functions");
+}catch (e){	
 }
 
 class Chatbar extends React.Component {
@@ -169,6 +169,10 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
+		// if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+			// alert("your browser does not support speech functions");
+			// return;
+		// }
 		if (synth && synth.speaking){
 			console.log('speech canceld');
 			recognition.abort();
