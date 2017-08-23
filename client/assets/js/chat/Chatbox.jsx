@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ChatBubble from './ChatBubble.jsx';
-import ReactDOM from 'react-dom';
 
 
 
@@ -14,8 +13,7 @@ class Chatbox extends React.Component {
   }
 	
 	scrollToBottom() {
-	  const node = ReactDOM.findDOMNode(this.messagesEnd);
-	  node.scrollIntoView({ behavior: "smooth" });
+	  this.messagesEnd.scrollIntoView({ behavior: "instant" });
 	};
 
 	componentDidMount() {
@@ -39,7 +37,7 @@ class Chatbox extends React.Component {
               />
             );
           })
-        }
+        } 
 		<div style={{ float:"left", clear: "both" }}
              ref={(el) => { this.messagesEnd = el; }}>
         </div>

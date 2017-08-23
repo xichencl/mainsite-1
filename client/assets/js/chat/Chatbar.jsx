@@ -24,6 +24,7 @@ try{
 	     voices = synth.getVoices();
 	}
 }catch (e){	
+	//do nothing yet, user will be alerted later when they press the mic button
 }
 
 class Chatbar extends React.Component {
@@ -38,7 +39,7 @@ class Chatbar extends React.Component {
           <button
             type="button"
             value="speak"
-            ref="rec" //a react attrib
+            // ref="rec" //a react attrib
             className="mic"
             onClick={this.props.onClick.bind(this)}
           >
@@ -52,7 +53,7 @@ class Chatbar extends React.Component {
           <input
             type="text"
             placeholder="Type your message here"
-            ref="textInput"
+            ref={input=>this.textInput=input}
             // onChange={this.props.onChange.bind(this)}
             // onKeyUp={(e) => this.props.onKeyUp.bind(this, e, e.target.value)()}
             onKeyUp={this.props.onKeyUp.bind(this)}
@@ -62,7 +63,7 @@ class Chatbar extends React.Component {
         <div>
           <button
             type="button"
-            ref="sendButton" //a react attrib
+            // ref="sendButton" //a react attrib
             value="send"
             className="circle"
             onClick={this.props.onClick.bind(this)}
@@ -169,15 +170,16 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-		// if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
-			// alert("your browser does not support speech functions");
-			// return;
-		// }
+		if (!('webkitSpeechRecognition' in window)) {
+			alert("your browser does not support speech functions");
+			return;
+		}
 		if (synth && synth.speaking){
 			console.log('speech canceld');
-			recognition.abort();
+			// recognition.abort();
 			synth.cancel();
-		}else{
+		}
+		// else{
 			// try {
 			  // const SpeechRecognition =
 				// SpeechRecognition || webkitSpeechRecognition;
@@ -200,7 +202,7 @@ const mapDispatchToProps = dispatch => {
 			  // alert('your browser may not support speech recognition');
 			  // return;
 			// }
-		}
+		// }
         recognition.start();
         recognition.onresult = e => {
 		  console.log("recog results: ", e.results);
@@ -212,7 +214,7 @@ const mapDispatchToProps = dispatch => {
 		  }
           const data = { message: userInput, type: 'text', isBot: false };
           postAndDispatch(data, this.props.sessionId, speak);
-		  // recognition.stop();
+		  recognition.stop();
         };
 
         recognition.onerror = e => {
@@ -226,11 +228,11 @@ const mapDispatchToProps = dispatch => {
         };
       } else {
         console.log('send button clicked');
-        console.log('input message', this.refs.textInput.value);
+        console.log('input message', this.textInput.value);
 		if (synth && synth.speaking){
 			synth.cancel();
 		}
-        const userInput = this.refs.textInput.value;
+        const userInput = this.textInput.value;
 		if (!userInput || /^\s*$/.test(userInput)){
 			  return;
 		 }
@@ -240,7 +242,7 @@ const mapDispatchToProps = dispatch => {
           isBot: false
         };
         //clears textbox
-        this.refs.textInput.value = '';
+        this.textInput.value = '';
         console.log('message:', data);		
 		postAndDispatch(data, this.props.sessionId);        
       }
@@ -257,7 +259,7 @@ const mapDispatchToProps = dispatch => {
 		    }
 			const data = {message: userInput, type:'text', isBot:false};
 			//clear input bar
-			this.refs.textInput.value = '';
+			this.textInput.value = '';
 			
 			postAndDispatch(data, this.props.sessionId);
 			
