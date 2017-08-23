@@ -1,14 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, dispatch } from 'react-redux';
 
 import axios from 'axios';
 // import ChatButton from './ChatButton.jsx';
 
+
+
 class Chatbar extends React.Component {
   constructor(props) {
     super(props);
-  }
-
+  } 
+  
   render() {
     return (
       <div className="light-grey chatbar">
@@ -62,6 +64,72 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
+   let msg, recognition, synth, voices, utt;
+   
+   //send post requests to api.ai, process response, and dispatch action to reducers
+   let postAndDispatch = function(data, sessionId, speak){
+	dispatch(
+		{
+		type: 'CHAT_ADD_MESSAGE',
+		payload: data,
+		}				
+	);
+	dispatch({
+		type: 'USER_INPUT',
+		payload:data,
+	});	
+	axios.post('/message', {payload:data, id:sessionId})
+	.then((response) =>{
+		console.log('response.data:', response.data);
+		msg = response.data.speech;
+		if (response.status === 200) {
+		  dispatch({
+			type: 'CHAT_ADD_MESSAGE',
+			payload: {
+			  message: msg,
+			  type: 'text',
+			  isBot: true
+			}
+		  });
+		  let customPayload;
+		  if (response.data.messages.length >1 ){
+			//get custom payload from api.ai
+			// console.log("buttons:", response.data.messages[1].payload.buttons);
+			customPayload = response.data.messages[1].payload.buttons;
+			const buttons = customPayload.split('<br>')
+			buttons.filter(x=>x).forEach(btn=>{
+				dispatch({
+				type: 'CHAT_ADD_MESSAGE',
+				payload: {
+				  message: btn,  
+				  type: 'button',
+				  isBot: true,
+				}
+				});
+			});
+		  }
+		}
+		if (speak!== undefined){
+			speak();
+		}
+	})
+	.catch((error) => {
+	console.error('Error:', error);
+	});  
+  } ;
+  
+  //speech synthesis for reading responses from api.ai
+    let speak = function(){
+		  utt = new SpeechSynthesisUtterance();
+		  utt.lang = 'en-US';
+		  utt.text = msg;
+		  // console.log(msg);
+		  utt.voice = voices[0];
+		  utt.pitch = 5;
+		  utt.volume = 5;
+		  synth.speak(utt);
+	};
+  
   return {
     // onChange (event) {
     // dispatch ({
@@ -81,7 +149,7 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-        let recognition, synth, voices;
+        // var recognition, synth, voices;
         try {
           const SpeechRecognition =
             SpeechRecognition || webkitSpeechRecognition;
@@ -106,40 +174,8 @@ const mapDispatchToProps = dispatch => {
           console.log('result: ', transcript);
           // return result;
           const data = { message: transcript, type: 'text', isBot: false };
-          dispatch({
-            type: 'CHAT_ADD_MESSAGE',
-            payload: data
-          });
-          dispatch({
-            type: 'USER_INPUT',
-            payload: data
-          });
-
-          axios
-            .post('/message', { payload: data, id: this.props.sessionId })
-            .then(response => {
-              console.log('Response:', response);
-              if (response.status === 200) {
-                dispatch({
-                  type: 'CHAT_ADD_MESSAGE',
-                  payload: {
-                    message: response.data,
-                    type: 'text',
-                    isBot: true
-                  }
-                });
-              }
-              const utt = new SpeechSynthesisUtterance();
-              utt.lang = 'en-US';
-              utt.text = response.data;
-              utt.voice = voices[0];
-              utt.pitch = 5;
-              utt.volume = 5;
-              synth.speak(utt);
-            })
-            .catch(error => {
-              console.error('Error:', error);
-            });
+          postAndDispatch(data, this.props.sessionId, speak);
+		  
         };
 
         recognition.onerror = e => {
@@ -160,75 +196,21 @@ const mapDispatchToProps = dispatch => {
         //clears textbox
         this.refs.textInput.value = '';
         console.log('message:', data);
-
-        dispatch({
-          type: 'CHAT_ADD_MESSAGE',
-          payload: data
-        });
-        dispatch({
-          type: 'USER_INPUT',
-          payload: data
-        });
-
-        axios
-          .post('/message', { payload: data, id: this.props.sessionId })
-          .then(response => {
-            console.log('Response:', response);
-            if (response.status === 200) {
-              dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: response.data,
-                  type: 'text',
-                  isBot: true
-                }
-              });
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
+		postAndDispatch(data, this.props.sessionId);        
       }
     },
-    onKeyUp(event) {
-      if (event.keyCode === 13) {
-        console.log('message:', event.target.value);
-        const data = {
-          message: event.target.value,
-          type: 'text',
-          isBot: false
-        };
-        dispatch({
-          type: 'CHAT_ADD_MESSAGE',
-          payload: data
-        });
-        dispatch({
-          type: 'USER_INPUT',
-          payload: data
-        });
-        //clear input bar
-        this.refs.textInput.value = '';
-
-        axios
-          .post('/message', { payload: data, id: this.props.sessionId })
-          .then(response => {
-            console.log('Response:', response);
-            if (response.status === 200) {
-              dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: response.data,
-                  type: 'text',
-                  isBot: true
-                }
-              });
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      }
-    }
+	onKeyUp (event) {		
+		if (event.keyCode === 13){
+			console.log("message:", event.target.value);
+			const data = {message:event.target.value, type:'text', isBot:false};
+			//clear input bar
+			this.refs.textInput.value = '';
+			postAndDispatch(data, this.props.sessionId);
+			
+						
+			
+		}
+	}
   };
 };
 

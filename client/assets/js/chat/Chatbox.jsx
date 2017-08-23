@@ -49,16 +49,37 @@ const mapDispatchToProps = (dispatch) => {
       axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
-
+		// response = JSON.parse(response);
+		
+		
+		
         if (response.status === 200) {
-          dispatch({
-            type: 'CHAT_ADD_MESSAGE',
-            payload: {
-              message: response.data,
-              type: 'text',
-              isBot: true,
-            }
-          });
+			//axios.response.data, get speech from api.ai 
+			const msg = response.data.speech;
+			
+		  dispatch({
+			type: 'CHAT_ADD_MESSAGE',
+			payload: {
+			  message: msg,  
+			  type: 'text',
+			  isBot: true,
+			}
+		  });
+		  //if there's a custom payload attached to api.ai response
+			let customPayload;
+			if (response.data.messages.length >1 ){
+				//get custom payload from api.ai
+				customPayload = JSON.stringify(response.data.messages[1].payload.buttons);
+				dispatch({
+				type: 'CHAT_ADD_MESSAGE',
+				payload: {
+				  message: customPayload,  
+				  type: 'button',
+				  isBot: true,
+				}
+				});
+			}
+		  
         }
       })
       .catch((error) => {
