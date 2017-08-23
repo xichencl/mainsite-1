@@ -4,7 +4,28 @@ import { connect, dispatch } from 'react-redux';
 import axios from 'axios';
 // import ChatButton from './ChatButton.jsx';
 
+//import and set up SpeechRecognition object
+let msg, recognition, synth, voices, utt;
+try{
+	const SpeechRecognition =
+	SpeechRecognition || webkitSpeechRecognition;
+	const SpeechGrammarList =
+	SpeechGrammarList || webkitSpeechGrammarList;
+	const SpeechRecognitionEvent =
+	SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
+	recognition = new SpeechRecognition();
+	recognition.lang = 'en-US';
+	  // const result = {};
+	  synth = window.speechSynthesis;
+	  //SpeechSynthesis.getVoices is async operation
+	  voices=synth.getVoices();
+	  synth.onvoiceschanged = ()=> {
+	     voices = synth.getVoices();
+	}
+}catch (e){	
+	//do nothing yet, user will be alerted later when they press the mic button
+}
 
 class Chatbar extends React.Component {
   constructor(props) {
@@ -18,7 +39,7 @@ class Chatbar extends React.Component {
           <button
             type="button"
             value="speak"
-            ref="rec" //a react attrib
+            // ref="rec" //a react attrib
             className="mic"
             onClick={this.props.onClick.bind(this)}
           >
@@ -32,7 +53,7 @@ class Chatbar extends React.Component {
           <input
             type="text"
             placeholder="Type your message here"
-            ref="textInput"
+            ref={input=>this.textInput=input}
             // onChange={this.props.onChange.bind(this)}
             // onKeyUp={(e) => this.props.onKeyUp.bind(this, e, e.target.value)()}
             onKeyUp={this.props.onKeyUp.bind(this)}
@@ -42,7 +63,7 @@ class Chatbar extends React.Component {
         <div>
           <button
             type="button"
-            ref="sendButton" //a react attrib
+            // ref="sendButton" //a react attrib
             value="send"
             className="circle"
             onClick={this.props.onClick.bind(this)}
@@ -64,7 +85,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-   let msg, recognition, synth, voices, utt;
+   // let msg, recognition, synth, voices, utt;
    
    //send post requests to api.ai, process response, and dispatch action to reducers
    let postAndDispatch = function(data, sessionId, speak){
@@ -124,7 +145,7 @@ const mapDispatchToProps = dispatch => {
 		  utt.lang = 'en-US';
 		  utt.text = msg;
 		  // console.log(msg);
-		  utt.voice = voices[0];
+		  utt.voice = voices[1];
 		  utt.pitch = 5;
 		  utt.volume = 5;
 		  synth.speak(utt);
@@ -149,62 +170,97 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-        // var recognition, synth, voices;
-        try {
-          const SpeechRecognition =
-            SpeechRecognition || webkitSpeechRecognition;
-          const SpeechGrammarList =
-            SpeechGrammarList || webkitSpeechGrammarList;
-          const SpeechRecognitionEvent =
-            SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		if (!('webkitSpeechRecognition' in window)) {
+			alert("your browser does not support speech functions");
+			return;
+		}
+		if (synth && synth.speaking){
+			console.log('speech canceld');
+			// recognition.abort();
+			synth.cancel();
+		}
+		// else{
+			// try {
+			  // const SpeechRecognition =
+				// SpeechRecognition || webkitSpeechRecognition;
+			  // const SpeechGrammarList =
+				// SpeechGrammarList || webkitSpeechGrammarList;
+			  // const SpeechRecognitionEvent =
+				// SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-          recognition = new SpeechRecognition();
-          recognition.lang = 'en-US';
-          // const result = {};
-          synth = window.speechSynthesis;
-          voices = synth.getVoices();
-        } catch (e) {
-          alert('your browser may not support speech recognition');
-          return;
-        }
-
+			  // recognition = new SpeechRecognition();
+			  // recognition.lang = 'en-US';
+			  //// const result = {};
+			  // synth = window.speechSynthesis;
+			  //// SpeechSynthesis.getVoices is async operation
+			  // voices=synth.getVoices();
+			  // synth.onvoiceschanged = ()=> {
+				// voices = synth.getVoices();
+			  // }
+			  // console.log('voices: ', voices);
+			// } catch (e) {
+			  // alert('your browser may not support speech recognition');
+			  // return;
+			// }
+		// }
         recognition.start();
         recognition.onresult = e => {
-          const transcript = e.results[e.results.length - 1][0].transcript;
-          console.log('result: ', transcript);
-          // return result;
-          const data = { message: transcript, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, speak);
+		  console.log("recog results: ", e.results);
 		  
+          const userInput = e.results[e.results.length - 1][0].transcript;
+          // console.log('result: ', transcript);
+		  if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		  }
+          const data = { message: userInput, type: 'text', isBot: false };
+          postAndDispatch(data, this.props.sessionId, speak);
+		  recognition.stop();
         };
 
         recognition.onerror = e => {
+		  recognition.stop();
           console.error(e);
         };
 
         recognition.onend = () => {
+		  recognition.stop();
           console.log('recognition end.');
         };
       } else {
         console.log('send button clicked');
-        console.log('input message', this.refs.textInput.value);
-        const data = {
-          message: this.refs.textInput.value,
+        console.log('input message', this.textInput.value);
+		if (synth && synth.speaking){
+			synth.cancel();
+		}
+        const userInput = this.textInput.value;
+		if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		 }
+		const data = {
+          message: userInput,
           type: 'text',
           isBot: false
         };
         //clears textbox
-        this.refs.textInput.value = '';
-        console.log('message:', data);
+        this.textInput.value = '';
+        console.log('message:', data);		
 		postAndDispatch(data, this.props.sessionId);        
       }
     },
 	onKeyUp (event) {		
 		if (event.keyCode === 13){
 			console.log("message:", event.target.value);
-			const data = {message:event.target.value, type:'text', isBot:false};
+			if (synth && synth.speaking){
+				synth.cancel();
+			}
+			const userInput = event.target.value;
+			if (!userInput || /^\s*$/.test(userInput)){
+			  return;
+		    }
+			const data = {message: userInput, type:'text', isBot:false};
 			//clear input bar
-			this.refs.textInput.value = '';
+			this.textInput.value = '';
+			
 			postAndDispatch(data, this.props.sessionId);
 			
 						

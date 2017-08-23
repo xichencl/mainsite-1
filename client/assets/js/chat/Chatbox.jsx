@@ -9,9 +9,20 @@ import ChatBubble from './ChatBubble.jsx';
 class Chatbox extends React.Component {
   constructor (props) {
     super(props);
-	// this.sessionId = uuidv1();
+	this.scrollToBottom = this.scrollToBottom.bind(this);
   }
+	
+	scrollToBottom() {
+	  this.messagesEnd.scrollIntoView({ behavior: "instant" });
+	};
 
+	componentDidMount() {
+	  this.scrollToBottom();
+	}
+
+	componentDidUpdate() {
+	  this.scrollToBottom();
+	}
   render () {
     return (
       <div className='grey chatbox'>
@@ -26,7 +37,11 @@ class Chatbox extends React.Component {
               />
             );
           })
-        }
+        } 
+		<div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
+		
       </div>
     );
   }
