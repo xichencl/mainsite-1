@@ -41,7 +41,8 @@ const mapDispatchToProps = (dispatch) => {
       if (event.currentTarget.type !== 'button') {
         return;
       }
-	  dispatch({type:"RESET_BOT"});   
+	  dispatch({type:"RESET_BOT"}); 
+	  this.props.resetSession();
       
     }
   };

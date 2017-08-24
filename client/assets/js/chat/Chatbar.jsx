@@ -88,7 +88,9 @@ const mapDispatchToProps = dispatch => {
    // let msg, recognition, synth, voices, utt;
    
    //send post requests to api.ai, process response, and dispatch action to reducers
+   
    let postAndDispatch = function(data, sessionId, speak){
+	console.log("SESSIONID: ", sessionId);
 	dispatch(
 		{
 		type: 'CHAT_ADD_MESSAGE',
