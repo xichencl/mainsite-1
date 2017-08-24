@@ -1,3 +1,5 @@
+var deepcopy = require('deepcopy'); 
+
 const defaultState = [
   {
     message:
@@ -55,6 +57,9 @@ module.exports = (state = defaultState, action) => {
 
       return newChat;
     }
+	case 'RESET_BOT':{
+	  return deepcopy(defaultState);
+	}
   }
 
   return state;
