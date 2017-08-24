@@ -32,6 +32,14 @@ class Chatbar extends React.Component {
     super(props);
   } 
   
+  componentWillUpdate(){
+	 synth.cancel();  
+  }
+  
+  componentWillMount(){
+	  synth.cancel();
+  }
+  
   render() {
     return (
       <div className="light-grey chatbar">
