@@ -121,7 +121,8 @@ a {
 
 /*********************************** bot bubble positioning and user bubbles ***********************************/
 .bot-bubble-left {
-  max-width: 23em;
+  /*max-width: 23em;*/
+  max-width: 100%;
   padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
   margin-top: 10px;
@@ -162,7 +163,8 @@ a {
 }
 
 .user-bubble-right {
-  max-width: 23em;
+  /*max-width: 23em;*/
+  max-width: 100%;
   padding: 20px 25px 20px 29px;
   margin-left: auto; /*right adjusts bubble*/
   margin-top: 10px;
