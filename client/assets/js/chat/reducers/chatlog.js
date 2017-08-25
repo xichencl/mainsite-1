@@ -1,4 +1,4 @@
-var deepcopy = require('deepcopy'); 
+var deepcopy = require('deepcopy');
 
 const defaultState = [
   {
@@ -38,7 +38,7 @@ const defaultState = [
     isBot: true
   },
   {
-    message: 'Domestic Violence is very bad',
+    message: 'Domestic Violence',
     type: 'button',
     isBot: true
   },
@@ -57,9 +57,9 @@ module.exports = (state = defaultState, action) => {
 
       return newChat;
     }
-	case 'RESET_BOT':{
-	  return deepcopy(defaultState);
-	}
+    case 'RESET_BOT': {
+      return deepcopy(defaultState);
+    }
   }
 
   return state;

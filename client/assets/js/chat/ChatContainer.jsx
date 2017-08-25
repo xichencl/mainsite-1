@@ -28,14 +28,13 @@ class ChatContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="grey chat-container">
-          <Chatbox sessionId={this.state.id} />{' '}
-          {/*props have to be in {} or ""*/}
-          <Chatbar sessionId={this.state.id} />
-          <Header resetSession={this.resetSession} />
-        </div>
+      //<div>
+      <div className="grey chat-container">
+        <Chatbox sessionId={this.state.id} /> {/*props have to be in {} or ""*/}
+        <Chatbar sessionId={this.state.id} />
+        <Header resetSession={this.resetSession} />
       </div>
+      //</div>
     );
   }
 }
