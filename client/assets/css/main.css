@@ -171,6 +171,9 @@ a {
   margin-bottom: 10px;
 }
 
+.force-bubble-right {
+  margin-left: 18em;
+}
 /*********************************** icon styling ***********************************/
 
 .circle {
