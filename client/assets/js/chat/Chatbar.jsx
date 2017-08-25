@@ -32,6 +32,14 @@ class Chatbar extends React.Component {
     super(props);
   } 
   
+  componentWillUpdate(){
+	 synth.cancel();  
+  }
+  
+  componentWillMount(){
+	  synth.cancel();
+  }
+  
   render() {
     return (
       <div className="light-grey chatbar">
@@ -88,7 +96,9 @@ const mapDispatchToProps = dispatch => {
    // let msg, recognition, synth, voices, utt;
    
    //send post requests to api.ai, process response, and dispatch action to reducers
+   
    let postAndDispatch = function(data, sessionId, speak){
+	console.log("SESSIONID: ", sessionId);
 	dispatch(
 		{
 		type: 'CHAT_ADD_MESSAGE',
