@@ -66,6 +66,15 @@ a {
   color: #363636;
 }
 
+.chat-container {
+  width: 25em;
+  height: 100vh;
+  bottom: 75px;
+  padding-top: 73px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
 .chatbox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -77,17 +86,8 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-end;
-  height: 100%;
+  height: auto;
   margin-bottom: 75px;
-}
-
-.chat-container {
-  width: 26em;
-  height: 60vh;
-  background-color: black;
-  position: absolute;
-  bottom: 0px;
-  height: 100%;
 }
 
 .chatbar {

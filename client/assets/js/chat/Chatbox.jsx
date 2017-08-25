@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
       if (data.type !== 'button') {
         return;
       }
-      
+      console.log("SESSIONID: ", this.props.sessionId);
       axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
