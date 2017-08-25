@@ -30,14 +30,19 @@ try{
 class Chatbar extends React.Component {
   constructor(props) {
     super(props);
+	this.state={speechEnabled: Boolean(recognition&&synth)};
   } 
   
   componentWillUpdate(){
-	 synth.cancel();  
+	 if (this.state.speechEnabled){ 
+		synth.cancel();  
+	 }
   }
   
   componentWillMount(){
-	  synth.cancel();
+	 if (this.state.speechEnabled){ 
+		synth.cancel();  
+	 }
   }
   
   render() {
@@ -180,7 +185,7 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-		if (!('webkitSpeechRecognition' in window)) {
+		if (!this.state.speechEnabled) {
 			alert("your browser does not support speech functions");
 			return;
 		}
