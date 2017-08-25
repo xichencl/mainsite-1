@@ -48,6 +48,12 @@ a {
   height: 0px;
 }
 
+.button-blue:active {
+  background-color: #e3f8ff;
+  color: #363636;
+  height: 0px;
+}
+
 /*********************************** component styling ***********************************/
 
 .grey {
@@ -58,6 +64,15 @@ a {
 .light-grey {
   background-color: #ffffff;
   color: #363636;
+}
+
+.chat-container {
+  width: 25em;
+  height: 100vh;
+  bottom: 75px;
+  padding-top: 73px;
+  display: table-cell;
+  vertical-align: bottom;
 }
 
 .chatbox {
@@ -71,17 +86,8 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-end;
-  height: 100%;
+  height: auto;
   margin-bottom: 75px;
-}
-
-.chat-container {
-  width: 26em;
-  height: 60vh;
-  background-color: black;
-  position: absolute;
-  bottom: 0px;
-  height: 100%;
 }
 
 .chatbar {
@@ -201,7 +207,6 @@ a {
 }
 
 .mic:hover {
-  /*background-color: #e7b925;*/
   color: #5392be;
   border: none;
   -webkit-transition-duration: 0.2s;
@@ -223,10 +228,49 @@ a {
 
 .header {
   width: 25em;
-  height: 86px;
+  height: 73px;
   background-color: rgba(255, 255, 255, .9);
   box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.46);
   position: absolute;
   top: 0;
-  color: red;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+}
+
+.refresh {
+  background: transparent;
+  width: 50px;
+  color: #545757;
+  border: none;
+  cursor: pointer;
+  margin: 15px;
+}
+
+.refresh:hover {
+  color: #bcbcbc;
+  border: none;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  transition: 0.2s;
+}
+
+.refresh:active {
+  color: #e3f8ff;
+  -webkit-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+  transition: 0s;
+  transition: 0s;
+}
+
+.settings {
+  background: transparent;
+  width: 50px;
+  color: #545757;
+  border: none;
+  cursor: pointer;
+  margin: 15px;
 }
