@@ -67,9 +67,8 @@ a {
 }
 
 .chat-container {
-  width: 26em;
+  width: 25em;
   height: 100vh;
-  background-color: black;
   bottom: 75px;
   padding-top: 73px;
   display: table-cell;
