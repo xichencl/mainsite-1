@@ -3,35 +3,26 @@ import { connect } from 'react-redux';
 
 import ChatContainer from './chat/ChatContainer.jsx';
 
-
 class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <h1>Chat</h1>
-
         <ChatContainer />
       </div>
     );
   }
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-
-  };
+const mapStateToProps = state => {
+  return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+const mapDispatchToProps = dispatch => {
+  return {};
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

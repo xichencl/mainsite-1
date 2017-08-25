@@ -30,7 +30,20 @@ try{
 class Chatbar extends React.Component {
   constructor(props) {
     super(props);
+	this.state={speechEnabled: Boolean(recognition&&synth)};
   } 
+  
+  componentWillUpdate(){
+	 if (this.state.speechEnabled){ 
+		synth.cancel();  
+	 }
+  }
+  
+  componentWillMount(){
+	 if (this.state.speechEnabled){ 
+		synth.cancel();  
+	 }
+  }
   
   render() {
     return (
@@ -88,7 +101,9 @@ const mapDispatchToProps = dispatch => {
    // let msg, recognition, synth, voices, utt;
    
    //send post requests to api.ai, process response, and dispatch action to reducers
+   
    let postAndDispatch = function(data, sessionId, speak){
+	console.log("SESSIONID: ", sessionId);
 	dispatch(
 		{
 		type: 'CHAT_ADD_MESSAGE',
@@ -170,7 +185,7 @@ const mapDispatchToProps = dispatch => {
       console.log('event.currentTarget.value:', event.currentTarget.value);
       if (event.currentTarget.value === 'speak') {
         console.log('speak button clicked');
-		if (!('webkitSpeechRecognition' in window)) {
+		if (!this.state.speechEnabled) {
 			alert("your browser does not support speech functions");
 			return;
 		}

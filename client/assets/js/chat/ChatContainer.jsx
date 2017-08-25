@@ -5,13 +5,38 @@ import Chatbox from './Chatbox.jsx';
 import Chatbar from './Chatbar.jsx';
 
 const uuidv1 = require('uuid/v1');
-const sessionId = uuidv1();
+let sessionId = uuidv1();
 
-const ChatContainer = () =>
-  <div className="chat-container">
-    <Chatbox sessionId={sessionId} /> {/*props have to be in {} or ""*/}
-    <Chatbar sessionId={sessionId} />
-    <Header />
-  </div>;
+class ChatContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { id: sessionId };
+    this.resetSession = this.resetSession.bind(this);
+  }
 
+  // componentDidMount(){
+  // sessionId = uuidv1();
+  // }
+
+  // componentWillUnmount(){
+
+  // }
+
+  resetSession() {
+    this.setState({ id: uuidv1() });
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="grey chat-container">
+          <Chatbox sessionId={this.state.id} />{' '}
+          {/*props have to be in {} or ""*/}
+          <Chatbar sessionId={this.state.id} />
+          <Header resetSession={this.resetSession} />
+        </div>
+      </div>
+    );
+  }
+}
 export default ChatContainer;
