@@ -10,7 +10,7 @@ const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 const functions = require('./functions.js')
 const fs = require('fs');
 
-const PORT = 3000;
+const PORT = 80;
 
 //temporary fix: mapping button text to events in api.ai
 const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
@@ -20,8 +20,14 @@ server.use('/', express.static('./client'));
 server.use(bodyParser.json());
 
 server.get('/', (req, res) => {
-	res.sendFile('index.html', {root:'./client'})
+	res.sendFile('index.html', {root:'./client'});
+	// res.sendFile('index.html');
 });
+
+// server.get('/', (req, res) => {
+  // res.writeHead(200);
+  // res.send('It works!');
+// });
 
 server.post('/message', (req, res) => {
 	console.log('/message', req.body);
@@ -113,6 +119,7 @@ server.post('/webhook', (req, res)=>{
 	
 	switch (action){
 		case 'small_claims.court_lookup':
+			console.log("court_lookup chosen");
 			response.speech = functions.small_claims_court_lookup(req.body.result.parameters);
 			console.log('speech:', response.speech);
 			response.displayText = response.speech;
