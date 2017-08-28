@@ -175,10 +175,6 @@ a {
   background-color: red;
 }
 
-.test {
-  background-color: red;
-  white-space: pre-line;
-}
 /*********************************** icon styling ***********************************/
 
 .circle {
@@ -281,4 +277,14 @@ a {
   border: none;
   cursor: pointer;
   margin: 15px;
+}
+
+/*********************************** button container ***********************************/
+
+.button-container {
+  background-color: seagreen;
+  width: 23em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
