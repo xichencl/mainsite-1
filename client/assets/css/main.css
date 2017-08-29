@@ -121,7 +121,8 @@ a {
 
 /*********************************** bot bubble positioning and user bubbles ***********************************/
 .bot-bubble-left {
-  max-width: 23em;
+  /*max-width: 23em;*/
+  min-width: 5em;
   padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
   margin-top: 10px;
@@ -162,18 +163,20 @@ a {
 }
 
 .user-bubble-right {
-  max-width: 23em;
+  /*max-width: 23em;*/
+  min-width: 5em;
   padding: 20px 25px 20px 29px;
-  /*margin-left: auto;*/ /*right adjusts bubble*/
+  margin-left: auto; /*right adjusts bubble*/
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-right: 2%;
+  /*margin-right: 2%;*/
 }
 
-.force-break {
-  height: 20px;
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
   width: 23em;
-  background-color: red;
+  display: flex;
 }
 
 /*********************************** icon styling ***********************************/
@@ -278,20 +281,4 @@ a {
   border: none;
   cursor: pointer;
   margin: 15px;
-}
-
-/*********************************** button container ***********************************/
-
-/*.button-container {
-  background-color: seagreen;
-  width: 23em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}*/
-
-.test1 {
-  width: 23em;
-  height: 10px;
-  background-color: pink;
 }
