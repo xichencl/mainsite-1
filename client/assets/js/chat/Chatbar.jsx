@@ -129,20 +129,32 @@ const mapDispatchToProps = dispatch => {
 		  });
 		  let customPayload;
 		  if (response.data.messages.length >1 ){
-			//get custom payload from api.ai
-			// console.log("buttons:", response.data.messages[1].payload.buttons);
-			customPayload = response.data.messages[1].payload.buttons;
-			const buttons = customPayload.split('<br>')
-			buttons.filter(x=>x).forEach(btn=>{
-				dispatch({
-				type: 'CHAT_ADD_MESSAGE',
-				payload: {
-				  message: btn,  
-				  type: 'button',
-				  isBot: true,
-				}
+			 if (response.data.messages[1].payload.buttons){
+				//get custom payload from api.ai
+				// console.log("buttons:", response.data.messages[1].payload.buttons);
+				customPayload = response.data.messages[1].payload.buttons;
+				const buttons = customPayload.split('<br>')
+				buttons.filter(x=>x).forEach(btn=>{
+					dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: btn,  
+					  type: 'button',
+					  isBot: true,
+					}
+					});
 				});
-			});
+			}else{
+				customPayload = response.data.messages[1].payload.image;
+				dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: customPayload,  
+					  type: 'text',
+					  isBot: true,
+					}
+				});
+			}
 		  }
 		}
 		if (speak!== undefined){
