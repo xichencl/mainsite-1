@@ -10,10 +10,12 @@ const ChatBubble = props => {
     className = ' user user-bubble-right';
     //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
   }
-
   return (
-    <div className={className} onClick={props.onClick}>
-      {ReactHtmlParser(props.message)}
+    <div>
+      <div className={className} onClick={props.onClick}>
+        {ReactHtmlParser(props.message)}
+      </div>
+      {/*<div className="test1" />*/}
     </div>
   );
 };

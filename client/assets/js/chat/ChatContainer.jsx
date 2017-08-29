@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import Chatbox from './Chatbox.jsx';
 import Chatbar from './Chatbar.jsx';
+// import BubbleBreak from './BubbleBreak.jsx';
 
 const uuidv1 = require('uuid/v1');
 let sessionId = uuidv1();
@@ -33,6 +34,7 @@ class ChatContainer extends React.Component {
         <Chatbox sessionId={this.state.id} /> {/*props have to be in {} or ""*/}
         <Chatbar sessionId={this.state.id} />
         <Header resetSession={this.resetSession} />
+        {/*<BubbleBreak sessionID={this.stat.id} />*/}
       </div>
       //</div>
     );
