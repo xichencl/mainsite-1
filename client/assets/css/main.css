@@ -122,6 +122,8 @@ a {
 /*********************************** bot bubble positioning and user bubbles ***********************************/
 .bot-bubble-left {
   max-width: 23em;
+  min-width: 14em; 
+  /* height:auto; */
   padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
   margin-top: 10px;
@@ -159,10 +161,14 @@ a {
   border: 3px solid #7fcde5;
   border-radius: 45px 45px 0px 45px;
   background-color: #ffffff;
+  /* height:22px; */
 }
 
 .user-bubble-right {
-  max-width: 23em;
+  max-width: 23em; 
+  min-width: 10em;
+  /* display: inline-block; */
+  /* height: auto; */
   padding: 20px 25px 20px 29px;
   margin-left: auto; /*right adjusts bubble*/
   margin-top: 10px;
