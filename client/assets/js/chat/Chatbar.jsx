@@ -6,6 +6,14 @@ import axios from 'axios';
 
 //import and set up SpeechRecognition object
 let msg, recognition, synth, voices, utt;
+let defaultVoiceIdx = 0;
+let defaultVoiceNames = {"pc":"Microsoft Zira Desktop - English (United States)", "mac":"Samantha"};
+let defaultLang = "en-US";
+let defaultRate = 1.0;
+let defaultPitch = 1.0;
+let defaultVolume = 5.0;
+
+
 try{
 	const SpeechRecognition =
 	SpeechRecognition || webkitSpeechRecognition;
@@ -19,9 +27,15 @@ try{
 	  // const result = {};
 	  synth = window.speechSynthesis;
 	  //SpeechSynthesis.getVoices is async operation
-	  voices=synth.getVoices();
+	  // voices=synth.getVoices();
 	  synth.onvoiceschanged = ()=> {
 	     voices = synth.getVoices();
+		 voices.forEach((v, i)=> {
+			 if (v.name == defaultVoiceNames.pc || v.name ==defaultVoiceNames.mac){
+				 defaultVoiceIdx = i;
+			 }
+			 console.log("voiceIdx: ", defaultVoiceIdx)
+		 });
 	}
 }catch (e){	
 	//do nothing yet, user will be alerted later when they press the mic button
@@ -157,12 +171,13 @@ const mapDispatchToProps = dispatch => {
   //speech synthesis for reading responses from api.ai
     let speak = function(){
 		  utt = new SpeechSynthesisUtterance();
-		  utt.lang = 'en-US';
+		  utt.lang = defaultLang;
 		  utt.text = msg;
 		  // console.log(msg);
-		  utt.voice = voices[1];
-		  utt.pitch = 5;
-		  utt.volume = 5;
+		  utt.voice = voices[defaultVoiceIdx]; 
+		  utt.rate = defaultRate;
+		  utt.pitch = defaultPitch;
+		  utt.volume = defaultVolume;
 		  synth.speak(utt);
 	};
   

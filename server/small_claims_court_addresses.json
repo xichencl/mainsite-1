@@ -1,1 +1,30 @@
-{"Contra Costa": "111 summer st"}
+{
+"Contra Costa": ["725 Court Street, Martinez, CA 94553", "1000 Center Drive, Pittsburg, CA 94565", "100 37th Street, Richmond, CA 94805"],
+"Martinez":"725 Court Street, Martinez, CA 94553",
+"Alamo":"725 Court Street, Martinez, CA 94553",
+"Avon":"725 Court Street, Martinez, CA 94553", 
+"Canyon":"725 Court Street, Martinez, CA 94553", 
+"Clayton":"725 Court Street, Martinez, CA 94553", 
+"Clyde":"725 Court Street, Martinez, CA 94553", 
+Concord:"725 Court Street, Martinez, CA 94553", 
+Danville:"725 Court Street, Martinez, CA 94553", 
+Lafayette:"725 Court Street, Martinez, CA 94553", 
+Moraga:"725 Court Street, Martinez, CA 94553",
+Orinda:"725 Court Street, Martinez, CA 94553",
+Pacheco:"725 Court Street, Martinez, CA 94553", 
+Pleasant Hill:"725 Court Street, Martinez, CA 94553", 
+Rheem:"725 Court Street, Martinez, CA 94553", 
+Rossmoor:"725 Court Street, Martinez, CA 94553", 
+San Ramon:"725 Court Street, Martinez, CA 94553", 
+St. Mary’s College:"725 Court Street, Martinez, CA 94553", 
+Walnut Creek:"725 Court Street, Martinez, CA 94553",
+Ygnacio Valley:"725 Court Street, Martinez, CA 94553"
+
+"Pittsburg":"1000 Center Drive, Pittsburg, CA 94565",
+
+
+
+
+
+
+}
