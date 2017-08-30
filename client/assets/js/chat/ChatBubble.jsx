@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import ImageViewer from "./ImageViewer.jsx";
 
 class ChatBubble extends React.Component{
   constructor(props){
@@ -11,16 +12,11 @@ class ChatBubble extends React.Component{
 	  if (this.props.type === 'button') {
 		className = ' button-blue chat-button';
 	  }else if(this.props.type === 'image'){
-		className = 'rcorner';
-		  return (
-		  <div onClick={this.props.onClick}>
-			  {ReactHtmlParser(this.props.message)}
-				  {/*<div ref={modal => this.myModal=modal} className="modal">
-				  <span className="close">&times;</span>
-				  <img className="modal-content" id="img01">
-				  <div id="caption"></div>
-				  </div>*/}
-		  </div>
+		// className = 'rcorner';
+		// console.log(this.props.message);
+		// const attr = JSON.parse(this.props.message);
+		   return (		  
+		  <ImageViewer src={this.props.message.src} alt={this.props.message.alt}  />
 		  );
 	  } else if (this.props.isBot === false) {
 		className = ' user user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right

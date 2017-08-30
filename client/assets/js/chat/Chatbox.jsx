@@ -99,8 +99,6 @@ const mapDispatchToProps = (dispatch) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-	}else if (data.type ==='image'){
-		console.log("div of image clicked");
 	}else{
 		return;
 	}
