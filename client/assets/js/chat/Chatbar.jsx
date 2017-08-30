@@ -150,7 +150,7 @@ const mapDispatchToProps = dispatch => {
 					type: 'CHAT_ADD_MESSAGE',
 					payload: {
 					  message: customPayload,  
-					  type: 'text',
+					  type: 'image',
 					  isBot: true,
 					}
 				});

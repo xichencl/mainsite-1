@@ -57,9 +57,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick (event, data) {
-      if (data.type !== 'button') {
-        return;
-      }
+      if (data.type === 'button'){ 
+        
       console.log("SESSIONID: ", this.props.sessionId);
       axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
@@ -100,7 +99,12 @@ const mapDispatchToProps = (dispatch) => {
       .catch((error) => {
         console.error('Error:', error);
       });
-    }
+	}else if (data.type ==='image'){
+		console.log("div of image clicked");
+	}else{
+		return;
+	}
+	}
   };
 };
 
