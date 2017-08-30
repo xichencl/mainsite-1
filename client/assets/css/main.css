@@ -121,9 +121,8 @@ a {
 
 /*********************************** bot bubble positioning and user bubbles ***********************************/
 .bot-bubble-left {
-  max-width: 23em;
-  min-width: 14em; 
-  /* height:auto; */
+  /*max-width: 23em;*/
+  min-width: 5em;
   padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
   margin-top: 10px;
@@ -156,23 +155,28 @@ a {
 }
 
 .user {
-  padding-left: 30px;
-  padding-right: 10px;
+  /*padding-left: 30px;
+  padding-right: 10px;*/
   border: 3px solid #7fcde5;
   border-radius: 45px 45px 0px 45px;
-  background-color: #ffffff;
-  /* height:22px; */
+  /*background-color: #ffffff;*/
 }
 
 .user-bubble-right {
-  max-width: 23em; 
-  min-width: 10em;
-  /* display: inline-block; */
-  /* height: auto; */
+  /*max-width: 23em;*/
+  min-width: 5em;
   padding: 20px 25px 20px 29px;
   margin-left: auto; /*right adjusts bubble*/
   margin-top: 10px;
   margin-bottom: 10px;
+  /*margin-right: 2%;*/
+}
+
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
+  width: 23em;
+  display: flex;
 }
 
 
@@ -270,7 +274,6 @@ a {
 /*********************************** icon styling ***********************************/
 
 .circle {
-  /*background-color: #f9d04e;*/
   background-color: #115077;
   color: #ffffff;
   border-radius: 50%;
@@ -283,7 +286,6 @@ a {
 }
 
 .circle:hover {
-  /*background-color: #e7b925;*/
   background-color: #316a92;
   border-radius: 50%;
   width: 50px;

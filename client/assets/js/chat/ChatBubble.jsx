@@ -20,6 +20,14 @@ class ChatBubble extends React.Component{
 		  );
 	  } else if (this.props.isBot === false) {
 		className = ' user user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
+		return (
+		  //allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
+		  <div className="bubble-breaker">
+			<div className={className} onClick={this.props.onClick}>
+			  {ReactHtmlParser(this.props.message)}
+			</div>
+		  </div>
+		);
 	  }
 
 	  return (
@@ -29,6 +37,7 @@ class ChatBubble extends React.Component{
 	  );
 	};
 }
+
 
 
 export default ChatBubble;

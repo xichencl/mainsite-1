@@ -52,8 +52,5 @@ functions.small_claims_sue_gov_resource = function(params){
 	}	
 };
 
-functions.agent_of_service_lookup = function(params){
-	
-}
 
 
