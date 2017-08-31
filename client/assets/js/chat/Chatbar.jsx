@@ -142,6 +142,8 @@ const mapDispatchToProps = dispatch => {
 			}
 		  });
 		  let customPayload;
+		  
+		 //if buttons in payload
 		  if (response.data.messages.length >1 ){
 			 if (response.data.messages[1].payload.buttons){
 				//get custom payload from api.ai
@@ -158,13 +160,27 @@ const mapDispatchToProps = dispatch => {
 					}
 					});
 				});
-			}else{
+			}
+			//if image in payload
+			else if (response.data.messages[1].payload.image){
 				customPayload = response.data.messages[1].payload.image;
 				dispatch({
 					type: 'CHAT_ADD_MESSAGE',
 					payload: {
 					  message: customPayload,  
 					  type: 'image',
+					  isBot: true,
+					}
+				});
+			}
+			//if map in payload
+			else if (response.data.messages[1].payload.map){
+				customPayload = response.data.messages[1].payload.map;
+				dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: customPayload,  
+					  type: 'map',
 					  isBot: true,
 					}
 				});
@@ -204,6 +220,8 @@ const mapDispatchToProps = dispatch => {
     // }
     // });
     // },
+	
+	//controls onclick events on buttons in chatbar
     onClick(event) {
       //using currentTarget instead of target because currentTarget is the object listening(the button). target is that actual target received, which is the icon, and not what we want
       if (event.currentTarget.type !== 'button') {

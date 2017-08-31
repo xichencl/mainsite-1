@@ -18,7 +18,14 @@ class ChatBubble extends React.Component{
 		   return (		  
 		  <ImageViewer src={this.props.message.src} alt={this.props.message.alt}  />
 		  );
-	  } else if (this.props.isBot === false) {
+	  } else if (this.props.type === 'map'){
+		  return (
+		  <div>
+			<iframe className="map" src={this.props.message.src} name={this.props.message.name}>
+		  </div>
+		  );
+	  
+	   }else if (this.props.isBot === false) {
 		className = ' user user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
 		return (
 		  //allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker

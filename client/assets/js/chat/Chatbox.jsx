@@ -57,6 +57,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+	  //controls buttons onclick function in bot response
     onClick (event, data) {
       if (data.type === 'button'){ 
         
