@@ -82,7 +82,7 @@ const mapDispatchToProps = dispatch => {
 			}
 		  });
 		  //if there's a custom payload attached to api.ai response
-			let customPayload;
+		  let customPayload;
 		  if (response.data.result.source === "agent"){
 			  let messages = response.data.result.fulfillment.messages;
 			  console.log("Messages:", messages);
