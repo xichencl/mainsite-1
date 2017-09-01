@@ -148,6 +148,7 @@ const mapDispatchToProps = dispatch => {
 		  let customPayload;
 		  if (response.data.result.source === "agent"){
 			  let messages = response.data.result.fulfillment.messages;
+			  console.log("Messages:", messages);
 			  if (messages.length>1 && messages[1].type==4){
 				 //buttons in payload
 				 if (rmessages[1].payload.buttons){

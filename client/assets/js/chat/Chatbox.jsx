@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => {
 		
         if (response.status === 200) {
 			//axios.response.data, get speech from api.ai 
-			const msg = response.data.speech;
+			const msg = response.data.result.fulfillment.speech;
 			
 		  dispatch({
 			type: 'CHAT_ADD_MESSAGE',
@@ -83,18 +83,96 @@ const mapDispatchToProps = dispatch => {
 		  });
 		  //if there's a custom payload attached to api.ai response
 			let customPayload;
-			if (response.data.messages.length >1 ){
-				//get custom payload from api.ai
-				customPayload = JSON.stringify(response.data.messages[1].payload.buttons);
-				dispatch({
-				type: 'CHAT_ADD_MESSAGE',
-				payload: {
-				  message: customPayload,  
-				  type: 'button',
-				  isBot: true,
+		  if (response.data.result.source === "agent"){
+			  let messages = response.data.result.fulfillment.messages;
+			  console.log("Messages:", messages);
+			  if (messages.length>1 && messages[1].type==4){
+				 //buttons in payload
+				 if (rmessages[1].payload.buttons){
+					//get custom payload from api.ai
+					// console.log("buttons:", response.data.messages[1].payload.buttons);
+					customPayload = messages[1].payload.buttons;
+					customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
 				}
-				});
+				//if image in payload
+				if (messages[1].payload.image){
+					customPayload = messages[1].payload.image;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+					});
+				}
+				//if map in payload
+				if (messages[1].payload.map){
+					customPayload = messages[1].payload.map;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+					});
+				}  
+			  
+			  
 			}
+		 
+		 }else if (response.data.result.source === "server"){
+		    let data = response.data.result.fulfillment.data;
+		    if (data.buttons){
+				customPayload= data.buttons;
+				customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
+			}
+			if (data.image){
+				customPayload =data.image;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+				});
+				
+			}
+			if (data.map){
+				customPayload=data.map;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+				});
+				
+			}
+		 
+		 
+		 }
 		  
         }
       })
