@@ -21,7 +21,7 @@ class ChatBubble extends React.Component{
 	  } else if (this.props.type === 'map'){
 		  return (
 		  <div>
-			<iframe className="map" src={this.props.message.src} name={this.props.message.name}>
+			<iframe className="map" src={this.props.message.src} name={this.props.message.name} />
 		  </div>
 		  );
 	  

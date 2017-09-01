@@ -12,6 +12,8 @@ let defaultLang = "en-US";
 let defaultRate = 1.0;
 let defaultPitch = 1.0;
 let defaultVolume = 5.0;
+// existing payload types
+// let payloadTypes = {0:"image", 1:"button", 2:"map"};
 
 
 try{
@@ -130,8 +132,10 @@ const mapDispatchToProps = dispatch => {
 	});	
 	axios.post('/message', {payload:data, id:sessionId})
 	.then((response) =>{
-		console.log('response.data:', response.data);
-		msg = response.data.speech;
+		console.log('Response:', response);
+		//response.data is a data envelope by redux
+		//it contains the fulfillment section of the data object which the backend chooses to return. 
+		msg = response.data.result.fulfillment.speech;
 		if (response.status === 200) {
 		  dispatch({
 			type: 'CHAT_ADD_MESSAGE',
@@ -142,50 +146,95 @@ const mapDispatchToProps = dispatch => {
 			}
 		  });
 		  let customPayload;
-		  
-		 //if buttons in payload
-		  if (response.data.messages.length >1 ){
-			 if (response.data.messages[1].payload.buttons){
-				//get custom payload from api.ai
-				// console.log("buttons:", response.data.messages[1].payload.buttons);
-				customPayload = response.data.messages[1].payload.buttons;
-				const buttons = customPayload.split('<br>')
-				buttons.filter(x=>x).forEach(btn=>{
-					dispatch({
-					type: 'CHAT_ADD_MESSAGE',
-					payload: {
-					  message: btn,  
-					  type: 'button',
-					  isBot: true,
-					}
+		  if (response.data.result.source === "agent"){
+			  let messages = response.data.result.fulfillment.messages;
+			  if (messages.length>1 && messages[1].type==4){
+				 //buttons in payload
+				 if (rmessages[1].payload.buttons){
+					//get custom payload from api.ai
+					// console.log("buttons:", response.data.messages[1].payload.buttons);
+					customPayload = messages[1].payload.buttons;
+					customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
 					});
-				});
-			}
-			//if image in payload
-			else if (response.data.messages[1].payload.image){
-				customPayload = response.data.messages[1].payload.image;
-				dispatch({
-					type: 'CHAT_ADD_MESSAGE',
-					payload: {
-					  message: customPayload,  
-					  type: 'image',
-					  isBot: true,
-					}
-				});
-			}
-			//if map in payload
-			else if (response.data.messages[1].payload.map){
-				customPayload = response.data.messages[1].payload.map;
-				dispatch({
-					type: 'CHAT_ADD_MESSAGE',
-					payload: {
-					  message: customPayload,  
-					  type: 'map',
-					  isBot: true,
-					}
-				});
-			}
+				}
+				//if image in payload
+				if (messages[1].payload.image){
+					customPayload = messages[1].payload.image;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+					});
+				}
+				//if map in payload
+				if (messages[1].payload.map){
+					customPayload = messages[1].payload.map;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+					});
+				}  
+			  
+			  
 		  }
+		 
+		 }else if (response.data.result.source === "server"){
+		    let data = response.data.result.fulfillment.data;
+		    if (data.buttons){
+				customPayload= data.buttons;
+				customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
+			}
+			if (data.image){
+				customPayload =data.image;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+				});
+				
+			}
+			if (data.map){
+				customPayload=data.map;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+				});
+				
+			}
+		 
+		 
+		 }
 		}
 		if (speak!== undefined){
 			speak();

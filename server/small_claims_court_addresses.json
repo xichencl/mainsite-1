@@ -1,37 +1,36 @@
 {
-1: {
+"cc": {
 	"address":"725 Court Street, Martinez, CA 94553, 1000 Center Drive, Pittsburg, CA 94565, or 100 37th Street, Richmond, CA 94805",
-	"name": "Contra Costa County small claims courts",
-	
-},
-
-0:{
-	"address":"725 Court Street, Martinez, CA 94553",
-	"name": "Wakefield Taylor Courthouse",
-	"placeId": "ChIJ31YRl4NvhYARsltz8AMvH4I",
+	"name": "Contra Costa County small claims courts"	
 	},
 
-"Contra Costa": 1;
-"Martinez" : 0,	
-"Alamo": 0,
-"Avon":0, 
-"Canyon":0, 
-"Clayton":0, 
-"Clyde":0, 
-"Concord":0, 
-"Danville":0, 
-"Lafayette":0, 
-"Moraga":0,
-"Orinda":0,
-"Pacheco":0, 
-"Pleasant Hill":0, 
-"Rheem":0, 
-"Rossmoor":0, 
-"San Ramon":0, 
-"St. Mary’s College":0, 
-"Walnut Creek":0,
-"Ygnacio Valley":0,
-"Pittsburg":0,
+"cc1":{
+	"address":"725 Court Street, Martinez, CA 94553",
+	"name": "Wakefield Taylor Courthouse",
+	"placeId": "ChIJ31YRl4NvhYARsltz8AMvH4I"
+	},
+
+"Contra Costa": "cc",
+"Martinez" : "cc1",	
+"Alamo": "cc1",
+"Avon":"cc1", 
+"Canyon":"cc1", 
+"Clayton":"cc1", 
+"Clyde":"cc1", 
+"Concord":"cc1", 
+"Danville":"cc1", 
+"Lafayette":"cc1", 
+"Moraga":"cc1",
+"Orinda":"cc1",
+"Pacheco":"cc1", 
+"Pleasant Hill":"cc1", 
+"Rheem":"cc1", 
+"Rossmoor":"cc1", 
+"San Ramon":"cc1", 
+"St. Mary’s College":"cc1", 
+"Walnut Creek":"cc1",
+"Ygnacio Valley":"cc1",
+"Pittsburg":"cc1"
 
 
 
