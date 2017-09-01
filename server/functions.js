@@ -25,26 +25,29 @@ functions.small_claims_court_lookup = function(params){
 	
 	//load court_addresses
 	const court_addresses = JSON.parse(fs.readFileSync('./server/small_claims_court_addresses.json'));
+	console.log("Court addresses: ", court_addresses);
+	// console.log("Place:" locale);
 	let response = {};
-	if (court_addresses.locale){
-		locale_id = court_addresses.locale;
+	if (court_addresses[locale]){
+		
+		locale_id = court_addresses[locale];
 		console.log("localeIdx: %s", locale_id);	
-		console.log(court_addresses.locale_id.placeId);
-		if (court_addresses.locale_id.placeId){
-			response.speech = "The small claims court for {0} is located at {1} {2}.".format(locale, court_addresses.locale_id.name, court_addresses.locale_id.address);
+		console.log(court_addresses[locale_id].placeId);
+		if (court_addresses[locale_id].placeId){
+			response.speech = "The small claims court for {0} is located at {1} {2}.".format(locale, court_addresses[locale_id].name, court_addresses[locale_id].address);
 			console.log(response.speech);
 			// response.displayText = response.speech;
 			// response.data = {};
-			response.data = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, court_addresses.locale_id.placeId), 
-			"name": court_addresses.locale_id.name
+			response.data = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, court_addresses[locale_id].placeId), 
+			"name": court_addresses[locale_id].name
 			}};
 			response.source = "server";
 			
 			return response;
 		}else {
-			response.speech = court_addresses.locale_id.name+ " are located at "+court_addresses.locale_id.address+".";
-			response.data = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, court_addresses.locale_id.name.split(/\s+/).join("+")),
-			"name": court_addresses.locale_id.name
+			response.speech = court_addresses[locale_id].name+ " are located at "+court_addresses[locale_id].address+".";
+			response.data = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, court_addresses[locale_id].name.split(/\s+/).join("+")),
+			"name": court_addresses[locale_id].name
 			}};
 			response.source= "server";
 			

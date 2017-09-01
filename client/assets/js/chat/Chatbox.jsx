@@ -83,12 +83,12 @@ const mapDispatchToProps = dispatch => {
 		  });
 		  //if there's a custom payload attached to api.ai response
 		  let customPayload;
-		  if (response.data.result.source === "agent"){
+		  if (!response.data.result.fulfillment.data){
 			  let messages = response.data.result.fulfillment.messages;
 			  console.log("Messages:", messages);
 			  if (messages.length>1 && messages[1].type==4){
 				 //buttons in payload
-				 if (rmessages[1].payload.buttons){
+				 if (messages[1].payload.buttons){
 					//get custom payload from api.ai
 					// console.log("buttons:", response.data.messages[1].payload.buttons);
 					customPayload = messages[1].payload.buttons;
@@ -131,7 +131,7 @@ const mapDispatchToProps = dispatch => {
 			  
 			}
 		 
-		 }else if (response.data.result.source === "server"){
+		 }else{
 		    let data = response.data.result.fulfillment.data;
 		    if (data.buttons){
 				customPayload= data.buttons;
