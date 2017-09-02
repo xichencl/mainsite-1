@@ -25,16 +25,19 @@ class Chatbox extends React.Component {
       <div className="grey chatbox">
         {//map to iterate over the newState Array and apply function for each element
         this.props.chatlog.map((value, key) => {
-          return (
+          console.log(value);
+		  return (
             <ChatBubble
               {...value} //spread operator
               key={key}
-              onClick={e =>
+			  sessionId= {this.props.sessionId}
+              /*onClick={e =>
                 this.props.onClick.bind(
                   this,
                   e,
                   value
-                )()} /*this is basically replacing the function (event) => {} with (event, value){}; value here is an element in the defaultState array*/
+                )()}*/
+				/*this is basically replacing the function (event) => {} with (event, value){}; value here is an element in the defaultState array*/
             />
           );
         })}
@@ -55,6 +58,7 @@ const mapStateToProps = state => {
   };
 };
 
+/*
 const mapDispatchToProps = dispatch => {
   return {
 	  //controls buttons onclick function in bot response
@@ -185,5 +189,8 @@ const mapDispatchToProps = dispatch => {
 	}
   };
 };
+*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);
+// export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);
+
+export default connect(mapStateToProps)(Chatbox);

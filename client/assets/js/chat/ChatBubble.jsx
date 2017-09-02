@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import ImageViewer from "./ImageViewer.jsx";
 
@@ -6,11 +8,22 @@ class ChatBubble extends React.Component{
   constructor(props){
 	super(props);
   }
+  
+  
+  
   render (){
 	  let className = 'blue bot-bubble-left';
 
 	  if (this.props.type === 'button') {
 		className = ' button-blue chat-button';
+		return (
+		  //allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
+		  
+			<div className={className} onClick={this.props.onClick.bind(this)}>
+			  {ReactHtmlParser(this.props.message)}
+			</div>
+		  
+		);
 	  }else if(this.props.type === 'image'){
 		// className = 'rcorner';
 		// console.log(this.props.message);
@@ -30,7 +43,7 @@ class ChatBubble extends React.Component{
 		return (
 		  //allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
 		  <div className="bubble-breaker">
-			<div className={className} onClick={this.props.onClick}>
+			<div className={className}>
 			  {ReactHtmlParser(this.props.message)}
 			</div>
 		  </div>
@@ -38,13 +51,143 @@ class ChatBubble extends React.Component{
 	  }
 
 	  return (
-		<div className={className} onClick={this.props.onClick}>
+		<div className={className} /*onClick={this.props.onClick}*/>
 		  {ReactHtmlParser(this.props.message)}	  
 		</div> 
 	  );
-	};
+	}
+	
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+	  //controls buttons onclick function in bot response
+    onClick () {      
+      const data = {message: this.props.message, type: this.props.type, isBot: this.props.isBot};  
+      console.log("SESSIONID: ", this.props.sessionId);
+      axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
+      .then((response) => {
+        console.log('Response:', response);
+		// response = JSON.parse(response);
+		
+		
+		
+        if (response.status === 200) {
+			//axios.response.data, get speech from api.ai 
+			const msg = response.data.result.fulfillment.speech;
+			
+		  dispatch({
+			type: 'CHAT_ADD_MESSAGE',
+			payload: {
+			  message: msg,  
+			  type: 'text',
+			  isBot: true,
+			}
+		  });
+		  //if there's a custom payload attached to api.ai response
+		  let customPayload;
+		  if (!response.data.result.fulfillment.data){
+			  let messages = response.data.result.fulfillment.messages;
+			  console.log("Messages:", messages);
+			  if (messages.length>1 && messages[1].type==4){
+				 //buttons in payload
+				 if (messages[1].payload.buttons){
+					//get custom payload from api.ai
+					// console.log("buttons:", response.data.messages[1].payload.buttons);
+					customPayload = messages[1].payload.buttons;
+					customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
+				}
+				//if image in payload
+				if (messages[1].payload.image){
+					customPayload = messages[1].payload.image;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+					});
+				}
+				//if map in payload
+				if (messages[1].payload.map){
+					customPayload = messages[1].payload.map;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+					});
+				}  
+			  
+			  
+			}
+		 
+		 }else{
+		    let data = response.data.result.fulfillment.data;
+		    if (data.buttons){
+				customPayload= data.buttons;
+				customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
+			}
+			if (data.image){
+				customPayload =data.image;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+				});
+				
+			}
+			if (data.map){
+				customPayload=data.map;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+				});
+				
+			}
+		 
+		 
+		 }
+		  
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+	
+	}
+  };
+};
 
 
-export default ChatBubble;
+
+
+export default connect(null, mapDispatchToProps)(ChatBubble);

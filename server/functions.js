@@ -61,6 +61,7 @@ functions.small_claims_court_lookup = function(params){
 	}	
 };
 
+//needs to update
 functions.small_claims_sue_gov_resource = function(params){
 	let locale;
 	if ('locator' in params){
