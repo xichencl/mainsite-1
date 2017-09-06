@@ -19,6 +19,7 @@
     "fs": "0.0.1-security",
     "path": "^0.12.7",
     "react": "^15.6.1",
+    "react-burger-menu": "^2.1.5",
     "react-dom": "^15.6.1",
     "react-html-parser": "^1.0.3",
     "react-linkify": "^0.2.1",
