@@ -173,6 +173,13 @@ a {
   margin-bottom: 10px;
 }
 
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
+  width: 23em;
+  display: flex;
+}
+
 /*********************************** icon styling ***********************************/
 
 .circle {
