@@ -5,6 +5,9 @@ body {
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: flex-end;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /*********************************** above is css reset ***********************************/
 * {
