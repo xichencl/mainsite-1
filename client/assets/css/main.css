@@ -349,6 +349,6 @@ a {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-/*#page-wrap {
-  display: table-row; keeps header fixed, allows scrolling when menu is opened and closed
-}*/
+#page-wrap {
+  display: table-row; /*keeps header fixed, allows scrolling when menu is opened and closed*/
+}
