@@ -10,7 +10,7 @@ const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 const functions = require('./functions.js')
 const fs = require('fs');
 
-const PORT = 3000;
+const PORT = 80;
 
 //temporary fix: mapping button text to events in api.ai
 const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
