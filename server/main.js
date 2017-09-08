@@ -13,7 +13,7 @@ const fs = require('fs');
 const PORT = 80;
 
 //temporary fix: mapping button text to events in api.ai
-const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
+// const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
 
 
 server.use('/', express.static('./client'));
@@ -38,6 +38,7 @@ server.post('/message', (req, res) => {
 	//sends event request to api.ai and response to front end
 	if (req.body.payload.type=='button'){
 		const msg = req.body.payload.message;
+		const events = JSON.parse(fs.readFileSync('./server/buttons_and_events.json'));
 		const ev = {};
 		if (msg in events){
 			console.log(msg);
