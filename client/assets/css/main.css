@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-  background-color: #363636;
+  background-color: red;
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /*********************************** above is css reset ***********************************/
 * {
@@ -105,6 +110,7 @@ a {
   bottom: 0;
   justify-content: space-between;
   align-items: center;
+  right: 100px;
 }
 
 .chatbar input[type=text] {
@@ -279,6 +285,13 @@ a {
 	width: 100%;
 }
 
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
+  width: 23em;
+  display: flex;
+}
+
 /*********************************** icon styling ***********************************/
 
 .circle {
@@ -345,6 +358,7 @@ a {
   justify-content: flex-end;
   align-items: center;
   position: fixed;
+  right: 100px;
 }
 
 .refresh {
@@ -381,4 +395,72 @@ a {
   border: none;
   cursor: pointer;
   margin: 15px;
+}
+
+/*============================ testing react-burger-menu css +========================*/
+/* Position and sizing of burger button */
+.bm-burger-button {
+  /*position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;*/
+  display: none;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: pink;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  position: absolute;
+  width: 44px !important;
+  height: 44px !important;
+  right: 121px !important;
+  top: 13px !important;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: transparent;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #363636;
+  padding-top: 70px;
+  padding-left: 22px;
+  padding-right: 0px;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  /*padding: 0.8em;*/
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.icon-size {
+  height: 44px;
+  width: 44px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+/*#page-wrap {
+  display: table-row; keeps header fixed, allows scrolling when menu is opened and closed
+}*/
+
+#outer-container {
+  overflow-y: visible !important;
 }
