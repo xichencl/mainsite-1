@@ -49,6 +49,8 @@ class ChatContainer extends React.Component {
           }
         >
           <div id="outer-container">
+            <Chatbar sessionId={this.state.id} />
+            <Header resetSession={this.resetSession} />
             {/************************************ Theme Icon (custom icon)************************************/}
             <div className="icon-size">
               <svg
@@ -135,8 +137,6 @@ class ChatContainer extends React.Component {
         <main id="page-wrap">
           {/*props have to be in {} or ""*/}
           <div className="grey chat-container">
-            <Chatbar sessionId={this.state.id} />
-            <Header resetSession={this.resetSession} />
             <Chatbox sessionId={this.state.id} />
           </div>
         </main>
