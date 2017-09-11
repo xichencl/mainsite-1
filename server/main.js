@@ -13,7 +13,7 @@ const fs = require('fs');
 const PORT = 80;
 
 //temporary fix: mapping button text to events in api.ai
-const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
+// const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
 
 
 server.use('/', express.static('./client'));
@@ -38,6 +38,7 @@ server.post('/message', (req, res) => {
 	//sends event request to api.ai and response to front end
 	if (req.body.payload.type=='button'){
 		const msg = req.body.payload.message;
+		const events = JSON.parse(fs.readFileSync('./server/buttons_and_events.json'));
 		const ev = {};
 		if (msg in events){
 			console.log(msg);
@@ -55,7 +56,7 @@ server.post('/message', (req, res) => {
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200) {
-			  res.end(JSON.stringify(response_from_ai.result.fulfillment));
+			  res.end(JSON.stringify(response_from_ai));
 			}
 		  });
 		request_to_ai.on('error', (error)=> {
@@ -67,11 +68,12 @@ server.post('/message', (req, res) => {
 	else if (req.body.payload.type=='text'){
 		const request_to_ai = ai.textRequest(req.body.payload.message, options);
 		request_to_ai.on('response', (response_from_ai)=>{
-			console.log('Response:', response_from_ai.result.fulfillment);
+			console.log('Response:', response_from_ai);
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200){
-				res.write(JSON.stringify(response_from_ai.result.fulfillment));
+				//send response object form api.ai to front end
+				res.write(JSON.stringify(response_from_ai));
 			}		
 			res.end();
 		});
@@ -85,11 +87,11 @@ server.post('/message', (req, res) => {
 	else{
 		const request_to_ai = ai.voiceRequest(options);
 		request_to_ai.on('response', (response_from_ai)=>{
-			console.log('Response:', response_from_ai.result.fulfillment);
+			console.log('Response:', response_from_ai);
 			const code = response_from_ai.status.code;
 			res.writeHead(code);
 			if (code == 200){
-				res.end(JSON.stringify(response_from_ai.result.fulfillment));
+				res.end(JSON.stringify(response_from_ai));
 			}		
 			res.end();
 		});
@@ -115,14 +117,15 @@ server.post('/message', (req, res) => {
 server.post('/webhook', (req, res)=>{
 	console.log('/webhook', req.body);
 	const action = req.body.result.action;
-	const response = {};
+	let response = {};
 	
 	switch (action){
 		case 'small_claims.court_lookup':
+		//something needs to be here for payload response
 			console.log("court_lookup chosen");
-			response.speech = functions.small_claims_court_lookup(req.body.result.parameters);
-			console.log('speech:', response.speech);
-			response.displayText = response.speech;
+			response = functions.small_claims_court_lookup(req.body.result.parameters);
+			console.log('Response Object:', response);			
+			// response.displayText = response.speech;
 			break;
 		case 'small_claims.sue_gov.resources':
 			response.speech = functions.small_claims_sue_gov_resource(req.body.result.parameters);

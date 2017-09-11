@@ -6,6 +6,16 @@ import axios from 'axios';
 
 //import and set up SpeechRecognition object
 let msg, recognition, synth, voices, utt;
+let defaultVoiceIdx = 0;
+let defaultVoiceNames = {"pc":"Microsoft Zira Desktop - English (United States)", "mac":"Samantha"};
+let defaultLang = "en-US";
+let defaultRate = 1.0;
+let defaultPitch = 1.0;
+let defaultVolume = 5.0;
+// existing payload types
+// let payloadTypes = {0:"image", 1:"button", 2:"map"};
+
+
 try{
 	const SpeechRecognition =
 	SpeechRecognition || webkitSpeechRecognition;
@@ -19,9 +29,15 @@ try{
 	  // const result = {};
 	  synth = window.speechSynthesis;
 	  //SpeechSynthesis.getVoices is async operation
-	  voices=synth.getVoices();
+	  // voices=synth.getVoices();
 	  synth.onvoiceschanged = ()=> {
 	     voices = synth.getVoices();
+		 voices.forEach((v, i)=> {
+			 if (v.name == defaultVoiceNames.pc || v.name ==defaultVoiceNames.mac){
+				 defaultVoiceIdx = i;
+			 }
+			 console.log("voiceIdx: ", defaultVoiceIdx)
+		 });
 	}
 }catch (e){	
 	//do nothing yet, user will be alerted later when they press the mic button
@@ -116,8 +132,10 @@ const mapDispatchToProps = dispatch => {
 	});	
 	axios.post('/message', {payload:data, id:sessionId})
 	.then((response) =>{
-		console.log('response.data:', response.data);
-		msg = response.data.speech;
+		console.log('Response:', response);
+		//response.data is a data envelope by redux
+		//it contains the fulfillment section of the data object which the backend chooses to return. 
+		msg = response.data.result.fulfillment.speech;
 		if (response.status === 200) {
 		  dispatch({
 			type: 'CHAT_ADD_MESSAGE',
@@ -128,22 +146,98 @@ const mapDispatchToProps = dispatch => {
 			}
 		  });
 		  let customPayload;
-		  if (response.data.messages.length >1 ){
-			//get custom payload from api.ai
-			// console.log("buttons:", response.data.messages[1].payload.buttons);
-			customPayload = response.data.messages[1].payload.buttons;
-			const buttons = customPayload.split('<br>')
-			buttons.filter(x=>x).forEach(btn=>{
-				dispatch({
-				type: 'CHAT_ADD_MESSAGE',
-				payload: {
-				  message: btn,  
-				  type: 'button',
-				  isBot: true,
+		  if (!response.data.result.fulfillment.data){
+			  let messages = response.data.result.fulfillment.messages;
+			  console.log("Messages:", messages);
+			  if (messages.length>1 && messages[1].type==4){
+				 //buttons in payload
+				 if (messages[1].payload.buttons){
+					//get custom payload from api.ai
+					// console.log("buttons:", response.data.messages[1].payload.buttons);
+					customPayload = messages[1].payload.buttons;
+					customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
 				}
-				});
-			});
+				//if image in payload
+				if (messages[1].payload.image){
+					customPayload = messages[1].payload.image;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+					});
+				}
+				//if map in payload
+				if (messages[1].payload.map){
+					customPayload = messages[1].payload.map;
+					dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+					});
+				}  
+			  
+			  
 		  }
+		 
+		 }
+		 //server response
+		 else {
+		    let data = response.data.result.fulfillment.data;
+		    if (data.buttons){
+				customPayload= data.buttons;
+				customPayload.forEach(btn=>{
+						dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: btn,  
+						  type: 'button',
+						  isBot: true,
+						}
+						});
+					});
+			}
+			if (data.image){
+				customPayload =data.image;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'image',
+						  isBot: true,
+						}
+				});
+				
+			}
+			if (data.map){
+				customPayload=data.map;
+				dispatch({
+						type: 'CHAT_ADD_MESSAGE',
+						payload: {
+						  message: customPayload,  
+						  type: 'map',
+						  isBot: true,
+						}
+				});
+				
+			}
+		 
+		 
+		 }
 		}
 		if (speak!== undefined){
 			speak();
@@ -157,12 +251,13 @@ const mapDispatchToProps = dispatch => {
   //speech synthesis for reading responses from api.ai
     let speak = function(){
 		  utt = new SpeechSynthesisUtterance();
-		  utt.lang = 'en-US';
+		  utt.lang = defaultLang;
 		  utt.text = msg;
 		  // console.log(msg);
-		  utt.voice = voices[1];
-		  utt.pitch = 5;
-		  utt.volume = 5;
+		  utt.voice = voices[defaultVoiceIdx]; 
+		  utt.rate = defaultRate;
+		  utt.pitch = defaultPitch;
+		  utt.volume = defaultVolume;
 		  synth.speak(utt);
 	};
   
@@ -177,6 +272,8 @@ const mapDispatchToProps = dispatch => {
     // }
     // });
     // },
+	
+	//controls onclick events on buttons in chatbar
     onClick(event) {
       //using currentTarget instead of target because currentTarget is the object listening(the button). target is that actual target received, which is the icon, and not what we want
       if (event.currentTarget.type !== 'button') {
