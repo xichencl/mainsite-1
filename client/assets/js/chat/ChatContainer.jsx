@@ -3,6 +3,7 @@ import Menu from 'react-burger-menu/lib/menus/push';
 import Header from './Header.jsx';
 import Chatbox from './Chatbox.jsx';
 import Chatbar from './Chatbar.jsx';
+import LanguageIcon from './LanguageIcon.jsx';
 // import BubbleBreak from './BubbleBreak.jsx';
 
 const uuidv1 = require('uuid/v1');
@@ -122,6 +123,7 @@ class ChatContainer extends React.Component {
             </div>
             {/************************************ Language-Icon (material.io icon)************************************/}
             <div className="icon-size">
+              <LanguageIcon />
               <svg
                 fill="#F0F0F0"
                 height="44"
