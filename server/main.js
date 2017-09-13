@@ -128,10 +128,17 @@ server.post('/webhook', (req, res)=>{
 			// response.displayText = response.speech;
 			break;
 		case 'small_claims.sue_gov.resources':
-			response.speech = functions.small_claims_sue_gov_resource(req.body.result.parameters);
-			console.log('speech:', response.speech);
-			response.displayText = response.speech;
+			console.log("small claims sue gov resources chosen");
+			response = functions.small_claims_sue_gov_resource(req.body.result.parameters);
+			console.log('Response Object:', response);
 			break;
+			
+		case 'agent_of_service_lookup':
+			console.log("agent_of_service_lookup chosen");
+			response = functions.agent_of_service_lookup(req.body.result.contexts);
+			console.log('Response Object:', response);
+			break;
+		
 		default:
 			console.log("Error: no such function exists.");
 	}		

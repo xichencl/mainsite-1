@@ -4,6 +4,10 @@ const functions = module.exports = {};
 const format = require('string-format');
 format.extend(String.prototype);
 const googleMapEmbedKey = "AIzaSyCfEjPR7_o-MseJ4z3yxVxQNq15v6gJcio";
+const http = require('http');
+
+const agentOfServiceHost = 'https://businesssearch.sos.ca.gov';
+const agentOfServicePath = '/CBS/SearchResults?';
 
 functions.small_claims_court_lookup = function(params){
 // let params = JSON.parse(para);
@@ -85,4 +89,34 @@ functions.small_claims_sue_gov_resource = function(params){
 };
 
 
-
+functions.agent_of_service_lookup = function(contexts){
+	let response = {};
+	const searchType1 = "LPLLC", searchType2="CORP";
+	let searchType;
+	if ('business_type' in contexts[0]){
+		searchType = contexts[0].business_type
+	}
+	if (!searchType){
+		//try LPLLC
+		searchType = searchType1;
+		
+	}
+	let searchTerms = contexts[0].parameters.any.toLowerCase().trim().split(/\s+/);
+	searchTerms = searchTerms.join('+');
+	
+	
+	let options = {
+	  host: agentOfServiceHost,
+	  port: 80,
+	  path: agentOfServicePath+'SearchType='+searchType+'&SearchCriteria='+searchTerms+'&SearchSubType=Keyword'
+	};
+	
+	http.get(options, (res)=>{
+		if (res.statusCode == 200){
+			console.log(res);
+		}
+	}).on('error', (e)=>{
+		console.log("Error: "+e.message);
+	});
+	
+};
