@@ -290,7 +290,7 @@ a {
   margin: 15px;
 }
 
-/*============================ testing react-burger-menu css +========================*/
+/*********************************** react-burger-menu css ***********************************/
 /* Position and sizing of burger button */
 .bm-burger-button {
   /*position: fixed;
@@ -328,17 +328,6 @@ a {
   padding-right: 0px;
 }
 
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
-  /*padding: 0.8em;*/
-}
-
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
@@ -349,14 +338,14 @@ a {
   width: 44px;
   margin-top: 25px;
   margin-bottom: 25px;
+  cursor: pointer;
 }
-/*#page-wrap {
-  display: table-row; keeps header fixed, allows scrolling when menu is opened and closed
-}*/
 
 #outer-container {
   overflow-y: visible !important;
 }
+
+/*********************************** Modals ***********************************/
 
 /****************** Modal popup image ****************/
 #myImg {
@@ -464,4 +453,18 @@ a {
 .map {
   height: 200px;
   width: 100%;
+}
+
+/*********************************** language icon modal ***********************************/
+.lang-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  right: 100px;
+  top: 0;
+  width: 25em; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* no scroll */
+  background-color: rgba(34, 75, 77, 0.6);
 }
