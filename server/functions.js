@@ -4,9 +4,10 @@ const functions = module.exports = {};
 const format = require('string-format');
 format.extend(String.prototype);
 const googleMapEmbedKey = "AIzaSyCfEjPR7_o-MseJ4z3yxVxQNq15v6gJcio";
-const http = require('http');
+const https = require('https');
+const cheerio = require('cheerio');
 
-const agentOfServiceHost = 'https://businesssearch.sos.ca.gov';
+const agentOfServiceHost = 'businesssearch.sos.ca.gov';
 const agentOfServicePath = '/CBS/SearchResults?';
 
 functions.small_claims_court_lookup = function(params){
@@ -89,7 +90,7 @@ functions.small_claims_sue_gov_resource = function(params){
 };
 
 
-functions.agent_of_service_lookup = function(contexts){
+functions.agent_of_service_lookup = function(contexts, callback){
 	let response = {};
 	const searchType1 = "LPLLC", searchType2="CORP";
 	let searchType;
@@ -104,19 +105,75 @@ functions.agent_of_service_lookup = function(contexts){
 	let searchTerms = contexts[0].parameters.any.toLowerCase().trim().split(/\s+/);
 	searchTerms = searchTerms.join('+');
 	
-	
+	// let path = agentOfServiceHost+agentOfServicePath+'SearchType='+searchType+'&SearchCriteria='+searchTerms+'&SearchSubType=Keyword'
 	let options = {
-	  host: agentOfServiceHost,
-	  port: 80,
-	  path: agentOfServicePath+'SearchType='+searchType+'&SearchCriteria='+searchTerms+'&SearchSubType=Keyword'
+	  hostname: agentOfServiceHost,
+	  path: agentOfServicePath+'SearchType='+searchType+'&SearchCriteria='+searchTerms+'&SearchSubType=Keyword',
+	  method:'GET'
+	  
 	};
 	
-	http.get(options, (res)=>{
-		if (res.statusCode == 200){
-			console.log(res);
+	let result = [];
+	console.log("url: ", options.hostname+options.path);
+	
+	
+	const loadCheerio = (options, retrieveText)=> {
+		
+	
+		const req = https.request(options);
+		req.on('error', (e)=>{
+			console.log("Error: "+e.message);
+		});
+		req.on('response', (res)=>{
+			let chunks = [];
+			res.on('data', chunks.push.bind(chunks));
+			res.on('end', ()=> {
+				const data = Buffer.concat(chunks);
+				const str = data.toString();
+				retrieveText(cheerio.load(str), sendResponse);
+			});
+			res.on('error', sendResponse);
+		});
+		req.end();
+	};
+	
+	const retrieveText = (cheerioObj, sendResponse)=>{
+		const $= cheerioObj;
+		$('tr', 'tbody').filter(function(){
+			// console.log($(this).children().eq(2).text().trim());
+			return $(this).children().eq(2).text().trim() === 'ACTIVE';
+		})
+		.slice(0,5).children('td')
+		.each(function(){
+			// if (!(/^\s*$/.test($(this).text()))){
+				// result.push($(this).text());
+			// }
+			result.push($(this).text().trim());
+		});
+		sendResponse();
+	};
+	
+	const sendResponse = ()=>{
+		if (result.length>0){
+			response.speech = "Here's what I found {}".format(result);
+			response.source = "server";
+			console.log(result);
+		}else{
+			response.speech = "Sorry, I cannot find a match for the company under the name.";
+			response.source = "server";
 		}
-	}).on('error', (e)=>{
-		console.log("Error: "+e.message);
-	});
+		callback(response);
+			
+	};
+	
+	loadCheerio(options, retrieveText);
+	
+		
+	
+	
+	
+	
+	
+	 
 	
 };
