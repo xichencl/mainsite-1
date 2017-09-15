@@ -461,6 +461,7 @@ a {
   overflow: hidden;
   background-color: rgba(50, 64, 70, 0.9);
   font-family: Helvetica Neue, Verdana, sans-serif;
+  cursor: default;
 }
 
 .lang-title {
@@ -472,16 +473,26 @@ a {
 }
 
 .lang-container {
-  width: auto;
-  height: auto; /*make auto at some point?*/
+  width: 200px;
   background: red;
   position: relative;
   top: 130px;
   left: 125px;
+  font-size: 1.6em;
+  color: #f1f1f1;
 }
 .lang {
   color: #f0f0f0;
   font-size: 20px;
   padding-top: 34px;
   padding-bottom: 34px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label {
+  cursor: pointer;
 }
