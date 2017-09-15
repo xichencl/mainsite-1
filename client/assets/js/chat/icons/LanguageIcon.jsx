@@ -55,22 +55,35 @@ class LanguageIcon extends React.Component {
 
             <div className="lang-container">
               <form>
-                <div className="radio">
+                <div className="radio" onClick={this.closeModal}>
                   <label>
-                    <input type="radio" value="option1" checked={true} />
-                    Option 1
+                    <input
+                      className="radio-style"
+                      type="radio"
+                      value="option1"
+                      checked={true}
+                    />
+                    English
                   </label>
                 </div>
                 <div className="radio" onClick={this.closeModal}>
                   <label>
-                    <input type="radio" value="option2" />
-                    Option 2
+                    <input
+                      type="radio"
+                      className="radio-style"
+                      value="option2"
+                    />
+                    Espa&ntilde;ol
                   </label>
                 </div>
-                <div className="radio">
+                <div className="radio" onClick={this.closeModal}>
                   <label>
-                    <input type="radio" value="option3" />
-                    Option 3
+                    <input
+                      type="radio"
+                      className="radio-style"
+                      value="option3"
+                    />
+                    中文
                   </label>
                 </div>
               </form>

@@ -491,8 +491,13 @@ a {
 form {
   display: flex;
   flex-wrap: wrap;
+  /*flex-direction: column;*/
 }
 
 label {
   cursor: pointer;
+}
+
+.radio-style {
+  margin-right: 25px;
 }
