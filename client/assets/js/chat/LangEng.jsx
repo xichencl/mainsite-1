@@ -8,7 +8,7 @@ class LangEng extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="lang">
         <h1>Enlgish</h1>
       </div>
     );

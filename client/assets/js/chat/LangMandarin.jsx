@@ -8,7 +8,7 @@ class LangMandarin extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="lang">
         <h1>中文</h1>
       </div>
     );

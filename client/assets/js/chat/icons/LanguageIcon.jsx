@@ -51,15 +51,18 @@ class LanguageIcon extends React.Component {
             </svg>
           </div>
           <div ref={mod => (this.myModal = mod)} className="lang-modal">
-            <h1 className="language-title">Select a language</h1>
-            <div onClick={this.closeModal}>
-              <LangEng />
-            </div>
-            <div onClick={this.closeModal}>
-              <LangSpanish />
-            </div>
-            <div onClick={this.closeModal}>
-              <LangMandarin />
+            <header className="lang-title">Select a language</header>
+
+            <div className="lang-container">
+              <div onClick={this.closeModal}>
+                <LangEng />
+              </div>
+              <div onClick={this.closeModal}>
+                <LangSpanish />
+              </div>
+              <div onClick={this.closeModal}>
+                <LangMandarin />
+              </div>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ class LangSpanish extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="lang">
         <h1>Espa&ntilde;ol</h1>
       </div>
     );

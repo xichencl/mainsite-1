@@ -463,10 +463,25 @@ a {
   font-family: Helvetica Neue, Verdana, sans-serif;
 }
 
-.language-title {
+.lang-title {
   color: #f0f0f0;
   font-size: 2.6em;
   text-align: center;
   position: relative;
   top: 105px;
+}
+
+.lang-container {
+  width: auto;
+  height: auto; /*make auto at some point?*/
+  background: red;
+  position: relative;
+  top: 130px;
+  left: 125px;
+}
+.lang {
+  color: #f0f0f0;
+  font-size: 20px;
+  padding-top: 34px;
+  padding-bottom: 34px;
 }
