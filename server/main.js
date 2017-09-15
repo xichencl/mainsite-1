@@ -43,7 +43,8 @@ server.post('/message', (req, res) => {
 		const ev = {};
 		if (msg in events){
 			console.log(msg);
-			ev.name=events[msg];
+			ev.name=events[msg].name;
+			ev.data=events[msg].data;
 			console.log(ev.name);
 		}else{
 			return;
@@ -142,11 +143,19 @@ server.post('/webhook', (req, res)=>{
 			// console.log('Response Object:', response);
 			break;
 			
-		case 'agent_of_service_lookup':
+		case 'LL_agent_of_service_lookup':
 		//this is async!
-			console.log("agent_of_service_lookup chosen");
+			console.log("LL_agent_of_service_lookup chosen");
 			// const callback = (res) => {return res;};
-			functions.agent_of_service_lookup(req.body.result.contexts, respondToAPI);//set callback to send response to api.ai			
+			functions.agent_of_service_lookup(req.body.result.contexts, 'LPLLC', respondToAPI);//set callback to send response to api.ai			
+			// console.log('Response Object:', response);
+			break;
+			
+		case 'CORP_agent_of_service_lookup':
+		//this is async!
+			console.log("CORP_agent_of_service_lookup chosen");
+			// const callback = (res) => {return res;};
+			functions.agent_of_service_lookup(req.body.result.contexts, 'CORP', respondToAPI);//set callback to send response to api.ai			
 			// console.log('Response Object:', response);
 			break;
 		

@@ -94,16 +94,22 @@ functions.small_claims_sue_gov_resource = function(params){
 };
 
 
-functions.agent_of_service_lookup = function(contexts, respondToAPI){
+functions.agent_of_service_lookup = function(contexts, searchType, respondToAPI){
 	let response = {};
-	const searchType1 = "LPLLC", searchType2="CORP";
-	let searchType;
-	if ('business_type' in contexts[0]){
+	// const searchType1 = "LPLLC", searchType2="CORP";
+	// let searchType;
+	/*if ('business_type' in contexts[0]){
 		searchType = contexts[0].business_type
 	}else{ //for unspecified search
-		//try LPLLC
-		searchType = searchType1;		
-	}
+		// try LPLLC
+		response.speech = "Please select a business type.";
+		response.data = {'buttons': ["Sole Proprietorship",
+						"Partnership",
+						"Corporation/Association",
+						"LLC/LLP/LP"]};
+		response.source = "server";
+		respondToAPI(response);		
+	}*/
 	const origEntry = contexts[0].parameters.any;
 	let searchTerms = origEntry.toLowerCase().trim().split(/\s+/);
 	searchTerms = searchTerms.join('+');
@@ -165,12 +171,14 @@ functions.agent_of_service_lookup = function(contexts, respondToAPI){
 		if (result){
 			listOfResults = formatResult();
 		}
+		console.log("NO OF ENTRIES: ", numEntriesFound);
 		if (numEntriesFound>5){
 			response.speech = "I have found {} companies matching the name \"{}\", whose registration is currently active. Here's the top five matches. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
 			response.data = {'table': listOfResults};
 			console.log(listOfResults);
-		}else if (0<numEntriesFound<=5){
+		}else if (numEntriesFound>0 && numEntriesFound<6){
+			
 			response.speech = "I have found {} company/ies matching the name \"{}\", whose registration is currently active. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
 			response.data = {'table': listOfResults};

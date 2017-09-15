@@ -287,14 +287,18 @@ a {
 
 /**************** table ***************/
 table {
-    width:90%;
+    width:95%;
+	border-spacing: 10px;
+    border: 1px solid grey;
+    -moz-border-radius: 10x;
+	-webkit-border-radius: 10px;
 }
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+    /*border: 1px solid black;*/
+    /* border-collapse: collapse; */
 }
 th, td {
-    padding: 10px;
+    padding: 0px;
     text-align: left;
 }
 table tr:nth-child(even) {

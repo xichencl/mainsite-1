@@ -42,14 +42,17 @@ class ChatBubble extends React.Component{
 		   console.log("executed");
 		   return (
 			<div>
-				<table>
-					<tr>
-						<th>{"Company Name"}</th>
-						<th>{"Entity Number"}</th>
-						<th>{"Agent of Service"}</th>
-					</tr>
+				<table onClick={this.props.onClick.bind(this)}>
+					<thead>
+						<tr>
+							<th>{"Company Name"}</th>
+							<th>{"Entity Number"}</th>
+							<th>{"Agent of Service"}</th>
+						</tr>
+					</thead>
+					<tbody>
 					{this.props.message.map((row, i)=>{
-						return (<tr> key={i} 
+						return (<tr key={i}> 
 							<td>
 							{row.companyName }
 							</td>
@@ -61,6 +64,7 @@ class ChatBubble extends React.Component{
 							</td>						
 						</tr>);
 					})}
+					</tbody>
 				</table>
 			</div>
 		   
