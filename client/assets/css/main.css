@@ -457,14 +457,13 @@ a {
 
 /*********************************** language icon modal ***********************************/
 .lang-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  display: none;
+  position: fixed;
   z-index: 2; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
   right: 100px;
-  top: 0;
+  top: 73px;
   width: 25em; /* Full width */
   height: 100%; /* Full height */
   overflow: hidden; /* no scroll */
-  background-color: rgba(34, 75, 77, 0.6);
+  background-color: rgba(50, 64, 70, 0.9);
 }

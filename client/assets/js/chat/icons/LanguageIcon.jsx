@@ -1,4 +1,7 @@
 import React from 'react';
+import LangEng from '../LangEng.jsx';
+import LangMandarin from '../LangMandarin.jsx';
+import LangSpanish from '../LangSpanish.jsx';
 // import ReactHtmlParser from 'react-html-parser';
 
 class LanguageIcon extends React.Component {
@@ -48,12 +51,15 @@ class LanguageIcon extends React.Component {
             </svg>
           </div>
           <div ref={mod => (this.myModal = mod)} className="lang-modal">
-            <span className="close" onClick={this.closeModal}>
-              &times;
-            </span>
-            <img className="modal-content" ref={img => (this.modalImg = img)} />
-            <h1>hi.</h1>
-            {/*make me and my options into a componanent, and then only add component, eg <LangiageIcon />*/}
+            <div onClick={this.closeModal}>
+              <LangEng />
+            </div>
+            <div onClick={this.closeModal}>
+              <LangSpanish />
+            </div>
+            <div onClick={this.closeModal}>
+              <LangMandarin />
+            </div>
           </div>
         </div>
       </div>
