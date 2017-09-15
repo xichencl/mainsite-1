@@ -118,32 +118,36 @@ server.post('/message', (req, res) => {
 server.post('/webhook', (req, res)=>{
 	console.log('/webhook', req.body);
 	const action = req.body.result.action;
-	let response = {};
-	const callback = (response)=>{
+	// let response = {};
+	//response is the argument passed into this function, 
+	//res is the argument passed into the outer most function above
+	const respondToAPI = (response)=>{
 		res.setHeader('Content-Type', 'application/json');
-		res.end(JSON.stringify(response));	
+		res.end(JSON.stringify(response));
+		return;
 	};
 	switch (action){
 		case 'small_claims.court_lookup':
 		//this appears to be sync
 			console.log("court_lookup chosen");
-			response = functions.small_claims_court_lookup(req.body.result.parameters);
-			console.log('Response Object:', response);res.setHeader('Content-Type', 'application/json');
-			res.end(JSON.stringify(response));				
+			functions.small_claims_court_lookup(req.body.result.parameters, respondToAPI);
+			// console.log('Response Object:', response);
+			// res.setHeader('Content-Type', 'application/json');
+			// res.end(JSON.stringify(response));				
 			// response.displayText = response.speech;
 			break;
 		case 'small_claims.sue_gov.resources':
 			console.log("small claims sue gov resources chosen");
 			response = functions.small_claims_sue_gov_resource(req.body.result.parameters);
-			console.log('Response Object:', response);
+			// console.log('Response Object:', response);
 			break;
 			
 		case 'agent_of_service_lookup':
 		//this is async!
 			console.log("agent_of_service_lookup chosen");
 			// const callback = (res) => {return res;};
-			functions.agent_of_service_lookup(req.body.result.contexts, callback);//set callback to send response to api.ai			
-			console.log('Response Object:', response);
+			functions.agent_of_service_lookup(req.body.result.contexts, respondToAPI);//set callback to send response to api.ai			
+			// console.log('Response Object:', response);
 			break;
 		
 		default:

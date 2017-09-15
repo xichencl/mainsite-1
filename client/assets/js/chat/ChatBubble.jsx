@@ -38,6 +38,34 @@ class ChatBubble extends React.Component{
 		  </div>
 		  );
 	  
+	   }else if (this.props.type === 'table'){
+		   console.log("executed");
+		   return (
+			<div>
+				<table>
+					<tr>
+						<th>{"Company Name"}</th>
+						<th>{"Entity Number"}</th>
+						<th>{"Agent of Service"}</th>
+					</tr>
+					{this.props.message.map((row, i)=>{
+						return (<tr> key={i} 
+							<td>
+							{row.companyName }
+							</td>
+							<td>
+							{row.entityNum}
+							</td>
+							<td>
+							{row.agentOfService}
+							</td>						
+						</tr>);
+					})}
+				</table>
+			</div>
+		   
+		   );
+		   
 	   }else if (this.props.isBot === false) {
 		className = ' user user-bubble-right'; //using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
 		return (
@@ -134,8 +162,9 @@ const mapDispatchToProps = dispatch => {
 			  
 			}
 		 
-		 }else{
+		 }else {
 		    let data = response.data.result.fulfillment.data;
+			console.log("DATA: ", data);
 		    if (data.buttons){
 				customPayload= data.buttons;
 				customPayload.forEach(btn=>{
@@ -173,7 +202,20 @@ const mapDispatchToProps = dispatch => {
 				});
 				
 			}
-		 
+			
+			if (data.table){
+				customPayload = data.table;
+				console.log("CUSTOMPAYLOAD",customPayload);
+				dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: customPayload,  
+					  type: 'table',
+					  isBot: true,
+					}
+				});
+			}
+			
 		 
 		 }
 		  
