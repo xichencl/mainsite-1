@@ -474,12 +474,11 @@ a {
 
 .lang-container {
   width: 200px;
-  background: red;
   position: relative;
   top: 175px;
   left: 125px;
   font-size: 1.6em;
-  color: #f1f1f1;
+  color: rgba(241, 241, 241, .5);
 }
 /*.language {
   color: #f0f0f0;
@@ -496,10 +495,19 @@ form {
 
 label {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+label:hover {
+  color: rgba(255, 255, 255, 1);
+  font-size: 1.1em;
+  transition: all .2s ease-in-out;
 }
 
 .radio-style {
   margin-right: 25px; /*positions radio*/
+  margin-top: 4px;
 }
 
 .radio {
