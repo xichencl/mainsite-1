@@ -1,0 +1,226 @@
+$font-family-serif: "Judson", serif;
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+
+$grey-border: #eee;
+$grey-text: #aaa;
+$black: #000;
+$white: #fff;
+$blue-button: #316a92;
+$blue-button-pressed: #115077;
+$blue-accent: #5392be;
+$yellow-highlight: #f9d04e;
+$grey-background: #f5f5f5;
+
+
+// Login Page
+.form-group {
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+
+.form-input {
+	height: 3.3rem;
+	margin-right: 2rem;
+	padding-top: 0;
+	width: 18rem;
+}
+
+.local-auth-button {
+	margin-bottom: 1rem
+}
+
+.forgot-password {
+	color: $black;
+}
+
+.oAuth-group {
+	padding: 4rem 0 2rem 0;
+}
+
+.oAuth-group-icon {
+	display: block;
+	height: 3rem;
+	margin-bottom: 1rem;
+}
+
+// Profile
+.Profile {
+	display: block;
+	@include md {
+		display: flex;
+	}
+	a {
+	}
+}
+
+.Listbox {
+	display: inline-block;
+	margin: 1rem 1rem 1rem 0; 
+	z-index: 1;
+	padding: 1rem 2rem 1rem 2rem;
+	text-align: left;
+	width: 100%;
+	position: relative;
+	background-color: $grey-background;
+	h2, h3 {
+		margin: 0;
+		display: inline-block;
+	}
+
+	h3 {
+		padding-top: 1rem;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	hr {
+		border: 0;
+		border-top: 0.15px solid $black;
+		margin: 1rem 0;
+	}
+	img {
+		width: 4rem;
+		position: absolute;
+		right: 1rem;
+	}
+	@include sm {
+		width: 50%;
+	}
+
+	@include md {
+		width: 33%;
+	}
+}
+
+.ListboxLarge {
+	display: block;
+	padding: 1rem 2rem 1rem 2rem;
+	text-align: left;
+	width: 100%;
+	position: relative;
+	background-color: $grey-background;
+	margin: 1rem 1rem 1rem 0; 
+	z-index: 1;
+	img {
+		width: 4.5rem;
+		position: absolute;
+		right: 1rem;
+	}
+	h2, h3 {
+		margin: 0;
+		display: inline-block;
+	}
+	h3 {
+		padding-top: 1rem;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	hr {
+		border: 0;
+		border-top: 0.15px solid $black;
+		margin: 1rem 0;
+	}
+}
+
+.Case-container {
+}
+
+.Todo-box, .Profile-box {
+	.fa {
+		margin-left: 2rem;
+	}
+	h3 {
+    	padding-top: 2rem;
+	}
+	padding: 0;
+	text-align: left;
+	padding-left: 2rem;
+	width: 100%;
+
+	position: relative;
+
+	@include sm {
+		width: 50%;
+	}
+
+	@include md {
+		width: 33%;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		display: block;
+	}
+	span {
+		position: relative;
+		display: block;
+		cursor: pointer;
+	}
+	span:before, span:after {
+		content: '';
+		position: absolute;
+		width: 0%;
+		height: 1px;
+		top: 50%;
+		margin-top: -0.5px;
+		background: $black;
+	}
+	span:before {
+		left: -2.5px;
+	}
+	span:after {
+		right: 2.5px;
+		background: $black;
+		// transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
+
+	span:hover:before {
+		background: $black;
+		width: 100%;
+		// transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
+
+	span:hover:after {
+		background: transparent;
+		width: 100%;
+		// transition: 0s;
+	}
+}
+
+.Todo-box {
+	background-color: $yellow-highlight;
+	padding-bottom: 3.2rem;
+
+}
+
+.Profile-box {
+	background-color: $grey-background;
+
+	margin-right: 20px;
+	padding-bottom: 55px;
+	a {
+		color: $black;
+	}
+	a:hover {
+		color: $grey-text;
+	}
+	h3 {
+		padding-bottom: 1.5rem;
+	}
+}
+
+.Logout {
+	position: relative;
+	right: 0;
+}
+
+
+

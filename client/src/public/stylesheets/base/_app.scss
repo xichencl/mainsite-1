@@ -1,0 +1,432 @@
+$font-family-serif: "Judson", serif;
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+
+$grey-border: #eee;
+$grey-text: #aaa;
+$black: #000;
+$white: #fff;
+$blue-button: #316a92;
+$blue-button-pressed: #115077;
+$blue-accent: #5392be;
+$yellow-highlight: #f9d04e;
+$grey-background: #f5f5f5;
+
+html {
+  font-size: 10px;
+
+  @include lg {
+    font-size: 12px;
+  }
+
+  @include xl {
+    font-size: 14px;
+  }
+}
+
+body {
+  color: $black;
+  font-family: $font-family-sans-serif;
+}
+
+.App {
+  font-size: 1.5rem;
+  padding: 2rem;
+
+  @include md {
+    padding: 3rem;
+  }
+
+  @include md {
+    padding: 4rem;
+  }
+}
+
+a {
+  color: $grey-text;
+}
+
+a:hover {
+  color: $black;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-family-serif;
+  margin: 2rem 0;
+}
+
+h1 {
+  font-size: 4rem;
+  font-color: $black;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+button {
+  background: $blue-button;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.7rem 2rem;
+}
+
+button:disabled {
+  opacity: 0.3;
+}
+
+button:hover {
+  background: $blue-button-pressed;
+}
+
+
+// ==========================
+// ==== nav and searchbar ===
+// ==========================
+.App-mask {
+  display: none;
+  position: relative;
+
+  @include lg {
+    background-color: $white;
+    display: block;
+    position: fixed;
+    margin: -4rem;
+    height: 8.5rem;
+    width: 100%;
+    z-index: 100;
+  }
+}
+
+.Menu {
+  align-items: center;
+  display: flex;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  z-index: 1000;
+
+  @include lg {
+    position: fixed;
+    height: 100vh; 
+    padding-bottom: 0;
+    display: inline-block; 
+    width: 18rem;
+  }
+}
+
+.Menu-logo {
+  margin-right: 2rem;
+  width: 6rem;
+  .Menu-logo-img {
+    display: none;
+  }
+
+  @include lg {
+    left: 0;
+    padding: 4rem 0 4rem 4rem;
+    position: fixed;
+    top: 0;
+    width: 19rem;
+
+    .Menu-logo-img-sm {
+      display: none
+    }
+    .Menu-logo-img {
+    display: block;
+    }
+  }
+}
+
+.Menu-links {
+  @include md {
+  }
+
+  @include lg {
+    position: fixed; //mine
+    padding: 6rem 0 4rem 0; //mine
+  }
+}
+
+.Menu-link {
+  font-family: $font-family-sans-serif;
+  line-height: 3rem;
+  margin-left: 1.5rem;
+  text-decoration: none;
+
+  @include md {
+    margin-left: 3rem;
+  }
+
+  @include lg {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.Menu-link--active {
+  color: $black;
+}
+
+.Search { 
+  align-items: center;
+  background-color: $white;
+  display: flex;
+  @include lg {
+    margin-left: 20rem;
+    position: fixed;
+  }
+  width: 100%;
+  z-index: 1000;
+}
+
+.Search-bar {
+  height: 3.3rem;
+  margin-right: 2rem;
+  padding-top: 0;
+  width: 40rem;
+}
+
+.Page {
+  margin: 4rem auto 0 auto;
+  max-width: 70rem;
+
+  @include lg {
+    margin: 8rem 0 0 20rem;
+  }
+}
+
+// ==========================
+// ====== box stylings ======
+// ==========================
+.Box {
+  h2, h3 {
+    margin: 0;
+  }
+  display: inline-block;
+  margin: 1rem 0 1rem 0; 
+  padding: 2rem;
+  z-index: 1;
+}
+
+.Square-box {
+  .fa {
+    font-size: 8rem;
+    padding: 2rem 2rem 3rem 2rem;
+  }
+  h3 {
+    padding-top: 2rem;
+  }
+  padding: 0;
+  text-align: center;
+  width: 100%;
+
+  position: relative;
+
+  @include sm {
+    width: 50%;
+  }
+
+  @include md {
+    width: 33%;
+  }
+}
+
+.Square-box-static {
+  color: $black;
+  border-top: 2px solid $blue-accent;
+  background-size: 200% 200%;
+  background-position: 0 100%;
+  background-image: 
+    linear-gradient(to bottom, $blue-accent 51%, $grey-background 50%);
+  -webkit-transition: background-position 300ms, color 300ms ease;
+  -moz-transition: background-position 300ms, color 300ms ease;
+  -ms-transition: background-position 300ms, color 300ms ease;
+  -o-transition: background-position 300ms, color 300ms ease;
+  transition: background-position 300ms, color 300ms ease;
+
+  .Square-box-static-links {
+    display: none;
+  }
+}
+
+.Square-box-static:hover {
+  background-image: 
+    linear-gradient(to bottom, $blue-accent 50%, $grey-background 50%);
+  background-position: 0 0;
+  -webkit-transition: background-position 300ms, color 300ms ease;
+  -moz-transition: background-position 300ms, color 300ms ease;
+  -ms-transition: background-position 300ms, color 300ms ease;
+  -o-transition: background-position 300ms, color 300ms ease;
+  transition: background-position 300ms, color 300ms ease;
+  .Square-box-static-main {
+    // display: hidden;
+  }
+  .Square-box-static-links {
+    // display: block;
+  }
+}
+
+.Square-box:after {
+  @include sm {
+  }
+}
+
+.Banner-box {
+  background-color: $yellow-highlight;
+  width: 97%;
+}
+
+.Info-box {
+  background-color: $grey-background;
+  display: block;
+  width: 97%
+}
+
+// ==========================
+// ========= FOOTER =========
+// ==========================
+.Footer {
+  fixed: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $blue-button;
+  width: 100%;
+  display: flex; // somehow this removes p margin whitespace at bottom
+  color: $white;
+  margin-top: 30rem;
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+  a:hover {
+    font-weight: 600;
+  }
+}
+
+.Footer-div {
+  margin: 1rem 4rem 2rem 4rem; 
+}
+
+
+
+// ==========================
+// ==== default stylings ====
+// ==========================
+hr {
+  border: 0;
+  border-top: 1px solid $black;
+  margin: 1rem 0;
+}
+
+.Example {
+  background: #F6F8FA;
+  border-radius: 0.4rem;
+  padding: 2rem;
+}
+
+.Example .Icon {
+  margin-right: 10px;
+}
+
+.BackgroundImgExample {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 16rem;
+  max-width: 25rem;
+}
+
+.ImgExample {
+  max-width: 25rem;
+}
+
+// ==========================
+// ====== GRID ==============
+// ==========================
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.grid {
+  background: white;
+  margin: 0 0 20px 0;
+}
+.grid:after {
+  /* Or @extend clearfix */
+  content: "";
+  display: table;
+  clear: both;
+} 
+
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+}
+.grid [class*='col-']:last-of-type {
+  padding-right: 0;
+}
+
+.col-2-3 {
+  width: 66.66%;
+}
+
+.col-1-3 {
+  width: 33.33%;
+}
+
+.col-1-2 {
+  width: 50%;
+}
+
+.col-1-4 {
+  width: 25%;
+}
+
+.col-1-8 {
+  width: 12.5%;
+}
+
+.module {
+  // padding: 2rem;
+}
+
+.grid-pad {
+  // padding: 20px 0 20px 20px;
+}
+.grid-pad [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+
+
+/////////////
+.Login, .Register {
+  input {
+    margin-bottom: 1.5rem;
+    width: 50%
+  }
+}
+
+///////////
+.Chat-icon {
+  position: fixed;
+  right: 2rem;
+  top: 3rem;
+  .fa {
+    font-size: 5rem;
+    color: $blue-accent;
+  }
+  .fa:hover {
+    color: $blue-button-pressed;
+    cursor: pointer;
+  }
+}
