@@ -476,22 +476,22 @@ a {
   width: 200px;
   background: red;
   position: relative;
-  top: 130px;
+  top: 175px;
   left: 125px;
   font-size: 1.6em;
   color: #f1f1f1;
 }
-.lang {
+/*.language {
   color: #f0f0f0;
   font-size: 20px;
   padding-top: 34px;
   padding-bottom: 34px;
-}
+}*/
 
 form {
+  /*wraps clickable area to only be as wide as radio button + text*/
   display: flex;
   flex-wrap: wrap;
-  /*flex-direction: column;*/
 }
 
 label {
@@ -499,9 +499,9 @@ label {
 }
 
 .radio-style {
-  margin-right: 25px;
+  margin-right: 25px; /*positions radio*/
 }
 
 .radio {
-  margin: 10px 0;
+  margin: 25px 0; /*space between language options*/
 }
