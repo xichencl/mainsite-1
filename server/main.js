@@ -9,6 +9,7 @@ const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 const functions = require('./functions.js')
 const fs = require('fs');
+const opn = require('opn');
 
 // const PORT = 80;
 const PORT = 3000;
@@ -32,6 +33,14 @@ server.get('/', (req, res) => {
 
 server.post('/message', (req, res) => {
 	console.log('/message', req.body);
+	//to launch a webpage in user default browser
+	if (req.body.url){
+		opn(req.body.url);
+		res.writeHead(200);
+		res.end(JSON.stringify({speech:'Here you are! Let me know if you have more questions'}));
+		return;
+	}
+	
 	const options = {sessionId: req.body.id};
 	// const id = uuidv1();
 	// const options = {sessionId:Math.random()*1000};
@@ -118,6 +127,7 @@ server.post('/message', (req, res) => {
 
 server.post('/webhook', (req, res)=>{
 	console.log('/webhook', req.body);
+	
 	const action = req.body.result.action;
 	// let response = {};
 	//response is the argument passed into this function, 

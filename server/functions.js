@@ -175,13 +175,13 @@ functions.agent_of_service_lookup = function(contexts, searchType, respondToAPI)
 		if (numEntriesFound>5){
 			response.speech = "I have found {} companies matching the name \"{}\", whose registration is currently active. Here's the top five matches. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
-			response.data = {'table': listOfResults};
+			response.data = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
 			console.log(listOfResults);
 		}else if (numEntriesFound>0 && numEntriesFound<6){
 			
 			response.speech = "I have found {} company/ies matching the name \"{}\", whose registration is currently active. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
-			response.data = {'table': listOfResults};
+			response.data = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
 			console.log(listOfResults);
 		}else{
 			response.speech = "Sorry, I cannot find a match for the company under the name {} and business type {}, whose registration is currently active. You may try an alternative business type or name, or consult the company website.".format(origEntry, searchType);

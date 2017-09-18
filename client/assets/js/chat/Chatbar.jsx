@@ -236,7 +236,7 @@ const mapDispatchToProps = dispatch => {
 				
 			}
 			if (data.table){
-				customPayload = data.table;
+				customPayload = data;
 				console.log("CUSTOMPAYLOAD",customPayload);
 				dispatch({
 					type: 'CHAT_ADD_MESSAGE',

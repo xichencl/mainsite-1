@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import ImageViewer from "./ImageViewer.jsx";
+// const opn = require('opn');
 
 class ChatBubble extends React.Component{
   constructor(props){
@@ -42,7 +43,7 @@ class ChatBubble extends React.Component{
 		   console.log("executed");
 		   return (
 			<div>
-				<table onClick={this.props.onClick.bind(this)}>
+				<table onClick={this.props.onClick.bind(this)} >
 					<thead>
 						<tr>
 							<th>{"Company Name"}</th>
@@ -51,7 +52,7 @@ class ChatBubble extends React.Component{
 						</tr>
 					</thead>
 					<tbody>
-					{this.props.message.map((row, i)=>{
+					{this.props.message.table.map((row, i)=>{
 						return (<tr key={i}> 
 							<td>
 							{row.companyName }
@@ -94,7 +95,27 @@ class ChatBubble extends React.Component{
 const mapDispatchToProps = dispatch => {
   return {
 	  //controls buttons onclick function in bot response
-    onClick () {      
+    onClick (event) {
+		//onClick on table can't use opn in frontend, has to transmit to backend. 
+		console.log("EVENT TYPE: ", event.currentTarget.nodeName);
+		if (event.currentTarget.nodeName === 'TABLE'){
+			console.log("URL: ", this.props.message.url);
+			axios.post('/message', {url:this.props.message.url})
+			.then((response)=>{
+				dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: response.data.speech,  
+					  type: 'text',
+					  isBot: true,
+					}
+					
+				});
+			});
+			return;
+
+		}
+		//onClick on buttons
       const data = {message: this.props.message, type: this.props.type, isBot: this.props.isBot};  
       console.log("SESSIONID: ", this.props.sessionId);
       axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
@@ -208,7 +229,7 @@ const mapDispatchToProps = dispatch => {
 			}
 			
 			if (data.table){
-				customPayload = data.table;
+				customPayload = data;
 				console.log("CUSTOMPAYLOAD",customPayload);
 				dispatch({
 					type: 'CHAT_ADD_MESSAGE',
