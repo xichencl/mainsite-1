@@ -9,7 +9,36 @@ class LanguageIcon extends React.Component {
     super(props);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.state = { selectedOption: 'option1' };
+    this.handleOptionChange = this.handleOptionChange.bind(this);
   }
+
+  // handleOptionChange = changeEvent => {
+  //   this.setState({
+  //     selectedOption: changeEvent.target.value
+  //   });
+  // };
+
+  // handleOptionChange() {
+  //   this.setState({
+  //   selectedOption: 'changeEvent.target.value';
+  // }
+
+  // handleOptionChange = changeEvent => {
+  //   this.setState({
+  //     selectedOption: changeEvent.target.value
+  //   });
+  // };
+
+  handleOptionChange(changeEvent) {
+    this.setState({
+      selectedOption: changeEvent.target.value
+    });
+  }
+
+  // resetSession() {
+  //   this.setState({ id: uuidv1() });
+  // }
 
   openModal() {
     this.myModal.style.display = 'block';
@@ -61,7 +90,8 @@ class LanguageIcon extends React.Component {
                       className="radio-style"
                       type="radio"
                       value="option1"
-                      checked={true}
+                      checked={this.state.selectedOption === 'option1'}
+                      onChange={this.handleOptionChange}
                     />
                     English
                   </label>
@@ -69,9 +99,11 @@ class LanguageIcon extends React.Component {
                 <div className="radio" onClick={this.closeModal}>
                   <label>
                     <input
-                      type="radio"
                       className="radio-style"
+                      type="radio"
                       value="option2"
+                      checked={this.state.selectedOption === 'option2'}
+                      onChange={this.handleOptionChange}
                     />
                     Espa&ntilde;ol
                   </label>
@@ -79,9 +111,11 @@ class LanguageIcon extends React.Component {
                 <div className="radio" onClick={this.closeModal}>
                   <label>
                     <input
-                      type="radio"
                       className="radio-style"
+                      type="radio"
                       value="option3"
+                      checked={this.state.selectedOption === 'option3'}
+                      onChange={this.handleOptionChange}
                     />
                     中文
                   </label>
