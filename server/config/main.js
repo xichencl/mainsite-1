@@ -1,14 +1,16 @@
+const { DB_URL, MAILGUN } = require('./.env');
+
 module.exports = {
   // Secret key for JWT signing and encryption
   secret: 'super secret passphrase',
   // Database connection information
   // database: 'mongodb://localhost:27017',
-  database: 'mongodb server link here',
+  database: DB_URL,
   // Setting port for server
   port: 3000,
   // Configuring Mailgun API for sending transactional email
-  // Rt now using authorized accounts only for testing --> 
-  mailgun_priv_key: 'mailgun private key here',
+  // Rt now using authorized accounts only for testing -->
+  mailgun_priv_key: MAILGUN,
   // Configuring Mailgun domain for sending transactional email
   mailgun_domain: 'mailgun domain here',
   // Mailchimp API key
