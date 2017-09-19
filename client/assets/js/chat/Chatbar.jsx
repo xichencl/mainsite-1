@@ -235,6 +235,19 @@ const mapDispatchToProps = dispatch => {
 				});
 				
 			}
+			if (data.table){
+				customPayload = data;
+				console.log("CUSTOMPAYLOAD",customPayload);
+				dispatch({
+					type: 'CHAT_ADD_MESSAGE',
+					payload: {
+					  message: customPayload,  
+					  type: 'table',
+					  isBot: true,
+					}
+				});
+			}
+		 
 		 
 		 
 		 }

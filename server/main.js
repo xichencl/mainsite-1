@@ -9,8 +9,10 @@ const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 const functions = require('./functions.js')
 const fs = require('fs');
+const opn = require('opn');
 
-const PORT = 80;
+// const PORT = 80;
+const PORT = 3000;
 
 //temporary fix: mapping button text to events in api.ai
 // const events = {"Small Claims": "small_claims_event", "Eviction": "eviction_event", "Traffic": "traffic_event", "Domestic Violence": "domestic_violence_event", "Family Law":"family_law_event", "Guardianship":"guardianship_event"};
@@ -31,6 +33,14 @@ server.get('/', (req, res) => {
 
 server.post('/message', (req, res) => {
 	console.log('/message', req.body);
+	//to launch a webpage in user default browser
+	if (req.body.url){
+		opn(req.body.url);
+		res.writeHead(200);
+		res.end(JSON.stringify({speech:'Here you are! Let me know if you have more questions'}));
+		return;
+	}
+	
 	const options = {sessionId: req.body.id};
 	// const id = uuidv1();
 	// const options = {sessionId:Math.random()*1000};
@@ -42,7 +52,8 @@ server.post('/message', (req, res) => {
 		const ev = {};
 		if (msg in events){
 			console.log(msg);
-			ev.name=events[msg];
+			ev.name=events[msg].name;
+			ev.data=events[msg].data;
 			console.log(ev.name);
 		}else{
 			return;
@@ -116,28 +127,52 @@ server.post('/message', (req, res) => {
 
 server.post('/webhook', (req, res)=>{
 	console.log('/webhook', req.body);
-	const action = req.body.result.action;
-	let response = {};
 	
+	const action = req.body.result.action;
+	// let response = {};
+	//response is the argument passed into this function, 
+	//res is the argument passed into the outer most function above
+	const respondToAPI = (response)=>{
+		res.setHeader('Content-Type', 'application/json');
+		res.end(JSON.stringify(response));
+		return;
+	};
 	switch (action){
 		case 'small_claims.court_lookup':
-		//something needs to be here for payload response
+		//this appears to be sync
 			console.log("court_lookup chosen");
-			response = functions.small_claims_court_lookup(req.body.result.parameters);
-			console.log('Response Object:', response);			
+			functions.small_claims_court_lookup(req.body.result.parameters, respondToAPI);
+			// console.log('Response Object:', response);
+			// res.setHeader('Content-Type', 'application/json');
+			// res.end(JSON.stringify(response));				
 			// response.displayText = response.speech;
 			break;
 		case 'small_claims.sue_gov.resources':
-			response.speech = functions.small_claims_sue_gov_resource(req.body.result.parameters);
-			console.log('speech:', response.speech);
-			response.displayText = response.speech;
+			console.log("small claims sue gov resources chosen");
+			response = functions.small_claims_sue_gov_resource(req.body.result.parameters);
+			// console.log('Response Object:', response);
 			break;
+			
+		case 'LL_agent_of_service_lookup':
+		//this is async!
+			console.log("LL_agent_of_service_lookup chosen");
+			// const callback = (res) => {return res;};
+			functions.agent_of_service_lookup(req.body.result.contexts, 'LPLLC', respondToAPI);//set callback to send response to api.ai			
+			// console.log('Response Object:', response);
+			break;
+			
+		case 'CORP_agent_of_service_lookup':
+		//this is async!
+			console.log("CORP_agent_of_service_lookup chosen");
+			// const callback = (res) => {return res;};
+			functions.agent_of_service_lookup(req.body.result.contexts, 'CORP', respondToAPI);//set callback to send response to api.ai			
+			// console.log('Response Object:', response);
+			break;
+		
 		default:
 			console.log("Error: no such function exists.");
 	}		
 	
-	res.setHeader('Content-Type', 'application/json');
-	res.end(JSON.stringify(response));	
 	
 } );
 
