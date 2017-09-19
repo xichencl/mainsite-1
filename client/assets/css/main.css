@@ -27,7 +27,7 @@ body {
 }
 
 a {
-  color: #ffffff;
+  color: #ffffff; /*this is to show links white that are added from api.ai*/
 }
 
 /*********************************** bot bubble/button colors ***********************************/
