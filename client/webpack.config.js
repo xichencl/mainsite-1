@@ -10,42 +10,53 @@ const config = {
     filename: 'bundle.js',
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      test: /\.(js|jsx)$/,
-      loader: 'babel-loader',
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('css!sass'),
-    },
-    {
-      test: /\.(png|jpg|gif)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {}  
-        }
-      ]
-    },
-    {
-      test: /\.svg$/,
-      use: [
-        {
-          loader: 'file-loader'
+    loaders: [
+      {
+        exclude: /node_modules/,
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+      },
+      // added code below and might have solved svg issue
+      {
+        test: /\.jsx?$/, // Match both .js and .jsx files
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['react'],
         },
-        {
-          loader: 'svgo-loader',
-          options: {
-            plugins: [
-              {removeTitle: true},
-              {convertColors: {shorthex: false}},
-              {convertPathData: false}
-            ]
-          }
-        }
-      ]
-    },],
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css!sass'),
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+                { convertColors: { shorthex: false } },
+                { convertPathData: false },
+              ],
+            },
+          },
+        ],
+      },
+    ],
   },
   devServer: {
     historyApiFallback: true,
