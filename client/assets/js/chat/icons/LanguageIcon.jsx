@@ -1,8 +1,4 @@
 import React from 'react';
-// import LangEng from '../LangEng.jsx';
-// import LangMandarin from '../LangMandarin.jsx';
-// import LangSpanish from '../LangSpanish.jsx';
-// import ReactHtmlParser from 'react-html-parser';
 
 class LanguageIcon extends React.Component {
   constructor(props) {
