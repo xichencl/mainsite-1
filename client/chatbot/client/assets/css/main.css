@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {
+/*body {
   font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: flex-end;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+}*/
 /*********************************** above is css reset ***********************************/
 * {
   -moz-box-sizing: border-box;
@@ -15,6 +15,11 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+/*********************************** positions bot to right side of screen ***********************************/
+.move-bot-right {
+  position: absolute;
+  right: 0px;
 }
 
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
@@ -569,9 +574,4 @@ table tr:nth-child(odd) {
 table th {
   background-color: black;
   color: white;
-}
-
-.move-bot-right {
-  display: flex;
-  align-items: flex-end;
 }
