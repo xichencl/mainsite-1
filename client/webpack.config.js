@@ -11,16 +11,19 @@ const config = {
   },
   module: {
     loaders: [
-      {
-        exclude: /node_modules/,
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-      },
+      // {
+      //   exclude: /node_modules/,
+      //   test: /\.(js|jsx)$/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['es2015', 'stage-0', 'stage-2', 'react', 'es2015-ie'],
+      //   },
+      // },
       // added code below and might have solved svg issue
       {
         test: /\.jsx?$/, // Match both .js and .jsx files
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['react'],
         },

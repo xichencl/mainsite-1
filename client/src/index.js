@@ -12,7 +12,6 @@ import reducers from './reducers/index';
 import { AUTH_USER } from './actions/types';
 // import { FETCH_USER } from './actions/types';
 
-
 // Import stylesheets
 import './public/stylesheets/app.scss';
 
@@ -30,19 +29,16 @@ const token = cookie.load('token');
 
 if (token) {
   // Update application state. User has token and is probably authenticated
-  store.dispatch({ 
-  	type: AUTH_USER
+  store.dispatch({
+    type: AUTH_USER,
   });
 }
 
-
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <AppRouter />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
-
-
-/// add to < Router onUpdate={logPageView} /> for google analytics
+// / add to < Router onUpdate={logPageView} /> for google analytics
