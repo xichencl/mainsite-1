@@ -6,6 +6,7 @@ import NotFoundPage from './components/pages/not-found-page';
 import Navbar from './components/template/navbar'
 import Footer from './components/template/footer'
 import Search from './components/template/search'
+import ChatContainer from './components/chatbot/ChatContainer.jsx'
 
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -52,6 +53,7 @@ export default class AppRouter extends Component {
 			    <div className='App-mask'></div>
 			    <Navbar />
 			    <Search />
+			    <ChatContainer />
 			    <div className='Page'>
 			      <Switch>
 			        <Route exact path="/" component={ HomePage } />

@@ -8,7 +8,8 @@ import userReducer from './user_reducer';
 const rootReducer = combineReducers({
   form: formReducer,
   auth: authReducer,
-  user: userReducer
+  user: userReducer,
+  chat: require('../components/chatbot/reducers.js')
 });
 
 export default rootReducer;

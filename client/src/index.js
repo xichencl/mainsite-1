@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import AppRouter from './router';
-import reducers from './reducers/index';
+import rootReducer from './reducers/index';
 
 // import ReactGA from 'react-ga';
 
@@ -24,7 +24,7 @@ import './public/stylesheets/app.scss';
 // }
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(reducers);
+const store = createStoreWithMiddleware(rootReducer);
 
 const token = cookie.load('token');
 

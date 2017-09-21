@@ -17,7 +17,7 @@ const config = {
     },
     {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('css!sass'),
+      loader: ExtractTextPlugin.extract('css-loader!sass-loader'),
     },
     {
       test: /\.(png|jpg|gif)$/,
@@ -53,8 +53,8 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       output: { comments: false },
@@ -63,7 +63,7 @@ const config = {
       minimize: true,
       mangle: { except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad'] },
     }),
-    new ExtractTextPlugin('src/public/stylesheets/app.css', {
+    new ExtractTextPlugin({filename:'src/public/stylesheets/app.css',
       allChunks: true,
     }),
   ],

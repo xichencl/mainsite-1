@@ -10,7 +10,7 @@ export default class Search extends Component {
           <button>
           Search
           </button>
-          <div className="Chat-icon"><i className="fa fa-commenting" aria-hidden="true"></i></div>
+          {/*<div className="Chat-icon"><i className="fa fa-commenting" aria-hidden="true"></i></div>*/}
         </div>
       </div>
     );
