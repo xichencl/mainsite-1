@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
-import Navbar from './components/template/navbar'
-import Footer from './components/template/footer'
-import Search from './components/template/search'
+import Navbar from './components/template/navbar';
+import Footer from './components/template/footer';
+import Search from './components/template/search';
+import Chat from '../chatbot/client/assets/js/chat/icons/Chat.jsx';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -25,7 +26,6 @@ import Register from './components/auth/register';
 import ForgotPassword from './components/auth/forgot-password';
 import ResetPassword from './components/auth/reset-password';
 
-
 // Import profile pages
 // import Profile from './components/profile/profile';
 import ViewProfile from './components/profile/view-profile';
@@ -42,57 +42,66 @@ import ViewProfile from './components/profile/view-profile';
 
 // Import higher order components
 import RequireAuth from './components/auth/require-auth';
- 
+
 export default class AppRouter extends Component {
-	render() {
-		return (
-			<BrowserRouter>
-			  <div>
-			  <div className='App'>
-			    <div className='App-mask'></div>
-			    <Navbar />
-			    <Search />
-			    <div className='Page'>
-			      <Switch>
-			        <Route exact path="/" component={ HomePage } />
-			        <Route path="/contact-us" component={ ContactPage } />
-							<Route path="/portal" component={ Portal } />
-							<Route path="/register" component={ Register } />
-							<Route path="/login" component={ Login } />
-							<Route path="/logout" component={ Logout } />
-							<Route path="/faqs" component={ FAQs } />
-							<Route path="/forms" component={ Forms } />
-							<Route path='/locations' component={ () => window.location = "http://www.cc-courts.org/locations/locations.aspx" }/>
-							<Route path='/find-a-case' component={ () => window.location = "http://www.cc-courts.org/civil/online-case.aspx" }/>
-							<Route path="/forgot-password" component={ ForgotPassword } />
-							<Route path="/reset-password/:resetToken" component={ ResetPassword } />
-							
-							<Route path="/smallclaims" component={ SmallClaims } />
-							<Route path="/guardianship" component={ Guardianship } />
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <div className="App">
+            <div className="App-mask" />
+            <Navbar />
+            <Search />
+            <div className="Chat-icon">
+              <Chat />
+            </div>
 
-							<Route path="/profile" component={RequireAuth(ViewProfile)} />
-							
+            <div className="Page">
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/contact-us" component={ContactPage} />
+                <Route path="/portal" component={Portal} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/faqs" component={FAQs} />
+                <Route path="/forms" component={Forms} />
+                <Route
+                  path="/locations"
+                  component={() =>
+                    (window.location = 'http://www.cc-courts.org/locations/locations.aspx')}
+                />
+                <Route
+                  path="/find-a-case"
+                  component={() =>
+                    (window.location = 'http://www.cc-courts.org/civil/online-case.aspx')}
+                />
+                <Route path="/forgot-password" component={ForgotPassword} />
+                <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
-			        <Route path='*' component={ NotFoundPage } />
-			      </Switch>
-			    </div>
-			  </div>
-			  <Footer />
-			  </div>
-			</BrowserRouter>
-		)
-	}
-	
+                <Route path="/smallclaims" component={SmallClaims} />
+                <Route path="/guardianship" component={Guardianship} />
+
+                <Route path="/profile" component={RequireAuth(ViewProfile)} />
+
+                <Route path="*" component={NotFoundPage} />
+              </Switch>
+            </div>
+          </div>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
-
-/* 
+/*
 
 
 <BrowserRouter>
 				<Route path="/" component={App}>
 				    <Route path="/contact-us" component={ContactPage} />
-				    
+
 
 				    <Route path="*" component={NotFoundPage} />
 				</Route>
@@ -124,5 +133,3 @@ export default class AppRouter extends Component {
 // 					    <Route component={RequireAuth(Profile)} />
 
 //     <Route path="profile" component={RequireAuth(ViewProfile)} />
-
-
