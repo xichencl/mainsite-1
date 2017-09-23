@@ -8,21 +8,17 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="header">
+      <div className="header-L">
         <div>
-          <button
-            type="button"
-            className="refresh"
-            onClick={this.props.onClick.bind(this)}
-          >
+          <button type="button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
             <i className="material-icons" style={{ fontSize: '44px' }}>
               refresh
             </i>
           </button>
         </div>
         <div>
-          <div type="button" className="settings">
-            {/*this div is providing space for the custom settings button from npm package react-burger-menu*/}
+          <div type="button" className="settings-N">
+            {/* this div is providing space for the custom settings button from npm package react-burger-menu*/}
           </div>
         </div>
       </div>
@@ -30,22 +26,18 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    chatlog: state.chat.log
-  };
-};
+const mapStateToProps = state => ({
+  chatlog: state.chat.log,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick(event) {
-      if (event.currentTarget.type !== 'button') {
-        return;
-      }
-      dispatch({ type: 'RESET_BOT' });
-      this.props.resetSession();
+const mapDispatchToProps = dispatch => ({
+  onClick(event) {
+    if (event.currentTarget.type !== 'button') {
+      return;
     }
-  };
-};
+    dispatch({ type: 'RESET_BOT' });
+    this.props.resetSession();
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

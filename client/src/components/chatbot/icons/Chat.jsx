@@ -8,7 +8,7 @@ class Chat extends React.Component {
   render() {
     return (
       <div>
-        <div className="icon-size">
+        <div className="icon-size-O">
           <svg
             fill="$warm-grey"
             height="24"

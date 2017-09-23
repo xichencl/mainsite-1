@@ -22,28 +22,28 @@ class Chatbox extends React.Component {
   }
   render() {
     return (
-      <div className="grey chatbox">
-        {//map to iterate over the newState Array and apply function for each element
+      <div className="grey-C chatbox-F">
+        {// map to iterate over the newState Array and apply function for each element
         this.props.chatlog.map((value, key) => {
           console.log(value);
-		  return (
+          return (
             <ChatBubble
-              {...value} //spread operator
+              {...value} // spread operator
               key={key}
-			  sessionId= {this.props.sessionId}
-              /*onClick={e =>
+              sessionId={this.props.sessionId}
+              /* onClick={e =>
                 this.props.onClick.bind(
                   this,
                   e,
                   value
                 )()}*/
-				/*this is basically replacing the function (event) => {} with (event, value){}; value here is an element in the defaultState array*/
+              /* this is basically replacing the function (event) => {} with (event, value){}; value here is an element in the defaultState array*/
             />
           );
         })}
         <div
           style={{ float: 'left', clear: 'both', margin: '0px 10px' }}
-          ref={el => {
+          ref={(el) => {
             this.messagesEnd = el;
           }}
         />
@@ -52,35 +52,32 @@ class Chatbox extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    chatlog: state.chat.log
-  };
-};
+const mapStateToProps = state => ({
+  chatlog: state.chat.log,
+});
 
 /*
 const mapDispatchToProps = dispatch => {
   return {
 	  //controls buttons onclick function in bot response
     onClick (event, data) {
-      if (data.type === 'button'){ 
-        
+      if (data.type === 'button'){
+
       console.log("SESSIONID: ", this.props.sessionId);
       axios.post('/message', {payload:data, id:this.props.sessionId}) //redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
 		// response = JSON.parse(response);
-		
-		
-		
+
+
         if (response.status === 200) {
-			//axios.response.data, get speech from api.ai 
+			//axios.response.data, get speech from api.ai
 			const msg = response.data.result.fulfillment.speech;
-			
+
 		  dispatch({
 			type: 'CHAT_ADD_MESSAGE',
 			payload: {
-			  message: msg,  
+			  message: msg,
 			  type: 'text',
 			  isBot: true,
 			}
@@ -100,7 +97,7 @@ const mapDispatchToProps = dispatch => {
 						dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: btn,  
+						  message: btn,
 						  type: 'button',
 						  isBot: true,
 						}
@@ -113,7 +110,7 @@ const mapDispatchToProps = dispatch => {
 					dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: customPayload,  
+						  message: customPayload,
 						  type: 'image',
 						  isBot: true,
 						}
@@ -125,16 +122,16 @@ const mapDispatchToProps = dispatch => {
 					dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: customPayload,  
+						  message: customPayload,
 						  type: 'map',
 						  isBot: true,
 						}
 					});
-				}  
-			  
-			  
+				}
+
+
 			}
-		 
+
 		 }else{
 		    let data = response.data.result.fulfillment.data;
 		    if (data.buttons){
@@ -143,7 +140,7 @@ const mapDispatchToProps = dispatch => {
 						dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: btn,  
+						  message: btn,
 						  type: 'button',
 						  isBot: true,
 						}
@@ -155,29 +152,29 @@ const mapDispatchToProps = dispatch => {
 				dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: customPayload,  
+						  message: customPayload,
 						  type: 'image',
 						  isBot: true,
 						}
 				});
-				
+
 			}
 			if (data.map){
 				customPayload=data.map;
 				dispatch({
 						type: 'CHAT_ADD_MESSAGE',
 						payload: {
-						  message: customPayload,  
+						  message: customPayload,
 						  type: 'map',
 						  isBot: true,
 						}
 				});
-				
+
 			}
-		 
-		 
+
+
 		 }
-		  
+
         }
       })
       .catch((error) => {

@@ -9,7 +9,8 @@ import FontSizeIcon from './icons/FontSizeIcon.jsx';
 // import BubbleBreak from './BubbleBreak.jsx';
 
 const uuidv1 = require('uuid/v1');
-let sessionId = uuidv1();
+
+const sessionId = uuidv1();
 
 class ChatContainer extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class ChatContainer extends React.Component {
           noOverlay
           width={'100px'}
           customCrossIcon={
-            //customized cross icon by replacing it with
+            // customized cross icon by replacing it with
             <svg
               fill="#545757"
               height="44"
@@ -63,8 +64,8 @@ class ChatContainer extends React.Component {
           </div>
         </Menu>
         <main id="page-wrap">
-          {/*props have to be in {} or ""*/}
-          <div className="grey chat-container">
+          {/* props have to be in {} or ""*/}
+          <div className="grey-C chat-container-E">
             <Chatbox sessionId={this.state.id} />
           </div>
         </main>

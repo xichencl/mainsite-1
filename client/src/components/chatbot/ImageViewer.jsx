@@ -28,11 +28,11 @@ class ImageViewer extends React.Component {
           src={this.props.src}
           alt={this.props.alt}
         />
-        <div ref={mod => (this.myModal = mod)} className="modal">
-          <span className="close" onClick={this.closeModal}>
+        <div ref={mod => (this.myModal = mod)} className="modal-P">
+          <span className="close-R" onClick={this.closeModal}>
             &times;
           </span>
-          <img className="modal-content" ref={img => (this.modalImg = img)} />
+          <img className="modal-content-Q" ref={img => (this.modalImg = img)} />
           <div ref={cap => (this.caption = cap)} id="caption">
             {this.props.alt}
           </div>

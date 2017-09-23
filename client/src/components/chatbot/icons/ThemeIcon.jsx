@@ -9,7 +9,7 @@ class ThemeIcon extends React.Component {
   render() {
     return (
       <div>
-        <div className="icon-size">
+        <div className="icon-size-O">
           <svg
             id="Symbol_14_1"
             data-name="Symbol 14 – 1"
@@ -20,7 +20,7 @@ class ThemeIcon extends React.Component {
               <style
                 dangerouslySetInnerHTML={{
                   __html:
-                    '\n      .cls-1 {\n        fill: #F0F0F0;\n        stroke: #6f7273;\n        stroke-width: 2px;\n      }\n\n      .cls-2 {\n        stroke: none;\n      }\n\n      .cls-3 {\n        fill: none;\n      }\n    '
+                    '\n      .cls-1 {\n        fill: #F0F0F0;\n        stroke: #6f7273;\n        stroke-width: 2px;\n      }\n\n      .cls-2 {\n        stroke: none;\n      }\n\n      .cls-3 {\n        fill: none;\n      }\n    ',
                 }}
               />
             </defs>

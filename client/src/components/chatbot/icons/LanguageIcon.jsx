@@ -8,16 +8,16 @@ class LanguageIcon extends React.Component {
     this.state = { selectedOption: 'option1' };
     this.handleOptionChange = this.handleOptionChange.bind(this);
   }
-  //allows only one radio button to be selected at a time
+  // allows only one radio button to be selected at a time
   handleOptionChange(changeEvent) {
     this.setState({
-      selectedOption: changeEvent.target.value
+      selectedOption: changeEvent.target.value,
     });
   }
 
   openModal() {
     this.myModal.style.display = 'block';
-    //this.modalImg.src = this.smallImg.src;
+    // this.modalImg.src = this.smallImg.src;
   }
   closeModal() {
     this.myModal.style.display = 'none';
@@ -26,8 +26,8 @@ class LanguageIcon extends React.Component {
   render() {
     return (
       <div>
-        <div className="icon-size">
-          <div onClick={this.openModal} className="icon-size">
+        <div className="icon-size-O">
+          <div onClick={this.openModal} className="icon-size-O">
             <svg
               fill="#F0F0F0"
               height="44"
@@ -44,7 +44,7 @@ class LanguageIcon extends React.Component {
 
             <div className="lang-container">
               <form>
-                <div className="radio" onClick={this.closeModal}>
+                <div className="radio-T" onClick={this.closeModal}>
                   <label>
                     <input
                       className="radio-style"
@@ -56,7 +56,7 @@ class LanguageIcon extends React.Component {
                     English
                   </label>
                 </div>
-                <div className="radio" onClick={this.closeModal}>
+                <div className="radio-T" onClick={this.closeModal}>
                   <label>
                     <input
                       className="radio-style"
@@ -68,7 +68,7 @@ class LanguageIcon extends React.Component {
                     Espa&ntilde;ol
                   </label>
                 </div>
-                <div className="radio" onClick={this.closeModal}>
+                <div className="radio-T" onClick={this.closeModal}>
                   <label>
                     <input
                       className="radio-style"
