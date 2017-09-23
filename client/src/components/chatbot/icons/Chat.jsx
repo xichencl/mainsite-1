@@ -10,7 +10,7 @@ class Chat extends React.Component {
       <div>
         <div className="icon-size">
           <svg
-            fill="#FFA500"
+            fill="$warm-grey"
             height="24"
             viewBox="0 0 24 24"
             width="24"
