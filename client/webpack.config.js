@@ -80,9 +80,13 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false,
-        comparisons: false, // don't optimize comparisons
+      uglifyOptions:{
+        properties: {
+          compress: {
+            warnings: false,
+            comparisons: false, // don't optimize comparisons
+          }
+        }
       },
     }),
     new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),
