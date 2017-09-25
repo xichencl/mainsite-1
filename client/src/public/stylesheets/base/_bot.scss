@@ -356,11 +356,14 @@
 
 /*********************************** Header Chat Button ***********************************/
 
-.chat-button {
-  position: relative;
-  left: 10em;
+.open-bot-icon {
+  /*speech bubble*/
+  position: fixed;
+  left: 53em;
   display: flex;
   align-items: center;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 /*********************************** Modals ***********************************/

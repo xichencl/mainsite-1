@@ -9,7 +9,7 @@ class Chat extends React.Component {
     return (
       <div>
         {/* <div className="icon-size-O">*/}
-        <div className="chat-button">
+        <div className="open-bot-icon">
           <svg
             fill="#7fcde5"
             height="36"

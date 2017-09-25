@@ -54,6 +54,7 @@ export default class AppRouter extends Component {
 
             <Navbar />
             <Search />
+            <Chat />
             <div className="Page">
               <Switch>
                 <Route exact path="/" component={HomePage} />
