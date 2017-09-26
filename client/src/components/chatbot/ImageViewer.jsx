@@ -29,7 +29,7 @@ class ImageViewer extends React.Component {
           alt={this.props.alt}
         />
         <div ref={mod => (this.myModal = mod)} className="modal-P">
-          <span className="close-R" onClick={this.closeModal}>
+          <span className="close-L" onClick={this.closeModal}>
             &times;
           </span>
           <img className="modal-content-Q" ref={img => (this.modalImg = img)} />

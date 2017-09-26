@@ -445,18 +445,18 @@
 }
 
 /* The Close Button */
-.close-R {
+.close-L {
   position: absolute;
   top: 15px;
-  right: 35px;
+  left: 35px;
   color: $light-grey;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
 }
 
-.close-R:hover,
-.close-R:focus {
+.close-L:hover,
+.close-L:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;

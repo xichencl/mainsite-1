@@ -72,10 +72,10 @@ module.exports = function (app) {
 
   // route: /chat/message
   console.log(ChatController.getMessageResponse);
-  chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
-  // chatRoutes.post('/message', ChatController.getMessageResponse);
+  // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
+  chatRoutes.post('/message', (req, res)=> {ChatController.getMessageResponse(req, res)});
   console.log(ChatController.getWebhookResponse);
-  chatRoutes.post('/webhook', ChatController.getWebhookResponse);
+  chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
 /*
   // Set chat routes as a subgroup/middleware to apiRoutes
   apiRoutes.use('/chat', chatRoutes);

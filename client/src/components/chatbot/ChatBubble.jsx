@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
     console.log('EVENT TYPE: ', event.currentTarget.nodeName);
     if (event.currentTarget.nodeName === 'TABLE') {
       console.log('URL: ', this.props.message.url);
-      axios.post('/chat/message', { url: this.props.message.url }).then((response) => {
+      axios.post('/api/chat/message', { url: this.props.message.url }).then((response) => {
         dispatch({
           type: 'CHAT_ADD_MESSAGE',
           payload: {

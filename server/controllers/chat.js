@@ -4,9 +4,7 @@ const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 
-exports.getMessageResponse = () => {
-  return
-    ((req, res) => {
+exports.getMessageResponse = (req, res) => {
       {
         console.log('/message', req.body);
         //to launch a webpage in user default browser
@@ -24,7 +22,7 @@ exports.getMessageResponse = () => {
         //sends event request to api.ai and response to front end
         if (req.body.payload.type=='button'){
           const msg = req.body.payload.message;
-          const events = JSON.parse(fs.readFileSync('./buttons_and_events.json'));
+          const events = JSON.parse(fs.readFileSync('./chatFiles/buttons_and_events.json'));
           const ev = {};
           if (msg in events){
             console.log(msg);
@@ -100,12 +98,10 @@ exports.getMessageResponse = () => {
         }
 
       }
-    });
-  };
+    };
 
 
-exports.getWebhookResponse = () => {
-  return ((req, res)=>{
+exports.getWebhookResponse = (req, res)=>{
     console.log('/webhook', req.body);
     
     const action = req.body.result.action;
@@ -154,8 +150,7 @@ exports.getWebhookResponse = () => {
     }   
     
     
-  });
-};
+  };
 
 
 

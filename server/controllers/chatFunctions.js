@@ -32,7 +32,7 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 	
 	
 	//load court_addresses
-	const court_addresses = JSON.parse(fs.readFileSync('./small_claims_court_addresses.json'));
+	const court_addresses = JSON.parse(fs.readFileSync('./chatFiles/small_claims_court_addresses.json'));
 	console.log("Court addresses: ", court_addresses);
 	// console.log("Place:" locale);
 	
@@ -83,7 +83,7 @@ functions.small_claims_sue_gov_resource = function(params){
 			return "I'm sorry, but your entry was invalid. Please enter or say a city or county name.";
 		}
 	}
-	const sue_gov_resources = JSON.parse(fs.readFileSync('./small_claims_sue_gov_resources.json'));
+	const sue_gov_resources = JSON.parse(fs.readFileSync('./chatFiles/small_claims_sue_gov_resources.json'));
 	// console.log("court addresses: %s", court_addresses);
 	
 	if (locale in sue_gov_resources){
