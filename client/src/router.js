@@ -49,7 +49,7 @@ export default class AppRouter extends Component {
     return (
       <BrowserRouter>
         <div>
-          <ChatContainer />
+          {/* <ToggleBox />*/}
           <div className="App">
             <div className="App-mask" />
 
