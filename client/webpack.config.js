@@ -72,8 +72,8 @@ const config = {
     ],
   },
   devServer: {
-    // historyApiFallback: true,
-    // contentBase: './',
+    historyApiFallback: true,
+    contentBase: './',
     // port:8000,
     proxy: {'/api':'http://localhost:3000'},
   },
