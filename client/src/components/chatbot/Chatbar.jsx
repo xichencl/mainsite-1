@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch) => {
       payload: data,
     });
     axios
-      .post('/message', { payload: data, id: sessionId })
+      .post('/chat/message', { payload: data, id: sessionId })
       .then((response) => {
         console.log('Response:', response);
         // response.data is a data envelope by redux

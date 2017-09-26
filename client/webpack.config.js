@@ -6,6 +6,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   context: __dirname,
   entry: './src/index.js',
+
   output: {
     path: __dirname,
     filename: 'bundle.js',
@@ -71,8 +72,10 @@ const config = {
     ],
   },
   devServer: {
-    historyApiFallback: true,
-    contentBase: './',
+    // historyApiFallback: true,
+    // contentBase: './',
+    // port:8000,
+    proxy: {'/api':'http://localhost:3000'},
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
