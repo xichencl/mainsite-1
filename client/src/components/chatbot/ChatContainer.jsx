@@ -34,7 +34,7 @@ class ChatContainer extends React.Component {
   render() {
     return (
       <div>
-        <div className="move-bot-right the-bot">
+        <div className="position-bot the-bot">
           <Menu
             pageWrapId={'page-wrap'}
             outerContainerId={'outer-container'}

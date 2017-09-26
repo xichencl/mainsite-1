@@ -7,7 +7,7 @@ import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
 import ChatContainer from './components/chatbot/ChatContainer.jsx';
-import Chat from './components/chatbot/icons/Chat.jsx';
+import ChatIcon from './components/chatbot/icons/ChatIcon.jsx';
 import OpenBot from './components/chatbot/OpenBot.jsx';
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -55,7 +55,7 @@ export default class AppRouter extends Component {
 
             <Navbar />
             <Search />
-            <Chat />
+            <ChatIcon />
             <OpenBot />
             <div className="Page">
               <Switch>

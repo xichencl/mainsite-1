@@ -19,9 +19,21 @@
   z-index: 1003;
 }
 
-.move-bot-right {
+.position-bot {
+  /*show bot*/
   position: absolute;
   right: 0px;
+  top: 0px;
+}
+
+// .slide-left {
+//   height: 100px;
+//   -webkit-transition: height .3s ease;
+// }
+
+.position-bot1 {
+  /*hide bot*/
+  left: 30em;
   top: 0px;
 }
 

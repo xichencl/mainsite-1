@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-import Chat from './icons/Chat.jsx';
+import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
 
 class OpenBot extends React.Component {
@@ -31,7 +31,7 @@ class OpenBot extends React.Component {
       // <div className="box">
       <div>
         <div className="open-bot-icon" onClick={this.toggleOpen}>
-          <Chat />
+          <ChatIcon />
         </div>
         {opened &&
           <div className="box-content">
