@@ -4,7 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Chat from './icons/Chat.jsx';
 import ChatContainer from './ChatContainer.jsx';
 
-class ToggleBox extends React.Component {
+class OpenBot extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,10 +12,10 @@ class ToggleBox extends React.Component {
       opened: false,
     };
     // http://egorsmirnov.me/2015/08/16/react-and-es6-part3.html
-    this.toggleBox = this.toggleBox.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
   }
 
-  toggleBox() {
+  toggleOpen() {
     // check if box is currently opened
     const { opened } = this.state;
     this.setState({
@@ -30,7 +30,7 @@ class ToggleBox extends React.Component {
     return (
       // <div className="box">
       <div>
-        <div className="open-bot-icon" onClick={this.toggleBox}>
+        <div className="open-bot-icon" onClick={this.toggleOpen}>
           <Chat />
         </div>
         {opened &&
@@ -43,9 +43,9 @@ class ToggleBox extends React.Component {
 }
 
 ReactDOM.render(
-  <ToggleBox text="Click me">
+  <OpenBot text="Click me">
     <div>Some content</div>
-  </ToggleBox>,
+  </OpenBot>,
   document.getElementById('root'),
 );
-export default ToggleBox;
+export default OpenBot;
