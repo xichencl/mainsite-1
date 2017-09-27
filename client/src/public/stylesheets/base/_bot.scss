@@ -593,23 +593,16 @@ table th {
 }
 
 #bot {
-  transform: translateX(-150px);
+  transform: translateX(100px);
   transition: transform 400ms ease-in;
-
-  width: 100px;
-  color: white;
-  height: 100%;
-  background-color: black;
-  padding: 20px;
-  font-family: sans-serif;
 }
 
 #bot.slideIn {
-  transform: translateX(0);
+  transform: translateX(48px);
 }
 
 #bot.slideOut {
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 
 #root {
@@ -617,7 +610,7 @@ table th {
   width: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0px;
 }
 
 #wrapper {
