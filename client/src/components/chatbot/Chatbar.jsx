@@ -319,7 +319,13 @@ const mapDispatchToProps = (dispatch) => {
         // return;
         // }
         // }
-        recognition.start();
+        try {
+          recognition.start();
+        } catch (e){
+          //stop last recognition if still on. 
+          recognition.stop();
+          recognition.start();
+        }
         recognition.onresult = (e) => {
           console.log('recog results: ', e.results);
 
