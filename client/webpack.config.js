@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
   context: __dirname,
@@ -10,27 +11,35 @@ const config = {
     filename: 'bundle.js',
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        // exclude: /node_modules/,
+        exclude: /node_modules(?!\/webpack-dev-server)/,
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+      },
+      // added code to work with svg
       // {
+      //   test: /\.jsx?$/, // Match both .js and .jsx files
       //   exclude: /node_modules/,
-      //   test: /\.(js|jsx)$/,
       //   loader: 'babel-loader',
       //   query: {
-      //     presets: ['es2015', 'stage-0', 'stage-2', 'react', 'es2015-ie'],
+      //     presets: ['react'],
       //   },
       // },
-      // added code below and might have solved svg issue
       {
-        test: /\.jsx?$/, // Match both .js and .jsx files
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react'],
-        },
+        test: /\.css$/i,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass'),
+        test: /\.scss$/i,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -41,24 +50,24 @@ const config = {
           },
         ],
       },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: [
-                { removeTitle: true },
-                { convertColors: { shorthex: false } },
-                { convertPathData: false },
-              ],
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.svg$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader'
+      //     },
+      //     {
+      //       loader: 'svgo-loader',
+      //       options: {
+      //         plugins: [
+      //           {removeTitle: true},
+      //           {convertColors: {shorthex: false}},
+      //           {convertPathData: false}
+      //         ]
+      //       }
+      //     }
+      //   ]
+      // },
     ],
   },
   devServer: {
@@ -67,38 +76,17 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      output: { comments: false },
-      mangle: false,
-      sourcemap: false,
-      minimize: true,
-      mangle: { except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad'] },
+    // new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new UglifyJSPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+        comparisons: false, // don't optimize comparisons
+      },
     }),
-    new ExtractTextPlugin('src/public/stylesheets/app.css', {
-      allChunks: true,
-    }),
+    new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),
   ],
 };
 
 module.exports = config;
-
-// new webpack.optimize.UglifyJsPlugin({
-//       compress: {
-//         warnings: false,
-//         screw_ie8: true,
-//         conditionals: true,
-//         unused: true,
-//         comparisons: true,
-//         sequences: true,
-//         dead_code: true,
-//         evaluate: true,
-//         if_return: true,
-//         join_vars: true,
-//       },
-//       output: {
-//         comments: false,
-//       },
-//     }),

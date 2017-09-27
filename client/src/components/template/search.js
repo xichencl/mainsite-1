@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Chat from '../../../chatbot/client/assets/js/chat/icons/Chat.jsx';
+import ChatIcon from '../chatbot/icons/ChatIcon.jsx';
 
 export default class Search extends Component {
   render() {
@@ -9,9 +9,6 @@ export default class Search extends Component {
           <input className="Search-bar" placeholder=" Search our site" />
 
           <button>Search</button>
-          <div className="Chat-icon">
-            <Chat />
-          </div>
         </div>
       </div>
     );

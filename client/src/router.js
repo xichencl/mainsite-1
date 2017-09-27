@@ -6,8 +6,9 @@ import NotFoundPage from './components/pages/not-found-page';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
-import Chat from '../chatbot/client/assets/js/chat/icons/Chat.jsx';
-
+import ChatContainer from './components/chatbot/ChatContainer.jsx';
+import ChatIcon from './components/chatbot/icons/ChatIcon.jsx';
+import OpenBot from './components/chatbot/OpenBot.jsx';
 // Import static pages
 import HomePage from './components/pages/home-page';
 import ContactPage from './components/pages/contact-page';
@@ -48,14 +49,14 @@ export default class AppRouter extends Component {
     return (
       <BrowserRouter>
         <div>
+          {/* <ToggleBox />*/}
           <div className="App">
             <div className="App-mask" />
+
             <Navbar />
             <Search />
-            <div className="Chat-icon">
-              <Chat />
-            </div>
-
+            <ChatIcon />
+            <OpenBot />
             <div className="Page">
               <Switch>
                 <Route exact path="/" component={HomePage} />
