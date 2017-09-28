@@ -130,7 +130,7 @@ const mapDispatchToProps = (dispatch) => {
       payload: data,
     });
     axios
-      .post('/message', { payload: data, id: sessionId })
+      .post('/api/chat/message', { payload: data, id: sessionId })
       .then((response) => {
         console.log('Response:', response);
         // response.data is a data envelope by redux
@@ -319,7 +319,13 @@ const mapDispatchToProps = (dispatch) => {
         // return;
         // }
         // }
-        recognition.start();
+        try {
+          recognition.start();
+        } catch (e){
+          //stop last recognition if still on. 
+          recognition.stop();
+          recognition.start();
+        }
         recognition.onresult = (e) => {
           console.log('recog results: ', e.results);
 

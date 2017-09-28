@@ -6,6 +6,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   context: __dirname,
   entry: './src/index.js',
+
   output: {
     path: __dirname,
     filename: 'bundle.js',
@@ -73,6 +74,8 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: './',
+    // port:8000,
+    proxy: {'/api':'http://localhost:3000'},
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
@@ -80,9 +83,13 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false,
-        comparisons: false, // don't optimize comparisons
+      uglifyOptions:{
+        properties: {
+          compress: {
+            warnings: false,
+            comparisons: false, // don't optimize comparisons
+          }
+        }
       },
     }),
     new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),

@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
     console.log('EVENT TYPE: ', event.currentTarget.nodeName);
     if (event.currentTarget.nodeName === 'TABLE') {
       console.log('URL: ', this.props.message.url);
-      axios.post('/message', { url: this.props.message.url }).then((response) => {
+      axios.post('/api/chat/message', { url: this.props.message.url }).then((response) => {
         dispatch({
           type: 'CHAT_ADD_MESSAGE',
           payload: {
@@ -112,7 +112,7 @@ const mapDispatchToProps = dispatch => ({
     const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
     console.log('SESSIONID: ', this.props.sessionId);
     axios
-      .post('/message', { payload: data, id: this.props.sessionId }) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
+      .post('/api/chat/message', { payload: data, id: this.props.sessionId }) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
         // response = JSON.parse(response);

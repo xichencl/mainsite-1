@@ -1,6 +1,6 @@
 const AuthenticationController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
-const ChatController = require('./controllers/chat');
+const ChatController = require('./controllers/chat.js');
 const CommunicationController = require('./controllers/communication');
 const StripeController = require('./controllers/stripe');
 const express = require('express');
@@ -67,6 +67,16 @@ module.exports = function (app) {
   // Chat Routes
   //= ========================
 
+  apiRoutes.use('/chat', chatRoutes);
+  // chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
+
+  // route: /chat/message
+  console.log(ChatController.getMessageResponse);
+  // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
+  chatRoutes.post('/message', (req, res)=> {ChatController.getMessageResponse(req, res)});
+  console.log(ChatController.getWebhookResponse);
+  chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
+/*
   // Set chat routes as a subgroup/middleware to apiRoutes
   apiRoutes.use('/chat', chatRoutes);
 
@@ -81,7 +91,7 @@ module.exports = function (app) {
 
   // Start new conversation
   chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
-
+*/
   //= ========================
   // Payment Routes
   //= ========================
