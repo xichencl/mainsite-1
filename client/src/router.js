@@ -49,14 +49,13 @@ export default class AppRouter extends Component {
     return (
       <BrowserRouter>
         <div>
-          {/* <ToggleBox />*/}
           <div className="App">
             <div className="App-mask" />
-
             <Navbar />
             <Search />
-            <ChatIcon />
-            <OpenBot />
+            <div className="position-bot the-bot">
+              <OpenBot />
+            </div>
             <div className="Page">
               <Switch>
                 <Route exact path="/" component={HomePage} />
