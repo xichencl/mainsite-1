@@ -219,6 +219,7 @@
   border: none;
   padding-left: 3px;
   cursor: pointer;
+  outline: none;
 }
 
 .circle-K:hover {
@@ -494,7 +495,7 @@
   height: 100%;
   overflow: hidden;
   background-color: rgba(50, 64, 70, 0.9);
-  font-family: Helvetica Neue, Verdana, sans-serif;
+  font-family: $bot-font;
   cursor: default;
 }
 
@@ -593,7 +594,7 @@ table th {
 }
 
 #bot.slideIn {
-  transform: translateX(48px);
+  transform: translateX(0);
 }
 
 #bot.slideOut {
