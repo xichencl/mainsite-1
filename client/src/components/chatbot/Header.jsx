@@ -10,14 +10,16 @@ class Header extends React.Component {
     return (
       <div className="header-L">
         <div>
-          <button type="button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
+          {/* replaced button element with div for styling purposes*/}
+          <div className="refresh-M" onClick={this.props.onClick.bind(this)}>
             <i className="material-icons" style={{ fontSize: '44px' }}>
               refresh
             </i>
-          </button>
+          </div>
         </div>
         <div>
-          <div type="button" className="settings-N">
+          {/* settings icon*/}
+          <div className="settings-N">
             {/* this div is providing space for the custom settings button from npm package react-burger-menu*/}
           </div>
         </div>
