@@ -4,9 +4,8 @@
   "description": "Client-side of MERN Starter.",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"    
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
-
   "author": "taypsl",
   "license": "MIT",
   "dependencies": {
