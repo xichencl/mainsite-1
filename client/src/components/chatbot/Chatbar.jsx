@@ -68,8 +68,7 @@ class Chatbar extends React.Component {
     return (
       <div className="light-grey-D chatbar-G">
         <div>
-          <button
-            type="button"
+          <div
             value="speak"
             // ref="rec" //a react attrib
             className="mic"
@@ -78,7 +77,7 @@ class Chatbar extends React.Component {
             <i className="material-icons" style={{ fontSize: '35px' }}>
               mic
             </i>
-          </button>
+          </div>
         </div>
 
         <div>
@@ -130,7 +129,7 @@ const mapDispatchToProps = (dispatch) => {
       payload: data,
     });
     axios
-      .post('/message', { payload: data, id: sessionId })
+      .post('/api/chat/message', { payload: data, id: sessionId })
       .then((response) => {
         console.log('Response:', response);
         // response.data is a data envelope by redux
@@ -319,7 +318,13 @@ const mapDispatchToProps = (dispatch) => {
         // return;
         // }
         // }
-        recognition.start();
+        try {
+          recognition.start();
+        } catch (e) {
+          // stop last recognition if still on.
+          recognition.stop();
+          recognition.start();
+        }
         recognition.onresult = (e) => {
           console.log('recog results: ', e.results);
 
