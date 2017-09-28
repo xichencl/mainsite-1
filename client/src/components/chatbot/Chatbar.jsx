@@ -82,6 +82,7 @@ class Chatbar extends React.Component {
 
         <div>
           <input
+            className="chat-input"
             type="text"
             placeholder="Type your message here"
             ref={input => (this.textInput = input)}
