@@ -20,10 +20,15 @@
 }
 
 .position-bot {
-  /*show bot*/
-  position: absolute;
+  /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
+  // position: absolute;
+  // right: 0px;
+  // top: 0px;
+  position: fixed;
+  max-height: 100vh;
   right: 0px;
   top: 0px;
+  overflow-y: scroll;
 }
 
 .position-bot1 {
