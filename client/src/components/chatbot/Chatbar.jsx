@@ -68,7 +68,8 @@ class Chatbar extends React.Component {
     return (
       <div className="light-grey-D chatbar-G">
         <div>
-          <div
+          <button
+            type="button"            
             value="speak"
             // ref="rec" //a react attrib
             className="mic"
@@ -77,7 +78,7 @@ class Chatbar extends React.Component {
             <i className="material-icons" style={{ fontSize: '35px' }}>
               mic
             </i>
-          </div>
+          </button>
         </div>
 
         <div>
