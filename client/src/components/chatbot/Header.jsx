@@ -11,11 +11,11 @@ class Header extends React.Component {
       <div className="header-L">
         <div>
           {/* replaced button element with div for styling purposes*/}
-          <div className="refresh-M" onClick={this.props.onClick.bind(this)}>
+          <button type="button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
             <i className="material-icons" style={{ fontSize: '44px' }}>
               refresh
             </i>
-          </div>
+          </button>
         </div>
         <div>
           {/* settings icon*/}
