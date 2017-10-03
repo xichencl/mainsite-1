@@ -21,14 +21,14 @@
 
 .position-bot {
   /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
-  // position: absolute;
-  // right: 0px;
-  // top: 0px;
   position: fixed;
   max-height: 100vh;
   right: 0px;
   top: 0px;
   overflow-y: scroll;
+  /*padding and margin allow bot to be fully visibile while settings nav is open*/
+  padding-left: 7em;
+  margin-left: -7em;
 }
 
 .position-bot1 {
