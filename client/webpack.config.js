@@ -31,8 +31,7 @@ const config = {
       {
         test: /\.css$/i,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader',
+          use: ['css-loader', 'sass-loader'],
         }),
       },
       {
@@ -43,14 +42,28 @@ const config = {
         }),
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {},
-          },
-        ],
-      },
+        test: /\.(png|svg)$/,
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+        },
+      }, 
+      {
+        test: /\.(png|jpg|svg)$/,
+        loader: 'file-loader',
+        query: {
+          name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
+        },
+      }
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {},
+      //     },
+      //   ],
+      // },
       // {
       //   test: /\.svg$/,
       //   use: [
