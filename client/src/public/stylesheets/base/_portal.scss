@@ -129,27 +129,26 @@ input:focus:-moz-placeholder { color:transparent; }
 .Case-container {
 }
 
-.Todo-box, .Profile-box {
-	.fa {
-		margin-left: 2rem;
-	}
-	h3 {
-    	padding-top: 2rem;
-	}
-	padding: 0;
-	text-align: left;
-	padding-left: 2rem;
-	width: 100%;
+.Todo-box {
+	// .fa {
+	// 	margin-left: 2rem;
+	// }
+	// h3 {
+ //    	padding-top: 2rem;
+	// }
+	// padding: 0;
+	// text-align: left;
+	// width: 100%;
 
-	position: relative;
+	// position: relative;
 
-	@include sm {
-		width: 50%;
-	}
+	// @include sm {
+	// 	width: 50%;
+	// }
 
-	@include md {
-		width: 33%;
-	}
+	// @include md {
+	// 	width: 33%;
+	// }
 
 	ul {
 		list-style: none;
@@ -195,31 +194,115 @@ input:focus:-moz-placeholder { color:transparent; }
 	}
 }
 
+// Portal Page
+.Portal-box {
+	a {
+		color: $black;
+	}
+	a:hover {
+		color: $grey-text;
+	}	
+	width: 100%;
+
+  @include sm {
+    width: 50%;
+  }
+  @include md {
+    width: 33%;
+  }
+  position: relative;
+}
+
+.Portal-box-content {
+	padding: 2rem;
+}
+
+.My-cases-box-lg {
+	width: 100%;
+}
+
+.Upcoming-box {
+  p {
+    display: inline;
+  }
+	a {
+		color: $black;
+	}
+	a:hover {
+		color: $grey-text;
+	}	
+	width: 100%;
+
+  @include sm {
+    width: 100%;
+  }
+  @include md {
+    width: 66%;
+  }
+}
+
+.Box-icon-sm {
+	position: absolute;
+	right: 4rem;
+}
+
 .Todo-box {
 	background-color: $yellow-highlight;
 	padding-bottom: 3.2rem;
 
 }
 
+// Profile Page
 .Profile-box {
-	background-color: $grey-background;
-
-	margin-right: 20px;
-	padding-bottom: 55px;
-	a {
-		color: $black;
-	}
-	a:hover {
-		color: $grey-text;
-	}
 	h3 {
-		padding-bottom: 1.5rem;
+		padding: 0;
+		margin-bottom: 1.8rem;
+	}
+	.Profile-phone {
+		margin-top: 0.8rem;
+		margin-bottom: 1.4rem;
 	}
 }
 
 .Logout {
-	position: relative;
-	right: 0;
+	position: absolute;
+	top: 21rem;
+	right: 2rem;
+
+	a {
+		position: relative;
+		border: 2px solid $blue-button;
+		font-weight: 600;
+		color: $blue-button;
+		padding: 1rem 2rem 1rem 2rem;
+		margin-top: 4rem;
+
+	}
+	a:hover {
+		background-color: $blue-button-pressed;
+		color: $white;
+		font-weight: 300;
+	}
+
+	@include xs {
+		top: 22rem;
+		right: 2rem;
+	}
+
+	@include sm {
+		top: 18rem;
+		right: 4rem;
+	}
+
+	@include md {
+		top: 20rem;
+		right: 12rem;
+	}
+
+	@include lg {
+		top: 13rem;
+		right: 8rem;
+	}
 }
 
 

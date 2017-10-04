@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // import cookie from 'react-cookie';
 import { connect } from 'react-redux';
 
-class ViewTodo extends Component {
+export default class ViewTodo extends Component {
   componentWillMount() {
     // Fetch user data prior to component mounting
 
@@ -14,15 +14,23 @@ class ViewTodo extends Component {
   render() {
     return (
       <div>
-      	<div className='Box Todo-box col-2'>
-      	
-      		
-      		<h3>To Do List <i className="fa fa-check" aria-hidden="true"></i></h3>
-      		<ul>
-      			<li><del>File a claim</del></li>
-      			<li><span>Serve the defendant(s)</span></li>
-      			<li><span>Prepare for court</span></li>
-      		</ul>
+      	<div className='Box Portal-box '>
+          <div className='Portal-box-content Yellow-background'>
+  		
+        		<h3>To Do List<i className="fa fa-check Box-icon-sm" aria-hidden="true"></i></h3>
+        		<hr className='Box-line-md' />
+            <p><Link to='/'><div className='bullet fa fa-dot-circle-o'> </div></Link> File a claim</p>
+            <hr className='Box-line-md' />
+            <p><Link to='/'><div className='bullet fa fa-dot-circle-o'> </div></Link> Serve the defendant(s)</p>
+            <hr className='Box-line-md' />
+            <p><Link to='/'><div className='bullet fa fa-circle-thin'> </div></Link> Submit proof of service</p>
+            <hr className='Box-line-md' />
+            <p><Link to='/'><div className='bullet fa fa-circle-thin'> </div></Link> Prepare for court</p>
+            <hr className='Box-line-md' />
+            <p><Link to='/'><div className='bullet fa fa-circle-thin'> </div></Link> Respond to the judgement</p>
+            <hr className='Box-line-md' />
+
+          </div>
       	</div>
       	
       </div>
@@ -38,6 +46,27 @@ class ViewTodo extends Component {
 // }
 
 // export default connect(mapStateToProps, { fetchUser })(ViewProfile);
-export default ViewTodo;
 
-// add {todoListItems} to <ul></ul>
+
+/*
+old to-do code ----> 
+////////////////////
+render() {
+    return (
+      <div>
+        <div className='Box Portal-box Todo-box col-2'>
+        
+          
+          <h3>To Do List <i className="fa fa-check" aria-hidden="true"></i></h3>
+          <ul>
+            <li><del>File a claim</del></li>
+            <li><span>Serve the defendant(s)</span></li>
+            <li><span>Prepare for court</span></li>
+          </ul>
+        </div>
+        
+      </div>
+    );
+  }
+   */
+ 

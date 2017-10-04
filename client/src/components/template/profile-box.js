@@ -10,7 +10,7 @@ export default class ProfileBox extends Component {
 				<div className="Square-box-static module">
 					<div className="Square-box-static-main">
 						<h3>{this.props.boxTitle}</h3>
-						<Link to={this.props.boxLink}><i className="fa fa-pencil" aria-hidden="true"></i></Link>
+						<Link to={this.props.boxLink} className='Box-icon-sm'><i className="fa fa-pencil" aria-hidden="true"></i></Link>
 					</div>
 					<div className="Square-box-static-links">
 						<p>{this.props.boxContent}</p>

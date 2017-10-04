@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
-// import ccscLogo from '../../img/ccsc-logo.svg';
-// import ccscLogoSm from '../../../img/ccsc-logo-sm.svg';
+import ccscLogo from '../../img/ccsc-logo.svg';
+import ccscLogoSm from '../../img/ccsc-logo-sm.svg';
 // import ReactSVG from 'react-svg';
 
 
@@ -23,12 +23,12 @@ function Navbar(props) {
           <img
             alt='Contra Costa Superior Courts logo'
             className='Menu-logo-img'
-            src=''
+            src={ccscLogo}
           />
           <img
             alt='Contra Costa Superior Courts logo'
             className='Menu-logo-img-sm'
-            src=''
+            src={ccscLogoSm}
           />
           
         </div>
