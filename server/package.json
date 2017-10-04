@@ -11,7 +11,7 @@
   "author": "taypsl",
   "license": "ISC",
   "dependencies": {
-    "api.ai": "^1.0.3",
+    "apiai": "^4.0.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "cheerio": "^1.0.0-rc.2",
