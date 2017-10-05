@@ -11,10 +11,14 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   position: fixed;
   bottom: 0;
-  justify-content: space-between;
-  align-items: center;
   right: 100px;
 }
 
@@ -26,6 +30,7 @@
   background: transparent;
   border: none;
   font-family: $bot-font;
+  -webkit-font-smoothing: antialiased;
   font-weight: lighter;
   margin-left: 15px;
 }
