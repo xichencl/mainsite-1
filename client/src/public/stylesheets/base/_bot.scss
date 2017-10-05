@@ -20,16 +20,17 @@
 }
 
 .position-bot {
-  /*show bot*/
-  position: absolute;
+  /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
+  position: fixed;
+  max-height: 100vh;
   right: 0px;
   top: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*padding and margin allow bot to be fully visibile while settings nav is open*/
+  padding-left: 7em;
+  margin-left: -7em;
 }
-
-// .slide-left {
-//   height: 100px;
-//   -webkit-transition: height .3s ease;
-// }
 
 .position-bot1 {
   /*hide bot*/
@@ -106,7 +107,7 @@
   display: flex;
   font-size: 1em;
   line-height: 1.375em;
-  padding: 16px;
+  padding: 18px;
   width: 25em;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -222,8 +223,11 @@
   height: 50px;
   margin-right: 5px;
   border: none;
-  padding-left: 3px;
   cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circle-K:hover {
@@ -236,10 +240,11 @@
   transition-duration: 0.2s;
 }
 
-.mic {
+button.mic {
   background-color: transparent;
   color: $warm-grey;
-  border: none;
+  outline: 0;
+  padding: 0;
   cursor: pointer;
   -webkit-transition-duration: 0.1s;
   -o-transition-duration: 0.1s;
@@ -247,17 +252,20 @@
   transition: 0.1s;
 }
 
-.mic:hover {
+button.mic:hover {
   color: #5392be;
-  border: none;
+  outline: 0;
+  padding: 0;
   -webkit-transition-duration: 0.2s;
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
   transition: 0.2s;
 }
 
-.mic:active {
+button.mic:active {
   color: red;
+  outline: 0;
+  padding: 0;
   -webkit-transition-duration: 0s;
   -o-transition-duration: 0s;
   transition-duration: 0s;
@@ -265,6 +273,9 @@
   transition: 0s;
 }
 
+.chat-input {
+  outline: none !important;
+}
 /*********************************** header ***********************************/
 
 .header-L {
@@ -281,17 +292,21 @@
   right: 100px;
 }
 
-.refresh-M {
+button.refresh-M {
   background: transparent;
+  outline: 0;
   width: 50px;
   color: $icon-grey;
+  padding: 0;
   border: none;
   cursor: pointer;
   margin: 15px;
 }
 
-.refresh-M:hover {
+button.refresh-M:hover {
   color: $warm-grey;
+  outline: 0;
+  padding: 0;
   border: none;
   -webkit-transition-duration: 0.2s;
   -o-transition-duration: 0.2s;
@@ -299,8 +314,10 @@
   transition: 0.2s;
 }
 
-.refresh-M:active {
+button.refresh-M:active {
   color: $very-light-blue;
+  outline: 0;
+  padding: 0;
   -webkit-transition-duration: 0s;
   -o-transition-duration: 0s;
   transition-duration: 0s;
@@ -372,7 +389,8 @@
 .chat-icon {
   /*speech bubble*/
   position: fixed;
-  left: 53em;
+  left: 55em;
+  top: 50px;
   display: flex;
   align-items: center;
   z-index: 1000;
@@ -499,7 +517,7 @@
   height: 100%;
   overflow: hidden;
   background-color: rgba(50, 64, 70, 0.9);
-  font-family: Helvetica Neue, Verdana, sans-serif;
+  font-family: $bot-font;
   cursor: default;
 }
 
@@ -598,7 +616,7 @@ table th {
 }
 
 #bot.slideIn {
-  transform: translateX(48px);
+  transform: translateX(0);
 }
 
 #bot.slideOut {
