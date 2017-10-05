@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Squarebox from '../../../template/square-box';
 import Bannerbox from '../../../template/banner-box';
 import Infobox from '../../../template/info-box';
-
+// import svgs
 import AdoptionIcon from '../../../../img/family_adoption.svg';
 import ChildCustodyIcon from '../../../../img/family_child-custody.svg';
 import ChildSupportIcon from '../../../../img/family_child-support.svg';
@@ -16,9 +17,11 @@ export default class FamilyHome extends Component {
 			<div className='Topic'>
 	      <h1>Family Law</h1>
 	      <div className='grid grid-pad'>
-	        <Squarebox 
-	        	boxTitle='Adoption'
-            imgSrc={AdoptionIcon} /> 
+	        <Link to='adoption'>
+	        	<Squarebox 
+	        		boxTitle='Adoption'
+            		imgSrc={AdoptionIcon} /> 
+            </Link>
 	        <Squarebox 
 	        	boxTitle='Child Custody'
             imgSrc={ChildCustodyIcon} /> 

@@ -21,6 +21,7 @@ import Eviction from './components/pages/topics/eviction';
 import Traffic from './components/pages/topics/traffic';
 import Dv from './components/pages/topics/dv';
 import FamilyHome from './components/pages/topics/family/family-home';
+import Adoption from './components/pages/topics/family/family-adoption';
 
 // import ComponentSamplesPage from './components/pages/component-samples';
 
@@ -82,6 +83,7 @@ export default class AppRouter extends Component {
               <Route path="/dv" component={ Dv } />
               <Route path="/traffic" component={ Traffic } />
               <Route path="/family" component={ FamilyHome } />
+              <Route path="/adoption" component={ Adoption } />
 
               <Route path="/profile" component={RequireAuth(ViewProfile)} />
               
