@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 class MyCaseData extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // Fetch user data prior to component mounting
   }
 
