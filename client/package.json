@@ -9,8 +9,7 @@
   "author": "taypsl",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.13.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "axios": "^0.13.1",    
     "deepcopy": "^0.6.3",
     "file-loader": "^0.11.2",
     "install": "^0.10.1",
