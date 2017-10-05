@@ -1,0 +1,31 @@
+//styling chatbar
+
+.chatbar-G {
+  height: 5em;
+  width: 25em;
+  padding: 16px;
+  padding-left: 8px;
+  padding-right: 10px;
+  border-top: 1px solid #939393;
+  color: $not-black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: center;
+  right: 100px;
+}
+
+.chatbar-G input[type=text] {
+  height: auto;
+  width: 17em;
+  font-size: 1em;
+  margin: 0px;
+  background: transparent;
+  border: none;
+  font-family: $bot-font;
+  font-weight: lighter;
+  margin-left: 15px;
+}

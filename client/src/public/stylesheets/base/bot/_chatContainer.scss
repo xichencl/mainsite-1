@@ -1,0 +1,97 @@
+//styling chat container and chatbox
+
+.grey-C {
+  background-color: $light-grey;
+  color: $not-black;
+}
+
+.light-grey-D {
+  background-color: #ffffff;
+  color: $not-black;
+}
+
+.chat-container-E {
+  width: 25em;
+  height: 100vh;
+  bottom: 75px;
+  padding-top: 73px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.chatbox-F {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1em;
+  line-height: 1.375em;
+  padding: 18px;
+  width: 25em;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-end;
+  height: auto;
+  margin-bottom: 75px;
+}
+
+.circle-K {
+  background-color: #115077;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-K:hover {
+  background-color: #316a92;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+button.mic {
+  background-color: transparent;
+  color: $warm-grey;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  transition: 0.1s;
+}
+
+button.mic:hover {
+  color: #5392be;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  transition: 0.2s;
+}
+
+button.mic:active {
+  color: red;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+  transition: 0s;
+  transition: 0s;
+}
+
+.chat-input {
+  outline: none !important;
+}

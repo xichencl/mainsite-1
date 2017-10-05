@@ -1,0 +1,44 @@
+//styling settings/push out nav
+/* Position and sizing of burger button */
+.bm-burger-button {
+  display: none;
+}
+
+/* Position and sizing of clickable settings button */
+.bm-cross-button {
+  position: absolute;
+  width: 44px !important;
+  height: 44px !important;
+  right: 121px !important;
+  top: 13px !important;
+}
+
+/* Color/shape of settings button cross */
+.bm-cross {
+  background: transparent;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: $not-black;
+  padding-top: 70px;
+  padding-left: 22px;
+  padding-right: 0px;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.icon-size-O {
+  height: 44px;
+  width: 44px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+#outer-container {
+  overflow-y: visible !important;
+}

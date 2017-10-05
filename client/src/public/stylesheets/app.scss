@@ -7,8 +7,16 @@
 @import "base/portal";
 @import "base/topics";
 
+//BOT STYLING ONLY
+@import "./base/bot/_variables.scss";
+@import "./base/bot/_bubblesButtons.scss";
 
-//BOT
-@import "base/variables";
-@import "base/bot";
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import "./base/bot/_agentsTable.scss";
+@import "./base/bot/_bot.scss";
+@import "./base/bot/_header.scss";
+@import "./base/bot/_languageModal.scss";
+@import "./base/bot/_mapModal.scss";
+@import "./base/bot/_openChat.scss";
+@import "./base/bot/_settings.scss";
+@import "./base/bot/_chatContainer.scss";
+@import "./base/bot/_chatbar.scss";

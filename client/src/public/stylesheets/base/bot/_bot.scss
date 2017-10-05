@@ -1,0 +1,95 @@
+//styling basics of bot and api.ai
+.the-bot {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 1003;
+}
+
+.position-bot {
+  /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
+  position: fixed;
+  max-height: 100vh;
+  right: 0px;
+  top: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*padding and margin allow bot to be fully visibile while settings nav is open*/
+  padding-left: 7em;
+  margin-left: -7em;
+}
+
+/*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
+.stress {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+}
+//styling user speech bubble, bot speech bubble, and clickable bot buttons
+.bot-bubble-left {
+  /*max-width: 23em;*/
+  min-width: 5em;
+  padding: 20px 27px 20px 29px;
+  margin-right: auto; /*left adjusts bubble*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 45px 45px 45px 0px;
+}
+
+.chat-button-H {
+  width: 11em;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 30px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 0px; /*overwrites .button-blue height, necessary to show correctly in moz*/
+}
+
+.user-J {
+  /*padding-left: 30px;
+  padding-right: 10px;*/
+  border: 3px solid $bot-blue;
+  border-radius: 45px 45px 0px 45px;
+  background-color: #ffffff;
+}
+
+.user-bubble-right {
+  /*max-width: 23em;*/
+  min-width: 5em;
+  padding: 20px 25px 20px 29px;
+  margin-left: auto; /*right adjusts bubble*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /*margin-right: 2%;*/
+}
+
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
+  width: 23em;
+  display: flex;
+}
+
+.bubble-breaker {
+  /*div wraps user bubble forcing next bubble onto next line*/
+  background-color: transparent;
+  width: 23em;
+  display: flex;
+}
