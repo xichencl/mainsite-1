@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
+// this component displays in the profile dashboard as a list of current cases attached to user profile
 class MyCases extends Component {
   constructor(props) {
     super(props);
     
   }
 
-  componentWillMount() {
-    // Fetch user data prior to component mounting
+  componentDidMount() {
+    // Fetch case data prior to component mounting
   }
 
   render() {
@@ -19,7 +19,8 @@ class MyCases extends Component {
       		<div className='Portal-box-content Grey-background'>
 	      		<h3>My Cases<Link to='calendar' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
 	      		<hr className='Box-line-md' />
-	      		<Link to='my-case' className='my-case-link'>
+	      		{/*list case number and type here */}
+            <Link to='my-case' className='my-case-link'>
               <p> A8271HKS2 </p>
               <p className='p2'> Small Claims</p>
             </Link>

@@ -49,7 +49,7 @@ const config = {
       //   },
       // }, 
       {
-        test: /\.(png|svg)$/,
+        test: /\.(png|svg|ico)$/,
         loader: 'url-loader',
         query: {
           limit: 10000,

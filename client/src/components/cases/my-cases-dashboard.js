@@ -6,7 +6,7 @@ import MyCaseData from './my-case-data';
 import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
 
 export default class MyCasesDashboard extends Component {
-  componentWillMount() {
+  componentDidMount() {
     // Fetch user data prior to component mounting
   }
 

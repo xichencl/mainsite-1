@@ -38,17 +38,23 @@ export default class HomePage extends Component {
       var testPath = '../../../img/smallclaims.svg';
       var iconLink = topic.img; 
       var imgPath = `../../../${iconLink}`
-      return (
-        <div key={topic.id}>
-        <Link to={topic.url}>
-          <Squarebox 
-              id={topic.id}
-              boxTitle={topic.name}
-              iconClass={topic.class}
-           /> 
-        </Link>
-        </div>
-      )
+      if (topic.id < 12) {
+        return (
+          <div key={topic.id}>
+          <Link to={topic.url}>
+            <Squarebox 
+                id={topic.id}
+                boxTitle={topic.name}
+                iconClass={topic.class}
+             /> 
+          </Link>
+          </div>
+        )
+      }
+      else {
+        return (<div></div>)
+      }
+
     })
     return (
       <div>
