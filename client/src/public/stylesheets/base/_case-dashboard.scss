@@ -1,0 +1,40 @@
+$font-family-serif: "Judson", serif;
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+
+$grey-border: #eee;
+$grey-text: #aaa;
+$black: #000;
+$white: #fff;
+$blue-button: #316a92;
+$blue-button-pressed: #115077;
+$blue-accent: #5392be;
+$blue-background: #e3f8ff;
+$yellow-highlight: #f9d04e;
+$grey-background: #f5f5f5;
+
+// dashboard grid view
+
+.dashboard-wrapper {
+	position: relative;
+}
+
+.dashboard-inner {
+	position: absolute
+}
+
+//case data
+.Actions {
+	.Date {
+		// display: inline-block;
+	}
+	// .Update {
+	// 	display: inline-block;
+	// 	.p2 {
+	// 		margin: 0;
+	// 	}
+	// }
+}
+
+.my-case-link:hover {
+	color: #333333;
+}

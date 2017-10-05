@@ -8,6 +8,7 @@ $white: #fff;
 $blue-button: #316a92;
 $blue-button-pressed: #115077;
 $blue-accent: #5392be;
+$blue-background: #e3f8ff;
 $yellow-highlight: #f9d04e;
 $grey-background: #f5f5f5;
 
@@ -125,8 +126,10 @@ button:hover {
 .Menu-logo {
   margin-right: 2rem;
   width: 6rem;
+  // background-image: url('../../../../img/ccsc-logo-sm.svg');
   .Menu-logo-img {
     display: none;
+    // background-image: url('../../../img/ccsc-logo.svg');
   }
 
   @include lg {
@@ -206,14 +209,37 @@ button:hover {
 // ==========================
 // ====== box stylings ======
 // ==========================
+.Blue-background {
+  background-color: $blue-background;
+}
+
+.Yellow-background {
+  background-color: $yellow-highlight;
+}
+
+.Grey-background {
+  background-color: $grey-background;
+}
+
 .Box {
   h2, h3 {
     margin: 0;
   }
   display: inline-block;
   margin: 1rem 0 1rem 0; 
-  padding: 2rem;
   z-index: 1;
+  p.p2 {
+    margin-left: 1.1rem;
+  }
+  p {
+    display: inline;
+  }
+  a {
+    color: $black;
+  }
+  a:hover {
+    color: $grey-text;
+  }
 }
 
 .Square-box {
@@ -224,7 +250,7 @@ button:hover {
   h3 {
     padding-top: 2rem;
   }
-  padding: 0;
+  // padding: 0;
   text-align: center;
   width: 100%;
 
@@ -282,13 +308,42 @@ button:hover {
 .Banner-box {
   background-color: $yellow-highlight;
   width: 97%;
+  padding: 2rem;
+  position: relative;
+  height: 180px;
+}
+
+.Banner-box-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.Banner-box-hr {
+  width: 80%;
+}
+
+.Banner-box-p {
+  box-sizing: border-box;
+  // margin-right: 12rem;
+  @include md {
+    margin-right: 8rem;
+  }
 }
 
 .Info-box {
   background-color: $grey-background;
   display: block;
-  width: 97%
+  width: 97%;
+  padding: 2rem;
 }
+
+.Info-box-btn {
+  margin-top: 1.2rem;
+}
+
+
+
 
 // ==========================
 // ========= FOOTER =========
