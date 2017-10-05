@@ -1,0 +1,26 @@
+//styling how bot opens after clicking chat icon
+#bot {
+  transform: translateX(100px);
+  transition: transform 400ms ease-in;
+}
+
+#bot.slideIn {
+  transform: translateX(0);
+}
+
+#bot.slideOut {
+  transform: translateX(100%);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+}

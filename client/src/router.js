@@ -35,7 +35,7 @@ import ResetPassword from './components/auth/reset-password';
 // Import profile pages
 // import Profile from './components/profile/profile';
 import ViewProfile from './components/profile/view-profile';
-import MyCasesDashboard from './components/cases/my-cases-dashboard';// import Inbox from './components/dashboard/messaging/inbox';
+import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import Inbox from './components/dashboard/messaging/inbox';
 // import Conversation from './components/dashboard/messaging/conversation';
 // import ComposeMessage from './components/dashboard/messaging/compose-message';
 // import BillingSettings from './components/billing/settings';
@@ -59,8 +59,9 @@ export default class AppRouter extends Component {
             <div className="App-mask" />
             <Navbar />
             <Search />
-            // <ChatIcon />
-            <OpenBot />
+            <div className="position-bot the-bot">
+              <OpenBot />
+            </div>
             <div className="Page">
               <Switch>
               <Route exact path="/" component={ HomePage } />
@@ -90,6 +91,7 @@ export default class AppRouter extends Component {
 
               <Route path='*' component={ NotFoundPage } />
             </Switch>
+
             </div>
           </div>
           <Footer />
