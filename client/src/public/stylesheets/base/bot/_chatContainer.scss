@@ -15,8 +15,10 @@
   height: 100vh;
   bottom: 75px;
   padding-top: 73px;
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: bottom;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chatbox-F {
@@ -32,7 +34,9 @@
   align-content: flex-end;
   font-size: 1em;
   line-height: 1.375em;
-  padding: 18px;
+  padding-left: 15px;
+  padding-right:25px;
+  padding-bottom:18px;
   width: 25em;
   height: auto;
   margin-bottom: 75px;

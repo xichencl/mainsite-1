@@ -27,7 +27,7 @@ class OpenBot extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <div className="chat-icon" onClick={this.handleClick}>
           {this.state.visible
             ? 'Hide bot'
