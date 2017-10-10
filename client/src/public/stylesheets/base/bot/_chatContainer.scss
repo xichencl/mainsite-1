@@ -11,20 +11,21 @@
 }
 
 .chat-container-E {
-  width: 25em;
+  //increased width from standard 25em to 26em to hide vertical scroll. cross-browser friendly.
+  width: 26em;
   height: 100vh;
   bottom: 75px;
   padding-top: 73px;
-  /*display: table-cell;*/
   vertical-align: bottom;
+  //adding the overflows fixes header and chatbar in fixed position
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 //hide scrollbar in chrome (which includes scrollbar width in calc width)
-.chat-container-E::-webkit-scrollbar { 
-    display: none; 
-};
+// .chat-container-E::-webkit-scrollbar {
+//   display: none;
+// }
 
 .chatbox-F {
   display: -webkit-box;
@@ -39,9 +40,7 @@
   align-content: flex-end;
   font-size: 1em;
   line-height: 1.375em;
-  padding-left: 15px;
-  padding-right:25px;
-  padding-bottom:18px;
+  padding: 18px;
   width: 25em;
   height: auto;
   margin-bottom: 75px;
