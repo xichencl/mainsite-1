@@ -11,13 +11,12 @@ class Theme extends React.Component {
   }
 
   render() {
-    // do consts go outside of render?
     const text = this.state.on ? 'ON' : 'OFF';
-    const className = this.state.on ? 'on' : '';
-    // className += ' test-button';
+    let className = this.state.on ? 'on' : '';
+    className += ' test-button';
 
     return (
-      <div className="test-button" onClick={this.toggleOnOff.bind(this)}>
+      <div className={className} onClick={this.toggleOnOff.bind(this)}>
         {text}
       </div>
     );
