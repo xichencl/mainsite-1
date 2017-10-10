@@ -6,6 +6,7 @@ import Chatbar from './Chatbar.jsx';
 import LanguageIcon from './icons/LanguageIcon.jsx';
 import ThemeIcon from './icons/ThemeIcon.jsx';
 import FontSizeIcon from './icons/FontSizeIcon.jsx';
+import Theme from './Theme.jsx';
 // import BubbleBreak from './BubbleBreak.jsx';
 
 const uuidv1 = require('uuid/v1');
@@ -30,7 +31,7 @@ class ChatContainer extends React.Component {
   resetSession() {
     this.setState({ id: uuidv1() });
   }
-
+  // pushes out settings/navbar
   render() {
     return (
       <div>
@@ -60,6 +61,7 @@ class ChatContainer extends React.Component {
             <ThemeIcon />
             <FontSizeIcon />
             <LanguageIcon />
+            <Theme />
           </div>
         </Menu>
         <main id="page-wrap">
