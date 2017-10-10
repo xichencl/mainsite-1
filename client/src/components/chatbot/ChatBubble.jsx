@@ -29,7 +29,7 @@ class ChatBubble extends React.Component {
       return <ImageViewer src={this.props.message.src} alt={this.props.message.alt} />;
     } else if (this.props.type === 'map') {
       return (
-        <div className="map-container">
+        <div>
           <iframe className="map-S" src={this.props.message.src} name={this.props.message.name} />
         </div>
       );
