@@ -21,6 +21,7 @@
   overflow-x: hidden;
 }
 
+//hide scrollbar in chrome (which includes scrollbar width in calc width)
 .chat-container-E::-webkit-scrollbar { 
     display: none; 
 };
