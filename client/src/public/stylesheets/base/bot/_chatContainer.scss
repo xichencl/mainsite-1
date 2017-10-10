@@ -21,6 +21,10 @@
   overflow-x: hidden;
 }
 
+.chat-container-E::-webkit-scrollbar { 
+    display: none; 
+};
+
 .chatbox-F {
   display: -webkit-box;
   display: -ms-flexbox;
