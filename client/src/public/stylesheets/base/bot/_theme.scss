@@ -1,0 +1,21 @@
+//styling for when theme icon is clicked
+
+.test-button {
+  display: block;
+  height: 100px;
+  width: 100px;
+  border: 1px solid #aaa;
+  border-radius: 25px;
+  font: bold 20px Helvetica, Arial, sans-serif;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #000;
+}
+.test-button.on {
+  background-color: #ad310b;
+  -webkit-transition: background-color 1000ms linear;
+  -ms-transition: background-color 1000ms linear;
+  transition: background-color 1000ms linear;
+}
