@@ -14,14 +14,13 @@ class Theme extends React.Component {
   }
 
   render() {
-    // const text = this.state.on ? 'ON' : 'OFF';
+    const text = this.state.on ? 'ON' : 'OFF';
     let className = this.state.on ? 'on' : '';
     className += ' test-button2';
 
     return (
       <div className={className} onClick={this.toggleOnOff.bind(this)}>
-        {/* {text}*/}
-        <ThemeIcon />
+        {text}
       </div>
     );
   }
