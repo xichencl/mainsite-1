@@ -40,7 +40,10 @@
   background-color: #4d4d50;
   display: flex;
   align-items: center;
-  -webkit-transition: background-color 1000ms linear;
-  -ms-transition: background-color 1000ms linear;
-  transition: background-color 1000ms linear;
+  -webkit-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+  -webkit-transition: border-right 200ms linear;
+  -ms-transition: border-right 200ms linear;
+  transition: border-right 200ms linear;
 }
