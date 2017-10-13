@@ -120,15 +120,34 @@ const mapDispatchToProps = dispatch => ({
         if (response.status === 200) {
           // axios.response.data, get speech from api.ai
           const msg = response.data.result.fulfillment.speech;
+          if (!msg.startsWith("\\n")){ //single paragraph
+            dispatch({ 
+                type: 'CHAT_ADD_MESSAGE',
+                payload: {
+                  message: msg,
+                  type: 'text',
+                  isBot: true,
+                },
+              });
 
-          dispatch({
-            type: 'CHAT_ADD_MESSAGE',
-            payload: {
-              message: msg,
-              type: 'text',
-              isBot: true,
-            },
-          });
+          }else{ //multi-paragraphs
+
+            const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
+            console.log(paragraphs);
+            let i=0;
+            // msg="";
+            for (i=0; i<paragraphs.length; i++){
+              // msg+=paragraphs[i];
+              dispatch({
+                type: 'CHAT_ADD_MESSAGE',
+                payload: {
+                  message: paragraphs[i].trim(),
+                  type: 'text',
+                  isBot: true,
+                },
+              });
+            }
+          }
           // if there's a custom payload attached to api.ai response
           let customPayload;
           if (!response.data.result.fulfillment.data) {
