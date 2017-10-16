@@ -1,7 +1,7 @@
 //styling chatbar
 
 .chatbar-G {
-  height: 5em;
+  height: 3em;
   width: 25em;
   padding: 16px;
   padding-left: 8px;
@@ -20,6 +20,7 @@
   position: fixed;
   bottom: 0;
   right: 100px;
+  border-left: 1px solid $not-black;
 }
 
 .chatbar-G input[type=text] {
@@ -33,4 +34,69 @@
   -webkit-font-smoothing: antialiased;
   font-weight: lighter;
   margin-left: 15px;
+}
+
+button.circle-K {
+  background-color: #115077;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+}
+
+button.circle-K:hover {
+  background-color: #316a92;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  padding: 0px;
+}
+
+button.mic {
+  background-color: transparent;
+  color: $warm-grey;
+  outline: 0;
+  padding: 0;
+  padding-top: 10px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  transition: 0.1s;
+}
+
+button.mic:hover {
+  color: #5392be;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  transition: 0.2s;
+}
+
+button.mic:active {
+  color: red;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+  transition: 0s;
+  transition: 0s;
+}
+
+.chat-input {
+  outline: none !important;
 }

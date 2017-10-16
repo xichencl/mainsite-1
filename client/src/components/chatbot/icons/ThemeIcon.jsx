@@ -4,11 +4,17 @@ import React from 'react';
 class ThemeIcon extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { on: false };
+  }
+  toggleOnOff() {
+    this.setState({ on: !this.state.on });
   }
 
   render() {
+    let className = this.state.on ? 'on' : '';
+    className += ' test-button2';
     return (
-      <div>
+      <div className={className} onClick={this.toggleOnOff.bind(this)}>
         <div className="icon-size-O">
           <svg
             id="Symbol_14_1"
