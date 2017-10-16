@@ -41,7 +41,7 @@ class ChatContainer extends React.Component {
           noOverlay
           width={'100px'}
           customCrossIcon={
-            // customized cross icon by replacing it with
+            // settings icon replaced original x (close) icon
             <svg
               fill="#545757"
               height="44"

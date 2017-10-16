@@ -69,7 +69,7 @@ class Chatbar extends React.Component {
       <div className="light-grey-D chatbar-G">
         <div>
           <button
-            type="button"            
+            type="button"
             value="speak"
             // ref="rec" //a react attrib
             className="mic"
@@ -101,7 +101,7 @@ class Chatbar extends React.Component {
             className="circle-K"
             onClick={this.props.onClick.bind(this)}
           >
-            <i className="material-icons" style={{ fontSize: '24px' }}>
+            <i className="material-icons" style={{ fontSize: '20px' }}>
               send
             </i>
           </button>
@@ -138,24 +138,24 @@ const mapDispatchToProps = (dispatch) => {
         // it contains the fulfillment section of the data object which the backend chooses to return.
         msg = response.data.result.fulfillment.speech;
         if (response.status === 200) {
-          if (!msg.startsWith("\\n")){
+          if (!msg.startsWith('\\n')) {
             dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: msg,
-                  type: 'text',
-                  isBot: true,
-                },
-              });
-
-          }else{ //multi-paragraphs
+              type: 'CHAT_ADD_MESSAGE',
+              payload: {
+                message: msg,
+                type: 'text',
+                isBot: true,
+              },
+            });
+          } else {
+            // multi-paragraphs
 
             const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
             console.log(paragraphs);
-            let i=0;
-            msg="";
-            for (i=0; i<paragraphs.length; i++){
-              msg+= paragraphs[i];
+            let i = 0;
+            msg = '';
+            for (i = 0; i < paragraphs.length; i++) {
+              msg += paragraphs[i];
               dispatch({
                 type: 'CHAT_ADD_MESSAGE',
                 payload: {
