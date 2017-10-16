@@ -21,7 +21,7 @@ export default class HomePage extends Component {
   // }
  
   componentDidMount() {
-    return fetch('https://case-data.glitch.me/courtdata')
+    return fetch('https://case-data.glitch.me/courtdata', {headers:{'Content-Type': 'application/json',}})
     .then((response) => response.json())
     .then((responseJson) => {
       this.setState({topics: responseJson});

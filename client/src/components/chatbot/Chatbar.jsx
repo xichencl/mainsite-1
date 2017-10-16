@@ -138,14 +138,34 @@ const mapDispatchToProps = (dispatch) => {
         // it contains the fulfillment section of the data object which the backend chooses to return.
         msg = response.data.result.fulfillment.speech;
         if (response.status === 200) {
-          dispatch({
-            type: 'CHAT_ADD_MESSAGE',
-            payload: {
-              message: msg,
-              type: 'text',
-              isBot: true,
-            },
-          });
+          if (!msg.startsWith("\\n")){
+            dispatch({
+                type: 'CHAT_ADD_MESSAGE',
+                payload: {
+                  message: msg,
+                  type: 'text',
+                  isBot: true,
+                },
+              });
+
+          }else{ //multi-paragraphs
+
+            const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
+            console.log(paragraphs);
+            let i=0;
+            msg="";
+            for (i=0; i<paragraphs.length; i++){
+              msg+= paragraphs[i];
+              dispatch({
+                type: 'CHAT_ADD_MESSAGE',
+                payload: {
+                  message: paragraphs[i].trim(),
+                  type: 'text',
+                  isBot: true,
+                },
+              });
+            }
+          }
           let customPayload;
           if (!response.data.result.fulfillment.data) {
             const messages = response.data.result.fulfillment.messages;
