@@ -10,6 +10,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: row;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -86,4 +87,22 @@ button.refresh-M:active {
   align-items: center;
   z-index: 1000;
   cursor: pointer;
+}
+
+button.close-bot {
+  position: relative;
+  background: transparent;
+  outline: 0;
+  right: 7em;
+  @include flex-center;
+  flex-direction: row;
+}
+
+.icon-container {
+  width: 25em;
+  height: 3em;
+  background-color: tomato;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
