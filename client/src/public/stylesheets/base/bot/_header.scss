@@ -53,17 +53,16 @@ button.close-bot {
   background: transparent;
   outline: 0;
   right: 7em;
-  line-height: 1px;
   @include flex-center;
   flex-direction: row;
 }
 
 .close-overlay {
-  width: 1.4em;
-  height: 1.4em;
+  width: 1.5em;
+  height: 1.5em;
   position: relative;
+  right: 7em;
   bottom: 2.1em;
-  right: 1.7em;
 }
 
 /* refresh button */
@@ -73,12 +72,12 @@ button.refresh-M {
   width: 50px;
   color: $icon-grey;
   padding: 0;
-  padding-top: 8px;
+  // padding-top: 8px;
   border: none;
   cursor: pointer;
   position: relative;
   right: 5.5em;
-  line-height: 1px;
+  top: 3px;
 }
 
 button.refresh-M:hover {
