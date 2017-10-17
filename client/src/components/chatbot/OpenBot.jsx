@@ -31,8 +31,8 @@ class OpenBot extends React.Component {
       <div id="wrapper">
         <div className="chat-icon" onClick={this.handleClick}>
           {this.state.visible
-            ? 'Hide bot'
-            : /* click to open icon*/ <svg
+            ? <div className="close-overlay" />
+            : /* click to open */ <svg
               fill="#7fcde5"
               height="36"
               viewBox="0 0 24 24"
