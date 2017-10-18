@@ -1,5 +1,6 @@
-// const uuidv1 = require('uuid/v1');
-
+/*
+this state captures strictly user input
+*/
 const defaultState = [];
 
 // const sessionId = uuidv1();

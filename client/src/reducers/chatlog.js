@@ -1,4 +1,4 @@
-var deepcopy = require('deepcopy');
+// var deepcopy = require('deepcopy');
 
 const defaultState = [
   {
@@ -50,6 +50,7 @@ const defaultState = [
 ];
 
 module.exports = (state = defaultState, action) => {
+  console.log("state updated!");
   switch (action.type) {
     case 'CHAT_ADD_MESSAGE': {
       const newChat = state.slice(); //create a shallow copy of new array containing the same elements as defaultState
@@ -58,7 +59,8 @@ module.exports = (state = defaultState, action) => {
       return newChat;
     }
     case 'RESET_BOT': {
-      return deepcopy(defaultState);
+      // return deepcopy(defaultState);
+      return defaultState;
     }
   }
 

@@ -410,4 +410,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chatbar);
+export default connect(null, mapDispatchToProps)(Chatbar);
