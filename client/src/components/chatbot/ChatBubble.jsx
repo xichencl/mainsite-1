@@ -11,7 +11,14 @@ class ChatBubble extends React.Component {
   }
 
   render() {
+
     let className = 'blue-A bot-bubble-left';
+
+    if (this.props.theme === 'dark'){
+        className += ' blue-dark'
+    }
+      
+    
 
     if (this.props.type === 'button') {
       className = ' button-blue-B chat-button-H';

@@ -21,8 +21,16 @@ class Chatbox extends React.Component {
     this.scrollToBottom();
   }
   render() {
+  	let className = '';
+  	console.log("current theme : ", this.props.theme);
+  	if (this.props.theme === 'dark'){
+  		className = 'dark chatbox-F';
+  	}else{
+  		className = "grey-C chatbox-F";
+  	}
+  	
     return (
-      <div className="grey-C chatbox-F">
+      <div className={className}>
         {// map to iterate over the newState Array and apply function for each element
         this.props.chatlog.map((value, key) => {
           console.log(value);
@@ -31,6 +39,7 @@ class Chatbox extends React.Component {
               {...value} // spread operator
               key={key}
               sessionId={this.props.sessionId}
+              theme = {this.props.theme}
               /* onClick={e =>
                 this.props.onClick.bind(
                   this,
