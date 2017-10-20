@@ -5,6 +5,7 @@ import userReducer from './user_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import themeReducer from './themeReducer';
+import botStatusReducer from './botStatusReducer';
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
 
@@ -13,7 +14,8 @@ import themeReducer from './themeReducer';
 const chatReducer = combineReducers({
 	log:chatlog, 
 	input:chatUserInput,
-	theme:themeReducer,
+	theme:botStatusReducer.themeReducer,
+  botVisibility:botStatusReducer.visibilityReducer
 	// router:routerStateReducer
 });
 

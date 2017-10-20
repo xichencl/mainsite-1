@@ -10,8 +10,8 @@ class Header extends React.Component {
     return (
       <div className="header-L">
         <div>
-          {/* replaced button element with div for styling purposes*/}
-          <button type="button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
+          <button type="button" id="close-button" onClick={this.props.onClick.bind(this)}>close</button>
+          <button type="button" id="refresh-button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
             <i className="material-icons" style={{ fontSize: '44px' }}>
               refresh
             </i>
@@ -37,8 +37,12 @@ const mapDispatchToProps = dispatch => ({
     if (event.currentTarget.type !== 'button') {
       return;
     }
-    dispatch({ type: 'RESET_BOT' });
-    this.props.resetSession();
+    if (event.currentTarget.id === 'refresh-button'){
+      dispatch({ type: 'RESET_BOT' });
+      this.props.resetSession();
+    }else{//id==='close-button'
+      dispatch({type: 'TOGGLE_BOT'});      
+    }
   },
 });
 
