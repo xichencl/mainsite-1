@@ -301,6 +301,8 @@ const mapDispatchToProps = (dispatch) => {
     // controls onclick events on buttons in chatbar
     onClick(event) {
       // using currentTarget instead of target because currentTarget is the object listening(the button). target is that actual target received, which is the icon, and not what we want
+      event.preventDefault();
+      event.stopPropagation();
       if (event.currentTarget.type !== 'button') {
         return;
       }

@@ -46,8 +46,21 @@ const SpeechBubble = (props) => {
 class OpenBot extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleClick = this.handleClick.bind(this);
+    // this.setWrapperRef = this.setWrapperRef.bind(this);
+    // this.handleClickOutside = this.handleClickOutside.bind(this);
     // this.state = { visible: false };
+  }
+
+  // setWrapperRef(node){
+  //   this.wrapperRef= node;
+  // }
+
+  componentDidMount(){
+      document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
+  }
+
+  componentWillUnMount(){
+    document.removeEventListener('click', this.props.handleClickOutside);
   }
 
   // handleClick() {
@@ -62,7 +75,7 @@ class OpenBot extends React.Component {
     // }
     return (
       // wrapper completely hides bot until chat icon is clicked
-      <div id="wrapper">
+      <div id="wrapper" ref={el => (this.wrapperRef=el)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)}>
           {this.props.visible
             ? <SpeechBubble visible={this.props.visible}/>
@@ -78,10 +91,20 @@ const mapStateToProps = state => ({
     visible: state.chat.botVisibility
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onClick() {
-    dispatch({type: "TOGGLE_BOT"})
+    dispatch({type: "TOGGLE_BOT"});
+  },
+
+  handleClickOutside (event, wrapperRef) {
+    console.log('handleClickOutside invoked');
+    console.log(wrapperRef);
+    console.log(event.target);
+    if (wrapperRef && !wrapperRef.contains(event.target)){
+      dispatch({type: "TOGGLE_BOT"});
+    }
   }
+  
 });
 
 // ReactDOM.render(<OpenBot />, document.getElementById('root'));
