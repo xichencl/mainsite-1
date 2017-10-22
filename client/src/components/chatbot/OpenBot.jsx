@@ -56,9 +56,14 @@ class OpenBot extends React.Component {
   //   this.wrapperRef= node;
   // }
 
-  // componentDidMount(){
-  //     document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
-  // }
+  componentDidUpdate(){
+    if (!this.props.visible){
+      // this.props.handleClickOutside = null;
+      delete this.props.handleClickOutside;
+    }
+    console.log(this.props);
+      // document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
+  }
 
   // componentWillUnMount(){
   //   document.removeEventListener('click', this.props.handleClickOutside);
@@ -68,19 +73,20 @@ class OpenBot extends React.Component {
   //   this.setState(prev => ({ visible: true}));
   // }
 
+
   render() {
     // let chatContainerCSS;
     // if (this.state.visible){
     //   chatContainerCSS=
-
+    console.log("props of OpenBot", this.props);
     // }
     return (
       // wrapper completely hides bot until chat icon is clicked
       <div id="wrapper" ref={el => (this.wrapperRef=el)}>
-        <div className="chat-icon" onClick={this.props.onClick.bind(this)}>
+        <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
           {this.props.visible
             ? null
-            : <SpeechBubble handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} /> }
+            : <SpeechBubble  handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} /> }
         </div>
         <BotBox visible={this.props.visible} /> 
       </div>
@@ -93,14 +99,22 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick() {
+  onClick(event) {
+    console.log("onClick event triggered", event.type);
     dispatch({type: "TOGGLE_BOT"});
   },
 
   handleClickOutside (event, wrapperRef) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("event type", event.type)
     console.log('handleClickOutside invoked');
-    console.log(wrapperRef);
+    console.log(this);
     console.log(event.target);
+    if (!this.visible){
+      return;
+    }
+    console.log("executed");
     if (wrapperRef && !wrapperRef.contains(event.target)){
       dispatch({type: "TOGGLE_BOT"});
     }

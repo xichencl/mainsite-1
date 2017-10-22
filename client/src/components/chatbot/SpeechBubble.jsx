@@ -4,16 +4,20 @@ import React from 'react';
 class SpeechBubble extends React.Component{
 	constructor(props){
 		super(props);
+		this.handleClickOutside = this.props.handleClickOutside.bind(this);
 	}
 
 	componentWillMount(){
 		console.log("listener removed");
-		document.removeEventListener('click', this.props.handleClickOutside);
+
+		window.removeEventListener('mousedown', this.handleClickOutside);
+		console.log(window.handleClickOutside);
+		console.log("props of SpeechBubble", this.props);
 	}
 
 	componentWillUnmount(){
 		console.log("listener added");
-		document.addEventListener('click', this.props.handleClickOutside);
+		window.addEventListener('mousedown', this.handleClickOutside);
 	}
 
 	render(){
