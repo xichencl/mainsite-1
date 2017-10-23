@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
 import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
-import SpeechBubble from './SpeechBubble.jsx';
+// import SpeechBubble from './SpeechBubble.jsx';
+import CloseBot from './CloseBot.jsx';
 import {connect} from 'react-redux';
 
 const BotBox = ({ visible }) => {
@@ -20,28 +21,28 @@ const BotBox = ({ visible }) => {
 //   <div id="navbar" className={visible ? 'slideIn' : 'slideOut'}>
 //     <ChatContainer />
 //   </div>;
-// const SpeechBubble = (props) => {
-//   let className;
-//   if (props.visible){
-//     className = 'hide-speech-bubble';
-//   }
-//   return (
-//     <div className={className}>
-//       <svg
-//               fill="#7fcde5"
-//               height="36"
-//               viewBox="0 0 24 24"
-//               width="36"
-//               xmlns="http://www.w3.org/2000/svg"
-//             >
-//               <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-//               <path d="M0 0h24v24H0z" fill="none" />
-//       </svg>
+const SpeechBubble = (props) => {
+  // let className;
+  // if (props.visible){
+  //   className = 'hide-speech-bubble';
+  // }
+  return (
+    <div>
+      <svg
+              fill="#7fcde5"
+              height="36"
+              viewBox="0 0 24 24"
+              width="36"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+              <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
 
-//     </div>
-//     );
+    </div>
+    );
 
-// };
+};
 
 
 class OpenBot extends React.Component {
@@ -56,14 +57,14 @@ class OpenBot extends React.Component {
   //   this.wrapperRef= node;
   // }
 
-  componentDidUpdate(){
-    if (!this.props.visible){
-      // this.props.handleClickOutside = null;
-      delete this.props.handleClickOutside;
-    }
-    console.log(this.props);
-      // document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
-  }
+  // componentDidUpdate(){
+  //   if (!this.props.visible){
+  //     // this.props.handleClickOutside = null;
+  //     delete this.props.handleClickOutside;
+  //   }
+  //   console.log(this.props);
+  //     // document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
+  // }
 
   // componentWillUnMount(){
   //   document.removeEventListener('click', this.props.handleClickOutside);
@@ -85,8 +86,8 @@ class OpenBot extends React.Component {
       <div id="wrapper" ref={el => (this.wrapperRef=el)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
           {this.props.visible
-            ? null
-            : <SpeechBubble  handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} /> }
+            ? <CloseBot handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} />
+            : <SpeechBubble  /> }
         </div>
         <BotBox visible={this.props.visible} /> 
       </div>
