@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-import ChatIcon from './icons/ChatIcon.jsx';
+// import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
-// import SpeechBubble from './SpeechBubble.jsx';
 import CloseBot from './CloseBot.jsx';
 import {connect} from 'react-redux';
 
@@ -17,15 +16,7 @@ const BotBox = ({ visible }) => {
 
 };
 
-// class NavigationBar extends React.Component = ({ visible }) =>
-//   <div id="navbar" className={visible ? 'slideIn' : 'slideOut'}>
-//     <ChatContainer />
-//   </div>;
 const SpeechBubble = (props) => {
-  // let className;
-  // if (props.visible){
-  //   className = 'hide-speech-bubble';
-  // }
   return (
     <div>
       <svg
@@ -48,39 +39,10 @@ const SpeechBubble = (props) => {
 class OpenBot extends React.Component {
   constructor(props) {
     super(props);
-    // this.setWrapperRef = this.setWrapperRef.bind(this);
-    // this.handleClickOutside = this.handleClickOutside.bind(this);
-    // this.state = { visible: false };
   }
-
-  // setWrapperRef(node){
-  //   this.wrapperRef= node;
-  // }
-
-  // componentDidUpdate(){
-  //   if (!this.props.visible){
-  //     // this.props.handleClickOutside = null;
-  //     delete this.props.handleClickOutside;
-  //   }
-  //   console.log(this.props);
-  //     // document.addEventListener('click', (event)=>{this.props.handleClickOutside(event, this.wrapperRef)});
-  // }
-
-  // componentWillUnMount(){
-  //   document.removeEventListener('click', this.props.handleClickOutside);
-  // }
-
-  // handleClick() {
-  //   this.setState(prev => ({ visible: true}));
-  // }
 
 
   render() {
-    // let chatContainerCSS;
-    // if (this.state.visible){
-    //   chatContainerCSS=
-    console.log("props of OpenBot", this.props);
-    // }
     return (
       // wrapper completely hides bot until chat icon is clicked
       <div id="wrapper" ref={el => (this.wrapperRef=el)}>
@@ -101,21 +63,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onClick(event) {
-    console.log("onClick event triggered", event.type);
     dispatch({type: "TOGGLE_BOT"});
   },
 
   handleClickOutside (event, wrapperRef) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("event type", event.type)
-    console.log('handleClickOutside invoked');
-    console.log(this);
-    console.log(event.target);
-    if (!this.visible){
-      return;
-    }
-    console.log("executed");
     if (wrapperRef && !wrapperRef.contains(event.target)){
       dispatch({type: "TOGGLE_BOT"});
     }

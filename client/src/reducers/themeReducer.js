@@ -3,8 +3,8 @@
 module.exports = (state='light', action) => {
 	switch (action.type) {
 		case "TOGGLE_THEME":
-			console.log(state);
-			console.log("toggled theme!");
+			// console.log(state);
+			// console.log("toggled theme!");
 			if (state === 'light'){
 				return 'dark';
 			}
