@@ -3,9 +3,14 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, DATA_LOADED } from './types';
+import {fetchData} from "../data/mockDataAPI";
+
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
+
+//should I import data? confused.
+export const PAGE_DATA_URL = 'http://localhost:8080';
 
 //= ===============================
 // Utility actions
@@ -29,6 +34,17 @@ export function fetchUser(uid) {
   };
 }
 
+export function loadUnitData() {
+    return (dispatch, getState) => {
+        fetchData()
+            .then(data => {
+                dispatch({
+                    type : DATA_LOADED,
+                    payload : data
+                })
+            });
+    }
+}
 
 export function errorHandler(dispatch, error, type) {
   console.log('Error type: ', type);
