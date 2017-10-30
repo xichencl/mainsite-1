@@ -63,6 +63,13 @@ button.close-bot {
   position: relative;
   right: 7em;
   bottom: 2.1em;
+  border: 1px solid red;
+}
+
+button.super-test {
+  width: 200px;
+  height: 100px;
+  background: tomato;
 }
 
 /* refresh button */
