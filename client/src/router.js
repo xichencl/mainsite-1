@@ -62,8 +62,12 @@ export default class AppRouter extends Component {
             <Search />
 
             <div className="position-bot the-bot">
+<<<<<<< HEAD
               <OpenBot />
               {/* <NewComponent />*/}
+=======
+              <OpenBot ref={el=>(this.chatWindow=el)}/>
+>>>>>>> c1029b8a08733a229da26cd067ab032d3aabac7c
             </div>
             <div className="Page">
               <Switch>

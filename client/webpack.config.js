@@ -88,8 +88,12 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: './',
-    // port:8000,
-    proxy: {'/api':'http://localhost:3000'},
+    proxy:{'/api':'http://localhost:3000'},
+    /* settings for serving from remote server
+    host:'0.0.0.0',
+    port:80,
+    proxy: {'/api':'http://52.39.81.245:3000'},
+    */
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),

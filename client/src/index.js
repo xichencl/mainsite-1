@@ -34,6 +34,9 @@ if (token) {
   });
 }
 
+//experiment with theme-change
+const themes =  [];
+
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter />

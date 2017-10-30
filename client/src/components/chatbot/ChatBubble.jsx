@@ -11,7 +11,14 @@ class ChatBubble extends React.Component {
   }
 
   render() {
+
     let className = 'blue-A bot-bubble-left';
+
+    if (this.props.theme === 'dark'){
+        className += ' blue-dark'
+    }
+      
+    
 
     if (this.props.type === 'button') {
       className = ' button-blue-B chat-button-H';
@@ -93,6 +100,7 @@ const mapDispatchToProps = dispatch => ({
   // controls buttons onclick function in bot response
   onClick(event) {
     // onClick on table can't use opn in frontend, has to transmit to backend.
+    event.stopPropagation();
     console.log('EVENT TYPE: ', event.currentTarget.nodeName);
     if (event.currentTarget.nodeName === 'TABLE') {
       console.log('URL: ', this.props.message.url);

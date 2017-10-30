@@ -127,3 +127,21 @@ button.refresh-M:active {
   cursor: pointer;
   margin: 15px;
 }
+<<<<<<< HEAD
+=======
+
+.chat-icon {
+  /*speech bubble*/
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+>>>>>>> c1029b8a08733a229da26cd067ab032d3aabac7c

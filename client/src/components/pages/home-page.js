@@ -34,7 +34,7 @@ export default class HomePage extends Component {
   render() {
     const topicArray = [];
     const topics = this.state.topics
-    .map(function(topic) {
+    .map(function(topic) { 
       var testPath = '../../../img/smallclaims.svg';
       var iconLink = topic.img; 
       var imgPath = `../../../${iconLink}`

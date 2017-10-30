@@ -1,33 +1,51 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-import ChatIcon from './icons/ChatIcon.jsx';
+// import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
+import CloseBot from './CloseBot.jsx';
+import {connect} from 'react-redux';
 
-const BotBox = ({ visible }) =>
-  <div id="bot" className={visible ? 'slideIn' : 'slideOut'}>
+const BotBox = ({ visible }) => {
+
+  return (
+  <div id="bot" className={visible?'slideIn':'slideOut'} >
     <ChatContainer />
-  </div>;
+  </div>
+  );
 
-// class NavigationBar extends React.Component = ({ visible }) =>
-//   <div id="navbar" className={visible ? 'slideIn' : 'slideOut'}>
-//     <ChatContainer />
-//   </div>;
+};
+
+const SpeechBubble = (props) => {
+  return (
+    <div>
+      <svg
+              fill="#7fcde5"
+              height="36"
+              viewBox="0 0 24 24"
+              width="36"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+              <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+
+    </div>
+    );
+
+};
+
 
 class OpenBot extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.state = { visible: false };
   }
 
-  handleClick() {
-    this.setState(prev => ({ visible: !prev.visible }));
-  }
 
   render() {
     return (
       // wrapper completely hides bot until chat icon is clicked
+<<<<<<< HEAD
       <div id="wrapper">
         <div className="chat-icon" onClick={this.handleClick}>
           {this.state.visible
@@ -43,12 +61,35 @@ class OpenBot extends React.Component {
               <path d="M0 0h24v24H0z" fill="none" />
             </svg>}
           {/* svg for chat icon*/}
+=======
+      <div id="wrapper" ref={el => (this.wrapperRef=el)}>
+        <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
+          {this.props.visible
+            ? <CloseBot handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} />
+            : <SpeechBubble  /> }
+>>>>>>> c1029b8a08733a229da26cd067ab032d3aabac7c
         </div>
-        <BotBox visible={this.state.visible} />
+        <BotBox visible={this.props.visible} /> 
       </div>
     );
   }
 }
 
-// ReactDOM.render(<OpenBot />, document.getElementById('root'));
-export default OpenBot;
+const mapStateToProps = state => ({
+    visible: state.chat.botVisibility
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onClick(event) {
+    dispatch({type: "TOGGLE_BOT"});
+  },
+
+  handleClickOutside (event, wrapperRef) {
+    if (wrapperRef && !wrapperRef.contains(event.target)){
+      dispatch({type: "TOGGLE_BOT"});
+    }
+  }
+  
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OpenBot);
