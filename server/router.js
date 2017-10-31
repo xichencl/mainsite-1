@@ -16,6 +16,9 @@ const passportService = require('./config/passport');
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
 
+const apiai = require('apiai');
+const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+
 module.exports = function (app) {
   // Initializing route groups
   const apiRoutes = express.Router(),
@@ -73,7 +76,7 @@ module.exports = function (app) {
   // route: /chat/message
   console.log(ChatController.getMessageResponse);
   // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
-  chatRoutes.post('/message', (req, res)=> {ChatController.getMessageResponse(req, res)});
+  chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
   console.log(ChatController.getWebhookResponse);
   chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
 /*

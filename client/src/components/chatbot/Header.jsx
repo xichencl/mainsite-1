@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
     }
     if (event.currentTarget.id === 'refresh-button'){
       dispatch({ type: 'RESET_BOT' });
+      dispatch({ type: 'SELECT_CASE_TYPE'});
       this.props.resetSession();
     }else{//id==='close-button'
       dispatch({type: 'TOGGLE_BOT'});      

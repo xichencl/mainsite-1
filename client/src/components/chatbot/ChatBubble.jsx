@@ -96,6 +96,10 @@ class ChatBubble extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  ai : state.chat.ai;
+};
+
 const mapDispatchToProps = dispatch => ({
   // controls buttons onclick function in bot response
   onClick(event) {
@@ -119,8 +123,15 @@ const mapDispatchToProps = dispatch => ({
     // onClick on buttons
     const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
     console.log('SESSIONID: ', this.props.sessionId);
+    let inputData = { payload: data, id: this.props.sessionId };
+    if (!this.props.ai){
+      inputData['ai']= false;
+      dispatch({type: 'SELECT_CASE_TYPE'});
+    }else{
+      inputData['ai']= true;
+    }
     axios
-      .post('/api/chat/message', { payload: data, id: this.props.sessionId }) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
+      .post('/api/chat/message', inputData) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
       .then((response) => {
         console.log('Response:', response);
         // response = JSON.parse(response);
@@ -263,4 +274,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(ChatBubble);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatBubble);

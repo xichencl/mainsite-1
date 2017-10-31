@@ -40,4 +40,15 @@ const themeReducer = (state='light', action) => {
 
 }
 
-module.exports = {themeReducer, visibilityReducer};
+//keep track of whether case type has been selected
+const aiReducer = (state= false, action)=>{
+	switch (action.type){
+		case "SELECT_CASE_TYPE":
+			return !state;
+		default:
+			return state;
+	}
+
+}
+
+module.exports = {themeReducer, visibilityReducer, aiReducer};
