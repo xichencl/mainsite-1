@@ -6,12 +6,6 @@
   left: 55em;
   top: 50px;
   display: -webkit-box;
-  // display: -ms-flexbox;
-  // display: flex;
-  // -webkit-box-align: center;
-  // -ms-flex-align: center;
-  // align-items: center;
-  // z-index: 1000;
   cursor: pointer;
 }
 
@@ -25,16 +19,12 @@
   right: 100px;
   border-left: 1px solid $not-black;
   position: fixed;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
-  // display: flex;
-  // flex-direction: row;
-  // -webkit-box-pack: end;
-  // -ms-flex-pack: end;
-  // justify-content: flex-end;
-  // -webkit-box-align: center;
-  // -ms-flex-align: center;
-  // align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 /* contains icons in bot header */
@@ -50,31 +40,17 @@ button.close-bot {
   position: relative;
   //background: transparent;
   outline: 0;
-  // right: 7em;
-  // background: transparent;
-  // outline: 0;
-  // width: 50px;
-  // color: $icon-grey;
-  // padding: 0;
-  // border: none;
-  // cursor: pointer;
-  // position: relative;
-  // right: 5.5em;
-  // top: 3px;
+  padding: 0;
+  border: none;
 }
 
 /* refresh button */
 button.refresh-M {
   //background: transparent;
-  //outline: 0;
-  // width: 50px;
-  color: $icon-grey;
+  position: relative;
+  outline: 0;
   padding: 0;
   border: none;
-  cursor: pointer;
-  position: relative;
-  // right: 5.5em;
-  // top: 3px;
 }
 
 button.refresh-M:hover {
@@ -99,7 +75,7 @@ button.refresh-M:active {
   transition: 0s;
 }
 
-/* settings icon (bm-cross-button is default name from package) */
+/* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
   position: absolute;
