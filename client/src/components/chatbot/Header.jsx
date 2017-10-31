@@ -29,7 +29,7 @@ class Header extends React.Component {
             className="refresh-M"
             onClick={this.props.onClick.bind(this)}
           >
-            <RefreshIcon />
+            <i className="material-icons">refresh</i>
           </button>
         </div>
       </div>

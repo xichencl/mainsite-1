@@ -12,7 +12,7 @@ class CloseChatIcon extends React.Component {
         <div className="close-bot">
           <svg
             fill="#545757"
-            height="25"
+            height="44"
             viewBox="0 0 24 24"
             width="25"
             xmlns="http://www.w3.org/2000/svg"

@@ -19,12 +19,13 @@
   right: 100px;
   border-left: 1px solid $not-black;
   position: fixed;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // -webkit-box-align: center;
+  // -ms-flex-align: center;
+  // align-items: center;
+  @include flex-center(none, center);
 }
 
 /* contains icons in bot header */
@@ -47,10 +48,16 @@ button.close-bot {
 /* refresh button */
 button.refresh-M {
   //background: transparent;
-  position: relative;
+  // position: relative;
   outline: 0;
   padding: 0;
   border: none;
+  margin: 15px;
+  position: absolute;
+  width: 44px !important;
+  height: 44px !important;
+  top: 5px !important;
+  background: red;
 }
 
 button.refresh-M:hover {
@@ -83,6 +90,7 @@ button.refresh-M:active {
   height: 44px !important;
   right: 111px !important;
   top: 5px !important;
+  background: red;
 }
 
 .settings-N {
