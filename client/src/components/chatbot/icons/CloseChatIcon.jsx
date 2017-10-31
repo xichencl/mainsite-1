@@ -1,7 +1,7 @@
 import React from 'react';
 // import ReactHtmlParser from 'react-html-parser';
 
-class CloseChat extends React.Component {
+class CloseChatIcon extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -26,4 +26,4 @@ class CloseChat extends React.Component {
   }
 }
 
-export default CloseChat;
+export default CloseChatIcon;

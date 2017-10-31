@@ -53,23 +53,16 @@ button.close-bot {
   background: transparent;
   outline: 0;
   right: 7em;
-  @include flex-center;
-  flex-direction: row;
-}
-
-.close-overlay {
-  width: 1.5em;
-  height: 1.5em;
-  position: relative;
-  right: 7em;
-  bottom: 2.1em;
-  border: 1px solid red;
-}
-
-button.super-test {
-  width: 200px;
-  height: 100px;
-  background: tomato;
+  // background: transparent;
+  // outline: 0;
+  // width: 50px;
+  // color: $icon-grey;
+  // padding: 0;
+  // border: none;
+  // cursor: pointer;
+  // position: relative;
+  // right: 5.5em;
+  // top: 3px;
 }
 
 /* refresh button */
@@ -79,7 +72,6 @@ button.refresh-M {
   width: 50px;
   color: $icon-grey;
   padding: 0;
-  // padding-top: 8px;
   border: none;
   cursor: pointer;
   position: relative;
@@ -109,7 +101,7 @@ button.refresh-M:active {
   transition: 0s;
 }
 
-/* settings icon */
+/* settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
   position: absolute;
@@ -127,32 +119,3 @@ button.refresh-M:active {
   cursor: pointer;
   margin: 15px;
 }
-
-// .chat-icon {
-//   /*speech bubble*/
-//   position: fixed;
-//   right: 0;
-//   top: 0;
-//   display: -webkit-box;
-//   display: -ms-flexbox;
-//   display: flex;
-//   -webkit-box-align: center;
-//   -ms-flex-align: center;
-//   align-items: center;
-//   z-index: 1000;
-//   cursor: pointer;
-// }
-
-// .chat-icon {
-//   position: fixed;
-//   left: 55em;
-//   top: 50px;
-//   display: -webkit-box;
-//   display: -ms-flexbox;
-//   display: flex;
-//   -webkit-box-align: center;
-//   -ms-flex-align: center;
-//   align-items: center;
-//   z-index: 1000;
-//   cursor: pointer;
-// }

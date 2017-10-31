@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CloseChat from './icons/CloseChat.jsx';
+import CloseChatIcon from './icons/CloseChatIcon.jsx';
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,8 +11,16 @@ class Header extends React.Component {
     return (
       <div className="header-L">
         <div>
-          <button type="button" id="close-button" onClick={this.props.onClick.bind(this)}>
-            close
+          <button
+            type="button"
+            id="close-button"
+            className="close-bot"
+            onClick={this.props.onClick.bind(this)}
+          >
+            {/* <i className="material-icons" style={{ fontSize: '44px' }}>
+              close
+            </i>*/}
+            <CloseChatIcon />
           </button>
           <button
             type="button"
