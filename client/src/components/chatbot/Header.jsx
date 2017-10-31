@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CloseChatIcon from './icons/CloseChatIcon.jsx';
+import RefreshIcon from './icons/RefreshIcon.jsx';
 
 class Header extends React.Component {
   constructor(props) {
@@ -28,9 +29,7 @@ class Header extends React.Component {
             className="refresh-M"
             onClick={this.props.onClick.bind(this)}
           >
-            <i className="material-icons" style={{ fontSize: '44px' }}>
-              refresh
-            </i>
+            <RefreshIcon />
           </button>
         </div>
       </div>
