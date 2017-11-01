@@ -3,19 +3,16 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, DATA_LOADED } from './types';
-import {fetchData} from "../data/mockDataAPI";
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA } from './types';
+import { fetchData } from "../data/mockDataAPI";
 
+const SITE_DATA_PATH = '../data/cleanSiteData.json'
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
-
-//should I import data? confused.
-export const PAGE_DATA_URL = 'http://localhost:8080';
 
 //= ===============================
 // Utility actions
 //= ===============================
-
 export function fetchUser(uid) {
   // console.log(uid)
   return function (dispatch) {
@@ -34,17 +31,46 @@ export function fetchUser(uid) {
   };
 }
 
-export function loadUnitData() {
+export function loadPageData() {
     return (dispatch, getState) => {
         fetchData()
             .then(data => {
+                console.log(data)
                 dispatch({
-                    type : DATA_LOADED,
+                    type : FETCH_PAGE_DATA,
                     payload : data
                 })
             });
     }
 }
+
+// export function fetchSiteData() {
+
+//   const request = axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`);
+//   console.log(request);
+//     return {
+//       type: FETCH_PAGE_DATA,
+//       payload: request
+//       };
+// }
+
+// export function fetchSiteData() {
+//   // console.log(uid)
+//   return function (dispatch) {
+
+//     // const thisToken = cookie.get('token')
+//     axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`)
+//     .then((response) => {
+//       dispatch({
+//         type: FETCH_PAGE_DATA,
+//         payload: response.data.page,
+//       });
+//     })
+//     .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
+//   };
+// }
+
+
 
 export function errorHandler(dispatch, error, type) {
   console.log('Error type: ', type);
@@ -165,31 +191,3 @@ export function sendContactForm({ name, emailAddress, message }) {
     });
   };
 }
-
-
-
-/*
-
-    const splitToken = cookie.get('token').split(' ');
-    const testToken = splitToken[1];
-    console.log(testToken)
-
-
-
-
-export function fetchUser(uid) {
-  return function (dispatch) {
-    axios.get(`${API_URL}/user/${uid}`, {
-      headers: { Authorization: cookie.get('token') },
-    })
-    .then((response) => {
-      dispatch({
-        type: FETCH_USER,
-        payload: response.data.user,
-      });
-    })
-    .catch(response => dispatch(errorHandler(response.data.error)));
-  };
-}
-
-*/

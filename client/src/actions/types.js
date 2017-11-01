@@ -20,7 +20,7 @@ export const SEND_CONTACT_FORM = 'send_contact_form',
   STATIC_ERROR = 'static_error';
 
 // page data
-export const DATA_LOADED = "DATA_LOADED";
+export const FETCH_PAGE_DATA = "FETCH_PAGE_DATA";
 
 
 
