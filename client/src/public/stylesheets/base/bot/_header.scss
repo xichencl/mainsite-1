@@ -43,6 +43,7 @@ button.close-bot {
   outline: 0;
   padding: 0;
   border: none;
+  display: flex;
 }
 
 /* refresh button */
@@ -52,12 +53,8 @@ button.refresh-M {
   outline: 0;
   padding: 0;
   border: none;
-  margin: 15px;
-  position: absolute;
-  width: 44px !important;
-  height: 44px !important;
-  top: 5px !important;
   background: red;
+  display: flex;
 }
 
 button.refresh-M:hover {

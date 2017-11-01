@@ -1,7 +1,6 @@
+// refresh and close icons live here as links to material icons, not svg-components
 import React from 'react';
 import { connect } from 'react-redux';
-import CloseChatIcon from './icons/CloseChatIcon.jsx';
-import RefreshIcon from './icons/RefreshIcon.jsx';
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,17 +10,16 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header-L">
-        <div>
+        <div className="icon-container">
           <button
             type="button"
             id="close-button"
             className="close-bot"
             onClick={this.props.onClick.bind(this)}
           >
-            {/* <i className="material-icons" style={{ fontSize: '44px' }}>
+            <i className="material-icons" style={{ fontSize: '44px' }}>
               close
-            </i>*/}
-            <CloseChatIcon />
+            </i>
           </button>
           <button
             type="button"
