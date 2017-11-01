@@ -19,18 +19,12 @@
   right: 100px;
   border-left: 1px solid $not-black;
   position: fixed;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
-  // display: flex;
-  // -webkit-box-align: center;
-  // -ms-flex-align: center;
-  // align-items: center;
   @include flex-center(none, center);
 }
 
 /* contains icons in bot header */
 .icon-container {
-  width: 25em;
+  width: 20em;
   height: 3em;
   @include flex-center(space-between, center);
   padding: .5em;
@@ -39,25 +33,27 @@
 /* close button */
 button.close-bot {
   position: relative;
-  //background: transparent;
+  background: transparent;
   outline: 0;
   padding: 0;
   border: none;
+  color: $icon-grey;
   display: flex;
+  bottom: .4em;
 }
 
 /* refresh button */
 button.refresh-M {
-  //background: transparent;
-  // position: relative;
+  background: transparent;
   outline: 0;
   padding: 0;
   border: none;
-  background: red;
+  color: $icon-grey;
   display: flex;
 }
 
-button.refresh-M:hover {
+button.refresh-M:hover,
+button.close-bot:hover {
   color: $warm-grey;
   outline: 0;
   padding: 0;
@@ -87,14 +83,14 @@ button.refresh-M:active {
   height: 44px !important;
   right: 111px !important;
   top: 5px !important;
-  background: red;
+  background: transparent;
 }
 
-.settings-N {
-  background: transparent;
-  width: 50px;
-  color: $icon-grey;
-  border: none;
-  cursor: pointer;
-  margin: 15px;
-}
+// .settings-N {
+//   background: blue;
+//   width: 2.5em;
+//   color: red;
+//   border: none;
+//   cursor: pointer;
+//   margin: 15px;
+// }

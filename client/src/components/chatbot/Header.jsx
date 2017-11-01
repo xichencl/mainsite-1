@@ -1,4 +1,5 @@
 // refresh and close icons live here as links to material icons, not svg-components
+// css for settings icon is in header.scss, but code lives in ChatContaier.jsx and there's a note about settings icon replacing default 'x' from react-burger-menu package;
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -17,7 +18,7 @@ class Header extends React.Component {
             className="close-bot"
             onClick={this.props.onClick.bind(this)}
           >
-            <i className="material-icons" style={{ fontSize: '44px' }}>
+            <i className="material-icons" style={{ fontSize: '1.2em' }}>
               close
             </i>
           </button>
@@ -27,7 +28,9 @@ class Header extends React.Component {
             className="refresh-M"
             onClick={this.props.onClick.bind(this)}
           >
-            <i className="material-icons">refresh</i>
+            <i className="material-icons" style={{ fontSize: '2.5em' }}>
+              refresh
+            </i>
           </button>
         </div>
       </div>
