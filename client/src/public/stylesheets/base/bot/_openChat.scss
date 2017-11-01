@@ -9,7 +9,8 @@
 }
 
 #bot.slideOut {
-  transform: translateX(100%);
+  //slides out chatbot completely even when sidenav is still open
+  transform: translateX(32em);
 }
 
 #root {
