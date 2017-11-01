@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-// import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
 import { connect } from 'react-redux';
 
-const BotBox = ({ visible }) => (
+const BotBox = ({ visible }) =>
   <div id="bot" className={visible ? 'slideIn' : 'slideOut'}>
     <ChatContainer />
-  </div>
-  );
+  </div>;
 
-const SpeechBubble = props => (
+const SpeechBubble = props =>
   <div>
     <svg
       fill="#7fcde5"
@@ -24,8 +22,7 @@ const SpeechBubble = props => (
       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
       <path d="M0 0h24v24H0z" fill="none" />
     </svg>
-  </div>
-  );
+  </div>;
 
 class OpenBot extends React.Component {
   constructor(props) {
