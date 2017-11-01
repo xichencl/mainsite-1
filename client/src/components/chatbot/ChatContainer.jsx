@@ -7,30 +7,10 @@ import LanguageIcon from './icons/LanguageIcon.jsx';
 import ThemeIcon from './icons/ThemeIcon.jsx';
 import FontSizeIcon from './icons/FontSizeIcon.jsx';
 import { connect } from 'react-redux';
-// import BubbleBreak from './BubbleBreak.jsx';
-// import { ReduxTheme, Theme, registerTheme, registerStyle } from 'redux-theme';
 
 const uuidv1 = require('uuid/v1');
 
 const sessionId = uuidv1();
-
-//experimenting with theme switch
-// const baseTheme = new Theme ('base');
-// const myTheme = new Theme ('mytheme');
-// myTheme.typo.font = 'Luckiest Guy, sans-serif';
- 
-// const textStyle = (theme) => ({
-//   base: {
-//     fontFamily: theme.typo.font
-//   }
-// });
- 
-// // Build array of themes and styles 
-// const themes = [defaultTheme, myTheme];
-// const styles = [{
-//   componentName: 'Chatbox', // Will apply on decorated component with this name 
-//   style: textStyle
-// }];
 
 class ChatContainer extends React.Component {
   constructor(props) {
@@ -39,27 +19,16 @@ class ChatContainer extends React.Component {
     this.resetSession = this.resetSession.bind(this);
   }
 
-  // componentDidMount(){
-  //   console.log("store: ", this.context.store);
-  // }
-
-  // componentWillUnmount(){
-
-  // }
-
   resetSession() {
     this.setState({ id: uuidv1() });
   }
 
-
   // pushes out settings/navbar
   render() {
-    // const {store} = this.context;
-    // console.log("theme:", this.props.theme);
     let chatContainerCSSClass;
-    if (this.props.theme === 'dark'){
+    if (this.props.theme === 'dark') {
       chatContainerCSSClass = 'dark chat-container-E';
-    }else{
+    } else {
       chatContainerCSSClass = 'grey-C chat-container-E';
     }
     return (
@@ -85,19 +54,18 @@ class ChatContainer extends React.Component {
           }
         >
           <div id="outer-container">
-            <Chatbar sessionId={this.state.id} theme={this.props.theme}/>
-            <Header resetSession={this.resetSession} theme={this.props.theme}/>
+            <Chatbar sessionId={this.state.id} theme={this.props.theme} />
+            <Header resetSession={this.resetSession} theme={this.props.theme} />
             <ThemeIcon />
             <FontSizeIcon />
             <LanguageIcon />
           </div>
         </Menu>
-        
 
         <main id="page-wrap">
           {/* chat-container-E keeps header and chatbar in fixed position*/}
           <div className={chatContainerCSSClass}>
-            <Chatbox sessionId={this.state.id} theme={this.props.theme}/>
+            <Chatbox sessionId={this.state.id} theme={this.props.theme} />
           </div>
         </main>
       </div>
@@ -105,30 +73,8 @@ class ChatContainer extends React.Component {
   }
 }
 
-// ChatContainer.contextTypes = {
-//   store: React.PropTypes.object
-// };
-
-
 const mapStateToProps = state => ({
-  theme: state.chat.theme
-}) ;
-
-// const mapDispatchToProps = dispatch => ({
-//   onClick(event){
-//     console.log(event.target.path);
-//     if (event.currentTarget.nodeName !== 'ThemeIcon'){
-//         return;
-//     }
-//     console.log("executed");
-//     console.log("current theme: ",event.currentTarget.props.theme);
-//     dispatch({
-//       type:'TOGGLE_THEME'
-//     });
-
-
-//   }
-
-// });
+  theme: state.chat.theme,
+});
 
 export default connect(mapStateToProps)(ChatContainer);
