@@ -2,16 +2,29 @@ const apiai = require('apiai');
 const aiSmallClaims = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 const aiGuardianship = apiai('d07862e5bda647a7bb38eb2cb54973fd');
 const aiGeneral = apiai('ea7debae233f4bee8ec7616124a23082');
-const ais = {'Small Claims':aiSmallClaims, 'Guardianship':aiGuardianship}
+const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
-let ai;
+let ai, caseType;
 
 exports.selectCaseType = (req, res, callback) => {
-    if (!req.body.ai){
+    if (req.body.ai === false){
       //check existing case types
-      ai = ais[req.body.payload.message] || aiGeneral;
+      switch (req.body.payload.message.toLowerCase()) {
+        case "small claims":
+          ai = aiSmallClaims;
+          caseType = "Small Claims";
+          break;
+        case "guardianship":
+          ai = aiGuardianship;
+          caseType = "Guardianship";
+          break;
+        default:
+          ai = aiGeneral;
+          caseType = "General";
+
+      }
 
     //machine learning goes here
     //either 1) the general inquiry bot which can be used to determine case types or 
@@ -19,13 +32,13 @@ exports.selectCaseType = (req, res, callback) => {
     //either way the later calls will have to be a callback function for this
     }
     
-    callback(req, res, ai);
+    callback(req, res);
   };
 
 
 
 
-exports.getMessageResponse = (req, res, ai) => {
+exports.getMessageResponse = (req, res) => {
       {
         // console.log('/message', req.body);
         //to launch a webpage in user default browser
@@ -59,6 +72,8 @@ exports.getMessageResponse = (req, res, ai) => {
           request_to_ai.on('response', (response_from_ai) => {
             // console.log('Response:', response_from_ai);
             const code = response_from_ai.status.code;
+            response_from_ai['caseType'] = caseType;
+            // console.log(response_from_ai);
             res.writeHead(code);
             if (code == 200) {
               res.end(JSON.stringify(response_from_ai));
@@ -75,6 +90,7 @@ exports.getMessageResponse = (req, res, ai) => {
           request_to_ai.on('response', (response_from_ai)=>{
             // console.log('Response:', response_from_ai);
             const code = response_from_ai.status.code;
+            response_from_ai['caseType'] = caseType;
             res.writeHead(code);
             if (code == 200){
               //send response object form api.ai to front end
@@ -89,33 +105,33 @@ exports.getMessageResponse = (req, res, ai) => {
           
         }
         //send voice request to api.ai
-        else{
-          const request_to_ai = ai.voiceRequest(options);
-          request_to_ai.on('response', (response_from_ai)=>{
-            // console.log('Response:', response_from_ai);
-            const code = response_from_ai.status.code;
-            res.writeHead(code);
-            if (code == 200){
-              res.end(JSON.stringify(response_from_ai));
-            }   
-            res.end();
-          });
-          request_to_ai.on('error', (error)=> {
-            console.error("Error:", error)
-          } );
+        // else{
+        //   const request_to_ai = ai.voiceRequest(options);
+        //   request_to_ai.on('response', (response_from_ai)=>{
+        //     // console.log('Response:', response_from_ai);
+        //     const code = response_from_ai.status.code;
+        //     res.writeHead(code);
+        //     if (code == 200){
+        //       res.end(JSON.stringify(response_from_ai));
+        //     }   
+        //     res.end();
+        //   });
+        //   request_to_ai.on('error', (error)=> {
+        //     console.error("Error:", error)
+        //   } );
           
-          //req.body.message is supposed to be a audio file path
-          fs.readFile(req.body.payload.message, function(error, buffer) {
-          if (error) {
-            console.log(error);
-          } else {
-            request_to_ai.write(buffer);
-          }
+        //   //req.body.message is supposed to be a audio file path
+        //   fs.readFile(req.body.payload.message, function(error, buffer) {
+        //   if (error) {
+        //     console.log(error);
+        //   } else {
+        //     request_to_ai.write(buffer);
+        //   }
 
-          request_to_ai.end();
-          });
+        //   request_to_ai.end();
+        //   });
           
-        }
+        // }
 
       }
     };
@@ -129,6 +145,7 @@ exports.getWebhookResponse = (req, res)=>{
     //response is the argument passed into this function, 
     //res is the argument passed into the outer most function above
     const respondToAPI = (response)=>{
+      response['caseType'] = caseType;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify(response));
       return;

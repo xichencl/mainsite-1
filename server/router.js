@@ -74,10 +74,10 @@ module.exports = function (app) {
   // chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
 
   // route: /chat/message
-  console.log(ChatController.getMessageResponse);
+  // console.log(ChatController.getMessageResponse);
   // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
   chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
-  console.log(ChatController.getWebhookResponse);
+  // console.log(ChatController.getWebhookResponse);
   chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
 /*
   // Set chat routes as a subgroup/middleware to apiRoutes

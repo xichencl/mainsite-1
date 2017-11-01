@@ -121,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
 
   // send post requests to api.ai, process response, and dispatch action to reducers
 
-  const postAndDispatch = function (data, sessionId, speak, ai) {
+  const postAndDispatch = function (data, sessionId, speak, caseTypeSelected) {
     console.log('SESSIONID: ', sessionId);
     dispatch({
       type: 'CHAT_ADD_MESSAGE',
@@ -133,8 +133,8 @@ const mapDispatchToProps = (dispatch) => {
     });
 
     let inputData = { payload: data, id: sessionId };
-    if (!ai){
-      dispatch({type: 'SELECT_CASE_TYPE'});
+    if (!caseTypeSelected){
+      // dispatch({type: data.message.toLowerCase()});
       inputData['ai'] = false;
     }else{
       inputData['ai'] = true;
@@ -176,6 +176,8 @@ const mapDispatchToProps = (dispatch) => {
               });
             }
           }
+          // console.log('case type: ', response.data.caseType.toLowerCase());
+          dispatch({type: response.data.caseType});
           let customPayload;
           if (!response.data.result.fulfillment.data) {
             const messages = response.data.result.fulfillment.messages;
@@ -358,7 +360,7 @@ const mapDispatchToProps = (dispatch) => {
             return;
           }
           const data = { message: userInput, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, speak, this.props.ai);
+          postAndDispatch(data, this.props.sessionId, speak, this.props.ai.selected);
           recognition.stop();
         };
 
@@ -389,7 +391,7 @@ const mapDispatchToProps = (dispatch) => {
         // clears textbox
         this.textInput.value = '';
         console.log('message:', data);
-        postAndDispatch(data, this.props.sessionId, null, this.props.ai);
+        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
       }
     },
     onKeyUp(event) {
@@ -406,7 +408,7 @@ const mapDispatchToProps = (dispatch) => {
         // clear input bar
         this.textInput.value = '';
 
-        postAndDispatch(data, this.props.sessionId, null, this.props.ai);
+        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
       }
     },
   };

@@ -96,9 +96,9 @@ class ChatBubble extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  ai : state.chat.ai;
-};
+const mapStateToProps = state => ({
+  ai : state.chat.ai
+});
 
 const mapDispatchToProps = dispatch => ({
   // controls buttons onclick function in bot response
@@ -124,9 +124,10 @@ const mapDispatchToProps = dispatch => ({
     const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
     console.log('SESSIONID: ', this.props.sessionId);
     let inputData = { payload: data, id: this.props.sessionId };
-    if (!this.props.ai){
+    // console.log("ai: ", this);
+    if (!this.props.ai.selected){
       inputData['ai']= false;
-      dispatch({type: 'SELECT_CASE_TYPE'});
+      // dispatch({type: 'SELECT_CASE_TYPE'});
     }else{
       inputData['ai']= true;
     }
@@ -138,6 +139,7 @@ const mapDispatchToProps = dispatch => ({
 
         if (response.status === 200) {
           // axios.response.data, get speech from api.ai
+
           const msg = response.data.result.fulfillment.speech;
           if (!msg.startsWith("\\n")){ //single paragraph
             dispatch({ 
@@ -167,6 +169,8 @@ const mapDispatchToProps = dispatch => ({
               });
             }
           }
+          // console.log('case type: ', response.data.caseType.toLowerCase());
+          dispatch({type: response.data.caseType});
           // if there's a custom payload attached to api.ai response
           let customPayload;
           if (!response.data.result.fulfillment.data) {

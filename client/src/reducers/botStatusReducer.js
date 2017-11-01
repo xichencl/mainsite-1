@@ -41,10 +41,16 @@ const themeReducer = (state='light', action) => {
 }
 
 //keep track of whether case type has been selected
-const aiReducer = (state= false, action)=>{
+const defaultState = {selected: false, caseType: 'General'};
+const aiReducer = (state= defaultState , action)=>{
 	switch (action.type){
-		case "SELECT_CASE_TYPE":
-			return !state;
+		case "Small Claims":
+			// console.log("small claims selected");
+			return {selected: true, caseType:'Small Claims'};
+		case "Guardianship":
+			return {selected: true, caseType:'Guardianship'};
+		case "General":
+			return defaultState;
 		default:
 			return state;
 	}
