@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import { loadPageData } from '../../actions/index.js'
+// import { bindActionCreators } from 'redux';
 import { loadPageData } from '../../actions/index.js'
-import { bindActionCreators } from 'redux';
+
 
 class TestHomePage extends React.Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class TestHomePage extends React.Component {
   }
 
   componentWillMount() {
-  	this.props.getPageData();
+  	// this.props.getPageData();
+    this.props.loadPageData();
   }
 
   render() {
@@ -19,26 +22,29 @@ class TestHomePage extends React.Component {
     return (
       <div>
           <div>hi 
-            
+          {this.props.pageData.smallclaims.title} 
           </div>
       </div>
     );
   }
 }
 
+
 function mapStateToProps(state) {
-	// const testData= state.data.page;
-	// console.log(testData)
+	console.log('component', state.data.page)
 	return {
-		data: state.data.page
+		pageData: state.data.page
 	}
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ getPageData: loadPageData }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+// 	return bindActionCreators({ getPageData: loadPageData }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
+// export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
+
+export default connect(mapStateToProps, { loadPageData })(TestHomePage);
+
 
 ///////
 

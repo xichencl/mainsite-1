@@ -35,7 +35,7 @@ export function loadPageData() {
     return (dispatch, getState) => {
         fetchData()
             .then(data => {
-                console.log(data)
+                console.log('action', data)
                 dispatch({
                     type : FETCH_PAGE_DATA,
                     payload : data
