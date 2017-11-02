@@ -11,6 +11,7 @@ import ChatIcon from './components/chatbot/icons/ChatIcon.jsx';
 import OpenBot from './components/chatbot/OpenBot.jsx';
 // Import static pages
 import HomePage from './components/pages/home-page';
+import TestHomePage from './components/pages/test-home-page';
 import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
@@ -65,6 +66,7 @@ export default class AppRouter extends Component {
             <div className="Page">
               <Switch>
               <Route exact path="/" component={ HomePage } />
+              <Route path="/test" component={ TestHomePage } />
               <Route path="/contact-us" component={ ContactPage } />
               <Route path="/portal" component={ Portal } />
               <Route path="/my-case" component={ MyCasesDashboard } />

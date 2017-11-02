@@ -58,7 +58,7 @@ export default class HomePage extends Component {
     })
     return (
       <div>
-        <h1>Self Help Law Center</h1>
+        <h1>Self-Help Law Center</h1>
         <Bannerbox 
           boxTitle='Do I need a lawyer?'
           boxContent='Learn more about representing yourself in court, and explore frequently asked questions.'

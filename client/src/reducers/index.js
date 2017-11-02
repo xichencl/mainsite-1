@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth_reducer';
 import userReducer from './user_reducer';
+import siteDataReducer from './site_data_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import themeReducer from './themeReducer';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   chat: chatReducer,
+  data: siteDataReducer
 });
 
 export default rootReducer;
