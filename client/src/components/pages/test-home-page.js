@@ -14,11 +14,7 @@ class TestHomePage extends React.Component {
   }
 
   render() {
-  	const topicsList = []
-  	const pageData = this.state.data.page
-  	.map(function() {
 
-  	})
 
     return (
       <div>
@@ -46,7 +42,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
 
 ///////
 
+  	// const topicsList = []
+  	// const pageData = this.state.data.page
+  	// .map(function() {
 
+  	// })
 
 
 
