@@ -48,6 +48,11 @@ const config = {
       //     limit: 10000,
       //   },
       // }, 
+      // {
+      //   test: /\.svg$/,
+      //   loader: 'url-loader'
+      // }
+      
       {
         test: /\.(png|svg|ico)$/,
         loader: 'url-loader',
@@ -56,6 +61,7 @@ const config = {
           name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]'
         }
       }
+
       // {
       //   test: /\.(png|jpg|gif)$/,
       //   use: [
