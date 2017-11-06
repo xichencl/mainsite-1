@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import ImageViewer from './ImageViewer.jsx';
 // const opn = require('opn');
+const CASETYPES = {'Small Claims':0, 'Guardianship':1, 'Domestic Violence':2, 'Family Law':3, 'Eviction':4, 'Traffic':5};
 
 class ChatBubble extends React.Component {
   constructor(props) {
@@ -125,7 +126,7 @@ const mapDispatchToProps = dispatch => ({
     console.log('SESSIONID: ', this.props.sessionId);
     let inputData = { payload: data, id: this.props.sessionId };
     // console.log("ai: ", this);
-    if (!this.props.ai.selected){
+    if (!this.props.ai.selected || this.props.message in CASETYPES){
       inputData['ai']= false;
       // dispatch({type: 'SELECT_CASE_TYPE'});
     }else{
