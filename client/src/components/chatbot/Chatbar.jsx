@@ -66,7 +66,7 @@ class Chatbar extends React.Component {
 
   render() {
     return (
-      <div className="light-grey-D chatbar-G">
+      <div className="light-grey-D chatbar">
         <div>
           <button
             type="button"
@@ -98,7 +98,7 @@ class Chatbar extends React.Component {
             type="button"
             // ref="sendButton" //a react attrib
             value="send"
-            className="circle-K"
+            className="circle-x"
             onClick={this.props.onClick.bind(this)}
           >
             <i className="material-icons" style={{ fontSize: '20px' }}>
