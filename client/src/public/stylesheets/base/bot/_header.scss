@@ -4,24 +4,25 @@
 .material-icons.md-36 {
   font-size: 36px;
 }
+.material-icons.md-18 {
+  font-size: 18px;
+  margin-left: 4px;
+}
 
 .open-bot-icon {
   position: fixed;
   display: -webkit-box;
   cursor: pointer;
-
+  color: $bot-blue;
   @include sm {
-    color: red;
     left: 37em;
     top: 7.9em;
   }
   @include md {
-    color: gold;
     left: 39em;
     top: 9.2em;
   }
   @include lg {
-    color: gold;
     left: 55em;
     top: 2.8em;
   }
@@ -30,6 +31,7 @@
 //see more in media queries at bottom of file
 .text-bot-icon {
   color: purple;
+  text-align: center;
 }
 
 /* bot header */
@@ -111,11 +113,6 @@ button.refresh-bot:active {
 
 //********************************** MEDIA QUERIES **********************************//
 
-// @media (max-width: 544px) {
-//   .open-bot-icon {
-//     color: green;
-//   }
-// }
 @media (max-width: 544px) and (min-width: 200px) {
   .open-bot-icon {
     display: none;
@@ -123,7 +120,12 @@ button.refresh-bot:active {
 }
 @media (max-width: 544px) and (min-width: 200px) {
   .text-bot-icon {
-    color: purple;
+    color: $bot-blue;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 5em;
+    left: 6.7em;
   }
 }
 

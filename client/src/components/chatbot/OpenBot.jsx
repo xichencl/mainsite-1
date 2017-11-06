@@ -16,7 +16,7 @@ const SpeechBubble = props =>
       <i className="material-icons md-36">chat_bubble</i>
     </div>
     <div className="text-bot-icon">
-      Chat <i className="material-icons md-36">chat_bubble</i>
+      Chat <i className="material-icons md-18">chat_bubble</i>
     </div>
   </div>;
 
