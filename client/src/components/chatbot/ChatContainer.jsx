@@ -23,16 +23,17 @@ class ChatContainer extends React.Component {
     this.setState({ id: uuidv1() });
   }
 
-  // pushes out settings/navbar
   render() {
-    let chatContainerCSSClass;
+    let botContainer;
     if (this.props.theme === 'dark') {
-      chatContainerCSSClass = 'dark-grey-bg chat-container-bg';
+      botContainer = 'dark-grey-bg chat-container-bg';
     } else {
-      chatContainerCSSClass = 'chat-box-bg chat-container-bg';
+      botContainer = 'chat-box-bg chat-container-bg';
     }
     return (
       <div>
+        {/* pushes out settings/navbar*/}
+
         <Menu
           pageWrapId={'page-wrap'}
           outerContainerId={'outer-container'}
@@ -63,8 +64,8 @@ class ChatContainer extends React.Component {
         </Menu>
 
         <main id="page-wrap">
-          {/* chat-container-bg keeps header and chatbar in fixed position*/}
-          <div className={chatContainerCSSClass}>
+          {/* chat-container-bg element keeps header and chatbar in fixed position*/}
+          <div className={botContainer}>
             <Chatbox sessionId={this.state.id} theme={this.props.theme} />
           </div>
         </main>

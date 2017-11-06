@@ -72,11 +72,8 @@
 // }
 
 //styling user speech bubble, bot speech bubble, and clickable bot buttons
-.blue-A {
-  background-color: $bot-blue;
-}
 
-.button-blue-B {
+.button-blue {
   color: #849da3;
   background-color: #b8e2ec;
   padding-top: 20px;
@@ -84,7 +81,7 @@
   height: 22px; /*overwritten by .chat-button's height: 0px, which is necessary to work in moz*/
 }
 
-.button-blue-B:hover {
+.button-blue:hover {
   background-color: $bot-blue;
   color: $not-black;
   -webkit-transition-duration: 0.2s;
@@ -93,14 +90,15 @@
   height: 0px;
 }
 
-.button-blue-B:active {
+.button-blue:active {
   background-color: $very-light-blue;
   color: $not-black;
   height: 0px;
 }
 
-.bot-bubble-left {
+.bot-bubble {
   /*max-width: 23em;*/
+  background-color: $bot-blue;
   min-width: 5em;
   padding: 20px 27px 20px 29px;
   margin-right: auto; /*left adjusts bubble*/
@@ -109,7 +107,7 @@
   border-radius: 45px 45px 45px 0px;
 }
 
-.chat-button-H {
+.bot-buttons {
   width: 11em;
   text-align: center;
   cursor: pointer;
@@ -121,7 +119,7 @@
   height: 0px; /*overwrites .button-blue height, necessary to show correctly in moz*/
 }
 
-.user-J {
+.user-bubble {
   /*padding-left: 30px;
   padding-right: 10px;*/
   border: 3px solid $bot-blue;
@@ -129,7 +127,7 @@
   background-color: #ffffff;
 }
 
-.user-bubble-right {
+.user-bubble-alignment {
   /*max-width: 23em;*/
   min-width: 5em;
   padding: 20px 25px 20px 29px;
@@ -137,13 +135,6 @@
   margin-top: 10px;
   margin-bottom: 10px;
   /*margin-right: 2%;*/
-}
-
-.bubble-breaker {
-  /*div wraps user bubble forcing next bubble onto next line*/
-  background-color: transparent;
-  width: 23em;
-  display: flex;
 }
 
 .bubble-breaker {

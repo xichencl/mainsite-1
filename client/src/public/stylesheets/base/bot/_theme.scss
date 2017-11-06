@@ -14,7 +14,7 @@
 // }
 //
 // //buttons
-// .testmax {
+// .botButtons {
 //   background: teal;
 // }
 // //user bubble
@@ -39,11 +39,11 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 }
 
 //buttons
-.testmax {
+.botButtons {
   background: teal;
 }
 
-.testmax:hover {
+.botButtons:hover {
   background-color: pink;
   color: $not-black;
   -webkit-transition-duration: 0.2s;
@@ -52,7 +52,7 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
   height: 0px;
 }
 
-.testmax:active {
+.botButtons:active {
   background-color: $very-light-blue;
   color: $not-black;
   height: 0px;
