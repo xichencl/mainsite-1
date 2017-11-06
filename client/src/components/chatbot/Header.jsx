@@ -10,7 +10,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="header-L">
+      <div className="header-x">
         <div className="icon-container">
           <button
             type="button"
@@ -25,7 +25,7 @@ class Header extends React.Component {
           <button
             type="button"
             id="refresh-button"
-            className="refresh-M"
+            className="refresh-bot"
             onClick={this.props.onClick.bind(this)}
           >
             <i className="material-icons" style={{ fontSize: '2.5em' }}>

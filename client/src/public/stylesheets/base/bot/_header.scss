@@ -10,7 +10,7 @@
 }
 
 /* bot header */
-.header-L {
+.header-x {
   width: 25em;
   height: 3em;
   background-color: #ffffff;
@@ -43,7 +43,7 @@ button.close-bot {
 }
 
 /* refresh button */
-button.refresh-M {
+button.refresh-bot {
   background: transparent;
   outline: 0;
   padding: 0;
@@ -52,7 +52,7 @@ button.refresh-M {
   display: flex;
 }
 
-button.refresh-M:hover,
+button.refresh-bot:hover,
 button.close-bot:hover {
   color: $warm-grey;
   outline: 0;
@@ -64,7 +64,7 @@ button.close-bot:hover {
   transition: 0.2s;
 }
 
-button.refresh-M:active {
+button.refresh-bot:active {
   color: $very-light-blue;
   outline: 0;
   padding: 0;
