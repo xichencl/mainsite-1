@@ -11,6 +11,8 @@ class Header extends React.Component {
       <div className="header-L">
         <div>
           <button type="button" id="close-button" onClick={this.props.onClick.bind(this)}>close</button>
+          <button type="button">{this.props.ai.caseType}</button>
+          
           <button type="button" id="refresh-button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
             <i className="material-icons" style={{ fontSize: '44px' }}>
               refresh
@@ -30,6 +32,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => ({
   chatlog: state.chat.log,
+  ai: state.chat.ai,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -39,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
     }
     if (event.currentTarget.id === 'refresh-button'){
       dispatch({ type: 'RESET_BOT' });
+      dispatch({ type: 'General'});
       this.props.resetSession();
     }else{//id==='close-button'
       dispatch({type: 'TOGGLE_BOT'});      

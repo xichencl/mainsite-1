@@ -18,6 +18,7 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 	let locale;
 	if ('locator' in params){
 		const entity = params.locator;
+		console.log("ENTITYT:", entity);
 		if ('county' in entity){
 			locale = entity.county;
 		}else if ('city' in entity){

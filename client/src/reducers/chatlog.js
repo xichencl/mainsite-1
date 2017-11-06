@@ -3,7 +3,7 @@
 const defaultState = [
   {
     message:
-      "Hello, I'm Courtney!  I'm here to help you find information and resources about your case. To begin, you may select a case type below, or tell me briefly what brought you here.",
+      "Hello, I'm Courtney!  I'm here to help you find information and resources about your case. To begin, please select a case type below, or tell me briefly what brought you here.",
     type: 'message',
     isBot: true
   },
