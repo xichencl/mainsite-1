@@ -1,16 +1,11 @@
 //styling chat container and chatbox
 
-.grey-C {
+.chat-box-bg {
   background-color: $light-grey;
   color: $not-black;
 }
 
-.light-grey-D {
-  background-color: #ffffff;
-  color: $not-black;
-}
-
-.chat-container-E {
+.chat-container-bg {
   //increased width from standard 25em to 26em to hide scroll. cross-browser friendly.
   width: 26em;
   height: 100vh;
@@ -21,9 +16,10 @@
   //adding the overflows fixes header and chatbar in fixed position
   overflow-y: auto;
   overflow-x: hidden;
+  background-color: $light-grey;
 }
 
-.chatbox-F {
+.chatbox-alignment {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

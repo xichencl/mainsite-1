@@ -27,9 +27,9 @@ class ChatContainer extends React.Component {
   render() {
     let chatContainerCSSClass;
     if (this.props.theme === 'dark') {
-      chatContainerCSSClass = 'dark-grey-bg chat-container-E';
+      chatContainerCSSClass = 'dark-grey-bg chat-container-bg';
     } else {
-      chatContainerCSSClass = 'grey-C chat-container-E';
+      chatContainerCSSClass = 'chat-box-bg chat-container-bg';
     }
     return (
       <div>
@@ -63,7 +63,7 @@ class ChatContainer extends React.Component {
         </Menu>
 
         <main id="page-wrap">
-          {/* chat-container-E keeps header and chatbar in fixed position*/}
+          {/* chat-container-bg keeps header and chatbar in fixed position*/}
           <div className={chatContainerCSSClass}>
             <Chatbox sessionId={this.state.id} theme={this.props.theme} />
           </div>

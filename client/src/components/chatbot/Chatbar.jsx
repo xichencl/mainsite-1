@@ -66,7 +66,7 @@ class Chatbar extends React.Component {
 
   render() {
     return (
-      <div className="light-grey-D chatbar">
+      <div className="chatbar">
         <div>
           <button
             type="button"
