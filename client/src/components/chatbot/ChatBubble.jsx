@@ -11,19 +11,19 @@ class ChatBubble extends React.Component {
   }
 
   render() {
-    let className = 'bot-blue bot-bubble';
+    let speechBubble = 'bot-bubble';
     if (this.props.theme === 'dark') {
-      className += ' dark-bot-bubble';
+      speechBubble += ' dark-bot-bubble';
     }
 
-    let xyz = 'button-blue chat-button';
+    let botButtons = 'button-blue bot-buttons';
     if (this.props.theme === 'dark') {
-      xyz += ' testmax';
+      botButtons += ' testmax';
     }
 
     if (this.props.type === 'button') {
       return (
-        <div className={xyz} onClick={this.props.onClick.bind(this)}>
+        <div className={botButtons} onClick={this.props.onClick.bind(this)}>
           {ReactHtmlParser(this.props.message)}
         </div>
       );
@@ -79,7 +79,7 @@ class ChatBubble extends React.Component {
       return (
         // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
         <div className="bubble-breaker">
-          <div className={className}>
+          <div className={speechBubble}>
             {ReactHtmlParser(this.props.message)}
           </div>
         </div>
@@ -87,19 +87,19 @@ class ChatBubble extends React.Component {
     }
 
     return (
-      <div className={className} /* onClick={this.props.onClick}*/>
+      <div className={speechBubble} /* onClick={this.props.onClick}*/>
         {ReactHtmlParser(this.props.message)}
       </div>
     );
 
-    if (this.props.theme === 'dark' && this.props.type === 'button') {
-      className += ' testmax chat-button';
-      return (
-        <div className={className} onClick={this.props.onClick.bind(this)}>
-          {ReactHtmlParser(this.props.message)}
-        </div>
-      );
-    }
+    // if (this.props.theme === 'dark' && this.props.type === 'button') {
+    //   className += ' testmax bot-buttons';
+    //   return (
+    //     <div className={className} onClick={this.props.onClick.bind(this)}>
+    //       {ReactHtmlParser(this.props.message)}
+    //     </div>
+    //   );
+    // }
   }
 }
 
