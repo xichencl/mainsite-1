@@ -58,7 +58,11 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
   height: 0px;
 }
 //user bubble
-
+.dark-user-bubble {
+  background: black;
+  border: 1px solid tomato;
+  color: white;
+}
 //greys
 //#cfcfcf - text
 //#797979 - bot background

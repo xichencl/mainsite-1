@@ -291,14 +291,19 @@ class ChatBubble extends React.Component {
       className += ' dark-bot-bubble';
     }
 
-    let xyz = 'button-blue-B chat-button-H';
+    let botButtons = 'button-blue-B chat-button-H';
     if (this.props.theme === 'dark') {
-      xyz += ' testmax';
+      botButtons += ' testmax';
+    }
+
+    let userBubble = 'user-J user-bubble-right';
+    if (this.props.theme === 'dark') {
+      userBubble += ' dark-user-bubble';
     }
 
     if (this.props.type === 'button') {
       return (
-        <div className={xyz} onClick={this.props.onClick.bind(this)}>
+        <div className={botButtons} onClick={this.props.onClick.bind(this)}>
           {ReactHtmlParser(this.props.message)}
         </div>
       );
@@ -354,7 +359,7 @@ class ChatBubble extends React.Component {
       return (
         // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
         <div className="bubble-breaker">
-          <div className={className}>
+          <div className={userBubble}>
             {ReactHtmlParser(this.props.message)}
           </div>
         </div>
@@ -367,14 +372,14 @@ class ChatBubble extends React.Component {
       </div>
     );
 
-    if (this.props.theme === 'dark' && this.props.type === 'button') {
-      className += ' testmax chat-button-H';
-      return (
-        <div className={className} onClick={this.props.onClick.bind(this)}>
-          {ReactHtmlParser(this.props.message)}
-        </div>
-      );
-    }
+    // if (this.props.theme === 'dark' && this.props.type === 'button') {
+    //   className += ' testmax chat-button-H';
+    //   return (
+    //     <div className={className} onClick={this.props.onClick.bind(this)}>
+    //       {ReactHtmlParser(this.props.message)}
+    //     </div>
+    //   );
+    // }
   }
 }
 
