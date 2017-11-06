@@ -19,6 +19,11 @@ export const FETCH_USER = 'fetch_user'; // do I need to add this reducer ERROR_R
 export const SEND_CONTACT_FORM = 'send_contact_form',
   STATIC_ERROR = 'static_error';
 
+// page data
+export const FETCH_PAGE_DATA = "FETCH_PAGE_DATA";
+
+
+
 
 /* Not using these =====>
 

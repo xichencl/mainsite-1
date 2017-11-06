@@ -1,0 +1,198 @@
+{
+	"-2": {
+		"Children": "26"
+	},
+	"-1": {
+		"Children": "9,10,11,12,13,14"
+	},
+	"0": {
+		"Children": "1,2,3,6,7,8"
+	},
+	"1": {
+		"Children": "4,5,15,19,20,21",
+		"ID": "1",
+		"Image": "guardianship.svg",
+		"Title": "Guardianship",
+		"BlockText": "Guardianship(*)",
+		"TitleSPA": "Tutela de menores",
+		"BlockTextSPA": "Tutela de menores(*)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"2": {
+		"Children": "27,28,29,30,31,32",
+		"ID": "2",
+		"Image": "family%20law.svg",
+		"Title": "Family Law",
+		"BlockText": "Family Law(+)",
+		"TitleSPA": "Ley familiar",
+		"BlockTextSPA": "Ley familiar(+)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"3": {
+		"Children": "37,38,39,19,20,21",
+		"ID": "3",
+		"Image": "eviction.svg",
+		"Title": "Eviction",
+		"BlockText": "Eviction(*)",
+		"TitleSPA": "Desalojo",
+		"BlockTextSPA": "Desalojo(*)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"4": {
+		"Children": "16,17,18,19,20,21",
+		"ID": "4",
+		"Image": "potential-guardian.svg",
+		"Title": "Potential Guardian",
+		"BlockText": "For Potential Guardians",
+		"TitleSPA": "Tutor Potencial",
+		"BlockTextSPA": "Para tutores potenciales",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"5": {
+		"Children": "16,17,18,19,20,21",
+		"ID": "5",
+		"Image": "parent.svg",
+		"Title": "Parent",
+		"BlockText": "For Parents",
+		"TitleSPA": "Padre",
+		"BlockTextSPA": "Para padres",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"8": {
+		"Children": "40,41,42,19,20,21",
+		"ID": "8",
+		"Image": "traffic.svg",
+		"Title": "Traffic",
+		"BlockText": "Traffic(+)",
+		"TitleSPA": "Tráfico",
+		"BlockTextSPA": "Tráfico(+)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"9": {
+		"Children": "43,44,19,20,21,1139",
+		"ID": "9",
+		"Image": "bankruptcy.svg",
+		"Title": "Bankruptcy",
+		"BlockText": "Bankruptcy(*)",
+		"TitleSPA": "Bancarrota",
+		"BlockTextSPA": "Bancarrota(*)",
+		"ExternalLink": "http://www.uscourts.gov/services-forms/bankruptcy",
+		"SmallButton": "0"
+	},
+	"10": {
+		"Children": "16,17,18,19,20,21",
+		"ID": "10",
+		"Image": "criminal-juvenile-delinquency.svg",
+		"Title": "Criminal",
+		"BlockText": "Criminal(*)",
+		"TitleSPA": "Ley criminal",
+		"BlockTextSPA": "Criminal(*)",
+		"ExternalLink": "http://www.courts.ca.gov/selfhelp-criminallaw.htm",
+		"SmallButton": "0"
+	},
+	"17": {
+		"Children": "22,23,24,19,20,21",
+		"ID": "17",
+		"Image": "during-your-case.svg",
+		"Title": "During your case",
+		"BlockText": "During the Case",
+		"TitleSPA": "Durante su caso",
+		"BlockTextSPA": "Durante el caso",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"19": {
+		"Children": "349,350,351,352,353,354",
+		"ID": "19",
+		"Image": "forms.svg",
+		"Title": "Forms",
+		"BlockText": "Forms",
+		"TitleSPA": "Formularios",
+		"BlockTextSPA": "Formularios",
+		"ExternalLink": "",
+		"SmallButton": "1"
+	},
+	"20": {
+		"Children": "371,372,373,374,375,376,377,378,379,352,353,354",
+		"ID": "20",
+		"Image": "question.png",
+		"Title": "FAQs",
+		"BlockText": "FAQs",
+		"TitleSPA": "Preguntas frecuentes",
+		"BlockTextSPA": "Preguntas frecuentes",
+		"ExternalLink": "",
+		"SmallButton": "1"
+	},
+	"21": {
+		"Children": "402,403,404,352,353,354",
+		"ID": "21",
+		"Image": "resources.svg",
+		"Title": "Resources",
+		"BlockText": "Resources",
+		"TitleSPA": "Recursos",
+		"BlockTextSPA": "Recursos",
+		"ExternalLink": "",
+		"SmallButton": "1"
+	},
+	"26": {
+		"Children": "349,849,352,353,354",
+		"ID": "26",
+		"Image": "",
+		"Title": "Coming Soon!",
+		"BlockText": "<h3>Coming Soon!</h3><p>The page you have clicked on is not yet available.</p>",
+		"TitleSPA": "¡Próximamente!",
+		"BlockTextSPA": "<h3>¡Próximamente!</h3><p>Lea la versión en inglés.</p>",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"27": {
+		"Children": "1068,1069,1070,1071,1072,1073,1074,376,1075,378,379,352,1076,354",
+		"ID": "27",
+		"Image": "adoption.svg",
+		"Title": "Adoption",
+		"BlockText": "Adoption(*)",
+		"TitleSPA": "Adopción",
+		"BlockTextSPA": "Adopción(*)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"28": {
+		"Children": "402,403,404,1077,1078,1079",
+		"ID": "28",
+		"Image": "custody.svg",
+		"Title": "Child Custody",
+		"BlockText": "Child Custody(*)",
+		"TitleSPA": "Custodia de los hijos",
+		"BlockTextSPA": "Custodia de los hijos(*)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"32": {
+		"Children": "1080,1081,1082,1083",
+		"ID": "32",
+		"Image": "divorce.svg",
+		"Title": "Divorce",
+		"BlockText": "Divorce(*)",
+		"TitleSPA": "Divorcio",
+		"BlockTextSPA": "Divorcio(*)",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	},
+	"103": {
+		"Children": "141,142,143,144",
+		"ID": "103",
+		"Image": "",
+		"Title": "Before Going to Court",
+		"BlockText": "<p>All adoptions of U.S.-born children need to be finalized in court. And actually, the court process is fairly simple. This is because most of what has to happen has to be done BEFORE the court hearing.</p>  <p>Once it can be shown (in writing) who the legal parents are, who has legal custody of the child, and that everyone involved knows about the adoption and agrees to it, the adoption case is ready to go to court.</p>",
+		"TitleSPA": "Antes de ir a la corte",
+		"BlockTextSPA": "<p>Todas las adopciones de niños nacidos en los EE.UU. se tienen que finalizar en la corte. En realidad, el proceso de la corte es bastante simple. Esto se debe a que la mayor parte del trámite se tiene que hacer ANTES de la audiencia en la corte.</p>  <p>Una vez que se pueda demostrar (por escrito) quiénes son los padres legales, quién tiene la custodia legal del niño, y que todas las partes involucradas están informadas sobre la adopción y de acuerdo con la misma, el caso de adopción estará listo para ir a la corte.</p> <p></p>           ",
+		"ExternalLink": "",
+		"SmallButton": "0"
+	}
+}
