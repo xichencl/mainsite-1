@@ -15,6 +15,9 @@ const SpeechBubble = props =>
     <div className="open-bot-icon">
       <i className="material-icons md-36">chat_bubble</i>
     </div>
+    <div className="text-bot-icon">
+      Chat <i className="material-icons md-36">chat_bubble</i>
+    </div>
   </div>;
 
 class OpenBot extends React.Component {

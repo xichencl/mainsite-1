@@ -9,13 +9,9 @@
   position: fixed;
   display: -webkit-box;
   cursor: pointer;
-  // @include xs {
-  //   color: blue;
-  //   left: 37em;
-  //   top: 7.4em;
-  // }
+
   @include sm {
-    color: gold;
+    color: red;
     left: 37em;
     top: 7.9em;
   }
@@ -31,26 +27,10 @@
   }
 }
 
+//see more in media queries at bottom of file
 .text-bot-icon {
   color: purple;
-  @include sm {
-    display: none;
-  }
-  @include md {
-    display: none;
-  }
-  @include lg {
-    display: none;
-  }
 }
-
-// .Banner-box-p {
-//   box-sizing: border-box;
-//   // margin-right: 12rem;
-//   @include test {
-//     margin-right: 8rem;
-//   }
-// }
 
 /* bot header */
 .header-x {
@@ -129,8 +109,26 @@ button.refresh-bot:active {
   background: transparent;
 }
 
-// @media (max-width: 1024px) {
+//********************************** MEDIA QUERIES **********************************//
+
+// @media (max-width: 544px) {
 //   .open-bot-icon {
-//     color: red;
+//     color: green;
 //   }
 // }
+@media (max-width: 544px) and (min-width: 200px) {
+  .open-bot-icon {
+    display: none;
+  }
+}
+@media (max-width: 544px) and (min-width: 200px) {
+  .text-bot-icon {
+    color: purple;
+  }
+}
+
+@media (max-width: 2000px) and (min-width: 545px) {
+  .text-bot-icon {
+    display: none;
+  }
+}
