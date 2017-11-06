@@ -11,21 +11,19 @@ class ChatBubble extends React.Component {
   }
 
   render() {
-
     let className = 'blue-A bot-bubble-left';
-
-    if (this.props.theme === 'dark'){
-        className += ' blue-dark'
+    if (this.props.theme === 'dark') {
+      className += ' dark-bot-bubble';
     }
-      
-    
+
+    let xyz = 'button-blue-B chat-button-H';
+    if (this.props.theme === 'dark') {
+      xyz += ' testmax';
+    }
 
     if (this.props.type === 'button') {
-      className = ' button-blue-B chat-button-H';
       return (
-        // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
-
-        <div className={className} onClick={this.props.onClick.bind(this)}>
+        <div className={xyz} onClick={this.props.onClick.bind(this)}>
           {ReactHtmlParser(this.props.message)}
         </div>
       );
@@ -93,6 +91,15 @@ class ChatBubble extends React.Component {
         {ReactHtmlParser(this.props.message)}
       </div>
     );
+
+    if (this.props.theme === 'dark' && this.props.type === 'button') {
+      className += ' testmax chat-button-H';
+      return (
+        <div className={className} onClick={this.props.onClick.bind(this)}>
+          {ReactHtmlParser(this.props.message)}
+        </div>
+      );
+    }
   }
 }
 
@@ -128,23 +135,24 @@ const mapDispatchToProps = dispatch => ({
         if (response.status === 200) {
           // axios.response.data, get speech from api.ai
           const msg = response.data.result.fulfillment.speech;
-          if (!msg.startsWith("\\n")){ //single paragraph
-            dispatch({ 
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: msg,
-                  type: 'text',
-                  isBot: true,
-                },
-              });
-
-          }else{ //multi-paragraphs
+          if (!msg.startsWith('\\n')) {
+            // single paragraph
+            dispatch({
+              type: 'CHAT_ADD_MESSAGE',
+              payload: {
+                message: msg,
+                type: 'text',
+                isBot: true,
+              },
+            });
+          } else {
+            // multi-paragraphs
 
             const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
             console.log(paragraphs);
-            let i=0;
+            let i = 0;
             // msg="";
-            for (i=0; i<paragraphs.length; i++){
+            for (i = 0; i < paragraphs.length; i++) {
               // msg+=paragraphs[i];
               dispatch({
                 type: 'CHAT_ADD_MESSAGE',
