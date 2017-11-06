@@ -24,7 +24,7 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 		}else if ('city' in entity){
 			locale = entity.city;
 		}else if ('zip-code' in entity){
-			locale = entity.zip-code;
+			locale = entity['zip-code'];
 		}else{
 			response.speech = "I'm sorry, but your entry was invalid. Please enter or say a city or county name or a valid CA zip code.";
 			respondToAPI(response);

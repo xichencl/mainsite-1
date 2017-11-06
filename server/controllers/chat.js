@@ -154,6 +154,7 @@ exports.getWebhookResponse = (req, res)=>{
       case 'small_claims.court_lookup':
       //this appears to be sync
         console.log("court_lookup chosen");
+        // console.log(req.body.result.parameters);
         functions.small_claims_court_lookup(req.body.result.parameters, respondToAPI);
         // console.log('Response Object:', response);
         // res.setHeader('Content-Type', 'application/json');
