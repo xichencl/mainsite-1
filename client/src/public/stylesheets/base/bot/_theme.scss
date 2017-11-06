@@ -1,3 +1,28 @@
+// /*monochromatic colors intended to help people with the most common
+// type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
+//
+// //bot background
+// .dark-grey-bg {
+//   background-color: #797979;
+//   color: purple;
+// }
+//
+// //bot bubble
+// .dark-bot-bubble {
+//   background: red;
+//   color: white;
+// }
+//
+// //buttons
+// .testmax {
+//   background: teal;
+// }
+// //user bubble
+//
+// //greys
+// //#cfcfcf - text
+// //#797979 - bot background
+
 /*monochromatic colors intended to help people with the most common
 type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 
@@ -16,6 +41,21 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 //buttons
 .testmax {
   background: teal;
+}
+
+.testmax:hover {
+  background-color: pink;
+  color: $not-black;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  height: 0px;
+}
+
+.testmax:active {
+  background-color: $very-light-blue;
+  color: $not-black;
+  height: 0px;
 }
 //user bubble
 
