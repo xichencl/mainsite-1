@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import ChatIcon from '../chatbot/icons/ChatIcon.jsx';
-
 export default class Search extends Component {
   render() {
     return (

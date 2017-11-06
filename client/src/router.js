@@ -7,7 +7,6 @@ import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
 import ChatContainer from './components/chatbot/ChatContainer.jsx';
-import ChatIcon from './components/chatbot/icons/ChatIcon.jsx';
 import OpenBot from './components/chatbot/OpenBot.jsx';
 // Import static pages
 import HomePage from './components/pages/home-page';

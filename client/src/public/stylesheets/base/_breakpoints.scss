@@ -5,7 +5,7 @@ $breakpoint-lg: 1025px !default;
 $breakpoint-xl: 2000px !default;
 
 @mixin xs() {
-  @media (min-width: $breakpoint-sm) {
+  @media (min-width: $breakpoint-xs) {
     @content;
   }
 }

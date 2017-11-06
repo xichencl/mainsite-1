@@ -1,13 +1,56 @@
 //styling header
 
 /*speech bubble in main header opens bot */
-.chat-icon {
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.open-bot-icon {
   position: fixed;
-  left: 55em;
-  top: 50px;
   display: -webkit-box;
   cursor: pointer;
+  // @include xs {
+  //   color: blue;
+  //   left: 37em;
+  //   top: 7.4em;
+  // }
+  @include sm {
+    color: gold;
+    left: 37em;
+    top: 7.9em;
+  }
+  @include md {
+    color: gold;
+    left: 39em;
+    top: 9.2em;
+  }
+  @include lg {
+    color: gold;
+    left: 55em;
+    top: 2.8em;
+  }
 }
+
+.text-bot-icon {
+  color: purple;
+  @include sm {
+    display: none;
+  }
+  @include md {
+    display: none;
+  }
+  @include lg {
+    display: none;
+  }
+}
+
+// .Banner-box-p {
+//   box-sizing: border-box;
+//   // margin-right: 12rem;
+//   @include test {
+//     margin-right: 8rem;
+//   }
+// }
 
 /* bot header */
 .header-x {
@@ -85,3 +128,9 @@ button.refresh-bot:active {
   top: 5px !important;
   background: transparent;
 }
+
+// @media (max-width: 1024px) {
+//   .open-bot-icon {
+//     color: red;
+//   }
+// }
