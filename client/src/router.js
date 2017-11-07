@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
@@ -50,17 +51,17 @@ import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import 
 // Import higher order components
 import RequireAuth from './components/auth/require-auth';
 
-export default class AppRouter extends Component {
+class AppRouter extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
           {/* <ToggleBox />*/}
-          <div className="App">
+          <div className={this.props.visible?"App noscroll":"App"}>
             <div className="App-mask" />
             <Navbar />
             <Search />
-            <div className="position-bot the-bot noscroll">
+            <div className="position-bot the-bot">
               <OpenBot />
             </div>
             <div className="Page">
@@ -103,6 +104,12 @@ export default class AppRouter extends Component {
   }
 }
 
+
+const mapStateToProps = (state) => ({
+  visible: state.chat.botVisibility
+});
+
+export default connect(mapStateToProps)(AppRouter);
 /*
 
 

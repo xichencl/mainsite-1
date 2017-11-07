@@ -47,7 +47,7 @@ class OpenBot extends React.Component {
     // this.toggleSwiped = this.toggleSwiped.bind(this);
     // this.state = {swiped : false};
     this.swipe = {};
-    this.minDistance = 100;
+    this.minDistance = 70;
   }
 
   handleTouchStart(e){
