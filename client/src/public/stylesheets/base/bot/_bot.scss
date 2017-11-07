@@ -23,6 +23,10 @@
   margin-left: -7em;
 }
 
+.noscroll{
+  touch-action: none;
+}
+
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
 .stress {
   font-size: 1em;

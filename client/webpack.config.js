@@ -89,7 +89,7 @@ const config = {
     historyApiFallback: true,
     contentBase: './',
     // proxy:{'/api':'http://localhost:3000'},
-     settings for serving from remote server
+     // settings for serving from remote server
     host:'0.0.0.0',
     port:80,
     proxy: {'/api':'http://52.39.81.245:3000'},

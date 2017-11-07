@@ -63,7 +63,7 @@ export default class AppRouter extends Component {
             <div className="position-bot the-bot noscroll">
               <OpenBot />
             </div>
-            <div className="Page noscroll">
+            <div className="Page">
               <Switch>
               <Route exact path="/" component={ HomePage } />
               <Route path="/test" component={ TestHomePage } />
