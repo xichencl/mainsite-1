@@ -67,7 +67,7 @@ class OpenBot extends React.Component {
   handleTouchEnd(e){
     const touchObj = e.changedTouches[0];
     const dist = touchObj.clientX - this.swipe.x;
-    if (this.swipe.swiping && dist>this.minDistance){
+    if (this.props.visible && this.swipe.swiping && dist>this.minDistance){
       // this.setState(this.toggleSwiped(true));
       // swiped = true;
       this.props.onSwipe();
@@ -105,7 +105,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleClickOutside (event, wrapperRef) {
-    if (wrapperRef && !wrapperRef.contains(event.target) && event.target.tagName !== 'HTML'){
+    if (wrapperRef && event.target.tagName !== 'HTML' && !wrapperRef.contains(event.target) ){
       // console.log(event.target.tagName);
       dispatch({type: "TOGGLE_BOT"});
     }
