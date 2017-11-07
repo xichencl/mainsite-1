@@ -1,9 +1,12 @@
 import { FETCH_PAGE_DATA, ERROR_RESPONSE } from '../actions/types';
+import siteData from '../data/smallClaimsData.json'
 
 const INITIAL_STATE = { 
-	page: {},  
+	page: [],  
 	error: '' 
 };
+
+// const INITIAL_STATE = siteData;
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {

@@ -1,74 +1,64 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { loadPageData } from '../../actions/index.js'
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { loadPageData } from '../../actions/index.js'
-
+import Squarebox from '../template/square-box';
 
 class TestHomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {}
   }
 
-  componentWillMount() {
-  	// this.props.getPageData();
-    this.props.loadPageData();
+  componentDidMount() {
+   // this.getPageData();
+    this.props.loadPageData()
   }
 
   render() {
+    const { pageData = [] } = this.props;
+    
+    // console.log('render', pageData)
+    // const topic = pageData.smallclaims
+    // console.log(topic, 'topic')
+    // console.log(this.state, 'state')
+    // console.log(this.props, 'props')
+
+    // let pageData = this.props.pageData || {}; <- took a screenshot of this reasoning if I want to check againx
 
 
     return (
       <div>
-          <div>hi 
-          {this.props.pageData.smallclaims.title} 
+          <div>
+          {pageData.smallclaims && pageData.smallclaims.title}
+          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[1].Title}</h4>
+          <p>{pageData.smallclaims && pageData.smallclaims.faqs[1].BlockText}</p>
+          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[2].Title}</h4>
+          <p>{pageData.smallclaims && pageData.smallclaims.faqs[2].BlockText}</p>
           </div>
       </div>
     );
   }
 }
 
-
-function mapStateToProps(state) {
-	console.log('component', state.data.page)
-	return {
-		pageData: state.data.page
-	}
+function mapStateToProps(state) { 
+  return {
+    pageData: state.data.page.data,
+  }
 }
 
-// function mapDispatchToProps(dispatch) {
-// 	return bindActionCreators({ getPageData: loadPageData }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {  
+  return bindActionCreators({
+    loadPageData: loadPageData
+  }, dispatch);
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
-
-export default connect(mapStateToProps, { loadPageData })(TestHomePage);
-
-
-///////
-
-  	// const topicsList = []
-  	// const pageData = this.state.data.page
-  	// .map(function() {
-
-  	// })
+export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
 
 
+// ps this works in the div... D:<
+// {pageData.smallclaims && pageData.smallclaims.title}
 
+//     let pageData = this.props.pageData || {}
+//          {pageData.smallclaims.title}
 
-
-///////////
-
-// function mapStateToProps(state) {
-// 	console.log(state.user)
-//   return {
-//     profile: state.user.profile,
-//   };
-// }
-
-/* 
-const mapStateToProps = state => ({
-  	data: loadUnitData()
-});
-*/

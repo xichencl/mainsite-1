@@ -6,6 +6,8 @@ import { logoutUser } from './auth';
 import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
+// import siteData from "../data/smallClaimsData";
+
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
@@ -31,18 +33,42 @@ export function fetchUser(uid) {
   };
 }
 
-export function loadPageData() {
-    return (dispatch, getState) => {
-        fetchData()
-            .then(data => {
-                console.log('action', data)
-                dispatch({
-                    type : FETCH_PAGE_DATA,
-                    payload : data
-                })
-            });
-    }
+// export function loadPageData() {
+//   return (dispatch, getState) => {
+//     fetchData()
+//     .then(data => {
+//       console.log('action', data)
+//       dispatch({
+//           type : FETCH_PAGE_DATA,
+//           payload : data
+//       })
+//     })
+//     .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
+//   }
+// }
+
+
+export function loadPageData() {  
+  return dispatch => {
+    axios.get('./smallClaimsData.json')
+      .then(data => {
+      console.log('action', data)
+      dispatch({
+          type : FETCH_PAGE_DATA,
+          payload : data
+      })
+    })
+  }
 }
+
+// export function loadPageData() {
+//   return {
+//     // Unique identifier
+//     type: 'FETCH_PAGE_DATA',
+//     // Payload
+//     payload: siteData
+//   }
+// }
 
 // export function fetchSiteData() {
 
