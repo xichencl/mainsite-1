@@ -14,6 +14,9 @@ const uuidv1 = require('uuid/v1');
 
 const sessionId = uuidv1();
 
+// let dist, startX, startY, startTime;
+// const swipeThreshold = 150, restraint = 100, allowedTime = 300
+
 //experimenting with theme switch
 // const baseTheme = new Theme ('base');
 // const myTheme = new Theme ('mytheme');
@@ -50,6 +53,8 @@ class ChatContainer extends React.Component {
   resetSession() {
     this.setState({ id: uuidv1() });
   }
+
+  
 
   // caseSelection(){
   //   this.setState({ caseTypeSelected: true });

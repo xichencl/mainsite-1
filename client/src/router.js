@@ -60,10 +60,10 @@ export default class AppRouter extends Component {
             <div className="App-mask" />
             <Navbar />
             <Search />
-            <div className="position-bot the-bot">
-              <OpenBot ref={el=>(this.chatWindow=el)}/>
+            <div className="position-bot the-bot noscroll">
+              <OpenBot />
             </div>
-            <div className="Page">
+            <div className="Page noscroll">
               <Switch>
               <Route exact path="/" component={ HomePage } />
               <Route path="/test" component={ TestHomePage } />

@@ -6,8 +6,10 @@ import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
 import {connect} from 'react-redux';
 
-const BotBox = ({ visible }) => {
+// let swiped = false;
 
+const BotBox = ({ visible }) => {
+  
   return (
   <div id="bot" className={visible?'slideIn':'slideOut'} >
     <ChatContainer />
@@ -39,13 +41,49 @@ const SpeechBubble = (props) => {
 class OpenBot extends React.Component {
   constructor(props) {
     super(props);
+    this.onTouchStart = this.handleTouchStart.bind(this);
+    this.onTouchMove = this.handleTouchMove.bind(this);
+    this.onTouchEnd = this.handleTouchEnd.bind(this);
+    // this.toggleSwiped = this.toggleSwiped.bind(this);
+    // this.state = {swiped : false};
+    this.swipe = {};
+    this.minDistance = 50;
   }
 
+  handleTouchStart(e){
+    let touchObj = e.touches[0];
+    this.swipe = {x:touchObj.clientX};
+    // swiped = false;
+    // this.setState(this.toggleSwiped(false));
+  }
+
+  handleTouchMove(e){
+    if (e.changedTouches && e.changedTouches.length){
+      const touchObj = e.changedTouches[0];
+      this.swipe.swiping = true;
+    }
+  }
+
+  handleTouchEnd(e){
+    const touchObj = e.changedTouches[0];
+    const dist = touchObj.clientX - this.swipe.x;
+    if (this.props.visible && this.swipe.swiping && dist>this.minDistance){
+      // this.setState(this.toggleSwiped(true));
+      // swiped = true;
+      this.props.onSwipe();
+      // console.log("swiped", swiped);
+    }
+    this.swipe = {};
+  }
+
+  // toggleSwiped(toggle){
+  //   return (prevState, toggle) => ({swiped: prevState.swiped && toggle  });
+  // }
 
   render() {
     return (
       // wrapper completely hides bot until chat icon is clicked
-      <div id="wrapper" ref={el => (this.wrapperRef=el)}>
+      <div id="wrapper" ref={el => (this.wrapperRef=el)} onTouchStart={(e)=>this.handleTouchStart(e)} onTouchMove={(e)=>this.handleTouchMove(e)} onTouchEnd={(e)=>this.handleTouchEnd(e)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
           {this.props.visible
             ? <CloseBot handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} />
@@ -67,9 +105,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleClickOutside (event, wrapperRef) {
-    if (wrapperRef && !wrapperRef.contains(event.target)){
+    if (wrapperRef && event.target.tagName !== 'HTML' && !wrapperRef.contains(event.target) ){
+      // console.log(event.target.tagName);
       dispatch({type: "TOGGLE_BOT"});
     }
+  }, 
+
+  onSwipe () {
+    dispatch({type: "TOGGLE_BOT"});
   }
   
 });
