@@ -6,7 +6,7 @@ import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
 import {connect} from 'react-redux';
 
-let swiped = false;
+// let swiped = false;
 
 const BotBox = ({ visible }) => {
   
@@ -53,7 +53,7 @@ class OpenBot extends React.Component {
   handleTouchStart(e){
     let touchObj = e.touches[0];
     this.swipe = {x:touchObj.clientX};
-    swiped = false;
+    // swiped = false;
     // this.setState(this.toggleSwiped(false));
   }
 
@@ -69,9 +69,9 @@ class OpenBot extends React.Component {
     const dist = touchObj.clientX - this.swipe.x;
     if (this.swipe.swiping && dist>this.minDistance){
       // this.setState(this.toggleSwiped(true));
-      swiped = true;
+      // swiped = true;
       this.props.onSwipe();
-      console.log("swiped", swiped);
+      // console.log("swiped", swiped);
     }
     this.swipe = {};
   }
@@ -105,7 +105,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleClickOutside (event, wrapperRef) {
-    if (wrapperRef && !wrapperRef.contains(event.target)){
+    if (wrapperRef && !wrapperRef.contains(event.target) && event.target.tagName !== 'HTML'){
+      // console.log(event.target.tagName);
       dispatch({type: "TOGGLE_BOT"});
     }
   }, 
