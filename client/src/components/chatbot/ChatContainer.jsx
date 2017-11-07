@@ -14,6 +14,8 @@ const uuidv1 = require('uuid/v1');
 
 const sessionId = uuidv1();
 
+let dist, startX, startY, startTime;
+
 //experimenting with theme switch
 // const baseTheme = new Theme ('base');
 // const myTheme = new Theme ('mytheme');
@@ -51,6 +53,23 @@ class ChatContainer extends React.Component {
     this.setState({ id: uuidv1() });
   }
 
+  handleTouchStart(e){
+    let touchObj = e.changedTouches[0];
+    dist = 0;
+    startX = touchObj.pageX;
+    startY = touchObj.pageY;
+    startTime = new Date().getTime();
+    e.preventDefault();
+  }
+
+  handleTouchMove(e){
+    e.preventDefault();
+  }
+
+  handleTouchEnd(e){
+
+  }
+
   // caseSelection(){
   //   this.setState({ caseTypeSelected: true });
   // }
@@ -66,7 +85,7 @@ class ChatContainer extends React.Component {
       chatContainerCSSClass = 'grey-C chat-container-E';
     }
     return (
-      <div>
+      <div onTouchStart={(e)=>this.handleTouchStart(e)} onTouchMove={(e)=>this.handleTouchMove(e)} onTouchEnd={(e)=>this.handleTouchEnd(e)}>
         <Menu
           pageWrapId={'page-wrap'}
           outerContainerId={'outer-container'}
