@@ -40,6 +40,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => ({
   chatlog: state.chat.log,
+  ai: state.chat.ai,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,6 +50,7 @@ const mapDispatchToProps = dispatch => ({
     }
     if (event.currentTarget.id === 'refresh-button') {
       dispatch({ type: 'RESET_BOT' });
+      dispatch({ type: 'General' });
       this.props.resetSession();
     } else {
       // id==='close-button'

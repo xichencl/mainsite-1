@@ -1,12 +1,46 @@
 const apiai = require('apiai');
-const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+const aiSmallClaims = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+const aiGuardianship = apiai('d07862e5bda647a7bb38eb2cb54973fd');
+const aiGeneral = apiai('ea7debae233f4bee8ec7616124a23082');
+const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
+let ai, caseType;
+
+exports.selectCaseType = (req, res, callback) => {
+    if (req.body.ai === false){
+      //check existing case types
+      switch (req.body.payload.message.toLowerCase()) {
+        case "small claims":
+          ai = aiSmallClaims;
+          caseType = "Small Claims";
+          break;
+        case "guardianship":
+          ai = aiGuardianship;
+          caseType = "Guardianship";
+          break;
+        default:
+          ai = aiGeneral;
+          caseType = "General";
+
+      }
+
+    //machine learning goes here
+    //either 1) the general inquiry bot which can be used to determine case types or 
+    //2) a result of my own machine learning algo
+    //either way the later calls will have to be a callback function for this
+    }
+    
+    callback(req, res);
+  };
+
+
+
 
 exports.getMessageResponse = (req, res) => {
       {
-        console.log('/message', req.body);
+        // console.log('/message', req.body);
         //to launch a webpage in user default browser
         if (req.body.url){
           opn(req.body.url);
@@ -16,29 +50,30 @@ exports.getMessageResponse = (req, res) => {
         }
         
         const options = {sessionId: req.body.id};
-        // const id = uuidv1();
-        // const options = {sessionId:Math.random()*1000};
-        // const options = {sessionId:req.body.sessionId};
+
         //sends event request to api.ai and response to front end
         if (req.body.payload.type=='button'){
           const msg = req.body.payload.message;
+
           const events = JSON.parse(fs.readFileSync('./static_files/bot_buttons_and_events.json'));
           const ev = {};
           if (msg in events){
-            console.log(msg);
+            // console.log(msg);
             ev.name=events[msg].name;
             ev.data=events[msg].data;
-            console.log(ev.name);
+            // console.log(ev.name);
           }else{
             return;
           }
           
           
           const request_to_ai = ai.eventRequest(ev, options);
-          console.log(request_to_ai);
+          // console.log(request_to_ai);
           request_to_ai.on('response', (response_from_ai) => {
-            console.log('Response:', response_from_ai);
+            // console.log('Response:', response_from_ai);
             const code = response_from_ai.status.code;
+            response_from_ai['caseType'] = caseType;
+            // console.log(response_from_ai);
             res.writeHead(code);
             if (code == 200) {
               res.end(JSON.stringify(response_from_ai));
@@ -53,8 +88,9 @@ exports.getMessageResponse = (req, res) => {
         else if (req.body.payload.type=='text'){
           const request_to_ai = ai.textRequest(req.body.payload.message, options);
           request_to_ai.on('response', (response_from_ai)=>{
-            console.log('Response:', response_from_ai);
+            // console.log('Response:', response_from_ai);
             const code = response_from_ai.status.code;
+            response_from_ai['caseType'] = caseType;
             res.writeHead(code);
             if (code == 200){
               //send response object form api.ai to front end
@@ -69,33 +105,33 @@ exports.getMessageResponse = (req, res) => {
           
         }
         //send voice request to api.ai
-        else{
-          const request_to_ai = ai.voiceRequest(options);
-          request_to_ai.on('response', (response_from_ai)=>{
-            console.log('Response:', response_from_ai);
-            const code = response_from_ai.status.code;
-            res.writeHead(code);
-            if (code == 200){
-              res.end(JSON.stringify(response_from_ai));
-            }   
-            res.end();
-          });
-          request_to_ai.on('error', (error)=> {
-            console.error("Error:", error)
-          } );
+        // else{
+        //   const request_to_ai = ai.voiceRequest(options);
+        //   request_to_ai.on('response', (response_from_ai)=>{
+        //     // console.log('Response:', response_from_ai);
+        //     const code = response_from_ai.status.code;
+        //     res.writeHead(code);
+        //     if (code == 200){
+        //       res.end(JSON.stringify(response_from_ai));
+        //     }   
+        //     res.end();
+        //   });
+        //   request_to_ai.on('error', (error)=> {
+        //     console.error("Error:", error)
+        //   } );
           
-          //req.body.message is supposed to be a audio file path
-          fs.readFile(req.body.payload.message, function(error, buffer) {
-          if (error) {
-            console.log(error);
-          } else {
-            request_to_ai.write(buffer);
-          }
+        //   //req.body.message is supposed to be a audio file path
+        //   fs.readFile(req.body.payload.message, function(error, buffer) {
+        //   if (error) {
+        //     console.log(error);
+        //   } else {
+        //     request_to_ai.write(buffer);
+        //   }
 
-          request_to_ai.end();
-          });
+        //   request_to_ai.end();
+        //   });
           
-        }
+        // }
 
       }
     };
@@ -109,6 +145,7 @@ exports.getWebhookResponse = (req, res)=>{
     //response is the argument passed into this function, 
     //res is the argument passed into the outer most function above
     const respondToAPI = (response)=>{
+      response['caseType'] = caseType;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify(response));
       return;

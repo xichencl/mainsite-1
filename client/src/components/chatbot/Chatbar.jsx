@@ -112,7 +112,8 @@ class Chatbar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userInput: state.chat.input,
+  // userInput: state.chat.input,
+  ai: state.chat.ai
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -120,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
 
   // send post requests to api.ai, process response, and dispatch action to reducers
 
-  const postAndDispatch = function (data, sessionId, speak) {
+  const postAndDispatch = function (data, sessionId, speak, caseTypeSelected) {
     console.log('SESSIONID: ', sessionId);
     dispatch({
       type: 'CHAT_ADD_MESSAGE',
@@ -130,8 +131,17 @@ const mapDispatchToProps = (dispatch) => {
       type: 'USER_INPUT',
       payload: data,
     });
+
+    let inputData = { payload: data, id: sessionId };
+    if (!caseTypeSelected){
+      // dispatch({type: data.message.toLowerCase()});
+      inputData['ai'] = false;
+    }else{
+      inputData['ai'] = true;
+    }
+
     axios
-      .post('/api/chat/message', { payload: data, id: sessionId })
+      .post('/api/chat/message', inputData)
       .then((response) => {
         console.log('Response:', response);
         // response.data is a data envelope by redux
@@ -166,6 +176,8 @@ const mapDispatchToProps = (dispatch) => {
               });
             }
           }
+          // console.log('case type: ', response.data.caseType.toLowerCase());
+          dispatch({type: response.data.caseType});
           let customPayload;
           if (!response.data.result.fulfillment.data) {
             const messages = response.data.result.fulfillment.messages;
@@ -264,7 +276,7 @@ const mapDispatchToProps = (dispatch) => {
             }
           }
         }
-        if (speak !== undefined) {
+        if (speak) {
           speak();
         }
       })
@@ -287,16 +299,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 
   return {
-    // onChange (event) {
-    // dispatch ({
-    // type: 'USER_INPUT',
-    // payload: {
-    // message: event.target.value,
-    // type: 'text',
-    // isBot: false,
-    // }
-    // });
-    // },
 
     // controls onclick events on buttons in chatbar
     onClick(event) {
@@ -358,7 +360,7 @@ const mapDispatchToProps = (dispatch) => {
             return;
           }
           const data = { message: userInput, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, speak);
+          postAndDispatch(data, this.props.sessionId, speak, this.props.ai.selected);
           recognition.stop();
         };
 
@@ -389,7 +391,7 @@ const mapDispatchToProps = (dispatch) => {
         // clears textbox
         this.textInput.value = '';
         console.log('message:', data);
-        postAndDispatch(data, this.props.sessionId);
+        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
       }
     },
     onKeyUp(event) {
@@ -406,10 +408,10 @@ const mapDispatchToProps = (dispatch) => {
         // clear input bar
         this.textInput.value = '';
 
-        postAndDispatch(data, this.props.sessionId);
+        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
       }
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(Chatbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Chatbar);

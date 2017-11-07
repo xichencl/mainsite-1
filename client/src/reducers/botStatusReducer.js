@@ -40,4 +40,21 @@ const themeReducer = (state='light', action) => {
 
 }
 
-module.exports = {themeReducer, visibilityReducer};
+//keep track of whether case type has been selected
+const defaultState = {selected: false, caseType: 'General'};
+const aiReducer = (state= defaultState , action)=>{
+	switch (action.type){
+		case "Small Claims":
+			// console.log("small claims selected");
+			return {selected: true, caseType:'Small Claims'};
+		case "Guardianship":
+			return {selected: true, caseType:'Guardianship'};
+		case "General":
+			return defaultState;
+		default:
+			return state;
+	}
+
+}
+
+module.exports = {themeReducer, visibilityReducer, aiReducer};
