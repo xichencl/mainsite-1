@@ -88,7 +88,6 @@ button:hover {
   background: $blue-button-pressed;
 }
 
-
 // ==========================
 // ==== nav and searchbar ===
 // ==========================
@@ -116,9 +115,9 @@ button:hover {
 
   @include lg {
     position: fixed;
-    height: 100vh; 
+    height: 100vh;
     padding-bottom: 0;
-    display: inline-block; 
+    display: inline-block;
     width: 18rem;
   }
 }
@@ -140,10 +139,10 @@ button:hover {
     width: 19rem;
 
     .Menu-logo-img-sm {
-      display: none
+      display: none;
     }
     .Menu-logo-img {
-    display: block;
+      display: block;
     }
   }
 }
@@ -178,7 +177,7 @@ button:hover {
   color: $black;
 }
 
-.Search { 
+.Search {
   align-items: center;
   background-color: $white;
   display: flex;
@@ -222,11 +221,12 @@ button:hover {
 }
 
 .Box {
-  h2, h3 {
+  h2,
+  h3 {
     margin: 0;
   }
   display: inline-block;
-  margin: 1rem 0 1rem 0; 
+  margin: 1rem 0 1rem 0;
   z-index: 1;
   p.p2 {
     margin-left: 1.1rem;
@@ -270,8 +270,7 @@ button:hover {
   border-top: 2px solid $blue-accent;
   background-size: 200% 200%;
   background-position: 0 100%;
-  background-image: 
-    linear-gradient(to bottom, $blue-accent 51%, $grey-background 50%);
+  background-image: linear-gradient(to bottom, $blue-accent 51%, $grey-background 50%);
   -webkit-transition: background-position 300ms, color 300ms ease;
   -moz-transition: background-position 300ms, color 300ms ease;
   -ms-transition: background-position 300ms, color 300ms ease;
@@ -284,8 +283,7 @@ button:hover {
 }
 
 .Square-box-static:hover {
-  background-image: 
-    linear-gradient(to bottom, $blue-accent 50%, $grey-background 50%);
+  background-image: linear-gradient(to bottom, $blue-accent 50%, $grey-background 50%);
   background-position: 0 0;
   -webkit-transition: background-position 300ms, color 300ms ease;
   -moz-transition: background-position 300ms, color 300ms ease;
@@ -342,9 +340,6 @@ button:hover {
   margin-top: 1.2rem;
 }
 
-
-
-
 // ==========================
 // ========= FOOTER =========
 // ==========================
@@ -367,10 +362,8 @@ button:hover {
 }
 
 .Footer-div {
-  margin: 1rem 4rem 2rem 4rem; 
+  margin: 1rem 4rem 2rem 4rem;
 }
-
-
 
 // ==========================
 // ==== default stylings ====
@@ -382,7 +375,7 @@ hr {
 }
 
 .Example {
-  background: #F6F8FA;
+  background: #f6f8fa;
   border-radius: 0.4rem;
   padding: 2rem;
 }
@@ -421,7 +414,7 @@ hr {
   content: "";
   display: table;
   clear: both;
-} 
+}
 
 [class*='col-'] {
   float: left;
@@ -462,26 +455,11 @@ hr {
   padding-right: 20px;
 }
 
-
 /////////////
-.Login, .Register {
+.Login,
+.Register {
   input {
     margin-bottom: 1.5rem;
-    width: 50%
+    width: 50%;
   }
 }
-
-///////////
-/*.chat-icon {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  .fa {
-    font-size: 5rem;
-    color: $blue-accent;
-  }
-  .fa:hover {
-    color: $blue-button-pressed;
-    cursor: pointer;
-  }
-}*/

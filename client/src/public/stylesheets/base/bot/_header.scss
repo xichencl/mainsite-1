@@ -14,25 +14,27 @@
   display: -webkit-box;
   cursor: pointer;
   color: $bot-blue;
-  @include sm {
-    left: 37em;
-    top: 7.9em;
-  }
-  @include md {
-    left: 39em;
-    top: 9.2em;
-  }
-  @include lg {
-    left: 55em;
-    top: 2.8em;
-  }
+  //***
+  position: relative;
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: flex-end;
+  //***
+  // @include sm {
+  // }
+  // @include md {
+  // }
+  // @include lg {
+  //   left: 55em;
+  //   top: 2.8em;
+  // }
 }
 
-//see more in media queries at bottom of file
-.text-bot-icon {
-  color: purple;
-  text-align: center;
-}
+//don't delete. may need later. see more in media queries at bottom of file
+// .text-bot-icon {
+//   color: purple;
+//   text-align: center;
+// }
 
 /* bot header */
 .header-x {
@@ -112,25 +114,33 @@ button.refresh-bot:active {
 }
 
 //********************************** MEDIA QUERIES **********************************//
-
-@media (max-width: 544px) and (min-width: 200px) {
+@media (max-width: 2000px) and (min-width: 1025px) {
   .open-bot-icon {
-    display: none;
-  }
-}
-@media (max-width: 544px) and (min-width: 200px) {
-  .text-bot-icon {
-    color: $bot-blue;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5em;
-    left: 6.7em;
+    position: fixed;
+    left: 55em;
+    top: 2.9em;
   }
 }
 
-@media (max-width: 2000px) and (min-width: 545px) {
-  .text-bot-icon {
-    display: none;
-  }
-}
+//the code below was to add "chat" + icon to text menu. keeping it just incase we need later
+// @media (max-width: 544px) and (min-width: 200px) {
+//   .open-bot-icon {
+//     display: none;
+//   }
+// }
+// @media (max-width: 544px) and (min-width: 200px) {
+//   .text-bot-icon {
+//     color: $bot-blue;
+//     display: flex;
+//     align-items: center;
+//     position: relative;
+//     top: 5em;
+//     left: 6.7em;
+//   }
+// }
+//
+// @media (max-width: 2000px) and (min-width: 545px) {
+//   .text-bot-icon {
+//     display: none;
+//   }
+// }
