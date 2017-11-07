@@ -22,6 +22,11 @@ class Header extends React.Component {
               close
             </i>
           </button>
+
+          <button type="button">
+            {this.props.ai.caseType}
+          </button>
+
           <button
             type="button"
             id="refresh-button"
