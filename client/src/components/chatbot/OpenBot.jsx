@@ -34,7 +34,6 @@ class OpenBot extends React.Component {
     this.minDistance = 50;
   }
 
-<<<<<<< HEAD
   handleTouchStart(e){
     let touchObj = e.touches[0];
     this.swipe = {x:touchObj.clientX};
@@ -70,14 +69,6 @@ class OpenBot extends React.Component {
       // wrapper completely hides bot until chat icon is clicked
       <div id="wrapper" ref={el => (this.wrapperRef=el)} onTouchStart={(e)=>this.handleTouchStart(e)} onTouchMove={(e)=>this.handleTouchMove(e)} onTouchEnd={(e)=>this.handleTouchEnd(e)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
-=======
-  render() {
-    return (
-      // wrapper completely hides bot until chat icon is clicked
-
-      <div id="wrapper" ref={el => (this.wrapperRef = el)}>
-        <div className="chat-icon" onClick={this.props.onClick.bind(this)}>
->>>>>>> e1b38cfef49135948ca2f121fbb6e6f50d79dc3b
           {this.props.visible
             ? <CloseBot
               handleClickOutside={event => this.props.handleClickOutside(event, this.wrapperRef)}
@@ -99,7 +90,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'TOGGLE_BOT' });
   },
 
-<<<<<<< HEAD
   handleClickOutside (event, wrapperRef) {
     if (wrapperRef && event.target.tagName !== 'HTML' && !wrapperRef.contains(event.target) ){
       // console.log(event.target.tagName);
@@ -111,13 +101,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({type: "TOGGLE_BOT"});
   }
   
-=======
-  handleClickOutside(event, wrapperRef) {
-    if (wrapperRef && !wrapperRef.contains(event.target)) {
-      dispatch({ type: 'TOGGLE_BOT' });
-    }
-  },
->>>>>>> e1b38cfef49135948ca2f121fbb6e6f50d79dc3b
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenBot);
