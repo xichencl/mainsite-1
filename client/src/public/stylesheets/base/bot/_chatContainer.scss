@@ -1,22 +1,12 @@
 //styling chat container and chatbox
 
-.grey-C {
+.chat-box-bg {
   background-color: $light-grey;
   color: $not-black;
 }
 
-.dark {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-.light-grey-D {
-  background-color: #ffffff;
-  color: $not-black;
-}
-
-.chat-container-E {
-  //increased width from standard 25em to 26em to hide vertical scroll. cross-browser friendly.
+.chat-container-bg {
+  //increased width from standard 25em to 26em to hide scroll. cross-browser friendly.
   width: 26em;
   height: 100vh;
   bottom: 75px;
@@ -26,14 +16,10 @@
   //adding the overflows fixes header and chatbar in fixed position
   overflow-y: auto;
   overflow-x: hidden;
+  background-color: $light-grey;
 }
 
-//hide scrollbar in chrome (which includes scrollbar width in calc width)
-// .chat-container-E::-webkit-scrollbar {
-//   display: none;
-// }
-
-.chatbox-F {
+.chatbox-alignment {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

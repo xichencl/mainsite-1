@@ -1,49 +1,40 @@
-//styling for theme changer test
+/*monochromatic colors intended to help people with the most common
+type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 
-// .test-button {
-//   display: block;
-//   height: 100px;
-//   width: 100px;
-//   border: 1px solid #aaa;
-//   border-radius: 25px;
-//   font: bold 20px Helvetica, Arial, sans-serif;
-//   text-align: center;
-//   line-height: 100px;
-//   cursor: pointer;
-//   color: #fff;
-//   background-color: #000;
-// }
-// .test-button.on {
-//   background-color: #ad310b;
-//   -webkit-transition: background-color 1000ms linear;
-//   -ms-transition: background-color 1000ms linear;
-//   transition: background-color 1000ms linear;
-// }
-
-.test-button2 {
-  display: block;
-  height: 100px;
-  width: 100px;
-  border-left: 10px solid transparent;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  background-color: transparent;
+//bot background
+.dark-grey-bg {
+  background-color: #464646;
 }
 
-.test-button2.on {
-  display: block;
-  height: 100px;
-  width: 100px;
-  border-right: 10px solid #00add8;
-  cursor: pointer;
-  background-color: #4d4d50;
-  display: flex;
-  align-items: center;
-  -webkit-transition: background-color 200ms linear;
-  -ms-transition: background-color 200ms linear;
-  transition: background-color 200ms linear;
-  -webkit-transition: border-right 200ms linear;
-  -ms-transition: border-right 200ms linear;
-  transition: border-right 200ms linear;
+//bot bubble
+.dark-bot-bubble {
+  background: #000000;
+  color: #ffffff;
+}
+
+//buttons
+.botButtons {
+  background: #717171;
+  color: $not-black;
+}
+
+.botButtons:hover {
+  background-color: #b9b9b9;
+  color: #ffffff;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  height: 0px;
+}
+
+.botButtons:active {
+  background-color: $very-light-blue;
+  color: #ffffff;
+  height: 0px;
+}
+//user bubble
+.dark-user-bubble {
+  background: #ffffff;
+  border: 3px solid #000000;
+  color: $not-black;
 }
