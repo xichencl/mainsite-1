@@ -51,6 +51,9 @@ class ChatContainer extends React.Component {
     this.setState({ id: uuidv1() });
   }
 
+  // caseSelection(){
+  //   this.setState({ caseTypeSelected: true });
+  // }
 
   // pushes out settings/navbar
   render() {
