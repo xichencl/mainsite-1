@@ -1,39 +1,86 @@
 //styling header
 
-.header-L {
+/*speech bubble in main header opens bot */
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-18 {
+  font-size: 18px;
+  margin-left: 4px;
+}
+
+.open-bot-icon {
+  position: fixed;
+  display: -webkit-box;
+  cursor: pointer;
+  color: $bot-blue;
+  //***
+  position: relative;
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: flex-end;
+  //***
+  // @include sm {
+  // }
+  // @include md {
+  // }
+  // @include lg {
+  //   left: 55em;
+  //   top: 2.8em;
+  // }
+}
+
+//don't delete. may need later. see more in media queries at bottom of file
+// .text-bot-icon {
+//   color: purple;
+//   text-align: center;
+// }
+
+/* bot header */
+.header-x {
   width: 25em;
   height: 3em;
-  background-color: rgba(255, 255, 255, .9);
-  box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.46);
-  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.7);
   top: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: fixed;
   right: 100px;
   border-left: 1px solid $not-black;
+  position: fixed;
+  @include flex-center(none, center);
 }
 
-button.refresh-M {
+/* contains icons in bot header */
+.icon-container {
+  width: 20em;
+  height: 3em;
+  @include flex-center(space-between, center);
+  padding: .5em;
+}
+
+/* close button */
+button.close-bot {
+  position: relative;
   background: transparent;
   outline: 0;
-  width: 50px;
-  color: $icon-grey;
   padding: 0;
-  padding-top: 8px;
   border: none;
-  cursor: pointer;
-  margin: 15px;
+  color: $icon-grey;
+  display: flex;
+  bottom: .4em;
 }
 
-button.refresh-M:hover {
+/* refresh button */
+button.refresh-bot {
+  background: transparent;
+  outline: 0;
+  padding: 0;
+  border: none;
+  color: $icon-grey;
+  display: flex;
+}
+
+button.refresh-bot:hover,
+button.close-bot:hover {
   color: $warm-grey;
   outline: 0;
   padding: 0;
@@ -44,7 +91,7 @@ button.refresh-M:hover {
   transition: 0.2s;
 }
 
-button.refresh-M:active {
+button.refresh-bot:active {
   color: $very-light-blue;
   outline: 0;
   padding: 0;
@@ -55,6 +102,7 @@ button.refresh-M:active {
   transition: 0s;
 }
 
+/* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
   position: absolute;
@@ -62,28 +110,37 @@ button.refresh-M:active {
   height: 44px !important;
   right: 111px !important;
   top: 5px !important;
-}
-
-.settings-N {
   background: transparent;
-  width: 50px;
-  color: $icon-grey;
-  border: none;
-  cursor: pointer;
-  margin: 15px;
 }
 
-.chat-icon {
-  /*speech bubble*/
-  position: fixed;
-  right: 0;
-  top: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  z-index: 1000;
-  cursor: pointer;
+//********************************** MEDIA QUERIES **********************************//
+@media (max-width: 2000px) and (min-width: 1025px) {
+  .open-bot-icon {
+    position: fixed;
+    left: 55em;
+    top: 2.9em;
+  }
 }
+
+//the code below was to add "chat" + icon to text menu. keeping it just incase we need later
+// @media (max-width: 544px) and (min-width: 200px) {
+//   .open-bot-icon {
+//     display: none;
+//   }
+// }
+// @media (max-width: 544px) and (min-width: 200px) {
+//   .text-bot-icon {
+//     color: $bot-blue;
+//     display: flex;
+//     align-items: center;
+//     position: relative;
+//     top: 5em;
+//     left: 6.7em;
+//   }
+// }
+//
+// @media (max-width: 2000px) and (min-width: 545px) {
+//   .text-bot-icon {
+//     display: none;
+//   }
+// }

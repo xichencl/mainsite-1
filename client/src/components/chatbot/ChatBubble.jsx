@@ -12,21 +12,19 @@ class ChatBubble extends React.Component {
   }
 
   render() {
-
-    let className = 'blue-A bot-bubble-left';
-
-    if (this.props.theme === 'dark'){
-        className += ' blue-dark'
-    }
-      
+    let className = ' bot-bubble';
+    let botButtons = 'button-blue bot-buttons';
+    let userBubble = 'user-bubble user-bubble-alignment';
+    if (this.props.theme === 'dark') {
+      className += ' dark-bot-bubble';
+      botButtons += ' botButtons';
+      userBubble += ' dark-user-bubble';
+    }  
     
 
     if (this.props.type === 'button') {
-      className = ' button-blue-B chat-button-H';
       return (
-        // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
-
-        <div className={className} onClick={this.props.onClick.bind(this)}>
+        <div className={botButtons} onClick={this.props.onClick.bind(this)}>
           {ReactHtmlParser(this.props.message)}
         </div>
       );
@@ -78,11 +76,11 @@ class ChatBubble extends React.Component {
         </div>
       );
     } else if (this.props.isBot === false) {
-      className = ' user-J user-bubble-right'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-right
+      className = ' user-bubble user-bubble-alignment'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-alignment
       return (
         // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
         <div className="bubble-breaker">
-          <div className={className}>
+          <div className={userBubble}>
             {ReactHtmlParser(this.props.message)}
           </div>
         </div>
@@ -142,23 +140,24 @@ const mapDispatchToProps = dispatch => ({
           // axios.response.data, get speech from api.ai
 
           const msg = response.data.result.fulfillment.speech;
-          if (!msg.startsWith("\\n")){ //single paragraph
-            dispatch({ 
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: msg,
-                  type: 'text',
-                  isBot: true,
-                },
-              });
-
-          }else{ //multi-paragraphs
+          if (!msg.startsWith('\\n')) {
+            // single paragraph
+            dispatch({
+              type: 'CHAT_ADD_MESSAGE',
+              payload: {
+                message: msg,
+                type: 'text',
+                isBot: true,
+              },
+            });
+          } else {
+            // multi-paragraphs
 
             const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
             console.log(paragraphs);
-            let i=0;
+            let i = 0;
             // msg="";
-            for (i=0; i<paragraphs.length; i++){
+            for (i = 0; i < paragraphs.length; i++) {
               // msg+=paragraphs[i];
               dispatch({
                 type: 'CHAT_ADD_MESSAGE',

@@ -1,42 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactHtmlParser from 'react-html-parser';
-// import ChatIcon from './icons/ChatIcon.jsx';
 import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-// let swiped = false;
 
-const BotBox = ({ visible }) => {
-  
-  return (
-  <div id="bot" className={visible?'slideIn':'slideOut'} >
+const BotBox = ({ visible }) =>
+  <div id="bot" className={visible ? 'slideIn' : 'slideOut'}>
     <ChatContainer />
-  </div>
-  );
+  </div>;
 
-};
-
-const SpeechBubble = (props) => {
-  return (
-    <div>
-      <svg
-              fill="#7fcde5"
-              height="36"
-              viewBox="0 0 24 24"
-              width="36"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-              <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-
+const SpeechBubble = props =>
+  <div>
+    <div className="open-bot-icon">
+      <i className="material-icons md-36">chat_bubble</i>
     </div>
-    );
-
-};
-
+    {/* dont delete. might need if we decide to add to text menu
+      <div className="text-bot-icon">
+      Chat <i className="material-icons md-18">chat_bubble</i>
+    </div>*/}
+  </div>;
 
 class OpenBot extends React.Component {
   constructor(props) {
@@ -50,6 +34,7 @@ class OpenBot extends React.Component {
     this.minDistance = 50;
   }
 
+<<<<<<< HEAD
   handleTouchStart(e){
     let touchObj = e.touches[0];
     this.swipe = {x:touchObj.clientX};
@@ -85,25 +70,36 @@ class OpenBot extends React.Component {
       // wrapper completely hides bot until chat icon is clicked
       <div id="wrapper" ref={el => (this.wrapperRef=el)} onTouchStart={(e)=>this.handleTouchStart(e)} onTouchMove={(e)=>this.handleTouchMove(e)} onTouchEnd={(e)=>this.handleTouchEnd(e)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
+=======
+  render() {
+    return (
+      // wrapper completely hides bot until chat icon is clicked
+
+      <div id="wrapper" ref={el => (this.wrapperRef = el)}>
+        <div className="chat-icon" onClick={this.props.onClick.bind(this)}>
+>>>>>>> e1b38cfef49135948ca2f121fbb6e6f50d79dc3b
           {this.props.visible
-            ? <CloseBot handleClickOutside={(event)=>this.props.handleClickOutside(event, this.wrapperRef)} />
-            : <SpeechBubble  /> }
+            ? <CloseBot
+              handleClickOutside={event => this.props.handleClickOutside(event, this.wrapperRef)}
+            />
+            : <SpeechBubble />}
         </div>
-        <BotBox visible={this.props.visible} /> 
+        <BotBox visible={this.props.visible} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-    visible: state.chat.botVisibility
+  visible: state.chat.botVisibility,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onClick(event) {
-    dispatch({type: "TOGGLE_BOT"});
+    dispatch({ type: 'TOGGLE_BOT' });
   },
 
+<<<<<<< HEAD
   handleClickOutside (event, wrapperRef) {
     if (wrapperRef && event.target.tagName !== 'HTML' && !wrapperRef.contains(event.target) ){
       // console.log(event.target.tagName);
@@ -115,6 +111,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch({type: "TOGGLE_BOT"});
   }
   
+=======
+  handleClickOutside(event, wrapperRef) {
+    if (wrapperRef && !wrapperRef.contains(event.target)) {
+      dispatch({ type: 'TOGGLE_BOT' });
+    }
+  },
+>>>>>>> e1b38cfef49135948ca2f121fbb6e6f50d79dc3b
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenBot);
