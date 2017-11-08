@@ -64,7 +64,7 @@ class AppRouter extends Component {
             <div className="position-bot the-bot">
               <OpenBot />
             </div>
-            <div className="Page">
+            <div className={this.props.visible?"Page noscroll":"Page"}>
               <Switch>
               <Route exact path="/" component={ HomePage } />
               <Route path="/test" component={ TestHomePage } />
