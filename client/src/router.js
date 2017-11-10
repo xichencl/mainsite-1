@@ -24,6 +24,7 @@ import Dv from './components/pages/topics/dv';
 import FamilyHome from './components/pages/topics/family/family-home';
 import Adoption from './components/pages/topics/family/family-adoption';
 
+import TestTodoApp from './components/pages/test-todo/todoApp';
 // import ComponentSamplesPage from './components/pages/component-samples';
 
 // Import authentication related pages
@@ -67,6 +68,7 @@ export default class AppRouter extends Component {
               <Switch>
               <Route exact path="/" component={ HomePage } />
               <Route path="/test" component={ TestHomePage } />
+              <Route path="/test-todo" component={ TestTodoApp } />
               <Route path="/contact-us" component={ ContactPage } />
               <Route path="/portal" component={ Portal } />
               <Route path="/my-case" component={ MyCasesDashboard } />

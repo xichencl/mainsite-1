@@ -16,25 +16,30 @@ class TestHomePage extends React.Component {
   }
 
   render() {
-    const { pageData = [] } = this.props;
+    // const { pageData = [] } = this.props
+
+    // .map(function(faq) {
+    //   return (
+
+    //   )
+    // })
     
     // console.log('render', pageData)
     // const topic = pageData.smallclaims
     // console.log(topic, 'topic')
-    // console.log(this.state, 'state')
-    // console.log(this.props, 'props')
-
+    console.log(this.props.pageData, 'props')
+    const pageData = this.props.pageData
+    // .map(function(topic) {
+    //   console.log(topic.title)
+    // })
+    console.log('variable sc', pageData)
+    // console.log('variable sc', smallclaims)
     // let pageData = this.props.pageData || {}; <- took a screenshot of this reasoning if I want to check againx
 
 
     return (
       <div>
-          <div>
-          {pageData.smallclaims && pageData.smallclaims.title}
-          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[1].Title}</h4>
-          <p>{pageData.smallclaims && pageData.smallclaims.faqs[1].BlockText}</p>
-          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[2].Title}</h4>
-          <p>{pageData.smallclaims && pageData.smallclaims.faqs[2].BlockText}</p>
+          <div>hi
           </div>
       </div>
     );
@@ -62,3 +67,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(TestHomePage);
 //     let pageData = this.props.pageData || {}
 //          {pageData.smallclaims.title}
 
+/*
+{pageData.smallclaims && pageData.smallclaims.title}
+          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[1].Title}</h4>
+          <p>{pageData.smallclaims && pageData.smallclaims.faqs[1].BlockText}</p>
+          <h4>{pageData.smallclaims && pageData.smallclaims.faqs[2].Title}</h4>
+          <p>{pageData.smallclaims && pageData.smallclaims.faqs[2].BlockText}</p>
+          </div>
+*/

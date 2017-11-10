@@ -6,6 +6,8 @@ import siteDataReducer from './site_data_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
+import todos from './todos';
+import visibilityFilter from './visibilityFilter';
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
 
@@ -25,7 +27,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   chat: chatReducer,
-  data: siteDataReducer
+  data: siteDataReducer,
+  todos,
+  visibilityFilter
 });
 
 export default rootReducer;

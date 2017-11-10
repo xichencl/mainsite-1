@@ -2,7 +2,7 @@ import { FETCH_PAGE_DATA, ERROR_RESPONSE } from '../actions/types';
 import siteData from '../data/smallClaimsData.json'
 
 const INITIAL_STATE = { 
-	page: [],  
+	page: {},  
 	error: '' 
 };
 

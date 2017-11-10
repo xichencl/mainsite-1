@@ -61,40 +61,30 @@ export function loadPageData() {
   }
 }
 
-// export function loadPageData() {
-//   return {
-//     // Unique identifier
-//     type: 'FETCH_PAGE_DATA',
-//     // Payload
-//     payload: siteData
-//   }
-// }
 
-// export function fetchSiteData() {
+// todo
+let nextTodoId = 0
+export const addTodo = text => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+  }
+}
 
-//   const request = axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`);
-//   console.log(request);
-//     return {
-//       type: FETCH_PAGE_DATA,
-//       payload: request
-//       };
-// }
+export const setVisibilityFilter = filter => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  }
+}
 
-// export function fetchSiteData() {
-//   // console.log(uid)
-//   return function (dispatch) {
-
-//     // const thisToken = cookie.get('token')
-//     axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`)
-//     .then((response) => {
-//       dispatch({
-//         type: FETCH_PAGE_DATA,
-//         payload: response.data.page,
-//       });
-//     })
-//     .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
-//   };
-// }
+export const toggleTodo = id => {
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  }
+}
 
 
 
