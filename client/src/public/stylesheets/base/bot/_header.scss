@@ -11,13 +11,17 @@
 
 .open-bot-icon {
   position: fixed;
-  display: -webkit-box;
+
   cursor: pointer;
   color: $bot-blue;
   //***
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   /* align-items: flex-end; */
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
   //***
   // @include sm {
@@ -65,6 +69,8 @@ button.close-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   bottom: .4em;
 }
@@ -76,6 +82,8 @@ button.refresh-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 

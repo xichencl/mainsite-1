@@ -17,6 +17,9 @@
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $light-grey;
+  @include xs {
+    height: 100vh;
+  }
 }
 
 .chatbox-alignment {
