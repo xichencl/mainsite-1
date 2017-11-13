@@ -1,15 +1,23 @@
 //styling how bot opens after clicking chat icon
 #bot {
   /*transform: translateX(100px);*/
+  -webkit-transition: -webkit-transform 400ms ease-in;
+  transition: -webkit-transform 400ms ease-in;
+  -o-transition: transform 400ms ease-in;
   transition: transform 400ms ease-in;
+  transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
 }
 
 #bot.slideIn {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
   transform: translateX(0);
 }
 
 #bot.slideOut {
   //slides out chatbot completely even when sidenav is still open
+  -webkit-transform: translateX(32em);
+  -ms-transform: translateX(32em);
   transform: translateX(32em);
 }
 

@@ -110,17 +110,12 @@ export default class AppRouter extends Component {
 }
 
 /*
-
-
 <BrowserRouter>
 				<Route path="/" component={App}>
 				    <Route path="/contact-us" component={ContactPage} />
-
-
 				    <Route path="*" component={NotFoundPage} />
 				</Route>
 			</BrowserRouter>
-
 */
 
 //	 <Route path="component-samples" component={RequireAuth(ComponentSamplesPage)} />
