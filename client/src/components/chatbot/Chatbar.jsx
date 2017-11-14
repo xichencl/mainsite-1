@@ -66,45 +66,48 @@ class Chatbar extends React.Component {
 
   render() {
     return (
-      <div className="chatbar">
-        <div>
-          <button
-            type="button"
-            value="speak"
-            // ref="rec" //a react attrib
-            className="mic"
-            onClick={this.props.onClick.bind(this)}
-          >
-            <i className="material-icons" style={{ fontSize: '35px' }}>
-              mic
-            </i>
-          </button>
-        </div>
+      // this empty div wraps everything, and lets the chatbar view correctly in safari*/}
+      <div>
+        <div className="chatbar">
+          <div>
+            <button
+              type="button"
+              value="speak"
+              // ref="rec" //a react attrib
+              className="mic"
+              onClick={this.props.onClick.bind(this)}
+            >
+              <i className="material-icons" style={{ fontSize: '35px' }}>
+                mic
+              </i>
+            </button>
+          </div>
 
-        <div>
-          <input
-            className="chat-input"
-            type="text"
-            placeholder="Type your message here"
-            ref={input => (this.textInput = input)}
-            // onChange={this.props.onChange.bind(this)}
-            // onKeyUp={(e) => this.props.onKeyUp.bind(this, e, e.target.value)()}
-            onKeyUp={this.props.onKeyUp.bind(this)}
-          />
-        </div>
+          <div>
+            <input
+              className="chat-input"
+              type="text"
+              placeholder="Type your message here"
+              ref={input => (this.textInput = input)}
+              // onChange={this.props.onChange.bind(this)}
+              // onKeyUp={(e) => this.props.onKeyUp.bind(this, e, e.target.value)()}
+              onKeyUp={this.props.onKeyUp.bind(this)}
+            />
+          </div>
 
-        <div>
-          <button
-            type="button"
-            // ref="sendButton" //a react attrib
-            value="send"
-            className="circle-x"
-            onClick={this.props.onClick.bind(this)}
-          >
-            <i className="material-icons" style={{ fontSize: '20px' }}>
-              send
-            </i>
-          </button>
+          <div>
+            <button
+              type="button"
+              // ref="sendButton" //a react attrib
+              value="send"
+              className="circle-x"
+              onClick={this.props.onClick.bind(this)}
+            >
+              <i className="material-icons" style={{ fontSize: '20px' }}>
+                send
+              </i>
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -113,7 +116,7 @@ class Chatbar extends React.Component {
 
 const mapStateToProps = state => ({
   // userInput: state.chat.input,
-  ai: state.chat.ai
+  ai: state.chat.ai,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -132,12 +135,12 @@ const mapDispatchToProps = (dispatch) => {
       payload: data,
     });
 
-    let inputData = { payload: data, id: sessionId };
-    if (!caseTypeSelected){
+    const inputData = { payload: data, id: sessionId };
+    if (!caseTypeSelected) {
       // dispatch({type: data.message.toLowerCase()});
-      inputData['ai'] = false;
-    }else{
-      inputData['ai'] = true;
+      inputData.ai = false;
+    } else {
+      inputData.ai = true;
     }
 
     axios
@@ -177,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
             }
           }
           // console.log('case type: ', response.data.caseType.toLowerCase());
-          dispatch({type: response.data.caseType});
+          dispatch({ type: response.data.caseType });
           let customPayload;
           if (!response.data.result.fulfillment.data) {
             const messages = response.data.result.fulfillment.messages;
@@ -299,7 +302,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 
   return {
-
     // controls onclick events on buttons in chatbar
     onClick(event) {
       // using currentTarget instead of target because currentTarget is the object listening(the button). target is that actual target received, which is the icon, and not what we want
