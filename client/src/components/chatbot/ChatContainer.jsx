@@ -55,8 +55,6 @@ class ChatContainer extends React.Component {
           }
         >
           <div id="outer-container">
-            <Chatbar sessionId={this.state.id} theme={this.props.theme} />
-            <Header resetSession={this.resetSession} theme={this.props.theme} />
             <ThemeIcon />
             <FontSizeIcon />
             <LanguageIcon />
@@ -64,9 +62,11 @@ class ChatContainer extends React.Component {
         </Menu>
 
         <main id="page-wrap">
-          {/* chat-container-bg element in the if statement  keeps header and chatbar in fixed position*/}
+          {/* botContainer wraps header and chatbar in fixed position*/}
           <div className={botContainer}>
             <Chatbox sessionId={this.state.id} theme={this.props.theme} />
+            <Header resetSession={this.resetSession} theme={this.props.theme} />
+            <Chatbar sessionId={this.state.id} theme={this.props.theme} />
           </div>
         </main>
       </div>
