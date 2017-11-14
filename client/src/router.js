@@ -6,8 +6,8 @@ import NotFoundPage from './components/pages/not-found-page';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
-import ChatContainer from './components/chatbot/ChatContainer.jsx';
-import OpenBot from './components/chatbot/OpenBot.jsx';
+import Bot from './components/chatbot/Bot.jsx';
+
 // Import static pages
 import HomePage from './components/pages/home-page';
 import TestHomePage from './components/pages/test-home-page';
@@ -59,10 +59,7 @@ export default class AppRouter extends Component {
             <div className="App-mask" />
             <Navbar />
             <Search />
-
-            <div className="position-bot the-bot">
-              <OpenBot ref={el => (this.chatWindow = el)} />
-            </div>
+            <Bot />
             <div className="Page">
               <Switch>
                 <Route exact path="/" component={HomePage} />
