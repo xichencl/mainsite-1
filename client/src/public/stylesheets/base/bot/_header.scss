@@ -11,7 +11,6 @@
 
 .open-bot-icon {
   position: fixed;
-
   cursor: pointer;
   color: $bot-blue;
   //***
@@ -19,26 +18,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* align-items: flex-end; */
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  //***
-  // @include sm {
-  // }
-  // @include md {
-  // }
-  // @include lg {
-  //   left: 55em;
-  //   top: 2.8em;
-  // }
+  @include xxs {
+    left: 311px;
+  }
 }
-
-//don't delete. may need later. see more in media queries at bottom of file
-// .text-bot-icon {
-//   color: purple;
-//   text-align: center;
-// }
 
 /* bot header */
 .header-x {
@@ -47,11 +33,11 @@
   background-color: #ffffff;
   box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.7);
   top: 0px;
-  // margin-top: 50px;
-  // right: 100px;
-  // border-left: 1px solid $not-black;
   position: fixed;
   @include flex-center(none, center);
+  @include xxs {
+    width: 22em;
+  }
 }
 
 /* contains icons in bot header */
@@ -60,6 +46,9 @@
   height: 3em;
   @include flex-center(space-between, center);
   padding: .5em;
+  @include xxs {
+    width: 17.7em;
+  }
 }
 
 /* close button */
@@ -74,6 +63,10 @@ button.close-bot {
   display: -ms-flexbox;
   display: flex;
   bottom: .4em;
+  @include xxs {
+    bottom: 0.6em;
+    left: 0.5em;
+  }
 }
 
 /* refresh button */
@@ -120,6 +113,11 @@ button.refresh-bot:active {
   right: 111px !important;
   top: 5px !important;
   background: transparent;
+  @include xxs {
+    width: 35px !important;
+    height: 35px !important;
+    top: 5px;
+  }
 }
 
 //********************************** MEDIA QUERIES **********************************//
@@ -130,26 +128,3 @@ button.refresh-bot:active {
     top: 2.9em;
   }
 }
-
-//the code below was to add "chat" + icon to text menu. keeping it just incase we need later
-// @media (max-width: 544px) and (min-width: 200px) {
-//   .open-bot-icon {
-//     display: none;
-//   }
-// }
-// @media (max-width: 544px) and (min-width: 200px) {
-//   .text-bot-icon {
-//     color: $bot-blue;
-//     display: flex;
-//     align-items: center;
-//     position: relative;
-//     top: 5em;
-//     left: 6.7em;
-//   }
-// }
-//
-// @media (max-width: 2000px) and (min-width: 545px) {
-//   .text-bot-icon {
-//     display: none;
-//   }
-// }

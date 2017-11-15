@@ -1,8 +1,16 @@
+$breakpoint-xxs: 320px !default; //***uses MAX-width ***//
 $breakpoint-xs: 375px !default;
 $breakpoint-sm: 500px !default;
 $breakpoint-md: 769px !default;
 $breakpoint-lg: 1025px !default;
 $breakpoint-xl: 2000px !default;
+
+//****note xxs uses MAX-width****//
+@mixin xxs() {
+  @media (max-width: $breakpoint-xxs) {
+    @content;
+  }
+}
 
 @mixin xs() {
   @media (min-width: $breakpoint-xs) {

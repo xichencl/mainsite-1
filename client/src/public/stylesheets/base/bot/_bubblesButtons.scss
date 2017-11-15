@@ -43,6 +43,10 @@
   margin-bottom: 10px;
   padding: 30px 10px;
   @include flex-center;
+  @include xxs {
+    width: 9em;
+    margin: 8px 0px;
+  }
   height: 0px; /*overwrites .button-blue height, necessary to show correctly in moz*/
 }
 

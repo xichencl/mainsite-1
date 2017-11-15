@@ -17,8 +17,9 @@
   overflow-y: auto;
   overflow-x: hidden;
   background-color: $light-grey;
-  @include xs {
+  @include xxs {
     height: 100vh;
+    width: 22em;
   }
 }
 
@@ -39,4 +40,7 @@
   width: 25em;
   height: auto;
   margin-bottom: 75px;
+  @include xxs {
+    width: 22em;
+  }
 }

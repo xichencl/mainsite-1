@@ -34,6 +34,11 @@
   right: 0;
   width: 25em;
   height: 100%;
+  @include xxs {
+    display: flex;
+    justify-content: center;
+    width: 22em;
+  }
 }
 
 div.hide-speech-bubble {
