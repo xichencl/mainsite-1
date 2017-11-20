@@ -33,21 +33,8 @@ export function fetchUser(uid) {
   };
 }
 
-// export function loadPageData() {
-//   return (dispatch, getState) => {
-//     fetchData()
-//     .then(data => {
-//       console.log('action', data)
-//       dispatch({
-//           type : FETCH_PAGE_DATA,
-//           payload : data
-//       })
-//     })
-//     .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
-//   }
-// }
 
-
+// load page data from local file
 export function loadPageData() {  
   return dispatch => {
     axios.get('./smallClaimsData.json')
@@ -62,7 +49,7 @@ export function loadPageData() {
 }
 
 
-// todo
+// todo component actions
 let nextTodoId = 0
 export const addTodo = text => {
   return {
@@ -86,7 +73,7 @@ export const toggleTodo = id => {
   }
 }
 
-
+///////////
 
 export function errorHandler(dispatch, error, type) {
   console.log('Error type: ', type);
