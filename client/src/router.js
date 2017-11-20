@@ -6,7 +6,9 @@ import NotFoundPage from './components/pages/not-found-page';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
-import Bot from './components/chatbot/Bot.jsx';
+// commented Bot out to hide from all views until bot works for all case types.
+// for now bot will only live in small claims
+// import Bot from './components/chatbot/Bot.jsx';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -59,7 +61,9 @@ export default class AppRouter extends Component {
             <div className="App-mask" />
             <Navbar />
             <Search />
-            <Bot />
+            {/* commented Bot out to hide from all views until bot works for all case types.
+              for now bot will only live in small claims*/}
+            {/* <Bot />*/}
             <div className="Page">
               <Switch>
                 <Route exact path="/" component={HomePage} />
