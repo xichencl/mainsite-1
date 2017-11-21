@@ -5,8 +5,8 @@ $breakpoint-md: 769px !default;
 $breakpoint-lg: 1025px !default;
 $breakpoint-xl: 2000px !default;
 
-//****note xxs uses MAX-width****//
 @mixin xxs() {
+  //****note xxs uses MAX-width****//
   @media (max-width: $breakpoint-xxs) {
     @content;
   }
