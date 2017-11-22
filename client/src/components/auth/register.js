@@ -34,6 +34,13 @@ function validate(formProps) {
     errors.password = 'Please enter a password';
   }
 
+  if (!formProps.address) {
+    errors.address = 'Please enter an address';
+  }
+
+  if (!formProps.phone) {
+    errors.phone = 'Please enter a phone number';
+  }
   return errors;
 }
 
@@ -53,13 +60,14 @@ class Register extends Component {
   }
 
   render() {
+    /*handleSubmit a property in reduxForm*/
     const { handleSubmit } = this.props;
 
     return (
       <div>
       <h1>Register a New Account</h1>
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        {this.renderAlert()}
+        {this.renderAlert()} 
         <div className="row">
           <div className="col-md-6">
             <label>First Name</label>
@@ -75,6 +83,15 @@ class Register extends Component {
             <label>Email</label>
             <Field name="email" className="form-control" component={renderField} type="text" />
           </div>
+          <div className="col-md-12">
+            <label>Address</label>
+            <Field name="address" className="form-control" component={renderField} type="text" />
+          </div>
+          <div className="col-md-12">
+            <label>Phone</label>
+            <Field name="phone" className="form-control" component={renderField} type="text" />
+          </div>
+
         </div>
         <div className="row">
           <div className="col-md-12">

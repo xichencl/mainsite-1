@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, ERROR_RESPONSE } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
@@ -27,7 +27,7 @@ export function fetchUser(uid) {
         payload: response.data.user,
       });
     })
-    .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
+    .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };
 }
 

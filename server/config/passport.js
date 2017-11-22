@@ -13,6 +13,7 @@ const localOptions = {
 
 // Setting up local login strategy
 const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
+  console.log("local strategy invoked");
   User.findOne({ email }, (err, user) => {
     if (err) { return done(err); }
     if (!user) { return done(null, false, { error: 'Your login details could not be verified. Please try again.' }); }
@@ -29,7 +30,8 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 // Setting JWT strategy options
 const jwtOptions = {
   // Telling Passport to check authorization headers for JWT
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+  // jwtFromRequest: (req)=>{console.log(req.headers.authorization)},
   // Telling Passport where to find the secret
   secretOrKey: config.secret
 
@@ -37,11 +39,14 @@ const jwtOptions = {
 };
 
 // Setting up JWT login strategy
-const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
-  User.findById(payload._id, (err, user) => {
+const jwtLogin = new JwtStrategy(jwtOptions, (jwt_payload, done) => {
+  console.log("jwt invoked");
+  console.log(jwt_payload._id);
+  User.findById(jwt_payload._id, (err, user) => {
     if (err) { return done(err, false); }
 
     if (user) {
+      console.log("User:", user);
       done(null, user);
     } else {
       done(null, false);

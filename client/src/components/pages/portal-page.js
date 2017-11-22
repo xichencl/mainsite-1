@@ -7,12 +7,26 @@ import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
 // import ViewTodo from '../todo/view-todo';
+import { API_URL, fetchUser } from '../../actions/index';
+// import axios from 'axios';
+// import Cookies from 'universal-cookie';
+// const cookie = new Cookies();
 
 import SearchIcon from '../../img/search.svg';
 
 class Portal extends Component {
   renderLinks() {
     if (this.props.authenticated) {
+      // fetchUser(cookie.get('user')._id);
+      // console.log(cookie.get('token'));
+      // axios.get(`${API_URL}/user/${cookie.get('user')._id}`, {headers: {'Authorization': `${cookie.get('token')}`}})
+      // .then((response)=>{
+      //   console.log(response.data);
+      //   data = response.data;
+      // })
+      // .catch((error)=>{
+      //   console.log(error);
+      // });
       return [
 
         <div key={`${1}profile`}>
@@ -80,6 +94,7 @@ class Portal extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    userProfile: state.user.profile,
   };
 }
 

@@ -6,6 +6,8 @@ const setUserInfo = require('../helpers').setUserInfo;
 //= =======================================
 exports.viewProfile = function (req, res, next) {
   const userId = req.params.userId; 
+  console.log("req user", req.user);
+  console.log("req params", req.params);
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {

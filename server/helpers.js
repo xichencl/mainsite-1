@@ -9,6 +9,8 @@ exports.setUserInfo = function setUserInfo(request) {
     _id: request._id,
     firstName: request.profile.firstName,
     lastName: request.profile.lastName,
+    address: request.profile.address,
+    phone: request.profile.phone,
     email: request.email,
     role: request.role
   };

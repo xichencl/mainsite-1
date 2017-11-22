@@ -13,7 +13,7 @@ class MyCaseData extends Component {
       	<div className='Box Case-data-box col-2-3 '>
       		<div className='Portal-box-content Grey-background'>
 	      		<h3 className='Case-data-title'>Small Claims Case - A8271HKS2</h3>
-	      		<hr />	      		
+	      		<br />	      		
 	      		<div className='Box-row'>
 	      			<div className='Parties'>
 	      				<p>Plaintiff(s)</p>

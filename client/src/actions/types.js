@@ -11,7 +11,8 @@ export const AUTH_USER = 'auth_user',
 //= =====================
 // User Profile Actions
 //= =====================
-export const FETCH_USER = 'fetch_user'; // do I need to add this reducer ERROR_RESPONSE='error_response'; ?
+export const FETCH_USER = 'fetch_user',
+  ERROR_RESPONSE = 'error_response'; // do I need to add this reducer ERROR_RESPONSE='error_response'; ?
 
 //= =====================
 // Page Actions
