@@ -9,6 +9,7 @@ import Search from './components/template/search';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
 // import Bot from './components/chatbot/Bot.jsx';
+import MobileBot from './components/pages/mobilebot';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -98,6 +99,7 @@ export default class AppRouter extends Component {
                 <Route path="/adoption" component={Adoption} />
 
                 <Route path="/profile" component={RequireAuth(ViewProfile)} />
+                <Route path="/mobilebot" component={MobileBot} />
 
                 <Route path="*" component={NotFoundPage} />
               </Switch>
