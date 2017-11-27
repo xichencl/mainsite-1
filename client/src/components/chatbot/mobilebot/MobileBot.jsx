@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ChatContainer from '../chatbot/ChatContainer.jsx';
+import ChatContainer from '../ChatContainer.jsx';
 // import OpenBot from './OpenBot.jsx';
 
-class Bot extends React.Component {
+class MobileBot extends React.Component {
   render() {
     return (
       <div>
@@ -14,4 +14,4 @@ class Bot extends React.Component {
   }
 }
 
-export default Bot;
+export default MobileBot;

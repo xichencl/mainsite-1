@@ -9,7 +9,7 @@ import Search from './components/template/search';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
 // import Bot from './components/chatbot/Bot.jsx';
-import MobileBot from './components/mobileBot/MobileBot.jsx';
+import MobileBot from './components/chatbot/mobilebot/MobileBot.jsx';
 
 // Import static pages
 import HomePage from './components/pages/home-page';

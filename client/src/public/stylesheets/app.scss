@@ -9,35 +9,34 @@
 @import "base/case-dashboard";
 
 //MIXINS
-@import "base/bot/_mixins.scss";
+@import "bot/_mixins.scss";
 
 //BOT STYLING ONLY
-@import "base/bot/_variables.scss";
-@import "base/bot/_bubblesButtons.scss";
-@import "base/bot/_agentsTable.scss";
-@import "base/bot/_bot.scss";
-@import "base/bot/_header.scss";
-@import "base/bot/_languageModal.scss";
-@import "base/bot/_mapModal.scss";
-@import "base/bot/_openChat.scss";
-@import "base/bot/_settings.scss";
-@import "base/bot/_chatContainer.scss";
-@import "base/bot/_chatbar.scss";
-@import "base/bot/_theme.scss";
-@import "base/bot/_breakpoints.scss";
+@import "bot/_variables.scss";
+@import "bot/_bubblesButtons.scss";
+@import "bot/_agentsTable.scss";
+@import "bot/_bot.scss";
+@import "bot/_header.scss";
+@import "bot/_languageModal.scss";
+@import "bot/_mapModal.scss";
+@import "bot/_openChat.scss";
+@import "bot/_settings.scss";
+@import "bot/_chatContainer.scss";
+@import "bot/_chatbar.scss";
+@import "bot/_theme.scss";
+@import "bot/_breakpoints.scss";
 
 //MOBILE BOT STYLING
-@import "base/MobileBot/_MmobileTest.scss";
-@import "base/MobileBot/_Mvariables.scss";
-@import "base/MobileBot/_MbubblesButtons.scss";
-@import "base/MobileBot/_MagentsTable.scss";
-@import "base/MobileBot/_Mbot.scss";
-@import "base/MobileBot/_Mheader.scss";
-@import "base/MobileBot/_MlanguageModal.scss";
-@import "base/MobileBot/_MmapModal.scss";
-@import "base/MobileBot/_MopenChat.scss";
-@import "base/MobileBot/_Msettings.scss";
-@import "base/MobileBot/_MchatContainer.scss";
-@import "base/MobileBot/_Mchatbar.scss";
-@import "base/MobileBot/_Mtheme.scss";
-@import "base/MobileBot/_Mbreakpoints.scss";
+@import "mobilebot/_variables-m.scss";
+@import "mobilebot/_bubblesButtons-m.scss";
+@import "mobilebot/_agentsTable-m.scss";
+@import "mobilebot/_bot-m.scss";
+@import "mobilebot/_header-m.scss";
+@import "mobilebot/_languageModal-m.scss";
+@import "mobilebot/_mapModal-m.scss";
+@import "mobilebot/_openChat-m.scss";
+@import "mobilebot/_settings-m.scss";
+@import "mobilebot/_chatContainer-m.scss";
+@import "mobilebot/_chatbar-m.scss";
+@import "mobilebot/_theme-m.scss";
+@import "mobilebot/_breakpoints-m.scss";
