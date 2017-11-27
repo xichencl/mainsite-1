@@ -20,8 +20,14 @@ export const SEND_CONTACT_FORM = 'send_contact_form',
   STATIC_ERROR = 'static_error';
 
 // page data
-export const FETCH_PAGE_DATA = "FETCH_PAGE_DATA";
+export const FETCH_PAGE_DATA = 'FETCH_PAGE_DATA';
 
+// checklist 
+export const GET_ALL_TASKS = "GET_ALL_TASKS",
+  POST_TASK = "POST_TASK",
+  CHANGE_STATUS = "CHANGE_STATUS";
+
+export const LOAD_CHECKLIST = 'LOAD_CHECKLIST';
 
 
 

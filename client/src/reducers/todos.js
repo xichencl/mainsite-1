@@ -1,3 +1,4 @@
+//reducers/todo.js
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -9,6 +10,17 @@ const todos = (state = [], action) => {
           completed: false
         }
       ]
+    case 'LOAD_CHECKLIST':
+      // const newChecklist = state.slice();
+      // newChecklist.push(action.payload)
+      // console.log('load checklist reducer', newChecklist)
+      // return { 
+      //   newChecklist 
+      // };
+      console.log('reducer state', action.payload)
+      return {
+        ...state, checklist: action.payload
+      }
     case 'TOGGLE_TODO':
       return state.map(todo =>
         (todo.id === action.id) 
@@ -20,4 +32,4 @@ const todos = (state = [], action) => {
   }
 }
 
-export default todos
+export default todos 

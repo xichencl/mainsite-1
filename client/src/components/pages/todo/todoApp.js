@@ -3,12 +3,15 @@ import TodoFooter from './todoFooter'
 import AddTodo from './containers/addTodo'
 import VisibleTodoList from './containers/visibleTodoList'
 
-const todoApp = () => (
+import LoadTodo from './containers/loadTodo'
+
+const TodoApp = () => (
   <div>
     <AddTodo />
+    <LoadTodo />
     <VisibleTodoList />
     <TodoFooter />
   </div>
 )
 
-export default todoApp
+export default TodoApp

@@ -1,8 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTodo } from '../../../../actions'
+import { loadChecklist } from '../../../../actions'
 
-let AddTodo = ({ dispatch }) => {
+
+class ListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentDidMount() {
+    this.props.loadChecklist()
+  }
+
+}
+
+ListContainer= connect()(ListContainer)
+export default ListContainer
+
+let ListContainer = ({ dispatch }) => {
   let input
 
   return (
@@ -13,7 +29,7 @@ let AddTodo = ({ dispatch }) => {
           if (!input.value.trim()) {
             return
           }
-          dispatch(addTodo(input.value))
+          dispatch(loadChecklist(input.value))
           input.value = ''
         }}
       >
@@ -29,6 +45,4 @@ let AddTodo = ({ dispatch }) => {
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
 
-export default AddTodo

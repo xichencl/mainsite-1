@@ -38,11 +38,11 @@ class TestHomePage extends React.Component {
     return (
       <div>
           <div>
-            <h1>{pageData.smallclaims && pageData.smallclaims.title}</h1>
-            <h4>{pageData.smallclaims && pageData.smallclaims.faqs[1].Title}</h4>
-            <p>{pageData.smallclaims && pageData.smallclaims.faqs[1].BlockText}</p>
-            <h4>{pageData.smallclaims && pageData.smallclaims.faqs[2].Title}</h4>
-            <p>{pageData.smallclaims && pageData.smallclaims.faqs[2].BlockText}</p>
+            // <h1>{pageData.smallclaims && pageData.smallclaims.title}</h1>
+            // <h4>{pageData.smallclaims && pageData.smallclaims.faqs[1].Title}</h4>
+            // <p>{pageData.smallclaims && pageData.smallclaims.faqs[1].BlockText}</p>
+            // <h4>{pageData.smallclaims && pageData.smallclaims.faqs[2].Title}</h4>
+            // <p>{pageData.smallclaims && pageData.smallclaims.faqs[2].BlockText}</p>
           </div>
       </div>
     );

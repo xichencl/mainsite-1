@@ -3,13 +3,13 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
-export const API_URL = 'http://localhost:3000/api';
+export const API_URL = 'http://localhost:3000/api'; // database server URL
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
 
 //= ===============================
@@ -49,7 +49,7 @@ export function loadPageData() {
 }
 
 
-// todo component actions
+// todo component actions from todo redux basics tutorial
 let nextTodoId = 0
 export const addTodo = text => {
   return {
@@ -57,6 +57,31 @@ export const addTodo = text => {
     id: nextTodoId++,
     text
   }
+}
+
+// export function loadChecklist() {  
+//   return dispatch => {
+//     axios.get('./checklist_smallClaims.json')
+//       .then(data => {
+//       console.log('action', data)
+//         return
+//       dispatch({
+//           type : 'LOAD_CHECKLIST',
+//           payload : data
+//       })
+//     })
+//   }
+// }
+
+export const loadChecklist = () => dispatch => {
+  axios.get('./checklist_smallClaims.json')
+    .then((response) => {
+      dispatch({
+        type: LOAD_CHECKLIST,
+        payload: response.data
+      }); 
+    })
+    .catch((error, errorType) => dispatch(errorHandler(dispatch, error.response, errorType)));
 }
 
 export const setVisibilityFilter = filter => {
