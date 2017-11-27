@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import MobileTest from './MobileTest.jsx';
+import MBot from './MBot.jsx';
 
 class MobileBot extends React.Component {
   constructor(props) {
@@ -6,7 +8,7 @@ class MobileBot extends React.Component {
   }
 
   render() {
-    return <div>Hi.</div>;
+    return <MBot />;
   }
 }
 
