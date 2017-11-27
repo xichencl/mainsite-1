@@ -65,12 +65,12 @@ class ChatContainer extends React.Component {
           </div>
         </Menu>
 
-        <main id="page-wrap">
+        
           {/* chat-container-bg element in the if statement  keeps header and chatbar in fixed position*/}
           <div className={botContainer}>
             <Chatbox sessionId={this.state.id} theme={this.props.theme} />
           </div>
-        </main>
+        
       </div>
     );
   }
