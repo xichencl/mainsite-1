@@ -9,14 +9,25 @@ exports.setUserInfo = function setUserInfo(request) {
     _id: request._id,
     firstName: request.profile.firstName,
     lastName: request.profile.lastName,
-    address: request.profile.address,
-    phone: request.profile.phone,
-    email: request.email,
     role: request.role
   };
 
   return getUserInfo;
 };
+
+//set user profile info from request
+exports.setProfile = function setProfile(request) {
+  const profile = {
+    _id: request._id,
+    firstName: request.profile.firstName,
+    lastName: request.profile.lastName,
+    email: request.email,
+    address: request.profile.address,
+    phone: request.profile.phone
+  };
+  
+  return profile;
+}
 
 exports.getRole = function getRole(checkRole) {
   let role;

@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
+const setProfile = require('../helpers').setProfile;
 
 //= =======================================
 // User Routes
@@ -15,7 +16,7 @@ exports.viewProfile = function (req, res, next) {
       return next(err);
     }
 
-    const userToReturn = setUserInfo(user);
+    const userToReturn = setProfile(user);
 
     return res.status(200).json({ user: userToReturn });
   });
