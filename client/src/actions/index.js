@@ -76,12 +76,18 @@ export const addTodo = text => {
 export const loadChecklist = () => dispatch => {
   axios.get('./checklist_smallClaims.json')
     .then((response) => {
+      console.log(response.data.smallClaims, 'checking first then response')
+      return response.data.smallClaims
+    })
+    .then((response) => {
       dispatch({
         type: LOAD_CHECKLIST,
-        payload: response.data
+        payload: response
       }); 
     })
-    .catch((error, errorType) => dispatch(errorHandler(dispatch, error.response, errorType)));
+  .catch((err) => {
+      console.error.bind(err);
+  })
 }
 
 export const setVisibilityFilter = filter => {

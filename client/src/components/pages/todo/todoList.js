@@ -2,9 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Todo from './todo'
 
+
+// const topicObject = data.todos.checklist
+// const thisList 
+// const sortData = function(topic) {
+//   for (key in topicObject) {
+//     if (topicObject[key].smallClaims === undefined) {
+//       console.log('undefined')
+//     }
+//     else {
+//       thisList = topicObject[key].smallClaims;
+//       console.log(thisList)
+//     }
+//   }
+  
+// }
+
 const TodoList = ({ todos, onTodoClick }) => (
+  
   <ul>
-    {todos.checklist.smallClaimsChecklist.Before.map(todo => (
+    {todos.map(todo => (
       <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
     ))}
   </ul>

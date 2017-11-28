@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { loadChecklist } from '../../../../actions'
 
 let LoadTodo = ({ dispatch }) => {
-  let input
 
   return (
     <div>

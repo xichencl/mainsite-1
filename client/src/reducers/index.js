@@ -7,6 +7,8 @@ import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
 import todos from './todos';
+import checklistReducer from './checklist_reducer';
+
 import visibilityFilter from './visibilityFilter';
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
   chat: chatReducer,
   data: siteDataReducer,
   todos,
+  checklist: checklistReducer,
   visibilityFilter
 });
 

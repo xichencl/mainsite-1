@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleTodo } from '../../../../actions/index.js'
-import TodoList from '../todoList'
+import TaskList from '../taskList'
 
 const getVisibleTodos = (todos, filter) => {
   console.log(todos)
@@ -16,7 +16,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    checklist: getVisibleTodos(state.checklist, state.visibilityFilter)
   }
 }
 
@@ -28,9 +28,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const VisibleTodoList = connect(
+const VisibleTaskList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList)
+)(TaskList)
 
-export default VisibleTodoList
+export default VisibleTaskList
