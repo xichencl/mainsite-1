@@ -4,12 +4,12 @@ import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
-  case 'SHOW_ALL':
-    return todos
-  case 'SHOW_COMPLETED':
-    return todos.filter(t => t.completed)
-  case 'SHOW_ACTIVE':
-    return todos.filter(t => !t.completed)
+  case 'SHOW_BEFORE':
+    return todos.filter(t => t.stage == 0) //toggles before/during/after for checklist
+  case 'SHOW_DURING':
+    return todos.filter(t => t.stage == 1)
+  case 'SHOW_AFTER':
+    return todos.filter(t => t.stage == 2)
   }
 }
 

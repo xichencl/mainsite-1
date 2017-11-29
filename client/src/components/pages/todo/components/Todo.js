@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Todo = ({ onClick, completed, title }) => (
+const Todo = ({ onClick, completed, title, blockText }) => (
   <li
     onClick={onClick}
     style={{
@@ -8,6 +8,7 @@ const Todo = ({ onClick, completed, title }) => (
     }}
   >
     {title}
+    <div className="hideText">{blockText}</div>
   </li>
 )
 

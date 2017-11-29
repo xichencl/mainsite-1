@@ -1,22 +1,30 @@
 import React from 'react'
 import FilterLink from '../containers/FilterLink'
 
-const Footer = () => (
-  <p>
-    Show:
-    {" "}
-    <FilterLink filter="SHOW_ALL">
-      All
+const ChecklistNavbar = () => (
+  <div className="checklist-navbar">
+    
+    <FilterLink filter="SHOW_BEFORE">
+      <div>
+        <div className="icn-checklist before">1</div>
+        <div className="caption">Before</div>
+      </div>
     </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_ACTIVE">
-      Active
+    
+    <FilterLink filter="SHOW_DURING">
+      <div>
+        <div className="icn-checklist before">2</div>
+        <div className="caption">During</div>
+      </div>
     </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_COMPLETED">
-      Completed
+    
+    <FilterLink filter="SHOW_AFTER">
+      <div>
+        <div className="icn-checklist before">3</div>
+        <div className="caption">After</div>
+      </div>
     </FilterLink>
-  </p>
+  </div>
 )
 
-export default Footer
+export default ChecklistNavbar

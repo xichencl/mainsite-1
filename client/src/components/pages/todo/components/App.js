@@ -5,8 +5,9 @@ import VisibleTodoList from '../containers/VisibleTodoList'
 
 const App = () => (
   <div>
-    <VisibleTodoList />
+  	<h1>Checklist</h1>
     <Footer />
+    <VisibleTodoList />
   </div>
 )
 
