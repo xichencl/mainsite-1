@@ -1,76 +1,58 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-const cookie = new Cookies();
+//redux async tutorial -- did not finish.
 
-import { GET_ALL_TASKS, POST_TASK, CHANGE_STATUS, DELETE_TASK } from './types';
+import fetch from 'cross-fetch';
+import checklistData from '../data/checklist_smallClaims.js'
 
-export const getTasks = (tasks) => ({type: GET_ALL_TASKS, tasks});
-export const newChecklist = (tasks) => ({type: NEW_CHECKLIST, tasks});
-export const addTask = (task) => ({type: POST_TASK, task});
-export const changeStatus = (task) => ({type: CHANGE_STATUS, task});
+import { SELECT_CHECKLIST, REQUEST_TASKS, INVALIDATE_CHECKLIST, RECEIVE_TASKS } from './types';
+import { API_URL, CLIENT_ROOT_URL, errorHandler } from './index';
 
-import API_URL from './index' // database server URL
-
-/////////////// ACTION DISPATCHER FUNCTIONS///////////////////
-export const getAllTasks = () => dispatch => {
-  axios.get(`${API_URL}/tasks`) // this is the link to the db user->checklist
-    .then((response) => {
-      return response.data;
-    })
-    .then((tasks) => {
-      dispatch(getTasks(tasks))
-    })
-    .catch((err) => {
-      console.error.bind(err);
-    })
-};
-
-// export const postNewTask = (task) => dispatch => {
-//   dispatch(addTask({title: task, metafields: [{value: false}], slug: formatSlug(task)}));
-//   axios.post(`https://api.cosmicjs.com/v1/your-bucket-slug-name/add-object`, {type_slug: "tasks", title: task, content: "New Task",
-//     metafields: [
-//       {
-//         title: "Is Complete",
-//         key: "is_complete",
-//         value: false,
-//         type: "text"
-//       }
-//     ]})
-//     .then((response) => {
-//       console.log(response.data);
-//     })
-//     .catch((err) => {
-//       console.error.bind(err);
-//     })
-// };
-
-// create new checklist
-export const newChecklist = () => dispatch => {
-	axios.get('./checklist_smallClaims.json')
-		.then((response) => {
-			return response.data;
-		})
-		.catch(err) => {
-			console.error.bind(err);
-		}
+/// redux example 
+export function selectChecklist(checklist) {
+  return {
+    type: SELECT_CHECKLIST,
+    checklist
+  }
 }
 
-// toggle visibility
-export const putChangeStatus = (task, bool) => (dispatch) => {
-  dispatch(changeStatus(task));
-  axios.put(`${API_URL}/tasks`, {
-    metafields: [
-      {
-        title: "Is Complete",
-        key: "is_complete",
-        value: !bool,
-        type: "text"
-      }
-    ]})
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((err) => {
-      console.error.bind(err);
-    })
-};
+function requestTasks(checklist) {
+  return {
+    type: REQUEST_TASKS,
+    tasks
+  }
+}
+
+export function invalidateChecklist(subreddit) {
+  return {
+    type: INVALIDATE_CHECKLIST,
+    checklist
+  }
+}
+
+function receiveTasks(checklist, json) {
+  return {
+    type: RECEIVE_TASKS,
+    checklist,
+    tasks: json.data.children.map(child => child.data)
+  }
+}
+
+// Meet our first thunk action creator!
+// Though its insides are different, you would use it just like any other action creator:
+// store.dispatch(fetchTasks('reactjs'))
+export function fetchTasks(checklist) {
+	// Thunk middleware knows how to handle functions.
+  // It passes the dispatch method as an argument to the function,
+  // thus making it able to dispatch actions itself.
+  return function (dispatch) {
+  	// First dispatch: the app state is updated to inform
+    // that the API call is starting.
+    dispatch(requestTasks(checklist))
+    // The function called by the thunk middleware can return a value,
+    // that is passed on as the return value of the dispatch method.
+
+    // In this case, we return a promise to wait for.
+    // This is not required by thunk middleware, but it is convenient for us.
+
+    return fetch(``)
+  }
+}

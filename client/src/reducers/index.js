@@ -6,10 +6,17 @@ import siteDataReducer from './site_data_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
-import todos from './todos';
-import checklistReducer from './checklist_reducer';
+import { 
+  checklistReducer,
+  tasksByChecklistType,
+  selectedChecklist 
+} from './checklist_reducer';
 
-import visibilityFilter from './visibilityFilter';
+//redux todo app with data service middleware: 
+import todos from './todos'
+import loading from './loading'
+import visibilityFilter from './visibilityFilter'
+
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
 
@@ -30,10 +37,14 @@ const rootReducer = combineReducers({
   user: userReducer,
   chat: chatReducer,
   data: siteDataReducer,
-  todos,
   checklist: checklistReducer,
+  selectedChecklist,
+  tasksByChecklistType,
+  loading,
+  todos,
   visibilityFilter
 });
+
 
 export default rootReducer;
 

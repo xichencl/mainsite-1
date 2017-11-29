@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
@@ -51,7 +51,7 @@ export function loadPageData() {
 
 // todo component actions from todo redux basics tutorial
 let nextTodoId = 0
-export const addTodo = text => {
+export const addTodo = (text) => {
   return {
     type: 'ADD_TODO',
     id: nextTodoId++,
@@ -59,50 +59,38 @@ export const addTodo = text => {
   }
 }
 
-// export function loadChecklist() {  
-//   return dispatch => {
-//     axios.get('./checklist_smallClaims.json')
-//       .then(data => {
-//       console.log('action', data)
-//         return
-//       dispatch({
-//           type : 'LOAD_CHECKLIST',
-//           payload : data
-//       })
-//     })
-//   }
-// }
-
-export const loadChecklist = () => dispatch => {
-  axios.get('./checklist_smallClaims.json')
-    .then((response) => {
-      console.log(response.data.smallClaims, 'checking first then response')
-      return response.data.smallClaims
-    })
-    .then((response) => {
-      dispatch({
-        type: LOAD_CHECKLIST,
-        payload: response
-      }); 
-    })
-  .catch((err) => {
-      console.error.bind(err);
-  })
-}
-
-export const setVisibilityFilter = filter => {
+export const setVisibilityFilter = (filter) => {
   return {
     type: 'SET_VISIBILITY_FILTER',
     filter
   }
 }
 
-export const toggleTodo = id => {
+export const toggleTodo = (id) => {
   return {
     type: 'TOGGLE_TODO',
     id
   }
 }
+
+///////////
+
+// export const loadChecklist = () => dispatch => {
+//   axios.get('./checklist_smallClaims.json')
+//     .then((response) => {
+//       console.log(response.data.smallClaims, 'checking first then response')
+//       return response.data.smallClaims
+//     })
+//     .then((data) => {
+//       dispatch({
+//         type: LOAD_CHECKLIST,
+//         payload: data
+//       }); 
+//     })
+//   .catch((err) => {
+//       console.error.bind(err);
+//   })
+// }
 
 ///////////
 

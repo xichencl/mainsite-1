@@ -16,42 +16,42 @@
 	{
 		"title": "title1",
 		"blockText": "text1",
-		"id": 2,
+		"id": 0,
 		"completed": false,
 		"during": true
 	},
 	{
 		"title": "title2",
 		"blockText": "text2",
-		"id": 3,
+		"id": 1,
 		"completed": false,
 		"during": true
 	},
 	{
 		"title": "title3",
 		"blockText": "text3",
-		"id": 4,
+		"id": 3,
 		"completed": false,
 		"during": true
 	},
 	{
 		"title": "title1",
 		"blockText": "text1",
-		"id": 5,
+		"id": 0,
 		"completed": false,
 		"after": true
 	},
 	{
 		"title": "title2",
 		"blockText": "text2",
-		"id": 6,
+		"id": 1,
 		"completed": false,
 		"after": true
 	},
 	{
 		"title": "title3",
 		"blockText": "text3",
-		"id": 7,
+		"id": 3,
 		"completed": false,
 		"after": true
 	}
