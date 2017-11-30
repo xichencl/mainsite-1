@@ -7,7 +7,6 @@
 
 .chat-container-bg-m {
   //increased width from standard 25em to 26em to hide scroll. cross-browser friendly.
-  width: 100vw;
   height: 100vh;
   bottom: 75px;
   padding-top: 73px;
@@ -36,8 +35,8 @@
   align-content: flex-end;
   font-size: 1em;
   line-height: 1.375em;
-  padding: 18px;
-  // width: 25em;
+  padding-right: 18px;
+  padding-left: 18px;
   width: 100vw;
   height: auto;
   margin-bottom: 75px;
