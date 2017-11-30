@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, ERROR_RESPONSE } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, ERROR_RESPONSE, PUT_DATA, POST_DATA, GET_DATA } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
@@ -113,6 +113,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
 
 // Get Request
 export function getData(action, errorType, isAuthReq, url, dispatch) {
+  return function (dispatch) {
   const requestUrl = API_URL + url;
   let headers = {};
 
@@ -122,14 +123,18 @@ export function getData(action, errorType, isAuthReq, url, dispatch) {
 
   axios.get(requestUrl, headers)
   .then((response) => {
+    console.log("Response.Data: ", response.data);
+    console.log("Action type: ", action);
     dispatch({
-      type: action,
-      payload: response.data,
+      type: GET_DATA,
+      payload: response.data.cases,
     });
   })
   .catch((error) => {
+    console.log("error handler is invoked");
     errorHandler(dispatch, error.response, errorType);
   });
+};
 }
 
 // Put Request

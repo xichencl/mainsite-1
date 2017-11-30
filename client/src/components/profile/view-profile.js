@@ -7,14 +7,15 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/index';
 
 import UserInfo from './user-info';
+// import PropTypes from 'prop-types';
 
 class ViewProfile extends Component {
-  componentWillMount() {
-    // Fetch user data prior to component mounting
-    const user = cookie.get('user');
-    const uid = user._id;
-    this.props.fetchUser(uid);
-  }
+  // componentWillMount() {
+  //   // Fetch user data prior to component mounting
+  //   const user = cookie.get('user');
+  //   const uid = user._id;
+  //   this.props.fetchUser(uid);
+  // }
 
   render() {
     return (

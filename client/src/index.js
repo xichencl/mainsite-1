@@ -22,8 +22,13 @@ import './public/stylesheets/app.scss';
 //   ReactGA.pageview(window.location.pathname);
 // }
 
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
+const store = createStoreWithMiddleware(rootReducer, devTools);
+
+store.subscribe(() => {
+  console.log('state changed', store.getState());
+});
 
 const token = cookie.load('token');
 

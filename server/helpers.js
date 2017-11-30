@@ -19,11 +19,8 @@ exports.setUserInfo = function setUserInfo(request) {
 exports.setProfile = function setProfile(request) {
   const profile = {
     _id: request._id,
-    firstName: request.profile.firstName,
-    lastName: request.profile.lastName,
-    email: request.email,
-    address: request.profile.address,
-    phone: request.profile.phone
+    profile: request.profile,
+    cases: request.cases,
   };
   
   return profile;

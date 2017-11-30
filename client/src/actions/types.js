@@ -14,6 +14,9 @@ export const AUTH_USER = 'auth_user',
 export const FETCH_USER = 'fetch_user',
   ERROR_RESPONSE = 'error_response'; // do I need to add this reducer ERROR_RESPONSE='error_response'; ?
 
+export const GET_DATA = 'get_data',
+  PUT_DATA = 'put_data',
+  POST_DATA = 'post_data';
 //= =====================
 // Page Actions
 //= =====================
