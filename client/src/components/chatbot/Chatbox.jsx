@@ -51,7 +51,7 @@ class Chatbox extends React.Component {
           );
         })}
         <div
-          style={{ float: 'left', clear: 'both', margin: '0px 10px' }}
+          className="clear"
           ref={(el) => {
             this.messagesEnd = el;
           }}
