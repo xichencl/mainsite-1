@@ -5,23 +5,27 @@ const ChecklistNavbar = () => (
   <div className="checklist-navbar">
     
     <FilterLink filter="SHOW_BEFORE">
-      <div>
-        <div className="icn-checklist before">1</div>
-        <div className="caption">Before</div>
+      <div className="tab-group">
+        <div className="icn-tab before">
+          <div className="icn-number">1</div>
+        </div>
+        <h3 className="tab caption">Before</h3>
       </div>
     </FilterLink>
     
     <FilterLink filter="SHOW_DURING">
-      <div>
-        <div className="icn-checklist before">2</div>
-        <div className="caption">During</div>
+      <div className="tab-group">
+        <div className="icn-tab during">
+          <div className="icn-number">2</div>
+        </div>
+        <h3 className="tab caption">During</h3>
       </div>
     </FilterLink>
     
     <FilterLink filter="SHOW_AFTER">
-      <div>
-        <div className="icn-checklist before">3</div>
-        <div className="caption">After</div>
+      <div className="tab-group">
+        <div className="icn-tab after"><div className="icn-number">3</div></div>
+        <h3 className="tab caption">After</h3>
       </div>
     </FilterLink>
   </div>

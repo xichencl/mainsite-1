@@ -5,7 +5,7 @@ const dataService = store => next => action => {
 	switch (action.type) {
 	case 'GET_TODO_DATA':
 		request
-			.get('checklist_smallClaims.json')
+			.get('data/checklist_smallClaims.json')
 			.end((err, res) => {
 				if (err) {
 					return next({

@@ -3,6 +3,7 @@ $font-family-sans-serif: "Source Sans Pro", sans-serif;
 
 $grey-border: #eee;
 $grey-text: #aaa;
+$dark-grey: #333;
 $black: #000;
 $white: #fff;
 $blue-button: #316a92;
@@ -13,4 +14,49 @@ $grey-background: #f5f5f5;
 
 .hideText {
 	display: none;
+}
+
+.checklist-title {
+	text-align: center;
+}
+
+.checklist {
+	padding: 2rem;
+}
+
+.checklist-navbar {
+	display: flex;
+	justify-content: space-around;
+}
+
+// FilterLink divs
+.caption {
+	margin: 10px 0;
+}
+
+.tab-group {
+	font-family: $font-family-serif;
+	text-align: center;
+	align-items: center;
+}
+
+.icn-tab {
+	// display: flex;
+	font-size: 4rem;
+	// border: 3px solid $dark-grey;
+	// color: $dark-grey;
+	// border-radius: 50%;
+	// width: 65px;
+	// height: 65px;
+	
+}
+
+.icn-number {
+	// margin-left: 5px;
+	text-align: center;
+	align-self: flex-start;
+	border: 3px solid $dark-grey;
+	border-radius: 50%;
+	width: 65px;
+	height: 65px;
 }
