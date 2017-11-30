@@ -24,9 +24,9 @@ class Chatbox extends React.Component {
     let className = '';
     console.log('current theme : ', this.props.theme);
     if (this.props.theme === 'dark') {
-      className = 'dark chatbox-alignment';
+      className = 'dark chatbox-alignment-m';
     } else {
-      className = 'chat-box-bg chatbox-alignment';
+      className = 'chat-box-bg chatbox-alignment-m';
     }
 
     return (

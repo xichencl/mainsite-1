@@ -3,9 +3,9 @@ import Menu from 'react-burger-menu/lib/menus/push';
 import Header from './Header.jsx';
 import Chatbox from './Chatbox.jsx';
 import Chatbar from './Chatbar.jsx';
-import LanguageIcon from './icons/LanguageIcon.jsx';
-import ThemeIcon from './icons/ThemeIcon.jsx';
-import FontSizeIcon from './icons/FontSizeIcon.jsx';
+import LanguageIcon from '../chatbot/icons/LanguageIcon.jsx';
+import ThemeIcon from '../chatbot/icons/ThemeIcon.jsx';
+import FontSizeIcon from '../chatbot/icons/FontSizeIcon.jsx';
 import { connect } from 'react-redux';
 
 const uuidv1 = require('uuid/v1');
@@ -26,9 +26,9 @@ class ChatContainer extends React.Component {
   render() {
     let botContainer;
     if (this.props.theme === 'dark') {
-      botContainer = 'dark-grey-bg chat-container-bg';
+      botContainer = 'dark-grey-bg chat-container-bg-m';
     } else {
-      botContainer = 'chat-box-bg chat-container-bg';
+      botContainer = 'chat-box-bg chat-container-bg-m';
     }
     return (
       <div>

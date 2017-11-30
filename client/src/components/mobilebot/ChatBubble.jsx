@@ -2,9 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
-import ImageViewer from './ImageViewer.jsx';
+import ImageViewer from '../chatbot/ImageViewer.jsx';
 // const opn = require('opn');
-const CASETYPES = {'Small Claims':0, 'Guardianship':1, 'Domestic Violence':2, 'Family Law':3, 'Eviction':4, 'Traffic':5};
+const CASETYPES = {
+  'Small Claims': 0,
+  Guardianship: 1,
+  'Domestic Violence': 2,
+  'Family Law': 3,
+  Eviction: 4,
+  Traffic: 5,
+};
 
 class ChatBubble extends React.Component {
   constructor(props) {
@@ -22,7 +29,7 @@ class ChatBubble extends React.Component {
       botButtons += ' botButtons';
     }
 
-    let userBubble = 'user-bubble user-bubble-alignment';
+    let userBubble = 'user-bubble user-bubble-alignment-m';
     if (this.props.theme === 'dark') {
       userBubble += ' dark-user-bubble';
     }
@@ -81,10 +88,10 @@ class ChatBubble extends React.Component {
         </div>
       );
     } else if (this.props.isBot === false) {
-      className = ' user-bubble user-bubble-alignment'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-alignment
+      className = ' user-bubble user-bubble-alignment-m'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-alignment
       return (
         // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
-        <div className="bubble-breaker">
+        <div className="bubble-breaker-m">
           <div className={userBubble}>
             {ReactHtmlParser(this.props.message)}
           </div>
@@ -101,7 +108,7 @@ class ChatBubble extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ai : state.chat.ai
+  ai: state.chat.ai,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -127,13 +134,13 @@ const mapDispatchToProps = dispatch => ({
     // onClick on buttons
     const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
     console.log('SESSIONID: ', this.props.sessionId);
-    let inputData = { payload: data, id: this.props.sessionId };
+    const inputData = { payload: data, id: this.props.sessionId };
     // console.log("ai: ", this);
-    if (!this.props.ai.selected || this.props.message in CASETYPES){
-      inputData['ai']= false;
+    if (!this.props.ai.selected || this.props.message in CASETYPES) {
+      inputData.ai = false;
       // dispatch({type: 'SELECT_CASE_TYPE'});
-    }else{
-      inputData['ai']= true;
+    } else {
+      inputData.ai = true;
     }
     axios
       .post('/api/chat/message', inputData) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
@@ -175,7 +182,7 @@ const mapDispatchToProps = dispatch => ({
             }
           }
           // console.log('case type: ', response.data.caseType.toLowerCase());
-          dispatch({type: response.data.caseType});
+          dispatch({ type: response.data.caseType });
           // if there's a custom payload attached to api.ai response
           let customPayload;
           if (!response.data.result.fulfillment.data) {
