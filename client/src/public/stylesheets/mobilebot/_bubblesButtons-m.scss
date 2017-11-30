@@ -65,14 +65,14 @@
   margin-left: auto; /*right adjusts bubble*/
   margin-top: 10px;
   margin-bottom: 10px;
-  // margin-right: 0px;
+  margin-right: 0px;
 }
 
 .bubble-breaker-m {
   /*div wraps user bubble forcing next bubble onto next line*/
   background-color: transparent;
-  width: 23em;
-  // width: 100vw;
+  // width: 23em;
+  width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
