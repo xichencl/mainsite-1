@@ -35,9 +35,6 @@
   top: 0px;
   position: fixed;
   @include flex-center(none, center);
-  @include xxs {
-    width: 22em;
-  }
 }
 
 /* contains icons in bot header */
@@ -46,9 +43,6 @@
   height: 3em;
   @include flex-center(space-between, center);
   padding: .5em;
-  @include xxs {
-    width: 17.7em;
-  }
 }
 
 /* close button */
@@ -63,10 +57,6 @@ button.close-bot {
   display: -ms-flexbox;
   display: flex;
   bottom: .4em;
-  @include xxs {
-    bottom: 0.6em;
-    left: 0.5em;
-  }
 }
 
 /* refresh button */
@@ -113,11 +103,6 @@ button.refresh-bot:active {
   right: 111px !important;
   top: 5px !important;
   background: transparent;
-  @include xxs {
-    width: 35px !important;
-    height: 35px !important;
-    top: 5px;
-  }
 }
 
 //********************************** MEDIA QUERIES **********************************//
