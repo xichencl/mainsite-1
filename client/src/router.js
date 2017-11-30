@@ -23,6 +23,8 @@ import Dv from './components/pages/topics/dv';
 import FamilyHome from './components/pages/topics/family/family-home';
 import Adoption from './components/pages/topics/family/family-adoption';
 
+import TodoApp from './components/pages/todo/components/App';
+// import ChecklistApp from './components/pages/checklist/checklistApp';
 // import ComponentSamplesPage from './components/pages/component-samples';
 
 // Import authentication related pages
@@ -66,41 +68,42 @@ export default class AppRouter extends Component {
             </div>
             <div className="Page noscroll">
               <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/test" component={TestHomePage} />
-                <Route path="/contact-us" component={ContactPage} />
-                <Route path="/portal" component={Portal} />
-                <Route path="/my-case" component={MyCasesDashboard} />
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/logout" component={Logout} />
-                <Route path="/faqs" component={FAQs} />
-                <Route path="/forms" component={Forms} />
-                <Route
-                  path="/locations"
-                  component={() =>
-                    (window.location = 'http://www.cc-courts.org/locations/locations.aspx')}
-                />
-                <Route
-                  path="/find-a-case"
-                  component={() =>
-                    (window.location = 'http://www.cc-courts.org/civil/online-case.aspx')}
-                />
-                <Route path="/forgot-password" component={ForgotPassword} />
-                <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
-                <Route path="/smallclaims" component={SmallClaims} />
-                <Route path="/guardianship" component={Guardianship} />
-                <Route path="/eviction" component={Eviction} />
-                <Route path="/dv" component={Dv} />
-                <Route path="/traffic" component={Traffic} />
-                <Route path="/family" component={FamilyHome} />
-                <Route path="/adoption" component={Adoption} />
+              <Route exact path="/" component={ HomePage } />
+              <Route path="/test" component={ TestHomePage } />
+              <Route path="/test-todo" component={ TodoApp } />
+              <Route path="/contact-us" component={ ContactPage } />
+              <Route path="/portal" component={ Portal } />
+              <Route path="/my-case" component={ MyCasesDashboard } />
+              <Route path="/register" component={ Register } />
+              <Route path="/login" component={ Login } />
+              <Route path="/logout" component={ Logout } />
+              <Route path="/faqs" component={ FAQs } />
+              <Route path="/forms" component={ Forms } />
+              <Route 
+                path="/locations" 
+                component={ () => window.location = "http://www.cc-courts.org/locations/locations.aspx" }
+              />
+              <Route 
+                path="/find-a-case" 
+                component={ () => window.location = "http://www.cc-courts.org/civil/online-case.aspx" }
+              />
+              <Route path="/forgot-password" component={ ForgotPassword } />
+              <Route path="/reset-password/:resetToken" component={ ResetPassword } />
+              
+              <Route path="/smallclaims" component={ SmallClaims } />
+              <Route path="/guardianship" component={ Guardianship } />
+              <Route path="/eviction" component={ Eviction } />
+              <Route path="/dv" component={ Dv } />
+              <Route path="/traffic" component={ Traffic } />
+              <Route path="/family" component={ FamilyHome } />
+              <Route path="/adoption" component={ Adoption } />
 
-                <Route path="/profile" component={RequireAuth(ViewProfile)} />
+              <Route path="/profile" component={RequireAuth(ViewProfile)} />
+              
 
-                <Route path="*" component={NotFoundPage} />
-              </Switch>
+              <Route path='*' component={ NotFoundPage } />
+            </Switch>
             </div>
           </div>
           <Footer />

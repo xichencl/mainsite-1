@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import AppRouter from './router';
 import rootReducer from './reducers/index';
+import dataService from './services/data-service'
+
+//import todoApp from './reducers' //rootReducer
+//import App from './components/App' //appRouter
+
 
 // import ReactGA from 'react-ga';
 
@@ -23,7 +28,7 @@ import './public/stylesheets/app.scss';
 // }
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
+const store = createStoreWithMiddleware(rootReducer, {}, compose(applyMiddleware(dataService)));
 
 const token = cookie.load('token');
 
@@ -43,5 +48,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+store.dispatch({type: 'GET_TODO_DATA'})
 
 // / add to < Router onUpdate={logPageView} /> for google analytics
