@@ -12,7 +12,7 @@ class Header extends React.Component {
     return (
       // this empty div wraps everything, and lets header view correctly in safari*/}
       <div>
-        <div className="header-x">
+        <div className="header-m">
           <div className="icon-container">
             <button
               type="button"

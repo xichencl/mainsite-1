@@ -5,10 +5,8 @@ import ChatContainer from './ChatContainer.jsx';
 class MobileBot extends React.Component {
   render() {
     return (
-      <div>
-        <div className="position-bot the-bot">
-          <ChatContainer />
-        </div>
+      <div className="position-bot the-bot">
+        <ChatContainer />
       </div>
     );
   }
