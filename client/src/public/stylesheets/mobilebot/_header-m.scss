@@ -36,7 +36,7 @@
   position: fixed;
   @include flex-center(none, center);
   @include xxs {
-    width: 22em;
+    width: 100vw;
   }
 }
 
@@ -47,10 +47,6 @@
   margin-left: .6em;
   padding: .5em;
   @include flex-center(space-between, center);
-  padding: .5em;
-  @include xxs {
-    width: 17.7em;
-  }
 }
 
 /* close button */
@@ -64,10 +60,6 @@ button.close-bot-m {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  @include xxs {
-    bottom: 0.6em;
-    left: 0.5em;
-  }
 }
 
 /* refresh button */

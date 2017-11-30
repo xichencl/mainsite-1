@@ -28,7 +28,6 @@ class Header extends React.Component {
             {/* <button type="button">
               {this.props.ai.caseType}
             </button>*/}
-
             <button
               type="button"
               id="refresh-button"

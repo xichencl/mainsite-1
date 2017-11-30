@@ -18,7 +18,7 @@
   background-color: $not-white;
   @include xxs {
     height: 100vh;
-    width: 22em;
+    width: 100vw;
   }
 }
 
@@ -41,7 +41,7 @@
   height: auto;
   margin-bottom: 75px;
   @include xxs {
-    width: 22em;
+    width: 100vw;
     padding-left: 1.5em;
   }
 }
