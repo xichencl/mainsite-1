@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactHtmlParser from 'react-html-parser';
 
 class SettingsIcon extends React.Component {
   constructor(props) {

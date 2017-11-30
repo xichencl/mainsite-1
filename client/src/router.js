@@ -7,7 +7,6 @@ import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
 import ChatContainer from './components/chatbot/ChatContainer.jsx';
-import ChatIcon from './components/chatbot/icons/ChatIcon.jsx';
 import OpenBot from './components/chatbot/OpenBot.jsx';
 // Import static pages
 import HomePage from './components/pages/home-page';
@@ -62,16 +61,16 @@ export default class AppRouter extends Component {
             <div className="App-mask" />
             <Navbar />
             <Search />
+
             <div className="position-bot the-bot">
-              <OpenBot ref={el=>(this.chatWindow=el)}/>
+              <OpenBot ref={el => (this.chatWindow = el)} />
             </div>
             <div className="Page">
               <Switch>
+
               <Route exact path="/" component={ HomePage } />
               <Route path="/test" component={ TestHomePage } />
               <Route path="/test-todo" component={ TodoApp } />
-              <Route path="/checklist" component={ ChecklistApp } />
-
               <Route path="/contact-us" component={ ContactPage } />
               <Route path="/portal" component={ Portal } />
               <Route path="/my-case" component={ MyCasesDashboard } />
@@ -80,8 +79,14 @@ export default class AppRouter extends Component {
               <Route path="/logout" component={ Logout } />
               <Route path="/faqs" component={ FAQs } />
               <Route path="/forms" component={ Forms } />
-              <Route path="/locations" component={ () => window.location = "http://www.cc-courts.org/locations/locations.aspx" }/>
-              <Route path="/find-a-case" component={ () => window.location = "http://www.cc-courts.org/civil/online-case.aspx" }/>
+              <Route 
+                path="/locations" 
+                component={ () => window.location = "http://www.cc-courts.org/locations/locations.aspx" }
+              />
+              <Route 
+                path="/find-a-case" 
+                component={ () => window.location = "http://www.cc-courts.org/civil/online-case.aspx" }
+              />
               <Route path="/forgot-password" component={ ForgotPassword } />
               <Route path="/reset-password/:resetToken" component={ ResetPassword } />
               
@@ -98,7 +103,6 @@ export default class AppRouter extends Component {
 
               <Route path='*' component={ NotFoundPage } />
             </Switch>
-
             </div>
           </div>
           <Footer />

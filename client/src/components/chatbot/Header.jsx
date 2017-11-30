@@ -1,3 +1,5 @@
+// refresh and close icons live here as links to material icons, not svg-components
+// css for settings icon is in header.scss, but code lives in ChatContaier.jsx and there's a note about settings icon replacing default 'x' from react-burger-menu package;
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -8,22 +10,33 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="header-L">
-        <div>
-          <button type="button" id="close-button" onClick={this.props.onClick.bind(this)}>close</button>
-          <button type="button">{this.props.ai.caseType}</button>
-          
-          <button type="button" id="refresh-button" className="refresh-M" onClick={this.props.onClick.bind(this)}>
-            <i className="material-icons" style={{ fontSize: '44px' }}>
+      <div className="header-x">
+        <div className="icon-container">
+          <button
+            type="button"
+            id="close-button"
+            className="close-bot"
+            onClick={this.props.onClick.bind(this)}
+          >
+            <i className="material-icons" style={{ fontSize: '1.2em' }}>
+              close
+            </i>
+          </button>
+
+          <button type="button">
+            {this.props.ai.caseType}
+          </button>
+
+          <button
+            type="button"
+            id="refresh-button"
+            className="refresh-bot"
+            onClick={this.props.onClick.bind(this)}
+          >
+            <i className="material-icons" style={{ fontSize: '2.5em' }}>
               refresh
             </i>
           </button>
-        </div>
-        <div>
-          {/* settings icon*/}
-          <div className="settings-N">
-            {/* this div is providing space for the custom settings button from npm package react-burger-menu*/}
-          </div>
         </div>
       </div>
     );
@@ -40,12 +53,13 @@ const mapDispatchToProps = dispatch => ({
     if (event.currentTarget.type !== 'button') {
       return;
     }
-    if (event.currentTarget.id === 'refresh-button'){
+    if (event.currentTarget.id === 'refresh-button') {
       dispatch({ type: 'RESET_BOT' });
-      dispatch({ type: 'General'});
+      dispatch({ type: 'General' });
       this.props.resetSession();
-    }else{//id==='close-button'
-      dispatch({type: 'TOGGLE_BOT'});      
+    } else {
+      // id==='close-button'
+      dispatch({ type: 'TOGGLE_BOT' });
     }
   },
 });

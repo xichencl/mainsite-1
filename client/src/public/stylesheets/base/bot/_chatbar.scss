@@ -1,12 +1,13 @@
 //styling chatbar
 
-.chatbar-G {
+.chatbar {
   height: 3em;
   width: 25em;
   padding: 16px;
   padding-left: 8px;
   padding-right: 10px;
   border-top: 1px solid #939393;
+  background-color: #ffffff;
   color: $not-black;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,7 +24,7 @@
   border-left: 1px solid $not-black;
 }
 
-.chatbar-G input[type=text] {
+.chatbar input[type=text] {
   height: auto;
   width: 17em;
   font-size: 1em;
@@ -36,7 +37,7 @@
   margin-left: 15px;
 }
 
-button.circle-K {
+button.circle-x {
   background-color: #115077;
   color: #ffffff;
   border-radius: 50%;
@@ -52,7 +53,7 @@ button.circle-K {
   padding: 0px;
 }
 
-button.circle-K:hover {
+button.circle-x:hover {
   background-color: #316a92;
   border-radius: 50%;
   width: 40px;
