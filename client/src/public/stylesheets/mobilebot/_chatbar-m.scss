@@ -3,7 +3,7 @@
 .chatbar-m {
   height: 4.2em;
   width: 100vw;
-  padding: .3em;
+  padding: .3em .7em .3em .3em;
   border-top: 1px solid #939393;
   background-color: #ffc107;
   color: $not-black;
@@ -54,7 +54,8 @@ button.circle-m {
   border: none;
   cursor: pointer;
   outline: none;
-  @include flex-center;
+  padding: .5em;
+  padding-top: .6em;
   @include xxs {
     @include flex-center;
     width: 35px;
