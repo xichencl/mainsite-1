@@ -4,6 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const BotBox = ({ visible }) =>
   <div id="bot" className={visible ? 'slideIn' : 'slideOut'}>
@@ -19,6 +20,11 @@ const SpeechBubble = props =>
       <div className="text-bot-icon">
       Chat <i className="material-icons md-18">chat_bubble</i>
     </div>*/}
+  </div>;
+
+const MobileSpeechBubble = props =>
+  <div className="open-bot-icon-m">
+    <i className="material-icons md-36">chat_bubble</i>
   </div>;
 
 class OpenBot extends React.Component {
@@ -38,6 +44,10 @@ class OpenBot extends React.Component {
             />
             : <SpeechBubble />}
         </div>
+        <Link to="mbot">
+          <MobileSpeechBubble />
+        </Link>
+
         <BotBox visible={this.props.visible} />
       </div>
     );

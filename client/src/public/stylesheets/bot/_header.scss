@@ -26,6 +26,23 @@
   }
 }
 
+/* icon displays for mobile views <600 and links to mbot route */
+.open-bot-icon-m {
+  position: fixed;
+  cursor: pointer;
+  color: red;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  @include xxs {
+    left: 311px;
+  }
+}
+
 /* bot header */
 .header-x {
   width: 25em;
@@ -111,5 +128,11 @@ button.refresh-bot:active {
     position: fixed;
     left: 55em;
     top: 2.9em;
+  }
+}
+//hides mobile chat icon until <600
+@media (min-width: 600px) and (max-width: 2000px) {
+  .open-bot-icon-m {
+    display: none;
   }
 }
