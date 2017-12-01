@@ -31,7 +31,7 @@ class Header extends React.Component {
             <button
               type="button"
               id="refresh-button"
-              className="refresh-bot"
+              className="refresh-bot-m"
               onClick={this.props.onClick.bind(this)}
             >
               <i className="material-icons" style={{ fontSize: '2.5em' }}>
