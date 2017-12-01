@@ -8,8 +8,8 @@
 .chat-container-bg-m {
   //increased width from standard 25em to 26em to hide scroll. cross-browser friendly.
   height: 100vh;
-  bottom: 75px;
   padding-top: 73px;
+  padding-bottom: 5em;
   vertical-align: bottom;
   border-left: 1px solid #000000;
   //adding the overflows fixes header and chatbar in fixed position
