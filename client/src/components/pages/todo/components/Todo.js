@@ -5,14 +5,18 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
     <i 
       onClick={onClick}
       className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
-    ></i>
+    >
+    </i>
     
-    <div className="list-item">
+    <div 
+      className="list-item"
+      onClick={onToggle}
+    >
       <div className="list-item-title" >
         {title}
         <i
-          onClick={onToggle} 
-          className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-title fa fa-chevron-down"}
+           
+          className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-chevron fa fa-chevron-down"}
         >
         </i>
       </div>
@@ -41,6 +45,7 @@ Todo.propTypes = {
 export default Todo
 
 /* 
+            className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-title fa fa-chevron-down"}
 
     <div className="list-item">
       <h4 className="list-item-title">{title}</h4>
