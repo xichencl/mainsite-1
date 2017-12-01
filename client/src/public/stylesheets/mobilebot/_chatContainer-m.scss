@@ -6,9 +6,9 @@
 }
 
 .chat-container-bg-m {
-  //increased width from standard 25em to 26em to hide scroll. cross-browser friendly.
   height: 100vh;
   padding-top: 73px;
+  //padding-bottom helps chat dialog clear chat bar.  views correctly on device. not in chrome dev tools. don't change.
   padding-bottom: 5em;
   vertical-align: bottom;
   border-left: 1px solid #000000;
