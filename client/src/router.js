@@ -59,7 +59,7 @@ export default class AppRouter extends Component {
         <div>
           {/* <ToggleBox />*/}
           <Switch>
-            <Route path="/mobilebot" component={MobileBot} />
+            <Route path="/mbot" component={MobileBot} />
             <div className="App">
               <div className="App-mask" />
               <Navbar />

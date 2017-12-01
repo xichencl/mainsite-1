@@ -24,6 +24,9 @@
   @include xxs {
     left: 311px;
   }
+  @include mobile {
+    display: none;
+  }
 }
 
 /* icon displays for mobile views <600 and links to mbot route */
