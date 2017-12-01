@@ -123,6 +123,12 @@ button.refresh-bot:active {
   right: 111px !important;
   top: 5px !important;
   background: transparent;
+  @include lg {
+    width: 42px !important;
+    height: 42px !important;
+    right: 6.3em !important;
+    top: .9em !important;
+  }
 }
 
 //********************************** MEDIA QUERIES **********************************//

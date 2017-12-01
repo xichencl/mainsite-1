@@ -54,12 +54,18 @@ button.close-bot-m {
   position: absolute;
   width: 37px !important;
   height: 37px !important;
-  right: 8.3em !important;
+  right: 7.6em !important;
   top: .8em !important;
   @include xxs {
     width: 35px !important;
     height: 35px !important;
     top: .85em !important;
+  }
+  @include lg {
+    width: 42px !important;
+    height: 42px !important;
+    right: 6.3em !important;
+    top: .9em !important;
   }
 }
 

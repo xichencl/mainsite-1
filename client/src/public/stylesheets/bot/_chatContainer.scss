@@ -16,11 +16,7 @@
   //adding the overflows fixes header and chatbar in fixed position
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: $light-grey;
-  @include xxs {
-    height: 100vh;
-    width: 22em;
-  }
+  background-color: $not-white;
 }
 
 .chatbox-alignment {
