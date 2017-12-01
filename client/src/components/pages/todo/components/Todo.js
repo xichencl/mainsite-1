@@ -7,15 +7,21 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
       className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
     ></i>
     
-    <div className="list-item" onClick={onToggle}>
+    <div className="list-item">
       <div className="list-item-title" >
         {title}
-        <i 
+        <i
+          onClick={onToggle} 
           className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-title fa fa-chevron-down"}
         >
         </i>
       </div>
-      <div className={expanded ? "list-item-text" : "list-item-text hideText"}>
+      <div 
+        className="list-item-text"
+        style={ {
+          display: expanded ? 'block' : 'none'
+        }}
+      >
         {blockText}
       </div>
 

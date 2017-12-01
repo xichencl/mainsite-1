@@ -99,8 +99,6 @@ ul.checklist-list-container {
 }
 
 .list-item {
-	display: flex;
-	list-style: none;
 }
 
 .list-item:hover {
@@ -117,6 +115,10 @@ ul.checklist-list-container {
 	position: absolute;
 	right: 2rem;
 	top: 0.6rem;
+}
+
+.list-item-text {
+	margin-left: 6rem;
 }
 
 
