@@ -48,6 +48,11 @@ const config = {
       //     limit: 10000,
       //   },
       // },
+      // {
+      //   test: /\.svg$/,
+      //   loader: 'url-loader'
+      // }
+
       {
         test: /\.(png|svg|ico)$/,
         loader: 'url-loader',

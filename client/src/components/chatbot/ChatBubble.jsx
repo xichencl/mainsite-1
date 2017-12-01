@@ -13,19 +13,26 @@ class ChatBubble extends React.Component {
 
   render() {
     let className = ' bot-bubble';
+<<<<<<< HEAD
     if (this.props.theme === 'dark') {
       className += ' mono-bot-bubble';
     }
 
+=======
+>>>>>>> f7c1072c6d97893af29723e4d002dadff1114ace
     let botButtons = 'button-blue bot-buttons';
-    if (this.props.theme === 'dark') {
-      botButtons += ' botButtons';
-    }
-
     let userBubble = 'user-bubble user-bubble-alignment';
     if (this.props.theme === 'dark') {
+<<<<<<< HEAD
       userBubble += ' mono-user-bubble';
     }
+=======
+      className += ' dark-bot-bubble';
+      botButtons += ' botButtons';
+      userBubble += ' dark-user-bubble';
+    }  
+    
+>>>>>>> f7c1072c6d97893af29723e4d002dadff1114ace
 
     if (this.props.type === 'button') {
       return (
