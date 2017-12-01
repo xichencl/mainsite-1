@@ -62,6 +62,8 @@ button.circle-m {
     height: 35px;
     padding: 0;
     padding-top: 0;
+    //padding-left will look incorrect on chrome dev tools, but views correctly on iphon5
+    padding-left: .5em;
   }
 }
 
