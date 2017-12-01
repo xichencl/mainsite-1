@@ -117,6 +117,21 @@ button.refresh-bot:active {
 /* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
+  fill: $icon-grey;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  transition: 0.2s;
+}
+
+.bm-cross-button:hover,
+.bm-cross-button:active {
+  fill: $not-white;
+}
+
+.bm-cross-button {
   position: absolute;
   width: 44px !important;
   height: 44px !important;

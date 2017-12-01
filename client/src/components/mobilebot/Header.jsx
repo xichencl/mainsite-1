@@ -17,7 +17,7 @@ class Header extends React.Component {
             <button
               type="button"
               id="close-button-m"
-              className="close-bot-m"
+              className="back-arrow-m"
               onClick={this.props.onClick.bind(this)}
             >
               <i className="material-icons" style={{ fontSize: '2.3em' }}>
