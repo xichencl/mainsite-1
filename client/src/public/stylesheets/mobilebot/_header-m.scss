@@ -9,23 +9,6 @@
   margin-left: 4px;
 }
 
-// .open-bot-icon {
-//   position: fixed;
-//   cursor: pointer;
-//   color: $bot-blue;
-//   //***
-//   position: relative;
-//   display: -webkit-box;
-//   display: -ms-flexbox;
-//   display: flex;
-//   -webkit-box-pack: end;
-//   -ms-flex-pack: end;
-//   justify-content: flex-end;
-//   @include xxs {
-//     left: 311px;
-//   }
-// }
-
 /* bot header */
 .header-m {
   width: 100vw;
@@ -63,41 +46,6 @@ button.close-bot-m {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-/* refresh button */
-button.refresh-bot {
-  background: transparent;
-  outline: 0;
-  padding: 0;
-  border: none;
-  color: $icon-grey;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-button.refresh-bot:hover,
-button.close-bot:hover {
-  color: $warm-grey;
-  outline: 0;
-  padding: 0;
-  border: none;
-  -webkit-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  transition: 0.2s;
-}
-
-button.refresh-bot:active {
-  color: $very-light-blue;
-  outline: 0;
-  padding: 0;
-  -webkit-transition-duration: 0s;
-  -o-transition-duration: 0s;
-  transition-duration: 0s;
-  transition: 0s;
-  transition: 0s;
 }
 
 /* this is actually the settings icon (bm-cross-button is default name from package) */
