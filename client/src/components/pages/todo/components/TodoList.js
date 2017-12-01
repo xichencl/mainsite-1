@@ -5,7 +5,7 @@ const TodoList = ({ todos, onTodoClick, onAccordionClick, loading, toggled }) =>
   <div>
 
     <div className="checklist-list-container">
-      {loading ? 'Loading...': ''}
+      {loading ? "Loading...": ""}
       {todos.map(todo =>
         <Todo
           key={todo.id}

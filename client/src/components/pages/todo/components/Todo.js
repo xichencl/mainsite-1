@@ -9,7 +9,7 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
   >
     <i 
       onClick={onClick}
-      className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
+      className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-circle-o"}
 
     >
     </i>

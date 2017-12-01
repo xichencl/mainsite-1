@@ -16,7 +16,9 @@ $grey-background: #f5f5f5;
 	display: none;
 }
 
-// Checklist Title Text
+// ===================================
+// ====== Checklist Title Text =======
+// ===================================
 .checklist-title {
 	display: flex;
 	text-align: center;
@@ -35,11 +37,12 @@ $grey-background: #f5f5f5;
 }
 
 .checklist {
-	padding: 4rem;
+	padding: 1rem 4rem;
 }
 
-
-// FilterLink divs
+// ===================================
+// ======= Footer/Link divs ==========
+// ===================================
 .checklist-navbar {
 	display: flex;
 	justify-content: space-around;
@@ -71,7 +74,9 @@ $grey-background: #f5f5f5;
 
 }
 
+// ===================================
 // Checklist List Container and Items
+// ===================================
 ul.checklist-list-container {
 	padding: 0; 
 }
