@@ -26,6 +26,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
     "react-router-dom": "^4.2.2",
+    "react-sanfona": "^1.0.6",
     "react-svg-loader": "^1.1.1",
     "react-tabbed-view": "^1.1.1",
     "redux": "^3.5.2",
