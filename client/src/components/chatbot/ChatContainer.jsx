@@ -26,7 +26,7 @@ class ChatContainer extends React.Component {
   render() {
     let botContainer;
     if (this.props.theme === 'dark') {
-      botContainer = 'dark-grey-bg chat-container-bg';
+      botContainer = 'mono-grey-bg chat-container-bg';
     } else {
       botContainer = 'chat-box-bg chat-container-bg';
     }
