@@ -1,10 +1,16 @@
 import React, { PropTypes } from 'react';
 
 const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
-  <div className="list-item-container">
+  <div 
+    className="list-item-container"
+    style={{
+      backgroundColor: completed ? "#eeeeee" : "#ffffff"
+    }}
+  >
     <i 
       onClick={onClick}
       className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
+
     >
     </i>
     
@@ -15,7 +21,7 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
       <div className="list-item-title" >
         {title}
         <i
-           
+          onClick={onToggle} 
           className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-chevron fa fa-chevron-down"}
         >
         </i>
@@ -23,7 +29,7 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
       <div 
         className="list-item-text"
         style={ {
-          display: expanded ? 'block' : 'none'
+          display: expanded ? "block" : "none"
         }}
       >
         {blockText}
