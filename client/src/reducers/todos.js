@@ -14,6 +14,10 @@ const todo = (state, action) => {
     return Object.assign({}, state, {
       completed: !state.completed
     })
+  case 'ACCORDION_TODO':
+    return Object.assign({}, state, {
+      expanded: true
+    })
   default:
     return state
   }
