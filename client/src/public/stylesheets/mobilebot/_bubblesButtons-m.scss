@@ -84,5 +84,7 @@
   display: -ms-flexbox;
   display: flex;
   padding: 1em 0em 1em 1em;
-  /* margin-top: 1em; */
+  @include xxs {
+    width: 88vw;
+  }
 }

@@ -74,7 +74,7 @@ class Chatbar extends React.Component {
               type="button"
               value="speak"
               // ref="rec" //a react attrib
-              className="mic"
+              className="mic-m"
               onClick={this.props.onClick.bind(this)}
             >
               <i className="material-icons" style={{ fontSize: '35px' }}>
