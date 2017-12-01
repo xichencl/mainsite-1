@@ -1,26 +1,26 @@
 import React, { PropTypes } from 'react';
 
-const Todo = ({ onClick, completed, title, blockText, onToggle }) => (
+const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
   <div className="list-item-container">
-    
-    <div 
+    <i 
       onClick={onClick}
       className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
-    ></div>
+    ></i>
     
-    <div className="list-item">
-      <div 
-        className="list-item-title"
-        onClick={onToggle}
-      >
+    <div className="list-item" onClick={onToggle}>
+      <div className="list-item-title" >
         {title}
+        <i 
+          className={expanded ? "list-item-chevron fa fa-chevron-up" : "list-item-title fa fa-chevron-down"}
+        >
+        </i>
       </div>
-      <div className="list-caret fa fa-caret-down">
-        <div className="hideText">{blockText}</div>
+      <div className={expanded ? "list-item-text" : "list-item-text hideText"}>
+        {blockText}
       </div>
 
     </div>
-
+ 
   </div>
 )
 
@@ -29,7 +29,7 @@ Todo.propTypes = {
   onToggle: PropTypes.func.isRequired,
   completed: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired, 
-  // toggled: PropTypes.bool.isRequired
+  expanded: PropTypes.bool.isRequired
 }
 
 export default Todo

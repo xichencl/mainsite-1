@@ -24,9 +24,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
+      console.log('todoClick dispatch')
       dispatch(toggleTodo(id))
     },
     onAccordionClick: (id) => {
+      console.log('accordion dispatch');
       dispatch(accordionTodo(id))
     }
   }

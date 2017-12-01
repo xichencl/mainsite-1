@@ -73,13 +73,6 @@ export const toggleTodo = (id) => {
   }
 }
 
-export const expandTodo = (id) => {
-  return {
-    type: 'EXPAND_TODO',
-    id
-  }
-}
-
 export const accordionTodo = (id) => {
   return {
     type: 'ACCORDION_TODO',

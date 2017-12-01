@@ -10,8 +10,9 @@ const TodoList = ({ todos, onTodoClick, onAccordionClick, loading, toggled }) =>
         <Todo
           key={todo.id}
           {...todo}
-          onClick={() => onTodoClick(todo.id)}
-          onToggle={() => onAccordionClick(todo.id)}
+          onClick={() => { onTodoClick(todo.id); }}
+          onToggle={() => { onAccordionClick(todo.id);}}
+
         />
       )}
     </div>
@@ -23,6 +24,7 @@ TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
+    expanded: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired, 
     
   }).isRequired).isRequired,

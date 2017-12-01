@@ -15,8 +15,11 @@ const todo = (state, action) => {
       completed: !state.completed
     })
   case 'ACCORDION_TODO':
+    if(state.id != action.id) {
+      return state
+    }
     return Object.assign({}, state, {
-      expanded: true
+      expanded: !state.completed
     })
   default:
     return state
@@ -33,6 +36,10 @@ const todos = (state = [], action) => {
       }))
     ]
   case 'TOGGLE_TODO':
+    return state.map(t =>
+      todo(t, action)
+    )
+  case 'ACCORDION_TODO':
     return state.map(t =>
       todo(t, action)
     )
