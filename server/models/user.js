@@ -19,7 +19,7 @@ const Schema = mongoose.Schema;
 //= ===============================
 const CaseSchema = new Schema({
   isPlaintiff: String,
-  caseNum: {
+  caseNumber: {
     type: String,
   },
   caseType: {

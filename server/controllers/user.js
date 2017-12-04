@@ -25,7 +25,7 @@ exports.viewProfile = function (req, res, next) {
 
 exports.postData = function (req, res, next) {
   const isPlaintiff = req.body.isPlaintiff;
-  const caseNum = req.body.caseNum;
+  const caseNumber = req.body.caseNumber;
   const caseType = req.body.caseType;
   const userId = req.params.userId;
 
@@ -36,7 +36,9 @@ exports.postData = function (req, res, next) {
       return next(err);
     }
 
-    user.cases.push({ isPlaintiff, caseNum, caseType });
+    //if case already there, either write or res.err
+
+    user.cases.push({ isPlaintiff, caseNumber, caseType });
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be saved.' });

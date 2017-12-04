@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
+
 // this component displays in the profile dashboard as a list of current cases attached to user profile
 class MyCases extends Component {
   constructor(props) {
@@ -24,28 +25,33 @@ class MyCases extends Component {
 
   render() {
     console.log("Cases:", this.props.cases);
+    // const cases = this.props.cases.map((value, key) => {
+    //           <div key={key}>
+    //             <hr className='Box-line-md' />
+    //             <Link to='my-case' className='my-case-link'>
+    //               <p> { value.caseNum ? value.caseNum : '' } </p>
+    //               <p className='p2'>{ value.caseType } </p>
+    //             </Link>
+    //           </div>
+    //         });
+    // console.log(cases);
     return (
       <div>
       	<div className={this.props.classStyle}>
       		<div className='Portal-box-content Grey-background'>
 	      		<h3>My Cases<Link to='addCase' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
-	      		<hr className='Box-line-md' />
-	      		{/*list case number and type here */}
-            <Link to='my-case' className='my-case-link'>
-              <p> { this.props.cases.length > 0 ? this.props.cases[0].caseType : '' } </p>
-              <p className='p2'>{ this.props.cases.length > 0 ? this.props.cases[0].caseType : '' } </p>
-            </Link>
-
-	      		<hr className='Box-line-md' />
-	      		<Link to='my-case' className='my-case-link'>
-              <p>S7221909N </p>
-  	      		<p className='p2'> Small Claims</p>
-            </Link> 
-
-	      		<hr className='Box-line-md' />
-	      		<p> </p>
-	      		<p className='p2'> </p>
-	      	</div>
+	      	  { this.props.cases.map((value, key) => {
+              return (
+              <div key={key}>
+                <hr className='Box-line-md' />
+                <Link to='my-case' className='my-case-link'>
+                  <p> { value.caseNumber ? value.caseNumber : '' } </p>
+                  <p className='p2'>{ value.caseType } </p>
+                </Link>
+              </div>
+              );
+            }) }
+          </div>
        	</div>
       	
       </div>

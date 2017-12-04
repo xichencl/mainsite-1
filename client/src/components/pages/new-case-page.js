@@ -41,7 +41,7 @@ function validate(formProps) {
 
 class NewCase extends Component{
 	handleFormSubmit(formProps) {
-		console.log("Find errorType: ", this.props);
+		console.log("FormProps: ", formProps);
     const uid = cookie.get('user')._id;
 		this.props.postData('post_data', this.props.error, true, `/user/${uid}/postData`, this.props.dispatch, formProps);
 	}

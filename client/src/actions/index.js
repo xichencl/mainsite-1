@@ -105,6 +105,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
       type: action,
       payload: response.data,
     });
+    window.location.href = `${CLIENT_ROOT_URL}/portal`;
   })
   .catch((error) => {
     errorHandler(dispatch, error.response, errorType);
