@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, browserHistory } from 'react-router-dom';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
-import ChatContainer from './components/chatbot/ChatContainer.jsx';
-import OpenBot from './components/chatbot/OpenBot.jsx';
+// DONT DELETE commented Bot out to hide from all views until bot works for all case types.
+// for now bot will only live in small claims
+// import Bot from './components/chatbot/Bot.jsx';
+import MobileBot from './components/mobilebot/MobileBot.jsx';
+
 // Import static pages
 import HomePage from './components/pages/home-page';
 import TestHomePage from './components/pages/test-home-page';
@@ -52,60 +55,67 @@ import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import 
 import RequireAuth from './components/auth/require-auth';
 
 export default class AppRouter extends Component {
+  constructor(props) {
+      super(props);
+  }
+
+
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter history={browserHistory}>
         <div>
           {/* <ToggleBox />*/}
-          <div className="App">
-            <div className="App-mask" />
-            <Navbar />
-            <Search />
+          <Switch>
+            <Route path="/mbot" history={browserHistory} component={MobileBot} />
+            <div className="App">
+              <div className="App-mask" />
+              <Navbar />
+              <Search />
+              {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
+              for now bot will only live in small claims*/}
+              {/* <Bot />*/}
+              <div className="Page">
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/test" component={TestHomePage} />
+                  <Route path="/test-todo" component={TodoApp} />
+                  <Route path="/contact-us" component={ContactPage} />
+                  <Route path="/portal" component={Portal} />
+                  <Route path="/my-case" component={MyCasesDashboard} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/logout" component={Logout} />
+                  <Route path="/faqs" component={FAQs} />
+                  <Route path="/forms" component={Forms} />
+                  <Route
+                    path="/locations"
+                    component={() =>
+                      (window.location = 'http://www.cc-courts.org/locations/locations.aspx')}
+                  />
+                  <Route
+                    path="/find-a-case"
+                    component={() =>
+                      (window.location = 'http://www.cc-courts.org/civil/online-case.aspx')}
+                  />
+                  <Route path="/forgot-password" component={ForgotPassword} />
+                  <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
-            <div className="position-bot the-bot">
-              <OpenBot ref={el => (this.chatWindow = el)} />
+                  <Route path="/smallclaims" component={SmallClaims} />
+                  <Route path="/guardianship" component={Guardianship} />
+                  <Route path="/eviction" component={Eviction} />
+                  <Route path="/dv" component={Dv} />
+                  <Route path="/traffic" component={Traffic} />
+                  <Route path="/family" component={FamilyHome} />
+                  <Route path="/adoption" component={Adoption} />
+
+                  <Route path="/profile" component={RequireAuth(ViewProfile)} />
+
+                  <Route path="*" component={NotFoundPage} />
+                </Switch>
+              </div>
             </div>
-            <div className="Page">
-              <Switch>
-
-              <Route exact path="/" component={ HomePage } />
-              <Route path="/test" component={ TestHomePage } />
-              <Route path="/test-todo" component={ TodoApp } />
-              <Route path="/contact-us" component={ ContactPage } />
-              <Route path="/portal" component={ Portal } />
-              <Route path="/my-case" component={ MyCasesDashboard } />
-              <Route path="/register" component={ Register } />
-              <Route path="/login" component={ Login } />
-              <Route path="/logout" component={ Logout } />
-              <Route path="/faqs" component={ FAQs } />
-              <Route path="/forms" component={ Forms } />
-              <Route 
-                path="/locations" 
-                component={ () => window.location = "http://www.cc-courts.org/locations/locations.aspx" }
-              />
-              <Route 
-                path="/find-a-case" 
-                component={ () => window.location = "http://www.cc-courts.org/civil/online-case.aspx" }
-              />
-              <Route path="/forgot-password" component={ ForgotPassword } />
-              <Route path="/reset-password/:resetToken" component={ ResetPassword } />
-              
-              <Route path="/smallclaims" component={ SmallClaims } />
-              <Route path="/guardianship" component={ Guardianship } />
-              <Route path="/eviction" component={ Eviction } />
-              <Route path="/dv" component={ Dv } />
-              <Route path="/traffic" component={ Traffic } />
-              <Route path="/family" component={ FamilyHome } />
-              <Route path="/adoption" component={ Adoption } />
-
-              <Route path="/profile" component={RequireAuth(ViewProfile)} />
-              
-
-              <Route path='*' component={ NotFoundPage } />
-            </Switch>
-            </div>
-          </div>
-          <Footer />
+            <Footer />
+          </Switch>
         </div>
       </BrowserRouter>
     );
@@ -113,17 +123,12 @@ export default class AppRouter extends Component {
 }
 
 /*
-
-
 <BrowserRouter>
 				<Route path="/" component={App}>
 				    <Route path="/contact-us" component={ContactPage} />
-
-
 				    <Route path="*" component={NotFoundPage} />
 				</Route>
 			</BrowserRouter>
-
 */
 
 //	 <Route path="component-samples" component={RequireAuth(ComponentSamplesPage)} />

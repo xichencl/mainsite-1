@@ -68,16 +68,16 @@ class Chatbar extends React.Component {
     return (
       // this empty div wraps everything, and lets the chatbar view correctly in safari*/}
       <div>
-        <div className="chatbar">
+        <div className="chatbar-m">
           <div>
             <button
               type="button"
               value="speak"
               // ref="rec" //a react attrib
-              className="mic"
+              className="mic-m"
               onClick={this.props.onClick.bind(this)}
             >
-              <i className="material-icons" style={{ fontSize: '35px' }}>
+              <i className="material-icons" style={{ fontSize: '39px' }}>
                 mic
               </i>
             </button>
@@ -100,7 +100,7 @@ class Chatbar extends React.Component {
               type="button"
               // ref="sendButton" //a react attrib
               value="send"
-              className="circle-x"
+              className="circle-m"
               onClick={this.props.onClick.bind(this)}
             >
               <i className="material-icons" style={{ fontSize: '20px' }}>

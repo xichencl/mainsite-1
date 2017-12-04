@@ -8,32 +8,32 @@ class Header extends React.Component {
     super(props);
   }
 
+  
+
   render() {
     return (
       // this empty div wraps everything, and lets header view correctly in safari*/}
       <div>
         <div className="header-m">
-          <div className="icon-container">
+          <div className="icon-container-m">
             <button
               type="button"
-              id="close-button"
-              className="close-bot"
+              id="close-button-m"
+              className="back-arrow-m"
               onClick={this.props.onClick.bind(this)}
             >
-              <i className="material-icons" style={{ fontSize: '1.2em' }}>
-                close
+              <i className="material-icons" style={{ fontSize: '2.3em' }}>
+                arrow_back
               </i>
             </button>
-
             {/* case type button*/}
             {/* <button type="button">
               {this.props.ai.caseType}
             </button>*/}
-
             <button
               type="button"
               id="refresh-button"
-              className="refresh-bot"
+              className="refresh-bot-m"
               onClick={this.props.onClick.bind(this)}
             >
               <i className="material-icons" style={{ fontSize: '2.5em' }}>
@@ -63,7 +63,8 @@ const mapDispatchToProps = dispatch => ({
       this.props.resetSession();
     } else {
       // id==='close-button'
-      dispatch({ type: 'TOGGLE_BOT' });
+      // dispatch({ type: 'TOGGLE_BOT' });
+      this.props.history.goBack(); 
     }
   },
 });

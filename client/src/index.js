@@ -27,8 +27,8 @@ import './public/stylesheets/app.scss';
 //   ReactGA.pageview(window.location.pathname);
 // }
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-const store = createStoreWithMiddleware(rootReducer, {}, compose(applyMiddleware(dataService)));
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, dataService)(createStore);
+const store = createStoreWithMiddleware(rootReducer);
 
 const token = cookie.load('token');
 
@@ -39,8 +39,8 @@ if (token) {
   });
 }
 
-//experiment with theme-change
-const themes =  [];
+// experiment with theme-change
+const themes = [];
 
 ReactDOM.render(
   <Provider store={store}>
