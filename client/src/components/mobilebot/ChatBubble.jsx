@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
-import ImageViewer from './ImageViewer.jsx';
+import ImageViewer from '../chatbot/ImageViewer.jsx';
 // const opn = require('opn');
 const CASETYPES = {
   'Small Claims': 0,
@@ -24,8 +24,12 @@ class ChatBubble extends React.Component {
       className += ' mono-bot-bubble';
     }
 
-    const botButtons = 'button-blue bot-buttons';
-    let userBubble = 'user-bubble user-bubble-alignment';
+    let botButtons = 'button-blue bot-buttons';
+    if (this.props.theme === 'dark') {
+      botButtons += ' botButtons';
+    }
+
+    let userBubble = 'user-bubble user-bubble-alignment-m';
     if (this.props.theme === 'dark') {
       userBubble += ' mono-user-bubble';
     }
@@ -84,10 +88,10 @@ class ChatBubble extends React.Component {
         </div>
       );
     } else if (this.props.isBot === false) {
-      className = ' user-bubble user-bubble-alignment'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-alignment
+      className = ' user-bubble user-bubble-alignment-m'; // using '=' instead of '+=' seperates blue chat-bubble from orange user-bubble-alignment
       return (
         // allows user bubble and bot bubble to be on two different lines because we're wrapping in div className=bubble-breaker
-        <div className="bubble-breaker">
+        <div className="bubble-breaker-m">
           <div className={userBubble}>
             {ReactHtmlParser(this.props.message)}
           </div>

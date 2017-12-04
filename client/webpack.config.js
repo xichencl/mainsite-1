@@ -47,21 +47,20 @@ const config = {
       //   query: {
       //     limit: 10000,
       //   },
-      // }, 
+      // },
       // {
       //   test: /\.svg$/,
       //   loader: 'url-loader'
       // }
-      
+
       {
         test: /\.(png|svg|ico)$/,
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]'
-        }
-      }
-
+          name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
+        },
+      },
       // {
       //   test: /\.(png|jpg|gif)$/,
       //   use: [
@@ -94,12 +93,12 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: './',
-    proxy:{'/api':'http://localhost:3000'},
-     // settings for serving from remote server
-    host:'0.0.0.0',
-    // port:80,
-    // proxy: {'/api':'http://52.39.81.245:3000'},
-    
+    proxy: { '/api': 'http://localhost:3000' },
+    host: '0.0.0.0',
+    /* settings for serving from remote server
+    port:80,
+    proxy: {'/api':'http://52.39.81.245:3000'},
+    */
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
@@ -107,13 +106,13 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({
       sourceMap: true,
-      uglifyOptions:{
+      uglifyOptions: {
         properties: {
           compress: {
             warnings: false,
             comparisons: false, // don't optimize comparisons
-          }
-        }
+          },
+        },
       },
     }),
     new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),

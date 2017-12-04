@@ -10,18 +10,28 @@
 @import "base/checklist";
 
 //MIXINS
-@import "base/bot/_mixins.scss";
+@import "bot/_mixins.scss";
 
 //BOT STYLING ONLY
-@import "base/bot/_variables.scss";
-@import "base/bot/_bubblesButtons.scss";
-@import "base/bot/_agentsTable.scss";
-@import "base/bot/_bot.scss";
-@import "base/bot/_header.scss";
-@import "base/bot/_languageModal.scss";
-@import "base/bot/_mapModal.scss";
-@import "base/bot/_openChat.scss";
-@import "base/bot/_settings.scss";
-@import "base/bot/_chatContainer.scss";
-@import "base/bot/_chatbar.scss";
-@import "base/bot/_theme.scss";
+@import "bot/_variables.scss";
+@import "bot/_bubblesButtons.scss";
+@import "bot/_agentsTable.scss";
+@import "bot/_bot.scss";
+@import "bot/_header.scss";
+@import "bot/_languageModal.scss";
+@import "bot/_mapModal.scss";
+@import "bot/_openChat.scss";
+@import "bot/_settings.scss";
+@import "bot/_chatContainer.scss";
+@import "bot/_chatbar.scss";
+@import "bot/_theme.scss";
+
+//MOBILE BOT STYLING
+@import "mobilebot/_bubblesButtons-m.scss";
+@import "mobilebot/_agentsTable-m.scss";
+@import "mobilebot/_bot-m.scss";
+@import "mobilebot/_header-m.scss";
+@import "mobilebot/_languageModal-m.scss";
+@import "mobilebot/_mapModal-m.scss";
+@import "mobilebot/_chatContainer-m.scss";
+@import "mobilebot/_chatbar-m.scss";

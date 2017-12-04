@@ -43,6 +43,10 @@
   margin-bottom: 10px;
   padding: 30px 10px;
   @include flex-center;
+  @include xxs {
+    width: 9em;
+    margin: 8px 0px;
+  }
   height: 0px; /*overwrites .button-blue height, necessary to show correctly in moz*/
 }
 
@@ -68,5 +72,7 @@
   /*div wraps user bubble forcing next bubble onto next line*/
   background-color: transparent;
   width: 23em;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }

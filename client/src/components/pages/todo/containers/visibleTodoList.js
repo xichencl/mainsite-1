@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleTodo } from '../../../../actions/index.js'
+import { accordionTodo } from '../../../../actions/index.js'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
@@ -23,7 +24,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
+      console.log('todoClick dispatch')
       dispatch(toggleTodo(id))
+    },
+    onAccordionClick: (id) => {
+      console.log('accordion dispatch');
+      dispatch(accordionTodo(id))
     }
   }
 }
