@@ -11,11 +11,13 @@ export default class MyCasesDashboard extends Component {
   }
 
   render() {
+    // console.log("CaseData props: ", this.props);
+    // console.log("CaseData state:", this.state);
     return (
       <div>
       	<div className='dashboard-wrapper'>
-      	  <h1>My Case - A8271HKS2</h1>
-      	  <MyCaseData className='dashboard-inner content-wrapper'/>
+      	  <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
+      	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
 					<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>
 
       		<div className='sidebar-wrapper'>

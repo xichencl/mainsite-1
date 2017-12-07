@@ -40,11 +40,11 @@ class MyCases extends Component {
       	<div className={this.props.classStyle}>
       		<div className='Portal-box-content Grey-background'>
 	      		<h3>My Cases<Link to='addCase' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
-	      	  { this.props.cases.map((value, key) => {
+	      	  { this.props.cases.map((value) => {
               return (
-              <div key={key}>
+              <div key={value._id}>
                 <hr className='Box-line-md' />
-                <Link to='my-case' className='my-case-link'>
+                <Link to={{pathname:'/my-case', state:{caseData: value}}} className='my-case-link'>
                   <p> { value.caseNumber ? value.caseNumber : '' } </p>
                   <p className='p2'>{ value.caseType } </p>
                 </Link>

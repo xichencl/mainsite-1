@@ -4,7 +4,7 @@ import deepcopy from 'deepcopy';
 const INITIAL_STATE = { profile: {}, cases: [], message: '', error: '' };
 
 export default function (state = INITIAL_STATE, action) {
-  console.log("ACTION: ", action);
+  // console.log("ACTION: ", action);
   switch (action.type) {
     case FETCH_USER:
       const newCases = state.cases.slice();

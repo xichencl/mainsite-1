@@ -8,8 +8,8 @@ const Case = require('../models/case');
 //= =======================================
 exports.viewProfile = function (req, res, next) {
   const userId = req.params.userId; 
-  console.log("req user", req.user);
-  console.log("req params", req.params);
+  // console.log("req user", req.user);
+  // console.log("req params", req.params);
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {
@@ -24,10 +24,12 @@ exports.viewProfile = function (req, res, next) {
 };
 
 exports.postData = function (req, res, next) {
+  // console.log("post req body:", req.body);
   const isPlaintiff = req.body.isPlaintiff;
   const caseNumber = req.body.caseNumber;
   const caseType = req.body.caseType;
   const userId = req.params.userId;
+  const caseId = req.body._id ? req.body._id : '';
 
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
@@ -36,9 +38,13 @@ exports.postData = function (req, res, next) {
       return next(err);
     }
 
-    //if case already there, either write or res.err
-
-    user.cases.push({ isPlaintiff, caseNumber, caseType });
+    //check if case already exists
+    const index = user.cases.findIndex((myCase) => {return myCase._id == caseId});
+    if (index !== -1){
+      user.cases[index] = { isPlaintiff, caseNumber, caseType };
+    }else {
+      user.cases.push({ isPlaintiff, caseNumber, caseType });
+    }
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be saved.' });
