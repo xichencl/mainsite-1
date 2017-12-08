@@ -29,6 +29,7 @@
     "react-sanfona": "^1.0.6",
     "react-svg-loader": "^1.1.1",
     "react-tabbed-view": "^1.1.1",
+    "react-widgets": "^4.1.1",
     "redux": "^3.5.2",
     "redux-form": "^6.0.0-rc.3",
     "redux-thunk": "^2.1.0",

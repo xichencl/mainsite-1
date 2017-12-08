@@ -7,7 +7,10 @@ const ChecklistNavbar = () => (
     <FilterLink filter="SHOW_BEFORE">
       <div className="tab-group">
         <div className="icn-tab before">
-          <div className="icn-number">1</div>
+          <div 
+            className="icn-number"
+            
+          >1</div>
         </div>
         <h3 className="tab caption">Before</h3>
       </div>
