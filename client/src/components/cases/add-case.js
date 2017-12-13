@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import DropdownList from 'react-widgets/lib/DropdownList';
 import { Link } from 'react-router-dom';
 // create action
-import { AddUserCase } from '../../actions/auth'; 
+import { AddUserCase } from '../../actions'; 
 import SquareBox from '../template/square-box';
 
 const form = reduxForm({
@@ -72,7 +72,7 @@ class AddCase extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="AddCase">
+      <div className="Add-case">
         <h1>Add Case</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           {this.renderAlert()}

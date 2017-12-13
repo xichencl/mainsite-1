@@ -79,6 +79,16 @@ export const accordionTodo = (id) => {
     id
   }
 }
+
+// checklist add case
+export const addUserCase = (caseType) => {
+  return {
+    type: 'ADD_CASE',
+    caseType
+  }
+}
+
+
 ///////////
 
 // export const loadChecklist = () => dispatch => {

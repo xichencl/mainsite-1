@@ -1,3 +1,15 @@
+const checklist = (state, action) => {
+  switch (action.type) {
+    case 'SELECT_CASE':
+      return {
+        text: action.text,
+      }
+      default: 
+        return state
+  }
+}
+
+// toggle todo in checklist
 const todo = (state, action) => {
   switch (action.type) {
   case 'ADD_TODO':
@@ -25,6 +37,7 @@ const todo = (state, action) => {
   }
 }
 
+// toggle todo and load todo data in checklist
 const todos = (state = [], action) => {
   switch (action.type) {
   case 'ADD_TODO':
