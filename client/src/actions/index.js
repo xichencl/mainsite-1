@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
@@ -29,7 +29,7 @@ export function fetchUser(uid) {
         payload: response.data.user,
       });
     })
-    .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
+    .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };
 }
 
@@ -133,6 +133,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
   const requestUrl = API_URL + url;
   let headers = {};
 
+  console.log("Data: ", data);
   if (isAuthReq) {
     headers = { headers: { Authorization: cookie.get('token') } };
   }
@@ -143,6 +144,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
       type: action,
       payload: response.data,
     });
+    window.location.href = `${CLIENT_ROOT_URL}/portal`;
   })
   .catch((error) => {
     errorHandler(dispatch, error.response, errorType);
@@ -151,6 +153,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
 
 // Get Request
 export function getData(action, errorType, isAuthReq, url, dispatch) {
+  return function (dispatch) {
   const requestUrl = API_URL + url;
   let headers = {};
 
@@ -160,14 +163,18 @@ export function getData(action, errorType, isAuthReq, url, dispatch) {
 
   axios.get(requestUrl, headers)
   .then((response) => {
+    console.log("Response.Data: ", response.data);
+    console.log("Action type: ", action);
     dispatch({
-      type: action,
-      payload: response.data,
+      type: GET_DATA,
+      payload: response.data.cases,
     });
   })
   .catch((error) => {
+    console.log("error handler is invoked");
     errorHandler(dispatch, error.response, errorType);
   });
+};
 }
 
 // Put Request

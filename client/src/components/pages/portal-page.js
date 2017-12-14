@@ -7,12 +7,41 @@ import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
 // import ViewTodo from '../todo/view-todo';
+import { API_URL, fetchUser } from '../../actions/index';
+// import axios from 'axios';
+// import Cookies from 'universal-cookie';
+// const cookie = new Cookies();
 
 import SearchIcon from '../../img/search.svg';
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 
 class Portal extends Component {
+  componentWillMount() {
+    // Fetch user data prior to component mounting
+    if (this.props.authenticated){
+      const user = cookie.get('user');
+      const uid = user._id;
+      this.props.fetchUser(uid);
+    }
+  }
+
   renderLinks() {
     if (this.props.authenticated) {
+      // console.log("Props:", this.props);
+      // const user = cookie.get('user');
+      // const uid = user._id;
+      // this.props.fetchUser(uid);
+      // fetchUser(cookie.get('user')._id);
+      // console.log(cookie.get('token'));
+      // axios.get(`${API_URL}/user/${cookie.get('user')._id}`, {headers: {'Authorization': `${cookie.get('token')}`}})
+      // .then((response)=>{
+      //   console.log(response.data);
+      //   data = response.data;
+      // })
+      // .catch((error)=>{
+      //   console.log(error);
+      // });
       return [
 
         <div key={`${1}profile`}>
@@ -83,7 +112,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Portal);
+export default connect(mapStateToProps, { fetchUser })(Portal);
 
 
 

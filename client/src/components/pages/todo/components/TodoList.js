@@ -1,25 +1,34 @@
 import React, { PropTypes } from 'react'
 import Todo from './Todo'
 
-const TodoList = ({ todos, onTodoClick, onAccordionClick, loading, toggled }) => (
-  <div>
+class TodoList extends React.Component{
+  constructor(props){
+    super(props);
+  }
 
-    <div className="checklist-list-container">
-      {loading ? "Loading...": ""}
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={() => { onTodoClick(todo.id); }}
-          onToggle={() => { onAccordionClick(todo.id);}}
+  render() {
+    const { todos, onTodoClick, onAccordionClick, loading, onSaveClick } = this.props;
+    return ( 
+    <div>
+      <button type="button" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>
+      <div className="checklist-list-container">
+        {loading ? 'Loading...': ''}
+        {todos.map(todo =>
+          <Todo
+            key={todo.id}
+            {...todo}
+            onClick={() => { onTodoClick(todo.id); }}
+            onToggle={() => { onAccordionClick(todo.id);}}
+          />
+        )}
+      </div>
 
-        />
-      )}
     </div>
 
-  </div>
-)
+    );
 
+    }
+}
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { postData } from '../../actions/index';
+import { connect } from 'react-redux';
+import { CLIENT_ROOT_URL, API_URL } from '../../actions/index';
 
 
 class MyCaseData extends Component {
@@ -8,12 +11,15 @@ class MyCaseData extends Component {
   }
 
   render() {
+  	// console.log("MyCaseData:", this.props);
     return (
       <div>
       	<div className='Box Case-data-box col-2-3 '>
       		<div className='Portal-box-content Grey-background'>
-	      		<h3 className='Case-data-title'>Small Claims Case - A8271HKS2</h3>
-	      		<hr />	      		
+	      		<h3 className='Case-data-title'>{this.props.caseData.caseType ? this.props.caseData.caseType:''} - {this.props.caseData.caseNumber ? this.props.caseData.caseNumber:''}</h3>
+	      		<Link to={{pathname:"/addCase", state:{id : this.props.caseData._id}}}>Edit</Link>	 
+	      		<br />
+	      		     		
 	      		<div className='Box-row'>
 	      			<div className='Parties'>
 	      				<p>Plaintiff(s)</p>
@@ -56,12 +62,12 @@ class MyCaseData extends Component {
 }
  
 // function mapStateToProps(state) {
-// 	console.log(state.user)
+// 	// console.log(state.user)
 //   return {
-//     profile: state.user.profile,
+//     cases: state.user.cases,
 //   };
 // }
 
-export default MyCaseData
-// export default connect(mapStateToProps, { fetchUser })(ViewProfile);
+// export default MyCaseData
+export default connect(null, { postData })(MyCaseData);
 
