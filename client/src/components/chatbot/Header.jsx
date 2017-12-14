@@ -10,18 +10,20 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="header-x">
-        <div className="icon-container">
-          <button
-            type="button"
-            id="close-button"
-            className="close-bot"
-            onClick={this.props.onClick.bind(this)}
-          >
-            <i className="material-icons" style={{ fontSize: '1.2em' }}>
-              close
-            </i>
-          </button>
+      // this empty div wraps everything, and lets header view correctly in safari*/}
+      <div>
+        <div className="header-m">
+          <div className="icon-container">
+            <button
+              type="button"
+              id="close-button"
+              className="close-bot"
+              onClick={this.props.onClick.bind(this)}
+            >
+              <i className="material-icons" style={{ fontSize: '1.2em' }}>
+                close
+              </i>
+            </button>
 
           <div>
             {this.props.ai.caseType}
@@ -29,16 +31,17 @@ class Header extends React.Component {
 
           <button id="email">email</button>
 
-          <button
-            type="button"
-            id="refresh-button"
-            className="refresh-bot"
-            onClick={this.props.onClick.bind(this)}
-          >
-            <i className="material-icons" style={{ fontSize: '2.5em' }}>
-              refresh
-            </i>
-          </button>
+            <button
+              type="button"
+              id="refresh-button"
+              className="refresh-bot"
+              onClick={this.props.onClick.bind(this)}
+            >
+              <i className="material-icons" style={{ fontSize: '2.5em' }}>
+                refresh
+              </i>
+            </button>
+          </div>
         </div>
       </div>
     );

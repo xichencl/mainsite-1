@@ -54,11 +54,10 @@ class NewCase extends Component{
 
   handleInitialize() {
     const caseId = this.props.location.state ? this.props.location.state.id : '';
-    let initData = {};
+    let initData;
     if (caseId) {
       //load existing case data
-      const myCase = this.props.cases.find( function(e) {return e._id === caseId}) 
-      initData = myCase;
+      initData = this.props.cases.find( function(e) {return e._id === caseId}) 
     }
     this.props.initialize(initData);
   }
@@ -91,7 +90,7 @@ class NewCase extends Component{
 
 	render() {
     /*handleSubmit a property in reduxForm*/
-    	const { handleSubmit, pristine, reset, submitting, onChange, value } = this.props;
+    	const { handleSubmit, pristine, reset, submitting } = this.props;
       // console.log("State - case number:", this.state.case);
       // const caseNumber = this.state.case.caseNumber ? this.state.case.caseNumber : '';
       // console.log("case number: ", caseNumber);

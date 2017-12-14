@@ -17,19 +17,21 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
 class Portal extends Component {
-  // componentWillMount() {
-  //   // Fetch user data prior to component mounting
-  //   const user = cookie.get('user');
-  //   const uid = user._id;
-  //   this.props.fetchUser(uid);
-  // }
-
-  renderLinks() {
-    if (this.props.authenticated) {
-      console.log("Props:", this.props);
+  componentWillMount() {
+    // Fetch user data prior to component mounting
+    if (this.props.authenticated){
       const user = cookie.get('user');
       const uid = user._id;
       this.props.fetchUser(uid);
+    }
+  }
+
+  renderLinks() {
+    if (this.props.authenticated) {
+      // console.log("Props:", this.props);
+      // const user = cookie.get('user');
+      // const uid = user._id;
+      // this.props.fetchUser(uid);
       // fetchUser(cookie.get('user')._id);
       // console.log(cookie.get('token'));
       // axios.get(`${API_URL}/user/${cookie.get('user')._id}`, {headers: {'Authorization': `${cookie.get('token')}`}})

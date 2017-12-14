@@ -11,7 +11,7 @@ const config = require('../config/main');
 // TO-DO Add issuer and audience
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
-    expiresIn: 600 // in seconds
+    expiresIn: 6080 // in seconds
   });
 }
 
@@ -20,8 +20,8 @@ function generateToken(user) {
 //= =======================================
 exports.login = function (req, res, next) {
   const userInfo = setUserInfo(req.user);
-  console.log("executed");
-  console.log(req.user);
+  // console.log("executed");
+  // console.log(req.user);
   res.status(200).json({
     token: `JWT ${generateToken(userInfo)}`,
     user: userInfo
@@ -68,7 +68,7 @@ exports.register = function (req, res, next) {
     const user = new User({
       email,
       password,
-      profile: { firstName, lastName, address, phone }
+      profile: { firstName, lastName, address, phone, email }
     });
 
     user.save((err, user) => {

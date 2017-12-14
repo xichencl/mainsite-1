@@ -24,7 +24,7 @@ class MyCases extends Component {
   // }
 
   render() {
-    console.log("Cases:", this.props.cases);
+    // console.log("Cases:", this.props.cases);
     // const cases = this.props.cases.map((value, key) => {
     //           <div key={key}>
     //             <hr className='Box-line-md' />

@@ -38,7 +38,7 @@ class ViewProfile extends Component {
 }
  
 function mapStateToProps(state) {
-	console.log(state.user.profile);
+	// console.log(state.user.profile);
   return {
     profile: state.user.profile,
   };

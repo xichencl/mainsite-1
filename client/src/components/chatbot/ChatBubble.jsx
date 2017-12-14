@@ -4,7 +4,14 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import ImageViewer from './ImageViewer.jsx';
 // const opn = require('opn');
-const CASETYPES = {'Small Claims':0, 'Guardianship':1, 'Domestic Violence':2, 'Family Law':3, 'Eviction':4, 'Traffic':5};
+const CASETYPES = {
+  'Small Claims': 0,
+  Guardianship: 1,
+  'Domestic Violence': 2,
+  'Family Law': 3,
+  Eviction: 4,
+  Traffic: 5,
+};
 
 class ChatBubble extends React.Component {
   constructor(props) {
@@ -13,14 +20,15 @@ class ChatBubble extends React.Component {
 
   render() {
     let className = ' bot-bubble';
-    let botButtons = 'button-blue bot-buttons';
+    if (this.props.theme === 'dark') {
+      className += ' mono-bot-bubble';
+    }
+
+    const botButtons = 'button-blue bot-buttons';
     let userBubble = 'user-bubble user-bubble-alignment';
     if (this.props.theme === 'dark') {
-      className += ' dark-bot-bubble';
-      botButtons += ' botButtons';
-      userBubble += ' dark-user-bubble';
-    }  
-    
+      userBubble += ' mono-user-bubble';
+    }
 
     if (this.props.type === 'button') {
       return (
@@ -102,7 +110,7 @@ class ChatBubble extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ai : state.chat.ai
+  ai: state.chat.ai,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -128,13 +136,13 @@ const mapDispatchToProps = dispatch => ({
     // onClick on buttons
     const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
     console.log('SESSIONID: ', this.props.sessionId);
-    let inputData = { payload: data, id: this.props.sessionId };
+    const inputData = { payload: data, id: this.props.sessionId };
     // console.log("ai: ", this);
-    if (!this.props.ai.selected || this.props.message in CASETYPES){
-      inputData['ai']= false;
+    if (!this.props.ai.selected || this.props.message in CASETYPES) {
+      inputData.ai = false;
       // dispatch({type: 'SELECT_CASE_TYPE'});
-    }else{
-      inputData['ai']= true;
+    } else {
+      inputData.ai = true;
     }
     axios
       .post('/api/chat/message', inputData) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
@@ -176,7 +184,7 @@ const mapDispatchToProps = dispatch => ({
             }
           }
           // console.log('case type: ', response.data.caseType.toLowerCase());
-          dispatch({type: response.data.caseType});
+          dispatch({ type: response.data.caseType });
           // if there's a custom payload attached to api.ai response
           let customPayload;
           if (!response.data.result.fulfillment.data) {

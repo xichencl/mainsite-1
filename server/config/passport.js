@@ -12,7 +12,7 @@ const localOptions = {
 };
 
 // Setting up local login strategy
-const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
+const localLogin = new LocalStrategy(localOptions, (email, password, done) => {  
   console.log("local strategy invoked");
   User.findOne({ email }, (err, user) => {
     if (err) { return done(err); }
@@ -25,13 +25,13 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
       return done(null, user);
     });
   });
+  
 });
 
 // Setting JWT strategy options
 const jwtOptions = {
   // Telling Passport to check authorization headers for JWT
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
-  // jwtFromRequest: (req)=>{console.log(req.headers.authorization)},
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
   // Telling Passport where to find the secret
   secretOrKey: config.secret
 
@@ -46,7 +46,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, (jwt_payload, done) => {
     if (err) { return done(err, false); }
 
     if (user) {
-      console.log("User:", user);
+      // console.log("User:", user);
       done(null, user);
     } else {
       done(null, false);

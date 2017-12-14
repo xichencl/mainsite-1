@@ -3,11 +3,13 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, ERROR_RESPONSE, PUT_DATA, POST_DATA, GET_DATA } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
+// import siteData from "../data/smallClaimsData";
+
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
-export const API_URL = 'http://localhost:3000/api';
+export const API_URL = 'http://localhost:3000/api'; // database server URL
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
 
 //= ===============================
@@ -31,46 +33,72 @@ export function fetchUser(uid) {
   };
 }
 
-export function loadPageData() {
-    return (dispatch, getState) => {
-        fetchData()
-            .then(data => {
-                console.log('action', data)
-                dispatch({
-                    type : FETCH_PAGE_DATA,
-                    payload : data
-                })
-            });
-    }
+
+// load page data from local file
+export function loadPageData() {  
+  return dispatch => {
+    axios.get('./smallClaimsData.json')
+      .then(data => {
+      console.log('action', data)
+      dispatch({
+          type : FETCH_PAGE_DATA,
+          payload : data
+      })
+    })
+  }
 }
 
-// export function fetchSiteData() {
 
-//   const request = axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`);
-//   console.log(request);
-//     return {
-//       type: FETCH_PAGE_DATA,
-//       payload: request
-//       };
-// }
+// todo component actions from todo redux basics tutorial
+let nextTodoId = 0
+export const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+  }
+}
 
-// export function fetchSiteData() {
-//   // console.log(uid)
-//   return function (dispatch) {
+export const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  }
+}
 
-//     // const thisToken = cookie.get('token')
-//     axios.get(`${CLIENT_ROOT_URL}/${SITE_DATA_PATH}`)
+export const toggleTodo = (id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  }
+}
+
+export const accordionTodo = (id) => {
+  return {
+    type: 'ACCORDION_TODO',
+    id
+  }
+}
+///////////
+
+// export const loadChecklist = () => dispatch => {
+//   axios.get('./checklist_smallClaims.json')
 //     .then((response) => {
-//       dispatch({
-//         type: FETCH_PAGE_DATA,
-//         payload: response.data.page,
-//       });
+//       console.log(response.data.smallClaims, 'checking first then response')
+//       return response.data.smallClaims
 //     })
-//     .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
-//   };
+//     .then((data) => {
+//       dispatch({
+//         type: LOAD_CHECKLIST,
+//         payload: data
+//       }); 
+//     })
+//   .catch((err) => {
+//       console.error.bind(err);
+//   })
 // }
 
-
+///////////
 
 export function errorHandler(dispatch, error, type) {
   console.log('Error type: ', type);
@@ -95,6 +123,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
   const requestUrl = API_URL + url;
   let headers = {};
 
+  console.log("Data: ", data);
   if (isAuthReq) {
     headers = { headers: { Authorization: cookie.get('token') } };
   }

@@ -29,7 +29,7 @@ const CaseSchema = new Schema({
   },
   plaintiffs: [String],
   defendants: [String],
-  steps: [Boolean],
+  steps: [],
   forms: [{ formId: String, status: Boolean}]
 },
  {
@@ -60,7 +60,8 @@ const UserSchema = new Schema({
       required: true
     },
     address: {type: String},
-    phone: {type: String}
+    phone: {type: String},
+    email: {type: String}
   },
   cases: [CaseSchema],
   role: {

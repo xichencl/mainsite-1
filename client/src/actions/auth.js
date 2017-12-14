@@ -15,8 +15,8 @@ export function loginUser({ email, password }) {
     axios.post(`${API_URL}/auth/login`, { email, password })
     .then((response) => {
       console.log('Response Data:', response.data);
-      cookie.set('token', response.data.token, { path: '/', maxAge: 600});
-      cookie.set('user', response.data.user, { path: '/', maxAge: 600 });
+      cookie.set('token', response.data.token, { path: '/', maxAge: 6080});
+      cookie.set('user', response.data.user, { path: '/', maxAge: 6080 });
       console.log('Cookie: ', cookie);
       dispatch({ type: AUTH_USER });
       window.location.href = `${CLIENT_ROOT_URL}/portal`;

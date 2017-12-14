@@ -11,30 +11,40 @@
 
 .open-bot-icon {
   position: fixed;
-  display: -webkit-box;
   cursor: pointer;
   color: $bot-blue;
   //***
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  /* align-items: flex-end; */
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
-  //***
-  // @include sm {
-  // }
-  // @include md {
-  // }
-  // @include lg {
-  //   left: 55em;
-  //   top: 2.8em;
-  // }
+  @include xxs {
+    left: 311px;
+  }
+  @include mobile {
+    display: none;
+  }
 }
 
-//don't delete. may need later. see more in media queries at bottom of file
-// .text-bot-icon {
-//   color: purple;
-//   text-align: center;
-// }
+/* icon displays for mobile views <600 and links to mbot route */
+.open-bot-icon-m {
+  position: fixed;
+  cursor: pointer;
+  color: red;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  @include xxs {
+    left: 311px;
+  }
+}
 
 /* bot header */
 .header-x {
@@ -42,9 +52,7 @@
   height: 3em;
   background-color: #ffffff;
   box-shadow: 0px 2px 2px rgba(179, 179, 179, 0.7);
-  top: 0;
-  right: 100px;
-  border-left: 1px solid $not-black;
+  top: 0px;
   position: fixed;
   @include flex-center(none, center);
 }
@@ -65,6 +73,8 @@ button.close-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   bottom: .4em;
 }
@@ -76,12 +86,14 @@ button.refresh-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 button.refresh-bot:hover,
 button.close-bot:hover {
-  color: $warm-grey;
+  color: $not-white;
   outline: 0;
   padding: 0;
   border: none;
@@ -105,12 +117,32 @@ button.refresh-bot:active {
 /* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
+  fill: $icon-grey;
+  outline: 0;
+  padding: 0;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  transition: 0.2s;
+}
+
+.bm-cross-button:hover {
+  fill: $not-white;
+}
+
+.bm-cross-button {
   position: absolute;
   width: 44px !important;
   height: 44px !important;
   right: 111px !important;
   top: 5px !important;
   background: transparent;
+  @include lg {
+    width: 42px !important;
+    height: 42px !important;
+    right: 6.3em !important;
+    top: .9em !important;
+  }
 }
 
 //********************************** MEDIA QUERIES **********************************//
@@ -121,26 +153,9 @@ button.refresh-bot:active {
     top: 2.9em;
   }
 }
-
-//the code below was to add "chat" + icon to text menu. keeping it just incase we need later
-// @media (max-width: 544px) and (min-width: 200px) {
-//   .open-bot-icon {
-//     display: none;
-//   }
-// }
-// @media (max-width: 544px) and (min-width: 200px) {
-//   .text-bot-icon {
-//     color: $bot-blue;
-//     display: flex;
-//     align-items: center;
-//     position: relative;
-//     top: 5em;
-//     left: 6.7em;
-//   }
-// }
-//
-// @media (max-width: 2000px) and (min-width: 545px) {
-//   .text-bot-icon {
-//     display: none;
-//   }
-// }
+//hides mobile chat icon until <600
+@media (min-width: 600px) and (max-width: 2000px) {
+  .open-bot-icon-m {
+    display: none;
+  }
+}

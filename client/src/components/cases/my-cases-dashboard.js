@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MyCases from './my-cases';
-import ViewTodo from '../todo/view-todo';
+// import ViewTodo from '../todo/view-todo';
 import MyCaseData from './my-case-data';
 import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
 
@@ -18,8 +18,8 @@ export default class MyCasesDashboard extends Component {
       	<div className='dashboard-wrapper'>
       	  <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
       	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
-					<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>
-
+					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
+          <Link to={{pathname:'/test-todo', state:{caseId:this.props.location.state.caseData._id}}}>Create a Checklist</Link>
       		<div className='sidebar-wrapper'>
 
       		</div>
@@ -30,6 +30,8 @@ export default class MyCasesDashboard extends Component {
     );
   }
 }
+ 
+//          <ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>
  
 // function mapStateToProps(state) {
 // 	console.log(state.user)

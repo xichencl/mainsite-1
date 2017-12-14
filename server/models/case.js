@@ -24,7 +24,11 @@ const CaseSchema = new Schema({
 	},
 	plaintiffs: [String],
 	defendants: [String],
-	steps: [Boolean],
+	steps: [{
+		id: Number,
+		completed: Boolean,
+		stage: Number,
+	}],
 	forms: [{ formId: String, status: Boolean}]
 },
  {
