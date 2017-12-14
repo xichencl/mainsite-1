@@ -20,7 +20,7 @@ export default function (state = INITIAL_STATE, action) {
     case PUT_DATA:
       return { ...state, cases: action.payload};
     case POST_DATA:
-      return { ...state, cases: action.payload};  
+      return { ...state, cases: action.payload}; 
     case ERROR_RESPONSE:
       return { ...state, error: action.payload };
   }

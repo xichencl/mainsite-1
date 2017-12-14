@@ -15,7 +15,7 @@ const dataService = store => next => action => {
 				}
 				const data = JSON.parse(res.text)
 				next({
-					type: 'GET_TODO_DATA_RECEIVED',
+					type: 'LOAD_TODOS',
 					data
 				})
 			})

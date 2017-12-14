@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
 const setProfile = require('../helpers').setProfile;
-const Case = require('../models/case');
+// const Case = require('../models/case');
 const dcopy = require('deep-copy');
 
 //= =======================================
@@ -81,7 +81,7 @@ exports.updateCase = function (req, res, next) {
     // console.log("MyCase: ", myCase);
     // myCase.update();
     
-    console.log("Steps: ", myCase.steps);
+    // console.log("Steps: ", myCase.steps);
 
     user.save(function(err, user){
       if (err) {
@@ -89,7 +89,8 @@ exports.updateCase = function (req, res, next) {
         return next(err);
       }
       console.log('Sucessfully saved!');
-      res.status(200).json({type: 'post_data', payload: user.cases});
+      console.log("Data returned", user.cases);
+      res.status(200).json({payload : myCase.steps});
     })
     
 

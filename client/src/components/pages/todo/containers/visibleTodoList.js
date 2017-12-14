@@ -18,6 +18,19 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
+// const getCaseType = (todos, caseType) => {
+//   return state.todos.filter((todo) => {
+//     todo.caseType === caseType;
+//   });
+// }
+
+// //udate the todos with existing data
+// const updateTodos = (todos) = {
+//   state.user.cases.forEach( (todo) => {
+
+//   });
+// };
+
 const mapStateToProps = (state) => {
   return {
     todos: getVisibleTodos(state.todos, state.visibilityFilter),
@@ -45,8 +58,14 @@ const mapDispatchToProps = (dispatch) => {
       const data = {caseId, steps};
       // console.log("data: ", data);
       // console.log("complete todos: ", todos) ;     
-      postData('post_data', null, true, `/user/${uid}/updateCase`, dispatch, data);
-    }
+      postData('LOAD_TODOS', null, true, `/user/${uid}/updateCase`, dispatch, data);
+    },
+    // onLoading: (caseId) => {
+    //   if (state.user.cases){
+
+    //   }
+
+    // }
   }
 };
 

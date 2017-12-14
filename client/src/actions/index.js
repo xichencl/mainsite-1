@@ -130,13 +130,15 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
 
   axios.post(requestUrl, data, headers)
   .then((response) => {
+    console.log("Repsonse Received: ", response.data);
     dispatch({
       type: action,
-      payload: response.data,
+      payload: response.data.payload,
     });
-    window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    // window.location.href = `${CLIENT_ROOT_URL}/portal`;
   })
   .catch((error) => {
+    console.log("Error", error);
     errorHandler(dispatch, error.response, errorType);
   });
 }
