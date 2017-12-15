@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
     todos: getVisibleTodos(state.todos, state.visibilityFilter),
     todosComplete: state.todos,
     loading: state.loading,
-    cases: state.user.cases
+    // cases: state.user.cases
   }
 }
 
@@ -62,9 +62,10 @@ const mapDispatchToProps = (dispatch) => {
       // console.log("complete todos: ", todos) ;     
       postData('LOAD_TODOS', null, true, `/user/${uid}/updateCase`, dispatch, data);
     },
-    onUpdate: (caseId) => {
+    onUpdate: (caseId, caseType) => {
       console.log("onUpdate method called");
       const uid = cookie.get('user')._id;
+      dispatch({type : caseType});
       getData('LOAD_TODOS', null, true, `/user/${uid}/${caseId}`, dispatch);
     }
     // onLoading: (caseId) => {

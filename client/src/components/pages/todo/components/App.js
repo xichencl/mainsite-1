@@ -2,19 +2,10 @@ import React from 'react'
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
-import { connect } from 'react-redux'
-import { getData } from '../../../../actions/index.js'
+// import { connect } from 'react-redux'
+// import { getData } from '../../../../actions/index.js'
 
-class App extends React.Component { 
-  constructor(props){
-    super(props);
-  }
-
-  // ComponentWillMount(){
-  //   console.log("get date called on component mount");
-  //   this.props.onUpdate();
-  // }
-  
+class App extends React.Component {
   render(){
   return (
     <div>
@@ -25,12 +16,13 @@ class App extends React.Component {
     	</div>
     	<div className="checklist">
   	    <Footer />
-  	    <VisibleTodoList caseId={this.props.location.state.caseId}/>
+  	    <VisibleTodoList caseId={this.props.location.state.caseId} caseType={this.props.location.state.caseType}/>
   	  </div>
     </div>
   );
   }
 }
+
 
 export default App;
 // export default connect(null, mapDispatchToProps )(App);

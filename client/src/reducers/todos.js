@@ -27,8 +27,10 @@ const todo = (state, action) => {
   }
 }
 
-const todos = (state = checklistTemplate, action) => {
+const todos = (state=[] , action) => {
   switch (action.type) {
+  case 'Small Claims':
+    return checklistTemplate;
   case 'ADD_TODO':
     return [
       ...state,
@@ -50,7 +52,7 @@ const todos = (state = checklistTemplate, action) => {
   case 'LOAD_TODOS':
     // console.log("UPDATE_TODO action payload: ", action.payload);
     // console.log("Old State: ", state);
-    if (state.length > 0){
+    if (action.payload.length > 0){
       console.log("loading updated todos");
       let newState = state.slice();
       newState = newState.map((t, i) => ({
@@ -63,7 +65,7 @@ const todos = (state = checklistTemplate, action) => {
       return newState;
     }else{
       console.log("loading template");
-      return action.data;
+      return state;
     }
 
 
