@@ -145,7 +145,7 @@ export function postData(action, errorType, isAuthReq, url, dispatch, data) {
 
 // Get Request
 export function getData(action, errorType, isAuthReq, url, dispatch) {
-  return function (dispatch) {
+  // return function (dispatch) {
   const requestUrl = API_URL + url;
   let headers = {};
 
@@ -158,15 +158,15 @@ export function getData(action, errorType, isAuthReq, url, dispatch) {
     console.log("Response.Data: ", response.data);
     console.log("Action type: ", action);
     dispatch({
-      type: GET_DATA,
-      payload: response.data.cases,
+      type: action,
+      payload: response.data.payload,
     });
   })
   .catch((error) => {
     console.log("error handler is invoked");
     errorHandler(dispatch, error.response, errorType);
   });
-};
+// };
 }
 
 // Put Request

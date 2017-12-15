@@ -58,6 +58,8 @@ module.exports = function (app) {
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
   userRoutes.post('/:userId/postData', requireAuth, UserController.postData);
   userRoutes.post('/:userId/updateCase', requireAuth, UserController.updateCase);
+  userRoutes.get('/:userId/:caseId', requireAuth, UserController.getData);
+  
     
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {

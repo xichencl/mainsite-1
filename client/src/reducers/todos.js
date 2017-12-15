@@ -1,3 +1,5 @@
+import checklistTemplate from '../../data/checklist_smallClaims';
+
 const todo = (state, action) => {
   switch (action.type) {
   case 'ADD_TODO':
@@ -25,7 +27,7 @@ const todo = (state, action) => {
   }
 }
 
-const todos = (state = [], action) => {
+const todos = (state = checklistTemplate, action) => {
   switch (action.type) {
   case 'ADD_TODO':
     return [

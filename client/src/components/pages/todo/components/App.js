@@ -2,11 +2,18 @@ import React from 'react'
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
+import { connect } from 'react-redux'
+import { getData } from '../../../../actions/index.js'
 
 class App extends React.Component { 
   constructor(props){
     super(props);
   }
+
+  // ComponentWillMount(){
+  //   console.log("get date called on component mount");
+  //   this.props.onUpdate();
+  // }
   
   render(){
   return (
@@ -24,6 +31,8 @@ class App extends React.Component {
   );
   }
 }
-export default App
+
+export default App;
+// export default connect(null, mapDispatchToProps )(App);
 
 //    <AddTodo />

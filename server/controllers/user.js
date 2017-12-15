@@ -100,17 +100,19 @@ exports.updateCase = function (req, res, next) {
 
 exports.getData = function (req, res, next) {
   const userId = req.params.userId;
+  const caseId = req.params.caseId;
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       return next(err);
     }
+    const myCase = user.cases.id(caseId);
 
-      console.log("User: ", user.cases);
+      // console.log("User: ", user.cases);
       console.log('Sucessfully retrieved!');
       // res.status(200).json({ cases: user.cases });
-      res.status(200).json({ cases: user.cases });
+      res.status(200).json({ payload: myCase.steps });
     });
     
 

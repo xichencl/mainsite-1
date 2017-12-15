@@ -5,6 +5,8 @@ import TodoList from '../components/TodoList';
 // import { CLIENT_ROOT_URL, postData } from '../../../actions/index';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+import { getData } from '../../../../actions/index.js'
+
 // import { postData } from '../../actions/index';
 
 const getVisibleTodos = (todos, filter) => {
@@ -60,6 +62,11 @@ const mapDispatchToProps = (dispatch) => {
       // console.log("complete todos: ", todos) ;     
       postData('LOAD_TODOS', null, true, `/user/${uid}/updateCase`, dispatch, data);
     },
+    onUpdate: (caseId) => {
+      console.log("onUpdate method called");
+      const uid = cookie.get('user')._id;
+      getData('LOAD_TODOS', null, true, `/user/${uid}/${caseId}`, dispatch);
+    }
     // onLoading: (caseId) => {
     //   if (state.user.cases){
 
