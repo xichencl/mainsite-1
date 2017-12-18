@@ -10,7 +10,7 @@ class MyForms extends Component {
   render() {
     return (
       <div>
-      	<div className='Box Portal-box My-cases-box col-2 '>
+      	<div className='Box My-cases-box-md col-2 '>
           <div className='Portal-box-content Blue-background'>
 
             <h3>My Forms<Link to='calendar' className='Box-icon-sm'><i className='fa fa-file-text-o' aria-hidden='true'></i></Link></h3>

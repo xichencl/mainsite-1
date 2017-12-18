@@ -4,6 +4,8 @@ import MyCases from './my-cases';
 // import ViewTodo from '../todo/view-todo';
 import MyCaseData from './my-case-data';
 import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
+import SquareBox from '../template/square-box';
+import ChecklistIcon from '../../img/checklist_1.svg';
 
 export default class MyCasesDashboard extends Component {
   componentDidMount() {
@@ -15,16 +17,28 @@ export default class MyCasesDashboard extends Component {
     // console.log("CaseData state:", this.state);
     return (
       <div>
-      	<div className='dashboard-wrapper'>
-      	  <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
-      	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
-					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
-          <Link to={{pathname:'/test-todo', state:{caseId:this.props.location.state.caseData._id}}}>Create a Checklist</Link>
-      		<div className='sidebar-wrapper'>
 
-      		</div>
-      		
-      		<MyFormsLarge className='dashboard-inner forms-wrapper' />
+      	<div className='dashboard-wrapper'>
+          <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
+            <hr className="mainpage-title-line"/>
+          </div>  
+        	  
+
+        	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
+  					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
+            <Link to={{pathname:'/test-todo', state:{caseId:this.props.location.state.caseData._id}}}>
+              <SquareBox 
+                boxTitle="My Case Checklist"
+                imgSrc={ChecklistIcon} 
+              />
+            </Link>
+        		<div className='sidebar-wrapper'>
+
+        		</div>
+        		
+        		<MyFormsLarge className='dashboard-inner forms-wrapper' />
       	</div>
       </div>
     );

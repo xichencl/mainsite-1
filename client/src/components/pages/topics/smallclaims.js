@@ -4,8 +4,8 @@ import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 // Bot temporarily lives only in Small Claims until all case types are functional in bot
 import Bot from '../../chatbot/Bot.jsx';
-import PlaintiffIcon from '../../../img/suing.svg';
-import DefendantIcon from '../../../img/sued.svg';
+import PlaintiffIcon from '../../../img/suing_1.svg';
+import DefendantIcon from '../../../img/sued_1.svg';
 
 export default class SmallClaims extends Component {
   constructor() {
@@ -71,21 +71,25 @@ export default class SmallClaims extends Component {
         {/* Bot temporarily lives only in Small Claims until all case types are functional in bot */}
         <Bot />
         <div className="Topic">
-          <h1>Small Claims</h1>
-          <Bannerbox
+          <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Small Claims</h1>
+            <hr className="mainpage-title-line"/>
+          </div> 
+          {/*<Bannerbox
             boxTitle="What is small claims court?"
             boxContent="Learn more about small claims court, who you can sue, where you should file, how much can be claimed, and what to expect to pay in filing fees."
             buttonText="FAQs"
             buttonLink="faqs/smallclaims"
-          />
+          />*/}
           <div className="grid grid-pad">
             <Squarebox
-              boxTitle="I am Suing"
+              boxTitle="Plaintiff"
               id="plaintiff"
               imgSrc={PlaintiffIcon}
               boxContent="Filing a Small Claim"
             />
-            <Squarebox boxTitle="I am being sued" imgSrc={DefendantIcon} />
+            <Squarebox boxTitle="Defendant" imgSrc={DefendantIcon} />
           </div>
           <Infobox boxTitle="FAQs" boxContent={renderFaqTitles} buttonText="View More" />
         </div>

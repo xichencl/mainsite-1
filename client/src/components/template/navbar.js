@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import ccscLogo from '../../img/ccsc-logo.svg';
 import ccscLogoSm from '../../img/ccsc-logo-sm.svg';
 // import ReactSVG from 'react-svg';
@@ -20,16 +20,18 @@ function Navbar(props) {
   return (
     <div className='Menu'>
         <div className='Menu-logo'>
-          <img
-            alt='Contra Costa Superior Courts logo'
-            className='Menu-logo-img'
-            src={ccscLogo}
-          />
-          <img
-            alt='Contra Costa Superior Courts logo'
-            className='Menu-logo-img-sm'
-            src={ccscLogoSm}
-          />
+          <Link to="/">
+            <img
+              alt='Contra Costa Superior Courts logo'
+              className='Menu-logo-img'
+              src={ccscLogo}
+            />
+            <img
+              alt='Contra Costa Superior Courts logo'
+              className='Menu-logo-img-sm'
+              src={ccscLogoSm}
+            />
+          </Link>
           
         </div>
         <div className='Menu-links'>

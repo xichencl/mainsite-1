@@ -39,7 +39,7 @@ class MyCases extends Component {
       <div>
       	<div className={this.props.classStyle}>
       		<div className='Portal-box-content Grey-background'>
-	      		<h3>My Cases<Link to='addCase' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
+	      		<h3>My Cases<Link to='add-case' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
 	      	  { this.props.cases.map((value) => {
               return (
               <div key={value._id}>
@@ -69,4 +69,4 @@ function mapStateToProps(state) {
 // export default MyCases
 export default connect(mapStateToProps, { getData })(MyCases);
 // MyCases.propTypes = { limit: React.PropTypes.String };
-MyCases.defaultProps = { classStyle: 'Box Portal-box col-2' }; 
+MyCases.defaultProps = { classStyle: 'Box My-cases-box-md col-2' };  //Portal-box  

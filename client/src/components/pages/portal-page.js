@@ -56,10 +56,7 @@ class Portal extends Component {
           <MyForms />
         </div>,
         // ============================
-        <div key={`${4}upcoming`}>
-          <Upcoming />
-        </div>,
-        // ============================
+        
         <div key={`${5}search`}>
           
           <Link to='find-a-case'>
@@ -145,3 +142,9 @@ export default connect(mapStateToProps, { fetchUser })(Portal);
 //    )
 //  }
 // }
+
+// taking out "upcoming" box for now
+{/*<div key={`${4}upcoming`}>
+          <Upcoming />
+        </div>,
+        // ============================*/}

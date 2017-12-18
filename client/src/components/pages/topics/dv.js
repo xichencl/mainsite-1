@@ -3,9 +3,10 @@ import Squarebox from '../../template/square-box';
 import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 
-import SeekingProtectionIcon from '../../../img/dv_psp.svg';
-import PersonAccusedIcon from '../../../img/dv_paa.svg';
-import OtherPersonIcon from '../../../img/dv_opp.svg';
+
+import SeekingProtectionIcon from '../../../img/dv_psp_1.svg';
+import PersonAccusedIcon from '../../../img/dv_paa_1.svg';
+import OtherPersonIcon from '../../../img/dv_opp_1.svg';
 
 export default class Dv extends Component {
 	constructor(){
@@ -71,13 +72,17 @@ export default class Dv extends Component {
 
 		return (
 			<div className='Topic'>
-		      <h1>Domestic Violence</h1>
+		      <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Domestic Violence</h1>
+            <hr className="mainpage-title-line"/>
+          </div> 
 		      <div className='warning'><p>WARNING! People can tell what Internet sites you have visited on your computer. Be Safe!</p></div>
-		      <Bannerbox boxTitle='What is Abuse?'
+		      {/*<Bannerbox boxTitle='What is Abuse?'
 		           boxContent='Learn about how to file a restraining order for yourself and others.'
 		           buttonText='FAQs'
                buttonLink='faqs/dv'
-		      />
+		      />*/}
 		      <div className='grid grid-pad'>
 		        <Squarebox 
 		        	boxTitle='Person Seeking Protection'

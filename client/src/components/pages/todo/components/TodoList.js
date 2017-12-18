@@ -10,7 +10,7 @@ class TodoList extends React.Component{
     const { todos, onTodoClick, onAccordionClick, loading, onSaveClick } = this.props;
     return ( 
     <div>
-      <button type="button" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>
+      
       <div className="checklist-list-container">
         {loading ? 'Loading...': ''}
         {todos.map(todo =>
@@ -22,7 +22,8 @@ class TodoList extends React.Component{
           />
         )}
       </div>
-
+      
+      <button type="button" className="btn-checklist-save" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>
     </div>
 
     );

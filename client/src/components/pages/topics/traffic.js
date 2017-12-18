@@ -3,9 +3,9 @@ import Squarebox from '../../template/square-box';
 import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 
-import BeforeIcon from '../../../img/before.svg';
-import DuringIcon from '../../../img/during.svg';
-import AfterIcon from '../../../img/after.svg';
+import BeforeIcon from '../../../img/before_1.svg';
+import DuringIcon from '../../../img/during_1.svg';
+import AfterIcon from '../../../img/after_1.svg';
 
 export default class Traffic extends Component {
 	constructor(){
@@ -71,12 +71,16 @@ export default class Traffic extends Component {
 
 		return (
 			<div className='Topic'>
-		      <h1>Traffic</h1>
-		      <Bannerbox boxTitle='Do I have to go to court?'
+		      <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Traffic</h1>
+            <hr className="mainpage-title-line"/>
+          </div> 
+		      {/*<Bannerbox boxTitle='Do I have to go to court?'
 		           boxContent='If you got a ticket for an infraction (like running a stop sign), you can probably do everything you need to do by mail. Learn more here.'
 		           buttonText='FAQs'
                buttonLink='faqs/traffic'
-		      />
+		      />*/}
 		      <div className='grid grid-pad'>
 		        <Squarebox 
 		        	boxTitle='Before Your Case'

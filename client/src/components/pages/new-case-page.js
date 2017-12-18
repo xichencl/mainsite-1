@@ -16,7 +16,7 @@ const renderField = field => (
     {field.touched && field.error && <div className="error">{field.error}</div>}
   </div>
 );
-
+ 
 // const renderSelect = field => (
 //   <div>
 //     <select className="form-control" {...field.input} />
@@ -103,7 +103,7 @@ class NewCase extends Component{
     				<label>Select One</label>
     				<div>
     				<label><Field name="isPlaintiff" component="input" type="radio" value="plaintiff" />Plaintiff</label>
-    				<label><Field name="isPlaintiff" component="input" type="radio" value="defendant"/>Defendant</label>
+    				<label><Field name="isDefendant" component="input" type="radio" value="defendant"/>Defendant</label>
     				</div>
     			</div>
 

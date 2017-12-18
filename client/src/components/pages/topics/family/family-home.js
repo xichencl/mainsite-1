@@ -15,7 +15,11 @@ export default class FamilyHome extends Component {
 	render() {
 		return (
 			<div className='Topic'>
-	      <h1>Family Law</h1>
+	      <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Family Law</h1>
+            <hr className="mainpage-title-line"/>
+          </div> 
 	      <div className='grid grid-pad'>
 	        <Link to='adoption'>
 	        	<Squarebox 

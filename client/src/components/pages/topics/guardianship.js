@@ -3,6 +3,11 @@ import Squarebox from '../../template/square-box';
 import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 
+// images
+import IcnPG from '../../../img/guardianship_pg_1.svg';
+import IcnParent from '../../../img/guardianship_parent_1.svg';
+import IcnChild from '../../../img/guardianship_child_1.svg';
+
 export default class Guardianship extends Component {
 	constructor(){
     super(); 
@@ -67,22 +72,26 @@ export default class Guardianship extends Component {
 
 		return (
 			<div className='Topic'>
-		      <h1>Guardianship</h1>
-		      <Bannerbox boxTitle='Reasons to Choose a Guardianship'
+		      <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Guardianship</h1>
+            <hr className="mainpage-title-line"/>
+          </div>  
+		      {/*<Bannerbox boxTitle='Reasons to Choose a Guardianship'
 		           boxContent='Learn about guardianship situations, who may be a legal guardian, what is required of a legal guardian, and more.'
 		           buttonText='FAQs'
                buttonLink='faqs/guardianship'
-		      />
+		      />*/}
 		      <div className='grid grid-pad'>
 		        <Squarebox 
 		        	boxTitle='Potential Guardian'
-	            iconClass='fa fa-home' /> 
+	            imgSrc={IcnPG} /> 
 		        <Squarebox 
 		        	boxTitle='Parent'
-	            iconClass='fa fa-user' />
+	            imgSrc={IcnParent} />
 	           <Squarebox 
 		        	boxTitle='Child'
-	            iconClass='fa fa-child' />  
+	            imgSrc={IcnChild} />  
 		      </div>
 		      <Infobox 
 		      	boxTitle='FAQs'

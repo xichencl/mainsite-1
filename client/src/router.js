@@ -40,14 +40,8 @@ import ResetPassword from './components/auth/reset-password';
 // Import profile pages
 // import Profile from './components/profile/profile';
 import ViewProfile from './components/profile/view-profile';
-<<<<<<< HEAD
-import MyCasesDashboard from './components/cases/my-cases-dashboard'; 
-import AddCase from './components/cases/add-case';
-// import Inbox from './components/dashboard/messaging/inbox';
-=======
 import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import Inbox from './components/dashboard/messaging/inbox';
 import NewCase from './components/pages/new-case-page';
->>>>>>> 49671fe6bba36985256448cab3924d06877a2622
 // import Conversation from './components/dashboard/messaging/conversation';
 // import ComposeMessage from './components/dashboard/messaging/compose-message';
 // import BillingSettings from './components/billing/settings';
@@ -117,14 +111,15 @@ export default class AppRouter extends Component {
 
                   <Route path="/profile" component={RequireAuth(ViewProfile)} />
 
-                  <Route path="/addCase" component={RequireAuth(NewCase)} />
+                  <Route path="/add-case" component={RequireAuth(NewCase)} />
 
                   <Route path="*" component={NotFoundPage} />
                 </Switch>
               </div>
             </div>
-            <Footer />
+            
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );
