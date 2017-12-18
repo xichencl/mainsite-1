@@ -1,4 +1,5 @@
 import checklistTemplate from '../../data/checklist_smallClaims';
+import { LOAD_TODOS, SMALL_CLAIMS } from '../actions/types'; 
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -29,8 +30,10 @@ const todo = (state, action) => {
 
 const todos = (state=[] , action) => {
   switch (action.type) {
-  case 'Small Claims':
+  
+  case SMALL_CLAIMS:
     return checklistTemplate;
+  
   case 'ADD_TODO':
     return [
       ...state,
@@ -49,8 +52,8 @@ const todos = (state=[] , action) => {
   // case 'GET_TODO_DATA_RECEIVED':
   //   return action.data;
   
-  case 'LOAD_TODOS':
-    // console.log("UPDATE_TODO action payload: ", action.payload);
+  case LOAD_TODOS:
+    console.log("LOAD_TODOS action called: ", action.payload);
     // console.log("Old State: ", state);
     if (action.payload.length > 0){
       console.log("loading updated todos");

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { postData } from '../../actions/index';
+import { postData, CLIENT_ROOT_URL } from '../../actions/index';
+import { UPDATE_CASE } from '../../actions/types';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
@@ -75,7 +76,8 @@ class NewCase extends Component{
     // if (this.state.case.length > 0){
     //   formProps.caseId = this.state.case._id;
     // }
-		this.props.postData('post_data', this.props.error, true, `/user/${uid}/postData`, this.props.dispatch, formProps);
+		this.props.postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, formProps);
+    window.location.href = `${CLIENT_ROOT_URL}/portal`;
 	}
 
 	renderAlert() {

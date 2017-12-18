@@ -17,11 +17,21 @@ export const FETCH_USER = 'fetch_user',
 export const GET_DATA = 'get_data',
   PUT_DATA = 'put_data',
   POST_DATA = 'post_data';
+
+//case types
+export const SMALL_CLAIMS = 'Small Claims',
+  GUARDIANSHIP = 'Guardianship';
+
 //= =====================
 // Page Actions
 //= =====================
 export const SEND_CONTACT_FORM = 'send_contact_form',
   STATIC_ERROR = 'static_error';
+
+//case data
+export const UPDATE_CASE = 'update_case',
+  // UPDATE_CHECKLIST = 'update_checklist',
+  LOAD_TODOS = 'load_todos';
 
 // page data
 export const FETCH_PAGE_DATA = 'FETCH_PAGE_DATA';

@@ -1,24 +1,24 @@
-import { connect } from 'react-redux'
-import { toggleTodo, accordionTodo, CLIENT_ROOT_URL, postData } from '../../../../actions/index.js'
+import { connect } from 'react-redux';
+import { toggleTodo, accordionTodo, CLIENT_ROOT_URL, postData, getData } from '../../../../actions/index.js';
 // import {  } from '../../../../actions/index.js'
 import TodoList from '../components/TodoList';
 // import { CLIENT_ROOT_URL, postData } from '../../../actions/index';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
-import { getData } from '../../../../actions/index.js'
+// import { getData, postData } from '../../../../actions/index.js';
+import { LOAD_TODOS } from '../../../../actions/types.js';
 
-// import { postData } from '../../actions/index';
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
   case 'SHOW_BEFORE':
-    return todos.filter(t => t.stage == 0) //toggles before/during/after for checklist
+    return todos.filter(t => t.stage == 0); //toggles before/during/after for checklist
   case 'SHOW_DURING':
-    return todos.filter(t => t.stage == 1)
+    return todos.filter(t => t.stage == 1);
   case 'SHOW_AFTER':
-    return todos.filter(t => t.stage == 2)
+    return todos.filter(t => t.stage == 2);
   }
-}
+};
 
 // const getCaseType = (todos, caseType) => {
 //   return state.todos.filter((todo) => {
@@ -40,17 +40,17 @@ const mapStateToProps = (state) => {
     loading: state.loading,
     // cases: state.user.cases
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
-      console.log('todoClick dispatch')
-      dispatch(toggleTodo(id))
+      console.log('todoClick dispatch');
+      dispatch(toggleTodo(id));
     },
     onAccordionClick: (id) => {
       console.log('accordion dispatch');
-      dispatch(accordionTodo(id))
+      dispatch(accordionTodo(id));
     },
     onSaveClick: (caseId, todos) => {
       const uid = cookie.get('user')._id;
@@ -58,15 +58,17 @@ const mapDispatchToProps = (dispatch) => {
         ({id: todo.id, completed: todo.completed, stage: todo.stage})
       ); 
       const data = {caseId, steps};
-      // console.log("data: ", data);
-      // console.log("complete todos: ", todos) ;     
-      postData('LOAD_TODOS', null, true, `/user/${uid}/updateCase`, dispatch, data);
+      
+      // console.log("complete todos: ", todos) ; 
+      console.log("Save button clicked"); 
+      console.log("data: ", data);   
+      postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, data);
     },
     onUpdate: (caseId, caseType) => {
       console.log("onUpdate method called");
       const uid = cookie.get('user')._id;
       dispatch({type : caseType});
-      getData('LOAD_TODOS', null, true, `/user/${uid}/${caseId}`, dispatch);
+      getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`);
     }
     // onLoading: (caseId) => {
     //   if (state.user.cases){
@@ -80,6 +82,6 @@ const mapDispatchToProps = (dispatch) => {
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList)
+)(TodoList);
 
-export default VisibleTodoList
+export default VisibleTodoList;
