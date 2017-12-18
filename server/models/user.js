@@ -1,5 +1,6 @@
 // Importing Node packages required for schema
 const mongoose = require('mongoose');
+
 const bcrypt = require('bcrypt-nodejs');
 const ROLE_MEMBER = require('../constants').ROLE_MEMBER;
 const ROLE_CLIENT = require('../constants').ROLE_CLIENT;

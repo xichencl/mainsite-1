@@ -44,16 +44,16 @@ const todos = (state=[] , action) => {
   case 'TOGGLE_TODO':
     return state.map(t =>
       todo(t, action)
-    )
+    );
   case 'ACCORDION_TODO':
     return state.map(t =>
       todo(t, action)
-    )
+    );
   // case 'GET_TODO_DATA_RECEIVED':
   //   return action.data;
   
   case LOAD_TODOS:
-    console.log("LOAD_TODOS action called: ", action.payload);
+    // console.log("LOAD_TODOS action called: ", action.payload);
     // console.log("Old State: ", state);
     if (action.payload.length > 0){
       console.log("loading updated todos");
@@ -64,7 +64,7 @@ const todos = (state=[] , action) => {
         completed : action.payload[i].completed
       })
       );
-      console.log("New State: ", newState);
+      // console.log("New State: ", newState);
       return newState;
     }else{
       console.log("loading template");

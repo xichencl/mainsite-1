@@ -119,10 +119,11 @@ export function errorHandler(dispatch, error, type) {
 }
 
 // Post Request
-export function postData(action, errorType, isAuthReq, url, data) {
+export function postData(action, errorType, isAuthReq, url, dispatch, data) {
   console.log("URL: ", url);
   console.log("Data: ", data);
-  return function (dispatch) {
+  // console.log("Dispatch: ", dispatch);
+  // return function (dispatch) {
     const requestUrl = API_URL + url;
     let headers = {};
 
@@ -144,12 +145,12 @@ export function postData(action, errorType, isAuthReq, url, data) {
       console.log("Error", error);
       errorHandler(dispatch, error.response, errorType);
     });
-  };
+  // };
 }
 
 // Get Request
-export function getData(action, errorType, isAuthReq, url) {
-  return function (dispatch) {
+export function getData(action, errorType, isAuthReq, url, dispatch) {
+  // return function (dispatch) {
     const requestUrl = API_URL + url;
     let headers = {};
 
@@ -170,7 +171,7 @@ export function getData(action, errorType, isAuthReq, url) {
       console.log("error handler is invoked");
       errorHandler(dispatch, error.response, errorType);
     });
-  };
+  // };
 }
 
 // Put Request

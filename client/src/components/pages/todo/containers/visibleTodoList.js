@@ -61,14 +61,14 @@ const mapDispatchToProps = (dispatch) => {
       
       // console.log("complete todos: ", todos) ; 
       console.log("Save button clicked"); 
-      console.log("data: ", data);   
-      postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, data);
+      // console.log("data: ", data);   
+      postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, dispatch, data);
     },
     onUpdate: (caseId, caseType) => {
       console.log("onUpdate method called");
       const uid = cookie.get('user')._id;
       dispatch({type : caseType});
-      getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`);
+      getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
     }
     // onLoading: (caseId) => {
     //   if (state.user.cases){

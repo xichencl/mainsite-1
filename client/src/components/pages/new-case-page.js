@@ -71,12 +71,12 @@ class NewCase extends Component{
   // }
 
 	handleFormSubmit(formProps) {
-		console.log("FormProps: ", formProps);
+		// console.log("FormProps: ", formProps);
     const uid = cookie.get('user')._id;
     // if (this.state.case.length > 0){
     //   formProps.caseId = this.state.case._id;
     // }
-		this.props.postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, formProps);
+		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
     window.location.href = `${CLIENT_ROOT_URL}/portal`;
 	}
 
@@ -93,6 +93,7 @@ class NewCase extends Component{
 	render() {
     /*handleSubmit a property in reduxForm*/
     	const { handleSubmit, pristine, reset, submitting } = this.props;
+      // console.log("Values: ", values);
       // console.log("State - case number:", this.state.case);
       // const caseNumber = this.state.case.caseNumber ? this.state.case.caseNumber : '';
       // console.log("case number: ", caseNumber);
@@ -138,6 +139,7 @@ class NewCase extends Component{
 	}
 }
 
+
 function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
@@ -146,4 +148,17 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { postData })(form(NewCase));
+// const mapDispatchToProps = (dispatch) => ({
+//   handleFormSubmit: () => {
+//     console.log("FormProps: ", formProps);
+//     const uid = cookie.get('user')._id;
+//     // if (this.state.case.length > 0){
+//     //   formProps.caseId = this.state.case._id;
+//     // }
+//     console.log("Values", this.props.values);
+//     postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, dispatch, this.props.values);
+//     window.location.href = `${CLIENT_ROOT_URL}/portal`;
+//   },
+// });
+
+export default connect(mapStateToProps)(form(NewCase));
