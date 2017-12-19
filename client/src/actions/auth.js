@@ -28,7 +28,10 @@ export function loginUser({ email, password }) {
 }
 
 export function registerUser({ email, firstName, lastName, address, phone, password }) {
+  console.log("register user called");
+  console.log({email, firstName, lastName, address, phone, password});
   return function (dispatch) {
+    console.log("register user");
     axios.post(`${API_URL}/auth/register`, { email, firstName, lastName, address, phone, password })
     .then((response) => {
       cookie.set('token', response.data.token, { path: '/' });

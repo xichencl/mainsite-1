@@ -44,7 +44,7 @@ class NewCase extends Component{
   constructor(props){
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
-    // this.state = {case : {}};
+    this.state = {newCase : true};
   }
 
   componentWillMount(){
@@ -57,6 +57,7 @@ class NewCase extends Component{
     const caseId = this.props.location.state ? this.props.location.state.id : '';
     let initData;
     if (caseId) {
+      this.setState({newCase : false});
       //load existing case data
       initData = this.props.cases.find( function(e) {return e._id === caseId}) 
     }
@@ -108,7 +109,7 @@ class NewCase extends Component{
       // console.log("case number: ", caseNumber);
     	return (
     		<div>
-    		<h1>Create/Update Your Case</h1>
+    		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
         <button type="button" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			{this.renderAlert()}
@@ -154,7 +155,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
     cases: state.user.cases,
-    form: state.form,
+    // form: state.form,
     };
 }
 

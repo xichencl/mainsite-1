@@ -26,6 +26,7 @@ exports.viewProfile = function (req, res, next) {
 
 exports.updateProfile = function (req, res, next){
   const userId = req.params.userId;
+  console.log("Req body:", req.body);
   const address = req.body.address;
   const phone = req.body.phone;
   const email = req.body.email;
