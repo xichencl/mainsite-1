@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { postData, CLIENT_ROOT_URL } from '../../actions/index';
+import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
 import { UPDATE_CASE } from '../../actions/types';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
@@ -80,6 +80,15 @@ class NewCase extends Component{
     window.location.href = `${CLIENT_ROOT_URL}/portal`;
 	}
 
+  handleClick(e) {
+    const isDelete = confirm("Are you sure you want to delete this case?");
+    if (isDelete){
+      const uid = cookie.get('user')._id;
+      deleteData(UPDATE_CASE, null, true, `/user/${uid}/${this.props.location.state.id}`, this.props.dispatch);
+      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+  }
+
 	renderAlert() {
     if (this.props.errorMessage) {
       return (
@@ -99,7 +108,8 @@ class NewCase extends Component{
       // console.log("case number: ", caseNumber);
     	return (
     		<div>
-    		<h1>Create a New Case</h1>
+    		<h1>Create/Update Your Case</h1>
+        <button type="button" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			{this.renderAlert()}
     			<div>

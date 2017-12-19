@@ -208,7 +208,7 @@ export function deleteData(action, errorType, isAuthReq, url, dispatch) {
   .then((response) => {
     dispatch({
       type: action,
-      payload: response.data,
+      payload: response.data.payload,
     });
   })
   .catch((error) => {
