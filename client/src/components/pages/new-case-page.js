@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { postData } from '../../actions/index';
+import DropdownList from 'react-widgets/lib/DropdownList';
+
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
@@ -38,6 +40,15 @@ function validate(formProps) {
   
   return errors;
 }
+
+const caseTypes = [
+  { type: 'Small Claims', value: 'smallClaims' },
+  { type: 'Guardianship', value: 'guardianship' },
+  { type: 'Family', value: 'family' },
+  { type: 'Traffic', value: 'traffic' },
+  { type: 'Domestic Violence', value: 'dv' },
+  { type: 'Eviction', value: 'eviction' }
+]; 
 
 class NewCase extends Component{ 
   constructor(props){
@@ -95,39 +106,59 @@ class NewCase extends Component{
       // const caseNumber = this.state.case.caseNumber ? this.state.case.caseNumber : '';
       // console.log("case number: ", caseNumber);
     	return (
-    		<div>
-    		<h1>Create a New Case</h1>
+    		<div className="New-Case-Page">
+    		<h1>My Case Details</h1>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			{this.renderAlert()}
-    			<div>
-    				<label>Select One</label>
-    				<div>
-    				<label><Field name="isPlaintiff" component="input" type="radio" value="plaintiff" />Plaintiff</label>
-    				<label><Field name="isDefendant" component="input" type="radio" value="defendant"/>Defendant</label>
-    				</div>
-    			</div>
-
-    			<div>
-    				<label>Case Number</label>
-    				<div>
-            <Field name="caseNumber" component={renderField} placeholder="Case Number"  />    				
-    				</div>
-    			</div>
-
-    			<div>
-    				<label>Case Type</label>
-    				<div>
-    				 <Field name="caseType" component="select">
-    				 	<option></option>
-    				 	<option value="Small Claims" >Small Claims</option>
-    				 	<option value="Guardianship" >Guardianship</option>
-    				 </Field>
-    				</div>
-    			</div>
     			
-    			<div>
-			        <button type="submit" disabled={pristine || submitting}>Submit</button>
-			        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+
+          {/*<div>
+            <label>Select a Case Type</label>
+            <Field
+              name="caseType"
+              component={DropdownList}
+              data={caseTypes}
+              valueField="value"
+              textField="type" />
+          </div>*/}
+          <div className="case-form-group select select-case-type">
+            <label>Select a Case Type</label>
+            <Field className="form-control" name="caseType" component="select">
+              <option value="smallClaims">Small Claims</option>
+              <option value="guardianship">Guardianship</option>
+              <option value="family">Family</option>
+              <option value="traffic">Traffic</option>
+              <option value="dv">Domestic Violence</option>
+              <option value="eviction">Eviction</option>
+            </Field>
+          </div>
+
+          <div className="case-form-group select select-party">
+    				<label>Party (select one)</label>
+    				<div className="row">
+    				  <div className="col-md-6">
+                <label>
+                <Field className="form-control" name="isPlaintiff" component="input" type="radio" value="plaintiff" />Plaintiff</label>
+        			</div>
+              <div className="col-md-6">
+                <label>
+                <Field className="form-control"name="isDefendant" component="input" type="radio" value="defendant"/>Defendant</label>
+    				  </div>
+            </div>
+    			</div>
+
+    			<div className="case-form-group case-number">
+    				<label>Case Number (optional)</label>
+    				<div>
+            <Field className="form-control" name="caseNumber" component={renderField} placeholder="Case Number"  />    				
+    				</div>
+    			</div>
+
+    			
+    			
+    			<div className="case-form-group">
+			        <button className="btn btn-submit" type="submit" disabled={pristine || submitting}>Submit</button>
+			        <button className="btn btn-submit" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
 		      	</div>
 
     		</form>

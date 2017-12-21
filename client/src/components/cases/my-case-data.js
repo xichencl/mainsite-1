@@ -18,7 +18,7 @@ class MyCaseData extends Component {
       		<div className='Portal-box-content Grey-background'>
 	      		<h3 className='Case-data-title'>
 	      			{this.props.caseData.caseType ? this.props.caseData.caseType:''} - {this.props.caseData.caseNumber ? this.props.caseData.caseNumber:''}
-	      			<Link className='Box-icon-sm' to={{pathname:"/addCase", state:{id : this.props.caseData._id}}}>
+	      			<Link className='Box-icon-sm' to={{pathname:"/add-case", state:{id : this.props.caseData._id}}}>
 	      				<i className='fa fa-pencil' aria-hidden='true'></i>
 	      			</Link>
 	      		</h3>

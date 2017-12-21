@@ -32,7 +32,7 @@
 }
 
 /*below code limits clickable area to be as wide as radio button + text*/
-form {
+.language-icon-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -40,7 +40,7 @@ form {
   flex-wrap: wrap;
 }
 
-label {
+.language-icon-label {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -50,7 +50,7 @@ label {
   align-items: center;
 }
 
-label:hover {
+.language-icon-label:hover {
   color: rgba(255, 255, 255, 1);
   font-size: 1.1em;
   transition: all .2s ease-in-out;

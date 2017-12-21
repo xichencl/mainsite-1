@@ -38,7 +38,7 @@ import ForgotPassword from './components/auth/forgot-password';
 import ResetPassword from './components/auth/reset-password';
 
 // Import profile pages
-// import Profile from './components/profile/profile';
+import EditProfile from './components/auth/edit-profile';
 import ViewProfile from './components/profile/view-profile';
 import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import Inbox from './components/dashboard/messaging/inbox';
 import NewCase from './components/pages/new-case-page';
@@ -112,6 +112,7 @@ export default class AppRouter extends Component {
                   <Route path="/profile" component={RequireAuth(ViewProfile)} />
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
+                  <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
 
                   <Route path="*" component={NotFoundPage} />
                 </Switch>
