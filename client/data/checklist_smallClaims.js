@@ -1,58 +1,136 @@
-[
+const checklistTemplate = [
 	{
 		"title": "Mediation",
 		"blockText": "Mediation is a process for resolving disputes informally.  It is voluntary and confidential.  It works like this:  You and the other person would meet with a third person who is neutral – a trained mediator. That person would help the two of you talk things over in an attempt to resolve your dispute. Usually, mediation of a small claims dispute lasts between 30 minutes and 2 hours. It can be tried before or after filing a lawsuit.    \tMediation can really help if you have an on-going relationship with the person you have the dispute with. If you are suing a family member, neighbor, business partner, landlord, or tenant, mediation may help you work out your problems and keep your relationship.  \tMediation allows people to make their own decisions about how they will resolve their disputes.   If you decide that mediation might resolve your dispute, ask a court clerk if the small claims court offers a mediation program.  If not, the clerk may know of a publicly funded program in your county.  You can also locate a mediation program by looking in the business section of your telephone directory, on the website of the California Department of Consumer Affairs.  If you DO settle your dispute, write down what was agreed to. Include:    \tThe names and addresses of the two people, \tA brief description of the “what,” “when” and “where” of the dispute that has been resolved, \tA statement of what the person giving up a claim is getting in return, \tThe date the agreement is being signed, and \tThe signatures of everyone involved.   Make sure everyone has a copy of the agreement, and keep your copy of the agreement in a safe place.",
 		"id": 0,
-		"completed": false,
-		"before": true
+		"completed":false,
+		"stage": 0
 	},
 	{
 		"title": "Write a demand letter",
 		"blockText": "Small claims cases require that you ask the other side for payment before you go to court (unless there is a good reason why you cannot). You can ask in person, by phone, or in writing. You will have to tell the court you did this and how on your court form. If you decide to ask for payment in writing, you can use a demand letter.  A demand letter is a short, clear letter demanding payment.  Bring a copy of it to your court hearing to show the judge. You can also attach it to your court papers. Often, a demand letter will be all you need to resolve your dispute.  Even if the person or business that owes you money knows about the problem, a firm and strong request in a letter that lays out the reasons why they owe you money and says that if your issue is not satisfied you plan to go to small claims court can have a big effect.  They realize you are serious about the case and intend to spend time and energy pursuing it.  Sometimes when you have a problem with a business, a demand letter can bring the problem to the attention of the owner who may not have known about your dispute because the manager never told him or her.",
 		"id": 1,
-		"completed": false,
-		"before": true
+		"completed":false,
+		"stage": 0
 	},
 	{
-		"title": "title1",
+		"title": "Determine Where to File",
 		"blockText": "text1",
-		"id": 0,
-		"completed": false,
-		"during": true
+		"id": 2,
+		"completed":false,
+		"stage": 0
 	},
 	{
-		"title": "title2",
-		"blockText": "text2",
-		"id": 1,
-		"completed": false,
-		"during": true
-	},
-	{
-		"title": "title3",
-		"blockText": "text3",
-		"id": 3,
-		"completed": false,
-		"during": true
-	},
-	{
-		"title": "title1",
+		"title": "Obtain Small Claims state and local forms",
 		"blockText": "text1",
-		"id": 0,
-		"completed": false,
-		"after": true
-	},
-	{
-		"title": "title2",
-		"blockText": "text2",
-		"id": 1,
-		"completed": false,
-		"after": true
-	},
-	{
-		"title": "title3",
-		"blockText": "text3",
 		"id": 3,
-		"completed": false,
-		"after": true
+		"completed":false,
+		"stage": 0
+	},
+	{
+		"title": "Fill out your forms",
+		"blockText": "text2",
+		"id": 4,
+		"completed":false,
+		"stage": 0
+	},
+	{
+		"title": "Attend a Small Claims Workshop",
+		"blockText": "text3",
+		"id": 5,
+		"completed":false,
+		"stage": 0
+	},
+	{
+		"title": "Fee Waivers",
+		"blockText": "text1After",
+		"id": 6,
+		"completed":false,
+		"stage": 0
+	},
+	{
+		"title": "File SC-100 to start your Small Claims case",
+		"blockText": "text2After",
+		"id": 7,
+		"completed":false,
+		"stage": 1
+	},
+	{
+		"title": "Serve the Defendant form SC-100",
+		"blockText": "text3After",
+		"id": 8,
+		"completed":false,
+		"stage": 1
+	},
+	{
+		"title": "File Proof of Service form SC-104",
+		"blockText": "text1After",
+		"id": 9,
+		"completed":false,
+		"stage": 1
+	},
+	{
+		"title": "Prepare for Trial",
+		"blockText": "text2After",
+		"id": 10,
+		"completed":false,
+		"stage": 1
+	},
+	{
+		"title": "(opt) Request to Postpone Trial",
+		"blockText": "text3After",
+		"id": 11,
+		"completed":false,
+		"stage": 1
+	}, 
+	{
+		"title": "(opt) How to Subpoena a Witness for Evidence",
+		"blockText": "text1After",
+		"id": 12,
+		"completed":false,
+		"stage": 1
+	},
+	{
+		"title": "Review the Judgement (Notice of Entry of Judement)",
+		"blockText": "text2After",
+		"id": 13,
+		"completed":false,
+		"stage": 2
+	},
+	{
+		"title": "Read form SC-200-INFO",
+		"blockText": "text3After",
+		"id": 14,
+		"completed":false,
+		"stage": 2
+	},
+	{
+		"title": "(opt) Acknowledgement of Satisfaction of Judgement",
+		"blockText": "text2After",
+		"id": 15,
+		"completed":false,
+		"stage": 2
+	},
+	{
+		"title": "(opt) Submit a Motion to Vacate the judgement",
+		"blockText": "text3After",
+		"id": 16,
+		"completed":false,
+		"stage": 2
+	},
+	{
+		"title": "(opt) Appeal the Judgement",
+		"blockText": "text3After",
+		"id": 17,
+		"completed":false,
+		"stage": 2
+	},
+	{
+		"title": "(opt) Review Judgement Debtor's Statement",
+		"blockText": "text3After",
+		"id": 17,
+		"completed":false,
+		"stage": 2
 	}
-]
+];
+export default checklistTemplate;

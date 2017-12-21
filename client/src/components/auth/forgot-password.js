@@ -13,14 +13,15 @@ class ForgotPassword extends Component {
   }
 
   componentWillMount() {
+    // console.log("Forgot_Password Mounted");
     if (this.props.authenticated) {
-      this.context.router.push('/dashboard');
+      this.context.router.history.push('/portal');
     }
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.authenticated) {
-      this.context.router.push('/dashboard');
+      this.context.router.history.push('/portal');
     }
   }
 

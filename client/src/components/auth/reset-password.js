@@ -39,19 +39,20 @@ class ResetPassword extends Component {
   }
 
   componentWillMount() {
+    // console.log("reset password component mounted");
     if (this.props.authenticated) {
-      this.context.router.push('/dashboard');
+      this.context.router.history.push('/portal');
     }
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.authenticated) {
-      this.context.router.push('/dashboard');
+      this.context.router.history.push('/portal');
     }
   }
 
   handleFormSubmit({ password }) {
-    const resetToken = this.props.params.resetToken;
+    const resetToken = this.props.match.params.resetToken;
     this.props.resetPassword(resetToken, { password });
   }
 
@@ -83,8 +84,7 @@ class ResetPassword extends Component {
 
         <fieldset className="form-group">
           <label>Confirm New Password:</label>
-          <Field name="passwordConfirm" component={renderField} type="password" />
-          {passwordConfirm.touched && passwordConfirm.error && <div className="error">{passwordConfirm.error}</div>}
+          <Field name="passwordConfirm" component={renderField} type="password" />          
         </fieldset>
 
         {this.renderAlert()}
@@ -95,7 +95,7 @@ class ResetPassword extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error, message: state.auth.resetMessage };
+  return { errorMessage: state.auth.error, message: state.auth.message };
 }
 
 export default connect(mapStateToProps, { resetPassword })(form(ResetPassword));

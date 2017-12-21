@@ -1,9 +1,15 @@
 import React, { PropTypes } from 'react'
 import Todo from './Todo'
+import { getData } from '../../../../actions/index.js'
 
 class TodoList extends React.Component{
   constructor(props){
     super(props);
+  }
+
+  componentWillMount(){
+    console.log("CaseType: ", this.props.caseType)
+    this.props.onUpdate(this.props.caseId, this.props.caseType);
   }
 
   render() {
@@ -44,7 +50,13 @@ TodoList.propTypes = {
   // toggled: PropTypes.bool.isRequired
 }
 
-export default TodoList
+// const mapDispatchToProps = (dispatch) => ({
+//   onUpdate: () => {
+//     getData('LOAD_TODOS', null, true, `/user/${uid}/${this.props.location.state.caseId}`, dispatch);
+//   },
+// });
+
+export default TodoList;
 
 /*
 const TodoList = ({ todos, onTodoClick, loading, toggled }) => (

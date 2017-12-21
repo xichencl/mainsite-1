@@ -9,7 +9,8 @@ const express = require('express'),
   config = require('./config/main');
 
 // Database Setup
-mongoose.connect(config.database);
+mongoose.Promise = require('bluebird');
+mongoose.connect(config.database, { useMongoClient: true });
 
 // Start the server
 let server;

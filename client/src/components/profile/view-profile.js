@@ -22,8 +22,7 @@ class ViewProfile extends Component {
       <div>
         <div className={this.props.classStyle}>
           <div className='Portal-box-content Grey-background'>
-          
-            <h3>{this.props.profile.firstName} {this.props.profile.lastName}<Link to="edit-profile" className='Box-icon-sm'><i className="fa fa-pencil" aria-hidden="true"></i></Link></h3>
+            <h3>{this.props.profile.firstName} {this.props.profile.lastName}<Link to="register" className='Box-icon-sm'><i className="fa fa-pencil" aria-hidden="true"></i></Link></h3>
 
             <div>{this.props.profile.email}</div>
             <div className='Profile-address'>{this.props.profile.address}</div>

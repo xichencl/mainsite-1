@@ -28,7 +28,7 @@ import './public/stylesheets/app.scss';
 // }
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const createStoreWithMiddleware = applyMiddleware(reduxThunk, dataService)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer, devTools);
 
 store.subscribe(() => {
@@ -54,6 +54,6 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-store.dispatch({type: 'GET_TODO_DATA'})
+// store.dispatch({type: 'GET_TODO_DATA'})
 
 // / add to < Router onUpdate={logPageView} /> for google analytics

@@ -21,20 +21,13 @@ export default class MyCasesDashboard extends Component {
       	<div className='dashboard-wrapper'>
           <div className="mainpage-title">
             <hr className="mainpage-title-line" />
-            <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
-            <hr className="mainpage-title-line"/>
-          </div>  
-        	  
-
-        	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
-  					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
-            <Link to={{pathname:'/test-todo', state:{caseId:this.props.location.state.caseData._id}}}>
-              <SquareBox 
-                boxTitle="My Case Checklist"
-                imgSrc={ChecklistIcon} 
-              />
-            </Link>
-        		<div className='sidebar-wrapper'>
+      	    <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
+            <hr className="mainpage-title-line" />
+          </div> 
+      	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
+					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
+          <Link to={{pathname:'/test-todo', state:{caseId:this.props.location.state.caseData._id, caseType:this.props.location.state.caseData.caseType}}}>Create a Checklist</Link>
+      		<div className='sidebar-wrapper'>
 
         		</div>
         		

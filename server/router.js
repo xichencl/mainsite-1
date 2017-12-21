@@ -56,8 +56,12 @@ module.exports = function (app) {
 
   // View user profile route
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
-  userRoutes.post('/:userId/postData', requireAuth, UserController.postData);
   userRoutes.post('/:userId/updateCase', requireAuth, UserController.updateCase);
+  userRoutes.post('/:userId/updateProfile', requireAuth, UserController.updateProfile);
+  userRoutes.post('/:userId/updateChecklist', requireAuth, UserController.updateChecklist);
+  userRoutes.get('/:userId/:caseId', requireAuth, UserController.getChecklist);
+  userRoutes.delete('/:userId/:caseId', requireAuth, UserController.deleteCase);
+  
     
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {

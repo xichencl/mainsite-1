@@ -130,51 +130,58 @@ export function errorHandler(dispatch, error, type) {
 
 // Post Request
 export function postData(action, errorType, isAuthReq, url, dispatch, data) {
-  const requestUrl = API_URL + url;
-  let headers = {};
-
+  console.log("URL: ", url);
   console.log("Data: ", data);
-  if (isAuthReq) {
-    headers = { headers: { Authorization: cookie.get('token') } };
-  }
+  // console.log("Dispatch: ", dispatch);
+  // return function (dispatch) {
+    const requestUrl = API_URL + url;
+    let headers = {};
 
-  axios.post(requestUrl, data, headers)
-  .then((response) => {
-    dispatch({
-      type: action,
-      payload: response.data,
+
+    if (isAuthReq) {
+      headers = { headers: { Authorization: cookie.get('token') } };
+    }
+
+    axios.post(requestUrl, data, headers)
+    .then((response) => {
+      console.log("Repsonse Received: ", response.data);
+      dispatch({
+        type: action,
+        payload: response.data.payload,
+      });
+      
+    })
+    .catch((error) => {
+      console.log("Error", error);
+      errorHandler(dispatch, error.response, errorType);
     });
-    window.location.href = `${CLIENT_ROOT_URL}/portal`;
-  })
-  .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
-  });
+  // };
 }
 
 // Get Request
 export function getData(action, errorType, isAuthReq, url, dispatch) {
-  return function (dispatch) {
-  const requestUrl = API_URL + url;
-  let headers = {};
+  // return function (dispatch) {
+    const requestUrl = API_URL + url;
+    let headers = {};
 
-  if (isAuthReq) {
-    headers = { headers: { Authorization: cookie.get('token') } };
-  }
+    if (isAuthReq) {
+      headers = { headers: { Authorization: cookie.get('token') } };
+    }
 
-  axios.get(requestUrl, headers)
-  .then((response) => {
-    console.log("Response.Data: ", response.data);
-    console.log("Action type: ", action);
-    dispatch({
-      type: GET_DATA,
-      payload: response.data.cases,
+    axios.get(requestUrl, headers)
+    .then((response) => {
+      console.log("Response.Data: ", response.data);
+      console.log("Action type: ", action);
+      dispatch({
+        type: action,
+        payload: response.data.payload,
+      });
+    })
+    .catch((error) => {
+      console.log("error handler is invoked");
+      errorHandler(dispatch, error.response, errorType);
     });
-  })
-  .catch((error) => {
-    console.log("error handler is invoked");
-    errorHandler(dispatch, error.response, errorType);
-  });
-};
+  // };
 }
 
 // Put Request
@@ -211,7 +218,7 @@ export function deleteData(action, errorType, isAuthReq, url, dispatch) {
   .then((response) => {
     dispatch({
       type: action,
-      payload: response.data,
+      payload: response.data.payload,
     });
   })
   .catch((error) => {

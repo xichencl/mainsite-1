@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+<<<<<<< HEAD
 import { postData } from '../../actions/index';
 import DropdownList from 'react-widgets/lib/DropdownList';
 
+=======
+import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
+import { UPDATE_CASE } from '../../actions/types';
+>>>>>>> c42aad6792b9fcd5a8c27c1065bdcb15eaf43d32
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
@@ -54,7 +59,7 @@ class NewCase extends Component{
   constructor(props){
     super(props);
     this.handleInitialize = this.handleInitialize.bind(this);
-    // this.state = {case : {}};
+    this.state = {newCase : true};
   }
 
   componentWillMount(){
@@ -67,6 +72,7 @@ class NewCase extends Component{
     const caseId = this.props.location.state ? this.props.location.state.id : '';
     let initData;
     if (caseId) {
+      this.setState({newCase : false});
       //load existing case data
       initData = this.props.cases.find( function(e) {return e._id === caseId}) 
     }
@@ -81,13 +87,23 @@ class NewCase extends Component{
   // }
 
 	handleFormSubmit(formProps) {
-		console.log("FormProps: ", formProps);
+		// console.log("FormProps: ", formProps);
     const uid = cookie.get('user')._id;
     // if (this.state.case.length > 0){
     //   formProps.caseId = this.state.case._id;
     // }
-		this.props.postData('post_data', this.props.error, true, `/user/${uid}/postData`, this.props.dispatch, formProps);
+		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
+    window.location.href = `${CLIENT_ROOT_URL}/portal`;
 	}
+
+  handleClick(e) {
+    const isDelete = confirm("Are you sure you want to delete this case?");
+    if (isDelete){
+      const uid = cookie.get('user')._id;
+      deleteData(UPDATE_CASE, null, true, `/user/${uid}/${this.props.location.state.id}`, this.props.dispatch);
+      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+  }
 
 	renderAlert() {
     if (this.props.errorMessage) {
@@ -102,12 +118,14 @@ class NewCase extends Component{
 	render() {
     /*handleSubmit a property in reduxForm*/
     	const { handleSubmit, pristine, reset, submitting } = this.props;
+      // console.log("Values: ", values);
       // console.log("State - case number:", this.state.case);
       // const caseNumber = this.state.case.caseNumber ? this.state.case.caseNumber : '';
       // console.log("case number: ", caseNumber);
     	return (
-    		<div className="New-Case-Page">
-    		<h1>My Case Details</h1>
+    		<div>
+    		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
+        <button type="button" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			{this.renderAlert()}
     			
@@ -167,12 +185,26 @@ class NewCase extends Component{
 	}
 }
 
+
 function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
     cases: state.user.cases,
-    form: state.form,
+    // form: state.form,
     };
 }
 
-export default connect(mapStateToProps, { postData })(form(NewCase));
+// const mapDispatchToProps = (dispatch) => ({
+//   handleFormSubmit: () => {
+//     console.log("FormProps: ", formProps);
+//     const uid = cookie.get('user')._id;
+//     // if (this.state.case.length > 0){
+//     //   formProps.caseId = this.state.case._id;
+//     // }
+//     console.log("Values", this.props.values);
+//     postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, dispatch, this.props.values);
+//     window.location.href = `${CLIENT_ROOT_URL}/portal`;
+//   },
+// });
+
+export default connect(mapStateToProps)(form(NewCase));

@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { registerUser } from '../../actions/auth';
+import { postData, CLIENT_ROOT_URL } from '../../actions/index';
+import { FETCH_USER } from '../../actions/types';
+
+
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 
 const form = reduxForm({
   form: 'register',
@@ -30,7 +36,8 @@ function validate(formProps) {
     errors.email = 'Please enter an email';
   }
 
-  if (!formProps.password) {
+  if (formProps.password && !formProps.password ) {
+    console.log("field error", formProps.password);
     errors.password = 'Please enter a password';
   }
 
@@ -45,8 +52,33 @@ function validate(formProps) {
 }
 
 class Register extends Component {
+  constructor(props){
+    super(props);
+    this.handleInitialize = this.handleInitialize.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+
+  componentWillMount(){
+    this.handleInitialize();
+  }
+
+  handleInitialize(){
+    this.props.initialize(this.props.profile);
+  }
+
   handleFormSubmit(formProps) {
-    this.props.registerUser(formProps);
+    // console.log("FormProps:", formProps);
+    if (this.props.authenticated) {
+      //existing profile
+      console.log("existing profile");
+      const uid = cookie.get('user')._id;
+      postData(FETCH_USER, null, true, `/user/${uid}/updateProfile`, this.props.dispatch, formProps);
+      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }else{
+      //new profile
+      console.log("creating new profile");
+      this.props.registerUser(formProps);
+    }
   }
 
   renderAlert() {
@@ -62,11 +94,12 @@ class Register extends Component {
   render() {
     /*handleSubmit a property in reduxForm*/
     const { handleSubmit } = this.props;
+    // console.log("Values:", this.values);
 
     return (
       <div>
-      <h1>Register a New Account</h1>
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <h1>{this.props.authenticated ? "Update Your Profile" : "Register a New Account" }</h1>
+      <form onSubmit={handleSubmit(this.handleFormSubmit)}>
         {this.renderAlert()} 
         <div className="row">
           <div className="col-md-6">
@@ -93,13 +126,15 @@ class Register extends Component {
           </div>
 
         </div>
-        <div className="row">
-          <div className="col-md-12">
-            <label>Password</label>
-            <Field name="password" className="form-control" component={renderField} type="password" />
+        {!this.props.authenticated &&
+          <div className="row">
+            <div className="col-md-12">
+              <label>Password</label>
+              <Field name="password" className="form-control" component={renderField} type="password" />
+            </div>
           </div>
-        </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        }
+        <button type="submit" className="btn btn-primary">{this.props.authenticated ? "Save" : "Register"}</button>
       </form>
       </div>
     );
@@ -111,6 +146,8 @@ function mapStateToProps(state) {
     errorMessage: state.auth.error,
     message: state.auth.message,
     authenticated: state.auth.authenticated,
+    profile: state.user.profile,
+    // values: state.form.register.values,
   };
 }
 

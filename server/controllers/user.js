@@ -1,8 +1,8 @@
 const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
 const setProfile = require('../helpers').setProfile;
-const Case = require('../models/case');
-const dcopy = require('deep-copy');
+// const Case = require('../models/case');
+// const dcopy = require('deep-copy');
 
 //= =======================================
 // User Routes
@@ -24,7 +24,36 @@ exports.viewProfile = function (req, res, next) {
   });
 };
 
-exports.postData = function (req, res, next) {
+exports.updateProfile = function (req, res, next){
+  const userId = req.params.userId;
+  console.log("Req body:", req.body);
+  const address = req.body.address;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
+  User.findById(userId, (err, user) => {
+    if (err) {
+      res.status(400).json({ error: 'No user could be found for this ID.' });
+      return next(err);
+    }
+    user.profile = { firstName, lastName, address, phone, email };
+    user.save(function(err, user){
+      if (err) {
+        res.status(400).json({ error: 'Profile cannot be updated.' });
+        return next(err);
+      }
+      console.log('Proflie updated!');
+      // res.status(200).json({ cases: user.cases });
+      res.status(200).json({ payload: setProfile(user) });
+    });   
+
+  });
+
+};
+
+exports.updateCase = function (req, res, next) {
   // console.log("post req body:", req.body);
   const isPlaintiff = req.body.isPlaintiff;
   const caseNumber = req.body.caseNumber;
@@ -42,29 +71,31 @@ exports.postData = function (req, res, next) {
     }
 
     //check if case already exists
-    const index = user.cases.findIndex((myCase) => {return myCase._id == caseId});
-    if (index !== -1){
-      user.cases[index] = { isPlaintiff, caseNumber, caseType };
+    const myCase = user.cases.id(caseId);
+
+    // const index = user.cases.findIndex((myCase) => {return myCase._id == caseId});
+    if (myCase){
+      myCase.set({ isPlaintiff, caseNumber, caseType});
       // user.cases[index].steps = steps;
-    }else {
+    } else {
       user.cases.push({ isPlaintiff, caseNumber, caseType });
     }
-    console.log("Updated Case Steps: ", user.cases[index]);
+    // console.log("Updated Case: ", myCase);
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be saved.' });
         return next(err);
       }
       console.log('Sucessfully saved!');
-      res.status(200).json({type: 'post_data', payload: user.cases});
+      res.status(200).json({ payload: user.cases });
     })
     
 
   });
 };
 
-exports.updateCase = function (req, res, next) {
-  console.log("update Case Req");
+exports.updateChecklist = function (req, res, next) {
+  console.log("update Checklist");
   const userId = req.params.userId;
   const caseId = req.body.caseId;
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
@@ -81,7 +112,7 @@ exports.updateCase = function (req, res, next) {
     // console.log("MyCase: ", myCase);
     // myCase.update();
     
-    console.log("Steps: ", myCase.steps);
+    // console.log("Steps: ", myCase.steps);
 
     user.save(function(err, user){
       if (err) {
@@ -89,7 +120,8 @@ exports.updateCase = function (req, res, next) {
         return next(err);
       }
       console.log('Sucessfully saved!');
-      res.status(200).json({type: 'post_data', payload: user.cases});
+      // console.log("Data returned", user.cases);
+      res.status(200).json({payload : myCase.steps});
     })
     
 
@@ -97,22 +129,48 @@ exports.updateCase = function (req, res, next) {
 
 }
 
-exports.getData = function (req, res, next) {
+exports.getChecklist = function (req, res, next) {
+  console.log("get checklist");
   const userId = req.params.userId;
+  const caseId = req.params.caseId;
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       return next(err);
     }
+    const myCase = user.cases.id(caseId);
 
-      console.log("User: ", user.cases);
+      // console.log("User: ", user.cases);
       console.log('Sucessfully retrieved!');
       // res.status(200).json({ cases: user.cases });
-      res.status(200).json({ cases: user.cases });
+      res.status(200).json({ payload: myCase.steps });
     });
     
 
 };
 //   const userId = req.params.userId;
- 
+
+exports.deleteCase = function (req, res, next) {
+  console.log("delete case");
+  const userId = req.params.userId; 
+  const caseId = req.params.caseId;
+  if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
+  User.findById(userId, (err, user) => {
+    if (err) {
+      res.status(400).json({ error: 'No user could be found for this ID.' });
+      return next(err);
+    }
+    user.cases.id(caseId).remove();
+    user.save(function(err, user){
+      if (err) {
+        res.status(400).json({ error: 'Case cannot be removed.' });
+        return next(err);
+      }
+      console.log('Case removed!');
+      // res.status(200).json({ cases: user.cases });
+      res.status(200).json({ payload: user.cases });
+    });   
+
+  });
+};
