@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-<<<<<<< HEAD
-import { postData } from '../../actions/index';
-import DropdownList from 'react-widgets/lib/DropdownList';
 
-=======
 import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
 import { UPDATE_CASE } from '../../actions/types';
->>>>>>> c42aad6792b9fcd5a8c27c1065bdcb15eaf43d32
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
