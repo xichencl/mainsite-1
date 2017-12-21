@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link, browserHistory } from 'react-router-dom';
+import { CLIENT_ROOT_URL } from './actions/index';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
@@ -63,14 +64,14 @@ export default class AppRouter extends Component {
 
   render() {
     return (
-      <BrowserRouter history={browserHistory}>
+      <BrowserRouter history={browserHistory} basename={CLIENT_ROOT_URL} >
         <div>
           {/* <ToggleBox />*/}
           <Switch>
             <Route path="/mbot" history={browserHistory} component={MobileBot} />
             <div className="App">
               <div className="App-mask" />
-              <Navbar />
+              <Navbar basename={CLIENT_ROOT_URL} />
               <Search />
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}

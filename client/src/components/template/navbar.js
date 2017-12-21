@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
+// import { CLIENT_ROOT_URL } from '../../actions/index';
 import ccscLogo from '../../img/ccsc-logo.svg';
-import ccscLogoSm from '../../img/ccsc-logo-sm.svg';
+import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
 // import ReactSVG from 'react-svg';
 
+// const path = require('path');
+// const ccscLogo = require(CLIENT_ROOT_URL+'/img/ccsc-logo.svg');
+// const ccscLogoSm = require(CLIENT_ROOT_URL+'/img/ccsc-logo-sm.svg');
 
 /* 
 <img className="Menu-logo-img"

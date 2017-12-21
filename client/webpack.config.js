@@ -11,6 +11,12 @@ const config = {
     path: __dirname,
     filename: 'bundle.js',
   },
+  
+  // resolve: {
+  //   alias :
+  //     { Images: path.resolve(__dirname, 'src', 'img') },
+  // },
+
   module: {
     rules: [
       {
@@ -60,6 +66,7 @@ const config = {
           limit: 10000,
           name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
         },
+        // include: [path.resolve(__dirname, 'src', 'img')]
       },
       // {
       //   test: /\.(png|jpg|gif)$/,

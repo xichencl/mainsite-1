@@ -64,6 +64,7 @@ export function getForgotPasswordToken({ email }) {
         type: FORGOT_PASSWORD_REQUEST,
         payload: response.data.message,
       });
+      browserHistory.push('/login');
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);
