@@ -64,14 +64,14 @@ export default class AppRouter extends Component {
 
   render() {
     return (
-      <BrowserRouter history={browserHistory} basename={CLIENT_ROOT_URL} >
+      <BrowserRouter history={browserHistory} >
         <div>
           {/* <ToggleBox />*/}
           <Switch>
             <Route path="/mbot" history={browserHistory} component={MobileBot} />
             <div className="App">
               <div className="App-mask" />
-              <Navbar basename={CLIENT_ROOT_URL} />
+              <Navbar />
               <Search />
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
