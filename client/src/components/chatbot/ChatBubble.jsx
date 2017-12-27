@@ -16,6 +16,7 @@ const CASETYPES = {
 class ChatBubble extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
@@ -101,8 +102,8 @@ class ChatBubble extends React.Component {
         {ReactHtmlParser(this.props.message)}
         <p className="feedback">
         Is this response helpful?
-        <input type="submit" value="Yes" />
-        <input type="submit" value="No" />
+        <input type="button" value="Yes" onClick={()=>{this.setState({'isHelpful':true})}} />
+        <input type="button" value="No" onClick={()=>{this.setState({'isHelpful':false})}} />
         </p>
       </div>
     );
@@ -117,6 +118,7 @@ const mapDispatchToProps = dispatch => ({
   // controls buttons onclick function in bot response
   onClick(event) {
     // onClick on table can't use opn in frontend, has to transmit to backend.
+    // console.log("Props: ", this.props);
     event.stopPropagation();
     console.log('EVENT TYPE: ', event.currentTarget.nodeName);
     if (event.currentTarget.nodeName === 'TABLE') {
@@ -134,7 +136,12 @@ const mapDispatchToProps = dispatch => ({
       return;
     }
     // onClick on buttons
-    const data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
+    let data;
+    if (this.props.state.isHelpful){
+      data = {message: this.props.message, type: this.props.type, isBot: this.props.isBot, isHelpful: this.props.state.isHelpful};
+    }else{
+     data = { message: this.props.message, type: this.props.type, isBot: this.props.isBot };
+    }
     console.log('SESSIONID: ', this.props.sessionId);
     const inputData = { payload: data, id: this.props.sessionId };
     // console.log("ai: ", this);
