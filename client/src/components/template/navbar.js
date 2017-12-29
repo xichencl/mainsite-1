@@ -24,7 +24,7 @@ function Navbar(props) {
   return (
     <div className='Menu'>
         <div className='Menu-logo'>
-          <Link to="/">
+          <NavLink to="/">
             <img
               alt='Contra Costa Superior Courts logo'
               className='Menu-logo-img'
@@ -35,7 +35,7 @@ function Navbar(props) {
               className='Menu-logo-img-sm'
               src={ccscLogoSm}
             />
-          </Link>
+          </NavLink>
           
         </div>
         <div className='Menu-links'>
