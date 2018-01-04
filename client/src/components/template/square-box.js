@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { routeCodes } from '../../App.js';
 // import PropTypes from 'prop-types';
+// import ResponsiveImage from './responsive-image';
 
 export default class SquareBox extends Component {
 	render() {
@@ -22,7 +23,7 @@ export default class SquareBox extends Component {
 	}
 } 
 
-
+//<img src={this.props.imgSrc} />
  
 // how to manage icons? 
 // <Icon />{this.props.glyph} 

@@ -17,6 +17,7 @@ import todos from './todos'
 import loading from './loading'
 import visibilityFilter from './visibilityFilter'
 
+
 // import { routerStateReducer }      from 'redux-router';
 // import { themeReducer }            from 'redux-theme';
 
@@ -36,7 +37,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   chat: chatReducer,
-  data: siteDataReducer,
+  content: siteDataReducer,
   checklist: checklistReducer,
   selectedChecklist,
   tasksByChecklistType,

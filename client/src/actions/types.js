@@ -49,6 +49,10 @@ export const REQUEST_TASKS = 'REQUEST_TASKS'
 export const INVALIDATE_CHECKLIST = 'INVALIDATE_CHECKLIST'
 export const RECEIVE_TASKS = 'RECEIVE_TASKS'
 
+//= =====================
+// Contentful test
+//= =====================
+export const FETCH_SITE_CONTENT = "FETCH_SITE_CONTENT";
 
 /* Not using these =====>
 
