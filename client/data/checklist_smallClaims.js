@@ -50,7 +50,7 @@ const checklistTemplate = [
 	},
 	{
 	 "title": "Check-in with Small Claims Advisor",
-	 "blockText": "<p>You can ask your court’s ,a href=\"http://www.courts.ca.gov/selfhelp-advisors.htm\" target=\"_blank\">small claims advisor</a> to look over the forms you filled out. Some small claims advisors also hold workshops you can attend.</p>",
+	 "blockText": "<p>You can ask your court’s <a href=\"http://www.courts.ca.gov/selfhelp-advisors.htm\" target=\"_blank\">small claims advisor</a> to look over the forms you filled out. Some small claims advisors also hold workshops you can attend.</p>",
 	 "completed": false,
 	 "stage": 0,
 	 "id": 8
