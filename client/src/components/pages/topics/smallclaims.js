@@ -68,11 +68,9 @@ export default class SmallClaims extends Component {
 
     // right now parties is hard-coded in state, but in future could deliver through cms
     const renderParties = this.state.parties.map((party) => {
-      console.log(party)
-      console.log(party.title)
       return (
         <div>
-          <Link to={party.slug}>
+          <Link to={`/smallclaims/${party.slug}`}>
             <Squarebox
               boxTitle={party.title}
               imgSrc={party.img} 

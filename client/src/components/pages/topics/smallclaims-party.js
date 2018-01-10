@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 
 export default class SmallClaimsParty extends Component {
-	
+	constructor(props) {
+		super(props)
+	}
+
 	render() {
 		return (
-			<div>
-				<div>{this.props.match.params.path}</div>
-				<div>Small Claims Checklist md box</div>
-				<div>Resources box</div>
-				<div>Before, during, after boxes</div>
-			</div>
+  		<div>
+	      <h1>{this.props.parties}</h1>
+	    </div>
 		)
-	}		
-
+  } 
 }
+
+
+
+// const SmallClaimsParty = ({ party }) => (
+
+//     		<div>
+// 		      <h1>{party}</h1>
+// 		    </div>
+    
+// )
+
+// Todo.propTypes = {
+//   party: PropTypes.string.isRequired, 
+// }
+
+// export default SmallClaimsParty;
