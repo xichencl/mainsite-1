@@ -64,85 +64,57 @@ const checklistTemplate = [
 	},
 	{
 		"title": "File SC-100 to start your Small Claims case",
-		"blockText": "text2After",
+		"blockText": "<p>Bring (or mail) 2 copies and the original of SC-100, along with any other forms you completed – like a fee waiver – to the court clerk to file. In some counties, you may be able to file the forms electronically. Check your court’s website to see if they have e-filing.</p><p>If you do not have a fee waiver, you will have pay a fee when you file the forms. <a href=\"http://www.cc-courts.org/fees/docs/2017CivilFeeSchedule.pdf\" target=\"_blank\">Learn what the filing fee will be.</a></p><p>Once the clerk has the forms and filing fee, the clerk will stamp the copies of the forms and give you a court date. You will get a stamped copy of the forms back to serve of the Defendant.</p>",
 		"id": 10,
 		"completed":false,
 		"stage": 1
 	},
 	{
 		"title": "Serve the Defendant form SC-100",
-		"blockText": "text3After",
+		"blockText": "<p>Have your forms served on the Defendant. To learn more about how service is done, go to <a href=\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=223\" target=\"_blank\">“Step 3: Serve Your Court Forms.”</a></p><p>The person who served the forms must fill out a Proof of Service, <a href=\"http://www.courts.ca.gov/documents/sc104.pdf\" target\"_blank\">form SC-104</a>. To learn more about Proof of Service and how to fill out the form, read <a href=\"http://www.courts.ca.gov/documents/sc104b.pdf\" target=\"_blank\">“What is Proof of Service?”</a></p>",
 		"id": 11,
 		"completed":false,
 		"stage": 1
 	},
 	{
 		"title": "File Proof of Service form SC-104",
-		"blockText": "text1After",
+		"blockText": "<p>Make two copies of the completed Sc-104, Proof of Service, and file it with court clerk. You should file the Proof of Service form 5 days before the trial.</p>",
 		"id": 12,
 		"completed":false,
 		"stage": 1
 	},
 	{
 		"title": "Prepare for Trial",
-		"blockText": "text2After",
+		"blockText": "<ul><li>Make copies of all the documents you need for court, such as bills or receipts. Make a copy for the judge, yourself, and the other person.</li><li>Gather any evidence you need and arrange for any witnesses to come on the day of trial.</li><li>If you need an interpreter, ask the court at least a week whether they provide interpreters or if you need to bring your own, such as a friend or family member.</li><li>Practice what it is you plan to say in court. Keep your story short and to the point.</li><li>Figure out where the Court is and plan how to get there.</li></ul><p>The Small Claims section of this site has more information on <a href=\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=223\" target=\"_blank\" >preparing for trial</a>.</p>",
 		"id": 13,
 		"completed":false,
 		"stage": 1
 	},
 	{
-		"title": "(opt) Request to Postpone Trial",
-		"blockText": "text3After",
+		"title": "Review the Judgement (Notice of Entry of Judgement)",
+		"blockText": "<p>Within 90-days of the date of your trial, you will receive a Notice of Entry of Judgment. Read it carefully. It will say who won and if anyone owes money. The form also has information on your options if you won or lost. You can also find this information on <a href\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=223\" target=\"_blank\">Form Sc-200-INFO</a>.</p>",
 		"id": 14,
 		"completed":false,
-		"stage": 1
+		"stage": 2
 	}, 
 	{
-		"title": "(opt) How to Subpoena a Witness for Evidence",
-		"blockText": "text1After",
+		"title": "Acknowledgment of Satisfaction of Judgment",
+		"blockText": "<p>Once you are paid a portion or all of the debt, you will need to file an Acknowledgement of Satisfaction of Judgement. To learn how to do this and which form to file, read <a href=\"http://www.cc-courthelp.org/default.aspx?Lang=ENG&Parent=224\" target=\"\" >“When the Judgement Debtor Has Paid in Full”</a>.</p><p>If you are the one who paid a debt, make sure that the person you owed the money to files an Acknowledgement of Satisfaction of Judgement.</p>",
 		"id": 15,
 		"completed":false,
-		"stage": 1
+		"stage": 2
 	},
 	{
-		"title": "Review the Judgement (Notice of Entry of Judement)",
-		"blockText": "text2After",
+		"title": "Motion to Vacate Judgment",
+		"blockText": "<p>If you did not show-up to your court date for a very good reason and the judge ruled against you, you can file a motion to vacate the judgment—that means to cancel what the judge ruled and give you a new court date. To do this, you will need file <a href=\"http://www.courts.ca.gov/documents/sc135.pdf\" target=\"_blank\">form SC-135</a>.</p><p>To learn more about how to complete and file this motion, read <a href=\"http://www.cc-courthelp.org/?Lang=ENG&Parent=268\" target=\"_blank\" >“How do I Ask the Court to Cancel a Default Judgment?”</a> It explains what you’ll need to do and has important deadlines you will need to follow.</p>",
 		"id": 16,
 		"completed":false,
 		"stage": 2
 	},
 	{
-		"title": "Read form SC-200-INFO",
-		"blockText": "text3After",
+		"title": "Appeal the Judgment",
+		"blockText": "<p>Only the person who owes money can appeal. An appeal is a new trial in front of a superior court judge. You can have an attorney at the new trial. To appeal the case, you must file <a href=\"http://www.courts.ca.gov/documents/sc140.pdf\" target=\"_blank\">SC-140</a>, a Notice of Appeal, within 30-days of the date the Court mailed you the Notice of Entry of Judgment.</p>",
 		"id": 17,
-		"completed":false,
-		"stage": 2
-	},
-	{
-		"title": "(opt) Acknowledgement of Satisfaction of Judgement",
-		"blockText": "text2After",
-		"id": 18,
-		"completed":false,
-		"stage": 2
-	},
-	{
-		"title": "(opt) Submit a Motion to Vacate the judgement",
-		"blockText": "text3After",
-		"id": 19,
-		"completed":false,
-		"stage": 2
-	},
-	{
-		"title": "(opt) Appeal the Judgement",
-		"blockText": "text3After",
-		"id": 20,
-		"completed":false,
-		"stage": 2
-	},
-	{
-		"title": "(opt) Review Judgement Debtor's Statement",
-		"blockText": "text3After",
-		"id": 21,
 		"completed":false,
 		"stage": 2
 	}

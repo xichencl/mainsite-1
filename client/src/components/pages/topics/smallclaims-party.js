@@ -49,6 +49,7 @@ export default class SmallClaimsParty extends Component {
         		boxTitle="Resources"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
+        		infoboxClass="Box Info-box small-box"
         		/>
         </div>
 	    </div>

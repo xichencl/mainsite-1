@@ -24,5 +24,5 @@ export default class TextIconBox extends Component {
 
 TextIconBox.propTypes = { limit: React.PropTypes.number };
 TextIconBox.defaultProps = { 
-	TextIconBoxClass: 'Box Text-icon-box Grey-background' 
+	TextIconBoxClass: 'Box Text-icon-box Grey-background medium-box' 
 };
