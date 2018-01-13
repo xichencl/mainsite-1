@@ -99,7 +99,7 @@ export default class SmallClaims extends Component {
             <div className="grid grid-pad">
               {renderParties}
             </div>
-            <Infobox boxTitle="FAQs" boxContent={renderFaqTitles} buttonText="View More" />
+            <Infobox boxTitle="FAQs" boxContent={renderFaqTitles} buttonText="View More" infoBoxClass="Box Info-box medium-box"/>
           </div>
       </div>
     );

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import TextIconBox from '../../template/text-icon-box';
 import ChecklistIcon from '../../../img/icn_checklist.svg';
 import InfoBox from '../../template/info-box';
+import SquareBox from '../../template/square-box';
+import Before from '../../../img/before_1.svg';
+import During from '../../../img/during_1.svg';
+import After from '../../../img/after_1.svg';
 
 const resourceList = [
 	{ 
@@ -44,13 +48,26 @@ export default class SmallClaimsParty extends Component {
         		boxTitle="Small Claims Checklist"
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
         		iconLarge={ChecklistIcon}
+        		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
         		/>
         	<InfoBox 
         		boxTitle="Resources"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
-        		infoboxClass="Box Info-box small-box"
+        		infoboxClass="Box Info-box small-box col-2"
         		/>
+        	<SquareBox 
+        		boxTitle="Before"
+        		imgSrc={Before}
+        	/>
+        	<SquareBox 
+        		boxTitle="During"
+        		imgSrc={During}
+        	/>
+        	<SquareBox 
+        		boxTitle="After"
+        		imgSrc={After}
+        	/>
         </div>
 	    </div>
 		)

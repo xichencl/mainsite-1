@@ -253,10 +253,7 @@ button:hover {
 }
 
 .Square-box {
-  .fa {
-    font-size: 8rem;
-    padding: 2rem 2rem 3rem 2rem;
-  }
+
   h3 {
     padding-top: 2rem;
   }
@@ -348,8 +345,10 @@ button:hover {
 .Info-box {
   background-color: $grey-background;
   display: block;
-  width: 97%;
+  width: 100%;
   padding: 2rem;
+  position: relative;
+
 }
 
 .Info-box-btn {
@@ -370,11 +369,21 @@ button:hover {
 }
 
 .medium-box {
-  width: 66%;
+  width: 100%;
+  margin-right: 3%;
+
+  @include sm {
+    width: 63%;
+  }
+
 }
 
 .small-box {
-  width: 33%;
+  width: 100%;
+  margin-right: 3%;
+  @include sm {
+    width: 30%;
+  }
 }
 
 .large-box {
