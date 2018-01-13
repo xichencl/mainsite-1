@@ -49,6 +49,7 @@ export default class SmallClaimsParty extends Component {
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
         		iconLarge={ChecklistIcon}
         		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
+        		buttonLink="/test-todo"
         		/>
         	<InfoBox 
         		boxTitle="Resources"

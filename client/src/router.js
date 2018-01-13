@@ -81,7 +81,7 @@ export default class AppRouter extends Component {
                 <Switch>
                   <Route exact path="/" component={HomePage} />
                   <Route path="/test" component={TestHomePage} />
-                  <Route path="/test-todo" component={TodoApp} />
+                  <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
                   <Route path="/my-case" component={MyCasesDashboard} />

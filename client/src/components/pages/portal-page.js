@@ -12,7 +12,8 @@ import { API_URL, fetchUser } from '../../actions/index';
 // import Cookies from 'universal-cookie';
 // const cookie = new Cookies();
 
-import SearchIcon from '../../img/search.svg';
+import SearchIcon from '../../img/icn_search.svg';
+import LoginIcon from '../../img/icn_login.svg';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
@@ -77,7 +78,7 @@ class Portal extends Component {
           <Link to="login">
             <SquareBox 
               boxTitle='Login / Sign Up'
-              iconClass='fa fa-user' />
+              imgSrc={LoginIcon} />
           </Link>
         </div>,
         <div key={2}>
