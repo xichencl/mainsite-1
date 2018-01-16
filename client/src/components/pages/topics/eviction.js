@@ -3,9 +3,9 @@ import Squarebox from '../../template/square-box';
 import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 
-import PropertyOwnerIcon from '../../../img/eviction_landlord.svg';
-import TenantIcon from '../../../img/eviction_tenant.svg';
-import OccupantIcon from '../../../img/eviction_oo.svg';
+import PropertyOwnerIcon from '../../../img/eviction_landlord_1.svg';
+import TenantIcon from '../../../img/eviction_tenant_1.svg';
+import OccupantIcon from '../../../img/eviction_oo_1.svg';
 
 export default class Eviction extends Component {
 	constructor(){
@@ -71,12 +71,16 @@ export default class Eviction extends Component {
 
 		return (
 			<div className='Topic'>
-		      <h1>Eviction</h1>
-		      <Bannerbox boxTitle='Do I Need a Lawyer?'
+		      <div className="mainpage-title">
+            <hr className="mainpage-title-line" />
+            <h1>Eviction</h1>
+            <hr className="mainpage-title-line"/>
+          </div> 
+		      {/*<Bannerbox boxTitle='Do I Need a Lawyer?'
 		           boxContent='Learn more about rental responsibilities, unlawful detainer, and information for tenants and property owners.'
 		           buttonText='FAQs'
                buttonLink='faqs/eviction'
-		      />
+		      />*/}
 		      <div className='grid grid-pad'>
 		        <Squarebox 
 		        	boxTitle='Property Owner'

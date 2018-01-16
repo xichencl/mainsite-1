@@ -1,31 +1,47 @@
 import React, { PropTypes } from 'react'
 import Todo from './Todo'
+import { getData } from '../../../../actions/index.js'
 
-const TodoList = ({ todos, onTodoClick, onAccordionClick, loading, toggled }) => (
-  <div>
+class TodoList extends React.Component{
+  constructor(props){
+    super(props);
+  }
 
-    <div className="checklist-list-container">
-      {loading ? 'Loading...': ''}
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={() => { onTodoClick(todo.id); }}
-          onToggle={() => { onAccordionClick(todo.id);}}
+  componentWillMount(){
+    console.log("CaseType: ", this.props.caseType)
+    this.props.onUpdate(this.props.caseId, this.props.caseType);
+  }
 
-        />
-      )}
+  render() {
+    const { todos, onTodoClick, onAccordionClick, loading, onSaveClick } = this.props;
+    return ( 
+    <div>
+      
+      <div className="checklist-list-container">
+        {loading ? 'Loading...': ''}
+        {todos.map(todo =>
+          <Todo
+            key={todo.id}
+            {...todo}
+            onClick={() => { onTodoClick(todo.id); }}
+            onToggle={() => { onAccordionClick(todo.id);}}
+          />
+        )}
+      </div>
+      
+      <button type="button" className="btn-checklist-save" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>
     </div>
 
-  </div>
-)
+    );
 
+    }
+}
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
     expanded: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired, 
+    blockText: PropTypes.string.isRequired, 
     
   }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired,
@@ -34,35 +50,4 @@ TodoList.propTypes = {
   // toggled: PropTypes.bool.isRequired
 }
 
-export default TodoList
-
-/*
-const TodoList = ({ todos, onTodoClick, loading, toggled }) => (
-  <div>
-
-    <div className="checklist-list-container">
-      {loading ? 'Loading...': ''}
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={() => onTodoClick(todo.id)}
-        />
-      )}
-    </div>
-
-  </div>
-)
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired, 
-    
-  }).isRequired).isRequired,
-  onTodoClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  // toggled: PropTypes.bool.isRequired
-}
-*/
+export default TodoList;

@@ -23,7 +23,7 @@ export default class SquareBox extends Component {
 } 
 
 
-
+ 
 // how to manage icons? 
 // <Icon />{this.props.glyph} 
 // div needs to be a link to the /page => "/smallclaims" 

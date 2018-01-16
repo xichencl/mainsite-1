@@ -27,8 +27,13 @@ import './public/stylesheets/app.scss';
 //   ReactGA.pageview(window.location.pathname);
 // }
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk, dataService)(createStore);
-const store = createStoreWithMiddleware(rootReducer);
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer, devTools);
+
+store.subscribe(() => {
+  console.log('state changed', store.getState());
+});
 
 const token = cookie.load('token');
 
@@ -49,6 +54,6 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-store.dispatch({type: 'GET_TODO_DATA'})
+// store.dispatch({type: 'GET_TODO_DATA'})
 
 // / add to < Router onUpdate={logPageView} /> for google analytics

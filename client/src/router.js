@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link, browserHistory } from 'react-router-dom';
+import { CLIENT_ROOT_URL } from './actions/index';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
@@ -19,6 +20,7 @@ import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
 import Portal from './components/pages/portal-page';
 import SmallClaims from './components/pages/topics/smallclaims';
+import SmallClaimsParty from './components/pages/topics/smallclaims-party';
 import Guardianship from './components/pages/topics/guardianship';
 import Eviction from './components/pages/topics/eviction';
 import Traffic from './components/pages/topics/traffic';
@@ -38,9 +40,10 @@ import ForgotPassword from './components/auth/forgot-password';
 import ResetPassword from './components/auth/reset-password';
 
 // Import profile pages
-// import Profile from './components/profile/profile';
+import EditProfile from './components/auth/edit-profile';
 import ViewProfile from './components/profile/view-profile';
 import MyCasesDashboard from './components/cases/my-cases-dashboard'; // import Inbox from './components/dashboard/messaging/inbox';
+import NewCase from './components/pages/new-case-page';
 // import Conversation from './components/dashboard/messaging/conversation';
 // import ComposeMessage from './components/dashboard/messaging/compose-message';
 // import BillingSettings from './components/billing/settings';
@@ -62,7 +65,7 @@ export default class AppRouter extends Component {
 
   render() {
     return (
-      <BrowserRouter history={browserHistory}>
+      <BrowserRouter history={browserHistory} >
         <div>
           {/* <ToggleBox />*/}
           <Switch>
@@ -78,7 +81,7 @@ export default class AppRouter extends Component {
                 <Switch>
                   <Route exact path="/" component={HomePage} />
                   <Route path="/test" component={TestHomePage} />
-                  <Route path="/test-todo" component={TodoApp} />
+                  <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
                   <Route path="/my-case" component={MyCasesDashboard} />
@@ -100,7 +103,8 @@ export default class AppRouter extends Component {
                   <Route path="/forgot-password" component={ForgotPassword} />
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
-                  <Route path="/smallclaims" component={SmallClaims} />
+                  <Route exact path="/smallclaims" component={SmallClaims} />
+                  <Route path="/smallclaims/:party" component={SmallClaimsParty} />
                   <Route path="/guardianship" component={Guardianship} />
                   <Route path="/eviction" component={Eviction} />
                   <Route path="/dv" component={Dv} />
@@ -110,12 +114,16 @@ export default class AppRouter extends Component {
 
                   <Route path="/profile" component={RequireAuth(ViewProfile)} />
 
+                  <Route path="/add-case" component={RequireAuth(NewCase)} />
+                  <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
+
                   <Route path="*" component={NotFoundPage} />
                 </Switch>
               </div>
             </div>
-            <Footer />
+            
           </Switch>
+          <Footer />
         </div>
       </BrowserRouter>
     );

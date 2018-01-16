@@ -11,7 +11,7 @@ const config = require('../config/main');
 // TO-DO Add issuer and audience
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
-    expiresIn: 604800 // in seconds
+    expiresIn: 6080 // in seconds
   });
 }
 
@@ -20,7 +20,8 @@ function generateToken(user) {
 //= =======================================
 exports.login = function (req, res, next) {
   const userInfo = setUserInfo(req.user);
-
+  // console.log("executed");
+  // console.log(req.user);
   res.status(200).json({
     token: `JWT ${generateToken(userInfo)}`,
     user: userInfo
@@ -37,6 +38,8 @@ exports.register = function (req, res, next) {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const password = req.body.password;
+  const address = req.body.address;
+  const phone = req.body.phone;
 
   // Return error if no email provided
   if (!email) {
@@ -65,7 +68,7 @@ exports.register = function (req, res, next) {
     const user = new User({
       email,
       password,
-      profile: { firstName, lastName }
+      profile: { firstName, lastName, address, phone, email }
     });
 
     user.save((err, user) => {
@@ -139,11 +142,13 @@ exports.forgotPassword = function (req, res, next) {
           // If error in saving token, return it
         if (err) { return next(err); }
 
+        // const hostname = req.headers.host;
+        const hostname = "localhost:8080";
         const message = {
           subject: 'Reset Password',
           text: `${'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            'http://'}${req.headers.host}/reset-password/${resetToken}\n\n` +
+            'http://'}${hostname}/reset-password/${resetToken}\n\n` +
             `If you did not request this, please ignore this email and your password will remain unchanged.\n`
         };
 

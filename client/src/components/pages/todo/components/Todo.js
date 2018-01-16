@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
   <div 
@@ -9,7 +10,7 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
   >
     <i 
       onClick={onClick}
-      className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-check-circle-o"}
+      className={completed ? "list-item-checkbox fa fa-check-circle" : "list-item-checkbox fa fa-circle-o"}
 
     >
     </i>
@@ -31,8 +32,10 @@ const Todo = ({ onClick, onToggle, completed, expanded, title, blockText }) => (
         style={ {
           display: expanded ? "block" : "none"
         }}
+        dangerouslySetInnerHTML={ { __html: blockText } }
       >
-        {blockText}
+        
+
       </div>
 
     </div>
@@ -44,7 +47,7 @@ Todo.propTypes = {
   onClick: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
   completed: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired, 
+  blockText: PropTypes.string.isRequired, 
   expanded: PropTypes.bool.isRequired
 }
 

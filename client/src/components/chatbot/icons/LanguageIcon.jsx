@@ -43,9 +43,9 @@ class LanguageIcon extends React.Component {
             <header className="lang-title">Select a language</header>
 
             <div className="lang-container">
-              <form>
+              <form className="language-icon-form">
                 <div className="radio-T" onClick={this.closeModal}>
-                  <label>
+                  <label className="language-icon-label">
                     <input
                       className="radio-style"
                       type="radio"
@@ -57,7 +57,7 @@ class LanguageIcon extends React.Component {
                   </label>
                 </div>
                 <div className="radio-T" onClick={this.closeModal}>
-                  <label>
+                  <label className="language-icon-label">
                     <input
                       className="radio-style"
                       type="radio"
@@ -69,7 +69,7 @@ class LanguageIcon extends React.Component {
                   </label>
                 </div>
                 <div className="radio-T" onClick={this.closeModal}>
-                  <label>
+                  <label className="language-icon-label">
                     <input
                       className="radio-style"
                       type="radio"

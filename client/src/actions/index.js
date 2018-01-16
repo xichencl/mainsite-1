@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
@@ -29,7 +29,7 @@ export function fetchUser(uid) {
         payload: response.data.user,
       });
     })
-    .catch((error) => dispatch(errorHandler(dispatch, error.response, errorType)));
+    .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };
 }
 
@@ -79,6 +79,16 @@ export const accordionTodo = (id) => {
     id
   }
 }
+
+// checklist add case
+export const addUserCase = (caseType) => {
+  return {
+    type: 'ADD_CASE',
+    caseType
+  }
+}
+
+
 ///////////
 
 // export const loadChecklist = () => dispatch => {
@@ -120,44 +130,58 @@ export function errorHandler(dispatch, error, type) {
 
 // Post Request
 export function postData(action, errorType, isAuthReq, url, dispatch, data) {
-  const requestUrl = API_URL + url;
-  let headers = {};
+  console.log("URL: ", url);
+  console.log("Data: ", data);
+  // console.log("Dispatch: ", dispatch);
+  // return function (dispatch) {
+    const requestUrl = API_URL + url;
+    let headers = {};
 
-  if (isAuthReq) {
-    headers = { headers: { Authorization: cookie.get('token') } };
-  }
 
-  axios.post(requestUrl, data, headers)
-  .then((response) => {
-    dispatch({
-      type: action,
-      payload: response.data,
+    if (isAuthReq) {
+      headers = { headers: { Authorization: cookie.get('token') } };
+    }
+
+    axios.post(requestUrl, data, headers)
+    .then((response) => {
+      console.log("Repsonse Received: ", response.data);
+      dispatch({
+        type: action,
+        payload: response.data.payload,
+      });
+      
+    })
+    .catch((error) => {
+      console.log("Error", error);
+      errorHandler(dispatch, error.response, errorType);
     });
-  })
-  .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
-  });
+  // };
 }
 
 // Get Request
 export function getData(action, errorType, isAuthReq, url, dispatch) {
-  const requestUrl = API_URL + url;
-  let headers = {};
+  // return function (dispatch) {
+    const requestUrl = API_URL + url;
+    let headers = {};
 
-  if (isAuthReq) {
-    headers = { headers: { Authorization: cookie.get('token') } };
-  }
+    if (isAuthReq) {
+      headers = { headers: { Authorization: cookie.get('token') } };
+    }
 
-  axios.get(requestUrl, headers)
-  .then((response) => {
-    dispatch({
-      type: action,
-      payload: response.data,
+    axios.get(requestUrl, headers)
+    .then((response) => {
+      console.log("Response.Data: ", response.data);
+      console.log("Action type: ", action);
+      dispatch({
+        type: action,
+        payload: response.data.payload,
+      });
+    })
+    .catch((error) => {
+      console.log("error handler is invoked");
+      errorHandler(dispatch, error.response, errorType);
     });
-  })
-  .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
-  });
+  // };
 }
 
 // Put Request
@@ -194,7 +218,7 @@ export function deleteData(action, errorType, isAuthReq, url, dispatch) {
   .then((response) => {
     dispatch({
       type: action,
-      payload: response.data,
+      payload: response.data.payload,
     });
   })
   .catch((error) => {

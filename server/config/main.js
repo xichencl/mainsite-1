@@ -1,4 +1,4 @@
-const { DB_URL, MAILGUN } = require('./.env');
+const { DB_URL, MAILGUN_KEY, MAILGUN_DOMAIN } = require('./.env');
 
 module.exports = {
   // Secret key for JWT signing and encryption
@@ -10,9 +10,9 @@ module.exports = {
   port: 3000,
   // Configuring Mailgun API for sending transactional email
   // Rt now using authorized accounts only for testing -->
-  mailgun_priv_key: MAILGUN,
+  mailgun_priv_key: MAILGUN_KEY,
   // Configuring Mailgun domain for sending transactional email
-  mailgun_domain: 'mailgun domain here',
+  mailgun_domain: MAILGUN_DOMAIN,
   // Mailchimp API key
   mailchimpApiKey: 'mailchimp api key here',
   // SendGrid API key

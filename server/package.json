@@ -13,6 +13,7 @@
   "dependencies": {
     "apiai": "^4.0.3",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.15.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.13.4",
@@ -26,7 +27,7 @@
     "morgan": "^1.7.0",
     "opn": "^5.1.0",
     "passport": "^0.3.2",
-    "passport-jwt": "^2.0.0",
+    "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
     "sendgrid": "^4.7.1",
     "socket.io": "^1.4.6",
@@ -35,14 +36,15 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",
+    "deep-copy": "^1.4.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
     "should": "^11.1.1",
-    "supertest": "^2.0.0",
-    "nodemon": "^1.11.0"
+    "supertest": "^2.0.0"
   }
 }

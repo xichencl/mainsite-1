@@ -25,10 +25,11 @@ class Header extends React.Component {
               </i>
             </button>
 
-            {/* case type button*/}
-            {/* <button type="button">
-              {this.props.ai.caseType}
-            </button>*/}
+          <div>
+            {this.props.ai.caseType}
+          </div>
+
+          <button id="email">email</button>
 
             <button
               type="button"
@@ -58,12 +59,18 @@ const mapDispatchToProps = dispatch => ({
       return;
     }
     if (event.currentTarget.id === 'refresh-button') {
-      dispatch({ type: 'RESET_BOT' });
-      dispatch({ type: 'General' });
-      this.props.resetSession();
-    } else {
-      // id==='close-button'
-      dispatch({ type: 'TOGGLE_BOT' });
+      if (confirm("You will lose all previous conversations on refresh. Do you wish to proceed?")){
+        //save all user input to database
+
+        dispatch({ type: 'RESET_BOT' });
+        dispatch({ type: 'General' });
+        this.props.resetSession();
+      }
+    } else if (event.currentTarget.id === 'close-button') {
+        dispatch({ type: 'TOGGLE_BOT' });
+    } else if (event.currentTarget.id === 'email'){
+        //email the dialog
+        axios.post();
     }
   },
 });

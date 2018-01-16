@@ -215,10 +215,15 @@ input:focus:-moz-placeholder { color:transparent; }
 
 .Portal-box-content {
 	padding: 2rem;
+	overflow: scroll;
 }
 
 .My-cases-box-lg {
 	width: 100%;
+}
+
+.My-cases-box-md {
+	width: 66%;
 }
 
 .Upcoming-box {

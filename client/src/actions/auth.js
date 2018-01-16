@@ -9,14 +9,15 @@ import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FORGOT_PASSWORD_REQUEST, RESET_PASS
 //= ===============================
 // Authentication actions
 //= ===============================
-
 // TO-DO: Add expiration to cookie
 export function loginUser({ email, password }) {
   return function (dispatch) {
     axios.post(`${API_URL}/auth/login`, { email, password })
     .then((response) => {
-      cookie.set('token', response.data.token, { path: '/' });
-      cookie.set('user', response.data.user, { path: '/' });
+      console.log('Response Data:', response.data);
+      cookie.set('token', response.data.token, { path: '/', maxAge: 6080});
+      cookie.set('user', response.data.user, { path: '/', maxAge: 6080 });
+      console.log('Cookie: ', cookie);
       dispatch({ type: AUTH_USER });
       window.location.href = `${CLIENT_ROOT_URL}/portal`;
     })
@@ -26,9 +27,12 @@ export function loginUser({ email, password }) {
   };
 }
 
-export function registerUser({ email, firstName, lastName, password }) {
+export function registerUser({ email, firstName, lastName, address, phone, password }) {
+  console.log("register user called");
+  console.log({email, firstName, lastName, address, phone, password});
   return function (dispatch) {
-    axios.post(`${API_URL}/auth/register`, { email, firstName, lastName, password })
+    console.log("register user");
+    axios.post(`${API_URL}/auth/register`, { email, firstName, lastName, address, phone, password })
     .then((response) => {
       cookie.set('token', response.data.token, { path: '/' });
       cookie.set('user', response.data.user, { path: '/' });
@@ -43,6 +47,7 @@ export function registerUser({ email, firstName, lastName, password }) {
 
 export function logoutUser(error) {
   return function (dispatch) {
+    console.log('logging out');
     dispatch({ type: UNAUTH_USER, payload: error || '' });
     cookie.remove('token', { path: '/' });
     cookie.remove('user', { path: '/' });
@@ -59,6 +64,7 @@ export function getForgotPasswordToken({ email }) {
         type: FORGOT_PASSWORD_REQUEST,
         payload: response.data.message,
       });
+      browserHistory.push('/login');
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);

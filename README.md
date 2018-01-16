@@ -6,6 +6,7 @@
 ~- Create landing pages for /:topics~
 - Forms page
 ~- Integrate with chatbot~
+- chatbot z-index (1003) overlaps buttons (bc of app container)
 
 ### CHECKLIST
 - Style blockText
