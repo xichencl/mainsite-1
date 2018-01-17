@@ -23,11 +23,17 @@ if (process.env.NODE_ENV != config.test_env) {
 }
 
 //Serve the front end
+app.use(express.static(path.join(__dirname, '../client/')));
+
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
-app.use(express.static(path.join(__dirname, '../client/')));
+app.get('/portal', (req, res) => {
+  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+});
+
+
 
 
 //set up sockets for multi-client chat
