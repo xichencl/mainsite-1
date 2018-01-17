@@ -97,18 +97,20 @@ const config = {
       // },
     ],
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './',
-    proxy: { '/api': 'http://localhost:3000' },
-    host: '0.0.0.0',
-    /* settings for serving from remote server
-    port:80,
-    proxy: {'/api':'http://52.39.81.245:3000'},
-    */
-  },
+  // devServer: {
+  //   historyApiFallback: true,
+  //   contentBase: './',
+  //   // proxy: { '/api': 'http://localhost:3000' },
+  //   host: '0.0.0.0',
+  //   port: 3000
+  //   /* settings for serving from remote server
+  //   port:80,
+  //   proxy: {'/api':'http://52.39.81.245:3000'},
+  //   */
+  // },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({

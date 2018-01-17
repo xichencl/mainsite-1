@@ -10,7 +10,7 @@ import { fetchData } from "../data/mockDataAPI";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
 export const API_URL = 'http://localhost:3000/api'; // database server URL
-export const CLIENT_ROOT_URL = 'http://localhost:8080';
+export const CLIENT_ROOT_URL = 'http://localhost:8000';
 
 //= ===============================
 // Utility actions

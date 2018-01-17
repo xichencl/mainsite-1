@@ -6,7 +6,8 @@ const express = require('express'),
   router = require('./router'),
   mongoose = require('mongoose'),
   socketEvents = require('./socketEvents'),
-  config = require('./config/main');
+  config = require('./config/main'),
+  path = require('path');
 
 // Database Setup
 mongoose.Promise = require('bluebird');
@@ -21,7 +22,15 @@ if (process.env.NODE_ENV != config.test_env) {
   server = app.listen(config.test_port);
 }
 
+//Serve the front end
+app.get('/', (req, res) => {
+  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+});
 
+app.use(express.static(path.join(__dirname, '../client/')));
+
+
+//set up sockets for multi-client chat
 const io = require('socket.io').listen(server);
 
 socketEvents(io);
