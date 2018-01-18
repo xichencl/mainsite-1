@@ -249,7 +249,7 @@ button:hover {
     color: $grey-text;
   }
   height: $box-height;
-  overflow: auto;
+  overflow: auto; //fine except for portal boxes.
 }
 
 .Square-box {
