@@ -1,0 +1,7 @@
+Your server is running on port \\.\pipe\ad1ae3c9-77c9-4286-b3d4-4ad117e04569.
+[0mGET /server/index.js [33m404 [0m5.255 ms - 154[0m
+[0mGET /server/index.js [33m404 [0m0.704 ms - 154[0m
+[0mGET /server/index.js [33m404 [0m0.694 ms - 154[0m
+[0mPOST /api/chat/message [32m200 [0m1193.352 ms - -[0m
+[0mPOST /api/chat/message [32m200 [0m163.500 ms - -[0m
+[0mPOST /api/chat/message [32m200 [0m1272.956 ms - -[0m

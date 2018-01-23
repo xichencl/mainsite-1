@@ -16,8 +16,8 @@ mongoose.connect(config.database, { useMongoClient: true });
 // Start the server
 let server;
 if (process.env.NODE_ENV != config.test_env) {
-  server = app.listen(config.port);
-  console.log(`Your server is running on port ${config.port}.`);
+  server = app.listen(process.env.PORT);
+  console.log(`Your server is running on port ${process.env.PORT}.`);
 } else{
   server = app.listen(config.test_port);
 }
@@ -32,6 +32,8 @@ app.get('/', (req, res) => {
 app.get('/portal', (req, res) => {
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
+
+// app.get('/api/chat/test', (req, res) => {res.send("Hi there!")});
 
 
 

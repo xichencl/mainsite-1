@@ -1,0 +1,11 @@
+SyntaxError: Unexpected token l
+    at parse (D:\Code\mainsite\server\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\Code\mainsite\server\node_modules\body-parser\lib\read.js:116:18
+    at invokeCallback (D:\Code\mainsite\server\node_modules\raw-body\index.js:262:16)
+    at done (D:\Code\mainsite\server\node_modules\raw-body\index.js:251:7)
+    at IncomingMessage.onEnd (D:\Code\mainsite\server\node_modules\raw-body\index.js:307:7)
+    at emitNone (events.js:106:13)
+    at IncomingMessage.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1055:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)

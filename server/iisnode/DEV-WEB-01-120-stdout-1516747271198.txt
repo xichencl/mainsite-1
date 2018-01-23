@@ -1,0 +1,7 @@
+Your server is running on port \\.\pipe\7b95f07d-0bdd-4a23-bc0b-a001a209bc8c.
+[0mGET /FormsViewer [33m404 [0m5.140 ms - 150[0m
+[0mGET /FormsViewer/server/main.js [33m404 [0m0.747 ms - 165[0m
+[0mGET /FormsViewer/server/main.js [33m404 [0m0.715 ms - 165[0m
+[0mGET /FormsViewer/server/main.js [33m404 [0m0.625 ms - 165[0m
+[0mGET /server/index.js [33m404 [0m0.367 ms - 154[0m
+[0mGET /server/index.js [33m404 [0m0.349 ms - 154[0m

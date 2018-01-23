@@ -1,0 +1,5 @@
+Your server is running on port \\.\pipe\0a71dc86-73d2-4d00-8790-b93c42452e80.
+[0mGET /api/chat/test [32m200 [0m7.592 ms - 12[0m
+[0mGET /api/chat/webhook [33m404 [0m4.180 ms - 155[0m
+[0mGET /api/chat/test [36m304 [0m1.527 ms - -[0m
+[0mPOST /api/chat/message [32m200 [0m259.171 ms - -[0m

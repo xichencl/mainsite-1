@@ -83,7 +83,7 @@ export default class SmallClaims extends Component {
     return (
       <div>
           {/* Bot temporarily lives only in Small Claims until all case types are functional in bot */}
-          <Bot />
+          // <Bot />
           <div className="Topic">
             <div className="mainpage-title">
               <hr className="mainpage-title-line" />

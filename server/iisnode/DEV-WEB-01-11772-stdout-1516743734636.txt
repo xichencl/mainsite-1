@@ -1,0 +1,2 @@
+Your server is running on port \\.\pipe\d35ee20a-7eae-4c54-8cde-d8b2140b8206.
+[0mGET /client/bundle.js [33m404 [0m5.985 ms - 155[0m

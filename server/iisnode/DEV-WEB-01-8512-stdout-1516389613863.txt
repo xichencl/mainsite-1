@@ -1,0 +1,2 @@
+Your server is running on port \\.\pipe\70fabee6-cd13-46e5-8516-8f76616f2b49.
+[0mPOST /api/chat/message [32m200 [0m823.265 ms - -[0m

@@ -1,0 +1,2 @@
+Your server is running on port \\.\pipe\8bf713e5-b51c-48c4-a9fa-adbb0dbf2cff.
+[0mGET /api/chat/test [36m304 [0m6.969 ms - -[0m

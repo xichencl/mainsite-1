@@ -77,7 +77,7 @@ module.exports = function (app) {
   //= ========================
 
   apiRoutes.use('/chat', chatRoutes);
-  // chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
+  chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
 
   // route: /chat/message
   // console.log(ChatController.getMessageResponse);

@@ -1,4 +1,4 @@
-const { DB_URL, MAILGUN_KEY, MAILGUN_DOMAIN } = require('./.env');
+const { DB_URL, MAILGUN_KEY, MAILGUN_DOMAIN } = require('./secret.env');
 
 module.exports = {
   // Secret key for JWT signing and encryption
