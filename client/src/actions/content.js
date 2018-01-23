@@ -1,5 +1,11 @@
 import axios from 'axios';
 import { FETCH_SITE_CONTENT } from './types'
+import { FETCH_ASSET } from './types'
+
+// export const FETCH_SITE_CONTENT = 'FETCH_SITE_CONTENT';
+// export const FETCH_POST = 'FETCH_POST';
+// export const FETCH_ASSET = 'FETCH_ASSET';
+
 
 const API_BASE_URL = 'https://cdn.contentful.com';
 const API_SPACE_ID = 'x8bmio1z72gj';
@@ -10,6 +16,15 @@ export function fetchCategories() {
   console.log('action request')
   return {
     type: FETCH_SITE_CONTENT,
+    payload: request
+  };
+}
+
+export function fetchAsset(id) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/assets/${id}?access_token=${API_TOKEN}`);
+
+  return {
+    type: FETCH_ASSET,
     payload: request
   };
 }

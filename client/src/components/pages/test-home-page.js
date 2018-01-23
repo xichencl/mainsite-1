@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../../actions/content.js';
 import Squarebox from '../template/square-box';
-import ResponsiveImage from '../template/responsive-image';
-
+import Asset from '../template/responsive-image';
+ 
 class TestHomePage extends React.Component {
   componentWillMount() {
     this.props.fetchCategories()
+    console.log(this.props.content)
   }
 
   renderCategories() {
@@ -19,12 +20,13 @@ class TestHomePage extends React.Component {
                   id={category.sys.id}
                   boxTitle={category.fields.title}
                   
+                  
                 />
-                
+                <div className="image">
+                  <Asset assetId={category.fields.file.url} />
+                </div>
             </Link>
-            <ResponsiveImage 
-                  src={category.fields.img}
-                  alt={category.fields.title}/>
+           
         </div>
       );
     });
@@ -49,3 +51,13 @@ function mapStateToProps(state) {
 }
 export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
 
+/* 
+
+ <ResponsiveImage 
+                  src={category.fields.img}
+                  alt={category.fields.title}/>
+
+
+                  <Asset assetId={category.fields.image.sys.id} />
+
+                  */

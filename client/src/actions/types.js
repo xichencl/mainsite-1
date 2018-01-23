@@ -53,6 +53,7 @@ export const RECEIVE_TASKS = 'RECEIVE_TASKS'
 // Contentful test
 //= =====================
 export const FETCH_SITE_CONTENT = "FETCH_SITE_CONTENT";
+export const FETCH_ASSET = "FETCH_ASSET";
 
 /* Not using these =====>
 

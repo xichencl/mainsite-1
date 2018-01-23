@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth_reducer';
 import userReducer from './user_reducer';
 import siteDataReducer from './site_data_reducer';
+import assetsReducer from './assets_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   chat: chatReducer,
   content: siteDataReducer,
+  assets: assetsReducer,
   checklist: checklistReducer,
   selectedChecklist,
   tasksByChecklistType,
