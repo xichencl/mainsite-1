@@ -92,6 +92,9 @@ button:hover {
   background: $blue-button-pressed;
 }
 
+.hidden {
+  display: none;
+}
 // ==========================
 // ==== nav and searchbar ===
 // ==========================
@@ -246,14 +249,11 @@ button:hover {
     color: $grey-text;
   }
   height: $box-height;
-  overflow: scroll;
+  overflow: auto; //fine except for portal boxes.
 }
 
 .Square-box {
-  .fa {
-    font-size: 8rem;
-    padding: 2rem 2rem 3rem 2rem;
-  }
+
   h3 {
     padding-top: 2rem;
   }
@@ -345,14 +345,50 @@ button:hover {
 .Info-box {
   background-color: $grey-background;
   display: block;
-  width: 97%;
+  width: 100%;
   padding: 2rem;
+  position: relative;
+
 }
 
 .Info-box-btn {
   margin-top: 1.2rem;
 }
 
+.Text-icon-box {
+  width: 66%;
+  overflow: none;
+  .text-icon-box-grid {
+    display: flex;
+  }
+  img {
+    width: 400px;
+
+  }
+  padding: 2rem;
+}
+
+.medium-box {
+  width: 100%;
+  margin-right: 3%;
+
+  @include sm {
+    width: 63%;
+  }
+
+}
+
+.small-box {
+  width: 100%;
+  margin-right: 3%;
+  @include sm {
+    width: 30%;
+  }
+}
+
+.large-box {
+  width: 100%;
+}
 // ==========================
 // ========= FOOTER =========
 // ==========================

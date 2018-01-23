@@ -20,6 +20,7 @@ import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
 import Portal from './components/pages/portal-page';
 import SmallClaims from './components/pages/topics/smallclaims';
+import SmallClaimsParty from './components/pages/topics/smallclaims-party';
 import Guardianship from './components/pages/topics/guardianship';
 import Eviction from './components/pages/topics/eviction';
 import Traffic from './components/pages/topics/traffic';
@@ -80,7 +81,7 @@ export default class AppRouter extends Component {
                 <Switch>
                   <Route exact path="/" component={HomePage} />
                   <Route path="/test" component={TestHomePage} />
-                  <Route path="/test-todo" component={TodoApp} />
+                  <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
                   <Route path="/my-case" component={MyCasesDashboard} />
@@ -102,7 +103,8 @@ export default class AppRouter extends Component {
                   <Route path="/forgot-password" component={ForgotPassword} />
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
-                  <Route path="/smallclaims" component={SmallClaims} />
+                  <Route exact path="/smallclaims" component={SmallClaims} />
+                  <Route path="/smallclaims/:party" component={SmallClaimsParty} />
                   <Route path="/guardianship" component={Guardianship} />
                   <Route path="/eviction" component={Eviction} />
                   <Route path="/dv" component={Dv} />

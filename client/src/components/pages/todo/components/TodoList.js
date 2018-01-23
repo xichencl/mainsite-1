@@ -41,7 +41,7 @@ TodoList.propTypes = {
     id: PropTypes.number.isRequired,
     completed: PropTypes.bool.isRequired,
     expanded: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired, 
+    blockText: PropTypes.string.isRequired, 
     
   }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired,
@@ -50,41 +50,4 @@ TodoList.propTypes = {
   // toggled: PropTypes.bool.isRequired
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   onUpdate: () => {
-//     getData('LOAD_TODOS', null, true, `/user/${uid}/${this.props.location.state.caseId}`, dispatch);
-//   },
-// });
-
 export default TodoList;
-
-/*
-const TodoList = ({ todos, onTodoClick, loading, toggled }) => (
-  <div>
-
-    <div className="checklist-list-container">
-      {loading ? 'Loading...': ''}
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onClick={() => onTodoClick(todo.id)}
-        />
-      )}
-    </div>
-
-  </div>
-)
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired, 
-    
-  }).isRequired).isRequired,
-  onTodoClick: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  // toggled: PropTypes.bool.isRequired
-}
-*/
