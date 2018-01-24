@@ -11,7 +11,14 @@ const express = require('express'),
 
 // Database Setup
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.database, { useMongoClient: true });
+mongoose.connect(config.database, { useMongoClient: true })
+        .then(
+            ()=> {console.log("Connected to DB")},
+            (err) => {console.log("error: ", err)}
+          );
+
+const env = require('dotenv').load();
+
 
 // Start the server
 let server;

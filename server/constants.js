@@ -2,12 +2,12 @@ const ROLE_MEMBER = 'Member';
 const ROLE_CLIENT = 'Client';
 const ROLE_OWNER = 'Owner';
 const ROLE_ADMIN = 'Admin';
-const SMALL_CLAIMS = 'Small Claims';
-const GUARDIANSHIP = 'Guardianship';
-const FAMILY_LAW = 'Family Law';
-const EVICTION = 'Eviction';
-const DOMESTIC_VIOLENCE = 'Domestic Violence';
-const TRAFFIC = 'Traffic';
+const SMALL_CLAIMS = 'smallClaims';
+const GUARDIANSHIP = 'guardianship';
+const FAMILY_LAW = 'family';
+const EVICTION = 'eviction';
+const DOMESTIC_VIOLENCE = 'dv';
+const TRAFFIC = 'traffic';
 
 module.exports = {
   ROLE_MEMBER,

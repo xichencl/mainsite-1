@@ -76,7 +76,7 @@ export default class AppRouter extends Component {
               <Search />
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
-              <Bot />
+              {/*<Bot /> */}
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />

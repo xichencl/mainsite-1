@@ -19,8 +19,8 @@ export const GET_DATA = 'get_data',
   POST_DATA = 'post_data';
 
 //case types
-export const SMALL_CLAIMS = 'Small Claims',
-  GUARDIANSHIP = 'Guardianship';
+export const SMALL_CLAIMS = 'smallClaims',
+  GUARDIANSHIP = 'guardianship';
 
 //= =====================
 // Page Actions
