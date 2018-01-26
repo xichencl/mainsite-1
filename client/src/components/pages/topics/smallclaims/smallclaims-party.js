@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import TextIconBox from '../../template/text-icon-box';
-import ChecklistIcon from '../../../img/icn_checklist.svg';
-import InfoBox from '../../template/info-box';
-import SquareBox from '../../template/square-box';
-import Before from '../../../img/before_1.svg';
-import During from '../../../img/during_1.svg';
-import After from '../../../img/after_1.svg';
+import { Link } from 'react-router-dom';
+import TextIconBox from '../../../template/text-icon-box';
+import ChecklistIcon from '../../../../img/icn_checklist.svg';
+import InfoBox from '../../../template/info-box';
+import SquareBox from '../../../template/square-box';
+import Before from '../../../../img/before_1.svg';
+import During from '../../../../img/during_1.svg';
+import After from '../../../../img/after_1.svg';
 
 const resourceList = [
 	{ 
@@ -21,7 +22,7 @@ const resourceList = [
 		link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
 	},
 ]
-		
+ 	
 
 export default class SmallClaimsParty extends Component {
 	constructor(props) {
@@ -36,6 +37,14 @@ export default class SmallClaimsParty extends Component {
 				</div>
 			)
 		})
+		// const thisUrl = this.props.match.url;
+		// const beforeUrl = `${thisUrl}/before`
+		// const duringUrl = `${thisUrl}/during`
+		// const afterUrl = `${thisUrl}/after`
+		
+
+		//show links here: filter by if clicked, show the side menu. otherwise show icons
+
 		return (
   		<div>
   			<div className="mainpage-title">
@@ -57,18 +66,25 @@ export default class SmallClaimsParty extends Component {
         		buttonVisibilityClass="hidden"
         		infoboxClass="Box Info-box small-box col-2"
         		/>
-        	<SquareBox 
-        		boxTitle="Before"
-        		imgSrc={Before}
-        	/>
-        	<SquareBox 
-        		boxTitle="During"
-        		imgSrc={During}
-        	/>
-        	<SquareBox 
-        		boxTitle="After"
-        		imgSrc={After}
-        	/>
+
+        	<Link to={`${this.props.match.url}/before`}>
+	        	<SquareBox 
+	        		boxTitle="Before"
+	        		imgSrc={Before}
+	        	/>
+        	</Link>
+        	<Link to={`${this.props.match.url}/before`}>
+	        	<SquareBox 
+	        		boxTitle="During"
+	        		imgSrc={During}
+	        	/>
+	        </Link>
+	        <Link to={`${this.props.match.url}/before`}>
+	        	<SquareBox 
+	        		boxTitle="After"
+	        		imgSrc={After}
+	        	/>
+	        </Link>
         </div>
 	    </div>
 		)

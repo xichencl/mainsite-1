@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Squarebox from '../../template/square-box';
-import Bannerbox from '../../template/banner-box';
-import Infobox from '../../template/info-box';
+import Squarebox from '../../../template/square-box';
+import Bannerbox from '../../../template/banner-box';
+import Infobox from '../../../template/info-box';
 // Bot temporarily lives only in Small Claims until all case types are functional in bot
-import Bot from '../../chatbot/Bot.jsx';
-import PlaintiffIcon from '../../../img/suing_1.svg';
-import DefendantIcon from '../../../img/sued_1.svg';
+import Bot from '../../../chatbot/Bot.jsx';
+import PlaintiffIcon from '../../../../img/suing_1.svg';
+import DefendantIcon from '../../../../img/sued_1.svg';
 
 
 

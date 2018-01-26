@@ -17,14 +17,14 @@ class TestHomePage extends React.Component {
         <div key={category.sys.id}>
             <Link to={category.fields.url}>
               <Squarebox 
-                  id={category.sys.id}
-                  boxTitle={category.fields.title}
+                id={category.sys.id}
+                boxTitle={category.fields.title}
+                
                   
-                  
-                />
-                <div className="image">
-                  <Asset assetId={category.fields.file.url} />
-                </div>
+              />
+              <div className="image">
+                <Asset assetId={category.fields.image.sys.id} />
+              </div>
             </Link>
            
         </div>

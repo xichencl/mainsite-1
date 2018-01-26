@@ -12,6 +12,7 @@ $blue-accent: #5392be;
 $blue-background: #e3f8ff;
 $yellow-highlight: #f9d04e;
 $grey-background: #f5f5f5;
+$white-background: #ffffff;
 
 $box-height: 225px;
 $box-img-height: 160px;
@@ -225,6 +226,10 @@ button:hover {
 
 .Grey-background {
   background-color: $grey-background;
+}
+
+.White-background {
+  background-color: $white-background;
 }
 
 .Box {
