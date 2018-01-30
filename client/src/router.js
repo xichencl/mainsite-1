@@ -18,6 +18,7 @@ import TestHomePage from './components/pages/test-home-page';
 import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
+import Videos from './components/pages/videos-page';
 import Portal from './components/pages/portal-page';
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
@@ -90,6 +91,7 @@ export default class AppRouter extends Component {
                   <Route path="/login" component={Login} />
                   <Route path="/logout" component={Logout} />
                   <Route path="/faqs" component={FAQs} />
+                  <Route path="/video-resources" component={Videos} />
                   <Route path="/forms" component={Forms} />
                   <Route
                     path="/locations"

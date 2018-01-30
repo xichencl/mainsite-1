@@ -22,12 +22,70 @@ const resourceList = [
 		link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
 	},
 ]
+
+const buttons = [
+	{
+		id: "before",
+		title: "Before Your Case"
+	},
+	{
+		id: "during",
+		title: "During Your Case"
+	},
+	{
+		id: "after",
+		title: "After the Trial"
+	}
+]
  	
 
 export default class SmallClaimsParty extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
+		this.state = {
+			buttonSelected: false,
+			stage: '' // before/during/after
+		}
+		this.onStageSelect = this.onStageSelect.bind(this);
 	}
+
+	onStageSelect(id, e) {
+		console.log(id)
+		e.stopPropagation();
+		this.setState({
+			buttonSelected: true
+			
+		})
+	}
+
+
+	renderLinks() {
+		//if button hasn't been clicked, show three button options
+    if (!this.state.buttonSelected) {
+      console.log("false", this.state)
+      const renderedButtons = buttons.map((button) => {
+      	return (
+      	<div onClick={(e) => this.onStageSelect(button.id, e)} id={button.id}>
+      		<SquareBox
+      			boxTitle={button.title}
+      			imgSrc={Before}
+      		/>
+      	</div>
+      	)
+  		})
+      return [
+      	<div>{renderedButtons}</div>
+   
+
+      ];
+    } else {
+    	console.log("true")
+      return [
+        // show selected stage content and menu with stage highlighted
+        <div> stage content and menu</div>
+      ];
+    }
+  }
 
 	render() {
 		const resources = resourceList.map((item) => {
@@ -37,12 +95,7 @@ export default class SmallClaimsParty extends Component {
 				</div>
 			)
 		})
-		// const thisUrl = this.props.match.url;
-		// const beforeUrl = `${thisUrl}/before`
-		// const duringUrl = `${thisUrl}/during`
-		// const afterUrl = `${thisUrl}/after`
 		
-
 		//show links here: filter by if clicked, show the side menu. otherwise show icons
 
 		return (
@@ -67,27 +120,15 @@ export default class SmallClaimsParty extends Component {
         		infoboxClass="Box Info-box small-box col-2"
         		/>
 
-        	<Link to={`${this.props.match.url}/before`}>
-	        	<SquareBox 
-	        		boxTitle="Before"
-	        		imgSrc={Before}
-	        	/>
-        	</Link>
-        	<Link to={`${this.props.match.url}/before`}>
-	        	<SquareBox 
-	        		boxTitle="During"
-	        		imgSrc={During}
-	        	/>
-	        </Link>
-	        <Link to={`${this.props.match.url}/before`}>
-	        	<SquareBox 
-	        		boxTitle="After"
-	        		imgSrc={After}
-	        	/>
-	        </Link>
+
+        	{this.renderLinks()}
+        
         </div>
 	    </div>
 		)
   } 
 }
+
+
+
 
