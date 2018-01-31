@@ -7,7 +7,12 @@ const express = require('express'),
   mongoose = require('mongoose'),
   socketEvents = require('./socketEvents'),
   config = require('./config/main'),
-  path = require('path');
+  path = require('path'),
+  expressSession = require('express-session'),
+  MongoStore = require('connect-mongo')(expressSession),
+  passport = require('passport'),
+  cookieParser = require('cookie-parser');
+  // cors = require('cors');
 
 // Database Setup
 mongoose.Promise = require('bluebird');
@@ -17,6 +22,17 @@ mongoose.connect(config.database, { useMongoClient: true })
             (err) => {console.log("error: ", err)}
           );
 
+//set up session middleware using mongoStore
+app.use(expressSession({
+  secret: 'secret',
+  cookie: {maxAge: config.mongoDBSessionMaxAge * 1000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    clear_interval: config.mongoDBSessionMaxAge
+  })
+}));
+
+app.use(cookieParser());
 const env = require('dotenv').load();
 
 
@@ -54,20 +70,30 @@ socketEvents(io);
 // app.use(express.static(__dirname + '/public'));
 
 // Setting up basic middleware for all Express requests
-app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Enable CORS from client-side
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+
+  console.log("adding header");
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 
-
+// app.use(cors({
+//   origin: 'http://localhost:3000/login',
+//   credentials: true
+// }));
 
 // Import routes to be served
 router(app);

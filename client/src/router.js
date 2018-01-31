@@ -117,6 +117,8 @@ export default class AppRouter extends Component {
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
 
+
+
                   <Route path="*" component={NotFoundPage} />
                 </Switch>
               </div>

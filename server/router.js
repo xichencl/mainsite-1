@@ -12,14 +12,23 @@ const ROLE_ADMIN = require('./constants').ROLE_ADMIN;
 
 const passportService = require('./config/passport');
 
+
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
+const requireOIDCLogin = (req, res, next) => {return passport.authenticate('azuread-openidconnect', 
+      { response: res,                      // required
+        // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+        // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+        failureRedirect: '/' 
+      });};
+const config = require('./config/main');
 
 const apiai = require('apiai');
 const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 module.exports = function (app) {
+   
   // Initializing route groups
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
@@ -41,6 +50,12 @@ module.exports = function (app) {
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
+  //azure ad login route
+  authRoutes.get('/openID', requireOIDCLogin, (req, res) => {
+      console.log("AD login success");
+      console.log("req: ", req);
+      console.log("res: ", res);
+  });
   // Password reset request route (generate/send token)
   authRoutes.post('/forgot-password', AuthenticationController.forgotPassword);
 
@@ -134,4 +149,88 @@ module.exports = function (app) {
 
   // Set url for API group routes
   app.use('/api', apiRoutes);
+
+  // app.get('/azure-login', (req, res, next) => {
+  //   console.log("azure-login");
+  //   passport.authenticate('azuread-openidconnect', 
+  //     { response: res,                      // required
+  //       // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+  //       // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+  //       failureRedirect: '/' 
+  //     })(req, res, next);
+  // }, 
+  // (req, res) => {
+  //   console.log("authenticated azure-login");
+  //   res.redirect('/');
+  // });
+
+  // app.get('/api/auth/openid/return',
+  //   (req, res, next) => {
+  //     console.log("get request received on return route");
+  //     passport.authenticate('azuread-openidconnect', 
+  //     { response: res,                      // required
+  //       // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+  //       // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+  //       failureRedirect: '/' 
+  //     })(req, res, next);
+  //   },
+  //   (req, res) => {
+  //     console.log("authenticated /api/auth/openid/return");
+  //     res.redirect('/');
+  //   });
+
+
+app.get('/azure-login',
+  function(req, res, next) {
+    console.log("we are getting a get request");
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+        customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+        failureRedirect: '/' 
+      }
+    )(req, res, next);
+  },
+  function(req, res) {
+    console.log('Login was called in the Sample');
+    res.redirect('/');
+});
+
+// 'GET returnURL'
+// `passport.authenticate` will try to authenticate the content returned in
+// query (such as authorization code). If authentication fails, user will be
+// redirected to '/' (home page); otherwise, it passes to the next middleware.
+app.get('/api/auth/openid/return',
+
+  function(req, res, next) {
+    console.log("get return url");
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        failureRedirect: '/'  
+      }
+    )(req, res, next);
+  },
+  function(req, res) {
+    console.log("next on the callback list");
+    res.redirect('/');
+  });
+
+  // 'logout' route, logout from passport, and destroy the session with AAD.
+app.get('/logout', function(req, res){
+  req.session.destroy(function(err) {
+    req.logOut();
+    res.redirect(config.destroySessionUrl);
+  });
+});
+//   app.get('/login', passport.authenticate('azuread-openidconnect', { failureRedirect: '/' }),
+//   function(req, res) {
+//     log.info('Login was called in the Sample');
+//     res.send("success");
+//     res.redirect('/');
+// } );
+  // app.get('/login', (req, res) => {
+  // });
+  // app.post('/azure-login')
 };

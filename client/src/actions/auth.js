@@ -27,6 +27,34 @@ export function loginUser({ email, password }) {
   };
 }
 
+//test openID login
+export function oidcLoginUser() {
+  console.log("openid login called"); 
+  axios({
+    url: '/login',
+    method: 'get',
+    transformResponse: (data) => {
+      data.headers = {'Access-Control-Allow-Origin': '*'};
+      return data;
+    }
+  }).
+  then((response) => {console.log("sucess");});
+  // axios.get('/login')
+  //     .then((response) => {
+  //       console.log("sucess: ", response);
+  //     }); 
+  // return function (dispatch) {
+    // axios.get('/login')
+    // .then(function (response) {
+    //   console.log("Response from IDProvider: ", response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+  // }
+}
+
+
 export function registerUser({ email, firstName, lastName, address, phone, password }) {
   console.log("register user called");
   console.log({email, firstName, lastName, address, phone, password});
