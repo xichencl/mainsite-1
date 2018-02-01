@@ -9,29 +9,32 @@ const passport = require('passport'),
 
 
 passport.serializeUser(function(user, done) {
-  done(null, user.oid);
+  console.log("serializing user: ", user);
+  done(null, user.email);
 });
 
-passport.deserializeUser(function(oid, done) {
-  findByOid(oid, function (err, user) {
+passport.deserializeUser(function(email, done) {
+  console.log("deserializing user...");
+  // mongoose.Types.ObjectId.isValid(id);
+  User.findOne({email}, function (err, user) {
     done(err, user);
   });
 });
 
 
 // array to hold signed-in users - in memory for testing
-var users = [];
+// var users = [];
 
-var findByOid = function(oid, fn) {
-    for (var i = 0, len = users.length; i < len; i++) {
-        var user = users[i];
-        log.info('we are using user: ', user);
-        if (user.oid === oid) {
-            return fn(null, user);
-        }
-    }
-    return fn(null, null);
-};
+// var findByOid = function(oid, fn) {
+//     for (var i = 0, len = users.length; i < len; i++) {
+//         var user = users[i];
+//         // log.info('we are using user: ', user);
+//         if (user.oid === oid) {
+//             return fn(null, user);
+//         }
+//     }
+//     return fn(null, null);
+// };
 
 //create a logger
 // const log = bunyan.createLogger({
@@ -113,23 +116,52 @@ const oidcOptions = {
 
 const oidcLogin = new OIDCStrategy(oidcOptions, 
   function(iss, sub, profile, accessToken, refreshToken, done) {
+    console.log("OIDCStrategy invoked");
     if (!profile.oid) {
       return done(new Error("No oid found"), null);
     }
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      findByOid(profile.oid, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          // "Auto-registration"
-          console.log("auto-registration used")
-          users.push(profile);
-          return done(null, profile);
-        }
+      User.findOne({ email: profile.upn.toLowerCase() }, (err, user) => {
+        console.log("email: ", profile.upn);
+        console.log("err: ", err);
+        console.log("user: ", user);
+        if (err) { return done(err); }
+        if (!user) 
+        //create basic user info from profile 
+          { 
+            const newUser = new User({
+              authType: 'azure',
+              email: profile.upn,
+              profile: { 
+                firstName: profile.name.givenName, 
+                lastName: profile.name.familyName,
+                middleName: profile.name.middleName
+              }
+              });
+            newUser.save((err, user) => {
+              if (err) {return done(err); }
+              console.log("New User: ", user);
+              // res.send("new user stored");
+
+            });
+          }
+        //if found, pass user down to next middleware
+
         return done(null, user);
       });
+      // findByOid(profile.oid, function(err, user) {
+      //   if (err) {
+      //     return done(err);
+      //   }
+      //   if (!user) {
+      //     // "Auto-registration"
+      //     console.log("auto-registration used, profile: ", profile);
+      //     users.push(profile);
+      //     return done(null, profile);
+      //   }
+      //   return done(null, user);
+      // });
     });
   }
   );

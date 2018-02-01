@@ -180,7 +180,7 @@ module.exports = function (app) {
   //   });
 
 
-app.get('/azure-login',
+app.get('/api/auth/azure-login',
   function(req, res, next) {
     console.log("we are getting a get request");
     passport.authenticate('azuread-openidconnect', 
@@ -195,7 +195,8 @@ app.get('/azure-login',
   function(req, res) {
     console.log('Login was called in the Sample');
     res.redirect('/');
-});
+  }
+);
 
 // 'GET returnURL'
 // `passport.authenticate` will try to authenticate the content returned in
@@ -214,7 +215,9 @@ app.get('/api/auth/openid/return',
   },
   function(req, res) {
     console.log("next on the callback list");
-    res.redirect('/');
+    console.log("req.user: ", req.user);
+    // console.log("req: ", req);
+    res.redirect('/portal');
   });
 
   // 'logout' route, logout from passport, and destroy the session with AAD.
@@ -230,7 +233,10 @@ app.get('/logout', function(req, res){
 //     res.send("success");
 //     res.redirect('/');
 // } );
-  // app.get('/login', (req, res) => {
-  // });
+  // app.get('/login', (req, res, next) => {
+  //   res.redirect()
+  // }
+
+  // );
   // app.post('/azure-login')
 };

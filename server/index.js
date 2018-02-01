@@ -52,9 +52,17 @@ app.get('/', (req, res) => {
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
-app.get('/portal', (req, res) => {
+app.get(/^(?:(?!\/api).)*$/, (req, res) => {
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
+
+// app.get('/portal', (req, res) => {
+//   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+// });
+
+// app.get('/register', (req, res) => {
+//   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+// });
 
 // app.get('/api/chat/test', (req, res) => {res.send("Hi there!")});
 

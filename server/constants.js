@@ -8,11 +8,20 @@ const FAMILY_LAW = 'family';
 const EVICTION = 'eviction';
 const DOMESTIC_VIOLENCE = 'dv';
 const TRAFFIC = 'traffic';
+const AZURE = 'azure';
+const LOCAL = 'local';
 
 module.exports = {
   ROLE_MEMBER,
   ROLE_CLIENT,
   ROLE_OWNER,
   ROLE_ADMIN,
-  SMALL_CLAIMS, GUARDIANSHIP, FAMILY_LAW, EVICTION, DOMESTIC_VIOLENCE, TRAFFIC
+  SMALL_CLAIMS, 
+  GUARDIANSHIP, 
+  FAMILY_LAW, 
+  EVICTION, 
+  DOMESTIC_VIOLENCE, 
+  TRAFFIC,
+  AZURE,
+  LOCAL
 };
