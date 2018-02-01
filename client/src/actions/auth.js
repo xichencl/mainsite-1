@@ -31,14 +31,10 @@ export function loginUser({ email, password }) {
 export function oidcLoginUser() {
   console.log("openid login called"); 
   axios({
-    url: '/login',
+    url: '/api/auth/azure-login',
     method: 'get',
-    transformResponse: (data) => {
-      data.headers = {'Access-Control-Allow-Origin': '*'};
-      return data;
-    }
   }).
-  then((response) => {console.log("sucess");});
+  then((response) => {console.log("sucess: ", response);});
   // axios.get('/login')
   //     .then((response) => {
   //       console.log("sucess: ", response);

@@ -51,8 +51,9 @@ class Login extends Component {
         </div>
 
         {/*<!-- test openID login -->*/}
-        <a href="/azure-login"> Azure Login </a>
-        {/*<button type="button" onClick={oidcLoginUser}>Azure Login </button>*/}
+        <a href="/api/auth/azure-login"> Azure Login </a>
+        {/*<Link to="azure-login">Azure Login</Link>*/}
+        <button type="button" onClick={ oidcLoginUser }> Azure Login </button>
       </div>
     );
   }
@@ -62,7 +63,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
     message: state.auth.message,
-    authenticated: state.auth.authenticated,
+    authenticated: state.auth.authenticated,  
   };
 }
 
