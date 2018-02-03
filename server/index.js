@@ -11,8 +11,16 @@ const express = require('express'),
   expressSession = require('express-session'),
   MongoStore = require('connect-mongo')(expressSession),
   passport = require('passport'),
-  cookieParser = require('cookie-parser');
+  cookieParser = require('cookie-parser'),
+  ReactEngine = require('react-engine'),
+  routes = require('../client/src/router');
   // cors = require('cors');
+console.log(__dirname);
+const React = require('react');
+const { createStore } = require('redux');
+const { Provider } = require('react-redux');
+const { renderToString } = require('react-dom/server');
+const rootReducer = require('../client/src/reducers/index');
 
 // Database Setup
 mongoose.Promise = require('bluebird');
@@ -21,6 +29,17 @@ mongoose.connect(config.database, { useMongoClient: true })
             ()=> {console.log("Connected to DB")},
             (err) => {console.log("error: ", err)}
           );
+
+// const engine = ReactEngine.server.create({
+//   routes,
+//   routesFilePath: path.join(__dirname, '/client/router.js') 
+// });
+
+// app.engine('.jsx', engine);
+
+// app.set('views', path.join(__dirname + '../client'));
+// app.set('view engine', 'jsx');
+// app.set('view', ReactEngine.expressView);
 
 //set up session middleware using mongoStore
 app.use(expressSession({
@@ -48,12 +67,24 @@ if (process.env.NODE_ENV != config.test_env) {
 //Serve the front end
 app.use(express.static(path.join(__dirname, '../client/')));
 
+app.use(handleRender);
+
+const handleRender = (req, res) => {
+
+};
+
+const renderFullPage = (html, preloadedState) => {
+
+};
+
 app.get('/', (req, res) => {
-  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+  res.render(req.url, { user: req.user });
+  // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
 app.get(/^(?:(?!\/api).)*$/, (req, res) => {
-  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+  res.render(req.url, { user: req.user });
+  // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
 // app.get('/portal', (req, res) => {
