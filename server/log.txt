@@ -1,0 +1,5 @@
+
+> ccsh-master@1.0.0 start C:\Users\xichentop\Documents\ContraCostaInternship\mainsite-xc\server
+> babel-node index.js --presets es2015,stage-2
+
+{"name":"AzureAD: OIDC Passport Strategy","hostname":"Peacha","pid":19616,"level":40,"msg":"Using http for redirectUrl is not recommended, please consider using https","time":"2018-02-04T18:34:15.363Z","v":0}

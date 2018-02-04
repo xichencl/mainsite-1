@@ -11,9 +11,9 @@ const express = require('express'),
   expressSession = require('express-session'),
   MongoStore = require('connect-mongo')(expressSession),
   passport = require('passport'),
-  cookieParser = require('cookie-parser'),
-  ReactEngine = require('react-engine'),
-  routes = require('../client/src/router');
+  cookieParser = require('cookie-parser');
+  // ReactEngine = require('react-engine'),
+  // routes = require('../client/src/router');
   // cors = require('cors');
 console.log(__dirname);
 const React = require('react');
@@ -67,25 +67,73 @@ if (process.env.NODE_ENV != config.test_env) {
 //Serve the front end
 app.use(express.static(path.join(__dirname, '../client/')));
 
-app.use(handleRender);
 
 const handleRender = (req, res) => {
-
+  console.log("handleRender for req.user: ", req.user);
+  let preloadedState = {
+    user: {profile: {firstName: req.user.given_name, lastName: req.user.family_name, email: req.user.upn}, cases: [], message: '', error: ''},
+    auth: {error: '', message:'', content: '', authenticated: true}
+  };
+  const store = createStore(rootReducer, preloadedState);
+  const html = renderToString(
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
+  )
+  const finalState = store.getState();
+  res.send(renderFullPage(html, finalState));
 };
 
 const renderFullPage = (html, preloadedState) => {
+  return `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
+    <title>CA Legal Self Help</title>
+
+    <script type="text/javascript" async></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Judson:700|Source+Sans+Pro:300,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Import bundled/compiled CSS -->
+    <link rel="stylesheet" type="text/css" href="/src/public/stylesheets/app.css">
+
+  </head>
+  <body>
+    <div id="root">${html}
+    </div>
+    <script>
+          // WARNING: See the following for security issues around embedding JSON in HTML:
+          // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+    </script>
+
+    <script src="/bundle.js"></script>
+
+  </body>
+</html>
+  `;
 };
 
+// app.use(handleRender);
+
+
+
 app.get('/', (req, res) => {
-  res.render(req.url, { user: req.user });
-  // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+  // res.render(req.url, { user: req.user });
+  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
-app.get(/^(?:(?!\/api).)*$/, (req, res) => {
-  res.render(req.url, { user: req.user });
-  // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
-});
+app.get(/^(?:(?!\/api).)*$/, handleRender(req, res));
+// app.get(/^(?:(?!\/api).)*$/, (req, res) => {
+//   // res.render(req.url, { user: req.user });
+//   // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+// });
 
 // app.get('/portal', (req, res) => {
 //   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
