@@ -34,13 +34,13 @@ delete window.__PRELOADED_STATE__;
 console.log("preloadedState: ", preloadedState);
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-// const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-// const store = createStoreWithMiddleware(rootReducer, preloadedState, devTools);
-const store = createStore(
-	rootReducer,
-	preloadedState,
-	applyMiddleware(reduxThunk, devTools)
-	);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer, preloadedState, devTools);
+// const store = createStore(
+// 	rootReducer,
+// 	preloadedState,
+// 	applyMiddleware(reduxThunk, devTools)
+// 	);
 
 store.subscribe(() => {
   console.log('state changed', store.getState());

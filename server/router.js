@@ -11,7 +11,10 @@ const ROLE_OWNER = require('./constants').ROLE_OWNER;
 const ROLE_ADMIN = require('./constants').ROLE_ADMIN;
 
 const passportService = require('./config/passport');
-
+// const handleRender = require('./index');
+// import { server } from './index.js';
+// console.log("server", server);
+// console.log("index: ", handleRender);
 
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -219,6 +222,11 @@ app.get('/api/auth/openid/return',
     // console.log("req: ", req);
     res.redirect('/portal');
   });
+
+
+
+
+
 
   // 'logout' route, logout from passport, and destroy the session with AAD.
 app.get('/logout', function(req, res){

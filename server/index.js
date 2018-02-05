@@ -20,7 +20,8 @@ const React = require('react');
 const { createStore } = require('redux');
 const { Provider } = require('react-redux');
 const { renderToString } = require('react-dom/server');
-const rootReducer = require('../client/src/reducers/index');
+import rootReducer from '../client/src/reducers/index.js';
+// const AppRouter = require('../client/src/router');
 
 // Database Setup
 mongoose.Promise = require('bluebird');
@@ -69,7 +70,7 @@ app.use(express.static(path.join(__dirname, '../client/')));
 
 
 const handleRender = (req, res) => {
-  console.log("handleRender for req.user: ", req.user);
+  console.log("handleRender for req: ", req);
   let preloadedState = {
     user: {profile: {firstName: req.user.given_name, lastName: req.user.family_name, email: req.user.upn}, cases: [], message: '', error: ''},
     auth: {error: '', message:'', content: '', authenticated: true}
@@ -129,11 +130,13 @@ app.get('/', (req, res) => {
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
-app.get(/^(?:(?!\/api).)*$/, handleRender(req, res));
-// app.get(/^(?:(?!\/api).)*$/, (req, res) => {
+// app.get('/portal', (req, res) => handleRender(req, res));
+
+// app.get(/^(?:(?!\/api).)*$/, (req, res) => handleRender(req, res));
+app.get(/^(?:(?!\/api).)*$/, (req, res) => {
 //   // res.render(req.url, { user: req.user });
-//   // res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
-// });
+  res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
+});
 
 // app.get('/portal', (req, res) => {
 //   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
@@ -177,6 +180,26 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// 'POST returnURL'
+// `passport.authenticate` will try to authenticate the content returned in
+// body (such as authorization code). If authentication fails, user will be
+// redirected to '/' (home page); otherwise, it passes to the next middleware.
+app.post('/api/auth/openid/return',
+  function(req, res, next) {
+    console.log('we have received a post request');
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        failureRedirect: '/'  
+      }
+    )(req, res, next);
+  },
+  function(req, res, next) {
+    console.log('We received a posted return from AzureAD');
+    handleRender(req, res);
+    res.redirect('/portal');
+  });
 // app.use(cors({
 //   origin: 'http://localhost:3000/login',
 //   credentials: true
@@ -186,4 +209,5 @@ app.use((req, res, next) => {
 router(app);
 
 // necessary for testing
-module.exports = server;
+module.exports = { server, handleRender };
+// console.log("module.exports.handleRender: ", module.exports.handleRender);

@@ -17,10 +17,10 @@ const creds = {
   clientID: '2f6fea12-e3c1-47d5-ae72-5285c6eecef1',
 
   // Required, must be 'code', 'code id_token', 'id_token code' or 'id_token' 
-  responseType: 'id_token', 
+  responseType: 'id_token code', 
 
   // Required
-  responseMode: 'query', 
+  responseMode: 'form_post', 
 
   // Required, the reply URL registered in AAD for your app
   redirectUrl: 'http://localhost:3000/api/auth/openid/return', 
@@ -30,7 +30,7 @@ const creds = {
   
   // Required if `responseType` is 'code', 'id_token code' or 'code id_token'. 
   // If app key contains '\', replace it with '\\'.
-  clientSecret: '<your_client_secret>', 
+  clientSecret: '9tSVsy7B1NuobRvyBy0qbu9sxAsQj04ZEMAaVoq87jI=', 
 
   // Required to set to false if you don't want to validate issuer
   validateIssuer: true,
