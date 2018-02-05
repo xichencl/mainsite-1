@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
+import AccordionListBox from '../../../template/accordion-list-box';
 import SquareBox from '../../../template/square-box';
-import Before from '../../../../img/before_1.svg';
-import During from '../../../../img/during_1.svg';
-import After from '../../../../img/after_1.svg';
+import before from '../../../../img/before_1.svg';
+import during from '../../../../img/during_1.svg';
+import after from '../../../../img/after_1.svg';
 
 const resourceList = [
 	{ 
@@ -26,15 +27,18 @@ const resourceList = [
 const buttons = [
 	{
 		id: "before",
-		title: "Before Your Case"
+		title: "Before Your Case",
+		img: before
 	},
 	{
 		id: "during",
-		title: "During Your Case"
+		title: "During Your Case",
+		img: during
 	},
 	{
 		id: "after",
-		title: "After the Trial"
+		title: "After the Trial",
+		img: after
 	}
 ]
  	
@@ -53,10 +57,33 @@ export default class SmallClaimsParty extends Component {
 		console.log(id)
 		e.stopPropagation();
 		this.setState({
-			buttonSelected: true
-			
+			buttonSelected: true,
+			stage: id
 		})
 	}
+
+	renderContent() {
+		this.props.fetchContent()
+
+    return this.props.content.map((category, index) => {
+      return (
+        <div key={category.sys.id}>
+            <Link to={category.fields.url}>
+              <Squarebox 
+                id={category.sys.id}
+                boxTitle={category.fields.title}
+                
+                  
+              />
+              <div className="image">
+                <Asset assetId={category.fields.image.sys.id} />
+              </div>
+            </Link>
+           
+        </div>
+      );
+    });
+  }
 
 
 	renderLinks() {
@@ -68,7 +95,7 @@ export default class SmallClaimsParty extends Component {
       	<div onClick={(e) => this.onStageSelect(button.id, e)} id={button.id}>
       		<SquareBox
       			boxTitle={button.title}
-      			imgSrc={Before}
+      			imgSrc={button.img}
       		/>
       	</div>
       	)
@@ -79,10 +106,31 @@ export default class SmallClaimsParty extends Component {
 
       ];
     } else {
-    	console.log("true")
+    	console.log("true", this.state)
+    	const renderedLinks = buttons.map((button) => {
+    		// if (button.id == this.state.stage) {
+
+    		// }
+
+      	return (
+      	<div onClick={(e) => this.onStageSelect(button.id, e)} id={button.id}>
+      		<a>{button.title}</a>
+      	</div>
+      	)
+  		})
+
       return [
-        // show selected stage content and menu with stage highlighted
-        <div> stage content and menu</div>
+        // show selected stage content and menu with stage highlighted 
+        // put this in a separate component, and pass state as props
+        <div className="grid-pad">
+        	<div>{this.state.stage} content here</div>
+      		<InfoBox 
+      			boxTitle={`Menu - ${this.state.stage}`}
+      			boxContent={renderedLinks}
+      			buttonVisibilityClass="hidden"
+      			infoboxClass="Box Info-box small-box col-2"
+      		/>
+        </div>
       ];
     }
   }

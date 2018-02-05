@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth_reducer';
 import userReducer from './user_reducer';
-import siteDataReducer from './site_data_reducer';
+import contentReducer from './content_reducer';
 import assetsReducer from './assets_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   chat: chatReducer,
-  content: siteDataReducer,
+  content: contentReducer,
   assets: assetsReducer,
   checklist: checklistReducer,
   selectedChecklist,

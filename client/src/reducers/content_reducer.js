@@ -6,7 +6,7 @@ const INITIAL_STATE = { all: [] };
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FETCH_SITE_CONTENT:
-  	console.log('fetch site content reducer firing')
+  	console.log('fetch site content reducer')
     return { ...state, all: action.payload.data.items };
   default:
     return state;

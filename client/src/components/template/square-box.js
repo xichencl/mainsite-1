@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // import { routeCodes } from '../../App.js';
 // import PropTypes from 'prop-types';
 // import ResponsiveImage from './responsive-image';
+import Asset from './responsive-image';
 
 export default class SquareBox extends Component {
 	render() {
@@ -11,11 +12,8 @@ export default class SquareBox extends Component {
 				<div className="Square-box-static module">
 					<div className="Square-box-static-main">
 						<h3>{this.props.boxTitle}</h3>
-						<img src={this.props.imgSrc} />
-						<i className={this.props.iconClass} aria-hidden="true"></i>
-					</div>
-					<div className="Square-box-static-links">
-						<p>{this.props.boxContent}</p>
+						<Asset assetId={this.props.assetId} />
+						{/* <img src={this.props.imgSrc} /> <i className={this.props.iconClass} aria-hidden="true"></i>*/}
 					</div>
 				</div>
 			</div>
@@ -38,5 +36,9 @@ export default class SquareBox extends Component {
 							{this.props.svgPath}
 							</svg>
 						</div>
+
+											<div className="Square-box-static-links">
+						<p>{this.props.boxContent}</p>
+					</div>
 
 */
