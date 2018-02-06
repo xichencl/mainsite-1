@@ -6,7 +6,9 @@ import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
 import AppRouter from './router';
 import rootReducer from './reducers/index';
-import dataService from './services/data-service'
+import dataService from './services/data-service';
+// import 'babel-polyfill';
+// import 'matchmedia-polyfill';
 
 //import todoApp from './reducers' //rootReducer
 //import App from './components/App' //appRouter
