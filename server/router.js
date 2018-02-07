@@ -242,7 +242,7 @@ app.post('/api/auth/openid/return',
     console.log('We received a posted return from AzureAD');
     // handleRender(req, res);
     console.log("req session: ", req.session)
-    res.redirect('/portal/'+req.user._id);
+    res.redirect('/portal');
   });
 
 
@@ -267,9 +267,14 @@ app.get('/logout', function(req, res){
   // );
   // app.post('/azure-login')
 
-  app.get('/api/azure-user/:uid', function(req, res){
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+};
+
+  app.get('/api/azure-user', function(req, res){
     console.log("req session: ", req.session);
-    console.log("req params: ", req.params);
-    res.status(200).end('uid received');
+    // console.log("req params: ", req.params);
+    res.status(200).send({user: req.user});
   });
 };

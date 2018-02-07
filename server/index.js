@@ -135,7 +135,7 @@ app.get('/', (req, res) => {
 // app.get(/^(?:(?!\/api).)*$/, (req, res) => handleRender(req, res));
 app.get(/^(?:(?!\/api).)*$/, (req, res) => {
 //   // res.render(req.url, { user: req.user });
-  console.log("req session: ", req.session);
+  // console.log("req session: ", req.session);
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 

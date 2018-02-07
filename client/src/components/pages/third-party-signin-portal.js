@@ -17,21 +17,10 @@ import LoginIcon from '../../img/icn_login.svg';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
-class Portal extends Component {
+class ThirdPartySignInPortal extends Component {
   componentWillMount() {
     // Fetch user data prior to component mounting
-    if (this.props.authenticated){
-      const user = cookie.get('user');
-      const uid = user._id;
-      this.props.fetchUser(uid);
-    } 
-    // else {
-    //   const uid = this.props.location.pathname.substring(8);
-    //   if (uid.length > 0){
-        // this.props.fetchAzureUser();
-    //   }
-    //   console.log('uid: ', uid);
-    // }
+    this.props.fetchAzureUser();
     
   }
 
@@ -80,7 +69,7 @@ class Portal extends Component {
         </div>,
         // ============================
         <div key={`${4}logout`} className='Logout'>
-          <Link to="logout">Logout</Link>
+          <a href='/api/logout'> Logout </a>
         </div>,
       ];
     } else {
@@ -122,7 +111,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser, fetchAzureUser })(Portal);
+export default connect(mapStateToProps, { fetchAzureUser })(ThirdPartySignInPortal);
 
 
 
