@@ -31,7 +31,7 @@ export function loginUser({ email, password }) {
 export function oidcLoginUser() {
   console.log("openid login called"); 
   axios({
-    url: '/api/auth/azure-login',
+    url: '/api/redirect',
     method: 'get',
   }).
   then((response) => {console.log("sucess: ", response);});

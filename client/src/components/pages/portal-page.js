@@ -7,7 +7,7 @@ import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
 // import ViewTodo from '../todo/view-todo';
-import { API_URL, fetchUser } from '../../actions/index';
+import { API_URL, fetchUser, fetchAzureUser } from '../../actions/index';
 // import axios from 'axios';
 // import Cookies from 'universal-cookie';
 // const cookie = new Cookies();
@@ -24,7 +24,19 @@ class Portal extends Component {
       const user = cookie.get('user');
       const uid = user._id;
       this.props.fetchUser(uid);
+    } 
+    else {
+      const uid = this.props.location.pathname.substring(8);
+      if (uid.length > 0){
+        this.props.fetchAzureUser(uid);
+      }
+      console.log('uid: ', uid);
     }
+    
+  }
+
+  componentDidMount() {
+    console.log("this props: ", this.props);
   }
 
   renderLinks() {
@@ -110,7 +122,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser })(Portal);
+export default connect(mapStateToProps, { fetchUser, fetchAzureUser })(Portal);
 
 
 

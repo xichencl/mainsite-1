@@ -224,7 +224,26 @@ app.get('/api/auth/openid/return',
   });
 
 
-
+// 'POST returnURL'
+// `passport.authenticate` will try to authenticate the content returned in
+// body (such as authorization code). If authentication fails, user will be
+// redirected to '/' (home page); otherwise, it passes to the next middleware.
+app.post('/api/auth/openid/return',
+  function(req, res, next) {
+    console.log('we have received a post request');
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        failureRedirect: '/'  
+      }
+    )(req, res, next);
+  },
+  function(req, res, next) {
+    console.log('We received a posted return from AzureAD');
+    // handleRender(req, res);
+    console.log("req session: ", req.session)
+    res.redirect('/portal/'+req.user._id);
+  });
 
 
 
@@ -247,4 +266,10 @@ app.get('/logout', function(req, res){
 
   // );
   // app.post('/azure-login')
+
+  app.get('/api/azure-user/:uid', function(req, res){
+    console.log("req session: ", req.session);
+    console.log("req params: ", req.params);
+    res.status(200).end('uid received');
+  });
 };

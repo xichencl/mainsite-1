@@ -33,6 +33,21 @@ export function fetchUser(uid) {
   };
 }
 
+export function fetchAzureUser(uid) {
+  return function (dispatch) {
+
+    // const thisToken = cookie.get('token')
+    axios.get(`${API_URL}/azure-user/${uid}`)
+    .then((response) => {
+      dispatch({
+        type: FETCH_USER,
+        payload: response.data.user,
+      })
+    })
+    .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
+  };
+}
+
 
 // load page data from local file
 export function loadPageData() {  
