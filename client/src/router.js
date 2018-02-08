@@ -19,6 +19,7 @@ import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
 import Portal from './components/pages/portal-page';
+import AzurePortal from './components/pages/azure-portal';
 import SmallClaims from './components/pages/topics/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims-party';
 import Guardianship from './components/pages/topics/guardianship';
@@ -84,6 +85,7 @@ export default class AppRouter extends Component {
                   <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
+                  <Route path="/azure-portal" component={AzurePortal} />
                   <Route path="/my-case" component={MyCasesDashboard} />
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />

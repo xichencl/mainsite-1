@@ -242,13 +242,13 @@ app.post('/api/auth/openid/return',
     console.log('We received a posted return from AzureAD');
     // handleRender(req, res);
     console.log("req session: ", req.session)
-    res.redirect('/portal');
+    res.redirect('/azure-portal');
   });
 
 
 
   // 'logout' route, logout from passport, and destroy the session with AAD.
-app.get('/logout', function(req, res){
+app.get('/api/logout', function(req, res){
   req.session.destroy(function(err) {
     req.logOut();
     res.redirect(config.destroySessionUrl);
@@ -268,13 +268,14 @@ app.get('/logout', function(req, res){
   // app.post('/azure-login')
 
 function ensureAuthenticated(req, res, next) {
+  console.log("isAuthenticated:", req.isAuthenticated);
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 };
 
-  app.get('/api/azure-user', function(req, res){
-    console.log("req session: ", req.session);
-    // console.log("req params: ", req.params);
-    res.status(200).send({user: req.user});
-  });
+app.get('/api/azure-user', ensureAuthenticated, function(req, res){
+  console.log("req session: ", req.session);
+  // console.log("req params: ", req.params);
+  res.status(200).send({user: req.user});
+});
 };

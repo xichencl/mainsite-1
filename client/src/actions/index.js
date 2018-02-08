@@ -43,7 +43,8 @@ export function fetchAzureUser() {
       dispatch({
         type: FETCH_USER,
         payload: response.data.user,
-      })
+      }),
+      dispatch({ type: 'FETCH_USER_RECEIVED' })
     })
     .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };
