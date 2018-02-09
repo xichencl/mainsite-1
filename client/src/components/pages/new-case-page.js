@@ -12,12 +12,15 @@ const form = reduxForm({
   validate,
 });
 
-const renderField = field => (
+const renderField = (field) => {
+  console.log("Field: ", field);
+  return (
   <div>
-    <input className="form-control" {...field.input} type="text" placeholder={field.placeholder} />
+    <input className="form-control" {...field.input} type={field.type} placeholder={field.placeholder} />
     {field.touched && field.error && <div className="error">{field.error}</div>}
   </div>
-);
+  );
+};
  
 // const renderSelect = field => (
 //   <div>
@@ -27,6 +30,7 @@ const renderField = field => (
 // );
 
 function validate(formProps) {
+  console.log("validating field props...");
   const errors = {};
 
   if (!formProps.isPlaintiff){
@@ -82,8 +86,9 @@ class NewCase extends Component{
   // }
 
 	handleFormSubmit(formProps) {
-		// console.log("FormProps: ", formProps);
+		console.log("FormProps: ", formProps);
     const uid = cookie.get('user')._id;
+    console.log(uid);
     // if (this.state.case.length > 0){
     //   formProps.caseId = this.state.case._id;
     // }
@@ -109,6 +114,8 @@ class NewCase extends Component{
       );
      }
   	}
+
+
 
 	render() {
     /*handleSubmit a property in reduxForm*/
@@ -136,7 +143,8 @@ class NewCase extends Component{
           </div>*/}
           <div className="case-form-group select select-case-type">
             <label>Select a Case Type</label>
-            <Field className="form-control" name="caseType" component="select">
+            <Field className="form-control" name="caseType" component="select" >
+              <option> </option>
               <option value="smallClaims">Small Claims</option>
               <option value="guardianship">Guardianship</option>
               <option value="family">Family</option>
@@ -151,11 +159,11 @@ class NewCase extends Component{
     				<div className="row">
     				  <div className="col-md-6">
                 <label>
-                <Field className="form-control" name="isPlaintiff" component="input" type="radio" value="plaintiff" />Plaintiff</label>
+                <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />Plaintiff</label>
         			</div>
               <div className="col-md-6">
                 <label>
-                <Field className="form-control"name="isDefendant" component="input" type="radio" value="defendant"/>Defendant</label>
+                <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>Defendant</label>
     				  </div>
             </div>
     			</div>
@@ -163,7 +171,7 @@ class NewCase extends Component{
     			<div className="case-form-group case-number">
     				<label>Case Number (optional)</label>
     				<div>
-            <Field className="form-control" name="caseNumber" component={renderField} placeholder="Case Number"  />    				
+            <Field className="form-control" name="caseNumber" component={renderField} type="text" placeholder="Case Number"  />    				
     				</div>
     			</div>
 
@@ -183,7 +191,7 @@ class NewCase extends Component{
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
+    errorMessage: state.auth.message,
     cases: state.user.cases,
     // form: state.form,
     };
