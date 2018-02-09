@@ -22,6 +22,10 @@ export const GET_DATA = 'get_data',
 export const SMALL_CLAIMS = 'smallClaims',
   GUARDIANSHIP = 'guardianship';
 
+//party
+export const PLAINTIFF = 'plaintiff',
+  DEFENDANT = 'defendant';
+
 //= =====================
 // Page Actions
 //= =====================

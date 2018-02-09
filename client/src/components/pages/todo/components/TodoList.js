@@ -9,7 +9,7 @@ class TodoList extends React.Component{
 
   componentWillMount(){
     console.log("CaseType: ", this.props.caseType)
-    this.props.onUpdate(this.props.caseId, this.props.caseType);
+    this.props.onUpdate(this.props.caseId, this.props.caseType, this.props.party);
   }
 
   render() {
@@ -18,7 +18,7 @@ class TodoList extends React.Component{
     <div>
       
       <div className="checklist-list-container">
-        {loading ? 'Loading...': ''}
+        {!loading ? 'Loading...': ''}
         {todos.map(todo =>
           <Todo
             key={todo.id}

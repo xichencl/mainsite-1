@@ -240,9 +240,13 @@ app.post('/api/auth/openid/return',
   },
   function(req, res, next) {
     console.log('We received a posted return from AzureAD');
-    // handleRender(req, res);
     console.log("req session: ", req.session)
-    res.redirect('/azure-portal');
+    // handleRender(req, res);
+    req.session.save(() => {
+      res.redirect('/azure-portal');
+    });
+    
+    // res.redirect('/azure-portal');
   });
 
 
@@ -268,7 +272,8 @@ app.get('/api/logout', function(req, res){
   // app.post('/azure-login')
 
 function ensureAuthenticated(req, res, next) {
-  console.log("isAuthenticated:", req.isAuthenticated);
+  console.log("ensureAuthenticated req session: ", req.session);
+  console.log("isAuthenticated:", req.isAuthenticated());
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 };

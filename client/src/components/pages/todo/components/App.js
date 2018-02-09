@@ -16,8 +16,8 @@ class App extends React.Component {
     	</div>
     	<div className="checklist">
   	    <Footer />
-        // somewhere here--> need to add logic so that if not logged in, can still view the checklist. 
-  	    <VisibleTodoList caseId={this.props.location.state.caseId} caseType={this.props.location.state.caseType}/>
+        {/*// somewhere here--> need to add logic so that if not logged in, can still view the checklist. */}
+  	    <VisibleTodoList caseId={this.props.location.state.caseId} caseType={this.props.location.state.caseType} party={this.props.location.state.party}/>
   	  </div>
     </div>
   );

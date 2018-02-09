@@ -64,10 +64,10 @@ const mapDispatchToProps = (dispatch) => {
       // console.log("data: ", data);   
       postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, dispatch, data);
     },
-    onUpdate: (caseId, caseType) => {
+    onUpdate: (caseId, caseType, party) => {
       console.log("onUpdate method called");
       const uid = cookie.get('user')._id;
-      dispatch({type : caseType});
+      dispatch({type : caseType+'-'+party});
       getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
     }
     // onLoading: (caseId) => {

@@ -39,12 +39,16 @@ export function fetchAzureUser() {
     // const thisToken = cookie.get('token')
     axios.get(`${API_URL}/azure-user`)
     .then((response) => {
-      dispatch({ type: AUTH_USER }),
+      console.log('promise called first time');      
       dispatch({
         type: FETCH_USER,
         payload: response.data.user,
-      }),
-      dispatch({ type: 'FETCH_USER_RECEIVED' })
+      });
+    })
+    .then(() => {
+      console.log('promise called second time');
+      dispatch({ type: AUTH_USER });
+      dispatch({ type: 'FETCH_USER_RECEIVED' });
     })
     .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };

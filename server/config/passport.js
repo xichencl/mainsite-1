@@ -16,7 +16,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(email, done) {
   console.log("deserializing user...");
   // mongoose.Types.ObjectId.isValid(id);
-  User.findOne({email}, function (err, user) {
+  User.findOne({email} , function (err, user) {
     done(err, user);
   });
 });
@@ -121,15 +121,16 @@ const oidcLogin = new OIDCStrategy(oidcOptions,
       return done(new Error("No oid found"), null);
     }
     // asynchronous verification, for effect...
-    process.nextTick(function () {
+    // process.nextTick(function () {
       User.findOne({ email: profile.upn.toLowerCase() }, (err, user) => {
         console.log("email: ", profile.upn);
         console.log("err: ", err);
         console.log("user: ", user);
-        if (err) { return done(err); }
+        if (err) { console.log("error encountered in finding user in db: ", err); return done(err); }
         if (!user) 
         //create basic user info from profile 
           { 
+            console.log("creating new user");
             const newUser = new User({
               authType: 'azure',
               email: profile.upn,
@@ -149,7 +150,7 @@ const oidcLogin = new OIDCStrategy(oidcOptions,
         //if found, pass user down to next middleware
 
         return done(null, user);
-      });
+      // });
       // findByOid(profile.oid, function(err, user) {
       //   if (err) {
       //     return done(err);

@@ -27,9 +27,10 @@ class AzurePortal extends Component {
 
   render() {
     return (
-    !this.props.loading && 
-    <AzurePortalView />
-    );
+    <div>
+    { (!this.props.loading) ?   <AzurePortalView /> : 'loading...' }
+    </div>
+    )
   }
 }
 
