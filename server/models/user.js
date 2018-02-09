@@ -51,12 +51,11 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: [() => {return this.authType === LOCAL? true : false}]
+    required: [() => {return this.authType ? true : false}]
   },
   authType: {
     type: String,
-    enum: [ AZURE, LOCAL],
-    required: true
+    enum: [ AZURE ],
   },
   profile: {
     firstName: { 
