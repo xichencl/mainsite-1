@@ -13,8 +13,8 @@ export default class MyCasesDashboard extends Component {
   }
 
   render() {
-    // console.log("CaseData props: ", this.props);
-    // console.log("CaseData state:", this.state);
+    console.log("CaseData: ", this.props.location.state.caseData);
+    // console.log("caseData state:", this.state);
     return (
       <div>
 

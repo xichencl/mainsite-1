@@ -8,7 +8,8 @@ class TodoList extends React.Component{
   }
 
   componentWillMount(){
-    console.log("CaseType: ", this.props.caseType)
+    console.log("CaseType: ", this.props.caseType);
+    console.log("party: ", this.props.party);
     this.props.onUpdate(this.props.caseId, this.props.caseType, this.props.party);
   }
 

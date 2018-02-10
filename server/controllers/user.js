@@ -55,7 +55,7 @@ exports.updateProfile = function (req, res, next){
 
 exports.updateCase = function (req, res, next) {
   // console.log("post req body:", req.body);
-  const isPlaintiff = req.body.isPlaintiff;
+  const isPlaintiff = req.body.party;
   const caseNumber = req.body.caseNumber;
   const caseType = req.body.caseType;
   const userId = req.params.userId;

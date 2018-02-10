@@ -12,38 +12,58 @@ const form = reduxForm({
   validate,
 });
 
-const renderField = (field) => {
-  console.log("Field: ", field);
+const renderField = ({input, label, type, meta: {touched, error}, placeholder}) => {
+  // console.log("FieldValue: ", value);
   return (
   <div>
-    <input className="form-control" {...field.input} type={field.type} placeholder={field.placeholder} />
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+    <input {...input} type={type} placeholder={placeholder} />
+    {touched && error && <span>{error}</span>}
   </div>
   );
 };
- 
-// const renderSelect = field => (
-//   <div>
-//     <select className="form-control" {...field.input} />
-//     {field.touched && field.error && <div className="error">{field.error}</div>}
-//   </div>
-// );
+ // const renderField = field => {
+ //  console.log(field);
+ //  return (
+ //    <div>
+ //      <input {...field.input} type={field.type} placeholder={field.placeholder} />
+ //      {field.meta.touched && field.mata.error && <span>{field.meta.error}</span>}
+ //    </div>
+ //  );
+ // }
+
+const renderSelect = ({input, label, type, meta: {touched, error}, children}) => {
+ console.log("SelectError: ", error);
+ console.log("touched? ", touched);
+ return (
+  <div>
+    <select {...input}>
+    {children}
+    </select>
+    {touched && error && <span>{error}</span>}
+  </div>
+)};
 
 function validate(formProps) {
   console.log("validating field props...");
+  console.log("formProps: ", formProps);
   const errors = {};
 
-  if (!formProps.isPlaintiff){
-  	errors.isPlaintiff = 'Please select plaintiff or defendant';
+  if (!formProps.party ){
+  	errors.party = 'Please select plaintiff or defendant';
   }
 
-  if (!formProps.caseType){
+  if (!formProps.caseType ){
   	errors.caseType = 'Please select a case type';
   }
 
-  
+  if (!formProps.caseNumber) {
+    errors.caseNumber = 'Please enter your case number';
+  }
+
+  console.log("errors: ", errors);
   return errors;
 }
+
 
 const caseTypes = [
   { type: 'Small Claims', value: 'smallClaims' },
@@ -129,7 +149,7 @@ class NewCase extends Component{
     		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
         <button type="button" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-    			{this.renderAlert()}
+    			 {this.renderAlert()}
     			
 
           {/*<div>
@@ -143,7 +163,7 @@ class NewCase extends Component{
           </div>*/}
           <div className="case-form-group select select-case-type">
             <label>Select a Case Type</label>
-            <Field className="form-control" name="caseType" component="select" >
+            <Field className="form-control" name="caseType" component={renderSelect} >
               <option> </option>
               <option value="smallClaims">Small Claims</option>
               <option value="guardianship">Guardianship</option>
@@ -169,7 +189,7 @@ class NewCase extends Component{
     			</div>
 
     			<div className="case-form-group case-number">
-    				<label>Case Number (optional)</label>
+    				<label>Case Number</label>
     				<div>
             <Field className="form-control" name="caseNumber" component={renderField} type="text" placeholder="Case Number"  />    				
     				</div>
