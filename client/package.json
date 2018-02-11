@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.13.1",
     "cli-table2": "^0.2.0",
-    "contentful": "^4.3.0",
+    "contentful": "^4.6.4",
     "cross-fetch": "^1.1.1",
     "deepcopy": "^0.6.3",
     "file-loader": "^0.11.2",

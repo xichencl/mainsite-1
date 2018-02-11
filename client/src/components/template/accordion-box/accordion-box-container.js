@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-export default class AccordionListBox extends Component {
+export default class AccordionBoxContainer extends Component {
 	renderAccordionContent() {
-		
+
 	}
 
 	render() {
@@ -16,7 +16,7 @@ export default class AccordionListBox extends Component {
 	}
 } 
 
-AccordionListBox.propTypes = { limit: React.PropTypes.number };
-AccordionListBox.defaultProps = { 
-	AccordionListBoxClass: 'Box White-box Info-box ',
+AccordionBoxContainer.propTypes = { limit: React.PropTypes.number };
+AccordionBoxContainer.defaultProps = { 
+	AccordionBoxContainerClass: 'Box White-box Info-box ',
 };

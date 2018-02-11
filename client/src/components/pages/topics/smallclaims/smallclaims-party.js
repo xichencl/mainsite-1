@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
-import AccordionListBox from '../../../template/accordion-list-box';
+import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import SquareBox from '../../../template/square-box';
 import before from '../../../../img/before_1.svg';
 import during from '../../../../img/during_1.svg';
@@ -145,7 +145,6 @@ export default class SmallClaimsParty extends Component {
 		})
 		
 		//show links here: filter by if clicked, show the side menu. otherwise show icons
-
 		return (
   		<div>
   			<div className="mainpage-title">

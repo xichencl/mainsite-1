@@ -35,3 +35,6 @@ export function fetchAsset(id) {
 
 
 // example image id 59Km2bLlde0SaGoK68GQWC
+
+//when I come back grom luch: figre out how to pass props to other components from test-home OR how to 
+// look up content using sys...? ??? or content_Type call/...
