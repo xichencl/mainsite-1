@@ -87,8 +87,10 @@ class SmallClaimsParty extends Component {
         // show selected stage content and menu with stage highlighted 
         // put this in a separate component, and pass state as props
         <div className="grid-pad">
-        	<div>{this.state.stageTitle} accordion box here</div>
-      		<InfoBox 
+{/*        	<div>{this.state.stageTitle} accordion box here</div>
+*/}      		
+          <AccordionBoxContainer />
+          <InfoBox 
       			boxTitle={`Menu - ${this.state.stageTitle}`}
       			boxContent={renderedLinks}
       			buttonVisibilityClass="hidden"

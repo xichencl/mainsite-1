@@ -14,40 +14,47 @@ const fakeContent = [
 ];
 
 export default class AccordionBoxContainer extends Component {
-	renderContent() {
-		return fakeContent.map((content) => {
-			return (
-				<div>
-					<h3>{content.title}</h3>
-					<div>{content.text}</div>
-					<hr />
-				<div>
-			)
-		})
+	constructor() {
+		super();
+		this.state = {
+			hidden: true,
+			id: null
+		}
+		this.setIdOnClick = this.setIdOnClick.bind(this);
+		this.toggleHidden = this.toggleHidden.bind(this);
+	}
+
+	setIdOnClick(_id) {
+		this.setState({ id: _id})
+	}
+
+	toggleHidden(_id) {
+		if (this.state.id = _id && hidden) {
+			this.setState({
+				hidden: false
+			})
+		} else {
+			this.setState({
+				hidden: true
+			})
+		}
 	}
 
 	render() {
+		const renderedContent = fakeContent.map((content) => {
+			return (
+				<div key={content.id}>
+					<h3>{content.title}</h3>
+					<div>{content.text}</div>
+					<hr />
+				</div>
+			)
+		})
 		return (
-			<div className={this.props.AccordionBoxContainerClass}>
-				{this.renderContent()}
+			<div className="Box AccordionBoxContainer medium-box">
+				{renderedContent}
 			</div>
 		)
 	}
 } 
 
-AccordionBoxContainer.propTypes = { limit: React.PropTypes.number };
-AccordionBoxContainer.defaultProps = { 
-	AccordionBoxContainerClass: 'Box White-box Info-box ',
-};
-
-/*
-render() {
-		return (
-			<div className={this.props.AccordionListBoxClass}>
-				<h3>{this.props.boxTitle}</h3>
-				<hr />
-				<div>{this.props.boxContent}</div>
-			</div>
-		)
-	}
-*/
