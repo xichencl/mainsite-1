@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchStages } from '../../../../actions/content.js';
+
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
@@ -22,28 +25,9 @@ const resourceList = [
 		title: "Small Claims Advisor",
 		link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
 	},
-]
+] 	
 
-const buttons = [
-	{
-		id: "before",
-		title: "Before Your Case",
-		img: before
-	},
-	{
-		id: "during",
-		title: "During Your Case",
-		img: during
-	},
-	{
-		id: "after",
-		title: "After the Trial",
-		img: after
-	}
-]
- 	
-
-export default class SmallClaimsParty extends Component {
+class SmallClaimsParty extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -53,69 +37,50 @@ export default class SmallClaimsParty extends Component {
 		this.onStageSelect = this.onStageSelect.bind(this);
 	}
 
-	onStageSelect(id, e) {
+  componentWillMount() {
+    this.props.fetchStages()
+  }
+
+	onStageSelect(title, id, e) {
 		console.log(id)
 		e.stopPropagation();
 		this.setState({
 			buttonSelected: true,
-			stage: id
+			stageId: id, 
+      stageTitle: title
 		})
 	}
-
-	renderContent() {
-		this.props.fetchContent()
-
-    return this.props.content.map((category, index) => {
-      return (
-        <div key={category.sys.id}>
-            <Link to={category.fields.url}>
-              <Squarebox 
-                id={category.sys.id}
-                boxTitle={category.fields.title}
-                
-                  
-              />
-              <div className="image">
-                <Asset assetId={category.fields.image.sys.id} />
-              </div>
-            </Link>
-           
-        </div>
-      );
-    });
-  }
-
 
 	renderLinks() {
 		//if button hasn't been clicked, show three button options
     if (!this.state.buttonSelected) {
       console.log("false", this.state)
-      const renderedButtons = buttons.map((button) => {
+      const renderedButtons = this.props.content.map((stage, index) => {
       	return (
-      	<div onClick={(e) => this.onStageSelect(button.id, e)} id={button.id}>
+      	<div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
       		<SquareBox
-      			boxTitle={button.title}
-      			imgSrc={button.img}
+      			id={stage.sys.id}
+            boxTitle={stage.fields.title}
+      			assetId={stage.fields.image.sys.id}
       		/>
       	</div>
       	)
   		})
+
       return [
       	<div>{renderedButtons}</div>
-   
-
       ];
     } else {
     	console.log("true", this.state)
-    	const renderedLinks = buttons.map((button) => {
+    	const renderedLinks =this.props.content.map((stage, index) => {
     		// if (button.id == this.state.stage) {
 
     		// }
 
       	return (
-      	<div onClick={(e) => this.onStageSelect(button.id, e)} id={button.id}>
-      		<a>{button.title}</a>
-      	</div>
+        	<div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+        		<a>{stage.fields.title}</a>
+        	</div>
       	)
   		})
 
@@ -123,7 +88,7 @@ export default class SmallClaimsParty extends Component {
         // show selected stage content and menu with stage highlighted 
         // put this in a separate component, and pass state as props
         <div className="grid-pad">
-        	<div>{this.state.stage} content here</div>
+        	<div>{this.state.stageTitle} content here</div>
       		<InfoBox 
       			boxTitle={`Menu - ${this.state.stage}`}
       			boxContent={renderedLinks}
@@ -176,6 +141,12 @@ export default class SmallClaimsParty extends Component {
   } 
 }
 
+
+function mapStateToProps(state) {
+  return { content: state.content.all };
+}
+
+export default connect(mapStateToProps, { fetchStages })(SmallClaimsParty);
 
 
 

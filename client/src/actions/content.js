@@ -44,7 +44,7 @@ export function fetchFaqs() {
 
 export function fetchStages() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage`);
-  console.log('fetch faqs action')
+  console.log('fetch stages action')
   return {
     type: FETCH_STAGES,
     payload: request
@@ -53,7 +53,7 @@ export function fetchStages() {
 
 export function fetchContent() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent`);
-  console.log('fetch faqs action')
+  console.log('fetch stageContent action')
   return {
     type: FETCH_CONTENT,
     payload: request
