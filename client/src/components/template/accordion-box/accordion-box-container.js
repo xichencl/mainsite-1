@@ -17,41 +17,29 @@ export default class AccordionBoxContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			hidden: true,
-			id: null
+			activeIndex: 0,
 		}
-		this.setIdOnClick = this.setIdOnClick.bind(this);
-		this.toggleHidden = this.toggleHidden.bind(this);
+		this.toggleClass = this.toggleClass.bind(this);
 	}
 
-	setIdOnClick(_id) {
-		this.setState({ id: _id})
-	}
-
-	toggleHidden(_id) {
-		if (this.state.id = _id && hidden) {
-			this.setState({
-				hidden: false
-			})
-		} else {
-			this.setState({
-				hidden: true
-			})
-		}
-	}
+	toggleClass(index) {
+		this.setState({ activeIndex: index });
+		console.log(this.state)
+  }
 
 	render() {
 		const renderedContent = fakeContent.map((content) => {
 			return (
 				<div key={content.id}>
-					<h3>{content.title}</h3>
-					<div>{content.text}</div>
+					<h3 onClick={() => this.toggleClass(content.id)}>{content.title}<span></span></h3>
+					<div className={this.state.activeIndex !==0 ? "hidden": " "} >{content.text}</div>
 					<hr />
 				</div>
 			)
 		})
 		return (
 			<div className="Box AccordionBoxContainer medium-box">
+				<hr />
 				{renderedContent}
 			</div>
 		)
