@@ -6,62 +6,31 @@ import Squarebox from '../template/square-box';
 import Asset from '../template/responsive-image';
 import client from '../../services/contentful-client'
 
-/* Testing integration with Contentful CMS */ 
+/* Testing accordion box components */ 
 class TestHomePage extends React.Component {
-  componentWillMount() {
-    this.props.fetchCategories()
-    console.log(this.props.content, 'this.props.categories')
-  }
-  // constructor() {
-  //   super()
-  //   this.state = {categories: []}
+  // componentWillMount() {
+  //   this.props.fetchCategories()
   // }
-
-  // componentDidMount() {
-  //   client.getEntries({content_type: 'category'}).then((response) => {
-  //     this.setState({categories: response.items})
-  //   })
+  
+  // renderCategories() {
   // }
-
-  renderCategories() {
-    return this.props.content.map((category, index) => {
-      return (
-        <div key={category.sys.id}>
-          <Link to={category.fields.url}>
-            <Squarebox 
-              id={category.sys.id}
-              boxTitle={category.fields.title}  
-              assetId={category.fields.image.sys.id}
-            />
-          </Link>
-        </div>
-      );
-    });
-  }
 
   render() {
     return (
-      <div className="mainpage">
-        <div className="mainpage-title">
-          <hr className="mainpage-title-line" />
-          <h1>Self-Help Law Center</h1>
-          <hr className="mainpage-title-line"/>
-        </div>
-        <div className="grid grid-pad">
-          {this.renderCategories()}
-        </div>
+      <div className="accordion-wrapper">
+        
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { content: state.content.all };
-}
+// function mapStateToProps(state) {
+//   return { content: state.content.all };
+// }
 
-// export default connect(mapStateToProps)(TestHomePage);
+export default TestHomePage;
 
-export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
+// export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
 
 /*
 renderCategories() {

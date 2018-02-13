@@ -72,7 +72,7 @@ class SmallClaimsParty extends Component {
       ];
     } else {
     	console.log("true", this.state)
-    	const renderedLinks =this.props.content.map((stage, index) => {
+    	const renderedLinks = this.props.content.map((stage, index) => {
     		// if (button.id == this.state.stage) {
 
     		// }
@@ -83,14 +83,13 @@ class SmallClaimsParty extends Component {
         	</div>
       	)
   		})
-
       return [
         // show selected stage content and menu with stage highlighted 
         // put this in a separate component, and pass state as props
         <div className="grid-pad">
-        	<div>{this.state.stageTitle} content here</div>
+        	<div>{this.state.stageTitle} accordion box here</div>
       		<InfoBox 
-      			boxTitle={`Menu - ${this.state.stage}`}
+      			boxTitle={`Menu - ${this.state.stageTitle}`}
       			boxContent={renderedLinks}
       			buttonVisibilityClass="hidden"
       			infoboxClass="Box Info-box small-box col-2"
