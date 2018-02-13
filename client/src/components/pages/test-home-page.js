@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { fetchCategories } from '../../actions/content.js';
+import { fetchCategories } from '../../actions/content.js';
 import Squarebox from '../template/square-box';
 import Asset from '../template/responsive-image';
 import client from '../../services/contentful-client'
 
 /* Testing integration with Contentful CMS */ 
 class TestHomePage extends React.Component {
-  // componentWillMount() {
-  //   this.props.fetchCategories('category')
-  //   console.log(this.props.content)
+  componentWillMount() {
+    this.props.fetchCategories()
+    console.log(this.props.content, 'this.props.categories')
+  }
+  // constructor() {
+  //   super()
+  //   this.state = {categories: []}
   // }
-  constructor() {
-    super()
-    this.state = {categories: []}
-  }
 
-  componentDidMount() {
-    client.getEntries({content_type: 'category'}).then((response) => {
-      this.setState({categories: response.items})
-    })
-  }
+  // componentDidMount() {
+  //   client.getEntries({content_type: 'category'}).then((response) => {
+  //     this.setState({categories: response.items})
+  //   })
+  // }
 
   renderCategories() {
-    return this.state.categories.map((category, index) => {
+    return this.props.content.map((category, index) => {
       return (
         <div key={category.sys.id}>
           <Link to={category.fields.url}>
@@ -33,10 +33,7 @@ class TestHomePage extends React.Component {
               boxTitle={category.fields.title}  
               assetId={category.fields.image.sys.id}
             />
-
           </Link>
-
-            
         </div>
       );
     });
@@ -62,9 +59,9 @@ function mapStateToProps(state) {
   return { content: state.content.all };
 }
 
-export default connect(mapStateToProps)(TestHomePage);
+// export default connect(mapStateToProps)(TestHomePage);
 
-// export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
+export default connect(mapStateToProps, { fetchCategories })(TestHomePage);
 
 /*
 renderCategories() {

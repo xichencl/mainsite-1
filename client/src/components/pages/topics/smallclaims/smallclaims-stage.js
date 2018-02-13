@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchStages } from '../../../../actions/content.js';
+
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
@@ -20,9 +23,28 @@ const resourceList = [
 ]
     
 
-export default class SmallClaimsParty extends Component {
+class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
+  }
+  componentWillMount() {
+    this.props.fetchStages()
+  }
+
+  renderStages() {
+    return this.props.content.map((stage, index) => {
+      return (
+        <div key={stage.sys.id}>
+          <Link to={`${this.props.match.url}/${stage.fields.url}`}>
+            <Squarebox 
+              id={stage.sys.id}
+              boxTitle={stage.fields.title}  
+              assetId={stage.fields.image.sys.id}
+            />
+          </Link>
+        </div>
+      );
+    });
   }
 
   render() {
@@ -55,12 +77,14 @@ export default class SmallClaimsParty extends Component {
             infoboxClass="Box Info-box small-box col-2"
             />
           
-          <div className="White-background">{this.props.match.params.stage} Your Case</div>
-          <div className="col-2 Grey-background">menu
+          {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>
+          <div className="col-2 Grey-background">menu*/}
             {/*<p>{this.props.match.params.stage}</p>*/}
-            <Link to={`${this.props.match.url}/before`}>before</Link>
+            {/*<Link to={`${this.props.match.url}/before`}>before</Link>
             <Link to={`${this.props.match.url}/during`}>during</Link>
-            <Link to={`${this.props.match.url}/after`}>after</Link>
+            <Link to={`${this.props.match.url}/after`}>after</Link>*/}
+          <div className="grid grid-pad">
+            {renderStages()}  
           </div>
 
         </div>
@@ -68,4 +92,11 @@ export default class SmallClaimsParty extends Component {
     )
   } 
 }
+
+function mapStateToProps(state) {
+  return { content: state.content.all };
+}
+
+export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
+
 
