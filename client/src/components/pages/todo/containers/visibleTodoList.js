@@ -66,9 +66,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     onUpdate: (caseId, caseType, party) => {
       console.log("onUpdate method called");
-      const uid = cookie.get('user')._id;
-      dispatch({type : caseType+'-'+party});
-      getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
+      if (caseId === null){ //not signed-in
+        dispatch({type : caseType+'-'+party});
+      }else { //signed-in
+        const uid = cookie.get('user')._id;
+        dispatch({type : caseType+'-'+party});
+        getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
+      }
     }
     // onLoading: (caseId) => {
     //   if (state.user.cases){

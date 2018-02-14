@@ -10,7 +10,11 @@ class TodoList extends React.Component{
   componentWillMount(){
     console.log("CaseType: ", this.props.caseType);
     console.log("party: ", this.props.party);
-    this.props.onUpdate(this.props.caseId, this.props.caseType, this.props.party);
+    if (this.props.caseId){
+      this.props.onUpdate(this.props.caseId, this.props.caseType, this.props.party);
+    }else {
+      this.props.onUpdate(null, this.props.caseType, this.props.party);
+    }
   }
 
   render() {
@@ -30,7 +34,7 @@ class TodoList extends React.Component{
         )}
       </div>
       
-      <button type="button" className="btn-checklist-save" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>
+      {this.props.caseId && <button type="button" className="btn-checklist-save" onClick={() => { onSaveClick(this.props.caseId, this.props.todosComplete)} } >Save</button>}
     </div>
 
     );

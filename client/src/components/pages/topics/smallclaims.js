@@ -67,6 +67,7 @@ export default class SmallClaims extends Component {
       );
 
     // right now parties is hard-coded in state, but in future could deliver through cms
+    //caseType hard-coded, but in future may consider using react router params
     const renderParties = this.state.parties.map((party) => {
       return (
         <div>

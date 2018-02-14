@@ -155,13 +155,16 @@ exports.deleteCase = function (req, res, next) {
   console.log("delete case");
   const userId = req.params.userId; 
   const caseId = req.params.caseId;
+  console.log("caseId: ", caseId);
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       return next(err);
     }
-    user.cases.id(caseId).remove();
+    console.log("we got so far");
+    const caseToDelete = user.cases.filter(eachCase => eachCase._id == caseId ) ;
+    caseToDelete.remove();
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be removed.' });

@@ -29,6 +29,7 @@ export default class SmallClaimsParty extends Component {
 	}
 
 	render() {
+
 		const resources = resourceList.map((item) => {
 			return (
 				<div>
@@ -49,7 +50,10 @@ export default class SmallClaimsParty extends Component {
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
         		iconLarge={ChecklistIcon}
         		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
-        		buttonLink="/test-todo"
+        		buttonLink="/checklist"
+            {/*caseType hard-coded in, in future may change all case paths to params*/}
+                caseType='smallClaims'
+                party={this.props.match.params.party}
         		/>
         	<InfoBox 
         		boxTitle="Resources"

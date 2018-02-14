@@ -12,9 +12,9 @@ export default class TextIconBox extends Component {
 						<div>{this.props.boxContent}</div>
 					</div>
 					<div className="text-icon-box-content">
-						<a href={this.props.buttonLink}>
+						<Link to={{pathname: this.props.buttonLink}, {state: {caseType: this.props.caseType, party: this.props.party}}}>
 							<img src={this.props.iconLarge} />
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
