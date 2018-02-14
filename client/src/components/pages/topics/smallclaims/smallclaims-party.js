@@ -63,7 +63,7 @@ class SmallClaimsParty extends Component {
             boxTitle={stage.fields.title}
       			assetId={stage.fields.image.sys.id}
       		/>
-      	</div>
+      	</div> 
       	)
   		})
 

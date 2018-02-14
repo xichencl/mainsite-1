@@ -89,7 +89,7 @@ class SmallClaims extends Component {
         </div>
       );
     });
-  }
+  } 
 
   render() {
     const faqs = temporaryFaqs.map((faq, index) => {
