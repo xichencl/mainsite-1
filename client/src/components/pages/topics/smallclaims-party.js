@@ -51,7 +51,7 @@ export default class SmallClaimsParty extends Component {
         		iconLarge={ChecklistIcon}
         		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
         		buttonLink="/checklist"
-            {/*caseType hard-coded in, in future may change all case paths to params*/}
+            //caseType hard-coded in, in future may change all case paths to params
                 caseType='smallClaims'
                 party={this.props.match.params.party}
         		/>

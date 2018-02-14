@@ -12,7 +12,7 @@ export default class TextIconBox extends Component {
 						<div>{this.props.boxContent}</div>
 					</div>
 					<div className="text-icon-box-content">
-						<Link to={{pathname: this.props.buttonLink}, {state: {caseType: this.props.caseType, party: this.props.party}}}>
+						<Link to={{pathname: this.props.buttonLink, state: {caseType: this.props.caseType, party: this.props.party}}}>
 							<img src={this.props.iconLarge} />
 						</Link>
 					</div>
