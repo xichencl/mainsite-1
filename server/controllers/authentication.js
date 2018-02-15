@@ -68,7 +68,7 @@ exports.register = function (req, res, next) {
     const user = new User({
       email,
       password,
-      authType: 'local',
+      // authType: 'local',
       profile: { firstName, lastName, address, phone, email }
     });
 

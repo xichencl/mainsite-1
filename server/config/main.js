@@ -1,11 +1,20 @@
-var env = require('dotenv').load();
-// const { DB_URL, MAILGUN_KEY, MAILGUN_DOMAIN } = require('./secret.env');
+// var env = require('dotenv').load();
+const { TEST_DB_URL,
+ MAILGUN_KEY,
+ MAILGUN_DOMAIN,
+ TENANT_ID,
+ CLIENT_ID,
+ CLIENT_SECRET,
+ COOKIE_ENCRYPTION_KEYS,
+ COSMOSDB_CONNSTR,
+ COSMOSDB_DBNAME,
+ JWT_SECRET } = require('../secret.env');
 // console.log(process.env);
 
 //auth settings
 const creds = {
   // Required
-  identityMetadata: 'https://login.microsoftonline.com/8ca9d8f1-d976-4445-a3cc-3ffc3e29a3ff/.well-known/openid-configuration',
+  identityMetadata: `https://login.microsoftonline.com/${TENANT_ID}/.well-known/openid-configuration`,
   // identityMetadata: 'https://login.microsoftonline.com/<tenant_name>.onmicrosoft.com/.well-known/openid-configuration', 
   // or equivalently: 'https://login.microsoftonline.com/<tenant_guid>/.well-known/openid-configuration'
   //
@@ -14,7 +23,7 @@ const creds = {
   // To use the common endpoint, you have to either set `validateIssuer` to false, or provide the `issuer` value.
 
   // Required, the client ID of your app in AAD  
-  clientID: '2f6fea12-e3c1-47d5-ae72-5285c6eecef1',
+  clientID: CLIENT_ID,
 
   // Required, must be 'code', 'code id_token', 'id_token code' or 'id_token' 
   responseType: 'id_token code', 
@@ -23,14 +32,17 @@ const creds = {
   responseMode: 'form_post', 
 
   // Required, the reply URL registered in AAD for your app
+  //local dev
   redirectUrl: 'http://localhost:3000/api/auth/openid/return', 
+  //dev server
+  // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',
 
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: true,
   
   // Required if `responseType` is 'code', 'id_token code' or 'code id_token'. 
   // If app key contains '\', replace it with '\\'.
-  clientSecret: '9tSVsy7B1NuobRvyBy0qbu9sxAsQj04ZEMAaVoq87jI=', 
+  clientSecret: CLIENT_SECRET, 
 
   // Required to set to false if you don't want to validate issuer
   validateIssuer: true,
@@ -53,10 +65,7 @@ const creds = {
   // Required if `useCookieInsteadOfSession` is set to true. You can provide multiple set of key/iv pairs for key
   // rollover purpose. We always use the first set of key/iv pair to encrypt cookie, but we will try every set of
   // key/iv pair to decrypt cookie. Key can be any string of length 32, and iv can be any string of length 12.
-  cookieEncryptionKeys: [ 
-    { 'key': '12345678901234567890123456789012', 'iv': '123456789012' },
-    { 'key': 'abcdefghijklmnopqrstuvwxyzabcdef', 'iv': 'abcdefghijkl' }
-  ],
+  cookieEncryptionKeys: COOKIE_ENCRYPTION_KEYS,
 
   // Optional. The additional scope you want besides 'openid', for example: ['email', 'profile'].
   scope: null,
@@ -76,17 +85,22 @@ const creds = {
 
 module.exports = {
   // Secret key for JWT signing and encryption
-  secret: 'super secret passphrase',
+  secret: JWT_SECRET,
   // Database connection information
   // database: 'mongodb://localhost:27017',
-  database: process.env.COSMOSDB_CONNSTR+process.env.COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
+  // test_database: TEST_DB_URL,
+
+  //Cosmos DB Emulator
+  test_database: 'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true',
+  // test_db_url: 'https://localhost:8081',
+  database: COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
   // Setting port for server
   // port: 3000,
   // Configuring Mailgun API for sending transactional email
   // Rt now using authorized accounts only for testing -->
-  mailgun_priv_key: process.env.MAILGUN_KEY,
+  mailgun_priv_key: MAILGUN_KEY,
   // Configuring Mailgun domain for sending transactional email
-  mailgun_domain: process.env.MAILGUN_DOMAIN,
+  mailgun_domain: MAILGUN_DOMAIN,
   // Mailchimp API key
   mailchimpApiKey: 'mailchimp api key here',
   // SendGrid API key
@@ -96,7 +110,7 @@ module.exports = {
   // necessary in order to run tests in parallel of the main app
   test_port: 3000,
   test_db: 'mern-starter-test',
-  test_env: 'test',
+  // dev_server: 'development',
   creds: creds,
 
   // Optional.

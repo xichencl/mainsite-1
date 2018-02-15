@@ -12,35 +12,22 @@ const express = require('express'),
   MongoStore = require('connect-mongo')(expressSession),
   passport = require('passport'),
   cookieParser = require('cookie-parser');
-  // ReactEngine = require('react-engine'),
-  // routes = require('../client/src/router');
-  // cors = require('cors');
-// console.log(__dirname);
-// const React = require('react');
-// const { createStore } = require('redux');
-// const { Provider } = require('react-redux');
-// const { renderToString } = require('react-dom/server');
-// import rootReducer from '../client/src/reducers/index.js';
-// const AppRouter = require('../client/src/router');
 
 // Database Setup
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.database, { useMongoClient: true })
+//connect to test database
+mongoose.connect(config.test_database, { useMongoClient: true })
         .then(
             ()=> {console.log("Connected to DB")},
             (err) => {console.log("error: ", err)}
           );
+//connec to database
+// mongoose.connect(config.database, { useMongoClient: true })
+//         .then(
+//             ()=> {console.log("Connected to DB")},
+//             (err) => {console.log("error: ", err)}
+//           );
 
-// const engine = ReactEngine.server.create({
-//   routes,
-//   routesFilePath: path.join(__dirname, '/client/router.js') 
-// });
-
-// app.engine('.jsx', engine);
-
-// app.set('views', path.join(__dirname + '../client'));
-// app.set('view engine', 'jsx');
-// app.set('view', ReactEngine.expressView);
 
 //set up session middleware using mongoStore
 app.use(expressSession({
@@ -53,104 +40,24 @@ app.use(expressSession({
 }));
 
 app.use(cookieParser());
-const env = require('dotenv').load();
 
 
 // Start the server
 let server;
-if (process.env.NODE_ENV != config.test_env) {
-  server = app.listen(process.env.PORT);
-  console.log(`Your server is running on port ${process.env.PORT}.`);
-} else{
-  server = app.listen(config.test_port);
-}
+const port = process.env.PORT || config.test_port; 
+server = app.listen(port);
+console.log(`Your server is running on port ${port}.`);
 
 //Serve the front end
 app.use(express.static(path.join(__dirname, '../client/')));
 
-
-// const handleRender = (req, res) => {
-//   console.log("handleRender for req: ", req);
-//   let preloadedState = {
-//     user: {profile: {firstName: req.user.given_name, lastName: req.user.family_name, email: req.user.upn}, cases: [], message: '', error: ''},
-//     auth: {error: '', message:'', content: '', authenticated: true}
-//   };
-//   const store = createStore(rootReducer, preloadedState);
-//   const html = renderToString(
-//     <Provider store={store}>
-//       <AppRouter />
-//     </Provider>
-//   )
-//   const finalState = store.getState();
-//   res.send(renderFullPage(html, finalState));
-// };
-
-// const renderFullPage = (html, preloadedState) => {
-//   return `
-// <!DOCTYPE html>
-// <html>
-//   <head>
-//     <meta charset="utf-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-
-//     <title>CA Legal Self Help</title>
-
-//     <script type="text/javascript" async></script>
-//     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-//     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-//     <link href="https://fonts.googleapis.com/css?family=Judson:700|Source+Sans+Pro:300,600,700" rel="stylesheet">
-//     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-//     <!-- Import bundled/compiled CSS -->
-//     <link rel="stylesheet" type="text/css" href="/src/public/stylesheets/app.css">
-
-//   </head>
-//   <body>
-//     <div id="root">${html}
-//     </div>
-//     <script>
-//           // WARNING: See the following for security issues around embedding JSON in HTML:
-//           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-//           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-//     </script>
-
-//     <script src="/bundle.js"></script>
-
-//   </body>
-// </html>
-//   `;
-// };
-
-// app.use(handleRender);
-
-
-
 app.get('/', (req, res) => {
-  // res.render(req.url, { user: req.user });
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
 
-// app.get('/portal', (req, res) => handleRender(req, res));
-
-// app.get(/^(?:(?!\/api).)*$/, (req, res) => handleRender(req, res));
 app.get(/^(?:(?!\/api).)*$/, (req, res) => {
-//   // res.render(req.url, { user: req.user });
-  // console.log("req session: ", req.session);
   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
 });
-
-// app.get('/portal', (req, res) => {
-//   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
-// });
-
-// app.get('/register', (req, res) => {
-//   res.sendFile('index.html', {root : path.join(__dirname, '../client/')});
-// });
-
-// app.get('/api/chat/test', (req, res) => {res.send("Hi there!")});
-
-
-
 
 //set up sockets for multi-client chat
 const io = require('socket.io').listen(server);
@@ -183,14 +90,9 @@ app.use((req, res, next) => {
 
 
 
-// app.use(cors({
-//   origin: 'http://localhost:3000/login',
-//   credentials: true
-// }));
 
 // Import routes to be served
 router(app);
 
 // necessary for testing
 module.exports = server;
-// console.log("module.exports.handleRender: ", module.exports.handleRender);

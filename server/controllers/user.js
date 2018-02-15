@@ -162,9 +162,13 @@ exports.deleteCase = function (req, res, next) {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       return next(err);
     }
-    console.log("we got so far");
-    const caseToDelete = user.cases.filter(eachCase => eachCase._id == caseId ) ;
-    caseToDelete.remove();
+    
+  /*alternative to using user.cases.id(caseId).remove(). conditional $pull not supported in cosmos db*/
+    //find index of case in array
+    const caseIndex = user.cases.forEach((eachCase, i) => { if (eachCase._id == caseId) return i; } ) ;
+    //remove case from array 
+    user.cases.splice(caseIndex, 1);
+
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be removed.' });

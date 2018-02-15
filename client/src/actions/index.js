@@ -9,7 +9,8 @@ import { fetchData } from "../data/mockDataAPI";
 // import siteData from "../data/smallClaimsData";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
-export const API_URL = '/api'; // database server URL
+export const API_URL = '/api'; 
+export const COSMOS_EMU_URL = 'https://localhost:8081';// cosmos db emulator URL
 export const CLIENT_ROOT_URL = '';
 
 //= ===============================

@@ -11,10 +11,6 @@ const ROLE_OWNER = require('./constants').ROLE_OWNER;
 const ROLE_ADMIN = require('./constants').ROLE_ADMIN;
 
 const passportService = require('./config/passport');
-// const handleRender = require('./index');
-// import { server } from './index.js';
-// console.log("server", server);
-// console.log("index: ", handleRender);
 
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -27,8 +23,8 @@ const requireOIDCLogin = (req, res, next) => {return passport.authenticate('azur
       });};
 const config = require('./config/main');
 
-const apiai = require('apiai');
-const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+// const apiai = require('apiai');
+// const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 module.exports = function (app) {
    
@@ -220,7 +216,10 @@ app.get('/api/auth/openid/return',
     console.log("next on the callback list");
     console.log("req.user: ", req.user);
     // console.log("req: ", req);
-    res.redirect('/portal');
+    req.session.save(() => {
+      res.redirect('/azure-portal');
+    });
+    
   });
 
 
