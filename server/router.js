@@ -43,6 +43,10 @@ module.exports = function (app) {
   // Set auth routes as subgroup/middleware to apiRoutes
   apiRoutes.use('/auth', authRoutes);
 
+  //azure registration routes
+  // authRoutes.get('/azure-login', );
+
+
   // Registration route
   authRoutes.post('/register', AuthenticationController.register);
 
@@ -149,35 +153,6 @@ module.exports = function (app) {
   // Set url for API group routes
   app.use('/api', apiRoutes);
 
-  // app.get('/azure-login', (req, res, next) => {
-  //   console.log("azure-login");
-  //   passport.authenticate('azuread-openidconnect', 
-  //     { response: res,                      // required
-  //       // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
-  //       // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
-  //       failureRedirect: '/' 
-  //     })(req, res, next);
-  // }, 
-  // (req, res) => {
-  //   console.log("authenticated azure-login");
-  //   res.redirect('/');
-  // });
-
-  // app.get('/api/auth/openid/return',
-  //   (req, res, next) => {
-  //     console.log("get request received on return route");
-  //     passport.authenticate('azuread-openidconnect', 
-  //     { response: res,                      // required
-  //       // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
-  //       // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
-  //       failureRedirect: '/' 
-  //     })(req, res, next);
-  //   },
-  //   (req, res) => {
-  //     console.log("authenticated /api/auth/openid/return");
-  //     res.redirect('/');
-  //   });
-
 
 app.get('/api/auth/azure-login',
   function(req, res, next) {
@@ -257,18 +232,6 @@ app.get('/api/logout', function(req, res){
     res.redirect(config.destroySessionUrl);
   });
 });
-//   app.get('/login', passport.authenticate('azuread-openidconnect', { failureRedirect: '/' }),
-//   function(req, res) {
-//     log.info('Login was called in the Sample');
-//     res.send("success");
-//     res.redirect('/');
-// } );
-  // app.get('/login', (req, res, next) => {
-  //   res.redirect()
-  // }
-
-  // );
-  // app.post('/azure-login')
 
 function ensureAuthenticated(req, res, next) {
   console.log("ensureAuthenticated req session: ", req.session);

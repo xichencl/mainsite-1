@@ -29,19 +29,6 @@ mongoose.connect(config.test_database, { useMongoClient: true })
 //           );
 
 
-//set up session middleware using mongoStore
-app.use(expressSession({
-  secret: 'secret',
-  cookie: {maxAge: config.mongoDBSessionMaxAge * 1000},
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    clear_interval: config.mongoDBSessionMaxAge
-  })
-}));
-
-app.use(cookieParser());
-
-
 // Start the server
 let server;
 const port = process.env.PORT || config.test_port; 
@@ -77,7 +64,19 @@ app.use(logger('dev')); // Log requests to API using morgan
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Enable CORS from client-side
+//set up session middleware using mongoStore
+app.use(expressSession({
+  secret: 'secret',
+  cookie: {maxAge: config.mongoDBSessionMaxAge * 1000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    clear_interval: config.mongoDBSessionMaxAge
+  })
+}));
+
+app.use(cookieParser());
+
+// Enable CORS 
 app.use((req, res, next) => {
 
   console.log("adding header");

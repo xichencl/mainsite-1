@@ -25,7 +25,6 @@ exports.selectCaseType = (req, res, callback) => {
         default:
           ai = aiGeneral;
           caseType = "General";
-
       }
 
     //machine learning goes here
