@@ -9,6 +9,9 @@ const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 let ai, caseType;
+/*set the ai temporarily to small claims agent only*/
+// ai = aiSmallClaims;
+ai = apiai('1e399876a4544a4ba6f941e320b43ef7');
 
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){

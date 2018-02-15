@@ -100,7 +100,11 @@ module.exports = function (app) {
   // route: /chat/message
   // console.log(ChatController.getMessageResponse);
   // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
-  chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
+  
+  /*select case type*/
+  // chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
+
+  chatRoutes.post('/message', (req, res) => {ChatController.getMessageResponse(req, res)});
   // console.log(ChatController.getWebhookResponse);
   chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
 /*
