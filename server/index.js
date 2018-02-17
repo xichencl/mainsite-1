@@ -59,12 +59,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-app.use(passport.initialize());
-app.use(passport.session());
-
-//set up session middleware using mongoStore
+//set up session middleware using mongoStore *** this needs to happen before initializing passport ***
 app.use(expressSession({
   secret: 'secret',
   cookie: {maxAge: config.mongoDBSessionMaxAge * 1000},
@@ -76,10 +71,16 @@ app.use(expressSession({
 
 app.use(cookieParser());
 
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // Enable CORS 
 app.use((req, res, next) => {
 
-  console.log("adding header");
+  // console.log("adding header");
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');

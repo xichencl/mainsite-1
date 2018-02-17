@@ -23,7 +23,7 @@ class TodoList extends React.Component{
     <div>
       
       <div className="checklist-list-container">
-        {!loading ? 'Loading...': ''}
+        { loading ? 'Loading...': ''}
         {todos.map(todo =>
           <Todo
             key={todo.id}

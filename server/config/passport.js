@@ -9,16 +9,20 @@ const passport = require('passport'),
 
 
 passport.serializeUser(function(user, done) {
-  console.log("serializing user: ", user);
-  done(null, user.email);
+  console.log("serializing user: ", user._id);
+  // done(null, user.email);
+  done(null, user._id);
 });
 
-passport.deserializeUser(function(email, done) {
+passport.deserializeUser(function(uid, done) {
   console.log("deserializing user...");
   // mongoose.Types.ObjectId.isValid(id);
-  User.findOne({email} , function (err, user) {
-    done(err, user);
-  });
+  // User.findOne({email} , function (err, user) {
+  //   done(err, user);
+  // });
+  // if (uid){
+  User.findById(uid, (err, user) => {done(err, user);});
+  // }
 });
 
 

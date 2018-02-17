@@ -40,7 +40,7 @@ export function fetchAzureUser() {
     // const thisToken = cookie.get('token')
     axios.get(`${API_URL}/azure-user`)
     .then((response) => {
-      console.log('promise called first time');      
+      console.log('promise called first time. Response: ', response);      
       dispatch({
         type: FETCH_USER,
         payload: response.data.user,

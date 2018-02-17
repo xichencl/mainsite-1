@@ -240,13 +240,24 @@ app.get('/api/logout', function(req, res){
 function ensureAuthenticated(req, res, next) {
   console.log("ensureAuthenticated req session: ", req.session);
   console.log("isAuthenticated:", req.isAuthenticated());
+
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  req.session.save(()=> {res.redirect('/login');});
 };
 
 app.get('/api/azure-user', ensureAuthenticated, function(req, res){
   console.log("req session: ", req.session);
-  // console.log("req params: ", req.params);
+  
   res.status(200).send({user: req.user});
 });
+
+app.post('/api/azure-user/updateCase', ensureAuthenticated, UserController.updateCase);
+
+app.delete('/api/azure-user/:caseId', ensureAuthenticated, UserController.deleteCase);
+
+app.post('/api/azure-user/updateChecklist', ensureAuthenticated, UserController.updateChecklist);
+
+app.get('/api/azure-user/:caseId', ensureAuthenticated, UserController.getChecklist);
+
+app.post('/api/azure-user/updateProfile', ensureAuthenticated, UserController.updateProfile);
 };

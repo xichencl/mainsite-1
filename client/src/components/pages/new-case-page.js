@@ -6,6 +6,7 @@ import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
 import { UPDATE_CASE } from '../../actions/types';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+const user = cookie.get('user');
 
 const form = reduxForm({
   form: 'newCase',
@@ -107,21 +108,35 @@ class NewCase extends Component{
 
 	handleFormSubmit(formProps) {
 		console.log("FormProps: ", formProps);
-    const uid = cookie.get('user')._id;
-    console.log(uid);
-    // if (this.state.case.length > 0){
-    //   formProps.caseId = this.state.case._id;
-    // }
-		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
-    window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    // const user = cookie.get('user');
+    /*local login*/
+    if (user){ 
+      const uid = user._id;
+      console.log(uid);
+      // if (this.state.case.length > 0){
+      //   formProps.caseId = this.state.case._id;
+      // }
+  		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
+      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+    /*azure login*/
+    else {
+      postData(UPDATE_CASE, this.props.error, false, '/azure-user/updateCase', this.props.dispatch, formProps);
+      window.location.href = `${CLIENT_ROOT_URL}/azure-portal`;
+    }
+    
 	}
 
   handleClick(e) {
     const isDelete = confirm("Are you sure you want to delete this case?");
-    if (isDelete){
-      const uid = cookie.get('user')._id;
+    if (isDelete && user){
+      const uid = user._id;
       deleteData(UPDATE_CASE, null, true, `/user/${uid}/${this.props.location.state.id}`, this.props.dispatch);
       window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+    else if (isDelete) {
+      deleteData(UPDATE_CASE, null, false, `/azure-user/${this.props.location.state.id}`, this.props.dispatch);
+      window.location.href = `${CLIENT_ROOT_URL}/azure-portal`;
     }
   }
 
