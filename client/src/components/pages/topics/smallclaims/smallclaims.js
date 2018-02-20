@@ -46,12 +46,16 @@ const resourceList = [
     link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
   },
   { 
-    title: "Non-profit Agencies",
-    link: "http://www.courts.ca.gov/selfhelp-lowcosthelp.htm#Legal_aid_agencies_and_other_non-profit_groups"
+    title: "California Department of Consumer Affairs",
+    link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
   },
   { 
-    title: "Small Claims Advisor",
-    link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
+    title: "Find a Law Library",
+    link: "http://www.publiclawlibrary.org/law-libraries/"
+  },
+  { 
+    title: "Videos",
+    link: "https://www.youtube.com/watch?v=wZ491ri0E74&list=PLnMJyjNWwPW7RCLl0kmdMuOkpAHGMbYnn"
   },
 ] 
 

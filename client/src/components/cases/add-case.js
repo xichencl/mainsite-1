@@ -72,7 +72,7 @@ class AddCase extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="Add-case">
+      <div className="Add-edit-case Add-case">
         <h1>Add Case</h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           {this.renderAlert()}
