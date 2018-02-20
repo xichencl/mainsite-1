@@ -11,28 +11,35 @@ import SquareBox from '../../../template/square-box';
 import before from '../../../../img/before_1.svg';
 import during from '../../../../img/during_1.svg';
 import after from '../../../../img/after_1.svg';
+//temporarily porting in bot here and on /smallclaims. eventually bring outside of topics pages
+import Bot from '../../../chatbot/Bot.jsx';
 
 const resourceList = [
-	{ 
-		title: "Small Claims Advisor",
-		link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
-	},
-	{ 
-		title: "Non-profit Agencies",
-		link: "http://www.courts.ca.gov/selfhelp-lowcosthelp.htm#Legal_aid_agencies_and_other_non-profit_groups"
-	},
-	{ 
-		title: "Small Claims Advisor",
-		link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
-	},
-] 	
+  { 
+    title: "Small Claims Advisor",
+    link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
+  },
+  { 
+    title: "California Department of Consumer Affairs",
+    link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
+  },
+  { 
+    title: "Find a Law Library",
+    link: "http://www.publiclawlibrary.org/law-libraries/"
+  },
+  { 
+    title: "Videos",
+    link: "https://www.youtube.com/watch?v=wZ491ri0E74&list=PLnMJyjNWwPW7RCLl0kmdMuOkpAHGMbYnn"
+  },
+] 	 
 
 class SmallClaimsParty extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			buttonSelected: false,
-			stage: '' // before/during/after
+			stageTitle: '',
+      stageId: null
 		}
 		this.onStageSelect = this.onStageSelect.bind(this);
 	}
@@ -74,9 +81,7 @@ class SmallClaimsParty extends Component {
     	console.log("true", this.state)
     	const renderedLinks = this.props.content.map((stage, index) => {
     		// if (button.id == this.state.stage) {
-
     		// }
-
       	return (
         	<div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
         		<a>{stage.fields.title}</a>
@@ -113,19 +118,22 @@ class SmallClaimsParty extends Component {
 		//show links here: filter by if clicked, show the side menu. otherwise show icons
 		return (
   		<div>
+        <Bot />
   			<div className="mainpage-title">
           <hr className="mainpage-title-line" />
           <h1>Small Claims</h1>
           <hr className="mainpage-title-line"/>
         </div>
         <div className="grid grid-pad">
-        	<TextIconBox 
-        		boxTitle="Small Claims Checklist"
-        		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
-        		iconLarge={ChecklistIcon}
-        		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
-        		buttonLink="/test-todo"
+        	<Link to="checklist">
+            <TextIconBox 
+          		boxTitle="Small Claims Checklist"
+          		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
+          		iconLarge={ChecklistIcon}
+          		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
+          		buttonLink="/test-todo"
         		/>
+          </Link>
         	<InfoBox 
         		boxTitle="Resources"
         		boxContent={resources}
@@ -144,7 +152,7 @@ class SmallClaimsParty extends Component {
 
 
 function mapStateToProps(state) {
-  return { content: state.content.all };
+  return { content: state.content.stages };
 }
 
 export default connect(mapStateToProps, { fetchStages })(SmallClaimsParty);

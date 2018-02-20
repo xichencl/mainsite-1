@@ -1,4 +1,6 @@
 //styling chatbar
+$yellow: #ffc107;
+$white: #ffffff;
 
 .chatbar {
   height: 4.2em;
@@ -7,7 +9,7 @@
   padding-left: 8px;
   padding-right: 10px;
   border-top: 1px solid #939393;
-  background-color: #ffc107;
+  background-color: $white;
   color: $not-black;
   display: -webkit-box;
   display: -ms-flexbox;

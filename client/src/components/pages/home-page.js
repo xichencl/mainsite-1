@@ -24,14 +24,14 @@ class HomePage extends React.Component {
   // }
 
   renderCategories() {
-    return this.props.content.map((category, index) => {
+    return this.props.content.map((unit, index) => {
       return (
-        <div key={category.sys.id}>
-          <Link to={category.fields.url}>
+        <div key={unit.sys.id}>
+          <Link to={unit.fields.url}>
             <Squarebox 
-              id={category.sys.id}
-              boxTitle={category.fields.title}  
-              assetId={category.fields.image.sys.id}
+              id={unit.sys.id}
+              boxTitle={unit.fields.title}  
+              assetId={unit.fields.image.sys.id}
             />
           </Link>
         </div>
@@ -56,7 +56,7 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.all };
+  return { content: state.content.categories };
 }
 
 // export default connect(mapStateToProps)(HomePage);

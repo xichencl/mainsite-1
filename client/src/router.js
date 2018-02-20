@@ -82,6 +82,8 @@ export default class AppRouter extends Component {
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />
+                    {/*if I want to load app and navs separately in {App} component, and load CaseType modules here--> */}
+                    {/*<IndexRoute component={TopicsList} /> */} 
                   <Route path="/test" component={TestAccordionBox} />
                   <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
@@ -107,8 +109,9 @@ export default class AppRouter extends Component {
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
                   <Route exact path="/smallclaims" component={SmallClaims} />
-                  <Route path="/smallclaims/:party/:stage" component={SmallClaimsStage} />
-                  <Route path="/smallclaims/:party" component={SmallClaimsParty} />
+                  <Route path="/smallclaims/:party/" component={SmallClaimsParty} >
+                    <Route path="/:stage" component={SmallClaimsStage} />
+                  </Route>
                   <Route path="/guardianship" component={Guardianship} />
                   <Route path="/eviction" component={Eviction} />
                   <Route path="/dv" component={Dv} />

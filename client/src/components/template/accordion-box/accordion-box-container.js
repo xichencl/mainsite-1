@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, { Component, PropTypes } from 'react';
 const fakeContent = [
 	{
 		id: 1,
@@ -46,3 +45,13 @@ export default class AccordionBoxContainer extends Component {
 	}
 } 
 
+AccordionBoxContainer.propTypes = {
+  tabs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    expanded: PropTypes.bool.isRequired,
+    // blockText: PropTypes.string.isRequired, 
+    
+  }).isRequired).isRequired,
+  onTabClick: PropTypes.func.isRequired,
+  onAccordionClick: PropTypes.func.isRequired,
+}

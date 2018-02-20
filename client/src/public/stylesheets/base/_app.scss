@@ -254,7 +254,8 @@ button:hover {
     color: $grey-text;
   }
   height: $box-height;
-  overflow: auto; //fine except for portal boxes.
+  // overflow: auto; 
+  //fine except for portal boxes.
 }
 
 .Square-box {
@@ -410,14 +411,14 @@ button:hover {
 // ========= FOOTER =========
 // ==========================
 .Footer {
-  fixed: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   background-color: $dark-grey;
   width: 100%;
   display: flex; // somehow this removes p margin whitespace at bottom
   color: $white;
-  margin-top: 30rem;
+  margin-top: 5rem;
   a {
     color: $white;
     text-decoration: none;

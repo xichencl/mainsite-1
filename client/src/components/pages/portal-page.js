@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import SquareBox from '../template/square-box.js';
+// import SquareBox from '../template/square-box.js';
+import SquareBoxStatic from '../template/square-box-static.js';
 import ViewProfile from '../profile/view-profile';
 import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
@@ -61,7 +62,7 @@ class Portal extends Component {
         <div key={`${5}search`}>
           
           <Link to='find-a-case'>
-            <SquareBox
+            <SquareBoxStatic
               boxTitle='Find a Court Case'
               imgSrc={SearchIcon} />
           </Link>
@@ -76,21 +77,21 @@ class Portal extends Component {
         // Unauthenticated navigation
         <div key={1}>
           <Link to="login">
-            <SquareBox 
+            <SquareBoxStatic
               boxTitle='Login / Sign Up'
               imgSrc={LoginIcon} />
           </Link>
         </div>,
         <div key={2}>
           <Link to="find-a-case">
-            <SquareBox 
+            <SquareBoxStatic 
               boxTitle='Find a Case'
               imgSrc={SearchIcon} />
           </Link>
         </div>,
       ];
     }
-  }
+  } 
 
   render() {
     return (

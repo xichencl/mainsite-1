@@ -7,6 +7,7 @@ import Bannerbox from '../../../template/banner-box';
 import Infobox from '../../../template/info-box';
 import { fetchParties } from '../../../../actions/content.js';
 import { fetchFaqs } from '../../../../actions/content.js';
+// import { fetchResourceLinks } from '../../../../actions/content.js';
 
 // Bot temporarily lives only in Small Claims until all case types are functional in bot
 import Bot from '../../../chatbot/Bot.jsx';
@@ -45,12 +46,16 @@ const resourceList = [
     link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
   },
   { 
-    title: "Non-profit Agencies",
-    link: "http://www.courts.ca.gov/selfhelp-lowcosthelp.htm#Legal_aid_agencies_and_other_non-profit_groups"
+    title: "California Department of Consumer Affairs",
+    link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
   },
   { 
-    title: "Small Claims Advisor",
-    link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
+    title: "Find a Law Library",
+    link: "http://www.publiclawlibrary.org/law-libraries/"
+  },
+  { 
+    title: "Videos",
+    link: "https://www.youtube.com/watch?v=wZ491ri0E74&list=PLnMJyjNWwPW7RCLl0kmdMuOkpAHGMbYnn"
   },
 ] 
 
@@ -71,8 +76,8 @@ class SmallClaims extends Component {
   componentWillMount() {
     this.props.fetchParties()
     // this.props.fetchFaqs()
+    // this.props.fetchResourceLinks()
   }
-
 
 
   renderParties() {
@@ -142,7 +147,7 @@ class SmallClaims extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.all };
+  return { content: state.content.parties };
 }
 
 export default connect(mapStateToProps, { fetchParties })(SmallClaims);

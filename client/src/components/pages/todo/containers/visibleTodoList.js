@@ -45,11 +45,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
-      console.log('todoClick dispatch');
+      // console.log('todoClick dispatch');
       dispatch(toggleTodo(id));
     },
     onAccordionClick: (id) => {
-      console.log('accordion dispatch');
+      // console.log('accordion dispatch');
       dispatch(accordionTodo(id));
     },
     onSaveClick: (caseId, todos) => {
@@ -60,12 +60,12 @@ const mapDispatchToProps = (dispatch) => {
       const data = {caseId, steps};
       
       // console.log("complete todos: ", todos) ; 
-      console.log("Save button clicked"); 
+      // console.log("Save button clicked"); 
       // console.log("data: ", data);   
       postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, dispatch, data);
     },
     onUpdate: (caseId, caseType) => {
-      console.log("onUpdate method called");
+      // console.log("onUpdate method called");
       const uid = cookie.get('user')._id;
       dispatch({type : caseType});
       getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
