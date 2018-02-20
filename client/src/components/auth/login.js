@@ -31,29 +31,38 @@ class Login extends Component {
     return (
       <div className="Login">
         <h1>Login</h1>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          {this.renderAlert()}
-          <div>
-            <label>Email</label>
-            <Field name="email" className="form-control" component="input" type="text" />
+        <div className="Login-options-wrapper">
+          <div className="Login-option">
+            {/*<!-- test openID login -->*/}
+            <p>Sign in with Microsoft Azure</p>
+            <a className="Login-azure" href="/api/auth/azure-login"> Azure Login </a>
+            {/*<Link to="azure-login">Azure Login</Link>*/}
+            {/*<button type="button" onClick={ oidcLoginUser }> Azure Login </button>*/}
           </div>
-          <div>
-            <label>Password</label>
-            <Field name="password" className="form-control" component="input" type="password" />
+          <div className="Login-option">
+            <p>Or sign in with your email address</p>
+            <form className="Login-local" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+              {this.renderAlert()}
+              <div>
+                <label>Email</label>
+                <Field name="email" className="form-control" component="input" type="text" />
+              </div>
+              <div>
+                <label>Password</label>
+                <Field name="password" className="form-control" component="input" type="password" />
+              </div>
+              <button type="submit" className="btn btn-primary">Login</button>
+            </form>
+            <Link to="/forgot-password">Forgot Password?</Link>
           </div>
-          <button type="submit" className="btn btn-primary">Login</button>
-        </form>
-        <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
         <div>
           
           <h3>Don't have an account? Register <Link to="register">here.</Link></h3>
           
         </div>
 
-        {/*<!-- test openID login -->*/}
-        <a href="/api/auth/azure-login"> Azure Login </a>
-        {/*<Link to="azure-login">Azure Login</Link>*/}
-        {/*<button type="button" onClick={ oidcLoginUser }> Azure Login </button>*/}
+        
       </div>
     );
   }
