@@ -278,11 +278,11 @@ input:focus:-moz-placeholder { color:transparent; }
 
 .Add-edit-case {}
 
-.form-control {
-	border: none;
-	font-size: 18px;
-	height: auto;
-}
+// .form-control {
+// 	border: none;
+// 	font-size: 18px;
+// 	height: auto;
+// }
 .case-form-group {
 	margin-top: 2rem;
 	select {
@@ -290,6 +290,9 @@ input:focus:-moz-placeholder { color:transparent; }
 	}
 	.form-control {
 		width: 33%;
+		border: none;
+		height: auto;
+		font-size: 18px;
 	}
 }
 
@@ -304,6 +307,8 @@ input:focus:-moz-placeholder { color:transparent; }
 	.form-control {
 		width: 2rem;
 		border: none;
+		height: auto;
+		font-size: 18px;
 	}
 }
 
