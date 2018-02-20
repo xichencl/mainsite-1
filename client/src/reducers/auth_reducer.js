@@ -1,11 +1,13 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FORGOT_PASSWORD_REQUEST, RESET_PASSWORD_REQUEST, PROTECTED_TEST } from '../actions/types';
+import { AUTH_LOCAL_USER, AUTH_AZURE_USER, UNAUTH_USER, AUTH_ERROR, FORGOT_PASSWORD_REQUEST, RESET_PASSWORD_REQUEST, PROTECTED_TEST } from '../actions/types';
 
 const INITIAL_STATE = { error: '', message: '', content: '', authenticated: false };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case AUTH_USER:
-      return { ...state, error: '', message: '', authenticated: true };
+    case AUTH_LOCAL_USER:
+      return { ...state, error: '', message: 'LOCAL', authenticated: true };
+    case AUTH_AZURE_USER:
+      return { ...state, error: '', message: 'AZURE', authenticated: true };  
     case UNAUTH_USER:
       return { ...state, authenticated: false, error: action.payload };
     case AUTH_ERROR:

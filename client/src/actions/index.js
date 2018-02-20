@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA, AUTH_USER } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA, AUTH_LOCAL_USER, AUTH_AZURE_USER } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
@@ -48,7 +48,7 @@ export function fetchAzureUser() {
     })
     .then(() => {
       console.log('promise called second time');
-      dispatch({ type: AUTH_USER });
+      dispatch({ type: AUTH_AZURE_USER });
       dispatch({ type: 'FETCH_USER_RECEIVED' });
     })
     .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));

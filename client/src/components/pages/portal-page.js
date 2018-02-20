@@ -123,7 +123,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchUser, fetchAzureUser })(Portal);
+export default connect(mapStateToProps, { fetchUser })(Portal);
 
 
 

@@ -53,7 +53,7 @@ class Login extends Component {
         {/*<!-- test openID login -->*/}
         <a href="/api/auth/azure-login"> Azure Login </a>
         {/*<Link to="azure-login">Azure Login</Link>*/}
-        <button type="button" onClick={ oidcLoginUser }> Azure Login </button>
+        {/*<button type="button" onClick={ oidcLoginUser }> Azure Login </button>*/}
       </div>
     );
   }

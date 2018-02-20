@@ -1,7 +1,8 @@
 //= =====================
 // Auth Actions
 //= =====================
-export const AUTH_USER = 'auth_user',
+export const AUTH_LOCAL_USER = 'auth_local_user',
+  AUTH_AZURE_USER = 'auth_azure_user',
   UNAUTH_USER = 'unauth_user',
   AUTH_ERROR = 'auth_error',
   FORGOT_PASSWORD_REQUEST = 'forgot_password_request',

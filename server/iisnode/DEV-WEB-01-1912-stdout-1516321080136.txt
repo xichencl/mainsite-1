@@ -1,3 +1,0 @@
-Your server is running on port \\.\pipe\6f544fc2-a7d2-41ba-8e2f-e9a20b9e09d5.
-[0mGET /server/iisnode/DEV-WEB-01-10296-stdout-1516304219864.txt [33m404 [0m3.909 ms - 195[0m
-[0mGET /api/chat/test [36m304 [0m4.303 ms - -[0m

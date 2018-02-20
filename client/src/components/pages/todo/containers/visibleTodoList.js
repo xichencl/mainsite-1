@@ -71,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
       console.log("onUpdate method called");
       if (caseId === null){ //not signed-in
         dispatch({type : caseType+'-'+party});
+        dispatch({type: 'GET_TODO_DATA_RECEIVED'});
       }else { //signed-in
         // const uid = cookie.get('user')._id;
         dispatch({type : caseType+'-'+party});

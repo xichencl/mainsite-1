@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// import Squarebox from '../../template/square-box';
+// import Bannerbox from '../../template/banner-box';
+// import Infobox from '../../template/info-box';
+// // Bot temporarily lives only in Small Claims until all case types are functional in bot
+// import Bot from '../../chatbot/Bot.jsx';
+// import PlaintiffIcon from '../../../img/suing_1.svg';
+// import DefendantIcon from '../../../img/sued_1.svg';
 import { connect } from 'react-redux';
 
 import Squarebox from '../../../template/square-box';
@@ -61,24 +68,38 @@ const resourceList = [
 
 class SmallClaims extends Component {
   // constructor() {
-  //   super()
+  //   super();
   //   this.state = {
-  //     parties: [],
-  //     faqs: []
+  //     topics: [],
+  //     parties: [
+  //       { slug: "plaintiff", img: PlaintiffIcon, title: "Plaintiff" }, 
+  //       { slug: "defendant", img: DefendantIcon, title: "Defendant" }
+  //     ]
+  //   };
+  // }
+
+  // static defaultProps() {
+  //   return {
+  //     limit: 4
   //   }
   // }
 
   // componentDidMount() {
-		// client.getEntries({content_type: 'party'}).then((response) => {
-  //     this.setState({parties: response.items})
-  //   })
+  //   return fetch('https://case-data.glitch.me/courtdata')
+  //     .then(response => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({ topics: responseJson });
+  //       // console.log(this.state.topics)
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
   // }
   componentWillMount() {
     this.props.fetchParties()
     // this.props.fetchFaqs()
     // this.props.fetchResourceLinks()
   }
-
 
   renderParties() {
     return this.props.content.map((party, index) => {

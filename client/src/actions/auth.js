@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { API_URL, CLIENT_ROOT_URL, errorHandler } from './index';
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FORGOT_PASSWORD_REQUEST, RESET_PASSWORD_REQUEST, PROTECTED_TEST } from './types';
+import { AUTH_LOCAL_USER, AUTH_AZURE_USER, AUTH_ERROR, UNAUTH_USER, FORGOT_PASSWORD_REQUEST, RESET_PASSWORD_REQUEST, PROTECTED_TEST } from './types';
 
 //= ===============================
 // Authentication actions
@@ -18,7 +18,7 @@ export function loginUser({ email, password }) {
       cookie.set('token', response.data.token, { path: '/', maxAge: 6080});
       cookie.set('user', response.data.user, { path: '/', maxAge: 6080 });
       console.log('Cookie: ', cookie);
-      dispatch({ type: AUTH_USER });
+      dispatch({ type: AUTH_LOCAL_USER });
       window.location.href = `${CLIENT_ROOT_URL}/portal`;
     })
     .catch((error) => {
@@ -60,7 +60,7 @@ export function registerUser({ email, firstName, lastName, address, phone, passw
     .then((response) => {
       cookie.set('token', response.data.token, { path: '/' });
       cookie.set('user', response.data.user, { path: '/' });
-      dispatch({ type: AUTH_USER });
+      dispatch({ type: AUTH_LOCAL_USER });
       window.location.href = `${CLIENT_ROOT_URL}/portal`;
     })
     .catch((error) => {

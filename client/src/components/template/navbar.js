@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 // import { CLIENT_ROOT_URL } from '../../actions/index';
 import ccscLogo from '../../img/ccsc-logo.svg';
@@ -20,7 +21,8 @@ import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
   src={ ccscLogoSm }
 />
 */
-function Navbar(props) {
+class Navbar extends Component {
+  render() {
   return (
     <div className='Menu'>
         <div className='Menu-logo'>
@@ -47,13 +49,20 @@ function Navbar(props) {
           >
             Home
           </NavLink>
+          {this.props.azure === 'AZURE'? <NavLink
+            activeClassName='Menu-link--active'
+            className='Menu-link'
+            to='/azure-portal'
+          >
+            My Portal
+          </NavLink> : 
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
             to='/portal'
           >
             My Portal
-          </NavLink>
+          </NavLink>}
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
@@ -92,6 +101,9 @@ function Navbar(props) {
         </div>
       </div>
   );
+  }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => { return {azure: state.auth.message}; };
+
+export default connect(mapStateToProps)(Navbar);

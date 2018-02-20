@@ -14,7 +14,7 @@ import promise from 'redux-promise'
 
 // import ReactGA from 'react-ga';
 
-import { AUTH_USER } from './actions/types';
+import { AUTH_LOCAL_USER } from './actions/types';
 // import { FETCH_USER } from './actions/types';
 
 // Import stylesheets
@@ -46,7 +46,7 @@ const token = cookie.load('token');
 if (token) {
   // Update application state. User has token and is probably authenticated
   store.dispatch({
-    type: AUTH_USER,
+    type: AUTH_LOCAL_USER,
   });
 }
 
