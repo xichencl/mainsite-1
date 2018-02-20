@@ -3,6 +3,7 @@ import { FETCH_CATEGORIES } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FAQS } from './types'
 import { FETCH_CONTENT } from './types'
+import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
 import { FETCH_ASSET } from './types'
 
@@ -13,7 +14,8 @@ import { FETCH_ASSET } from './types'
 
 const API_BASE_URL = 'https://cdn.contentful.com';
 const API_SPACE_ID = 'x8bmio1z72gj';
-const API_TOKEN = '43bd55625a6f64960d215a703e1def27bcbbdf9a912732b32d153356b1fce40c';
+const API_TOKEN = 'd5bbad9aaee8876cceb673a9de9364b29cf477d2ca96f978e684ba25f55ec74a';
+const SMALL_CLAIMS_ID = '5iJkGCIR2gUoMKaeQOqo6W';
 
 export function fetchCategories() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);
@@ -56,6 +58,15 @@ export function fetchContent() {
   console.log('fetch stageContent action')
   return {
     type: FETCH_CONTENT,
+    payload: request
+  };
+}
+
+export function fetchResourceLinks() {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.unit.sys.id=${SMALL_CLAIMS_ID}`);
+  console.log('fetch resource links action')
+  return {
+    type: FETCH_RESOURCE_LINKS,
     payload: request
   };
 }

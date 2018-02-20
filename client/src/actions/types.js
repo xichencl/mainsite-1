@@ -57,6 +57,7 @@ export const FETCH_ASSET = "FETCH_ASSET";
 export const FETCH_PARTIES = "FETCH_PARTIES";
 export const FETCH_FAQS = "FETCH_FAQS";
 export const FETCH_CONTENT = "FETCH_CONTENT";
+export const FETCH_RESOURCE_LINKS = "FETCH_RESOURCE_LINKS";
 export const FETCH_STAGES = "FETCH_STAGES";
 
 /* Not using these =====>

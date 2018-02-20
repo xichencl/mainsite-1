@@ -7,6 +7,7 @@ import Bannerbox from '../../../template/banner-box';
 import Infobox from '../../../template/info-box';
 import { fetchParties } from '../../../../actions/content.js';
 import { fetchFaqs } from '../../../../actions/content.js';
+// import { fetchResourceLinks } from '../../../../actions/content.js';
 
 // Bot temporarily lives only in Small Claims until all case types are functional in bot
 import Bot from '../../../chatbot/Bot.jsx';
@@ -71,8 +72,8 @@ class SmallClaims extends Component {
   componentWillMount() {
     this.props.fetchParties()
     // this.props.fetchFaqs()
+    this.props.fetchResourceLinks()
   }
-
 
 
   renderParties() {
