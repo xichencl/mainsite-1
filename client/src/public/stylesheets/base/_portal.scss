@@ -10,7 +10,7 @@ $blue-button-pressed: #115077;
 $blue-accent: #5392be;
 $yellow-highlight: #f9d04e;
 $grey-background: #f5f5f5;
-
+$red: #C62C2C;
 
 // Login Page
 .form-group {
@@ -215,11 +215,13 @@ input:focus:-moz-placeholder { color:transparent; }
 
 .Portal-box-content {
 	padding: 2rem;
+	height: 215px;
 	overflow: scroll;
 }
 
 .My-cases-box-lg {
 	width: 100%;
+	overflow: scroll;
 }
 
 .My-cases-box-md {
@@ -272,6 +274,46 @@ input:focus:-moz-placeholder { color:transparent; }
 		margin-top: 0.8rem;
 		margin-bottom: 1.4rem;
 	}
+}
+
+.Add-edit-case {}
+
+.form-control {
+	border: none;
+	font-size: 18px;
+	height: auto;
+}
+.case-form-group {
+	margin-top: 2rem;
+	select {
+		width: 33%;
+	}
+	.form-control {
+		width: 33%;
+	}
+}
+
+.case-number {
+	.caseNumber-form-control {
+		width: 33%;
+	}
+}
+
+.radio-row {
+	display: flex;
+	.form-control {
+		width: 2rem;
+		border: none;
+	}
+}
+
+.button-delete {
+	background-color: $red;
+}
+
+.button-submit {
+	margin-right: 2rem;
+	background-color: $blue-button;
 }
 
 .Logout {

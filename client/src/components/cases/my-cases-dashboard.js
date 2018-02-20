@@ -4,7 +4,8 @@ import MyCases from './my-cases';
 // import ViewTodo from '../todo/view-todo';
 import MyCaseData from './my-case-data';
 import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
-import SquareBox from '../template/square-box';
+// import SquareBox from '../template/square-box';
+import SquareBoxStatic from '../template/square-box-static';
 import ChecklistIcon from '../../img/checklist_1.svg';
 
 export default class MyCasesDashboard extends Component {
@@ -27,7 +28,7 @@ export default class MyCasesDashboard extends Component {
       	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
 					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
           <Link to={{pathname:'/checklist', state:{caseId:this.props.location.state.caseData._id, caseType:this.props.location.state.caseData.caseType}}}>
-            <SquareBox 
+            <SquareBoxStatic 
               boxTitle="Create a Checklist"
               imgSrc={ChecklistIcon}
               />
