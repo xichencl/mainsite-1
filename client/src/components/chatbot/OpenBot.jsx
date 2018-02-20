@@ -15,7 +15,7 @@ const BotBox = ({ visible }) =>
 const SpeechBubble = props =>
   <div>
     <div className="open-bot-icon">
-      <i className="material-icons md-36">chat_bubble</i>
+      <i className="material-icons md-48">chat_bubble</i>
     </div>
     {/* dont delete. might need if we decide to add to text menu
       <div className="text-bot-icon">
