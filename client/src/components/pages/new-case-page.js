@@ -160,9 +160,9 @@ class NewCase extends Component{
       // const caseNumber = this.state.case.caseNumber ? this.state.case.caseNumber : '';
       // console.log("case number: ", caseNumber);
     	return (
-    		<div>
+    		<div className="Add-edit-case">
     		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
-        <button type="button" onClick={this.handleClick.bind(this)}>Delete Case</button>
+        <button type="button" className="button button-delete" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			 {this.renderAlert()}
     			
@@ -191,6 +191,7 @@ class NewCase extends Component{
 
           <div className="case-form-group select select-party">
     				<label>Party (select one)</label>
+{/*<< HEAD
     				<div className="row">
     				  <div className="col-md-6">
                 <label>
@@ -200,21 +201,29 @@ class NewCase extends Component{
                 <label>
                 <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>Defendant</label>
     				  </div>
+=====*/}
+    				<div className="radio-row">
+                <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />
+                <p>Plaintiff</p>
+            </div>
+            <div className="radio-row">
+                <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>
+                <p>Defendant</p>
             </div>
     			</div>
 
     			<div className="case-form-group case-number">
     				<label>Case Number</label>
     				<div>
-            <Field className="form-control" name="caseNumber" component={renderField} type="text" placeholder="Case Number"  />    				
+            <Field className="form-control caseNumber-form-control" name="caseNumber" component={renderField} placeholder="Case Number"  />    				
     				</div>
     			</div>
 
     			
     			
     			<div className="case-form-group">
-			        <button className="btn btn-submit" type="submit" disabled={pristine || submitting}>Submit</button>
-			        <button className="btn btn-submit" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+			        <button className="button button-submit" type="submit" disabled={pristine || submitting}>Submit</button>
+			        <button className="button" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
 		      	</div>
 
     		</form>

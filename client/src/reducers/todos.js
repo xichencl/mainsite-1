@@ -22,7 +22,7 @@ const todo = (state, action) => {
       return state
     }
     return Object.assign({}, state, {
-      expanded: !state.completed
+      expanded: !state.expanded
     })
   default:
     return state

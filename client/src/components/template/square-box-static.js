@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 // import { routeCodes } from '../../App.js';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import ResponsiveImage from './responsive-image';
-import Asset from './responsive-image';
+// import Asset from './responsive-image';
 
-export default class SquareBox extends Component {
+export default class SquareBoxStatic extends Component {
 	render() {
 		return (
 			<div className={this.props.squareBoxClass} id={this.props.id}>
 				<div className="Square-box-static module">
 					<div className="Square-box-static-main">
 						<h3>{this.props.boxTitle}</h3>
-						<Asset assetId={this.props.assetId} />
-						{/* <img src={this.props.imgSrc} /> <i className={this.props.iconClass} aria-hidden="true"></i>*/}
+						<img src={this.props.imgSrc} /> <i className={this.props.iconClass} aria-hidden="true"></i>
 					</div>
 				</div>
 			</div>
@@ -21,8 +20,8 @@ export default class SquareBox extends Component {
 	}
 } 
 
-SquareBox.propTypes = { limit: React.PropTypes.number };
-SquareBox.defaultProps = { 
+SquareBoxStatic.propTypes = { limit: React.PropTypes.number };
+SquareBoxStatic.defaultProps = { 
   squareBoxClass: 'Box Square-box col-2 ',
   buttonVisibilityClass: ' ',
 };
