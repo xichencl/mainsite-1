@@ -41,6 +41,7 @@ class MyCases extends Component {
       		<div className='Portal-box-content Grey-background'>
 	      		<h3>My Cases<Link to='add-case' className='Box-icon-sm'><i className='fa fa-plus' aria-hidden='true'></i></Link></h3>
 	      	  { this.props.cases.map((value) => {
+              console.log("case: ", value);
               return (
               <div key={value._id}>
                 <hr className='Box-line-md' />

@@ -1,7 +1,8 @@
 //= =====================
 // Auth Actions
 //= =====================
-export const AUTH_USER = 'auth_user',
+export const AUTH_LOCAL_USER = 'auth_local_user',
+  AUTH_AZURE_USER = 'auth_azure_user',
   UNAUTH_USER = 'unauth_user',
   AUTH_ERROR = 'auth_error',
   FORGOT_PASSWORD_REQUEST = 'forgot_password_request',
@@ -19,8 +20,12 @@ export const GET_DATA = 'get_data',
   POST_DATA = 'post_data';
 
 //case types
-export const SMALL_CLAIMS = 'Small Claims',
-  GUARDIANSHIP = 'Guardianship';
+export const SMALL_CLAIMS = 'smallClaims',
+  GUARDIANSHIP = 'guardianship';
+
+//party
+export const PLAINTIFF = 'plaintiff',
+  DEFENDANT = 'defendant';
 
 //= =====================
 // Page Actions

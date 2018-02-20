@@ -25,9 +25,9 @@ class Header extends React.Component {
               </i>
             </button>
 
-          <div>
+         {/* <div>
             {this.props.ai.caseType}
-          </div>
+          </div> */}
 
           <button id="email">email</button>
 

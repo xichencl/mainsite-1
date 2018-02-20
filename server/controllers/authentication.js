@@ -15,13 +15,14 @@ function generateToken(user) {
   });
 }
 
+
 //= =======================================
 // Login Route
 //= =======================================
 exports.login = function (req, res, next) {
   const userInfo = setUserInfo(req.user);
-  // console.log("executed");
-  // console.log(req.user);
+  console.log("executed");
+  console.log("req.user: ", req.user);
   res.status(200).json({
     token: `JWT ${generateToken(userInfo)}`,
     user: userInfo
@@ -68,6 +69,7 @@ exports.register = function (req, res, next) {
     const user = new User({
       email,
       password,
+      // authType: 'local',
       profile: { firstName, lastName, address, phone, email }
     });
 

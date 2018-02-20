@@ -125,15 +125,17 @@ class SmallClaimsParty extends Component {
           <hr className="mainpage-title-line"/>
         </div>
         <div className="grid grid-pad">
-        	<Link to="checklist">
+        	{/*<Link to="checklist">*/}
             <TextIconBox 
           		boxTitle="Small Claims Checklist"
           		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
           		iconLarge={ChecklistIcon}
           		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
-          		buttonLink="/test-todo"
+          		buttonLink="/checklist"
+              caseType='smallClaims'
+              party={this.props.match.params.party}
         		/>
-          </Link>
+          {/*</Link>*/}
         	<InfoBox 
         		boxTitle="Resources"
         		boxContent={resources}

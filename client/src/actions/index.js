@@ -3,14 +3,15 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 // import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_PAGE_DATA, LOAD_CHECKLIST, GET_ALL_TASKS, CHANGE_STATUS, ERROR_RESPONSE, POST_DATA, AUTH_LOCAL_USER, AUTH_AZURE_USER } from './types';
 import { fetchData } from "../data/mockDataAPI";
 
 // import siteData from "../data/smallClaimsData";
 
 const SITE_DATA_PATH = '../data/cleanSiteData.json'
-export const API_URL = 'http://localhost:3000/api'; // database server URL
-export const CLIENT_ROOT_URL = 'http://localhost:8080';
+export const API_URL = '/api'; 
+export const COSMOS_EMU_URL = 'https://localhost:8081';// cosmos db emulator URL
+export const CLIENT_ROOT_URL = '';
 
 //= ===============================
 // Utility actions
@@ -28,6 +29,27 @@ export function fetchUser(uid) {
         type: FETCH_USER,
         payload: response.data.user,
       });
+    })
+    .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
+  };
+}
+
+export function fetchAzureUser() {
+  return function (dispatch) {
+
+    // const thisToken = cookie.get('token')
+    axios.get(`${API_URL}/azure-user`)
+    .then((response) => {
+      console.log('promise called first time. Response: ', response);      
+      dispatch({
+        type: FETCH_USER,
+        payload: response.data.user,
+      });
+    })
+    .then(() => {
+      console.log('promise called second time');
+      dispatch({ type: AUTH_AZURE_USER });
+      dispatch({ type: 'FETCH_USER_RECEIVED' });
     })
     .catch((error) => dispatch(errorHandler(dispatch, error.response, ERROR_RESPONSE)));
   };

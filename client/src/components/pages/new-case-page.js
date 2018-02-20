@@ -6,40 +6,65 @@ import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
 import { UPDATE_CASE } from '../../actions/types';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+const user = cookie.get('user');
 
 const form = reduxForm({
   form: 'newCase',
   validate,
 });
 
-const renderField = field => (
+const renderField = ({input, label, type, meta: {touched, error}, placeholder}) => {
+  // console.log("FieldValue: ", value);
+  return (
   <div>
-    <input className="form-control" {...field.input} type="text" placeholder={field.placeholder} />
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+    <input {...input} type={type} placeholder={placeholder} />
+    {touched && error && <span>{error}</span>}
   </div>
-);
- 
-// const renderSelect = field => (
-//   <div>
-//     <select className="form-control" {...field.input} />
-//     {field.touched && field.error && <div className="error">{field.error}</div>}
-//   </div>
-// );
+  );
+};
+ // const renderField = field => {
+ //  console.log(field);
+ //  return (
+ //    <div>
+ //      <input {...field.input} type={field.type} placeholder={field.placeholder} />
+ //      {field.meta.touched && field.mata.error && <span>{field.meta.error}</span>}
+ //    </div>
+ //  );
+ // }
+
+const renderSelect = ({input, label, type, meta: {touched, error}, children}) => {
+ console.log("SelectError: ", error);
+ console.log("touched? ", touched);
+ return (
+  <div>
+    <select {...input}>
+    {children}
+    </select>
+    {touched && error && <span>{error}</span>}
+  </div>
+)};
 
 function validate(formProps) {
+  console.log("validating field props...");
+  console.log("formProps: ", formProps);
   const errors = {};
 
-  if (!formProps.isPlaintiff){
-  	errors.isPlaintiff = 'Please select plaintiff or defendant';
+  if (!formProps.party ){
+  	errors.party = 'Please select plaintiff or defendant';
   }
 
-  if (!formProps.caseType){
+  if (!formProps.caseType ){
   	errors.caseType = 'Please select a case type';
   }
 
-  
+  if (!formProps.caseNumber) {
+    errors.caseNumber = 'Please enter your case number';
+  }
+
+  console.log("errors: ", errors);
   return errors;
 }
+
 
 const caseTypes = [
   { type: 'Small Claims', value: 'smallClaims' },
@@ -82,21 +107,36 @@ class NewCase extends Component{
   // }
 
 	handleFormSubmit(formProps) {
-		// console.log("FormProps: ", formProps);
-    const uid = cookie.get('user')._id;
-    // if (this.state.case.length > 0){
-    //   formProps.caseId = this.state.case._id;
-    // }
-		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
-    window.location.href = `${CLIENT_ROOT_URL}/portal`;
+		console.log("FormProps: ", formProps);
+    // const user = cookie.get('user');
+    /*local login*/
+    if (user){ 
+      const uid = user._id;
+      console.log(uid);
+      // if (this.state.case.length > 0){
+      //   formProps.caseId = this.state.case._id;
+      // }
+  		postData(UPDATE_CASE, this.props.error, true, `/user/${uid}/updateCase`, this.props.dispatch, formProps);
+      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+    /*azure login*/
+    else {
+      postData(UPDATE_CASE, this.props.error, false, '/azure-user/updateCase', this.props.dispatch, formProps);
+      window.location.href = `${CLIENT_ROOT_URL}/azure-portal`;
+    }
+    
 	}
 
   handleClick(e) {
     const isDelete = confirm("Are you sure you want to delete this case?");
-    if (isDelete){
-      const uid = cookie.get('user')._id;
+    if (isDelete && user){
+      const uid = user._id;
       deleteData(UPDATE_CASE, null, true, `/user/${uid}/${this.props.location.state.id}`, this.props.dispatch);
       window.location.href = `${CLIENT_ROOT_URL}/portal`;
+    }
+    else if (isDelete) {
+      deleteData(UPDATE_CASE, null, false, `/azure-user/${this.props.location.state.id}`, this.props.dispatch);
+      window.location.href = `${CLIENT_ROOT_URL}/azure-portal`;
     }
   }
 
@@ -110,6 +150,8 @@ class NewCase extends Component{
      }
   	}
 
+
+
 	render() {
     /*handleSubmit a property in reduxForm*/
     	const { handleSubmit, pristine, reset, submitting } = this.props;
@@ -122,7 +164,7 @@ class NewCase extends Component{
     		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
         <button type="button" className="button button-delete" onClick={this.handleClick.bind(this)}>Delete Case</button>
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-    			{this.renderAlert()}
+    			 {this.renderAlert()}
     			
 
           {/*<div>
@@ -136,7 +178,8 @@ class NewCase extends Component{
           </div>*/}
           <div className="case-form-group select select-case-type">
             <label>Select a Case Type</label>
-            <Field className="form-control" name="caseType" component="select">
+            <Field className="form-control" name="caseType" component={renderSelect} >
+              <option> </option>
               <option value="smallClaims">Small Claims</option>
               <option value="guardianship">Guardianship</option>
               <option value="family">Family</option>
@@ -149,17 +192,17 @@ class NewCase extends Component{
           <div className="case-form-group select select-party">
     				<label>Party (select one)</label>
     				<div className="radio-row">
-                <Field className="form-control" name="isPlaintiff" component="input" type="radio" value="plaintiff" />
+                <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />
                 <p>Plaintiff</p>
             </div>
             <div className="radio-row">
-                <Field className="form-control" name="isDefendant" component="input" type="radio" value="defendant"/>
+                <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>
                 <p>Defendant</p>
             </div>
     			</div>
 
     			<div className="case-form-group case-number">
-    				<label>Case Number (optional)</label>
+    				<label>Case Number</label>
     				<div>
             <Field className="form-control caseNumber-form-control" name="caseNumber" component={renderField} placeholder="Case Number"  />    				
     				</div>
@@ -181,7 +224,7 @@ class NewCase extends Component{
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
+    errorMessage: state.auth.message,
     cases: state.user.cases,
     // form: state.form,
     };

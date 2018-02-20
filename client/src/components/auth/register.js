@@ -8,6 +8,7 @@ import { FETCH_USER } from '../../actions/types';
 
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+const user = cookie.get('user');
 
 const form = reduxForm({
   form: 'register',
@@ -71,9 +72,15 @@ class Register extends Component {
     if (this.props.authenticated) {
       //existing profile
       console.log("existing profile");
-      const uid = cookie.get('user')._id;
-      postData(FETCH_USER, null, true, `/user/${uid}/updateProfile`, this.props.dispatch, formProps);
-      window.location.href = `${CLIENT_ROOT_URL}/portal`;
+      // const uid = cookie.get('user')._id;
+      if (user){
+        postData(FETCH_USER, null, true, `/user/${user._id}/updateProfile`, this.props.dispatch, formProps);
+        window.location.href = `${CLIENT_ROOT_URL}/portal`; 
+      }else {
+        postData(FETCH_USER, null, false, '/azure-user/updateProfile', this.props.dispatch, formProps);
+        window.location.href = `${CLIENT_ROOT_URL}/azure-portal`;
+      }
+      
     }else{
       //new profile
       console.log("creating new profile");

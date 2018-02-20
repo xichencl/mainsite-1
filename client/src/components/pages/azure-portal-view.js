@@ -17,28 +17,7 @@ import SearchIcon from '../../img/icn_search.svg';
 import LoginIcon from '../../img/icn_login.svg';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
-
-class Portal extends Component {
-  componentWillMount() {
-    // Fetch user data prior to component mounting
-    if (this.props.authenticated){
-      const user = cookie.get('user');
-      const uid = user._id;
-      this.props.fetchUser(uid);
-    } 
-    // else {
-    //   const uid = this.props.location.pathname.substring(8);
-    //   if (uid.length > 0){
-        // this.props.fetchAzureUser();
-    //   }
-    //   console.log('uid: ', uid);
-    // }
-    
-  }
-
-  componentDidMount() {
-    console.log("this props: ", this.props);
-  }
+class AzurePortalView extends Component {
 
   renderLinks() {
     if (this.props.authenticated) {
@@ -81,7 +60,7 @@ class Portal extends Component {
         </div>,
         // ============================
         <div key={`${4}logout`} className='Logout'>
-          <Link to="logout">Logout</Link>
+          <a href='/api/logout'> Logout </a>
         </div>,
       ];
     } else {
@@ -103,10 +82,11 @@ class Portal extends Component {
         </div>,
       ];
     }
-  } 
+  }
 
   render() {
-    return (
+    return  (
+      !this.props.loading &&
       <div>
         <h1>My Portal</h1>
         <div className='grid grid-pad'>
@@ -120,45 +100,8 @@ class Portal extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    loading: state.loading
   };
 }
 
-export default connect(mapStateToProps, { fetchUser })(Portal);
-
-
-
-
-
-
-
-// import React, { Component } from 'react';
-// import SquareBox from '../template/square-box';
-// import { Link } from 'react-router-dom';
-// import profile from '../../../img/profile.svg';
-// import search from '../../../img/search.svg';
-
-// export default class PortalNoAuth extends Component {
-//  render() {
-//    return (
-//      <div className='PortalNoAuth'>
-//        <h1>My Portal</h1>
-//            <Link to='/login'>
-//              <SquareBox boxTitle='Log in / Sign up'
-//                   imgSrc=''
-//              />
-//            </Link>
-//            <Link to='/profile'>
-//              <SquareBox boxTitle='Find a Court Case'
-//                   imgSrc=''
-//              />
-//            </Link>
-//        </div>
-//    )
-//  }
-// }
-
-// taking out "upcoming" box for now
-{/*<div key={`${4}upcoming`}>
-          <Upcoming />
-        </div>,
-        // ============================*/}
+export default connect(mapStateToProps, { fetchAzureUser })(AzurePortalView);

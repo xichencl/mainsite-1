@@ -5,6 +5,7 @@ import TodoList from '../components/TodoList';
 // import { CLIENT_ROOT_URL, postData } from '../../../actions/index';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+const user = cookie.get('user');
 // import { getData, postData } from '../../../../actions/index.js';
 import { LOAD_TODOS } from '../../../../actions/types.js';
 
@@ -53,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(accordionTodo(id));
     },
     onSaveClick: (caseId, todos) => {
-      const uid = cookie.get('user')._id;
+      // const uid = cookie.get('user')._id;
       const steps = todos.map((todo) => 
         ({id: todo.id, completed: todo.completed, stage: todo.stage})
       ); 
@@ -62,13 +63,22 @@ const mapDispatchToProps = (dispatch) => {
       // console.log("complete todos: ", todos) ; 
       // console.log("Save button clicked"); 
       // console.log("data: ", data);   
-      postData(LOAD_TODOS, null, true, `/user/${uid}/updateChecklist`, dispatch, data);
+      
+      user ? postData(LOAD_TODOS, null, true, `/user/${user._id}/updateChecklist`, dispatch, data) : 
+      postData(LOAD_TODOS, null, false, '/azure-user/updateChecklist', dispatch, data);
     },
-    onUpdate: (caseId, caseType) => {
-      // console.log("onUpdate method called");
-      const uid = cookie.get('user')._id;
-      dispatch({type : caseType});
-      getData(LOAD_TODOS, null, true, `/user/${uid}/${caseId}`, dispatch);
+    onUpdate: (caseId, caseType, party) => {
+      console.log("onUpdate method called");
+      if (caseId === null){ //not signed-in
+        dispatch({type : caseType+'-'+party});
+        dispatch({type: 'GET_TODO_DATA_RECEIVED'});
+      }else { //signed-in
+        // const uid = cookie.get('user')._id;
+        dispatch({type : caseType+'-'+party});
+        user ? 
+        getData(LOAD_TODOS, null, true, `/user/${user._id}/${caseId}`, dispatch) :
+        getData(LOAD_TODOS, null, false, `/azure-user/${caseId}`, dispatch);
+      }
     }
     // onLoading: (caseId) => {
     //   if (state.user.cases){

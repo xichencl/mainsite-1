@@ -63,6 +63,7 @@ class SmallClaimsStage extends Component {
           </div>
 
         </div>
+
     )
   } 
 }

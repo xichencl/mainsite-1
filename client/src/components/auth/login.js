@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { loginUser } from '../../actions/auth';
+import { loginUser, oidcLoginUser } from '../../actions/auth';
 import SquareBox from '../template/square-box';
 
 const form = reduxForm({
@@ -49,6 +49,11 @@ class Login extends Component {
           <h3>Don't have an account? Register <Link to="register">here.</Link></h3>
           
         </div>
+
+        {/*<!-- test openID login -->*/}
+        <a href="/api/auth/azure-login"> Azure Login </a>
+        {/*<Link to="azure-login">Azure Login</Link>*/}
+        {/*<button type="button" onClick={ oidcLoginUser }> Azure Login </button>*/}
       </div>
     );
   }
@@ -58,7 +63,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
     message: state.auth.message,
-    authenticated: state.auth.authenticated,
+    authenticated: state.auth.authenticated,  
   };
 }
 

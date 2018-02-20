@@ -2,17 +2,26 @@ const ROLE_MEMBER = 'Member';
 const ROLE_CLIENT = 'Client';
 const ROLE_OWNER = 'Owner';
 const ROLE_ADMIN = 'Admin';
-const SMALL_CLAIMS = 'Small Claims';
-const GUARDIANSHIP = 'Guardianship';
-const FAMILY_LAW = 'Family Law';
-const EVICTION = 'Eviction';
-const DOMESTIC_VIOLENCE = 'Domestic Violence';
-const TRAFFIC = 'Traffic';
+const SMALL_CLAIMS = 'smallClaims';
+const GUARDIANSHIP = 'guardianship';
+const FAMILY_LAW = 'family';
+const EVICTION = 'eviction';
+const DOMESTIC_VIOLENCE = 'dv';
+const TRAFFIC = 'traffic';
+const AZURE = 'azure';
+const LOCAL = 'local';
 
 module.exports = {
   ROLE_MEMBER,
   ROLE_CLIENT,
   ROLE_OWNER,
   ROLE_ADMIN,
-  SMALL_CLAIMS, GUARDIANSHIP, FAMILY_LAW, EVICTION, DOMESTIC_VIOLENCE, TRAFFIC
+  SMALL_CLAIMS, 
+  GUARDIANSHIP, 
+  FAMILY_LAW, 
+  EVICTION, 
+  DOMESTIC_VIOLENCE, 
+  TRAFFIC,
+  AZURE,
+  LOCAL
 };

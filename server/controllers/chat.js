@@ -1,12 +1,17 @@
+const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../secret.env');
+
 const apiai = require('apiai');
-const aiSmallClaims = apiai('8fcfe02fdf5b42628700e6458795e6d4');
-const aiGuardianship = apiai('d07862e5bda647a7bb38eb2cb54973fd');
-const aiGeneral = apiai('ea7debae233f4bee8ec7616124a23082');
+const aiSmallClaims = apiai(SC_CHAT_API_KEY);
+const aiGuardianship = apiai(GUARDIANSHIP_CHAT_API_KEY);
+const aiGeneral = apiai(GENERAL_CHAT_API_KEY);
 const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 let ai, caseType;
+/*set the ai temporarily to small claims agent only*/
+// ai = aiSmallClaims;
+ai = apiai('1e399876a4544a4ba6f941e320b43ef7');
 
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){
@@ -23,7 +28,6 @@ exports.selectCaseType = (req, res, callback) => {
         default:
           ai = aiGeneral;
           caseType = "General";
-
       }
 
     //machine learning goes here

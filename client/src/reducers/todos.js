@@ -1,5 +1,6 @@
-import checklistTemplate from '../../data/checklist_smallClaims';
-import { LOAD_TODOS, SMALL_CLAIMS } from '../actions/types'; 
+import checklistTemplatePlaintiff from '../../data/checklist_plaintiff.js';
+import checklistTemplateDefendant from '../../data/checklist_defendant.js';
+import { LOAD_TODOS, SMALL_CLAIMS, PLAINTIFF, DEFENDANT } from '../actions/types'; 
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -31,8 +32,13 @@ const todo = (state, action) => {
 const todos = (state=[] , action) => {
   switch (action.type) {
   
-  case SMALL_CLAIMS:
-    return checklistTemplate;
+  case SMALL_CLAIMS+'-'+PLAINTIFF:
+    console.log("loading complete plaintiff template for small claims", checklistTemplatePlaintiff);
+    return checklistTemplatePlaintiff['smallClaims'];
+
+  case SMALL_CLAIMS+'-'+DEFENDANT:
+    console.log("loading complete defendant template for small claims");
+    return checklistTemplateDefendant['smallClaims'];
   
   case 'ADD_TODO':
     return [

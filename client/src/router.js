@@ -9,7 +9,7 @@ import Footer from './components/template/footer';
 import Search from './components/template/search';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
-// import Bot from './components/chatbot/Bot.jsx';
+import Bot from './components/chatbot/Bot.jsx';
 import MobileBot from './components/mobilebot/MobileBot.jsx';
 
 // Import static pages
@@ -20,6 +20,9 @@ import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
 import Videos from './components/pages/videos-page';
 import Portal from './components/pages/portal-page';
+import AzurePortal from './components/pages/azure-portal';
+// import SmallClaims from './components/pages/topics/smallclaims';
+// import SmallClaimsParty from './components/pages/topics/smallclaims-party';
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
 import SmallClaimsStage from './components/pages/topics/smallclaims/smallclaims-stage';
@@ -78,7 +81,7 @@ export default class AppRouter extends Component {
               <Search />
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
-              {/* <Bot />*/}
+              {/*<Bot /> */}
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />
@@ -88,6 +91,7 @@ export default class AppRouter extends Component {
                   <Route path="/checklist" component={TodoApp} />
                   <Route path="/contact-us" component={ContactPage} />
                   <Route path="/portal" component={Portal} />
+                  <Route path="/azure-portal" component={AzurePortal} />
                   <Route path="/my-case" component={MyCasesDashboard} />
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
@@ -123,6 +127,8 @@ export default class AppRouter extends Component {
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
+
+
 
                   <Route path="*" component={NotFoundPage} />
                 </Switch>

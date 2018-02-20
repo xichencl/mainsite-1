@@ -15,11 +15,19 @@ const passportService = require('./config/passport');
 // Middleware to require login/auth
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogin = passport.authenticate('local', { session: false });
+const requireOIDCLogin = (req, res, next) => {return passport.authenticate('azuread-openidconnect', 
+      { response: res,                      // required
+        // resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+        // customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+        failureRedirect: '/' 
+      });};
+const config = require('./config/main');
 
-const apiai = require('apiai');
-const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+// const apiai = require('apiai');
+// const ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 module.exports = function (app) {
+   
   // Initializing route groups
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
@@ -35,12 +43,22 @@ module.exports = function (app) {
   // Set auth routes as subgroup/middleware to apiRoutes
   apiRoutes.use('/auth', authRoutes);
 
+  //azure registration routes
+  // authRoutes.get('/azure-login', );
+
+
   // Registration route
   authRoutes.post('/register', AuthenticationController.register);
 
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
+  //azure ad login route
+  authRoutes.get('/openID', requireOIDCLogin, (req, res) => {
+      console.log("AD login success");
+      console.log("req: ", req);
+      console.log("res: ", res);
+  });
   // Password reset request route (generate/send token)
   authRoutes.post('/forgot-password', AuthenticationController.forgotPassword);
 
@@ -77,12 +95,16 @@ module.exports = function (app) {
   //= ========================
 
   apiRoutes.use('/chat', chatRoutes);
-  // chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
+  chatRoutes.get('/test', (req, res)=> {res.send("it worked!!!")});
 
   // route: /chat/message
   // console.log(ChatController.getMessageResponse);
   // chatRoutes.post('/message', ()=>{console.log("it worked!!!")});
-  chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
+  
+  /*select case type*/
+  // chatRoutes.post('/message', (req, res)=> {ChatController.selectCaseType(req, res, ChatController.getMessageResponse)});
+
+  chatRoutes.post('/message', (req, res) => {ChatController.getMessageResponse(req, res)});
   // console.log(ChatController.getWebhookResponse);
   chatRoutes.post('/webhook', (req, res)=> {ChatController.getWebhookResponse(req, res)});
 /*
@@ -134,4 +156,108 @@ module.exports = function (app) {
 
   // Set url for API group routes
   app.use('/api', apiRoutes);
+
+
+app.get('/api/auth/azure-login',
+  function(req, res, next) {
+    console.log("we are getting a get request");
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
+        customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+        failureRedirect: '/' 
+      }
+    )(req, res, next);
+  },
+  function(req, res) {
+    console.log('Login was called in the Sample');
+    res.redirect('/');
+  }
+);
+
+// 'GET returnURL'
+// `passport.authenticate` will try to authenticate the content returned in
+// query (such as authorization code). If authentication fails, user will be
+// redirected to '/' (home page); otherwise, it passes to the next middleware.
+app.get('/api/auth/openid/return',
+
+  function(req, res, next) {
+    console.log("get return url");
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        failureRedirect: '/'  
+      }
+    )(req, res, next);
+  },
+  function(req, res) {
+    console.log("next on the callback list");
+    console.log("req.user: ", req.user);
+    // console.log("req: ", req);
+    req.session.save(() => {
+      res.redirect('/azure-portal');
+    });
+    
+  });
+
+
+// 'POST returnURL'
+// `passport.authenticate` will try to authenticate the content returned in
+// body (such as authorization code). If authentication fails, user will be
+// redirected to '/' (home page); otherwise, it passes to the next middleware.
+app.post('/api/auth/openid/return',
+  function(req, res, next) {
+    console.log('we have received a post request');
+    passport.authenticate('azuread-openidconnect', 
+      { 
+        response: res,                      // required
+        failureRedirect: '/'  
+      }
+    )(req, res, next);
+  },
+  function(req, res, next) {
+    console.log('We received a posted return from AzureAD');
+    console.log("req session: ", req.session)
+    // handleRender(req, res);
+    req.session.save(() => {
+      res.redirect('/azure-portal');
+    });
+    
+    // res.redirect('/azure-portal');
+  });
+
+
+
+  // 'logout' route, logout from passport, and destroy the session with AAD.
+app.get('/api/logout', function(req, res){
+  req.session.destroy(function(err) {
+    req.logOut();
+    res.redirect(config.destroySessionUrl);
+  });
+});
+
+function ensureAuthenticated(req, res, next) {
+  console.log("ensureAuthenticated req session: ", req.session);
+  console.log("isAuthenticated:", req.isAuthenticated());
+
+  if (req.isAuthenticated()) { return next(); }
+  req.session.save(()=> {res.redirect('/login');});
+};
+
+app.get('/api/azure-user', ensureAuthenticated, function(req, res){
+  console.log("req session: ", req.session);
+  
+  res.status(200).send({user: req.user});
+});
+
+app.post('/api/azure-user/updateCase', ensureAuthenticated, UserController.updateCase);
+
+app.delete('/api/azure-user/:caseId', ensureAuthenticated, UserController.deleteCase);
+
+app.post('/api/azure-user/updateChecklist', ensureAuthenticated, UserController.updateChecklist);
+
+app.get('/api/azure-user/:caseId', ensureAuthenticated, UserController.getChecklist);
+
+app.post('/api/azure-user/updateProfile', ensureAuthenticated, UserController.updateProfile);
 };

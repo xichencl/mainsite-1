@@ -11,7 +11,9 @@ GUARDIANSHIP = require('../constants').GUARDIANSHIP,
 FAMILY_LAW = require('../constants').FAMILY_LAW, 
 EVICTION = require('../constants').EVICTION, 
 DOMESTIC_VIOLENCE = require('../constants').DOMESTIC_VIOLENCE, 
-TRAFFIC = require('../constants').TRAFFIC;
+TRAFFIC = require('../constants').TRAFFIC,
+AZURE = require('../constants').AZURE,
+LOCAL = require('../constants').LOCAL;
 
 const Schema = mongoose.Schema;
 
@@ -19,7 +21,10 @@ const Schema = mongoose.Schema;
 // Case Schema
 //= ===============================
 const CaseSchema = new Schema({
-  isPlaintiff: String,
+  isPlaintiff: {
+    type: String,
+    // required: true
+  },
   caseNumber: {
     type: String,
   },
@@ -49,7 +54,11 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: [() => {return this.authType ? true : false}]
+  },
+  authType: {
+    type: String,
+    enum: [ AZURE ],
   },
   profile: {
     firstName: { 
@@ -59,6 +68,9 @@ const UserSchema = new Schema({
     lastName: { 
       type: String,
       required: true
+    },
+    middleName: {
+      type: String
     },
     address: {type: String},
     phone: {type: String},

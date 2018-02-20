@@ -1,4 +1,4 @@
-const loading = (state = false, action) => {
+const loading = (state = true, action) => {
 	switch (action.type) {
 	case 'GET_TODO_DATA':
 		return true
@@ -6,6 +6,8 @@ const loading = (state = false, action) => {
 		return false
 	case 'GET_TODO_DATA_ERROR':
 		return false
+	case 'FETCH_USER_RECEIVED':
+		return false	
 	default:
 		return state
 	}

@@ -14,8 +14,8 @@ export default class MyCasesDashboard extends Component {
   }
 
   render() {
-    // console.log("CaseData props: ", this.props);
-    // console.log("CaseData state:", this.state);
+    console.log("CaseData: ", this.props.location.state.caseData);
+    // console.log("caseData state:", this.state);
     return (
       <div>
 
@@ -27,7 +27,11 @@ export default class MyCasesDashboard extends Component {
           </div> 
       	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
 					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
-          <Link to={{pathname:'/checklist', state:{caseId:this.props.location.state.caseData._id, caseType:this.props.location.state.caseData.caseType}}}>
+          <Link to={{pathname:'/checklist', state:{
+                                                    caseId:this.props.location.state.caseData._id, 
+                                                    caseType:this.props.location.state.caseData.caseType,
+                                                    party: this.props.location.state.caseData.isPlaintiff 
+          }}}>
             <SquareBoxStatic 
               boxTitle="Create a Checklist"
               imgSrc={ChecklistIcon}

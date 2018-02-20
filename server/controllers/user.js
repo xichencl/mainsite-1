@@ -25,7 +25,7 @@ exports.viewProfile = function (req, res, next) {
 };
 
 exports.updateProfile = function (req, res, next){
-  const userId = req.params.userId;
+  const userId = req.params.userId || req.session.passport.user;
   console.log("Req body:", req.body);
   const address = req.body.address;
   const phone = req.body.phone;
@@ -55,11 +55,11 @@ exports.updateProfile = function (req, res, next){
 
 exports.updateCase = function (req, res, next) {
   // console.log("post req body:", req.body);
-  const isPlaintiff = req.body.isPlaintiff;
+  const isPlaintiff = req.body.party;
   const caseNumber = req.body.caseNumber;
   const caseType = req.body.caseType;
-  const userId = req.params.userId;
-  const caseId = req.body._id ? req.body._id : '';
+  const userId = req.params.userId || req.session.passport.user;
+  const caseId = req.body._id || '';
   // const caseId = req.body.caseId;
   // const steps = req.body.steps;
 
@@ -96,7 +96,7 @@ exports.updateCase = function (req, res, next) {
 
 exports.updateChecklist = function (req, res, next) {
   console.log("update Checklist");
-  const userId = req.params.userId;
+  const userId = req.params.userId || req.session.passport.user;
   const caseId = req.body.caseId;
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
@@ -131,7 +131,7 @@ exports.updateChecklist = function (req, res, next) {
 
 exports.getChecklist = function (req, res, next) {
   console.log("get checklist");
-  const userId = req.params.userId;
+  const userId = req.params.userId || req.session.passport.user;
   const caseId = req.params.caseId;
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
@@ -153,15 +153,22 @@ exports.getChecklist = function (req, res, next) {
 
 exports.deleteCase = function (req, res, next) {
   console.log("delete case");
-  const userId = req.params.userId; 
+  const userId = req.params.userId || req.session.passport.user; 
   const caseId = req.params.caseId;
+  console.log("caseId: ", caseId);
   if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
   User.findById(userId, (err, user) => {
     if (err) {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       return next(err);
     }
-    user.cases.id(caseId).remove();
+    
+  /*alternative to using user.cases.id(caseId).remove(). conditional $pull not supported in cosmos db*/
+    //find index of case in array
+    const caseIndex = user.cases.forEach((eachCase, i) => { if (eachCase._id == caseId) return i; } ) ;
+    //remove case from array 
+    user.cases.splice(caseIndex, 1);
+
     user.save(function(err, user){
       if (err) {
         res.status(400).json({ error: 'Case cannot be removed.' });

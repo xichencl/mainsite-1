@@ -14,7 +14,7 @@ import promise from 'redux-promise'
 
 // import ReactGA from 'react-ga';
 
-import { AUTH_USER } from './actions/types';
+import { AUTH_LOCAL_USER } from './actions/types';
 // import { FETCH_USER } from './actions/types';
 
 // Import stylesheets
@@ -26,6 +26,12 @@ import './public/stylesheets/app.scss';
 // function logPageView() {
 //   ReactGA.pageview(window.location.pathname);
 // }
+
+//grabe preloaded state from global var injected into server-generated html
+const preloadedState = window.__PRELOADED_STATE__;
+delete window.__PRELOADED_STATE__;
+
+console.log("preloadedState: ", preloadedState);
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
@@ -40,12 +46,12 @@ const token = cookie.load('token');
 if (token) {
   // Update application state. User has token and is probably authenticated
   store.dispatch({
-    type: AUTH_USER,
+    type: AUTH_LOCAL_USER,
   });
 }
 
 // experiment with theme-change
-const themes = [];
+// const themes = [];
 
 ReactDOM.render(
   <Provider store={store}>
