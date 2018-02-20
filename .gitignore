@@ -1,5 +1,6 @@
-.DS_Store
 node_modules
 .env
-iisnode
-bundle
+server/secret.env
+server/iisnode
+client/bundle
+*.log
