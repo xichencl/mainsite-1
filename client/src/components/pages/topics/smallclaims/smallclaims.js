@@ -72,7 +72,7 @@ class SmallClaims extends Component {
   componentWillMount() {
     this.props.fetchParties()
     // this.props.fetchFaqs()
-    this.props.fetchResourceLinks()
+    // this.props.fetchResourceLinks()
   }
 
 
@@ -143,7 +143,7 @@ class SmallClaims extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.all };
+  return { content: state.content.parties };
 }
 
 export default connect(mapStateToProps, { fetchParties })(SmallClaims);
