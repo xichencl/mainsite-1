@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStages } from '../../../../actions/content.js';
+import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
@@ -64,8 +65,8 @@ class SmallClaimsParty extends Component {
       console.log("false", this.state)
       const renderedButtons = this.props.content.map((stage, index) => {
       	return (
-      	<div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-      		<SquareBox
+      	<div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+          <SquareBox
       			id={stage.sys.id}
             boxTitle={stage.fields.title}
       			assetId={stage.fields.image.sys.id}
@@ -75,7 +76,7 @@ class SmallClaimsParty extends Component {
   		})
 
       return [
-      	<div>{renderedButtons}</div>
+      	<div className="grid grid-pad">{renderedButtons}</div> 
       ];
     } else {
     	console.log("true", this.state)
@@ -119,11 +120,7 @@ class SmallClaimsParty extends Component {
 		return (
   		<div>
         <Bot />
-  			<div className="mainpage-title">
-          <hr className="mainpage-title-line" />
-          <h1>Small Claims</h1>
-          <hr className="mainpage-title-line"/>
-        </div>
+  			<TitleLine title="Small Claims" />
         <div className="grid grid-pad">
         	{/*<Link to="checklist">*/}
             <TextIconBox 

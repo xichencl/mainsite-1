@@ -191,17 +191,6 @@ class NewCase extends Component{
 
           <div className="case-form-group select select-party">
     				<label>Party (select one)</label>
-{/*<< HEAD
-    				<div className="row">
-    				  <div className="col-md-6">
-                <label>
-                <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />Plaintiff</label>
-        			</div>
-              <div className="col-md-6">
-                <label>
-                <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>Defendant</label>
-    				  </div>
-=====*/}
     				<div className="radio-row">
                 <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />
                 <p>Plaintiff</p>

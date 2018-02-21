@@ -5,7 +5,7 @@ import { fetchCategories } from '../../actions/content.js';
 import Squarebox from '../template/square-box';
 import Asset from '../template/responsive-image';
 import client from '../../services/contentful-client'
-
+import TitleLine from '../template/title-line';
 /* Testing integration with Contentful CMS */ 
 class HomePage extends React.Component {
   componentWillMount() {
@@ -26,7 +26,7 @@ class HomePage extends React.Component {
   renderCategories() {
     return this.props.content.map((unit, index) => {
       return (
-        <div key={unit.sys.id}>
+        <div className="Square-box-container" key={unit.sys.id}>
           <Link to={unit.fields.url}>
             <Squarebox 
               id={unit.sys.id}
@@ -42,11 +42,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="mainpage">
-        <div className="mainpage-title">
-          <hr className="mainpage-title-line" />
-          <h1>Self-Help Law Center</h1>
-          <hr className="mainpage-title-line"/>
-        </div>
+        <TitleLine title="Self-Help Law Center" />
         <div className="grid grid-pad">
           {this.renderCategories()}
         </div>
