@@ -73,7 +73,7 @@ class Portal extends Component {
         </div>,
         // ============================
         
-        <div key={`${5}search`}>
+        <div className="Square-box-container" key={`${5}search`}>
           
           <Link to='find-a-case'>
             <SquareBoxStatic
@@ -89,14 +89,14 @@ class Portal extends Component {
     } else {
       return [
         // Unauthenticated navigation
-        <div key={1}>
+        <div className="Square-box-container" key={1}>
           <Link to="login">
             <SquareBoxStatic
               boxTitle='Login / Sign Up'
               imgSrc={LoginIcon} />
           </Link>
         </div>,
-        <div key={2}>
+        <div className="Square-box-container" key={2}>
           <Link to="find-a-case">
             <SquareBoxStatic 
               boxTitle='Find a Case'

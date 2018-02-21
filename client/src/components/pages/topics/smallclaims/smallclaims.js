@@ -105,7 +105,7 @@ class SmallClaims extends Component {
   renderParties() {
     return this.props.content.map((party, index) => {
       return (
-        <div key={party.sys.id}>
+        <div className="Square-box-container" key={party.sys.id}>
           <Link to={`/smallclaims/${party.fields.url}`}>
             <Squarebox 
               id={party.sys.id}

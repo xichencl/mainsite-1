@@ -26,7 +26,7 @@ class HomePage extends React.Component {
   renderCategories() {
     return this.props.content.map((unit, index) => {
       return (
-        <div key={unit.sys.id}>
+        <div className="Square-box-container" key={unit.sys.id}>
           <Link to={unit.fields.url}>
             <Squarebox 
               id={unit.sys.id}
