@@ -14,25 +14,43 @@
   margin-left: 4px;
 }
 
-.open-bot-icon {
-  position: fixed;
+.open-bot-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  
+  background-color: $bot-blue;
   cursor: pointer;
-  color: $bot-blue;
-  //***
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  text-align: center;  
+
+  position: fixed;
+
   @include xxs {
-    left: 311px;
+    right: 2rem;
+    top: 6rem;
   }
   @include mobile {
     display: none;
   }
 }
+
+.open-bot-icon {
+  margin-top: 12px;
+  color: #ffffff;
+
+  //***
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // -webkit-box-pack: end;
+  // -ms-flex-pack: end;
+  // justify-content: flex-end;
+ 
+}
+
+
 
 /* icon displays for mobile views <600 and links to mbot route */
 .open-bot-icon-m {
@@ -47,7 +65,8 @@
   -ms-flex-pack: end;
   justify-content: flex-end;
   @include xxs {
-    left: 311px;
+    right: 2rem;
+    top: 2rem
   }
 }
 
@@ -152,10 +171,11 @@ button.refresh-bot:active {
 
 //********************************** MEDIA QUERIES **********************************//
 @media (max-width: 2000px) and (min-width: 1025px) {
-  .open-bot-icon {
+  .open-bot-icon-circle {
     position: fixed;
-    left: 55em;
-    top: 2.9em;
+    right: 4rem;
+    // top: 2.9em;
+    top: 18rem;
   }
 }
 //hides mobile chat icon until <600

@@ -5,7 +5,7 @@ import ChatContainer from './ChatContainer.jsx';
 import CloseBot from './CloseBot.jsx';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { ChatbotIcon } from '../../img/icn_chatbot.svg';
 
 const BotBox = ({ visible }) =>
   <div id="bot" className={visible ? 'slideIn' : 'slideOut'}>
@@ -14,8 +14,9 @@ const BotBox = ({ visible }) =>
 
 const SpeechBubble = props =>
   <div>
-    <div className="open-bot-icon">
-      <i className="material-icons md-48">chat_bubble</i>
+    <div className="open-bot-icon-circle">
+{/*      <img src={props.imgSrc} alt="open chatbot icon"/>
+*/}      <div className="open-bot-icon"><i className="material-icons md-36">chat_bubble</i></div>
     </div>
     {/* dont delete. might need if we decide to add to text menu
       <div className="text-bot-icon">
@@ -25,7 +26,8 @@ const SpeechBubble = props =>
 
 const MobileSpeechBubble = props =>
   <div className="open-bot-icon-m">
-    <i className="material-icons md-36">chat_bubble</i>
+{/*    <img src={ChatbotIcon} alt="open chatbot icon"/>
+*/}    <i className="material-icons md-36">chat_bubble</i>
   </div>;
 
 class OpenBot extends React.Component {
@@ -73,13 +75,13 @@ class OpenBot extends React.Component {
   render() {
     return (
       // wrapper completely hides bot until chat icon is clicked
-      <div id="wrapper" ref={el => (this.wrapperRef=el)} onTouchStart={(e)=>this.handleTouchStart(e)} onTouchMove={(e)=>this.handleTouchMove(e)} onTouchEnd={(e)=>this.handleTouchEnd(e)}>
+      <div id="wrapper" className={this.props.visible ? 'bot-is-open' : 'bot-is-closed'} ref={el => (this.wrapperRef=el)} onTouchStart={(e) => this.handleTouchStart(e)} onTouchMove={(e) => this.handleTouchMove(e)} onTouchEnd={(e) => this.handleTouchEnd(e)}>
         <div className="chat-icon" onClick={this.props.onClick.bind(this)} >
           {this.props.visible
             ? <CloseBot
               handleClickOutside={event => this.props.handleClickOutside(event, this.wrapperRef)}
             />
-            : <SpeechBubble />}
+            : <SpeechBubble imgSrc={ChatbotIcon}/>}
         </div>
         <Link to="mbot">
           <MobileSpeechBubble />
