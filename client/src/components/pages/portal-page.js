@@ -7,6 +7,8 @@ import ViewProfile from '../profile/view-profile';
 import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
+import TitleLine from '../template/title-line';
+
 // import ViewTodo from '../todo/view-todo';
 import { API_URL, fetchUser, fetchAzureUser } from '../../actions/index';
 // import axios from 'axios';
@@ -108,7 +110,7 @@ class Portal extends Component {
   render() {
     return (
       <div>
-        <h1>My Portal</h1>
+        <TitleLine title="My Portal" />
         <div className='grid grid-pad'>
             {this.renderLinks()}
         </div>

@@ -13,31 +13,61 @@ $yellow-highlight: #f9d04e;
 $grey-background: #f5f5f5;
 $red-warning: #FE856B;
 
-
-.mainpage-title {
-	display: flex;
+h1 {
 	text-align: center;
-	align-items: space-between;
-	h1 {
-		margin-left: 2rem;
-		margin-right: 2rem;
-	}
 }
 
-.mainpage-title-line {
-	border: 3px solid $dark-grey;
-	width: 15%;
-	margin-top: 4rem;
+h1.title-line-background {
+    position: relative;
+    overflow: hidden;
+    
+    span {
+        display: inline-block;
+        vertical-align: baseline;
+        zoom: 1;
+        *display: inline;
+        *vertical-align: auto;
+        position: relative;
+        padding: 0 20px;
+
+        &:before, &:after {
+            content: '';
+            display: block;
+            width: 1000px;
+            position: absolute;
+            top: 0.73em;
+            border-top: 5px solid $dark-grey;
+        }
+
+        &:before { right: 100%; }
+        &:after { left: 100%; }
+    }
 }
 
-.topic-title {
+// .mainpage-title {
+// 	display: flex;
+// 	text-align: center;
+// 	align-items: space-between;
+// 	h1 {
+// 		margin-left: 2rem;
+// 		margin-right: 2rem;
+// 	}
+// }
 
-}
+// .mainpage-title-line {
+// 	border: 3px solid $dark-grey;
+// 	width: 15%;
+// 	margin-top: 4rem;
+// }
 
-.topic-title:hover {
-	cursor: pointer;
-	color: $grey-text;
-}
+// .topic-title {
+
+// }
+
+// .topic-title:hover {
+// 	cursor: pointer;
+// 	color: $grey-text;
+// }
 
 .warning {
 	background-color: $red-warning;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TitleLine from '../../../template/title-line';
 // import Squarebox from '../../template/square-box';
 // import Bannerbox from '../../template/banner-box';
 // import Infobox from '../../template/info-box';
@@ -141,11 +142,7 @@ class SmallClaims extends Component {
           {/* Bot temporarily lives only in Small Claims until all case types are functional in bot */}
           <Bot />
           <div className="Topic">
-            <div className="mainpage-title">
-              <hr className="mainpage-title-line" />
-              <h1>Small Claims</h1>
-              <hr className="mainpage-title-line"/>
-            </div> 
+            <TitleLine title="Small Claims" />
             <div className="grid grid-pad">
               {this.renderParties()}
               <Infobox 
