@@ -11,7 +11,10 @@ const opn = require('opn');
 let ai, caseType;
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
-ai = apiai('1e399876a4544a4ba6f941e320b43ef7');
+//TEST_SmallClaims
+// ai = apiai('1e399876a4544a4ba6f941e320b43ef7');
+//Courntey_SmallClaims
+ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){

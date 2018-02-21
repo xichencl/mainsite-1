@@ -3,10 +3,34 @@
 const defaultState = [
   {
     message:
-      "Hello, I'm Courtney! I can help you learn more about the small claims process. Remember, I am not here to give legal advice, but information about the legal process. Try ask me a question.",
+      "Hello, I'm Courtney!",
     type: 'message',
     isBot: true
   },
+  {
+    message:
+      "I'm here to help you learn about the small claims process. I DO NOT offer legal advice. Ask me a question or click on a button to begin.",
+    type: 'message',
+    isBot: true
+  },
+  {
+    message: "What is small claims court?",
+    type:'button',
+    isBot: true
+  },
+  {
+    message: "Claim Limit",
+    type:'button',
+    isBot: true
+  },
+  {
+    message: "Types of Cases Heard",
+    type:'button',
+    isBot: true
+  }
+  
+
+
   // {
     // message: 'Tell briefly what brought you here.',
     // type: 'message',
