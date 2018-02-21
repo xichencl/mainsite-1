@@ -62,7 +62,8 @@ class SmallClaimsStage extends Component {
             {renderStages()}  
           </div>
 
-      </div>
+        </div>
+
     )
   } 
 }

@@ -3,4 +3,6 @@ node_modules
 server/secret.env
 server/iisnode
 client/bundle
+client/.DS_Store
+.DS_Store
 *.log
