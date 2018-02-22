@@ -1,8 +1,10 @@
 //styling user speech bubble, bot speech bubble, and clickable bot buttons
-
 .button-blue {
-  color: #849da3;
-  background-color: #b8e2ec;
+  // color: #849da3;
+  color: $not-black;
+  border: 5px solid $bot-blue;
+  // background-color: #b8e2ec;
+  background-color: white;
   padding-top: 20px;
   padding-bottom: 20px;
   height: 22px; /*overwritten by .chat-button's height: 0px, which is necessary to work in moz*/
@@ -18,7 +20,9 @@
 }
 
 .button-blue:active {
-  background-color: $very-light-blue;
+  // background-color: $very-light-blue;
+  background-color: white;
+  border: 5px solid $bot-blue;
   color: $not-black;
   height: 0px;
 }
@@ -28,11 +32,18 @@
   background-color: $bot-blue;
   min-width: 5em;
   padding: 20px 27px 20px 20px;
-  margin-right: auto; /*left adjusts bubble*/
+  //margin-right: auto; /*left adjusts bubble*/
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 45px 45px 45px 0px;
+  a {
+    color: $bot-link;
+  }
+  a:hover {
+    color: black;
+  }
 }
+
 
 .bot-buttons {
   width: 11em;

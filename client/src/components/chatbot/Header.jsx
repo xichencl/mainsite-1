@@ -29,18 +29,17 @@ class Header extends React.Component {
             {this.props.ai.caseType}
           </div> */}
 
-          <button id="email">email</button>
+            <button id="email" className="button-chatbot-email">email</button>
 
             <button
               type="button"
               id="refresh-button"
               className="refresh-bot"
               onClick={this.props.onClick.bind(this)}
-            >
-              <i className="material-icons" style={{ fontSize: '2.5em' }}>
-                refresh
-              </i>
+              >
+              <i className="material-icons" style={{ fontSize: '2.5em' }}>refresh</i>
             </button>
+            
           </div>
         </div>
       </div>

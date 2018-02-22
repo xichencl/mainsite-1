@@ -25,9 +25,9 @@ const SpeechBubble = props =>
   </div>;
 
 const MobileSpeechBubble = props =>
-  <div className="open-bot-icon-m">
+  <div className="open-bot-icon-m-circle">
 {/*    <img src={ChatbotIcon} alt="open chatbot icon"/>
-*/}    <i className="material-icons md-36">chat_bubble</i>
+*/}    <div className="open-bot-icon-m"><i className="material-icons md-36">chat_bubble</i></div>
   </div>;
 
 class OpenBot extends React.Component {
