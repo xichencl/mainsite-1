@@ -375,6 +375,12 @@ button:hover {
 
 .Info-box {
   background-color: $grey-background;
+
+  // display: inline-block;
+  position: relative;
+  // margin: 1rem 0 1rem 0;
+  margin: 1rem;
+
   // display: block;
   width: 100%;
   // padding: 2rem;
@@ -386,14 +392,15 @@ button:hover {
   // @include md {
   //   width: 66%;
   // }
-  padding: 1rem;
+
+  padding: 2rem;
 
 }
 
 .Info-box-btn {
   position: absolute;
-  right: 2rem;
   bottom: 1.5rem;
+  left: 75%;
 }
 
 .Text-icon-box {
@@ -426,7 +433,7 @@ button:hover {
 
 .small-box {
   width: 100%;
-  margin-right: 3%;
+  // margin-right: 3%;
   @include sm {
     width: 30%;
   }
