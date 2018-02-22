@@ -25,7 +25,7 @@
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
   
-  background-color: $blue-accent;
+  background-color: $bot-blue-icon;
   cursor: pointer;
   // text-align: center;  
 
@@ -41,7 +41,7 @@
 }
 
 .open-bot-icon-circle:hover {
-  background-color: $bot-blue-pressed;
+  background-color: $bot-blue-icon-pressed;
   .open-bot-icon {
     color: $light-grey;
   }
@@ -81,7 +81,7 @@
   text-align: center;  
   position: fixed;
   cursor: pointer;
-  background-color: $blue-accent;
+  background-color: $bot-blue-icon;
   right: 2rem;
   top: 2rem;
   
