@@ -17,9 +17,12 @@ $white-background: #ffffff;
 $box-height: 225px;
 $box-img-height: 160px;
 $box-img-width: 180px;
+$footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
+$footer-push-height-negative: -20rem;
 
 html {
   font-size: 10px;
+  height: 100%;
 
   @include lg {
     font-size: 12px;
@@ -36,6 +39,8 @@ body {
 }
 
 .App {
+  min-height: 100vh;
+
   font-size: 1.5rem;
   padding: 2rem;
 
@@ -45,6 +50,9 @@ body {
 
   @include md {
     padding: 4rem;
+  }
+  .App-footer-push {
+    height: $footer-push-height;
   }
 }
 
@@ -94,6 +102,12 @@ button:hover {
   background: $blue-button-pressed;
 }
 
+hr {
+  border: 0;
+  border-top: 1px solid $dark-grey;
+  margin: 1rem 0;
+}
+
 .hidden {
   display: none;
 }
@@ -116,10 +130,10 @@ button:hover {
 }
 
 .Menu {
-  align-items: center;
-  display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  // align-items: center;
+  // display: -webkit-box;
+  //   display: -ms-flexbox;
+  //   display: flex;
   margin-top: 2rem;
   padding-bottom: 2rem;
   z-index: 1000;
@@ -135,16 +149,14 @@ button:hover {
 
 .Menu-logo {
   margin-right: 2rem;
-  width: 6rem;
-  // background-image: url('../../../../img/ccsc-logo-sm.svg');
+  width: 13rem;
   .Menu-logo-img {
     display: none;
-    // background-image: url('../../../img/ccsc-logo.svg');
   }
 
   @include lg {
     left: 0;
-    padding: 4rem 0 4rem 4rem;
+    padding: 3.25rem 0 4rem 4rem;
     position: fixed;
     top: 0;
     width: 19rem;
@@ -154,6 +166,7 @@ button:hover {
     }
     .Menu-logo-img {
       display: block;
+
     }
   }
 }
@@ -217,6 +230,8 @@ button:hover {
     margin: 8rem 0 0 20rem;
   }
 }
+
+
 
 // ==========================
 // ====== box stylings ======
@@ -454,11 +469,12 @@ button:hover {
   left: 0;
   background-color: $dark-grey;
   width: 100%;
+  height: $footer-push-height;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex; // somehow display:flex removes p margin whitespace at bottom
   color: $white;
-  margin-top: 5rem;
+  // margin-top: 5rem;
   a {
     color: $white;
     text-decoration: none;
@@ -475,33 +491,28 @@ button:hover {
 // ==========================
 // ==== default stylings ====
 // ==========================
-hr {
-  border: 0;
-  border-top: 1px solid $black;
-  margin: 1rem 0;
-}
 
-.Example {
-  background: #f6f8fa;
-  border-radius: 0.4rem;
-  padding: 2rem;
-}
+// .Example {
+//   background: #f6f8fa;
+//   border-radius: 0.4rem;
+//   padding: 2rem;
+// }
 
-.Example .Icon {
-  margin-right: 10px;
-}
+// .Example .Icon {
+//   margin-right: 10px;
+// }
 
-.BackgroundImgExample {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 16rem;
-  max-width: 25rem;
-}
+// .BackgroundImgExample {
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   height: 16rem;
+//   max-width: 25rem;
+// }
 
-.ImgExample {
-  max-width: 25rem;
-}
+// .ImgExample {
+//   max-width: 25rem;
+// }
 
 // ==========================
 // ====== GRID ==============
@@ -525,12 +536,13 @@ hr {
   // background: white;
   // margin: 0 0 20px 0;
 }
-.grid:after {
+
+// .grid:after {
   /* Or @extend clearfix */
   // content: "";
   // display: table;
   // clear: both;
-}
+// }
 
 // [class*='col-'] {
 //   float: left;
@@ -560,22 +572,16 @@ hr {
 //   width: 12.5%;
 // }
 
-.module {
-  // padding: 2rem;
-}
+// .module {
+//   padding: 2rem;
+// }
 
-.grid-pad {
-  // padding: 20px 0 20px 20px;
-}
-.grid-pad [class*='col-']:last-of-type {
-  // padding-right: 20px;
-}
+// .grid-pad {
+//   padding: 20px 0 20px 20px;
+// }
+// .grid-pad [class*='col-']:last-of-type {
+//   padding-right: 20px;
+// }
 
 /////////////
-.Login,
-.Register {
-  input {
-    margin-bottom: 1.5rem;
-    width: 50%;
-  }
-}
+
