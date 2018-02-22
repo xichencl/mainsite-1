@@ -7,6 +7,7 @@ import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
 // import SquareBox from '../template/square-box';
 import SquareBoxStatic from '../template/square-box-static';
 import ChecklistIcon from '../../img/checklist_1.svg';
+import TitleLine from '../template/title-line';
 
 export default class MyCasesDashboard extends Component {
   componentDidMount() {
@@ -16,32 +17,38 @@ export default class MyCasesDashboard extends Component {
   render() {
     console.log("CaseData: ", this.props.location.state.caseData);
     // console.log("caseData state:", this.state);
+    const myCaseTitle = this.props.location.state.caseData.caseNumber
     return (
       <div>
 
-      	<div className='dashboard-wrapper'>
-          <div className="mainpage-title">
+      	<div className='dashboard-wrapper grid grid-pad'>
+          {/*<div className="mainpage-title">
             <hr className="mainpage-title-line" />
       	    <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
             <hr className="mainpage-title-line" />
-          </div> 
+          </div> */}
+          <TitleLine title={myCaseTitle} />
       	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
 					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
-          <Link to={{pathname:'/checklist', state:{
-                                                    caseId:this.props.location.state.caseData._id, 
-                                                    caseType:this.props.location.state.caseData.caseType,
-                                                    party: this.props.location.state.caseData.isPlaintiff 
-          }}}>
-            <SquareBoxStatic 
-              boxTitle="Create a Checklist"
-              imgSrc={ChecklistIcon}
+          <Link to={{
+            pathname:'/checklist', 
+            state:{
+                    caseId:this.props.location.state.caseData._id, 
+                    caseType:this.props.location.state.caseData.caseType,
+                    party: this.props.location.state.caseData.isPlaintiff 
+                  }
+          }}>
+            
+              <SquareBoxStatic 
+                boxTitle="Create a Checklist"
+                imgSrc={ChecklistIcon}
               />
+          
           </Link>
-      		<div className='sidebar-wrapper'>
 
-        		</div>
-        		
-        		<MyFormsLarge className='dashboard-inner forms-wrapper' />
+      		<div className='sidebar-wrapper'></div>
+        	<MyFormsLarge className='dashboard-inner forms-wrapper' />
+
       	</div>
       </div>
     );

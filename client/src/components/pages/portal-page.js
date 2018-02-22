@@ -7,6 +7,8 @@ import ViewProfile from '../profile/view-profile';
 import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
+import TitleLine from '../template/title-line';
+
 // import ViewTodo from '../todo/view-todo';
 import { API_URL, fetchUser, fetchAzureUser } from '../../actions/index';
 // import axios from 'axios';
@@ -71,7 +73,7 @@ class Portal extends Component {
         </div>,
         // ============================
         
-        <div key={`${5}search`}>
+        <div className="Square-box-container" key={`${5}search`}>
           
           <Link to='find-a-case'>
             <SquareBoxStatic
@@ -87,14 +89,14 @@ class Portal extends Component {
     } else {
       return [
         // Unauthenticated navigation
-        <div key={1}>
+        <div className="Square-box-container" key={1}>
           <Link to="login">
             <SquareBoxStatic
               boxTitle='Login / Sign Up'
               imgSrc={LoginIcon} />
           </Link>
         </div>,
-        <div key={2}>
+        <div className="Square-box-container" key={2}>
           <Link to="find-a-case">
             <SquareBoxStatic 
               boxTitle='Find a Case'
@@ -108,7 +110,7 @@ class Portal extends Component {
   render() {
     return (
       <div>
-        <h1>My Portal</h1>
+        <TitleLine title="My Portal" />
         <div className='grid grid-pad'>
             {this.renderLinks()}
         </div>
