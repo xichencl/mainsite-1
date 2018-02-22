@@ -14,40 +14,72 @@
   margin-left: 4px;
 }
 
-.open-bot-icon {
-  position: fixed;
+.open-bot-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  
+  background-color: $bot-blue;
   cursor: pointer;
-  color: $bot-blue;
-  //***
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  text-align: center;  
+
+  position: fixed;
+
   @include xxs {
-    left: 311px;
+    right: 2rem;
+    top: 2rem;
   }
   @include mobile {
     display: none;
   }
 }
 
+.open-bot-icon-circle:hover {
+  background-color: $bot-blue-pressed;
+  .open-bot-icon {
+    color: $light-grey;
+  }
+}
+
+
+.open-bot-icon, .open-bot-icon-m {
+  margin-top: 12px;
+  color: #ffffff;
+
+  //***
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // -webkit-box-pack: end;
+  // -ms-flex-pack: end;
+  // justify-content: flex-end;
+ 
+}
+
+
+
 /* icon displays for mobile views <600 and links to mbot route */
-.open-bot-icon-m {
+.open-bot-icon-m-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  text-align: center;  
   position: fixed;
   cursor: pointer;
   color: red;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // -webkit-box-pack: end;
+  // -ms-flex-pack: end;
+  // justify-content: flex-end;
   @include xxs {
-    left: 311px;
+    right: 2rem;
+    top: 2rem
   }
 }
 
@@ -68,6 +100,7 @@
   height: 3em;
   @include flex-center(space-between, center);
   padding: .5em;
+  display: flex;
 }
 
 /* close button */
@@ -78,10 +111,11 @@ button.close-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  bottom: .4em;
+  font-size: 36px;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // bottom: .4em;
 }
 
 /* refresh button */
@@ -91,38 +125,48 @@ button.refresh-bot {
   padding: 0;
   border: none;
   color: $icon-grey;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+}
+
+button.button-chatbot-email {
+  background-color: $icon-grey;
 }
 
 button.refresh-bot:hover,
 button.close-bot:hover {
-  color: $not-white;
+  // color: $warm-grey;
   outline: 0;
   padding: 0;
   border: none;
-  -webkit-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  transition: 0.2s;
+  // -webkit-transition-duration: 0.2s;
+  // -o-transition-duration: 0.2s;
+  // transition-duration: 0.2s;
+  // transition: 0.2s;
+}
+
+button.button-chatbot-email:hover {
+  // background-color: $warm-grey;
 }
 
 button.refresh-bot:active {
-  color: $very-light-blue;
+  color: $warm-grey;
   outline: 0;
   padding: 0;
-  -webkit-transition-duration: 0s;
-  -o-transition-duration: 0s;
-  transition-duration: 0s;
-  transition: 0s;
-  transition: 0s;
+  // -webkit-transition-duration: 0s;
+  // -o-transition-duration: 0s;
+  // transition-duration: 0s;
+  // transition: 0s;
+  // transition: 0s;
 }
+
 
 /* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
-  fill: $icon-grey;
+  // fill: $icon-grey;
+  color: $warm-grey;
   outline: 0;
   padding: 0;
   -webkit-transition-duration: 0.2s;
@@ -132,7 +176,8 @@ button.refresh-bot:active {
 }
 
 .bm-cross-button:hover {
-  fill: $not-white;
+  // color: $warm-grey;
+  // fill: $not-white;
 }
 
 .bm-cross-button {
@@ -151,16 +196,27 @@ button.refresh-bot:active {
 }
 
 //********************************** MEDIA QUERIES **********************************//
-@media (max-width: 2000px) and (min-width: 1025px) {
-  .open-bot-icon {
+@media (max-width: 2000px) and (min-width: 600px) {
+  .open-bot-icon-circle {
     position: fixed;
-    left: 55em;
-    top: 2.9em;
+    right: 4rem;
+    // top: 2.9em;
+    top: 4rem;
   }
 }
+
+// @media (max-width: 2000px) and (min-width: 1025px) {
+//   .open-bot-icon-circle {
+//     position: fixed;
+//     right: 4rem;
+//     // top: 2.9em;
+//     top: 18rem;
+//   }
+// }
+
 //hides mobile chat icon until <600
 @media (min-width: 600px) and (max-width: 2000px) {
-  .open-bot-icon-m {
+  .open-bot-icon-m-circle {
     display: none;
   }
 }
