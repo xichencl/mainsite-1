@@ -4,6 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 // import { CLIENT_ROOT_URL } from '../../actions/index';
 import ccscLogo from '../../img/ccsc-logo.svg';
 import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
+import logoModern from '../../img/logo-modern.svg';
 // import ReactSVG from 'react-svg';
 
 // const path = require('path');
@@ -30,12 +31,12 @@ class Navbar extends Component {
             <img
               alt='Contra Costa Superior Courts logo'
               className='Menu-logo-img'
-              src={ccscLogo}
+              src={logoModern}
             />
             <img
               alt='Contra Costa Superior Courts logo'
               className='Menu-logo-img-sm'
-              src={ccscLogoSm}
+              src={logoModern}
             />
           </NavLink>
           

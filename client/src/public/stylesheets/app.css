@@ -1054,16 +1054,18 @@ button:hover {
 
 .Info-box {
   background-color: #f5f5f5;
+  position: relative;
+  margin: 1rem;
   width: 100%;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1rem; }
+  padding: 2rem; }
 
 .Info-box-btn {
   position: absolute;
-  right: 2rem;
-  bottom: 1.5rem; }
+  bottom: 1.5rem;
+  left: 75%; }
 
 .Text-icon-box {
   width: 66%;
@@ -1084,8 +1086,7 @@ button:hover {
       width: 63%; } }
 
 .small-box {
-  width: 100%;
-  margin-right: 3%; }
+  width: 100%; }
   @media (min-width: 500px) {
     .small-box {
       width: 30%; } }
@@ -1730,7 +1731,7 @@ table th {
   @media (max-width: 320px) {
     .open-bot-icon-circle {
       right: 2rem;
-      top: 6rem; } }
+      top: 2rem; } }
   @media only screen and (max-width: 600px) {
     .open-bot-icon-circle {
       display: none; } }
@@ -1825,13 +1826,9 @@ button.button-chatbot-email {
 
 button.refresh-bot:hover,
 button.close-bot:hover {
-  color: #bcbcbc;
   outline: 0;
   padding: 0;
   border: none; }
-
-button.button-chatbot-email:hover {
-  background-color: #bcbcbc; }
 
 button.refresh-bot:active {
   color: #bcbcbc;
@@ -1848,9 +1845,6 @@ button.refresh-bot:active {
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
   transition: 0.2s; }
-
-.bm-cross-button:hover {
-  color: #bcbcbc; }
 
 .bm-cross-button {
   position: absolute;
@@ -1870,7 +1864,7 @@ button.refresh-bot:active {
   .open-bot-icon-circle {
     position: fixed;
     right: 4rem;
-    top: 18rem; } }
+    top: 4rem; } }
 
 @media (min-width: 600px) and (max-width: 2000px) {
   .open-bot-icon-m-circle {
@@ -2498,9 +2492,6 @@ button.refresh-bot-m:active {
       height: 42px !important;
       right: 6.3em !important;
       top: .9em !important; } }
-
-.bm-cross-button:hover {
-  fill: #404040; }
 
 .lang-modal {
   display: none;
