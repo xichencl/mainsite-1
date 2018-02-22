@@ -184,7 +184,7 @@ const mapDispatchToProps = dispatch => ({
             }
           }
           // console.log('case type: ', response.data.caseType.toLowerCase());
-          dispatch({ type: response.data.caseType });
+          response.data.caseType && dispatch({ type: response.data.caseType });
           // if there's a custom payload attached to api.ai response
           let customPayload;
           if (!response.data.result.fulfillment.data) {

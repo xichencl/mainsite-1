@@ -180,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
             }
           }
           // console.log('case type: ', response.data.caseType.toLowerCase());
-          dispatch({ type: response.data.caseType });
+          response.data.caseType && dispatch({ type: response.data.caseType });
           let customPayload;
           if (!response.data.result.fulfillment.data) {
             const messages = response.data.result.fulfillment.messages;
