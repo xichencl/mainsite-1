@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStages } from '../../../../actions/content.js';
+import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
@@ -37,11 +38,7 @@ class SmallClaimsStage extends Component {
 
     return (
       <div>
-        <div className="mainpage-title">
-          <hr className="mainpage-title-line" />
-          <h1>Small Claims</h1>
-          <hr className="mainpage-title-line"/>
-        </div>
+        <TitleLine title="Small Claims" />
 
           
           {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>

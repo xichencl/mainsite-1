@@ -1,5 +1,6 @@
 import React from "react";
 import matchSorter from 'match-sorter'
+import TitleLine from '../template/title-line';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -44,11 +45,7 @@ export default class FormsHome extends React.Component {
     const { data } = this.state;
     return (
       <div className="Forms-home">
-      	<div className="mainpage-title">
-          <hr className="mainpage-title-line" />
-          <h1>Forms</h1>
-          <hr className="mainpage-title-line"/>
-        </div>
+      	<TitleLine title="Forms" />
 
         <ReactTable
           data={data}
