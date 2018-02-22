@@ -1054,16 +1054,18 @@ button:hover {
 
 .Info-box {
   background-color: #f5f5f5;
+  position: relative;
+  margin: 1rem;
   width: 100%;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1rem; }
+  padding: 2rem; }
 
 .Info-box-btn {
   position: absolute;
-  right: 2rem;
-  bottom: 1.5rem; }
+  bottom: 1.5rem;
+  left: 75%; }
 
 .Text-icon-box {
   width: 66%;
@@ -1084,8 +1086,7 @@ button:hover {
       width: 63%; } }
 
 .small-box {
-  width: 100%;
-  margin-right: 3%; }
+  width: 100%; }
   @media (min-width: 500px) {
     .small-box {
       width: 30%; } }
