@@ -1713,7 +1713,7 @@ table th {
   @media (max-width: 320px) {
     .open-bot-icon-circle {
       right: 2rem;
-      bottom: 2rem; } }
+      top: 2rem; } }
   @media only screen and (max-width: 600px) {
     .open-bot-icon-circle {
       display: none; } }
