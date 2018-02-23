@@ -113,7 +113,7 @@ export default class AppRouter extends Component {
                   <Route path="/reset-password/:resetToken" component={ResetPassword} />
 
                   <Route exact path="/smallclaims" component={SmallClaims} />
-                  <Route path="/smallclaims/:party/" component={SmallClaimsParty} >
+                  <Route exact path="/smallclaims/:party/" component={SmallClaimsParty} >
                     <Route path="/:stage" component={SmallClaimsStage} />
                   </Route>
                   <Route path="/guardianship" component={Guardianship} />

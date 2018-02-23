@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStages } from '../../../../actions/content.js';
+// import { fetchStageContent } from '../../../../actions/content.js';
 import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
@@ -15,23 +15,32 @@ class SmallClaimsStage extends Component {
     super(props)
   }
   componentWillMount() {
-    this.props.fetchStages()
+    // this.props.fetchStageContent()
   }
 
-  renderStages() {
-    return this.props.content.map((stage, index) => {
+  renderMenuLinks() {
+    const renderedLinks = this.props.content.map((stage, index) => {
+      // if (button.id == this.state.stage) {
+      // }
       return (
-        <div key={stage.sys.id}>
-          <Link to={`${this.props.match.url}/${stage.fields.url}`}>
-            <Squarebox 
-              id={stage.sys.id}
-              boxTitle={stage.fields.title}  
-              assetId={stage.fields.image.sys.id}
-            />
-          </Link>
+        <div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+          <a>{stage.fields.title}</a>
         </div>
-      );
-    });
+      )
+    })
+    return [
+      // show selected stage content and menu with stage highlighted 
+      // put this in a separate component, and pass state as props
+      <div>
+        <AccordionBoxContainer />
+        <InfoBox 
+          boxTitle={`Menu - ${this.state.stageTitle}`}
+          boxContent={renderedLinks}
+          buttonVisibilityClass="hidden"
+          infoboxClass="Box Info-box small-box col-2"
+        />
+      </div>
+    ];
   }
 
   render() {
@@ -39,8 +48,6 @@ class SmallClaimsStage extends Component {
     return (
       <div>
         <TitleLine title="Small Claims" />
-
-          
           {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>
           <div className="col-2 Grey-background">menu*/}
             {/*<p>{this.props.match.params.stage}</p>*/}
@@ -48,15 +55,7 @@ class SmallClaimsStage extends Component {
             <Link to={`${this.props.match.url}/during`}>during</Link>
             <Link to={`${this.props.match.url}/after`}>after</Link>*/}
           <div className="grid grid-pad">
-            <AccordionBoxContainer />
-            <InfoBox 
-              boxTitle={`Menu - ${this.state.stageTitle}`}
-              boxContent={renderedLinks}
-              buttonVisibilityClass="hidden"
-              infoboxClass="Box Info-box small-box col-2"
-            />
-          
-            {renderStages()}  
+            {renderMenuLinks()}  
           </div>
 
         </div>
@@ -69,6 +68,7 @@ function mapStateToProps(state) {
   return { content: state.content.all };
 }
 
-export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
+// export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
+export default connect(mapStateToProps)(SmallClaimsStage);
 
 
