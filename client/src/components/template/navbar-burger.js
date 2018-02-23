@@ -1,75 +1,73 @@
 import React, { Component } from 'react';
-import { slide as Menu } from 'react-burger-menu';
 import { NavLink, Link } from 'react-router-dom';
 
-class NavbarBurger extends Component {
+export default class NavbarBurger extends Component {
 	// showSettings(event) {
 	// 	event.preventDefault();
 	// }
 
 	render() {
 		return (
-			<Menu>
-				<div className='Menu-links'>
+			<div className="Menu-burger">
+        {/*this is a hidden checkbox that will receive click*/}
+        <input className="Menu-burger-checkbox" type="checkbox"/>
+        {/*the hamburger part of the menu*/}
+        <span></span>
+        <span></span>
+        <span></span>
+
+				<div className='Menu-links-burger'>
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             exact
             to='/'
           >
             Home
           </NavLink>
           {this.props.azure === 'AZURE'? <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/azure-portal'
           >
             My Portal
           </NavLink> : 
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/portal'
           >
             My Portal
           </NavLink>}
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/forms'
           >
             Forms
           </NavLink>
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/faqs'
           >
             FAQs
           </NavLink>
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/video-resources'
           >
             Video Resources
           </NavLink>
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/locations'
           >
             Find a Courthouse
           </NavLink>
           <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
+            className='Menu-link-burger'
             to='/contact-us'
           >
             Contact
           </NavLink>
         </div>
-			</Menu>
+			</div>
 		)
 	}
 }
