@@ -27,19 +27,25 @@ export default class AccordionBoxContainer extends Component {
 			activeId: id,
 			pressed: !this.state.pressed 
 		});
-		console.log(this.state)
+		console.log(this.state, 'print this.state for toggleClass')
   }
 
+
+
 	render() {
-		const renderedContent = fakeContent.map((content) => {
+		const renderedContent = this.props.stageContent.map((tab) => {
 			return (
-				<div className="Accordion-box-item " key={content.id}>
-					<h3 onClick={() => this.toggleClass(content.id)}>{content.title}<span></span></h3>
-					<div className={this.state.activeId == content.id && this.state.pressed == true ? " ": "hidden"} >{content.text}</div>
+				<div className="Accordion-box-item " key={tab.sys.id}>
+					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.sys.title}<span></span></h3>
+					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"} >{tab.fields.blockText}</div>
 					<hr />
 				</div>
 			)
 		})
+		// const newContent = this.props.stageContent.filter((tab) => {
+  // 		tab.fields.stage.map((item) => item.sys.id == stageId)
+  // 	})
+
 		return (
 			<div className="Box AccordionBoxContainer medium-box">
 				<hr />
@@ -60,3 +66,24 @@ AccordionBoxContainer.propTypes = {
   // onTabClick: PropTypes.func.isRequired,
   // onAccordionClick: PropTypes.func.isRequired,
 }
+
+/* 
+	render() {
+		const renderedContent = this.props.stageContent.map((tab) => {
+			return (
+				<div className="Accordion-box-item " key={tab.sys.id}>
+					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.sys.title}<span></span></h3>
+					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"} >{tab.fields.blockText}</div>
+					<hr />
+				</div>
+			)
+		})
+		return (
+			<div className="Box AccordionBoxContainer medium-box">
+				<hr />
+				{renderedContent}
+			</div>
+		)
+	}
+} 
+*/

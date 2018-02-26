@@ -50,7 +50,7 @@ class SmallClaimsParty extends Component {
   }
 
 	onStageSelect(title, id, e) {
-		console.log(id)
+		console.log(title)
 		e.stopPropagation();
 		this.setState({
 			buttonSelected: true,

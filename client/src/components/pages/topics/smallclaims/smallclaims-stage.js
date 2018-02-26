@@ -8,50 +8,72 @@ import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
-
+import { fetchContent } from '../../../../actions/content.js';
 
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selectedStage: '',
+      stageId: null,
+      currentContent: []
+    }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
+    this.onStageSelect = this.onStageSelect.bind(this);
   }
   componentWillMount() {
-    // this.props.fetchStageContent()
+    this.props.fetchContent('SmallClaims')
+  }
+
+  onStageSelect(title, _id, e) {
+    console.log(title)
+    e.stopPropagation();
+    
+
+    this.setState({
+      stageId: _id, 
+      selectedStage: title 
+    })
   }
 
   renderMenuLinks() {
-    const renderedLinks = this.props.content.map((stage, index) => {
-      // if (button.id == this.state.stage) {
-      // }
+    const renderedLinks = this.props.stage.map((stage, index) => {
       return (
-        <div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-          <a>{stage.fields.title}</a>
-        </div>
-      )
+          <div onClick={(e) => this.onStageSelect(stage.fields.url, stage.sys.id, e)} key={stage.sys.id}>
+            <Link to={stage.fields.url}>{stage.fields.title}</Link>
+          </div>
+        )
     })
+
+  // filterContent(stageId) {
+  //   newContent = this.props.stageContent.filter((tab) => {
+  //     tab.fields.stage.map((item) => item.sys.id == stageId)
+  //   })
+  //   console.log(newContent);
+  //   return {
+  //     newContent
+  //   }
+  // }
+
     return [
-      // show selected stage content and menu with stage highlighted 
-      // put this in a separate component, and pass state as props
-      <div>
-        <AccordionBoxContainer />
-        <InfoBox 
-          boxTitle={`Menu - ${this.props.content.stageTitle}`}
+      <InfoBox 
+          boxTitle={`Menu - ${this.props.match.params.stage}`}
           boxContent={renderedLinks}
           buttonVisibilityClass="hidden"
           infoboxClass="Box Info-box small-box col-2"
-        />
-      </div>
-    ];
+      />
+    ]
   }
-
+  
   render() {
 
     return (
       <div>
         <TitleLine title="Small Claims" />
-        
+
           <div className="grid grid-pad">
-            {this.renderMenuLinks()}  
+            {this.renderMenuLinks()} 
+            <AccordionBoxContainer stageId={this.state.stageId} stageContent={this.props.stageContent} /> 
           </div>
 
         </div>
@@ -61,9 +83,12 @@ class SmallClaimsStage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.stages };
+  return { 
+    stageContent: state.content.tabs,
+    stage: state.content.stages
+   };
 }
-export default connect(mapStateToProps)(SmallClaimsStage);
+export default connect(mapStateToProps, { fetchContent })(SmallClaimsStage);
 
 // export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
 
