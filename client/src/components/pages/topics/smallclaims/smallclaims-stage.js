@@ -10,15 +10,23 @@ import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContent } from '../../../../actions/content.js';
 
+// before ID = 1cMyrIaZ680ukwwSi8YscC;
+// during ID = 5iDqJ92Rzqksq88gYWawE4;
+//  after ID = 4HkTlYlsFqqIgscmGWOCkk;
+
+const selectedStageID = '';
+const filteredTabs = [];
+
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
       selectedStage: '',
-      stageId: null,
-      currentContent: []
+      selectedStageId: null,
+      selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
+    // this.filterTabsByStage = this.filterTabsByStage.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
   }
   componentWillMount() {
@@ -28,13 +36,45 @@ class SmallClaimsStage extends Component {
   onStageSelect(title, _id, e) {
     console.log(title)
     e.stopPropagation();
-    
+    // this.setState({
+    //   selectedStageId: _id, 
+    //   selectedStage: title 
+    // })
+    let newContentAry = []
+    for (let i=0; i>= 0; i++) {
+      let newAry = this.props.stageContent[i].fields
+      for (let j=0; j>=0; j++) {
 
-    this.setState({
-      stageId: _id, 
-      selectedStage: title 
-    })
+        if (_id == newAry.stage[j]) {
+          newContentAry = this.props.stageContent[i]
+          return (
+            this.setState({
+              selectedContent: newContentAry,
+              selectedStageId: _id,
+              selectedStage: title
+            })
+          )
+        }
+      }
+    }
   }
+
+  // getStageIds() {
+  //   this.props.stageContent.map((tab) => {
+  //     const tabFields = tab.fields;
+  //     // console.log(tabFields, "========== tabFields")
+  //     tabFields.stage.map((stage) => {
+  //       stage.sys.id
+  //       // console.log(stage.sys.id, '////////// stage.sys.id')
+  //     })
+  //   })
+
+  // }
+
+  // filterContentById(_id) {
+
+
+  // }
 
   renderMenuLinks() {
     const renderedLinks = this.props.stage.map((stage, index) => {
@@ -73,7 +113,7 @@ class SmallClaimsStage extends Component {
 
           <div className="grid grid-pad">
             {this.renderMenuLinks()} 
-            <AccordionBoxContainer stageId={this.state.stageId} stageContent={this.props.stageContent} /> 
+            <AccordionBoxContainer stageId={this.state.stageId} stageContent={this.state.selectedContent} /> 
           </div>
 
         </div>
