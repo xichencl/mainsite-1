@@ -13,6 +13,7 @@ import AccordionBoxContainer from '../../../template/accordion-box/accordion-box
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
+    this.renderMenuLinks = this.renderMenuLinks.bind(this)
   }
   componentWillMount() {
     // this.props.fetchStageContent()
@@ -34,7 +35,7 @@ class SmallClaimsStage extends Component {
       <div>
         <AccordionBoxContainer />
         <InfoBox 
-          boxTitle={`Menu - ${this.state.stageTitle}`}
+          boxTitle={`Menu - ${this.props.content.stageTitle}`}
           boxContent={renderedLinks}
           buttonVisibilityClass="hidden"
           infoboxClass="Box Info-box small-box col-2"
@@ -48,14 +49,9 @@ class SmallClaimsStage extends Component {
     return (
       <div>
         <TitleLine title="Small Claims" />
-          {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>
-          <div className="col-2 Grey-background">menu*/}
-            {/*<p>{this.props.match.params.stage}</p>*/}
-            {/*<Link to={`${this.props.match.url}/before`}>before</Link>
-            <Link to={`${this.props.match.url}/during`}>during</Link>
-            <Link to={`${this.props.match.url}/after`}>after</Link>*/}
+        
           <div className="grid grid-pad">
-            {renderMenuLinks()}  
+            {this.renderMenuLinks()}  
           </div>
 
         </div>
@@ -65,10 +61,15 @@ class SmallClaimsStage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.all };
+  return { content: state.content.stages };
 }
-
-// export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
 export default connect(mapStateToProps)(SmallClaimsStage);
 
+// export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
 
+          {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>
+          <div className="col-2 Grey-background">menu*/}
+            {/*<p>{this.props.match.params.stage}</p>*/}
+            {/*<Link to={`${this.props.match.url}/before`}>before</Link>
+            <Link to={`${this.props.match.url}/during`}>during</Link>
+            <Link to={`${this.props.match.url}/after`}>after</Link>*/}

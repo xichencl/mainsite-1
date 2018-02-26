@@ -91,7 +91,7 @@ class Navbar extends Component {
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
-            to='/locations'
+            to='/court-locations'
           >
             Find a Courthouse
           </NavLink>
