@@ -10,9 +10,20 @@ import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContent } from '../../../../actions/content.js';
 
-// before ID = 1cMyrIaZ680ukwwSi8YscC;
-// during ID = 5iDqJ92Rzqksq88gYWawE4;
-//  after ID = 4HkTlYlsFqqIgscmGWOCkk;
+let beforeID = '1cMyrIaZ680ukwwSi8YscC';
+// let duringID = 5iDqJ92Rzqksq88gYWawE4;
+// let afterID = 4HkTlYlsFqqIgscmGWOCkk;
+// const stageIds = [
+//   {
+//     before: '1cMyrIaZ680ukwwSi8YscC'
+//   },
+//   {
+//     during: '5iDqJ92Rzqksq88gYWawE4'
+//   },
+//   {
+//     after: '4HkTlYlsFqqIgscmGWOCkk'
+//   }
+// ]
 
 const selectedStageID = '';
 const filteredTabs = [];
@@ -21,12 +32,12 @@ class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStage: '',
-      selectedStageId: null,
+      selectedStage: this.props.match.params.stage,
+      selectedStageId: beforeID,
       selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
-    // this.filterTabsByStage = this.filterTabsByStage.bind(this)
+    this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
   }
   componentWillMount() {
@@ -36,29 +47,52 @@ class SmallClaimsStage extends Component {
   onStageSelect(title, _id, e) {
     console.log(title)
     e.stopPropagation();
-    // this.setState({
-    //   selectedStageId: _id, 
-    //   selectedStage: title 
-    // })
-    let newContentAry = []
-    for (let i=0; i>= 0; i++) {
-      let newAry = this.props.stageContent[i].fields
-      for (let j=0; j>=0; j++) {
+    this.setState({
+      selectedStageId: _id, 
+      selectedStage: title 
+    })
+    // let newContentAry = []
+    // for (let i=0; i>= 0; i++) {
+    //   let newAry = this.props.stageContent[i].fields
+    //   for (let j=0; j>=0; j++) {
 
-        if (_id == newAry.stage[j]) {
-          newContentAry = this.props.stageContent[i]
-          return (
-            this.setState({
-              selectedContent: newContentAry,
-              selectedStageId: _id,
-              selectedStage: title
-            })
-          )
-        }
-      }
-    }
+    //     if (_id == newAry.stage[j]) {
+    //       newContentAry = this.props.stageContent[i]
+    //       return (
+    //         this.setState({
+    //           selectedContent: newContentAry,
+    //           selectedStageId: _id,
+    //           selectedStage: title
+    //         })
+    //       )
+    //     }
+    //   }
+    // }
   }
 
+  filterContent(content, findById) {
+    // const r = this.props.stageContent.filter(function(o) {
+    //   if (o.sys) o.sys = this.filterContent(o.sys, id);
+    //   return o.id = id
+    // })
+    // this.setState({
+    //   selectedContent: r
+    // })
+    console.log(content, 'content ===///')
+    return content.tabs.reduce(function (acc, tab) {
+      console.log(tab, 'initial tab =====')
+      const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
+        // console.log(tab.fields.stage, "tab.fields.stage ====//")
+          const tabStage = cat.sys.id.includes(findById);
+          console.log(tabStage, 'tabstage is true (matches) or false (dont match)')
+          return tabStage.length ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+      }, []);
+      console.log(tab, "post aryTabs tab ====")
+      console.log(aryTabs, "aryTabs ====")
+      return !aryTabs.length ? acc : acc.concat(Object.assign({}, content, { aryTabs })); 
+
+    }, []);
+  }
   // getStageIds() {
   //   this.props.stageContent.map((tab) => {
   //     const tabFields = tab.fields;
@@ -81,6 +115,7 @@ class SmallClaimsStage extends Component {
       return (
           <div onClick={(e) => this.onStageSelect(stage.fields.url, stage.sys.id, e)} key={stage.sys.id}>
             <Link to={stage.fields.url}>{stage.fields.title}</Link>
+            
           </div>
         )
     })
@@ -102,6 +137,7 @@ class SmallClaimsStage extends Component {
           buttonVisibilityClass="hidden"
           infoboxClass="Box Info-box small-box col-2"
       />
+
     ]
   }
   
@@ -113,6 +149,7 @@ class SmallClaimsStage extends Component {
 
           <div className="grid grid-pad">
             {this.renderMenuLinks()} 
+            {this.filterContent(this.props.content, this.state.selectedStageId)}
             <AccordionBoxContainer stageId={this.state.stageId} stageContent={this.state.selectedContent} /> 
           </div>
 
@@ -125,7 +162,8 @@ class SmallClaimsStage extends Component {
 function mapStateToProps(state) {
   return { 
     stageContent: state.content.tabs,
-    stage: state.content.stages
+    stage: state.content.stages,
+    content: state.content
    };
 }
 export default connect(mapStateToProps, { fetchContent })(SmallClaimsStage);
