@@ -5,6 +5,8 @@ import { NavLink, Link } from 'react-router-dom';
 import ccscLogo from '../../img/ccsc-logo.svg';
 import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
 import logoModern from '../../img/logo-modern.svg';
+
+import NavbarBurger from './navbar-burger';
 // import ReactSVG from 'react-svg';
 
 // const path = require('path');
@@ -41,6 +43,7 @@ class Navbar extends Component {
           </NavLink>
           
         </div>
+        <NavbarBurger />
         <div className='Menu-links'>
           <NavLink
             activeClassName='Menu-link--active'
@@ -88,7 +91,7 @@ class Navbar extends Component {
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
-            to='/locations'
+            to='/court-locations'
           >
             Find a Courthouse
           </NavLink>
