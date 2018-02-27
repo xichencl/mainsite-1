@@ -130,11 +130,11 @@ hr {
 
   @include lg {
     background-color: $white;
-    display: none; //display: block; to have fixed on top of screen
+    display: block; //display: block; to have fixed on top of screen
     position: fixed;
     margin: -4rem;
     height: 8.5rem;
-    width: 100%;
+    width: 90%; //vs 100%
     z-index: 100;
   }
 }
@@ -142,17 +142,17 @@ hr {
 .Search {
   align-items: center;
   background-color: $white;
-  // display: -webkit-box;
-  //   display: -ms-flexbox;
-  //   display: flex;
-  width: 75%;
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  // width: 75%;
   @include md {
     margin-left: 1rem; 
-    width: 100%;
+    // width: 100%;
   }
   @include lg {
     margin-left: 20rem;
-    // position: fixed; // to have search bar fixed on top
+    position: fixed; // to have search bar fixed on top
   }
   margin-top: 1rem;
   margin-left: 2rem;
@@ -171,7 +171,7 @@ hr {
   max-width: 95rem;
   
   @include lg {
-    margin: 8rem 0 0 20rem;
+    margin: 8rem 10rem 0 20rem;
   }
 }
 
