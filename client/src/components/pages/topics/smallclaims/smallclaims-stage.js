@@ -45,70 +45,38 @@ class SmallClaimsStage extends Component {
   }
 
   onStageSelect(title, _id, e) {
-    console.log(title)
+    // console.log(title)
     e.stopPropagation();
     this.setState({
       selectedStageId: _id, 
-      selectedStage: title 
+      selectedStage: title,
+      selectedContent: [] 
     })
-    // let newContentAry = []
-    // for (let i=0; i>= 0; i++) {
-    //   let newAry = this.props.stageContent[i].fields
-    //   for (let j=0; j>=0; j++) {
-
-    //     if (_id == newAry.stage[j]) {
-    //       newContentAry = this.props.stageContent[i]
-    //       return (
-    //         this.setState({
-    //           selectedContent: newContentAry,
-    //           selectedStageId: _id,
-    //           selectedStage: title
-    //         })
-    //       )
-    //     }
-    //   }
-    // }
   }
 
   filterContent(content, findById) {
-    // const r = this.props.stageContent.filter(function(o) {
-    //   if (o.sys) o.sys = this.filterContent(o.sys, id);
-    //   return o.id = id
-    // })
-    // this.setState({
-    //   selectedContent: r
-    // })
-    console.log(content, 'content ===///')
-    return content.tabs.reduce(function (acc, tab) {
-      console.log(tab, 'initial tab =====')
-      const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
-        // console.log(tab.fields.stage, "tab.fields.stage ====//")
-          const tabStage = cat.sys.id.includes(findById);
-          console.log(tabStage, 'tabstage is true (matches) or false (dont match)')
-          return tabStage.length ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-      }, []);
-      console.log(tab, "post aryTabs tab ====")
-      console.log(aryTabs, "aryTabs ====")
-      return !aryTabs.length ? acc : acc.concat(Object.assign({}, content, { aryTabs })); 
+    let filledAry = [];
+    let emptyAry = [];
 
+    // first reduce gets each tab array
+    return content.tabs.reduce(function (acc, tab) {
+      const thisTab = tab;
+      // second reduce gets each stage array
+      const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
+          // includes checks if ID is present in stage array
+          const tabStage = cat.sys.id.includes(findById);
+          // if the ID matches, push the tab content to a new array
+          return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+          // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+      }, []);
+      console.log("5. aryTabs", aryTabs)
+      console.log("7. filledAry", filledAry)
+      console.log("8. emptyAry", emptyAry)
+      // return !aryTabs.length ? acc : acc.concat(Object.assign({}, { aryTabs }));
+      // pass content to AccordionBoxContainer as props
+      return !filledAry.length ? <AccordionBoxContainer stageContent={emptyAry} /> : <AccordionBoxContainer stageContent={filledAry} />
     }, []);
   }
-  // getStageIds() {
-  //   this.props.stageContent.map((tab) => {
-  //     const tabFields = tab.fields;
-  //     // console.log(tabFields, "========== tabFields")
-  //     tabFields.stage.map((stage) => {
-  //       stage.sys.id
-  //       // console.log(stage.sys.id, '////////// stage.sys.id')
-  //     })
-  //   })
-
-  // }
-
-  // filterContentById(_id) {
-
-
-  // }
 
   renderMenuLinks() {
     const renderedLinks = this.props.stage.map((stage, index) => {
@@ -120,16 +88,6 @@ class SmallClaimsStage extends Component {
         )
     })
 
-  // filterContent(stageId) {
-  //   newContent = this.props.stageContent.filter((tab) => {
-  //     tab.fields.stage.map((item) => item.sys.id == stageId)
-  //   })
-  //   console.log(newContent);
-  //   return {
-  //     newContent
-  //   }
-  // }
-
     return [
       <InfoBox 
           boxTitle={`Menu - ${this.props.match.params.stage}`}
@@ -137,23 +95,18 @@ class SmallClaimsStage extends Component {
           buttonVisibilityClass="hidden"
           infoboxClass="Box Info-box small-box col-2"
       />
-
     ]
   }
   
   render() {
-
     return (
       <div>
         <TitleLine title="Small Claims" />
-
-          <div className="grid grid-pad">
-            {this.renderMenuLinks()} 
-            {this.filterContent(this.props.content, this.state.selectedStageId)}
-            <AccordionBoxContainer stageId={this.state.stageId} stageContent={this.state.selectedContent} /> 
-          </div>
-
+        <div className="grid grid-pad">
+          {this.renderMenuLinks()} 
+          {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>
+      </div>
 
     )
   } 
@@ -164,7 +117,7 @@ function mapStateToProps(state) {
     stageContent: state.content.tabs,
     stage: state.content.stages,
     content: state.content
-   };
+  };
 }
 export default connect(mapStateToProps, { fetchContent })(SmallClaimsStage);
 

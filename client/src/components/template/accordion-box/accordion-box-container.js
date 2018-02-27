@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import marked from 'marked';
+const ReactMarkdown = require('react-markdown')
+
 const fakeContent = [
 	{
 		id: 1,
@@ -13,13 +16,14 @@ const fakeContent = [
 ]; 
 
 export default class AccordionBoxContainer extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			activeId: 0,
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
+		this.getParsedMarkdown = this.getParsedMarkdown.bind(this);
 	}
 
 	toggleClass(id) {
@@ -27,17 +31,32 @@ export default class AccordionBoxContainer extends Component {
 			activeId: id,
 			pressed: !this.state.pressed 
 		});
-		console.log(this.state, 'print this.state for toggleClass')
+		// console.log(this.state, 'print this.state for toggleClass')
   }
 
+  componentWillMount() {
+  	// console.log("Next Page: this.props.stageContent", this.props.stageContent)
+  }
 
+  getParsedMarkdown(content) {
+  	return {
+  		__html: marked(content, {sanitize: true})
+  	}
+  }
 
 	render() {
+		// return <div>test</div>
+
 		const renderedContent = this.props.stageContent.map((tab) => {
+			const input = tab.fields.blockText
 			return (
 				<div className="Accordion-box-item " key={tab.sys.id}>
-					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.sys.title}<span></span></h3>
-					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"} >{tab.fields.blockText}</div>
+					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.fields.title}<span></span></h3>
+					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
+							<ReactMarkdown source={input} />
+					
+{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
+*/}					</div>
 					<hr />
 				</div>
 			)
