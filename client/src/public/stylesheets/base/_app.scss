@@ -130,7 +130,7 @@ hr {
 
   @include lg {
     background-color: $white;
-    display: block;
+    display: none; //display: block; to have fixed on top of screen
     position: fixed;
     margin: -4rem;
     height: 8.5rem;
@@ -142,9 +142,9 @@ hr {
 .Search {
   align-items: center;
   background-color: $white;
-  display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  // display: -webkit-box;
+  //   display: -ms-flexbox;
+  //   display: flex;
   width: 75%;
   @include md {
     margin-left: 1rem; 
@@ -152,7 +152,7 @@ hr {
   }
   @include lg {
     margin-left: 20rem;
-    position: fixed;
+    // position: fixed; // to have search bar fixed on top
   }
   margin-top: 1rem;
   margin-left: 2rem;
