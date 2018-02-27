@@ -2,5 +2,7 @@
 "What is small claims court?":{"name":"sc_small_claims_court_event"},
 "Claim Limit": {"name":"sc_claim_limit_event"},
 "Types of Cases Heard": {"name": "sc_types_cases_heard_event"},
-"What is mediation?":{"name":"sc_mediation_event"}
+"What is mediation?":{"name":"sc_mediation_event"},
+"I owe money.": {"name":"sc_judgment_against"},
+"I'm owed money.": {"name":"sc_judgment_for"}
 }
