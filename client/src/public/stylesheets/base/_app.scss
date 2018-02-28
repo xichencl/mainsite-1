@@ -1,18 +1,22 @@
 $font-family-serif: "Judson", serif;
 $font-family-sans-serif: "Source Sans Pro", sans-serif;
 
+
+
 $grey-border: #eee;
 $grey-text: #aaa;
 $black: #000;
-$dark-grey: #333333;
+$dark-grey: #444444; // #333333
 $white: #fff;
-$blue-button: #316a92;
-$blue-button-pressed: #115077;
-$blue-accent: #5392be;
+$blue-button: #4d9de0; // #316a92
+$blue-button-pressed: #000000; // #115077
+$blue-accent: #4d9de0; // #5392be
 $blue-background: #e3f8ff;
 $yellow-highlight: #f9d04e;
 $grey-background: #f5f5f5;
+$grey-drop-shadow: #dddddd;
 $white-background: #ffffff;
+
 
 $box-height: 225px;
 $box-img-height: 160px;
@@ -130,11 +134,11 @@ hr {
 
   @include lg {
     background-color: $white;
-    display: block;
+    display: block; //display: block; to have fixed on top of screen
     position: fixed;
     margin: -4rem;
     height: 8.5rem;
-    width: 100%;
+    width: 90%; //vs 100%
     z-index: 100;
   }
 }
@@ -145,14 +149,14 @@ hr {
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-  width: 75%;
+  // width: 75%;
   @include md {
     margin-left: 1rem; 
-    width: 100%;
+    // width: 100%;
   }
   @include lg {
     margin-left: 20rem;
-    position: fixed;
+    position: fixed; // to have search bar fixed on top
   }
   margin-top: 1rem;
   margin-left: 2rem;
@@ -169,9 +173,9 @@ hr {
 .Page {
   margin: 4rem;
   max-width: 95rem;
-
+  
   @include lg {
-    margin: 8rem 0 0 20rem;
+    margin: 8rem 10rem 0 20rem;
   }
 }
 

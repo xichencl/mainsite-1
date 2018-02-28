@@ -1523,6 +1523,10 @@ h1.title-line-background {
     h1.title-line-background span:after {
       left: 100%; }
 
+.Accordion-box-item {
+  cursor: pointer;
+  width: 100%; }
+
 .warning {
   background-color: #FE856B;
   padding: 1rem 1rem 0.01rem 1rem;
