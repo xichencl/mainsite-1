@@ -6,30 +6,65 @@ import TitleLine from '../template/title-line';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
+const test_server = "http://45.33.45.17:3000";
+const dev_server = "http://dev-eforms-viewer.ad.cc-courts.org";
+
 const formData = [
 	{
 		formName: "SC-100", 
 		category: "Small Claims",
 		dateRevised: "Jan. 1, 2017",
-		description: "Plaintiff’s Claim and Order to Go to Small Claims Court" 
+		description: "Plaintiff’s Claim and Order to Go to Small Claims Court",
+    link: dev_server+"/?form=sc100" 
 	}, 
 	{
 		formName: "SC-100-INFO", 
 		category: "Small Claims",
 		dateRevised: "Jan. 1, 2017",
-		description: "Information for the Small Claims Plaintiff" 
+		description: "Information for the Small Claims Plaintiff", 
+    link: "" 
 	},
 	{
 		formName: "SC-100A", 
 		category: "Small Claims",
 		dateRevised: "Jan. 1, 2017",
-		description: "Other Plaintiffs or Defendants (Small Claims)" 
+		description: "Other Plaintiffs or Defendants", 
+    link: dev_server+"/?form=sc100a"
 	},
+  {
+    formName: "SC-112A", 
+    category: "Small Claims",
+    dateRevised: "Jan. 1, 2017",
+    description: "Proof of Service by Mail", 
+    link: dev_server+"/?form=sc112a"
+  },
+  {
+    formName: "SC-120", 
+    category: "Small Claims",
+    dateRevised: "Jan. 1, 2017",
+    description: "Defendant’s Claim and ORDER to Go to Small Claims Court (Small Claims)", 
+    link: dev_server+"/?form=sc120"
+  },
+  {
+    formName: "SC-120A", 
+    category: "Small Claims",
+    dateRevised: "Jan. 1, 2017",
+    description: "Other Plaintiffs or Defendants (Small Claims)", 
+    link: dev_server+"/?form=sc120a"
+  },
+  {
+    formName: "SC-140", 
+    category: "Small Claims",
+    dateRevised: "Jan. 1, 2017",
+    description: "Notice of Appeal", 
+    link: dev_server+"/?form=sc140"
+  },
 	{
 		formName: "E-Test", 
 		category: "Eviction",
 		dateRevised: "Jan. 1, 2017",
-		description: "Eviction test" 
+		description: "Eviction test",
+    link: "" 
 	}
 ]
 
@@ -48,10 +83,9 @@ export default class FormsHome extends React.Component {
       	<TitleLine title="Forms" />
 
         <ReactTable
-          data={data}
+          data={data}          
           filterable
-          defaultFilterMethod={(filter, row) =>
-            String(row[filter.id]) === filter.value}
+          
           columns={[
             {
               columns: [
@@ -77,29 +111,51 @@ export default class FormsHome extends React.Component {
                 {
                   Header: "Form",
                   width: 100,
-                  id: "formName",
+                  id: "formName",        
                   accessor: d => d.formName,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["formName"] }),
+                  Cell: (d) => {return <a href={d.original.link} target="_blank">{d.original.formName}</a>},
+
+                  //filter not working. object.map -> object is undefined. why?
+                  filterMethod: (filter, rows) => { return matchSorter(rows, filter.value, { keys: ["formName"] })},
                   filterAll: true
                 },
                 {
                   Header: "Description",
                   id: "description",
                   accessor: d => d.description,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["description"] }),
-                  filterAll: true
+                  filterable: false //to disable filter input box
+                  // filterMethod: (filter, rows) =>
+                  //   matchSorter(rows, filter.value, { keys: ["description"] }),
+                  // filterAll: true
                 },
                 {
                   Header: "Date Revised",
-                  accessor: "dateRevised" //how to disable input box? 
-                }
+                  id: "dateRevised",
+                  accessor: d => d.dateRevised,
+                  filterable: false //to disable filter input box 
+                }, 
+                // {
+                //   Header: "Links",
+                //   id: "links",
+                //   accessor: d => d.link, 
+                //   filterMethod: (filter, rows) =>
+                //     matchSorter(rows, filter.value, { keys: ["link"] }),
+                //   filterAll: true
+                // }
               ]
             },
           ]}
           defaultPageSize={10}
           className="-striped -highlight"
+          // getTdProps={(state, rowInfo, column, instance) => {
+          //   return {
+          //     onClick: (e) => {
+          //       const formName =  rowInfo.original.formName.toLowerCase().split("-").join("");
+          //       console.log("Form Name:", formName);
+          //       axios.post("")
+          //     }
+          //   }
+          // }}
         />
         <br />
       </div>

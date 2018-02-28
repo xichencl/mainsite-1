@@ -157,6 +157,7 @@ const mapDispatchToProps = (dispatch) => {
               payload: {
                 message: msg,
                 type: 'text',
+                source: 'dialogflow',
                 isBot: true,
               },
             });

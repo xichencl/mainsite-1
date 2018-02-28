@@ -12,6 +12,7 @@
   -webkit-transform: translateX(0);
   -ms-transform: translateX(0);
   transform: translateX(0);
+//  z-index: 1003;
 }
 
 #bot.slideOut {
@@ -19,6 +20,7 @@
   -webkit-transform: translateX(32em);
   -ms-transform: translateX(32em);
   transform: translateX(32em);
+//  z-index: -100;
 }
 
 #root {
