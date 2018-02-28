@@ -1,7 +1,7 @@
 //styling user speech bubble, bot speech bubble, and clickable bot buttons
 .button-blue {
   // color: #849da3;
-  color: $not-black; 
+  color: $black; 
   border: 5px solid $blue-button; //$bot-blue
   // background-color: #b8e2ec;
   background-color: white;
@@ -12,7 +12,7 @@
 
 .button-blue:hover {
   background-color: $blue-button; //$bot-blue
-  color: white; //$not-black
+  color: $white; //$not-black
   -webkit-transition-duration: 0.2s;
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
@@ -23,13 +23,13 @@
   // background-color: $very-light-blue;
   background-color: white;
   border: 3px solid $blue-button; //$bot-blue
-  color: $not-black;
+  color: $black;
   height: 0px;
 }
 
 .bot-bubble {
   /*max-width: 23em;*/
-  color: $not-black;
+  color: $black;
   background-color: $white; //$bot-blue
   box-shadow: 3px 7px $grey-drop-shadow;
   min-width: 5em;
@@ -64,6 +64,7 @@
 }
 
 .user-bubble {
+  color: $white;
   /*padding-left: 30px;
   padding-right: 10px;*/
   //border: 3px solid $blue-main-test; //$bot-blue
