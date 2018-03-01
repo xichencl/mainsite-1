@@ -1,27 +1,43 @@
 //styling how bot opens after clicking chat icon
 #bot {
   /*transform: translateX(100px);*/
-  -webkit-transition: -webkit-transform 400ms ease-in;
-  transition: -webkit-transform 400ms ease-in;
-  -o-transition: transform 400ms ease-in;
-  transition: transform 400ms ease-in;
-  transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
+  // -webkit-transition: -webkit-transform 400ms ease-in;
+  // transition: -webkit-transform 400ms ease-in;
+  // -o-transition: transform 400ms ease-in;
+  // transition: transform 400ms ease-in;
+  // transition: transform 400ms ease-in, -webkit-transform 400ms ease-in;
 }
 
 #bot.slideIn {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
-//  z-index: 1003;
+  // -webkit-transform: translateX(0);
+  // -ms-transform: translateX(0);
+  // transform: translateX(0);
+  transition: right 2s;
+  right: 0rem;
+
+
+    .bm-cross-button {
+    padding-left: 0rem;
+  }
 }
 
+
 #bot.slideOut {
-  //slides out chatbot completely even when sidenav is still open
-  -webkit-transform: translateX(32em);
-  -ms-transform: translateX(32em);
-  transform: translateX(32em);
-//  z-index: -100;
+ // slides out chatbot completely even when sidenav is still open
+  // -webkit-transform: translateX(32em);
+  // -ms-transform: translateX(32em);
+  // transform: translateX(32em);
+
+  right: -32rem;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% + 32rem);
+  padding: 0 10rem 0;
+  .bm-cross-button {
+    padding-left: 5rem;
+  }
 }
+
 
 #root {
   height: 100%;
@@ -32,6 +48,8 @@
 }
 //wrapper completely hides bot until chat icon is clicked
 #wrapper {
+  // margin: -1em auto auto calc(-32rem - 1em);
+
   position: fixed;
   right: 0;
   width: 25em;
