@@ -44,20 +44,6 @@ class Portal extends Component {
 
   renderLinks() {
     if (this.props.authenticated) {
-      // console.log("Props:", this.props);
-      // const user = cookie.get('user');
-      // const uid = user._id;
-      // this.props.fetchUser(uid);
-      // fetchUser(cookie.get('user')._id);
-      // console.log(cookie.get('token'));
-      // axios.get(`${API_URL}/user/${cookie.get('user')._id}`, {headers: {'Authorization': `${cookie.get('token')}`}})
-      // .then((response)=>{
-      //   console.log(response.data);
-      //   data = response.data;
-      // })
-      // .catch((error)=>{
-      //   console.log(error);
-      // });
       return [
 
         <div key={`${1}profile`}>
