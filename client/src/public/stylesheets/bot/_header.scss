@@ -1,6 +1,10 @@
 //styling header
 
 /*speech bubble in main header opens bot */
+.material-icons {
+  line-height: 2;
+}
+
 .material-icons.md-48 {
   font-size: 48px;
 }
@@ -25,7 +29,7 @@
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
   
-  background-color: $blue-button;
+  background-color: $blue-accent-primary;
   cursor: pointer;
   // text-align: center;  
 
@@ -44,7 +48,7 @@
 .open-bot-icon-circle:hover {
   background-color: $black;
   .open-bot-icon {
-    color: $light-grey;
+    color: $light-grey-secondary;
   }
 }
 
@@ -84,7 +88,7 @@
   text-align: center;  
   position: fixed;
   cursor: pointer;
-  background-color: $blue-button;
+  background-color: $blue-accent-primary;
   right: 2rem;
   top: 2rem;
   
@@ -126,7 +130,7 @@ button.close-bot {
   outline: 0;
   padding: 0;
   border: none;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   font-size: 36px;
   // display: -webkit-box;
   // display: -ms-flexbox;
@@ -140,19 +144,19 @@ button.refresh-bot {
   outline: 0;
   padding: 0;
   border: none;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   // display: -webkit-box;
   // display: -ms-flexbox;
   // display: flex;
 }
 
 button.button-chatbot-email {
-  background-color: $icon-grey;
+  background-color: $dark-grey-primary;
 }
 
 button.refresh-bot:hover,
 button.close-bot:hover {
-  // color: $warm-grey;
+  color: $blue-accent-primary;
   outline: 0;
   padding: 0;
   border: none;
@@ -163,11 +167,11 @@ button.close-bot:hover {
 }
 
 button.button-chatbot-email:hover {
-  // background-color: $warm-grey;
+  background-color: $blue-accent-primary;
 }
 
 button.refresh-bot:active {
-  color: $warm-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   // -webkit-transition-duration: 0s;
@@ -182,7 +186,7 @@ button.refresh-bot:active {
 /* Position and sizing of clickable settings button */
 .bm-cross-button {
   // fill: $icon-grey;
-  color: $warm-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   -webkit-transition-duration: 0.2s;

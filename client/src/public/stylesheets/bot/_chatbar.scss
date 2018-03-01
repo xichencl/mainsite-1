@@ -1,16 +1,13 @@
 //styling chatbar
-$yellow: #ffc107;
-$white: #ffffff;
-
 .chatbar {
   height: 4.2em;
   width: 25em;
   padding: 16px;
   padding-left: 8px;
   padding-right: 10px;
-  border-top: 1px solid #939393;
+  border-top: 1px solid $light-grey-secondary;
   background-color: $white;
-  color: $not-black;
+  color: $dark-grey-primary;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -46,7 +43,7 @@ $white: #ffffff;
 }
 
 button.circle-x {
-  background-color: #115077;
+  background-color: $dark-grey-primary;
   color: #ffffff;
   border-radius: 50%;
   width: 40px;
@@ -68,7 +65,7 @@ button.circle-x {
 }
 
 button.circle-x:hover {
-  background-color: #316a92;
+  background-color: $blue-accent-primary;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -78,9 +75,13 @@ button.circle-x:hover {
   padding: 0px;
 }
 
+button.circle-x:active {
+  background-color: $btn-default-active;
+}
+
 button.mic {
   background-color: transparent;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   padding-top: 10px;
@@ -92,7 +93,7 @@ button.mic {
 }
 
 button.mic:hover {
-  color: $light-grey;
+  color: $blue-accent-primary;
   outline: 0;
   padding: 0;
   padding-top: 10px;
@@ -103,7 +104,7 @@ button.mic:hover {
 }
 
 button.mic:active {
-  color: red;
+  color: $danger;
   outline: 0;
   padding: 0;
   padding-top: 10px;

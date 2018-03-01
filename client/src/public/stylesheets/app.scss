@@ -9,6 +9,9 @@
 @import "base/case-dashboard";
 @import "base/checklist";
 
+// import color palette variables
+@import "base/_variables";
+
 //MIXINS
 @import "bot/_mixins.scss";
 
@@ -35,3 +38,5 @@
 @import "mobilebot/_mapModal-m.scss";
 @import "mobilebot/_chatContainer-m.scss";
 @import "mobilebot/_chatbar-m.scss";
+
+

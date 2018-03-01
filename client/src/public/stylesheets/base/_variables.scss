@@ -1,0 +1,45 @@
+// Fonts
+$font-family-serif: "Judson", serif;
+$font-family-sans-serif: "Source Sans Pro", sans-serif;
+
+// Primary paletter
+$dark-grey-primary: #333333; // Main dark color
+$blue-accent-primary: #4d9de0; // Blue highlight color
+$light-grey-primary: #f5f5f5; // Light grey box background color
+
+// Secondary palette
+$light-grey-secondary: #dddddd;
+$black: #000000;
+$white: #ffffff;
+
+// Tertiary palette
+$success: #0E9EA4; // btn-success
+$warning: #ECBF27; // btn-warning
+$danger: #D34049; // btn-danger
+
+// Button states
+$btn-success-active: #048282;
+$btn-warning-active: #ab2534;
+$btn-danger-active: #c4952d;
+$btn-default-active: #3286bd;
+
+$btn-success-disabled: #86cbce;
+$btn-warning-disabled: #f2d897;
+$btn-danger-disabled: #eb8c96;
+$btn-default-disabled: #a3c7e2;
+
+// Light background colors
+$blue-background: #a2c6e1;
+$yellow-background: #f1d796;
+$grey-background: #f5f5f5;
+$white-background: #ffffff;
+
+// azure blue
+$blue-azure: #00A7E4;
+
+// Box Dimensions & Footer corrections
+$box-height: 225px;
+$box-img-height: 160px;
+$box-img-width: 180px;
+$footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
+$footer-push-height-negative: -20rem;

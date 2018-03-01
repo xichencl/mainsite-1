@@ -1,7 +1,7 @@
 //styling modal when image is clicked on
 #myImg {
   border-radius: 10px;
-  border: 2px solid $bot-blue;
+  border: 2px solid $blue-accent-primary;
   cursor: pointer;
   transition: 0.3s;
   width: 200px;
@@ -79,7 +79,7 @@
   position: absolute;
   top: 15px;
   left: 35px;
-  color: $light-grey;
+  color: $light-grey-primary;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
