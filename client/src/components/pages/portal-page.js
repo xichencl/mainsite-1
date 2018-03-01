@@ -54,9 +54,10 @@ class Portal extends Component {
           <MyCases />
         </div>,
         // ============================
-        <div key={`${3}forms`}>
-          <MyForms />
-        </div>,
+        // hide forms component for now
+        // <div key={`${3}forms`}>
+        //   <MyForms />
+        // </div>,
         // ============================
         
         <div className="Square-box-container" key={`${5}search`}>
