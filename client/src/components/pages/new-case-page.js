@@ -156,7 +156,7 @@ class NewCase extends Component{
     		<div className="Add-edit-case">
     		<TitleLine title={`${this.state.newCase ? "Create" : "Update"} Your Case`} />
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-    			 {this.renderAlert()}
+    			 {/*this.renderAlert()*/}
     			
 
           {/*<div>
