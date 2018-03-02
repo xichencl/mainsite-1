@@ -449,12 +449,10 @@ p.warning {
 
 .Logout {
 	position: absolute;
-	top: 21rem;
+	top: 12rem;
 	right: 2rem;
-
+		
 	a {
-		position: relative;
-		// border: 2px solid $danger;
 		background-color: $danger;
 		color: $white;
 		padding: 1rem 2rem 1rem 2rem;
@@ -472,23 +470,23 @@ p.warning {
 	}
 
 	@include xs {
-		top: 22rem;
+		top: 12rem;
 		right: 2rem;
 	}
 
 	@include sm {
-		top: 18rem;
-		right: 4rem;
+		top: 13rem;
+		right: 6rem;
 	}
 
 	@include md {
-		top: 20rem;
-		right: 12rem;
+		top: 12rem;
+		right: 7rem;
 	}
 
 	@include lg {
-		top: 13rem;
-		right: 8rem;
+		top: 10rem;
+		right: 13rem;
 	}
 }
 

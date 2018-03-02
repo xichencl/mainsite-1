@@ -828,7 +828,7 @@ body {
     height: 20rem; }
 
 a {
-  color: #dddddd; }
+  color: #999999; }
 
 a:hover {
   color: #000000;
@@ -866,7 +866,7 @@ button:hover {
 
 hr {
   border: 0;
-  border-top: 1px solid #444444;
+  border-top: 1px solid #333333;
   margin: 1rem 0; }
 
 .hidden {
@@ -1017,7 +1017,7 @@ hr {
     height: 4px;
     margin-bottom: 5px;
     position: relative;
-    background: #444444;
+    background: #333333;
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0px;
@@ -1034,7 +1034,7 @@ hr {
   height: 100vh;
   margin: -100px 0 0 -50px;
   padding: 12rem 0 5rem 5rem;
-  background: #444444;
+  background: #333333;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -1196,7 +1196,7 @@ hr {
   position: relative;
   bottom: 0;
   left: 0;
-  background-color: #444444;
+  background-color: #333333;
   width: 100%;
   height: 20rem;
   display: -webkit-box;
@@ -1418,8 +1418,8 @@ input:focus:-moz-placeholder {
 #page {
   touch-action: none; }
 
-.warning {
-  padding-bottom: 1rem; }
+p.warning {
+  padding: 1rem 1rem 1rem 1rem; }
 
 .case-form-group {
   margin-top: 2rem; }
@@ -1469,6 +1469,9 @@ input:focus:-moz-placeholder {
   border: 3px solid #86cbce;
   color: #333333; }
 
+.button-submit:hover {
+  border: 3px solid #000000; }
+
 .danger-buttons {
   margin-bottom: 1rem; }
 
@@ -1508,10 +1511,9 @@ input:focus:-moz-placeholder {
 
 .Logout {
   position: absolute;
-  top: 21rem;
+  top: 12rem;
   right: 2rem; }
   .Logout a {
-    position: relative;
     background-color: #D34049;
     color: #ffffff;
     padding: 1rem 2rem 1rem 2rem;
@@ -1524,20 +1526,20 @@ input:focus:-moz-placeholder {
     font-weight: 300; }
   @media (min-width: 375px) {
     .Logout {
-      top: 22rem;
+      top: 12rem;
       right: 2rem; } }
   @media (min-width: 500px) {
     .Logout {
-      top: 18rem;
-      right: 4rem; } }
+      top: 13rem;
+      right: 6rem; } }
   @media (min-width: 769px) {
     .Logout {
-      top: 20rem;
-      right: 12rem; } }
+      top: 12rem;
+      right: 7rem; } }
   @media (min-width: 1025px) {
     .Logout {
-      top: 13rem;
-      right: 8rem; } }
+      top: 10rem;
+      right: 13rem; } }
 
 h1 {
   text-align: center; }
@@ -2419,7 +2421,6 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 .mono-user-bubble {
   background: #ffffff;
   border: 3px solid #000000;
-
   color: #333333; }
 
 .bot-buttons {
