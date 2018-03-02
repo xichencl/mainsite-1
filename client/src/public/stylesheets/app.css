@@ -1227,8 +1227,12 @@ hr {
 /* Or @extend clearfix */
 .Login input,
 .Register input {
-  margin-bottom: 1.5rem;
-  width: 50%; }
+  width: 100%;
+  margin-bottom: 1.5rem; }
+  @media (min-width: 769px) {
+    .Login input,
+    .Register input {
+      width: 50%; } }
 
 input:focus::-webkit-input-placeholder {
   color: transparent; }
@@ -1414,6 +1418,9 @@ input:focus:-moz-placeholder {
 #page {
   touch-action: none; }
 
+.warning {
+  padding-bottom: 1rem; }
+
 .case-form-group {
   margin-top: 2rem; }
   .case-form-group select {
@@ -1424,10 +1431,15 @@ input:focus:-moz-placeholder {
     height: auto;
     font-size: 18px; }
 
-.case-number .caseNumber-form-control {
-  width: 33%; }
+.case-number input {
+  width: 40%; }
+
+.form-control-input-p {
+  margin-left: 1rem; }
 
 .radio-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex; }
   .radio-row .form-control {
     width: 2rem;
@@ -1435,12 +1447,64 @@ input:focus:-moz-placeholder {
     height: auto;
     font-size: 18px; }
 
-.button-delete {
-  background-color: #ECBF27; }
+.case-page-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
 
 .button-submit {
-  margin-right: 2rem;
-  background-color: #4d9de0; }
+  padding: 1rem 0;
+  width: 140px;
+  margin-right: 6rem;
+  margin-bottom: 2rem;
+  border: 3px solid #0E9EA4;
+  background-color: #0E9EA4; }
+
+.button-submit:disabled {
+  background-color: #86cbce;
+  border: 3px solid #86cbce;
+  color: #333333; }
+
+.danger-buttons {
+  margin-bottom: 1rem; }
+
+.button-clear {
+  padding: 1rem 0;
+  width: 140px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  color: #3286bd;
+  background-color: #ffffff;
+  border: 3px solid #3286bd; }
+
+.button-clear:disabled {
+  background-color: #a3c7e2;
+  color: #333333;
+  border: 3px solid #a3c7e2; }
+
+.button-clear:hover {
+  color: #ffffff;
+  background-color: #3286bd; }
+
+.button-delete {
+  padding: 1rem 0;
+  width: 140px;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  color: #D34049;
+  border: 3px solid #D34049; }
+
+.button-delete:disabled {
+  background-color: #eb8c96;
+  color: #dddddd; }
+
+.button-delete:hover {
+  color: #ffffff;
+  background-color: #D34049; }
 
 .Logout {
   position: absolute;
@@ -1516,6 +1580,9 @@ h1.title-line-background {
   color: #000000;
   font-size: 1.1em;
   transition: none; }
+
+.Box-row {
+  margin-bottom: 1rem; }
 
 .hideText {
   display: none; }

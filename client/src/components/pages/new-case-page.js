@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { postData, CLIENT_ROOT_URL, deleteData } from '../../actions/index';
 import { UPDATE_CASE } from '../../actions/types';
 import Cookies from 'universal-cookie';
+import TitleLine from '../template/title-line';
 const cookie = new Cookies();
 const user = cookie.get('user');
 
@@ -17,30 +18,22 @@ const renderField = ({input, label, type, meta: {touched, error}, placeholder}) 
   // console.log("FieldValue: ", value);
   return (
   <div>
+    {touched && error && <div>{error}</div>}
     <input {...input} type={type} placeholder={placeholder} />
-    {touched && error && <span>{error}</span>}
   </div>
   );
 };
- // const renderField = field => {
- //  console.log(field);
- //  return (
- //    <div>
- //      <input {...field.input} type={field.type} placeholder={field.placeholder} />
- //      {field.meta.touched && field.mata.error && <span>{field.meta.error}</span>}
- //    </div>
- //  );
- // }
 
 const renderSelect = ({input, label, type, meta: {touched, error}, children}) => {
  console.log("SelectError: ", error);
  console.log("touched? ", touched);
  return (
   <div>
-    <select {...input}>
-    {children}
-    </select>
+
     {touched && error && <span>{error}</span>}
+    <select {...input}>
+      {children}
+    </select>
   </div>
 )};
 
@@ -144,7 +137,7 @@ class NewCase extends Component{
     if (this.props.errorMessage) {
       return (
         <div>
-          <span><strong>Error!</strong> {this.props.errorMessage}</span>
+          <p className="warning"><strong>Error!</strong> {this.props.errorMessage}</p>
         </div>
       );
      }
@@ -161,8 +154,7 @@ class NewCase extends Component{
       // console.log("case number: ", caseNumber);
     	return (
     		<div className="Add-edit-case">
-    		<h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
-        <button type="button" className="button button-delete" onClick={this.handleClick.bind(this)}>Delete Case</button>
+    		<TitleLine title={`${this.state.newCase ? "Create" : "Update"} Your Case`} />
     		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
     			 {this.renderAlert()}
     			
@@ -193,11 +185,11 @@ class NewCase extends Component{
     				<label>Party (select one)</label>
     				<div className="radio-row">
                 <Field className="form-control" name="party" component={renderField} type="radio" value="plaintiff" />
-                <p>Plaintiff</p>
+                <p className="form-control-input-p">Plaintiff</p>
             </div>
             <div className="radio-row">
                 <Field className="form-control" name="party" component={renderField} type="radio" value="defendant"/>
-                <p>Defendant</p>
+                <p className="form-control-input-p">Defendant</p>
             </div>
     			</div>
 
@@ -210,10 +202,13 @@ class NewCase extends Component{
 
     			
     			
-    			<div className="case-form-group">
+    			<div className="case-form-group case-page-buttons">
 			        <button className="button button-submit" type="submit" disabled={pristine || submitting}>Submit</button>
-			        <button className="button" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-		      	</div>
+			        <div className="danger-buttons">
+                <button className="button button-clear" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+                <button type="button" className="button button-delete" onClick={this.handleClick.bind(this)}>Delete Case</button>
+              </div>
+		      </div>
 
     		</form>
     		</div>
@@ -229,6 +224,8 @@ function mapStateToProps(state) {
     // form: state.form,
     };
 }
+
+//        <h1>{this.state.newCase ? "Create" : "Update"} Your Case</h1>
 
 // const mapDispatchToProps = (dispatch) => ({
 //   handleFormSubmit: () => {
