@@ -9,5 +9,6 @@
 "Personal Service Deadlines":{"name": "sc_personal_service_deadlines"},
 "Prepare for Trial":{"name": "sc_prepare_hearing_event"},
 "SC120 Service Deadlines":{"name": "sc120_when_to_serve_event"},
-"Substituted Service Deadlines": {"name": "sc_substituted_service_deadlines"}
+"Substituted Service Deadlines": {"name": "sc_substituted_service_deadlines"},
+"Government Agencies": {"name": "sc_sue_gov_event"}
 }
