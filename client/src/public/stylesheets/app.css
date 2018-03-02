@@ -2118,22 +2118,22 @@ button.refresh-bot:active {
   padding-left: 10px; }
 
 #bot {
-  /*transform: translateX(100px);*/
-  -webkit-transition: -webkit-transform 400ms ease-in;
-  transition: -webkit-transform 400ms ease-in;
-  -o-transition: transform 400ms ease-in;
-  transition: transform 400ms ease-in;
-  transition: transform 400ms ease-in, -webkit-transform 400ms ease-in; }
+  /*transform: translateX(100px);*/ }
 
 #bot.slideIn {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0); }
+  transition: right 2s;
+  right: 0rem; }
+  #bot.slideIn .bm-cross-button {
+    padding-left: 0rem; }
 
 #bot.slideOut {
-  -webkit-transform: translateX(32em);
-  -ms-transform: translateX(32em);
-  transform: translateX(32em); }
+  right: -32rem;
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% + 32rem);
+  padding: 0 10rem 0; }
+  #bot.slideOut .bm-cross-button {
+    padding-left: 5rem; }
 
 #root {
   height: 100%;
