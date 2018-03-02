@@ -99,11 +99,12 @@ class ChatBubble extends React.Component {
     return (
       <div className={className} /* onClick={this.props.onClick}*/>
         {ReactHtmlParser(this.props.message)}
-        {/*<p className="feedback">*/}
-        {/*Is this response helpful?*/}
-        {/*<input type="submit" value="Yes" />*/}
-        {/*<input type="submit" value="No" />*/}
-        {/*</p>*/}
+        {/* this.props.source === 'dialogflow' 
+        && <p className="feedback">
+          Is this response helpful?
+        <input type="submit" value="Yes" />
+        <input type="submit" value="No" />
+        </p> */}
       </div>
     );
   }
@@ -127,6 +128,7 @@ const mapDispatchToProps = dispatch => ({
           payload: {
             message: response.data.speech,
             type: 'text',
+            source: 'dialogflow',
             isBot: true,
           },
         });
