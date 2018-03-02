@@ -19,7 +19,7 @@ class ViewProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Box-container">
         <div className={this.props.classStyle}>
           <div className='Portal-box-content Grey-background'>
             <h3>{this.props.profile.firstName} {this.props.profile.lastName}<Link to="register" className='Box-icon-sm'><i className="fa fa-pencil" aria-hidden="true"></i></Link></h3>
@@ -45,31 +45,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, { fetchUser })(ViewProfile);
 
-/* <UserInfo firstName={this.props.profile.firstName} /> */
-
-
-// export default class ViewProfile extends Component {
-
-//   render() {
-//     // console.log("Data", this.props.data);
-//     return (
-      // <div>
-      //   <div className={this.props.classStyle}>
-      //     <div className='Portal-box-content Grey-background'>
-          
-      //       <h3>{this.props.data.firstName} {this.props.data.lastName}<Link to="profile" className='Box-icon-sm'><i className="fa fa-pencil" aria-hidden="true"></i></Link></h3>
-
-      //       <div>{this.props.data.email}</div>
-      //       <div className='Profile-address'>911 Alhambra Ave.</div>
-      //       <div className='Profile-address'>Martinez, CA</div>
-      //       <div className='Profile-phone'>(510) 867-5309</div>
-      //     </div>
-      //   </div>
-        
-      // </div>
-//     );
-//   }
-// }
-
-// ViewProfile.propTypes = { limit: React.PropTypes.String };
-ViewProfile.defaultProps = { classStyle: 'Box Portal-box Profile-box col-2' }; 
+ViewProfile.defaultProps = { classStyle: 'Box Profile-box ' }; 

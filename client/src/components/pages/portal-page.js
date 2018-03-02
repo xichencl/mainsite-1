@@ -46,11 +46,11 @@ class Portal extends Component {
     if (this.props.authenticated) {
       return [
 
-        <div key={`${1}profile`}>
+        <div key={`${1}profile`} className="Portal-box Portal-box-profile">
           <ViewProfile />
         </div>,
         // ============================
-        <div key={`${2}cases`}>
+        <div key={`${2}cases`} className="Portal-box Portal-box-cases">
           <MyCases />
         </div>,
         // ============================
@@ -59,15 +59,15 @@ class Portal extends Component {
         //   <MyForms />
         // </div>,
         // ============================
-        
-        <div className="Square-box-container" key={`${5}search`}>
+        // hide "Find a Court Case" for now
+        // <div className="Square-box-container" key={`${5}search`}>
           
-          <Link to='find-a-case'>
-            <SquareBoxStatic
-              boxTitle='Find a Court Case'
-              imgSrc={SearchIcon} />
-          </Link>
-        </div>,
+        //   <Link to='find-a-case'>
+        //     <SquareBoxStatic
+        //       boxTitle='Find a Court Case'
+        //       imgSrc={SearchIcon} />
+        //   </Link>
+        // </div>,
         // ============================
         <div key={`${4}logout`} className='Logout'>
           <Link to="logout">Logout</Link>
@@ -98,7 +98,7 @@ class Portal extends Component {
     return (
       <div>
         <TitleLine title="My Portal" />
-        <div className='grid grid-pad'>
+        <div className="grid grid-pad portal-grid">
             {this.renderLinks()}
         </div>
       </div>

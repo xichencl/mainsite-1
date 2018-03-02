@@ -34,6 +34,8 @@ const resourceList = [
   },
 ] 	 
 
+//                 <Link to={{pathname:'/my-case', state:{caseData: value}}} className="Portal-box-link">
+
 class SmallClaimsParty extends Component {
 	constructor(props) {
 		super(props);

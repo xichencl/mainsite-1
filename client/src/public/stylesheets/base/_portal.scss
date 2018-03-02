@@ -147,80 +147,58 @@ input:focus:-moz-placeholder { color:transparent; }
 .Case-container {
 }
 
-.Todo-box {
-	// .fa {
-	// 	margin-left: 2rem;
-	// }
-	// h3 {
- //    	padding-top: 2rem;
-	// }
-	// padding: 0;
-	// text-align: left;
-	// width: 100%;
+// .Todo-box {
+// 	ul {
+// 		list-style: none;
+// 		margin: 0;
+// 		padding: 0;
+// 	}
+// 	li {
+// 		display: block;
+// 	}
+// 	span {
+// 		position: relative;
+// 		display: block;
+// 		cursor: pointer;
+// 	}
+// 	span:before, span:after {
+// 		content: '';
+// 		position: absolute;
+// 		width: 0%;
+// 		height: 1px;
+// 		top: 50%;
+// 		margin-top: -0.5px;
+// 		background: $black;
+// 	}
+// 	span:before {
+// 		left: -2.5px;
+// 	}
+// 	span:after {
+// 		right: 2.5px;
+// 		background: $black;
+// 	}
 
-	// position: relative;
+// 	span:hover:before {
+// 		background: $black;
+// 		width: 100%;
+// 	}
 
-	// @include sm {
-	// 	width: 50%;
-	// }
-
-	// @include md {
-	// 	width: 33%;
-	// }
-
-	ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-	li {
-		display: block;
-	}
-	span {
-		position: relative;
-		display: block;
-		cursor: pointer;
-	}
-	span:before, span:after {
-		content: '';
-		position: absolute;
-		width: 0%;
-		height: 1px;
-		top: 50%;
-		margin-top: -0.5px;
-		background: $black;
-	}
-	span:before {
-		left: -2.5px;
-	}
-	span:after {
-		right: 2.5px;
-		background: $black;
-		// transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-	}
-
-	span:hover:before {
-		background: $black;
-		width: 100%;
-		// transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-	}
-
-	span:hover:after {
-		background: transparent;
-		width: 100%;
-		// transition: 0s;
-	}
-}
+// 	span:hover:after {
+// 		background: transparent;
+// 		width: 100%;
+// 	}
+// }
 
 // Portal Page
-.Portal-box {
-	a {
-		color: $black;
-	}
-	a:hover {
-		color: $dark-grey-primary;
-	}	
-	width: 100%;
+.portal-grid {
+	align-items: stretch;
+}
+
+.Square-box-container-portal {
+  -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  width: 100%;
 
   @include sm {
     width: 50%;
@@ -228,62 +206,82 @@ input:focus:-moz-placeholder { color:transparent; }
   @include md {
     width: 33%;
   }
-  position: relative;
+  padding: 1rem;
 }
 
-.Portal-box-content {
-	padding: 2rem;
-	height: 215px;
-	overflow: scroll;
-}
-
-.My-cases-box-lg {
-	width: 100%;
-	overflow: scroll;
-}
-
-.My-cases-box-md {
-	width: 66%;
-	overflow: scroll;
-}
-
-.Upcoming-box {
-  p {
-    display: inline;
-  }
+.Portal-box {
+		  -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
 	a {
 		color: $black;
 	}
 	a:hover {
 		color: $dark-grey-primary;
 	}	
+	// width: 300px;
+
+ //  @include lg {
+ //  	// width: 50vw;
+ //  }
+}
+
+.Portal-box-profile {
 	width: 100%;
 
-  @include sm {
-    width: 100%;
+  @include md {
+    width: 33%;
   }
+  // @include md {
+  //   width: 25%;
+  // }
+}
+
+.Portal-box-cases {
+	 width: 100%;
+
   @include md {
     width: 66%;
   }
+  // @include md {
+  //   width: 75%;
+  // }
+}
+
+.Portal-box-content {
+	padding: 2rem;
+	h3 {
+		position: relative;
+	}
+}
+
+.Portal-box-content-line {
+	position: static;
+}
+
+.Portal-box-link {
+	p { margin: 0 }
+	display: flex;
+	position: relative;
+}
+
+.Portal-box-link-caseNumber {
+	width: 150px;
+}
+
+.Portal-box-link-caseType {
+	position: absolute;
+	right: 0;
 }
 
 .Box-icon-sm {
 	position: absolute;
-	right: 4rem;
-}
-
-.Todo-box {
-	background-color: $yellow-background;
-	padding-bottom: 3.2rem;
-
-}
-
-// Profile Page
-#page{
-	touch-action: none;
+	right: 0;
 }
 
 .Profile-box {
+
+	position: relative;
 	h3 {
 		padding: 0;
 		margin-bottom: 1.8rem;
@@ -294,13 +292,38 @@ input:focus:-moz-placeholder { color:transparent; }
 	}
 }
 
+// .Upcoming-box {
+//   p {
+//     display: inline;
+//   }
+// 	a {
+// 		color: $black;
+// 	}
+// 	a:hover {
+// 		color: $dark-grey-primary;
+// 	}	
+// 	width: 100%;
+//   @include sm {
+//     width: 100%;
+//   }
+//   @include md {
+//     width: 66%;
+//   }
+// }
+
+// .Todo-box {
+// 	background-color: $yellow-background;
+// 	padding-bottom: 3.2rem;
+
+// }
+
+// View/Edit Profile Page
+#page{
+	touch-action: none;
+}
+
 .Add-edit-case {}
 
-// .form-control {
-// 	border: none;
-// 	font-size: 18px;
-// 	height: auto;
-// }
 .case-form-group {
 	margin-top: 2rem;
 	select {
@@ -346,16 +369,20 @@ input:focus:-moz-placeholder { color:transparent; }
 
 	a {
 		position: relative;
-		border: 2px solid $blue-accent-primary;
-		font-weight: 600;
-		color: $blue-accent-primary;
+		// border: 2px solid $danger;
+		background-color: $danger;
+		color: $white;
 		padding: 1rem 2rem 1rem 2rem;
 		margin-top: 4rem;
 
 	}
+	a:active {
+		background-color: $btn-danger-active;
+	}
+
 	a:hover {
-		background-color: $btn-default-active;
-		color: $white;
+		background-color: $black;
+		color: $light-grey-secondary;
 		font-weight: 300;
 	}
 
