@@ -1,14 +1,50 @@
 {
-  "name": "ccsh-master-client",
+  "name": "mainsite",
   "version": "1.0.0",
-  "description": "Client-side of MERN Starter.",
+  "description": "working code for mainsite",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "test": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+	"start": "webpack --config ./client/webpack.config.js && nodemon ./server/index.js"
   },
-  "author": "taypsl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contracostacourtneys/mainsite.git"
+  },
+  "author": "taypsl, xichencl",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/contracostacourtneys/mainsite/issues"
+  },
+  "homepage": "https://github.com/contracostacourtneys/mainsite#readme",
   "dependencies": {
+    "apiai": "^4.0.3",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.15.0",
+    "bunyan": "^1.8.12",
+    "cheerio": "^1.0.0-rc.2",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "express-session": "^1.15.6",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^5.7.0",
+    "mailchimp-v3": "^1.0.1",
+    "mailgun-js": "^0.7.10",
+    "moment": "^2.13.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.4.13",
+    "morgan": "^1.7.0",
+    "opn": "^5.1.0",
+    "passport": "^0.3.2",
+    "passport-azure-ad": "^3.0.9",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "sendgrid": "^4.7.1",
+    "socket.io": "^1.4.6",
+    "string-format": "^0.5.0",
+    "stripe": "^4.6.0",
     "axios": "^0.13.1",
     "babel-polyfill": "^6.26.0",
     "cli-table2": "^0.2.0",
@@ -20,7 +56,6 @@
     "install": "^0.10.1",
     "lodash": "^4.6.1",
     "match-sorter": "^2.2.0",
-    "moment": "^2.13.0",
     "npm": "^5.4.2",
     "react": "^15.6.2",
     "react-burger-menu": "^2.1.6",
@@ -41,7 +76,6 @@
     "redux-form": "^6.0.0-rc.3",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
-    "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
     "superagent": "^3.8.1",
     "svgo": "^0.7.2",
@@ -77,6 +111,11 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2",
-    "webpack-sources": "^1.0.1"
+    "webpack-sources": "^1.0.1",
+    "deep-copy": "^1.4.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "should": "^11.1.1",
+    "supertest": "^2.0.0"
   }
 }
