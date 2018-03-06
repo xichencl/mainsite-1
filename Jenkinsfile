@@ -7,6 +7,11 @@ pipeline {
 	
 	#need to build test and deliver stage sh files
     stages {
+		stage('Build') { 
+            steps {
+                sh 'npm install' 
+            }
+        }
         stage('Run') { 
             steps {
                 sh 'npm start' 

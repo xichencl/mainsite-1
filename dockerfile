@@ -1,11 +1,12 @@
 # Build image
 FROM node:9-alpine
 
-# Add packages needed to build native dependencies
-# install all required packages
-run apk --no-cache add --virtual native-deps \
-   python \
-   git &&\
-  npm install && \
-  apk del native-deps
+#install deps
+RUN apk add --no-cache \
+    git \
+    python \
+
+
+# Install modules
+# RUN npm install --quiet
 
