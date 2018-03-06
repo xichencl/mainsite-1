@@ -5,14 +5,13 @@ pipeline {
 	
 	environment { CI = 'true' }
 	
-	#need to build test and deliver stage sh files
-    stages {
+	stages {
 		stage('Build') { 
             steps {
                 sh 'npm install' 
             }
         }
-        stage('Test') { 
+        stage('Run') { 
             steps {
                 sh 'npm start' 
             }
