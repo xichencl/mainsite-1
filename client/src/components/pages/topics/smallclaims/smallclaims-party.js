@@ -62,7 +62,7 @@ class SmallClaimsParty extends Component {
 	}
 
   renderStageButtons() {
-    const renderedButtons = this.props.content.map((stage, index) => {
+    return this.props.content.map((stage, index) => {
       return (
       <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
         <Link to={`${this.props.match.url}/${stage.fields.url}`}>
@@ -76,9 +76,9 @@ class SmallClaimsParty extends Component {
       )
     })
 
-    return [
-      <div className="grid grid-pad">{renderedButtons}</div> 
-    ];
+    // return [
+    //   <div>{renderedButtons}</div>
+    // ];
   }
 
 	render() {
@@ -97,6 +97,8 @@ class SmallClaimsParty extends Component {
   			<TitleLine title="Small Claims" />
         <div className="grid grid-pad">
         	{/*<Link to="checklist">*/}
+            {this.renderStageButtons()}
+
             <TextIconBox 
           		boxTitle="Small Claims Checklist"
           		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
@@ -115,7 +117,7 @@ class SmallClaimsParty extends Component {
         		/>
 
 
-        	{this.renderStageButtons()}
+        	
         
         </div>
 	    </div>

@@ -54,7 +54,7 @@ const resourceList = [
     link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
   },
   { 
-    title: "California Department of Consumer Affairs",
+    title: "Department of Consumer Affairs",
     link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
   },
   { 
