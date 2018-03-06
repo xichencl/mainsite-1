@@ -11,11 +11,13 @@ import { FETCH_ASSET } from './types'
 // export const FETCH_POST = 'FETCH_POST';
 // export const FETCH_ASSET = 'FETCH_ASSET';
 
+import {
+  API_BASE_URL,
+  API_SPACE_ID,
+  API_TOKEN,
+  SMALL_CLAIMS_ID 
+} from '../../secret.env'
 
-const API_BASE_URL = 'https://cdn.contentful.com';
-const API_SPACE_ID = 'x8bmio1z72gj';
-const API_TOKEN = 'd5bbad9aaee8876cceb673a9de9364b29cf477d2ca96f978e684ba25f55ec74a';
-const SMALL_CLAIMS_ID = '5iJkGCIR2gUoMKaeQOqo6W';
 
 export function fetchCategories() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);

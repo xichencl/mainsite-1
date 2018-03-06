@@ -42,9 +42,14 @@ export default class AccordionBoxContainer extends Component {
 					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">
 							<ReactMarkdown source={input} />
+
+							{/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
 						</div>
-{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
-*/}					</div>
+						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
+						*/}					
+
+
+					</div>
 					<hr />
 				</div>
 			)
