@@ -19,15 +19,15 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc \
 #COPY *.json ./
 
 # Add packages needed to build native dependencies
-run apk --no-cache add --virtual native-deps \
-  g++ gcc libgcc libstdc++ linux-headers make python git&& \
-  npm install --quiet node-gyp -g &&\
-  npm install --quiet && \
-  apk del native-deps
+#run apk --no-cache add --virtual native-deps \
+#  g++ gcc libgcc libstdc++ linux-headers make python git&& \
+#  npm install --quiet node-gyp -g &&\
+#  npm install --quiet && \
+#  apk del native-deps
 
-#RUN apk add --no-cache \
-#    git \
-#    python \
+RUN apk add --no-cache \
+    git \
+    python \
 #    python-dev \
 #    py-pip \
 #    build-base \
@@ -38,4 +38,4 @@ run apk --no-cache add --virtual native-deps \
 #RUN npm install --quiet
 
 # Copy over the application code so we can run lint, tests, etc.
-COPY . ./
+#COPY . ./
