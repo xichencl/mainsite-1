@@ -8,22 +8,21 @@ import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
-import { fetchContent } from '../../../../actions/content.js';
+import { fetchContentByParty } from '../../../../actions/content.js';
 
 let beforeID = '1cMyrIaZ680ukwwSi8YscC';
 // let duringID = 5iDqJ92Rzqksq88gYWawE4;
 // let afterID = 4HkTlYlsFqqIgscmGWOCkk;
-// const stageIds = [
-//   {
-//     before: '1cMyrIaZ680ukwwSi8YscC'
-//   },
-//   {
-//     during: '5iDqJ92Rzqksq88gYWawE4'
-//   },
-//   {
-//     after: '4HkTlYlsFqqIgscmGWOCkk'
-//   }
-// ]
+
+const plaintiffId = {
+  name: 'plaintiff',
+  id: '2zYmskK1EUW22uukow4CaU'
+}
+
+const defendantId = {
+  name: 'defendant',
+  id: 'mI8A9AawXACAmYEmSyU0g'
+}
 
 const selectedStageID = '';
 const filteredTabs = [];
@@ -41,7 +40,16 @@ class SmallClaimsStage extends Component {
     this.onStageSelect = this.onStageSelect.bind(this);
   }
   componentWillMount() {
-    this.props.fetchContent('SmallClaims')
+    // this.props.fetchContent('SmallClaims')
+    if (this.props.match.params.party === plaintiffId.name) {
+      console.log(this.props.match.params.party, "=====")
+      this.props.fetchContentByParty('SmallClaims', '2zYmskK1EUW22uukow4CaU')
+    } else if(this.props.match.params.party === defendantId.name) {
+      console.log(this.props.match.params.party, "=====")
+      this.props.fetchContentByParty('SmallClaims', 'mI8A9AawXACAmYEmSyU0g')
+    }
+    // plaintiffId: 2zYmskK1EUW22uukow4CaU
+    // defendantId: mI8A9AawXACAmYEmSyU0g
   }
 
   onStageSelect(title, _id, e) {
@@ -57,24 +65,27 @@ class SmallClaimsStage extends Component {
   filterContent(content, findById) {
     let filledAry = [];
     let emptyAry = [];
-
-    // first reduce gets each tab array
+    // filter content by party 
     return content.tabs.reduce(function (acc, tab) {
+      // const 
+    // first reduce gets each tab 
+    // return content.tabs.reduce(function (acc, tab) {
       const thisTab = tab;
-      // second reduce gets each stage array
+      // second reduce gets each tab's array of stages 
       const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
-          // includes checks if ID is present in stage array
-          const tabStage = cat.sys.id.includes(findById);
-          // if the ID matches, push the tab content to a new array
-          return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
-          // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-      }, []);
-      console.log("5. aryTabs", aryTabs)
+        // checks if ID is present in stage array
+        const tabStage = cat.sys.id.includes(findById);
+        // if the ID matches, push the tab content to a new array
+        return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+        // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+      }, []); 
+      // console.log("5. aryTabs", aryTabs)
       console.log("7. filledAry", filledAry)
-      console.log("8. emptyAry", emptyAry)
+      // console.log("8. emptyAry", emptyAry)
       // return !aryTabs.length ? acc : acc.concat(Object.assign({}, { aryTabs }));
       // pass content to AccordionBoxContainer as props
-      return !filledAry.length ? <AccordionBoxContainer stageContent={emptyAry} /> : <AccordionBoxContainer stageContent={filledAry} />
+      return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
+
     }, []);
   }
 
@@ -119,7 +130,7 @@ function mapStateToProps(state) {
     content: state.content
   };
 }
-export default connect(mapStateToProps, { fetchContent })(SmallClaimsStage);
+export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
 
 // export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
 

@@ -39,9 +39,10 @@ export default class AccordionBoxContainer extends Component {
 			return (
 				<div className="Accordion-box-item " key={tab.sys.id}>
 					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.fields.title}<span></span></h3>
-					<div className=`Accordion-box-content ${this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}`> 
+					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
+						<div className="Accordion-box-content">
 							<ReactMarkdown source={input} />
-					
+						</div>
 {/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
 */}					</div>
 					<hr />
