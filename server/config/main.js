@@ -8,7 +8,7 @@ const { TEST_DB_URL,
  COOKIE_ENCRYPTION_KEYS,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
- JWT_SECRET } = require('../secret.env');
+ JWT_SECRET } = require('../../secret.env');
 // console.log(process.env);
 
 //auth settings
