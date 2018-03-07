@@ -621,6 +621,17 @@ hr {
   // }
 }
 
+.xs-box {
+  width: 100%;
+  // margin-right: 3%;
+  @include sm {
+    width: 20%;
+  }
+  // @include sm {
+  //   width: 50%;
+  // }
+}
+
 .large-box {
   width: 100%;
 }

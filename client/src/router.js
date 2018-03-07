@@ -4,6 +4,7 @@ import { CLIENT_ROOT_URL } from './actions/index';
 
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
+import UnderConstruction from './components/pages/under-construction';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
@@ -116,18 +117,17 @@ export default class AppRouter extends Component {
                   <Route exact path="/smallclaims" component={SmallClaims} />
                   <Route exact path="/smallclaims/:party" component={SmallClaimsParty} />
                   <Route path="/smallclaims/:party/:stage" component={SmallClaimsStage} />
-                  <Route path="/guardianship" component={Guardianship} />
-                  <Route path="/eviction" component={Eviction} />
-                  <Route path="/dv" component={Dv} />
-                  <Route path="/traffic" component={Traffic} />
-                  <Route path="/family" component={FamilyHome} />
-                  <Route path="/adoption" component={Adoption} />
+                  <Route path="/guardianship" component={UnderConstruction} />
+                  <Route path="/eviction" component={UnderConstruction} />
+                  <Route path="/dv" component={UnderConstruction} />
+                  <Route path="/traffic" component={UnderConstruction} />
+                  <Route path="/family" component={UnderConstruction} />
+                  <Route path="/adoption" component={UnderConstruction} />
 
                   <Route path="/profile" component={RequireAuth(ViewProfile)} />
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
-
 
 
                   <Route component={NotFoundPage} />
