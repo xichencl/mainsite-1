@@ -10,46 +10,84 @@ import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContentByParty } from '../../../../actions/content.js';
 
-let beforeID = '1cMyrIaZ680ukwwSi8YscC';
+// let beforeID = '1cMyrIaZ680ukwwSi8YscC';
 // let duringID = 5iDqJ92Rzqksq88gYWawE4;
 // let afterID = 4HkTlYlsFqqIgscmGWOCkk;
 
-const plaintiffId = {
-  name: 'plaintiff',
-  id: '2zYmskK1EUW22uukow4CaU'
-}
 
-const defendantId = {
-  name: 'defendant',
-  id: 'mI8A9AawXACAmYEmSyU0g'
-}
 
-const selectedStageID = '';
-const filteredTabs = [];
+const partyIds = [
+  {
+    name: 'defendant',
+    id: 'mI8A9AawXACAmYEmSyU0g'
+    
+  },
+  {
+    name: 'plaintiff',
+    id: '2zYmskK1EUW22uukow4CaU'
+   }
+  
+]
+
+const stageIds = [
+  {
+    name: 'before',
+    id: '1cMyrIaZ680ukwwSi8YscC'
+    
+  },
+  {
+    name: 'during',
+    id: '5iDqJ92Rzqksq88gYWawE4'
+  },
+  {
+    name: 'after',
+    id: '4HkTlYlsFqqIgscmGWOCkk'
+  }
+  
+]
 
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
       selectedStage: this.props.match.params.stage,
-      selectedStageId: beforeID,
+      selectedStageId: this.props.stageId,
       selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
+    this.getContentByParty = this.getContentByParty.bind(this);
   }
   componentWillMount() {
-    // this.props.fetchContent('SmallClaims')
-    if (this.props.match.params.party === plaintiffId.name) {
-      console.log(this.props.match.params.party, "=====")
-      this.props.fetchContentByParty('SmallClaims', '2zYmskK1EUW22uukow4CaU')
-    } else if(this.props.match.params.party === defendantId.name) {
-      console.log(this.props.match.params.party, "=====")
-      this.props.fetchContentByParty('SmallClaims', 'mI8A9AawXACAmYEmSyU0g')
-    }
-    // plaintiffId: 2zYmskK1EUW22uukow4CaU
-    // defendantId: mI8A9AawXACAmYEmSyU0g
+    console.log(this.state.selectedStageId, "this.state.selectedStageId")
+    let _partyId;
+
+    if (this.props.match.params.party === partyIds[0].name) {
+        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
+        //console.log(partyIds[0].id)
+          _partyId = partyIds[0].id
+      } else {
+        //console.log(partyIds[1].id)
+         _partyId = partyIds[1].id
+      }
+    // console.log(_partyId, "Party Id");
+    this.props.fetchContentByParty('SmallClaims', _partyId)
+  }
+
+  getContentByParty() {
+    let _partyId;
+
+    if (this.props.match.params.party === partyIds[0].name) {
+        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
+        //console.log(partyIds[0].id)
+          _partyId = partyIds[0].id
+      } else {
+        //console.log(partyIds[1].id)
+         _partyId = partyIds[1].id
+      }
+    // console.log(_partyId, "Party Id");
+    this.props.fetchContentByParty('SmallClaims', _partyId)
   }
 
   onStageSelect(title, _id, e) {
@@ -127,7 +165,8 @@ function mapStateToProps(state) {
   return { 
     stageContent: state.content.tabs,
     stage: state.content.stages,
-    content: state.content
+    content: state.content, 
+    stageId: state.content.stageId
   };
 }
 export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);

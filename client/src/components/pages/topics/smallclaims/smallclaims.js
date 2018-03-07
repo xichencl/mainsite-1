@@ -83,9 +83,11 @@ class SmallClaims extends Component {
   }
 
   onPartyClick(_id, e){
+    this.props.storePartyId(_id)
     console.log('onpartyclick, id', _id)
     e.stopPropagation();
     this.setState({partyId: _id})
+    
   }
 
   renderParties() {
@@ -154,7 +156,6 @@ class SmallClaims extends Component {
 function mapStateToProps(state) {
   return { 
     content: state.content.parties,
-    selectedParty: state.partyId
    };
 }
 

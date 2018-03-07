@@ -6,6 +6,7 @@ import { FETCH_CONTENT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
 import { FETCH_ASSET } from './types'
+import { STORE_STAGE_ID } from './types'
 
 // export const FETCH_SITE_CONTENT = 'FETCH_SITE_CONTENT';
 // export const FETCH_POST = 'FETCH_POST';
@@ -81,6 +82,22 @@ export function fetchAsset(id) {
     payload: request
   };
 }
+
+export const storeStageId = (id) => {
+  console.log("storeStageId action", id)
+  return {
+    type: STORE_STAGE_ID,
+    id
+  }
+}
+
+
+// export function storePartyId(id) {
+//   return {
+//     type: STORE_PARTY_ID,
+//     payload: id
+//   }
+// }
 
 // {space_id}/{asset_id}/{token}/{name}
 

@@ -3,15 +3,16 @@ import { reducer as formReducer } from 'redux-form';
 import authReducer from './auth_reducer';
 import userReducer from './user_reducer';
 import contentReducer from './content_reducer';
+// import contentVariableReducer from './content_variable_reducer';
 import assetsReducer from './assets_reducer';
 import chatlog from './chatlog';
 import chatUserInput from './chatUserInput';
 import botStatusReducer from './botStatusReducer';
-import { 
-  checklistReducer,
-  tasksByChecklistType,
-  selectedChecklist 
-} from './checklist_reducer';
+// import { 
+//   checklistReducer,
+//   tasksByChecklistType,
+//   selectedChecklist 
+// } from './checklist_reducer';
 
 //redux todo app with data service middleware: 
 import todos from './todos'
@@ -39,10 +40,11 @@ const rootReducer = combineReducers({
   user: userReducer,
   chat: chatReducer,
   content: contentReducer,
+  // partyId: contentVariableReducer,
   assets: assetsReducer,
-  checklist: checklistReducer,
-  selectedChecklist,
-  tasksByChecklistType,
+  // // checklist: checklistReducer,
+  // selectedChecklist,
+  // tasksByChecklistType,
   loading,
   todos,
   visibilityFilter
