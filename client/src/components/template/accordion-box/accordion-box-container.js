@@ -2,19 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import marked from 'marked';
 const ReactMarkdown = require('react-markdown')
 
-const fakeContent = [
-	{
-		id: 1,
-		title: "What is Small Claims Court?",
-		text: "Small claims court is set-up to resolve disputes quickly with little costs. Cases are always for less than $10,000. The rules are more simple and the hearings are less formal than in other courts. You can talk to a lawyer about your small claims case, but your lawyer cannot represent you in court."
-	},
-	{
-		id: 2,
-		title: "Who Can File a Claim in Small Claims Court",
-		text: "Generally, any adult, business or government agency (except the federal government) can sue or be sued in small claims court – as long as the dispute is about money."
-	}
-]; 
-
 export default class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -53,10 +40,16 @@ export default class AccordionBoxContainer extends Component {
 				<div className="Accordion-box-item " key={tab.sys.id}>
 					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.fields.title}<span></span></h3>
 					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
+						<div className="Accordion-box-content">
 							<ReactMarkdown source={input} />
-					
-{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
-*/}					</div>
+
+							{/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
+						</div>
+						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
+						*/}					
+
+
+					</div>
 					<hr />
 				</div>
 			)

@@ -8,40 +8,86 @@ import TextIconBox from '../../../template/text-icon-box';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
-import { fetchContent } from '../../../../actions/content.js';
+import { fetchContentByParty } from '../../../../actions/content.js';
 
-let beforeID = '1cMyrIaZ680ukwwSi8YscC';
+// let beforeID = '1cMyrIaZ680ukwwSi8YscC';
 // let duringID = 5iDqJ92Rzqksq88gYWawE4;
 // let afterID = 4HkTlYlsFqqIgscmGWOCkk;
-// const stageIds = [
-//   {
-//     before: '1cMyrIaZ680ukwwSi8YscC'
-//   },
-//   {
-//     during: '5iDqJ92Rzqksq88gYWawE4'
-//   },
-//   {
-//     after: '4HkTlYlsFqqIgscmGWOCkk'
-//   }
-// ]
 
-const selectedStageID = '';
-const filteredTabs = [];
+
+
+const partyIds = [
+  {
+    name: 'defendant',
+    id: 'mI8A9AawXACAmYEmSyU0g'
+    
+  },
+  {
+    name: 'plaintiff',
+    id: '2zYmskK1EUW22uukow4CaU'
+   }
+  
+]
+
+const stageIds = [
+  {
+    name: 'before',
+    id: '1cMyrIaZ680ukwwSi8YscC'
+    
+  },
+  {
+    name: 'during',
+    id: '5iDqJ92Rzqksq88gYWawE4'
+  },
+  {
+    name: 'after',
+    id: '4HkTlYlsFqqIgscmGWOCkk'
+  }
+  
+]
 
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
       selectedStage: this.props.match.params.stage,
-      selectedStageId: beforeID,
+      selectedStageId: this.props.stageId,
       selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
+    this.getContentByParty = this.getContentByParty.bind(this);
   }
   componentWillMount() {
-    this.props.fetchContent('SmallClaims')
+    console.log(this.state.selectedStageId, "this.state.selectedStageId")
+    let _partyId;
+
+    if (this.props.match.params.party === partyIds[0].name) {
+        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
+        //console.log(partyIds[0].id)
+          _partyId = partyIds[0].id
+      } else {
+        //console.log(partyIds[1].id)
+         _partyId = partyIds[1].id
+      }
+    // console.log(_partyId, "Party Id");
+    this.props.fetchContentByParty('SmallClaims', _partyId)
+  }
+
+  getContentByParty() {
+    let _partyId;
+
+    if (this.props.match.params.party === partyIds[0].name) {
+        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
+        //console.log(partyIds[0].id)
+          _partyId = partyIds[0].id
+      } else {
+        //console.log(partyIds[1].id)
+         _partyId = partyIds[1].id
+      }
+    // console.log(_partyId, "Party Id");
+    this.props.fetchContentByParty('SmallClaims', _partyId)
   }
 
   onStageSelect(title, _id, e) {
@@ -57,24 +103,27 @@ class SmallClaimsStage extends Component {
   filterContent(content, findById) {
     let filledAry = [];
     let emptyAry = [];
-
-    // first reduce gets each tab array
+    // filter content by party 
     return content.tabs.reduce(function (acc, tab) {
+      // const 
+    // first reduce gets each tab 
+    // return content.tabs.reduce(function (acc, tab) {
       const thisTab = tab;
-      // second reduce gets each stage array
+      // second reduce gets each tab's array of stages 
       const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
-          // includes checks if ID is present in stage array
-          const tabStage = cat.sys.id.includes(findById);
-          // if the ID matches, push the tab content to a new array
-          return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
-          // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-      }, []);
-      console.log("5. aryTabs", aryTabs)
+        // checks if ID is present in stage array
+        const tabStage = cat.sys.id.includes(findById);
+        // if the ID matches, push the tab content to a new array
+        return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+        // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+      }, []); 
+      // console.log("5. aryTabs", aryTabs)
       console.log("7. filledAry", filledAry)
-      console.log("8. emptyAry", emptyAry)
+      // console.log("8. emptyAry", emptyAry)
       // return !aryTabs.length ? acc : acc.concat(Object.assign({}, { aryTabs }));
       // pass content to AccordionBoxContainer as props
-      return !filledAry.length ? <AccordionBoxContainer stageContent={emptyAry} /> : <AccordionBoxContainer stageContent={filledAry} />
+      return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
+
     }, []);
   }
 
@@ -116,10 +165,11 @@ function mapStateToProps(state) {
   return { 
     stageContent: state.content.tabs,
     stage: state.content.stages,
-    content: state.content
+    content: state.content, 
+    stageId: state.content.stageId
   };
 }
-export default connect(mapStateToProps, { fetchContent })(SmallClaimsStage);
+export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
 
 // export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
 

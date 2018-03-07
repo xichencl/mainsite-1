@@ -54,7 +54,7 @@ const resourceList = [
     link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
   },
   { 
-    title: "California Department of Consumer Affairs",
+    title: "Department of Consumer Affairs",
     link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
   },
   { 
@@ -68,38 +68,26 @@ const resourceList = [
 ] 
 
 class SmallClaims extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     topics: [],
-  //     parties: [
-  //       { slug: "plaintiff", img: PlaintiffIcon, title: "Plaintiff" }, 
-  //       { slug: "defendant", img: DefendantIcon, title: "Defendant" }
-  //     ]
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      partyId: ''
+    };
+    this.onPartyClick = this.onPartyClick.bind(this)
+  }
 
-  // static defaultProps() {
-  //   return {
-  //     limit: 4
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   return fetch('https://case-data.glitch.me/courtdata')
-  //     .then(response => response.json())
-  //     .then((responseJson) => {
-  //       this.setState({ topics: responseJson });
-  //       // console.log(this.state.topics)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
   componentWillMount() {
     this.props.fetchParties()
     // this.props.fetchFaqs()
     // this.props.fetchResourceLinks()
+  }
+
+  onPartyClick(_id, e){
+    this.props.storePartyId(_id)
+    console.log('onpartyclick, id', _id)
+    e.stopPropagation();
+    this.setState({partyId: _id})
+    
   }
 
   renderParties() {
@@ -108,6 +96,7 @@ class SmallClaims extends Component {
         <div className="Square-box-container" Kindsey={party.sys.id}>
           <Link to={`/smallclaims/${party.fields.url}`}>
             <Squarebox 
+              onClick={(e) => this.onPartyClick(party.sys.id, e)}
               id={party.sys.id}
               boxTitle={party.fields.title}  
               assetId={party.fields.image.sys.id}
@@ -165,7 +154,9 @@ class SmallClaims extends Component {
 }
 
 function mapStateToProps(state) {
-  return { content: state.content.parties };
+  return { 
+    content: state.content.parties,
+   };
 }
 
 export default connect(mapStateToProps, { fetchParties })(SmallClaims);

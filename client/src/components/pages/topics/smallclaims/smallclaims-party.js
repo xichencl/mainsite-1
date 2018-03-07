@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStages } from '../../../../actions/content.js';
+import { storeStageId } from '../../../../actions/content.js';
+
 import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
@@ -21,7 +25,7 @@ const resourceList = [
     link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
   },
   { 
-    title: "California Department of Consumer Affairs",
+    title: "Department of Consumer Affairs",
     link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
   },
   { 
@@ -52,17 +56,19 @@ class SmallClaimsParty extends Component {
   }
 
 	onStageSelect(title, id, e) {
-		console.log(title)
-		e.stopPropagation();
-		this.setState({
-			buttonSelected: true,
-			stageId: id, 
-      stageTitle: title
-		})
+		console.log(id, "onStageSelect id")
+    e.stopPropagation();
+    this.props.storeStageId(id);
+    
+		// this.setState({
+		// 	buttonSelected: true,
+		// 	stageId: id, 
+  //     stageTitle: title
+		// })
 	}
 
   renderStageButtons() {
-    const renderedButtons = this.props.content.map((stage, index) => {
+    return this.props.content.map((stage, index) => {
       return (
       <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
         <Link to={`${this.props.match.url}/${stage.fields.url}`}>
@@ -76,9 +82,9 @@ class SmallClaimsParty extends Component {
       )
     })
 
-    return [
-      <div className="grid grid-pad">{renderedButtons}</div> 
-    ];
+    // return [
+    //   <div>{renderedButtons}</div>
+    // ];
   }
 
 	render() {
@@ -97,6 +103,8 @@ class SmallClaimsParty extends Component {
   			<TitleLine title="Small Claims" />
         <div className="grid grid-pad">
         	{/*<Link to="checklist">*/}
+            {this.renderStageButtons()}
+
             <TextIconBox 
           		boxTitle="Small Claims Checklist"
           		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
@@ -115,7 +123,7 @@ class SmallClaimsParty extends Component {
         		/>
 
 
-        	{this.renderStageButtons()}
+        	
         
         </div>
 	    </div>
@@ -124,9 +132,41 @@ class SmallClaimsParty extends Component {
 }
 
 
+
 function mapStateToProps(state) {
-  return { content: state.content.stages };
+  return { 
+    content: state.content.stages,
+    stageId: state.content.stageId 
+  };
 }
 
-export default connect(mapStateToProps, { fetchStages })(SmallClaimsParty);
+function mapDispatchToProps(dispatch) {
+  return {
+      fetchStages: bindActionCreators(fetchStages, dispatch),
+      storeStageId: bindActionCreators(storeStageId, dispatch)
+  };
+}
+
+
+// const mapStateToProps = (state) => {
+//   return { 
+//     content: state.content.stages,
+//     stageId: state.content.stageId
+//    };
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     dispatchFetchStages: () => dispatch(fetchStages()),
+//     dispatchStoreStageId: () => dispatch(storeStageId())
+//   };
+// }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsParty);
+
+
+
+
+// export default connect(mapStateToProps, { storeStageId, fetchStages })(SmallClaimsParty);
 

@@ -599,8 +599,8 @@ hr {
 
 .medium-box {
   width: 100%;
-  margin-right: 3%;
-
+  // margin-right: 3%;
+  margin: 1rem;
   @include sm {
     width: 63%;
   }
