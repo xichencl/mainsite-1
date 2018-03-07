@@ -1,4 +1,4 @@
-const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../secret.env');
+const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
 
 const apiai = require('apiai');
 const aiSmallClaims = apiai(SC_CHAT_API_KEY);
@@ -8,6 +8,7 @@ const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Gua
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
+const path = require('path');
 let ai, caseType;
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
@@ -61,8 +62,8 @@ exports.getMessageResponse = (req, res) => {
         //sends event request to api.ai and response to front end
         if (req.body.payload.type=='button'){
           const msg = req.body.payload.message;
-
-          const events = JSON.parse(fs.readFileSync('./static_files/bot_buttons_and_events.json'));
+          // console.log("dir ", __dirname);
+          const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
           const ev = {};
           if (msg in events){
             // console.log(msg);

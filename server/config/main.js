@@ -8,7 +8,8 @@ const { TEST_DB_URL,
  COOKIE_ENCRYPTION_KEYS,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
- JWT_SECRET } = require('../secret.env');
+ JWT_SECRET,
+ NODE_ENV } = require('../../secret.env');
 // console.log(process.env);
 
 //auth settings
@@ -33,7 +34,9 @@ const creds = {
 
   // Required, the reply URL registered in AAD for your app
   //local dev
-  redirectUrl: 'http://localhost:3000/api/auth/openid/return', 
+  redirectUrl: (NODE_ENV === 'dev_server') ? 
+  'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return': 
+  'http://localhost:3000/api/auth/openid/return',
   //dev server
   // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',
 
@@ -120,7 +123,9 @@ module.exports = {
 resourceURL: 'https://graph.windows.net',
 
 // The url you need to go to destroy the session with AAD
-destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
+destroySessionUrl: (NODE_ENV === 'dev_server') ?
+'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
+'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
 
 // If you want to use the mongoDB session store for session middleware; otherwise we will use the default
 // session store provided by express-session.
