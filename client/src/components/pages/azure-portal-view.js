@@ -7,6 +7,8 @@ import ViewProfile from '../profile/view-profile';
 import Upcoming from '../calendar/upcoming';
 import MyForms from './FormsBoxes/my-forms';
 import MyCases from '../cases/my-cases';
+import TitleLine from '../template/title-line';
+
 // import ViewTodo from '../todo/view-todo';
 import { API_URL, fetchUser, fetchAzureUser } from '../../actions/index';
 // import axios from 'axios';
@@ -21,43 +23,31 @@ class AzurePortalView extends Component {
 
   renderLinks() {
     if (this.props.authenticated) {
-      // console.log("Props:", this.props);
-      // const user = cookie.get('user');
-      // const uid = user._id;
-      // this.props.fetchUser(uid);
-      // fetchUser(cookie.get('user')._id);
-      // console.log(cookie.get('token'));
-      // axios.get(`${API_URL}/user/${cookie.get('user')._id}`, {headers: {'Authorization': `${cookie.get('token')}`}})
-      // .then((response)=>{
-      //   console.log(response.data);
-      //   data = response.data;
-      // })
-      // .catch((error)=>{
-      //   console.log(error);
-      // });
+
       return [
 
-        <div key={`${1}profile`}>
+        <div key={`${1}profile`} className="Portal-box Portal-box-profile">
           <ViewProfile />
         </div>,
         // ============================
-        <div key={`${2}cases`}>
+        <div key={`${2}cases`} className="Portal-box Portal-box-cases">
           <MyCases />
         </div>,
+
         // ============================
-        <div key={`${3}forms`}>
-          <MyForms />
-        </div>,
+        // <div key={`${3}forms`}>
+        //   <MyForms />
+        // </div>,
         // ============================
         
-        <div key={`${5}search`}>
+        // <div key={`${5}search`}>
           
-          <Link to='find-a-case'>
-            <SquareBoxStatic
-              boxTitle='Find a Court Case'
-              imgSrc={SearchIcon} />
-          </Link>
-        </div>,
+        //   <Link to='find-a-case'>
+        //     <SquareBoxStatic
+        //       boxTitle='Find a Court Case'
+        //       imgSrc={SearchIcon} />
+        //   </Link>
+        // </div>,
         // ============================
         <div key={`${4}logout`} className='Logout'>
           <a href='/api/logout'> Logout </a>
@@ -66,14 +56,14 @@ class AzurePortalView extends Component {
     } else {
       return [
         // Unauthenticated navigation
-        <div key={1}>
+        <div className="Square-box-container" key={1}>
           <Link to="login">
             <SquareBoxStatic
               boxTitle='Login / Sign Up'
               imgSrc={LoginIcon} />
           </Link>
         </div>,
-        <div key={2}>
+        <div className="Square-box-container" key={2}>
           <Link to="find-a-case">
             <SquareBoxStatic 
               boxTitle='Find a Case'
@@ -88,8 +78,8 @@ class AzurePortalView extends Component {
     return  (
       !this.props.loading &&
       <div>
-        <h1>My Portal</h1>
-        <div className='grid grid-pad'>
+        <TitleLine title="My Portal" />
+        <div className="grid grid-pad portal-grid" >
             {this.renderLinks()}
         </div>
       </div>

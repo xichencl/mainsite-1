@@ -6,16 +6,19 @@ import { FETCH_CONTENT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
 import { FETCH_ASSET } from './types'
+import { STORE_STAGE_ID } from './types'
 
 // export const FETCH_SITE_CONTENT = 'FETCH_SITE_CONTENT';
 // export const FETCH_POST = 'FETCH_POST';
 // export const FETCH_ASSET = 'FETCH_ASSET';
 
+import {
+  API_BASE_URL,
+  API_SPACE_ID,
+  API_TOKEN,
+  SMALL_CLAIMS_ID 
+} from '../../secret.env'
 
-const API_BASE_URL = 'https://cdn.contentful.com';
-const API_SPACE_ID = 'x8bmio1z72gj';
-const API_TOKEN = 'd5bbad9aaee8876cceb673a9de9364b29cf477d2ca96f978e684ba25f55ec74a';
-const SMALL_CLAIMS_ID = '5iJkGCIR2gUoMKaeQOqo6W';
 
 export function fetchCategories() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);
@@ -53,8 +56,8 @@ export function fetchStages() {
   };
 }
 
-export function fetchContent(label) {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}`);
+export function fetchContentByParty(label, party) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt`);
   console.log('fetch stageContent action')
   return {
     type: FETCH_CONTENT,
@@ -62,8 +65,8 @@ export function fetchContent(label) {
   };
 }
 
-export function fetchResourceLinks() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.unit.sys.id=${SMALL_CLAIMS_ID}`);
+export function fetchResourceLinks(label) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.categoryLabel=${label}`);
   console.log('fetch resource links action')
   return {
     type: FETCH_RESOURCE_LINKS,
@@ -79,6 +82,22 @@ export function fetchAsset(id) {
     payload: request
   };
 }
+
+export const storeStageId = (id) => {
+  console.log("storeStageId action", id)
+  return {
+    type: STORE_STAGE_ID,
+    id
+  }
+}
+
+
+// export function storePartyId(id) {
+//   return {
+//     type: STORE_PARTY_ID,
+//     payload: id
+//   }
+// }
 
 // {space_id}/{asset_id}/{token}/{name}
 

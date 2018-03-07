@@ -1,6 +1,5 @@
 //styling header
-$yellow: #ffc107;
-$white: #ffffff;
+
 /*speech bubble in main header opens bot */
 .material-icons.md-36 {
   font-size: 36px;
@@ -43,7 +42,7 @@ button.back-arrow-m {
   outline: 0;
   padding: 0;
   border: none;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,7 +54,7 @@ button.refresh-bot-m {
   outline: 0;
   padding: 0;
   border: none;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,7 +62,7 @@ button.refresh-bot-m {
 
 button.refresh-bot-m:hover,
 button.back-arrow-m:hover {
-  color: $icon-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   border: none;
@@ -74,7 +73,7 @@ button.back-arrow-m:hover {
 }
 
 button.refresh-bot-m:active {
-  color: $icon-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   -webkit-transition-duration: 0s;

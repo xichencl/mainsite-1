@@ -3,24 +3,24 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 
 //bot background
 .mono-grey-bg {
-  background-color: $not-white;
+  background-color: $light-grey-primary;
 }
 
 //bot bubble
 .mono-bot-bubble {
-  background: #000000;
-  color: #ffffff;
+  background: $black;
+  color: $white;
 }
 
 //buttons
 .botButtons {
-  background: #717171;
-  color: #ffffff;
+  background: $black;
+  color: $white;
 }
 
 .botButtons:hover {
   background-color: #cdcdcd;
-  color: $not-black;
+  color: $dark-grey-primary;
   -webkit-transition-duration: 0.2s;
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
@@ -28,13 +28,13 @@ type color blindness, Deuteranomaly (5 % of men, 0.4 % of women)*/
 }
 
 .botButtons:active {
-  background-color: $very-light-blue;
-  color: $not-black;
+  background-color: $light-grey-primary;
+  color: $dark-grey-primary;
   height: 0px;
 }
 //user bubble
 .mono-user-bubble {
   background: #ffffff;
   border: 3px solid #000000;
-  color: $not-black;
+  color: $dark-grey-primary;
 }

@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import MyCases from './my-cases';
 // import ViewTodo from '../todo/view-todo';
 import MyCaseData from './my-case-data';
-import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
+// import MyFormsLarge from '../pages/FormsBoxes/my-forms-lg';
 // import SquareBox from '../template/square-box';
 import SquareBoxStatic from '../template/square-box-static';
+import TextIconBox from '../template/text-icon-box';
 import ChecklistIcon from '../../img/checklist_1.svg';
 import TitleLine from '../template/title-line';
 
@@ -15,21 +16,17 @@ export default class MyCasesDashboard extends Component {
   }
 
   render() {
-    console.log("CaseData: ", this.props.location.state.caseData);
+    // console.log("CaseData: ", this.props.location.state.caseData);
     // console.log("caseData state:", this.state);
     const myCaseTitle = this.props.location.state.caseData.caseNumber
     return (
       <div>
-
+        <TitleLine title={`My Case - ${myCaseTitle}`} />
       	<div className='dashboard-wrapper grid grid-pad'>
-          {/*<div className="mainpage-title">
-            <hr className="mainpage-title-line" />
-      	    <h1>My Case - {this.props.location.state.caseData.caseNumber}</h1>
-            <hr className="mainpage-title-line" />
-          </div> */}
-          <TitleLine title={myCaseTitle} />
-      	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
-					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
+          <div className="Box-container">
+        	  <MyCaseData className='dashboard-inner content-wrapper' caseData={this.props.location.state.caseData}/>
+  					{/*<ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>*/}
+          </div>
           <Link to={{
             pathname:'/checklist', 
             state:{
@@ -38,31 +35,28 @@ export default class MyCasesDashboard extends Component {
                     party: this.props.location.state.caseData.isPlaintiff 
                   }
           }}>
-            
+            <div className="Box-container">
               <SquareBoxStatic 
-                boxTitle="Create a Checklist"
+                boxTitle="My Case Checklist"
                 imgSrc={ChecklistIcon}
               />
+            </div>
+            {/*<TextIconBox 
+              boxTitle="Create / View Checklist"
+              iconLarge={ChecklistIcon}
+              TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
+            />*/}
           
           </Link>
 
       		<div className='sidebar-wrapper'></div>
-        	<MyFormsLarge className='dashboard-inner forms-wrapper' />
+        	{/*<MyFormsLarge className='dashboard-inner forms-wrapper' />*/}
 
       	</div>
       </div>
     );
   }
 }
- 
-//          <ViewTodo className='dashboard-inner sidebar-inner sidebar-bottom'/>
- 
-// function mapStateToProps(state) {
-// 	console.log(state.user)
-//   return {
-//     profile: state.user.profile,
-//   };
-// }
 
-// export default connect(mapStateToProps, { fetchUser })(ViewProfile);
+//               boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
 

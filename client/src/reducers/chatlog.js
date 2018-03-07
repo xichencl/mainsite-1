@@ -4,13 +4,15 @@ const defaultState = [
   {
     message:
       "Hello, I'm Courtney!",
-    type: 'message',
+    type: 'text',
+    source: 'server',
     isBot: true
   },
   {
     message:
       "I'm here to help you learn about the small claims process. I DO NOT offer legal advice. Ask me a question or click on a button to begin.",
-    type: 'message',
+    type: 'text',
+    source: 'server',
     isBot: true
   },
   {
@@ -20,7 +22,7 @@ const defaultState = [
   },
   {
     message: "Claim Limit",
-    type:'button',
+    type:'button',    
     isBot: true
   },
   {

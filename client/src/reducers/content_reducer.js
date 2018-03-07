@@ -6,19 +6,21 @@ import { FETCH_CONTENT } from '../actions/types';
 import { FETCH_RESOURCE_LINKS } from '../actions/types';
 import { FETCH_STAGES } from '../actions/types';
 
+import { STORE_STAGE_ID } from '../actions/types';
+
 const INITIAL_STATE = { 
   categories: [],
   parties: [],
   stages: [],
   resources: [],
   faqs: [],
-  tabs: [] 
+  tabs: [], 
+  stageId: [] 
 };
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FETCH_CATEGORIES:
-        console.log('fetch reducer')
     return { ...state, categories: action.payload.data.items };
   case FETCH_PARTIES:
     return { ...state, parties: action.payload.data.items };
@@ -30,7 +32,10 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, stages: action.payload.data.items };
   case FETCH_RESOURCE_LINKS:
     return { ...state, resources: action.payload.data.items };
+  case STORE_STAGE_ID:
+    return { ...state, stageId: action.id };
   default:
     return state;
   }
 }
+

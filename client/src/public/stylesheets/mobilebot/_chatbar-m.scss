@@ -1,14 +1,11 @@
 //styling chatbar
-$yellow: #ffc107;
-$white: #ffffff;
-
 .chatbar-m {
   height: 4.2em;
   width: 100vw;
   padding: .3em .7em .3em .3em;
-  border-top: 1px solid #939393;
+  border-top: 1px solid $light-grey-secondary;
   background-color: $white;
-  color: $not-black;
+  color: $dark-grey-primary;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,7 +35,7 @@ $white: #ffffff;
   margin-right: 6px;
   padding-left: 1em;
   border-radius: 0;
-  background-color: #ffffff;
+  background-color: $white;
   @include xxs {
     width: 14.5em;
     height: 2.6em;
@@ -48,8 +45,8 @@ $white: #ffffff;
 }
 
 button.circle-m {
-  background-color: #115077;
-  color: #ffffff;
+  background-color: $blue-accent-primary;
+  color: $white;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -71,7 +68,7 @@ button.circle-m {
 
 button.mic-m {
   background-color: transparent;
-  color: $icon-grey;
+  color: $dark-grey-primary;
   outline: 0;
   padding: 0;
   padding-top: 10px;

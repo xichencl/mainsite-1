@@ -73,11 +73,11 @@ exports.getMessageResponse = (req, res) => {
             return;
           }
           
-          
+          console.log("event: ", ev);
           const request_to_ai = ai.eventRequest(ev, options);
           // console.log(request_to_ai);
           request_to_ai.on('response', (response_from_ai) => {
-            // console.log('Response:', response_from_ai);
+            console.log('Response:', response_from_ai);
             const code = response_from_ai.status.code;
             response_from_ai['caseType'] = caseType;
             // console.log(response_from_ai);

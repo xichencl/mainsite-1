@@ -77,7 +77,7 @@ export default class Dv extends Component {
             <h1>Domestic Violence</h1>
             <hr className="mainpage-title-line"/>
           </div> 
-		      <div className='warning'><p>WARNING! People can tell what Internet sites you have visited on your computer. Be Safe!</p></div>
+		      <div className="warning"><p>WARNING! People can tell what Internet sites you have visited on your computer. Be Safe!</p></div>
 		      {/*<Bannerbox boxTitle='What is Abuse?'
 		           boxContent='Learn about how to file a restraining order for yourself and others.'
 		           buttonText='FAQs'

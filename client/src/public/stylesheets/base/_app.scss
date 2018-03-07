@@ -1,32 +1,48 @@
+// Fonts
 $font-family-serif: "Judson", serif;
 $font-family-sans-serif: "Source Sans Pro", sans-serif;
 
-$grey-border: #eee;
-$grey-text: #aaa;
-$black: #000;
-$dark-grey: #333333;
-$white: #fff;
-$blue-button: #316a92;
-$blue-button-pressed: #115077;
-$blue-accent: #5392be;
-$blue-background: #e3f8ff;
-$yellow-highlight: #f9d04e;
+// Primary paletter
+$dark-grey-primary: #333333; // Main dark color
+$blue-accent-primary: #4d9de0; // Blue highlight color
+$light-grey-primary: #f5f5f5; // Light grey box background color
+
+// Secondary palette
+$light-grey-secondary: #dddddd;
+$black: #000000;
+$white: #ffffff;
+
+// Tertiary palette
+$success: #0E9EA4; // btn-success
+$warning: #ECBF27; // btn-warning
+$danger: #D34049; // btn-danger
+
+// Button states
+$btn-success-active: #048282;
+$btn-warning-active: #ab2534;
+$btn-danger-active: #c4952d;
+$btn-default-active: #3286bd;
+
+$btn-success-disabled: #86cbce;
+$btn-warning-disabled: #f2d897;
+$btn-danger-disabled: #eb8c96;
+$btn-default-disabled: #a3c7e2;
+
+// Light background colors
+$blue-background: #a2c6e1;
+$yellow-background: #f1d796;
 $grey-background: #f5f5f5;
 $white-background: #ffffff;
 
+// azure blue
+$blue-azure: #00A7E4;
+
+// Box Dimensions & Footer corrections
 $box-height: 225px;
 $box-img-height: 160px;
 $box-img-width: 180px;
 $footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
 $footer-push-height-negative: -20rem;
-
-
-$bot-blue: #94ebff; //updated 2/21/18
-$very-light-blue: #e3f8ff;
-$light-grey: #f0f0f0;
-$bot-blue-icon: #4AA7DB;
-$bot-link: #0000ff;
-$bot-blue-icon-pressed: #5392be;
 
 
 html {
@@ -66,7 +82,7 @@ body {
 }
 
 a {
-  color: $grey-text;
+  color: #999999;
 }
 
 a:hover {
@@ -95,7 +111,7 @@ h3 {
 }
 
 button {
-  background: $blue-button;
+  background: $blue-accent-primary;
   border: none;
   color: $white;
   cursor: pointer;
@@ -108,12 +124,12 @@ button:disabled {
 }
 
 button:hover {
-  background: $blue-button-pressed;
+  background: $black;
 }
 
 hr {
   border: 0;
-  border-top: 1px solid $dark-grey;
+  border-top: 1px solid $dark-grey-primary;
   margin: 1rem 0;
 }
 
@@ -130,11 +146,11 @@ hr {
 
   @include lg {
     background-color: $white;
-    display: none; //display: block; to have fixed on top of screen
+    display: block; //display: block; to have fixed on top of screen
     position: fixed;
     margin: -4rem;
     height: 8.5rem;
-    width: 100%;
+    width: 90%; //vs 100%
     z-index: 100;
   }
 }
@@ -142,17 +158,17 @@ hr {
 .Search {
   align-items: center;
   background-color: $white;
-  // display: -webkit-box;
-  //   display: -ms-flexbox;
-  //   display: flex;
-  width: 75%;
+  display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  // width: 75%;
   @include md {
     margin-left: 1rem; 
-    width: 100%;
+    // width: 100%;
   }
   @include lg {
     margin-left: 20rem;
-    // position: fixed; // to have search bar fixed on top
+    position: fixed; // to have search bar fixed on top
   }
   margin-top: 1rem;
   margin-left: 2rem;
@@ -171,7 +187,7 @@ hr {
   max-width: 95rem;
   
   @include lg {
-    margin: 8rem 0 0 20rem;
+    margin: 8rem 10rem 0 20rem;
   }
 }
 
@@ -315,7 +331,7 @@ hr {
     margin-bottom: 5px;
     position: relative;
     
-    background: $dark-grey;
+    background: $dark-grey-primary;
     border-radius: 3px;
     
     z-index: 1;
@@ -348,7 +364,7 @@ hr {
   padding: 12rem 0 5rem 5rem;
   // padding-top: 125px;
   
-  background: $dark-grey;
+  background: $dark-grey-primary;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -361,7 +377,7 @@ hr {
     color: $white;
   }
   a:hover {
-    color: $blue-button;
+    color: $blue-accent-primary;
   }
 }
 
@@ -385,7 +401,7 @@ hr {
 }
 
 .Yellow-background {
-  background-color: $yellow-highlight;
+  background-color: $yellow-background;
 }
 
 .Grey-background {
@@ -394,6 +410,10 @@ hr {
 
 .White-background {
   background-color: $white-background;
+}
+
+.Box-container {
+  padding: 1rem;
 }
 
 .Square-box-container {
@@ -430,7 +450,7 @@ hr {
     color: $black;
   }
   a:hover {
-    color: $grey-text;
+    color: $light-grey-secondary;
   }
   // height: $box-height;
   // overflow: auto; 
@@ -459,10 +479,10 @@ hr {
 
 .Square-box-static {
   color: $black;
-  border-top: 2px solid $blue-accent;
+  border-top: 2px solid $blue-accent-primary;
   background-size: 200% 200%;
   background-position: 0 100%;
-  background-image: linear-gradient(to bottom, $blue-accent 51%, $grey-background 50%);
+  background-image: linear-gradient(to bottom, $blue-accent-primary 51%, $grey-background 50%);
   -webkit-transition: background-position 300ms, color 300ms ease;
   -moz-transition: background-position 300ms, color 300ms ease;
   -ms-transition: background-position 300ms, color 300ms ease;
@@ -475,7 +495,7 @@ hr {
 }
 
 .Square-box-static:hover {
-  background-image: linear-gradient(to bottom, $blue-accent 50%, $grey-background 50%);
+  background-image: linear-gradient(to bottom, $blue-accent-primary 50%, $grey-background 50%);
   background-position: 0 0;
   -webkit-transition: background-position 300ms, color 300ms ease;
   -moz-transition: background-position 300ms, color 300ms ease;
@@ -507,7 +527,7 @@ hr {
 }
 
 .Banner-box {
-  background-color: $yellow-highlight;
+  background-color: $yellow-background;
   width: 97%;
   padding: 2rem;
   position: relative;
@@ -579,8 +599,8 @@ hr {
 
 .medium-box {
   width: 100%;
-  margin-right: 3%;
-
+  // margin-right: 3%;
+  margin: 1rem;
   @include sm {
     width: 63%;
   }
@@ -611,7 +631,7 @@ hr {
   position: relative;
   bottom: 0;
   left: 0;
-  background-color: $dark-grey;
+  background-color: $dark-grey-primary;
   width: 100%;
   height: $footer-push-height;
   display: -webkit-box;
