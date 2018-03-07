@@ -110,7 +110,7 @@ class SmallClaimsStage extends Component {
           boxTitle={`Menu - ${this.props.match.params.stage}`}
           boxContent={renderedLinks}
           buttonVisibilityClass="hidden"
-          infoboxClass="Box Info-box small-box col-2"
+          infoboxClass="Box Info-box xs-box"
       />
     ]
   }
