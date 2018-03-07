@@ -8,6 +8,7 @@ const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Gua
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
+const path = require('path');
 let ai, caseType;
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
@@ -62,7 +63,7 @@ exports.getMessageResponse = (req, res) => {
         if (req.body.payload.type=='button'){
           const msg = req.body.payload.message;
 
-          const events = JSON.parse(fs.readFileSync('./static_files/bot_buttons_and_events.json'));
+          const events = JSON.parse(fs.readFileSync('./server/static_files/bot_buttons_and_events.json'));
           const ev = {};
           if (msg in events){
             // console.log(msg);
