@@ -21,7 +21,6 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FETCH_CATEGORIES:
-        console.log('fetch categories reducer')
     return { ...state, categories: action.payload.data.items };
   case FETCH_PARTIES:
     return { ...state, parties: action.payload.data.items };

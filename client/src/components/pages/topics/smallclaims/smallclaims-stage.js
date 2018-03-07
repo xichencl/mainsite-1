@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { fetchStageContent } from '../../../../actions/content.js';
 import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
@@ -10,30 +9,22 @@ import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContentByParty } from '../../../../actions/content.js';
 
-// let beforeID = '1cMyrIaZ680ukwwSi8YscC';
-// let duringID = 5iDqJ92Rzqksq88gYWawE4;
-// let afterID = 4HkTlYlsFqqIgscmGWOCkk;
-
-
 
 const partyIds = [
   {
     name: 'defendant',
-    id: 'mI8A9AawXACAmYEmSyU0g'
-    
+    id: 'mI8A9AawXACAmYEmSyU0g' 
   },
   {
     name: 'plaintiff',
     id: '2zYmskK1EUW22uukow4CaU'
    }
-  
 ]
 
 const stageIds = [
   {
     name: 'before',
     id: '1cMyrIaZ680ukwwSi8YscC'
-    
   },
   {
     name: 'during',
@@ -43,7 +34,6 @@ const stageIds = [
     name: 'after',
     id: '4HkTlYlsFqqIgscmGWOCkk'
   }
-  
 ]
 
 class SmallClaimsStage extends Component {
@@ -57,41 +47,22 @@ class SmallClaimsStage extends Component {
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
-    this.getContentByParty = this.getContentByParty.bind(this);
   }
   componentWillMount() {
-    console.log(this.state.selectedStageId, "this.state.selectedStageId")
+    // before component mounts, load content by selected party
     let _partyId;
-
+    // check if params.party matches the partyId[x].name
     if (this.props.match.params.party === partyIds[0].name) {
-        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
-        //console.log(partyIds[0].id)
+        // whichever name matches, return the id to _partyId
           _partyId = partyIds[0].id
       } else {
-        //console.log(partyIds[1].id)
          _partyId = partyIds[1].id
       }
-    // console.log(_partyId, "Party Id");
-    this.props.fetchContentByParty('SmallClaims', _partyId)
-  }
-
-  getContentByParty() {
-    let _partyId;
-
-    if (this.props.match.params.party === partyIds[0].name) {
-        // return this.props.fetchContentByParty('SmallClaims', partyIds[i].id) 
-        //console.log(partyIds[0].id)
-          _partyId = partyIds[0].id
-      } else {
-        //console.log(partyIds[1].id)
-         _partyId = partyIds[1].id
-      }
-    // console.log(_partyId, "Party Id");
+    // update state with smallclaims/:party content
     this.props.fetchContentByParty('SmallClaims', _partyId)
   }
 
   onStageSelect(title, _id, e) {
-    // console.log(title)
     e.stopPropagation();
     this.setState({
       selectedStageId: _id, 
@@ -105,9 +76,7 @@ class SmallClaimsStage extends Component {
     let emptyAry = [];
     // filter content by party 
     return content.tabs.reduce(function (acc, tab) {
-      // const 
     // first reduce gets each tab 
-    // return content.tabs.reduce(function (acc, tab) {
       const thisTab = tab;
       // second reduce gets each tab's array of stages 
       const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
@@ -117,10 +86,7 @@ class SmallClaimsStage extends Component {
         return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
         // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
       }, []); 
-      // console.log("5. aryTabs", aryTabs)
       console.log("7. filledAry", filledAry)
-      // console.log("8. emptyAry", emptyAry)
-      // return !aryTabs.length ? acc : acc.concat(Object.assign({}, { aryTabs }));
       // pass content to AccordionBoxContainer as props
       return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
@@ -128,11 +94,13 @@ class SmallClaimsStage extends Component {
   }
 
   renderMenuLinks() {
-    const renderedLinks = this.props.stage.map((stage, index) => {
+
+    const renderedLinks = [].concat(this.props.stage)
+    .sort((a, b) => a.fields.id > b.fields.id)
+    .map((stage) => {
       return (
           <div onClick={(e) => this.onStageSelect(stage.fields.url, stage.sys.id, e)} key={stage.sys.id}>
             <Link to={stage.fields.url}>{stage.fields.title}</Link>
-            
           </div>
         )
     })
@@ -156,7 +124,6 @@ class SmallClaimsStage extends Component {
           {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>
       </div>
-
     )
   } 
 }
@@ -170,12 +137,3 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
-
-// export default connect(mapStateToProps, { fetchStages })(SmallClaimsStage);
-
-          {/*<div className="White-background">{this.props.match.params.stage} Your Case</div>
-          <div className="col-2 Grey-background">menu*/}
-            {/*<p>{this.props.match.params.stage}</p>*/}
-            {/*<Link to={`${this.props.match.url}/before`}>before</Link>
-            <Link to={`${this.props.match.url}/during`}>during</Link>
-            <Link to={`${this.props.match.url}/after`}>after</Link>*/}

@@ -34,10 +34,15 @@ export default class AccordionBoxContainer extends Component {
 	render() {
 		// return <div>test</div>
 
-		const renderedContent = this.props.stageContent.map((tab) => {
+	
+
+    const renderedContent = [].concat(this.props.stageContent)
+    .sort((a, b) => a.fields.id > b.fields.id)
+    .map((tab) => {
+		// const renderedContent = this.props.stageContent.map((tab) => {
 			const input = tab.fields.blockText
 			return (
-				<div className="Accordion-box-item " key={tab.sys.id}>
+				<div className="Accordion-box-item " key={tab.fields.id}>
 					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.fields.title}<span></span></h3>
 					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">

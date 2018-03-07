@@ -65,8 +65,8 @@ export function fetchContentByParty(label, party) {
   };
 }
 
-export function fetchResourceLinks() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.unit.sys.id=${SMALL_CLAIMS_ID}`);
+export function fetchResourceLinks(label) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.categoryLabel=${label}`);
   console.log('fetch resource links action')
   return {
     type: FETCH_RESOURCE_LINKS,

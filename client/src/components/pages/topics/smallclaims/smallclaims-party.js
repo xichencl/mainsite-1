@@ -17,28 +17,7 @@ import before from '../../../../img/before_1.svg';
 import during from '../../../../img/during_1.svg';
 import after from '../../../../img/after_1.svg';
 //temporarily porting in bot here and on /smallclaims. eventually bring outside of topics pages
-import Bot from '../../../chatbot/Bot.jsx';
-
-const resourceList = [
-  { 
-    title: "Small Claims Advisor",
-    link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
-  },
-  { 
-    title: "Department of Consumer Affairs",
-    link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
-  },
-  { 
-    title: "Find a Law Library",
-    link: "http://www.publiclawlibrary.org/law-libraries/"
-  },
-  { 
-    title: "Videos",
-    link: "https://www.youtube.com/watch?v=wZ491ri0E74&list=PLnMJyjNWwPW7RCLl0kmdMuOkpAHGMbYnn"
-  },
-] 	 
-
-//                 <Link to={{pathname:'/my-case', state:{caseData: value}}} className="Portal-box-link">
+import Bot from '../../../chatbot/Bot.jsx'; 
 
 class SmallClaimsParty extends Component {
 	constructor(props) {
@@ -56,19 +35,23 @@ class SmallClaimsParty extends Component {
   }
 
 	onStageSelect(title, id, e) {
-		console.log(id, "onStageSelect id")
     e.stopPropagation();
+    // when stage selected, store stageId in state
     this.props.storeStageId(id);
-    
-		// this.setState({
-		// 	buttonSelected: true,
-		// 	stageId: id, 
-  //     stageTitle: title
-		// })
 	}
 
-  renderStageButtons() {
-    return this.props.content.map((stage, index) => {
+	render() {
+		const resources = this.props.resources.map((item) => {
+			return (
+				<div>
+					<a href={item.fields.url} target="_blank">{item.fields.title}</a>
+				</div>
+			)
+		})
+
+    const renderedStages = [].concat(this.props.content)
+    .sort((a, b) => a.fields.id > b.fields.id)
+    .map((stage) => {
       return (
       <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
         <Link to={`${this.props.match.url}/${stage.fields.url}`}>
@@ -81,62 +64,42 @@ class SmallClaimsParty extends Component {
       </div> 
       )
     })
-
-    // return [
-    //   <div>{renderedButtons}</div>
-    // ];
-  }
-
-	render() {
-		const resources = resourceList.map((item) => {
-			return (
-				<div>
-					<a href={item.link} target="_blank">{item.title}</a>
-				</div>
-			)
-		})
 		
-		//show links here: filter by if clicked, show the side menu. otherwise show icons
 		return (
   		<div>
         <Bot />
   			<TitleLine title="Small Claims" />
         <div className="grid grid-pad">
-        	{/*<Link to="checklist">*/}
-            {this.renderStageButtons()}
 
-            <TextIconBox 
-          		boxTitle="Small Claims Checklist"
-          		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
-          		iconLarge={ChecklistIcon}
-          		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
-          		buttonLink="/checklist"
-              caseType='smallClaims'
-              party={this.props.match.params.party}
-        		/>
-          {/*</Link>*/}
+          {renderedStages}
+
+          <TextIconBox 
+        		boxTitle="Small Claims Checklist"
+        		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
+        		iconLarge={ChecklistIcon}
+        		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
+        		buttonLink="/checklist"
+            caseType='smallClaims'
+            party={this.props.match.params.party}
+      		/>
+
         	<InfoBox 
         		boxTitle="Resources"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
         		infoboxClass="Box Info-box small-box col-2"
         		/>
-
-
-        	
-        
         </div>
 	    </div>
 		)
   } 
 }
 
-
-
 function mapStateToProps(state) {
   return { 
     content: state.content.stages,
-    stageId: state.content.stageId 
+    stageId: state.content.stageId,
+    resources: state.content.resources
   };
 }
 
@@ -147,26 +110,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-// const mapStateToProps = (state) => {
-//   return { 
-//     content: state.content.stages,
-//     stageId: state.content.stageId
-//    };
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     dispatchFetchStages: () => dispatch(fetchStages()),
-//     dispatchStoreStageId: () => dispatch(storeStageId())
-//   };
-// }
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsParty);
-
-
-
-
-// export default connect(mapStateToProps, { storeStageId, fetchStages })(SmallClaimsParty);
-
