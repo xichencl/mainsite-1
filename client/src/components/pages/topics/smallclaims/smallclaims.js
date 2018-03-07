@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TitleLine from '../../../template/title-line';
-// import Squarebox from '../../template/square-box';
-// import Bannerbox from '../../template/banner-box';
-// import Infobox from '../../template/info-box';
-// // Bot temporarily lives only in Small Claims until all case types are functional in bot
-// import Bot from '../../chatbot/Bot.jsx';
-// import PlaintiffIcon from '../../../img/suing_1.svg';
-// import DefendantIcon from '../../../img/sued_1.svg';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Squarebox from '../../../template/square-box';
@@ -15,12 +9,10 @@ import Bannerbox from '../../../template/banner-box';
 import Infobox from '../../../template/info-box';
 import { fetchParties } from '../../../../actions/content.js';
 import { fetchFaqs } from '../../../../actions/content.js';
-// import { fetchResourceLinks } from '../../../../actions/content.js';
+import { fetchResourceLinks } from '../../../../actions/content.js';
 
 // Bot temporarily lives only in Small Claims until all case types are functional in bot
 import Bot from '../../../chatbot/Bot.jsx';
-// import PlaintiffIcon from '../../../../img/suing_1.svg';
-// import DefendantIcon from '../../../../img/sued_1.svg';
 import client from '../../../../services/contentful-client'
 
 //3WOs1Yx3FKWAOwSYg4WsK2 smallclaims id
@@ -48,25 +40,6 @@ const temporaryFaqs = [
   }
 ]
 
-const resourceList = [
-  { 
-    title: "Small Claims Advisor",
-    link: "http://www.courts.ca.gov/selfhelp-advisors.htm"
-  },
-  { 
-    title: "Department of Consumer Affairs",
-    link: "http://www.dca.ca.gov/publications/small_claims/index.shtml"
-  },
-  { 
-    title: "Find a Law Library",
-    link: "http://www.publiclawlibrary.org/law-libraries/"
-  },
-  { 
-    title: "Videos",
-    link: "https://www.youtube.com/watch?v=wZ491ri0E74&list=PLnMJyjNWwPW7RCLl0kmdMuOkpAHGMbYnn"
-  },
-] 
-
 class SmallClaims extends Component {
   constructor() {
     super();
@@ -77,9 +50,10 @@ class SmallClaims extends Component {
   }
 
   componentWillMount() {
+    const unitLabel = "SmallClaims"
     this.props.fetchParties()
     // this.props.fetchFaqs()
-    // this.props.fetchResourceLinks()
+    this.props.fetchResourceLinks(unitLabel)
   }
 
   onPartyClick(_id, e){
@@ -87,25 +61,7 @@ class SmallClaims extends Component {
     console.log('onpartyclick, id', _id)
     e.stopPropagation();
     this.setState({partyId: _id})
-    
   }
-
-  renderParties() {
-    return this.props.content.map((party, index) => {
-      return (
-        <div className="Square-box-container" Kindsey={party.sys.id}>
-          <Link to={`/smallclaims/${party.fields.url}`}>
-            <Squarebox 
-              onClick={(e) => this.onPartyClick(party.sys.id, e)}
-              id={party.sys.id}
-              boxTitle={party.fields.title}  
-              assetId={party.fields.image.sys.id}
-            />
-          </Link>
-        </div>
-      );
-    });
-  } 
 
   render() {
     const faqs = temporaryFaqs.map((faq, index) => {
@@ -118,13 +74,31 @@ class SmallClaims extends Component {
       )
     })
 
-    const resources = resourceList.map((item) => {
+    const resources = this.props.resources.map((item) => {
       return (
         <div>
-          <a href={item.link} target="_blank">{item.title}</a>
+          <a href={item.fields.url} target="_blank">{item.fields.title}</a>
         </div>
       )
     })
+
+    const renderedParties = [].concat(this.props.content)
+    .sort((a, b) => a.fields.id > b.fields.id)
+    .map((party) => {
+        return (
+          <div className="Square-box-container" key={party.sys.id}>
+            <Link to={`/smallclaims/${party.fields.url}`}>
+              <Squarebox 
+                onClick={(e) => this.onPartyClick(party.sys.id, e)}
+                id={party.sys.id}
+                boxTitle={party.fields.title}  
+                assetId={party.fields.image.sys.id}
+              />
+            </Link>
+          </div>
+        );
+      });
+
 
     return (
       <div>
@@ -133,7 +107,7 @@ class SmallClaims extends Component {
           <div className="Topic">
             <TitleLine title="Small Claims" />
             <div className="grid grid-pad">
-              {this.renderParties()}
+              {renderedParties}
               <Infobox 
                 boxTitle="Frequently Asked Questions"
                 boxContent={faqs}
@@ -153,13 +127,23 @@ class SmallClaims extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
   return { 
     content: state.content.parties,
-   };
+    resources: state.content.resources
+  };
 }
 
-export default connect(mapStateToProps, { fetchParties })(SmallClaims);
+function mapDispatchToProps(dispatch) {
+  return {
+      fetchParties: bindActionCreators(fetchParties, dispatch),
+      fetchResourceLinks: bindActionCreators(fetchResourceLinks, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SmallClaims);
+
 /*
           <Link to={`/smallclaims/${party.url}`}>
             <Squarebox
