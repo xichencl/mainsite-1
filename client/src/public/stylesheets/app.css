@@ -1178,7 +1178,7 @@ hr {
 
 .medium-box {
   width: 100%;
-  margin-right: 3%; }
+  margin: 1rem; }
   @media (min-width: 500px) {
     .medium-box {
       width: 63%; } }
@@ -1570,6 +1570,9 @@ h1.title-line-background {
 .Accordion-box-item {
   cursor: pointer;
   width: 100%; }
+
+.Accordion-box-content div p {
+  margin: 1rem 0 1rem 0; }
 
 .warning {
   background-color: #ECBF27;

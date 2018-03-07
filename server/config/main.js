@@ -91,7 +91,7 @@ module.exports = {
   // test_database: TEST_DB_URL,
 
   //Cosmos DB Emulator
-  test_database: 'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@172.21.183.14:10255/admin?ssl=true',
+  test_database: 'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true',
   // test_db_url: 'https://localhost:8081',
   database: COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
   // Setting port for server
