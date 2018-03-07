@@ -62,8 +62,8 @@ exports.getMessageResponse = (req, res) => {
         //sends event request to api.ai and response to front end
         if (req.body.payload.type=='button'){
           const msg = req.body.payload.message;
-
-          const events = JSON.parse(fs.readFileSync('./server/static_files/bot_buttons_and_events.json'));
+          // console.log("dir ", __dirname);
+          const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
           const ev = {};
           if (msg in events){
             // console.log(msg);
