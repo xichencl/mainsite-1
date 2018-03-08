@@ -8,8 +8,9 @@ const config = {
   entry: ["babel-polyfill", "./client/src/index.js"],
 
   output: {
-    path: __dirname,
-    filename: './client/bundle.js',
+    path:  __dirname + '/client/dist',
+    // publicPath: '/client/dist',
+    filename: 'bundle.js',
   },
   
   // resolve: {
