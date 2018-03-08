@@ -124,15 +124,17 @@ class SmallClaimsStage extends Component {
     
     return (
       <div>
-        <div className="breadcrumbs">
-          <Link to="/">Home</Link>
-          <span className="breadcrumbs-chevron">></span>
-          <Link to="/smallclaims">Small Claims</Link>
-          <span className="breadcrumbs-chevron">></span> 
-          <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+        <div className="Stage-top-bar">
+          <div className="breadcrumbs">
+            <Link to="/">Home</Link>
+            <span className="breadcrumbs-chevron">></span>
+            <Link to="/smallclaims">Small Claims</Link>
+            <span className="breadcrumbs-chevron">></span> 
+            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+          </div>
+          <div className="Stage-menu">{this.renderMenuLinks()}</div>
         </div>
         <TitleLine title={currentTitle} />
-        <div className="Stage-menu">{this.renderMenuLinks()}</div>
         <div>
           {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>

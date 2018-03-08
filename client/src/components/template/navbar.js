@@ -5,7 +5,7 @@ import { NavLink, Link } from 'react-router-dom';
 import ccscLogo from '../../img/ccsc-logo.svg';
 import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
 import logoModern from '../../img/logo-modern.svg';
-import logoBw from '../../img/logo-bw.svg';
+import logoBw from '../../img/logo-219.svg';
 
 import NavbarBurger from './navbar-burger';
 // import ReactSVG from 'react-svg';

@@ -63,7 +63,7 @@ const config = {
         test: /\.(png|svg|ico)$/,
         loader: 'url-loader',
         query: {
-          limit: 10000,
+          limit: 130000,
           name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
         },
         // include: [path.resolve(__dirname, 'src', 'img')]
