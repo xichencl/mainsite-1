@@ -13,9 +13,6 @@ import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import SquareBox from '../../../template/square-box';
-import before from '../../../../img/before_1.svg';
-import during from '../../../../img/during_1.svg';
-import after from '../../../../img/after_1.svg';
 //temporarily porting in bot here and on /smallclaims. eventually bring outside of topics pages
 import Bot from '../../../chatbot/Bot.jsx'; 
 
