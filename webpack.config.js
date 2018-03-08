@@ -9,7 +9,7 @@ const config = {
 
   output: {
     path: __dirname,
-    filename: './bundle.js',
+    filename: './client/bundle.js',
   },
   
   // resolve: {
@@ -101,8 +101,8 @@ const config = {
     historyApiFallback: true,
     contentBase: './client',
     // proxy: { '/api': 'http://localhost:3000' },
-    host: '0.0.0.0',
-    port: 8000
+    // host: '0.0.0.0',
+    // port: 8000
     /* settings for serving from remote server
     port:80,
     proxy: {'/api':'http://52.39.81.245:3000'},
