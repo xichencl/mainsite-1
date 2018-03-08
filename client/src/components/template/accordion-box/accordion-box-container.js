@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import marked from 'marked';
+// import marked from 'marked';
+import { CSSTransitionGroup } from 'react-transition-group'
 const ReactMarkdown = require('react-markdown')
 
 export default class AccordionBoxContainer extends Component {
@@ -10,7 +11,7 @@ export default class AccordionBoxContainer extends Component {
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
-		this.getParsedMarkdown = this.getParsedMarkdown.bind(this);
+		// this.getParsedMarkdown = this.getParsedMarkdown.bind(this);
 	}
 
 	toggleClass(id) {
@@ -25,11 +26,11 @@ export default class AccordionBoxContainer extends Component {
   	// console.log("Next Page: this.props.stageContent", this.props.stageContent)
   }
 
-  getParsedMarkdown(content) {
-  	return {
-  		__html: marked(content, {sanitize: true})
-  	}
-  }
+  // getParsedMarkdown(content) {
+  // 	return {
+  // 		__html: marked(content, {sanitize: true})
+  // 	}
+  // }
 
 	render() {
 		// return <div>test</div>
@@ -66,7 +67,12 @@ export default class AccordionBoxContainer extends Component {
 		return (
 			<div className="Box AccordionBoxContainer large-box">
 				<hr />
+        <CSSTransitionGroup
+			    transitionName="example"
+			    transitionEnterTimeout={500}
+			    transitionLeaveTimeout={300}>
 				{renderedContent}
+				</CSSTransitionGroup>
 			</div>
 		)
 	}

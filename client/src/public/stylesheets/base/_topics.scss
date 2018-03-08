@@ -63,12 +63,28 @@ h1.title-line-background {
   }
 }
 
-
-
 .warning {
   background-color: $warning;
   padding: 1rem 1rem 0.01rem 1rem;
   width: 97%;
   border-radius: 5px;
   font-weight: 700;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

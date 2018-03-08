@@ -62,6 +62,10 @@ class SmallClaimsStage extends Component {
     this.props.fetchContentByParty('SmallClaims', _partyId)
   }
 
+  componentWillUpdate() {
+
+  }
+
   onStageSelect(title, _id, e) {
     e.stopPropagation();
     this.setState({
