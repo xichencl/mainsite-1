@@ -30,6 +30,14 @@ h1.title-line-background {
   }
 }
 
+// url breadcrumbs
+.breadcrumbs {
+}
+
+.breadcrumbs-chevron {
+  padding: 0 1rem; 
+}
+
 // Stage selection + content rendering
 .Stage-menu {
   // a:hover {
@@ -43,11 +51,11 @@ h1.title-line-background {
 
 .Stage-menu-item {
   a {
-    color: $black;
+    color: $blue-accent-primary;
     font-family: $font-family-serif;
   }
   a:hover {
-    color: $blue-accent-primary;
+    color: $black;
   }
 }
 
