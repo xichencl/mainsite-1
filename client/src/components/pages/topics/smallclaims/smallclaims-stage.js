@@ -128,9 +128,10 @@ class SmallClaimsStage extends Component {
 
     return (
       <div>
+
         <TitleLine title={currentTitle} />
+        <div className="Stage-menu">{this.renderMenuLinks()}</div>
         <div>
-          <div className="Stage-menu">{this.renderMenuLinks()}</div>
           {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>
       </div>
