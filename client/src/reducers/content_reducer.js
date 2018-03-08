@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   resources: [],
   faqs: [],
   tabs: [], 
-  stageId: [] 
+  stageId: [],
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -33,7 +33,7 @@ export default function(state = INITIAL_STATE, action) {
   case FETCH_RESOURCE_LINKS:
     return { ...state, resources: action.payload.data.items };
   case STORE_STAGE_ID:
-    return { ...state, stageId: action.id };
+    return { ...state, stageId: action.payload };
   default:
     return state;
   }

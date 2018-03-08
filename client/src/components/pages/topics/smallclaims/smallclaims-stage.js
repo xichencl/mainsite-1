@@ -40,8 +40,8 @@ class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStage: this.props.match.params.stage,
-      selectedStageId: this.props.stageId,
+      selectedStageId: this.props.stageId.id,
+      selectedStageTitle: this.props.stageId.title,
       selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
@@ -66,7 +66,7 @@ class SmallClaimsStage extends Component {
     e.stopPropagation();
     this.setState({
       selectedStageId: _id, 
-      selectedStage: title,
+      selectedStageTitle: title,
       selectedContent: [] 
     })
   }
@@ -99,7 +99,7 @@ class SmallClaimsStage extends Component {
     .sort((a, b) => a.fields.id > b.fields.id)
     .map((stage) => {
       return (
-          <div onClick={(e) => this.onStageSelect(stage.fields.url, stage.sys.id, e)} key={stage.sys.id}>
+          <div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
             <Link to={stage.fields.url}>{stage.fields.title}</Link>
           </div>
         )
@@ -107,18 +107,21 @@ class SmallClaimsStage extends Component {
 
     return [
       <InfoBox 
-          boxTitle={`Menu - ${this.props.match.params.stage}`}
+          boxTitle="Menu"
           boxContent={renderedLinks}
           buttonVisibilityClass="hidden"
           infoboxClass="Box Info-box xs-box"
       />
     ]
   }
+
   
   render() {
+    const currentTitle = this.state.selectedStageTitle
+
     return (
       <div>
-        <TitleLine title="Small Claims" />
+        <TitleLine title={currentTitle} />
         <div className="grid grid-pad">
           {this.renderMenuLinks()} 
           {this.filterContent(this.props.content, this.state.selectedStageId)}

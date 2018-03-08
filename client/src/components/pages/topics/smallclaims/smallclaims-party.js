@@ -37,7 +37,7 @@ class SmallClaimsParty extends Component {
 	onStageSelect(title, id, e) {
     e.stopPropagation();
     // when stage selected, store stageId in state
-    this.props.storeStageId(id);
+    this.props.storeStageId(title, id);
 	}
 
 	render() {
@@ -64,7 +64,7 @@ class SmallClaimsParty extends Component {
       </div> 
       )
     })
-		
+
 		return (
   		<div>
         <Bot />
@@ -77,7 +77,7 @@ class SmallClaimsParty extends Component {
         		boxTitle="Small Claims Checklist"
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
         		iconLarge={ChecklistIcon}
-        		TextIconBoxClass="Box Text-icon-box Grey-background medium-box"
+        		TextIconBoxClass="Box Text-icon-box Blue-border Grey-background medium-box"
         		buttonLink="/checklist"
             caseType='smallClaims'
             party={this.props.match.params.party}

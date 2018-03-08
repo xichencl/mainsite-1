@@ -43,7 +43,7 @@ export default class AccordionBoxContainer extends Component {
 			const input = tab.fields.blockText
 			return (
 				<div className="Accordion-box-item " key={tab.fields.id}>
-					<h3 onClick={() => this.toggleClass(tab.sys.id)}>{tab.fields.title}<span></span></h3>
+					<h3 onClick={() => this.toggleClass(tab.sys.id)} className={this.state.activeId == tab.sys.id && this.state.pressed == true ? "blue-font": " "} >{tab.fields.title}<span className="Accordion-box-icon">{this.state.activeId == tab.sys.id && this.state.pressed == true ? "-" : "+"}</span></h3>
 					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">
 							<ReactMarkdown source={input} />
@@ -64,7 +64,7 @@ export default class AccordionBoxContainer extends Component {
   // 	})
 
 		return (
-			<div className="Box AccordionBoxContainer medium-box">
+			<div className="Box AccordionBoxContainer large-box">
 				<hr />
 				{renderedContent}
 			</div>
