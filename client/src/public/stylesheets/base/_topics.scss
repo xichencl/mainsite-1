@@ -1,3 +1,4 @@
+// title line
 h1 {
 	text-align: center;
 }
@@ -29,6 +30,23 @@ h1.title-line-background {
   }
 }
 
+// Stage selection + content rendering
+.Stage-menu {
+  // a:hover {
+  //   color: $blue-accent-primary;
+  // }
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2.25rem;
+  align-items: stretch;
+}
+
+.Stage-menu-item {
+  a {
+    font-family: $font-family-serif;
+  }
+}
+
 .Accordion-box-item {
   position: relative;
   cursor: pointer;
@@ -36,6 +54,9 @@ h1.title-line-background {
   h3 {
     margin: 1.5rem 2.5rem 1rem 0;
     font-family: $font-family-sans-serif;
+  }
+  h3:hover {
+    color: $blue-accent-primary;
   }
 }
 
@@ -71,6 +92,7 @@ h1.title-line-background {
   font-weight: 700;
 }
 
+//fade in transition for stage change
 .example-enter {
   opacity: 0.01;
 }
