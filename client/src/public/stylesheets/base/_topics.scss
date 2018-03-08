@@ -57,6 +57,12 @@ h1.title-line-background {
   p {
     display: block;
   }
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    color: $blue-accent-primary;
+  }
 }
 
 
