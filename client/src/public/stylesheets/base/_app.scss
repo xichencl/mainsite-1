@@ -413,11 +413,11 @@ hr {
 }
 
 .Blue-border {
-  border: 5px solid $black;
+  border-top: 5px solid $black;
 }
 
 .Blue-border:hover {
-  border: 5px solid $blue-accent-primary;
+  border-top: 5px solid $blue-accent-primary;
 }
 
 .Box-container {
