@@ -49,6 +49,7 @@ class SmallClaimsStage extends Component {
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
+    this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
     // before component mounts, load content by selected party
@@ -110,25 +111,26 @@ class SmallClaimsStage extends Component {
         </div>
       )
     })
+  }
 
-    {/*return [
-      <InfoBox 
-          boxTitle="Menu"
-          boxContent={renderedLinks}
-          buttonVisibilityClass="hidden"
-          infoboxClass="Box Info-box xs-box"
-      />
-
-    ]*/}
+  toUpperCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   
   render() {
     const currentTitle = this.state.selectedStageTitle
-
+    const currentSection = this.props.match.params.party
+    
     return (
       <div>
-
+        <div className="breadcrumbs">
+          <Link to="/">Home</Link>
+          <span className="breadcrumbs-chevron">></span>
+          <Link to="/smallclaims">Small Claims</Link>
+          <span className="breadcrumbs-chevron">></span> 
+          <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+        </div>
         <TitleLine title={currentTitle} />
         <div className="Stage-menu">{this.renderMenuLinks()}</div>
         <div>
