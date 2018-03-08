@@ -1,3 +1,4 @@
+// title line
 h1 {
 	text-align: center;
 }
@@ -29,14 +30,69 @@ h1.title-line-background {
   }
 }
 
+// url breadcrumbs
+.breadcrumbs {
+}
+
+.breadcrumbs-chevron {
+  padding: 0 1rem; 
+}
+
+// Stage selection + content rendering
+.Stage-menu {
+  // a:hover {
+  //   color: $blue-accent-primary;
+  // }
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2.25rem;
+  align-items: stretch;
+}
+
+.Stage-menu-item {
+  a {
+    color: $blue-accent-primary;
+    font-family: $font-family-serif;
+  }
+  a:hover {
+    color: $black;
+  }
+}
+
 .Accordion-box-item {
+  position: relative;
   cursor: pointer;
   width: 100%;
+  h3 {
+    margin: 1.5rem 2.5rem 1rem 0;
+    font-family: $font-family-sans-serif;
+  }
+  h3:hover {
+    color: $blue-accent-primary;
+  }
+}
+
+.Accordion-box-icon {
+  position: absolute;
+  right: 2rem;
+  font-size: 3rem;
+  top: -0.75rem;
+}
+
+.blue-font {
+  color: $blue-accent-primary;
 }
 
 .Accordion-box-content {
-  div p {
-    margin: 1rem 0 1rem 0;
+  color: $dark-grey-primary;
+  p {
+    display: block;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    color: $blue-accent-primary;
   }
 }
 
@@ -46,4 +102,23 @@ h1.title-line-background {
   width: 97%;
   border-radius: 5px;
   font-weight: 700;
+}
+
+//fade in transition for stage change
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

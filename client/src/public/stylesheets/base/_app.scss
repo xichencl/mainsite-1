@@ -100,6 +100,7 @@ h3 {
 h1 {
   font-size: 4rem;
   font-color: $black;
+  margin: 1rem 0 2rem 0;
 }
 
 h2 {
@@ -412,6 +413,14 @@ hr {
   background-color: $white-background;
 }
 
+.Blue-border {
+  border-top: 5px solid $black;
+}
+
+.Blue-border:hover {
+  border-top: 5px solid $blue-accent-primary;
+}
+
 .Box-container {
   padding: 1rem;
 }
@@ -562,9 +571,9 @@ hr {
 
   // display: block;
   width: 100%;
-  // padding: 2rem;
-  // position: relative;
-  -webkit-box-flex: 1;
+ 
+  // flex makes info-box stretch to fit grid-pad width
+  -webkit-box-flex: 1; 
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
 
@@ -633,6 +642,13 @@ hr {
 }
 
 .large-box {
+  width: 100%;
+  @include sm {
+    width: 75%;
+  }
+}
+
+.xl-box {
   width: 100%;
 }
 // ==========================

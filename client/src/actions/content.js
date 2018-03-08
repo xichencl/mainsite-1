@@ -83,11 +83,15 @@ export function fetchAsset(id) {
   };
 }
 
-export const storeStageId = (id) => {
+export const storeStageId = (title, id) => {
   console.log("storeStageId action", id)
+  const newObject = {
+    title: title,
+    id: id
+  }
   return {
     type: STORE_STAGE_ID,
-    id
+    payload: newObject
   }
 }
 

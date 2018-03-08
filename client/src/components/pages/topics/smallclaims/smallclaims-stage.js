@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
+import SquareBoxStatic from '../../../template/square-box-static';
+
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
@@ -40,13 +42,14 @@ class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStage: this.props.match.params.stage,
-      selectedStageId: this.props.stageId,
+      selectedStageId: this.props.stageId.id,
+      selectedStageTitle: this.props.stageId.title,
       selectedContent: []
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
+    this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
     // before component mounts, load content by selected party
@@ -62,11 +65,15 @@ class SmallClaimsStage extends Component {
     this.props.fetchContentByParty('SmallClaims', _partyId)
   }
 
+  componentWillUpdate() {
+
+  }
+
   onStageSelect(title, _id, e) {
     e.stopPropagation();
     this.setState({
       selectedStageId: _id, 
-      selectedStage: title,
+      selectedStageTitle: title,
       selectedContent: [] 
     })
   }
@@ -95,32 +102,38 @@ class SmallClaimsStage extends Component {
 
   renderMenuLinks() {
 
-    const renderedLinks = [].concat(this.props.stage)
+    return [].concat(this.props.stage)
     .sort((a, b) => a.fields.id > b.fields.id)
     .map((stage) => {
       return (
-          <div onClick={(e) => this.onStageSelect(stage.fields.url, stage.sys.id, e)} key={stage.sys.id}>
-            <Link to={stage.fields.url}>{stage.fields.title}</Link>
-          </div>
-        )
+        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+          <Link to={stage.fields.url}>{stage.fields.title}</Link>
+        </div>
+      )
     })
-
-    return [
-      <InfoBox 
-          boxTitle={`Menu - ${this.props.match.params.stage}`}
-          boxContent={renderedLinks}
-          buttonVisibilityClass="hidden"
-          infoboxClass="Box Info-box xs-box"
-      />
-    ]
   }
+
+  toUpperCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   
   render() {
+    const currentTitle = this.state.selectedStageTitle
+    const currentSection = this.props.match.params.party
+    
     return (
       <div>
-        <TitleLine title="Small Claims" />
-        <div className="grid grid-pad">
-          {this.renderMenuLinks()} 
+        <div className="breadcrumbs">
+          <Link to="/">Home</Link>
+          <span className="breadcrumbs-chevron">></span>
+          <Link to="/smallclaims">Small Claims</Link>
+          <span className="breadcrumbs-chevron">></span> 
+          <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+        </div>
+        <TitleLine title={currentTitle} />
+        <div className="Stage-menu">{this.renderMenuLinks()}</div>
+        <div>
           {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>
       </div>
