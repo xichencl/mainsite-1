@@ -106,6 +106,7 @@ export default class FormsHome extends React.Component {
                       <option value="Family">Family Law</option>
                       <option value="Domestic Violence">Domestic Violence</option>
                       <option value="Traffic">Traffic</option>
+                      <option value="Fee Waiver">Fee Waiver</option>
                     </select>
                 },
                 {

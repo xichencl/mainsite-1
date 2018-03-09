@@ -4,8 +4,8 @@
   "description": "working code for mainsite",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "start": "webpack --config ./client/webpack.config.js && nodemon ./server/index.js"
+    "test": "webpack-dev-server --hot --inline",
+    "start": "webpack --config ./webpack.config.js && nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
