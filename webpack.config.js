@@ -8,8 +8,8 @@ const config = {
   entry: ["babel-polyfill", "./client/src/index.js"],
 
   output: {
-    path:  __dirname + '/client/dist',
-    // publicPath: '/client/dist',
+    path: __dirname + '/client',
+    // publicPath: "/client",
     filename: 'bundle.js',
   },
   
@@ -65,7 +65,7 @@ const config = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
+          name: '/client/assets/images/[name]-[sha512:hash:base64:7].[ext]',
         },
         // include: [path.resolve(__dirname, 'src', 'img')]
       },
@@ -101,6 +101,8 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: './client',
+    // hot: true,
+    // inline: true
     // proxy: { '/api': 'http://localhost:3000' },
     // host: '0.0.0.0',
     // port: 8000
@@ -125,7 +127,7 @@ const config = {
         },
       },
     }),
-    new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),
+    new ExtractTextPlugin({ filename: 'app.css', allChunks: true }),
   ],
 };
 
