@@ -24,7 +24,7 @@ class ChecklistNavbar extends React.Component {
             
           >1</div>
         </div>
-        <h3 className="tab caption">Before</h3>
+        <h3 className="tab caption">Before Your Case</h3>
       </div>
     </FilterLink>
     }
@@ -34,14 +34,14 @@ class ChecklistNavbar extends React.Component {
         <div className="icn-tab during">
           <div className="icn-number">2</div>
         </div>
-        <h3 className="tab caption">During</h3>
+        <h3 className="tab caption">During Your Case</h3>
       </div>
     </FilterLink>
     
     <FilterLink filter="SHOW_AFTER">
       <div className="tab-group">
         <div className="icn-tab after"><div className="icn-number">3</div></div>
-        <h3 className="tab caption">After</h3>
+        <h3 className="tab caption">After Your Case</h3>
       </div>
     </FilterLink>    
   </div>

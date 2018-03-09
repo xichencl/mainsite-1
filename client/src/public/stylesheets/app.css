@@ -1594,6 +1594,9 @@ h1.title-line-background {
   display: flex;
   justify-content: space-between; }
 
+.Stage-menu {
+  z-index: 2000; }
+
 .Stage-menu-item {
   display: inline;
   padding: 0 1rem; }
