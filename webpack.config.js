@@ -65,7 +65,7 @@ const config = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: '/client/assets/images/[name]-[sha512:hash:base64:7].[ext]',
+          name: '/assets/images/[name]-[sha512:hash:base64:7].[ext]',
         },
         // include: [path.resolve(__dirname, 'src', 'img')]
       },
@@ -127,7 +127,7 @@ const config = {
         },
       },
     }),
-    new ExtractTextPlugin({ filename: 'app.css', allChunks: true }),
+    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true }),
   ],
 };
 
