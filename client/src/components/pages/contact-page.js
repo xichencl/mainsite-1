@@ -41,21 +41,23 @@ export default class Contact extends Component {
 		return (
 			<div>
 				<TitleLine title="Contact Information" />
-				<InfoBox 
-					boxTitle="Directories"
-					boxContent={renderedDirectories}
-					buttonVisibilityClass="hidden"
-				/>
-				<InfoBox 
-					boxTitle="Give us Feedback!"
-					boxContent="Answer our quick online survey​​ and help to make the Self-Help Law Center better! We are working to keep the Self-Help Law Center as updated as possible and will be using public feedback to make improvements to the site.​​​"
-					buttonVisibilityClass="hidden"
-				/>
-				<InfoBox 
-					boxTitle="Missing or Incorrect Content?"
-					boxContent="If there is any content on the site that should be updated or if there is a link we should add, please let us know​!​​​​​"
-					buttonVisibilityClass="hidden"
-				/>
+				<div className="grid grid-pad">
+						<InfoBox 
+							boxTitle="Directories"
+							boxContent={renderedDirectories}
+							buttonVisibilityClass="hidden"
+						/>
+						<InfoBox 
+							boxTitle="Give us Feedback!"
+							boxContent="Answer our quick online survey​​ and help to make the Self-Help Law Center better! We are working to keep the Self-Help Law Center as updated as possible and will be using public feedback to make improvements to the site.​​​"
+							buttonVisibilityClass="hidden"
+						/>
+						<InfoBox 
+							boxTitle="Missing or Incorrect Content?"
+							boxContent="If there is any content on the site that should be updated or if there is a link we should add, please let us know​!​​​​​"
+							buttonVisibilityClass="hidden"
+						/>
+				</div>
 			</div>
 		)
 	}

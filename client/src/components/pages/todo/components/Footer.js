@@ -1,9 +1,21 @@
 import React from 'react'
 import FilterLink from '../containers/filterLink'
+import { setVisibilityFilter } from '../../../../actions/index.js'
+import { connect } from 'react-redux';
 
-const ChecklistNavbar = () => (
+class ChecklistNavbar extends React.Component {
+
+  componentWillMount () {
+    //set SHOW_DURING in defendant mode, SHOW_BEFORE in plaintiff mode
+    this.props.party == 'plaintiff' ? this.props.setFilter('SHOW_BEFORE') : this.props.setFilter('SHOW_DURING')
+  }
+
+  render(){
+  //return only during and after when in defendant case
+  return (
   <div className="checklist-navbar">
-    
+    {
+      this.props.party == "plaintiff" &&
     <FilterLink filter="SHOW_BEFORE">
       <div className="tab-group">
         <div className="icn-tab before">
@@ -15,6 +27,7 @@ const ChecklistNavbar = () => (
         <h3 className="tab caption">Before</h3>
       </div>
     </FilterLink>
+    }
     
     <FilterLink filter="SHOW_DURING">
       <div className="tab-group">
@@ -30,8 +43,23 @@ const ChecklistNavbar = () => (
         <div className="icn-tab after"><div className="icn-number">3</div></div>
         <h3 className="tab caption">After</h3>
       </div>
-    </FilterLink>
+    </FilterLink>    
   </div>
-)
+  );
+  
+  }
 
-export default ChecklistNavbar
+}
+
+const mapStateToProps = (state) => ({
+  visibilityFilter : state.visibilityFilter
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  
+    setFilter: (filter) => { 
+      dispatch(setVisibilityFilter(filter))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChecklistNavbar)

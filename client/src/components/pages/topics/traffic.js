@@ -3,9 +3,9 @@ import Squarebox from '../../template/square-box';
 import Bannerbox from '../../template/banner-box';
 import Infobox from '../../template/info-box';
 
-import BeforeIcon from '../../../img/before_1.svg';
-import DuringIcon from '../../../img/during_1.svg';
-import AfterIcon from '../../../img/after_1.svg';
+// import BeforeIcon from '../../../img/before_1.svg';
+// import DuringIcon from '../../../img/during_1.svg';
+// import AfterIcon from '../../../img/after_1.svg';
 
 export default class Traffic extends Component {
 	constructor(){
@@ -82,7 +82,7 @@ export default class Traffic extends Component {
                buttonLink='faqs/traffic'
 		      />*/}
 		      <div className='grid grid-pad'>
-		        <Squarebox 
+{/*		        <Squarebox 
 		        	boxTitle='Before Your Case'
 	            imgSrc={BeforeIcon} /> 
 		        <Squarebox 
@@ -90,7 +90,7 @@ export default class Traffic extends Component {
 	            imgSrc={DuringIcon} />
             <Squarebox 
               boxTitle='After Your Case'
-              imgSrc={AfterIcon} />  
+              imgSrc={AfterIcon} />  */}
 		      </div>
 		      <Infobox 
 		      	boxTitle='FAQs'

@@ -10,7 +10,7 @@ import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContentByParty } from '../../../../actions/content.js';
-
+import Bot from '../../../chatbot/Bot.jsx'; 
 
 const partyIds = [
   {
@@ -93,7 +93,7 @@ class SmallClaimsStage extends Component {
         return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
         // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
       }, []); 
-      console.log("7. filledAry", filledAry)
+      // console.log("7. filledAry", filledAry)
       // pass content to AccordionBoxContainer as props
       return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
@@ -103,9 +103,10 @@ class SmallClaimsStage extends Component {
   renderMenuLinks() {
 
     return [].concat(this.props.stage)
-    .sort((a, b) => a.fields.id > b.fields.id)
+    // .filter(stage => stage.sys.id !== this.state.selectedStageId )
+    .sort((a, b) => a.fields.id - b.fields.id)
     .map((stage) => {
-      return (
+      return stage.sys.id !== this.state.selectedStageId && (
         <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
           <Link to={stage.fields.url}>{stage.fields.title}</Link>
         </div>
@@ -124,15 +125,18 @@ class SmallClaimsStage extends Component {
     
     return (
       <div>
-        <div className="breadcrumbs">
-          <Link to="/">Home</Link>
-          <span className="breadcrumbs-chevron">></span>
-          <Link to="/smallclaims">Small Claims</Link>
-          <span className="breadcrumbs-chevron">></span> 
-          <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+        <Bot />
+        <div className="Stage-top-bar">
+          <div className="breadcrumbs">
+            <Link to="/">Home</Link>
+            <span className="breadcrumbs-chevron">></span>
+            <Link to="/smallclaims">Small Claims</Link>
+            <span className="breadcrumbs-chevron">></span> 
+            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+          </div>
+          <div className="Stage-menu">{this.renderMenuLinks()}</div>
         </div>
         <TitleLine title={currentTitle} />
-        <div className="Stage-menu">{this.renderMenuLinks()}</div>
         <div>
           {this.filterContent(this.props.content, this.state.selectedStageId)}
         </div>

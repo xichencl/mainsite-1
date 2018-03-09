@@ -892,12 +892,13 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-left: 2rem;
   z-index: 1000; }
   @media (min-width: 769px) {
     .Search {
-      margin-left: 1rem; } }
+      margin-left: 1rem;
+      margin-top: 1rem; } }
   @media (min-width: 1025px) {
     .Search {
       margin-left: 20rem;
@@ -1589,18 +1590,17 @@ h1.title-line-background {
 .breadcrumbs-chevron {
   padding: 0 1rem; }
 
-.Stage-menu {
+.Stage-top-bar {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 2.25rem;
-  align-items: stretch; }
+  justify-content: space-between; }
 
-.Stage-menu-item a {
-  color: #4d9de0;
-  font-family: "Judson", serif; }
-
-.Stage-menu-item a:hover {
-  color: #000000; }
+.Stage-menu-item {
+  display: inline;
+  padding: 0 1rem; }
+  .Stage-menu-item a {
+    color: #4d9de0; }
+  .Stage-menu-item a:hover {
+    color: #000000; }
 
 .Accordion-box-item {
   position: relative;
@@ -1954,13 +1954,14 @@ table th {
       font-size: 1.8rem; } }
 
 .open-bot-icon, .open-bot-icon-m {
-  margin-top: 5px;
   color: #ffffff; }
+
+.open-bot-icon-m i {
+  margin-top: -0.7rem; }
 
 /* icon displays for mobile views <600 and links to mbot route */
 .open-bot-icon-m-circle {
   text-align: center;
-  padding-top: 6px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -1971,7 +1972,7 @@ table th {
   cursor: pointer;
   background-color: #4d9de0;
   right: 2rem;
-  top: 2rem; }
+  top: 1rem; }
 
 /* bot header */
 .header-x {

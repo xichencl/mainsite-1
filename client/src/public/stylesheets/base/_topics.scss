@@ -39,20 +39,27 @@ h1.title-line-background {
 }
 
 // Stage selection + content rendering
+.Stage-top-bar {
+  display: flex;
+  justify-content: space-between; 
+}
+
 .Stage-menu {
   // a:hover {
   //   color: $blue-accent-primary;
   // }
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2.25rem;
-  align-items: stretch;
+  // display: flex;
+  // justify-content: space-around;
+  // margin-bottom: 2.25rem;
+  // align-items: stretch;
 }
 
 .Stage-menu-item {
+  display: inline;
+  padding: 0 1rem;
   a {
     color: $blue-accent-primary;
-    font-family: $font-family-serif;
+    // font-family: $font-family-serif;
   }
   a:hover {
     color: $black;
