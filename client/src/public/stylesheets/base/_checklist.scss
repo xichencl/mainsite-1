@@ -51,7 +51,7 @@
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	        align-items: center;
-	        
+
 	font-family: $font-family-serif;
 	text-align: center;
 }
@@ -61,15 +61,66 @@
 }
 
 .icn-number {
-	text-align: center;
-	align-self: flex-start;
-	border: 3px solid $dark-grey-primary;
-	border-radius: 50%;
-	width: 75px;
-	height: 65px;
-	padding: 0 0 70px;
+		border: 3px solid $blue-accent-primary;
+		border-radius: 50%;
+		background-color: $blue-accent-primary;
+		color: $white;
 
+		text-align: center;
+		align-self: flex-start;
+		width: 75px;
+		height: 65px;
+		padding: 0 0 70px;
+		// &:link {
+		// 	border: 3px solid $light-grey-secondary;
+		// }
+		// &:visited {
+		// 	border: 3px solid $light-grey-secondary;
+		// }
+		// &:active {
+		// 	border: 3px solid $light-grey-secondary;
+		// }
+	}
+
+.checklist-navbar a {
+	&:link {
+		.tab-group {
+			color: $dark-grey-primary;
+		}
+		.icn-number {
+			border: 3px solid $dark-grey-primary;
+			border-radius: 50%;
+			background-color: $white;
+			color: $dark-grey-primary;
+		}
+	}
+	&:visited {
+		.icn-number {
+			border: 3px solid $light-grey-secondary;
+			border-radius: 50%;
+		}
+	}
+	&:hover {
+		.tab-group {
+			color: $black;
+		}
+		.icn-number {
+			border: 3px solid $black;
+			border-radius: 50%;
+			background-color: $black;
+			color: $white;
+		}
+	}
+	&:active {
+		.icn-number {
+			border: 3px solid $dark-grey-primary;
+			border-radius: 50%;
+		}
+	}
 }
+
+
+
 
 // ===================================
 // Checklist List Container and Items
