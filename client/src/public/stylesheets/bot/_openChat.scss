@@ -9,9 +9,9 @@
 }
 
 #bot.slideIn {
-  // -webkit-transform: translateX(0);
-  // -ms-transform: translateX(0);
-  // transform: translateX(0);
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
   transition: right 2s;
   right: 0rem;
 
@@ -24,9 +24,9 @@
 
 #bot.slideOut {
  // slides out chatbot completely even when sidenav is still open
-  // -webkit-transform: translateX(32em);
-  // -ms-transform: translateX(32em);
-  // transform: translateX(32em);
+  -webkit-transform: translateX(32em);
+  -ms-transform: translateX(32em);
+  transform: translateX(32em);
 
   right: -32rem;
   position: relative;
