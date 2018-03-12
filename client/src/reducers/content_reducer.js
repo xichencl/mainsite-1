@@ -5,6 +5,7 @@ import { FETCH_FAQS } from '../actions/types';
 import { FETCH_CONTENT } from '../actions/types';
 import { FETCH_RESOURCE_LINKS } from '../actions/types';
 import { FETCH_STAGES } from '../actions/types';
+import { FETCH_VIDEOS } from '../actions/types';
 
 import { STORE_STAGE_ID } from '../actions/types';
 
@@ -15,6 +16,8 @@ const INITIAL_STATE = {
   resources: [],
   faqs: [],
   tabs: [], 
+  videos: [],
+  videoURLs: {},
   stageId: [],
 };
 
@@ -30,6 +33,19 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, tabs: action.payload.data.items };
   case FETCH_STAGES:
     return { ...state, stages: action.payload.data.items };
+  case FETCH_VIDEOS:
+    const videoURLs = {};
+    const videos = action.payload.data.includes.Asset;
+    const length = videos.length;
+
+    for (let i = 0; i < length; i++) {
+      let video = videos[i];
+      let file = video.fields.file;
+      
+      videoURLs[video.fields.title] = file.url;
+    }
+
+    return { ...state, videos, videoURLs };
   case FETCH_RESOURCE_LINKS:
     return { ...state, resources: action.payload.data.items };
   case STORE_STAGE_ID:
