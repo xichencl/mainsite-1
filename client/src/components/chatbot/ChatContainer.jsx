@@ -36,7 +36,7 @@ class ChatContainer extends React.Component {
       <div>
         {/* pushes out settings/navbar*/} 
 
-        <Menu
+        {/*<Menu
           pageWrapId={'page-wrap'}
           outerContainerId={'outer-container'}
           right
@@ -55,7 +55,7 @@ class ChatContainer extends React.Component {
             <FontSizeIcon />
             <LanguageIcon />
           </div>
-        </Menu>
+        </Menu>*/}
 
         <main id="page-wrap">
           {/* botContainer wraps header and chatbar in fixed position*/}
