@@ -39,7 +39,7 @@
   @include xxs {
     right: 2rem;
     bottom: 2rem;
-  }
+  } 
   @include mobile {
     display: none;
   }
@@ -61,7 +61,7 @@
 }
 
 .open-bot-icon, .open-bot-icon-m {
-  margin-top: 5px;
+  // margin-top: 5px;
   color: #ffffff;
 
   //***
@@ -74,12 +74,16 @@
  
 }
 
-
+.open-bot-icon-m {
+  i {
+    margin-top: -0.7rem;
+  }
+}
 
 /* icon displays for mobile views <600 and links to mbot route */
 .open-bot-icon-m-circle { 
   text-align: center;
-  padding-top: 6px;
+  // padding-top: 6px;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -90,7 +94,10 @@
   cursor: pointer;
   background-color: $blue-accent-primary;
   right: 2rem;
-  top: 2rem;
+  top: 1rem;
+  @include sm {
+
+  }
   
   // display: flex;
   // -webkit-box-pack: end;
@@ -116,7 +123,7 @@
 
 /* contains icons in bot header */
 .icon-container {
-  width: 20em;
+  width: 24em; // 20rem when settings icon present
   height: 3em;
   @include flex-center(space-between, center);
   padding: .5em;

@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 // import { CLIENT_ROOT_URL } from '../../actions/index';
-import ccscLogo from '../../img/ccsc-logo.svg';
-import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
-import logoModern from '../../img/logo-modern.svg';
-import logoBw from '../../img/logo-bw.svg';
+
+// import ccscLogo from '../../img/ccsc-logo.svg';
+// import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
+import logoBw from '../../img/logo-219.svg';
 
 import NavbarBurger from './navbar-burger';
 // import ReactSVG from 'react-svg';
@@ -88,13 +88,6 @@ class Navbar extends Component {
             to='/video-resources'
           >
             Video Resources
-          </NavLink>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/court-locations'
-          >
-            Find a Courthouse
           </NavLink>
           <NavLink
             activeClassName='Menu-link--active'
