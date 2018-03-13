@@ -12,7 +12,7 @@
   // -webkit-transform: translateX(0);
   // -ms-transform: translateX(0);
   // transform: translateX(0);
-  transition: right 2s;
+  // transition: all 0.5s;
   right: 0rem;
   .bm-cross-button {
     padding-left: 0rem;
@@ -25,8 +25,8 @@
   // -webkit-transform: translateX(32em);
   // -ms-transform: translateX(32em);
   // transform: translateX(32em);
-
-  right: -36rem;
+  // transition: all 0.5s; 
+  right: -38rem;
   position: relative;
   box-sizing: border-box;
   width: calc(100% + 32rem);

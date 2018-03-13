@@ -2342,13 +2342,14 @@ button.button-chatbot-email:active {
   /*transform: translateX(100px);*/ }
 
 #bot.slideIn {
-  transition: right 2s;
+  transition: all 0.5s;
   right: 0rem; }
   #bot.slideIn .bm-cross-button {
     padding-left: 0rem; }
 
 #bot.slideOut {
-  right: -36rem;
+  transition: all 0.5s;
+  right: -38rem;
   position: relative;
   box-sizing: border-box;
   width: calc(100% + 32rem);
