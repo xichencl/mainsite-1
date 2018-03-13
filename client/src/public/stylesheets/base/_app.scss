@@ -186,8 +186,11 @@ hr {
 }
 
 .Page {
-  margin: 4rem 2rem;
+  margin: 4rem 0rem;
   max-width: 95rem;
+  @include sm {
+    margin: 4rem 2rem;
+  }
   @include lg {
     margin: 8rem 10rem 0 20rem;
   }

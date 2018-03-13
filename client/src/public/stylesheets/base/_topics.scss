@@ -40,6 +40,7 @@ h1.title-line-background {
 
 // Stage selection + content rendering
 .Stage-top-bar {
+  z-index: 2000;
   display: block;
   @include sm {
     display: flex;

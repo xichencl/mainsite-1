@@ -126,15 +126,17 @@ class SmallClaimsStage extends Component {
     return (
       <div>
         <Bot />
-        <div className="Stage-top-bar">
-          <div className="breadcrumbs">
-            <Link to="/">Home</Link>
-            <span className="breadcrumbs-chevron">></span>
-            <Link to="/smallclaims">Small Claims</Link>
-            <span className="breadcrumbs-chevron">></span> 
-            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+        <div>
+          <div className="Box Stage-top-bar">
+            <div className="breadcrumbs">
+              <Link to="/">Home</Link>
+              <span className="breadcrumbs-chevron">></span>
+              <Link to="/smallclaims">Small Claims</Link>
+              <span className="breadcrumbs-chevron">></span> 
+              <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+            </div>
+            <div className="Stage-menu">{this.renderMenuLinks()}</div>
           </div>
-          <div className="Stage-menu">{this.renderMenuLinks()}</div>
         </div>
         <TitleLine title={currentTitle} />
         <div>
