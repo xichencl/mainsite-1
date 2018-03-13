@@ -1601,6 +1601,7 @@ h1.title-line-background {
   padding: 0 1rem; }
 
 .Stage-top-bar {
+  position: relative;
   z-index: 2000;
   display: block; }
   @media (min-width: 500px) {
@@ -1964,7 +1965,7 @@ table th {
 .bot-z-index-open {
   z-index: 1003; }
 
-.bot-z-index-closed {
+.bot-is-closed {
   z-index: -1; }
 
 .position-bot {

@@ -79,7 +79,7 @@ class OpenBot extends React.Component {
             />
             : <SpeechBubble imgSrc={ChatbotIcon}/>}
         </div>
-        <Link to="mbot">
+        <Link to="/mbot">
           <MobileSpeechBubble />
         </Link>
 

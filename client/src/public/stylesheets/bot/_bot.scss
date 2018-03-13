@@ -15,12 +15,12 @@
 // .bot-is-open {
 //   z-index: 1003;
 // }
-// .bot-is-closed {
-//   z-index: -1003;
-// }
+.bot-is-closed {
+  z-index: -1;
+}
 
 .bot-z-index-closed {
-  z-index: 1;
+  // z-index: -1;
 }
 
 .position-bot {
