@@ -18,6 +18,22 @@ const visibilityReducer = (state=false, action) => {
 
 }
 
+const botMenuVisibilityReducer = (state=false, action) => {
+	switch (action.type) {
+		case "TOGGLE_BOT_MENU":
+
+			return !state;
+		
+
+		default:
+			return state;
+		
+
+
+	}
+
+}
+
 const themeReducer = (state='light', action) => {
 	switch (action.type) {
 		case "TOGGLE_THEME":
@@ -57,4 +73,4 @@ const aiReducer = (state= defaultState , action)=>{
 
 }
 
-module.exports = {themeReducer, visibilityReducer, aiReducer};
+module.exports = {themeReducer, visibilityReducer, botMenuVisibilityReducer, aiReducer};
