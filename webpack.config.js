@@ -38,6 +38,7 @@ const config = {
       {
         test: /\.css$/i,
         use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
           use: ['css-loader', 'sass-loader'],
         }),
       },
@@ -45,6 +46,7 @@ const config = {
         test: /\.scss$/i,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
           use: ['css-loader', 'sass-loader'],
         }),
       },
@@ -112,8 +114,9 @@ const config = {
     */
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
+  /*switch to production to enable ExtractTextPlugin for*/
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
+    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({
@@ -127,7 +130,7 @@ const config = {
         },
       },
     }),
-    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true }),
+    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: process.env.NODE_ENV !== 'production' }),
   ],
 };
 

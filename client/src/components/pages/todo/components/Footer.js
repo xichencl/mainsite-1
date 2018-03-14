@@ -29,7 +29,7 @@ class ChecklistNavbar extends React.Component {
     <FilterLink className="Filter-link-item" filter="SHOW_DURING">
       <div className="tab-group">
         <div className="icn-tab during">
-          <div className="icn-number">2</div>
+          <div className="icn-number">{this.props.party == "plaintiff"? 2:1}</div>
         </div>
         <h3 className="tab caption">During Your Case</h3>
       </div>
@@ -38,7 +38,7 @@ class ChecklistNavbar extends React.Component {
     <FilterLink className="Filter-link-item" filter="SHOW_AFTER">
       <div className="tab-group">
         <div className="icn-tab after">
-          <div className="icn-number">3</div>
+          <div className="icn-number">{this.props.party == "plaintiff"? 3:2}</div>
         </div>
         <h3 className="tab caption">After Your Case</h3>
       </div>
