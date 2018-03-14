@@ -3,7 +3,9 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const config = {
+const config = (env) => {
+  console.log(env);
+  return {
   context: __dirname,
   entry: ["babel-polyfill", "./client/src/index.js"],
 
@@ -116,7 +118,7 @@ const config = {
   plugins: [
   /*switch to production to enable ExtractTextPlugin for*/
     // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new UglifyJSPlugin({
@@ -130,8 +132,9 @@ const config = {
         },
       },
     }),
-    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: process.env.NODE_ENV !== 'production' }),
+    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: env.NODE_ENV !== 'prod' }),
   ],
+};
 };
 
 module.exports = config;
