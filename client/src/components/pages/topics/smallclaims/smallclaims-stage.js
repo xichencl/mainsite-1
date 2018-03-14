@@ -134,12 +134,12 @@ class SmallClaimsStage extends Component {
             <span className="breadcrumbs-chevron">></span> 
             <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
           </div>
-          <div className="Stage-menu">{this.renderMenuLinks()}</div>
+          <div className="Stage-menu">
+            {this.renderMenuLinks()}
+          </div>
         </div>
         <TitleLine title={currentTitle} />
-        <div>
-          {this.filterContent(this.props.content, this.state.selectedStageId)}
-        </div>
+        {this.filterContent(this.props.content, this.state.selectedStageId)}
       </div>
     )
   } 

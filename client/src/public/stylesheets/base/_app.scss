@@ -42,6 +42,7 @@ $box-height: 225px;
 $box-img-height: 160px;
 $box-img-width: 180px;
 $footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
+$footer-push-height-mobile: 40rem; // Footer and Page-footer-push must be same height;
 $footer-push-height-negative: -20rem;
 
 
@@ -185,9 +186,11 @@ hr {
 }
 
 .Page {
-  margin: 4rem;
+  margin: 4rem 0rem;
   max-width: 95rem;
-  
+  @include sm {
+    margin: 4rem 2rem;
+  }
   @include lg {
     margin: 8rem 10rem 0 20rem;
   }
@@ -587,9 +590,12 @@ hr {
 }
 
 .Info-box-btn {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 75%;
+  display: none;
+  @include sm {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 75%;
+  }
 }
 
 .Text-icon-box {
@@ -661,11 +667,12 @@ hr {
   left: 0;
   background-color: $dark-grey-primary;
   width: 100%;
-  height: $footer-push-height;
+  height: $footer-push-height-mobile;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex; // somehow display:flex removes p margin whitespace at bottom
   color: $white;
+  z-index: -100;
   // margin-top: 5rem;
   a {
     color: $white;
@@ -673,6 +680,9 @@ hr {
   }
   a:hover {
     text-decoration: underline;
+  }
+  @include sm {
+    height: $footer-push-height;
   }
 }
 

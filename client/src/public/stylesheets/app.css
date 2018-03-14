@@ -911,8 +911,11 @@ hr {
   width: 40rem; }
 
 .Page {
-  margin: 4rem;
+  margin: 4rem 0rem;
   max-width: 95rem; }
+  @media (min-width: 500px) {
+    .Page {
+      margin: 4rem 2rem; } }
   @media (min-width: 1025px) {
     .Page {
       margin: 8rem 10rem 0 20rem; } }
@@ -1169,9 +1172,12 @@ hr {
   padding: 2rem; }
 
 .Info-box-btn {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 75%; }
+  display: none; }
+  @media (min-width: 500px) {
+    .Info-box-btn {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 75%; } }
 
 .Text-icon-box {
   width: 66%;
@@ -1218,16 +1224,20 @@ hr {
   left: 0;
   background-color: #333333;
   width: 100%;
-  height: 20rem;
+  height: 40rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: #ffffff; }
+  color: #ffffff;
+  z-index: -100; }
   .Footer a {
     color: #ffffff;
     text-decoration: none; }
   .Footer a:hover {
     text-decoration: underline; }
+  @media (min-width: 500px) {
+    .Footer {
+      height: 20rem; } }
 
 .Footer-div {
   margin: 1rem 4rem 2rem 4rem; }
@@ -1591,11 +1601,16 @@ h1.title-line-background {
   padding: 0 1rem; }
 
 .Stage-top-bar {
-  display: flex;
-  justify-content: space-between; }
+  position: relative;
+  z-index: 2000;
+  display: block; }
+  @media (min-width: 500px) {
+    .Stage-top-bar {
+      display: flex;
+      justify-content: space-between; } }
 
 .Stage-menu {
-  z-index: 2000; }
+  z-index: 1000; }
 
 .Stage-menu-item {
   display: inline;
@@ -1616,10 +1631,13 @@ h1.title-line-background {
     color: #4d9de0; }
 
 .Accordion-box-icon {
-  position: absolute;
-  right: 2rem;
   font-size: 3rem;
-  top: -0.75rem; }
+  top: -0.75rem;
+  position: absolute;
+  right: 0.5rem; }
+  @media (min-width: 500px) {
+    .Accordion-box-icon {
+      right: 2rem; } }
 
 .blue-font {
   color: #4d9de0; }
@@ -1679,7 +1697,10 @@ h1.title-line-background {
   margin-top: 4rem; }
 
 .checklist {
-  padding: 1rem 4rem; }
+  padding: 0; }
+  @media (min-width: 500px) {
+    .checklist {
+      padding: 1rem 4rem; } }
 
 .checklist-navbar {
   display: flex;
@@ -1690,21 +1711,63 @@ h1.title-line-background {
   margin: 10px 0; }
 
 .tab-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-family: "Judson", serif;
-  text-align: center;
-  align-items: center; }
+  text-align: center; }
 
 .icn-tab {
   font-size: 4rem; }
 
 .icn-number {
+  width: 65px;
+  height: 60px;
+  padding: 0 0 60px;
+  border: 3px solid #4d9de0;
+  border-radius: 50%;
+  background-color: #4d9de0;
+  color: #ffffff;
   text-align: center;
-  align-self: flex-start;
+  align-self: flex-start; }
+  @media (min-width: 500px) {
+    .icn-number {
+      width: 75px;
+      height: 65px;
+      padding: 0 0 70px; } }
+
+.checklist-navbar a:link .tab-group {
+  color: #333333; }
+
+.checklist-navbar a:link .icn-number {
   border: 3px solid #333333;
   border-radius: 50%;
-  width: 75px;
-  height: 65px;
-  padding: 0 0 70px; }
+  background-color: #ffffff;
+  color: #333333; }
+
+.checklist-navbar a:visited .icn-number {
+  border: 3px solid #dddddd;
+  border-radius: 50%; }
+
+.checklist-navbar a:hover .tab-group {
+  color: #000000; }
+
+.checklist-navbar a:hover .icn-number {
+  border: 3px solid #000000;
+  border-radius: 50%;
+  background-color: #000000;
+  color: #ffffff; }
+
+.checklist-navbar a:active .icn-number {
+  border: 3px solid #333333;
+  border-radius: 50%; }
 
 ul.checklist-list-container {
   padding: 0; }
@@ -1729,21 +1792,31 @@ ul.checklist-list-container {
   cursor: pointer; }
 
 .list-item-title {
-  font-family: "Judson", serif;
-  margin: 0.3rem 0 0.3rem 6rem;
-  font-size: 1.7rem; }
+  margin: 0.3rem 0 0.3rem 4rem; }
+  @media (min-width: 500px) {
+    .list-item-title {
+      font-family: "Judson", serif;
+      margin: 0.3rem 0 0.3rem 6rem;
+      font-size: 1.7rem; } }
 
 .list-item-chevron {
-  position: absolute;
-  right: 2rem;
-  top: 0.6rem; }
+  display: none; }
+  @media (min-width: 500px) {
+    .list-item-chevron {
+      position: absolute;
+      right: 2rem;
+      top: 0.6rem; } }
 
 .list-item-chevron:hover {
   cursor: pointer; }
 
 .list-item-text {
-  margin-left: 6rem;
-  margin-right: 4rem; }
+  margin-left: 4rem;
+  margin-right: 2rem; }
+  @media (min-width: 500px) {
+    .list-item-text {
+      margin-left: 6rem;
+      margin-right: 4rem; } }
 
 .btn-checklist-save {
   position: relative;
@@ -1889,8 +1962,11 @@ table th {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased; }
 
-.bot-z-index {
+.bot-z-index-open {
   z-index: 1003; }
+
+.bot-is-closed {
+  z-index: -1; }
 
 .position-bot {
   /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
@@ -1962,6 +2038,9 @@ table th {
 .open-bot-icon-m i {
   margin-top: -0.7rem; }
 
+.material-icon-m-bot {
+  font-size: 3.5rem; }
+
 /* icon displays for mobile views <600 and links to mbot route */
 .open-bot-icon-m-circle {
   text-align: center;
@@ -1974,8 +2053,9 @@ table th {
   position: fixed;
   cursor: pointer;
   background-color: #4d9de0;
-  right: 2rem;
-  top: 1rem; }
+  right: 1rem;
+  top: 1rem;
+  z-index: 2000; }
 
 /* bot header */
 .header-x {
@@ -2001,7 +2081,7 @@ table th {
 
 /* contains icons in bot header */
 .icon-container {
-  width: 20em;
+  width: 24em;
   height: 3em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2030,27 +2110,27 @@ button.close-bot {
   font-size: 36px; }
 
 /* refresh button */
-button.refresh-bot {
+button.refresh-bot,
+button.open-bot-settings,
+button.button-chatbot-email {
   background: transparent;
   outline: 0;
   padding: 0;
   border: none;
   color: #333333; }
 
-button.button-chatbot-email {
-  background-color: #333333; }
-
 button.refresh-bot:hover,
-button.close-bot:hover {
+button.close-bot:hover,
+button.open-bot-settings:hover,
+button.button-chatbot-email:hover {
   color: #4d9de0;
   outline: 0;
   padding: 0;
   border: none; }
 
-button.button-chatbot-email:hover {
-  background-color: #4d9de0; }
-
-button.refresh-bot:active {
+button.refresh-bot:active,
+button.open-bot-settings:active,
+button.button-chatbot-email:active {
   color: #333333;
   outline: 0;
   padding: 0; }
@@ -2094,7 +2174,7 @@ button.refresh-bot:active {
   display: none;
   position: fixed;
   z-index: 2;
-  right: 100px;
+  right: 0px;
   top: 73px;
   width: 25em;
   height: 100%;
@@ -2102,6 +2182,14 @@ button.refresh-bot:active {
   background-color: rgba(50, 64, 70, 0.9);
   font-family: "Roboto", sans-serif;
   cursor: default; }
+
+.close-lang-modal {
+  position: absolute;
+  top: 2rem;
+  left: 2rem; }
+  .close-lang-modal .material-icons {
+    font-size: 2rem;
+    color: #ffffff; }
 
 .lang-title {
   color: #f5f5f5;
@@ -2254,17 +2342,16 @@ button.refresh-bot:active {
   /*transform: translateX(100px);*/ }
 
 #bot.slideIn {
-  transition: right 2s;
   right: 0rem; }
   #bot.slideIn .bm-cross-button {
     padding-left: 0rem; }
 
 #bot.slideOut {
-  right: -32rem;
+  right: -38rem;
   position: relative;
   box-sizing: border-box;
   width: calc(100% + 32rem);
-  padding: 0 10rem 0; }
+  padding: 0; }
   #bot.slideOut .bm-cross-button {
     padding-left: 5rem; }
 
@@ -2290,33 +2377,22 @@ div.hide-speech-bubble {
   display: none; }
 
 /* Position and sizing of burger button */
-.bm-burger-button {
-  display: none; }
-
-/* Color/shape of settings button cross */
-.bm-cross {
-  background: transparent; }
-
-/* General sidebar styles */
-.bm-menu {
-  background: #333333;
-  padding-top: 73px;
-  padding-right: 0px; }
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3); }
-
 .icon-size-O {
-  height: 44px;
-  width: 44px;
+  height: 36px;
+  width: 36px;
   margin-top: 25px;
   margin-bottom: 25px;
   margin-left: 16px;
   cursor: pointer; }
 
-#outer-container {
-  overflow-y: visible !important; }
+.bot-settings {
+  display: flex;
+  justify-content: space-evenly;
+  background: #333333;
+  padding: 63px 0 0 0; }
+  @media (min-width: 500px) {
+    .bot-settings {
+      padding: 73px 0 0 0; } }
 
 .chat-box-bg {
   background-color: #f5f5f5;
@@ -2585,12 +2661,6 @@ table th {
   background-color: black;
   color: white; }
 
-.position-bot {
-  /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
-  /*overflow-y: scroll;
-  overflow-x: hidden;*/
-  /*padding and margin allow bot to be fully visibile while settings nav is open*/ }
-
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
 .stress {
   font-size: 1em;
@@ -2699,83 +2769,6 @@ button.refresh-bot-m:active {
 
 /* this is actually the settings icon (bm-cross-button is default name from package) */
 /* Position and sizing of clickable settings button. ok doesn't have "-m" at end of element name, will work for mobile view */
-.bm-cross-button {
-  position: absolute;
-  width: 37px !important;
-  height: 37px !important;
-  right: 7.6em !important;
-  top: .8em !important; }
-  @media (max-width: 320px) {
-    .bm-cross-button {
-      width: 35px !important;
-      height: 35px !important;
-      top: .85em !important; } }
-  @media (min-width: 1025px) {
-    .bm-cross-button {
-      width: 42px !important;
-      height: 42px !important;
-      right: 6.3em !important;
-      top: .9em !important; } }
-
-.lang-modal {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  right: 100px;
-  top: 73px;
-  width: 25em;
-  height: 100%;
-  overflow: hidden;
-  background-color: rgba(50, 64, 70, 0.9);
-  font-family: "Roboto", sans-serif;
-  cursor: default; }
-
-.lang-title {
-  color: #f5f5f5;
-  font-size: 2.6em;
-  text-align: center;
-  position: relative;
-  top: 105px; }
-
-.lang-container {
-  width: 200px;
-  position: relative;
-  top: 175px;
-  left: 125px;
-  font-size: 1.6em;
-  color: rgba(241, 241, 241, 0.5); }
-
-/*below code limits clickable area to be as wide as radio button + text*/
-.language-icon-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
-
-.language-icon-label {
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center; }
-
-.language-icon-label:hover {
-  color: white;
-  font-size: 1.1em;
-  transition: all .2s ease-in-out; }
-
-.radio-style {
-  margin-right: 25px;
-  /*positions radio*/
-  margin-top: 4px; }
-
-.radio-T {
-  margin: 25px 0;
-  /*space between language options*/ }
-
 #myImg {
   border-radius: 10px;
   border: 2px solid #4d9de0;

@@ -13,7 +13,7 @@ class Bot extends Component {
 
 	render() {
     return (
-      <div className={ this.props.visible ? "position-bot the-bot bot-z-index": "position-bot the-bot "}>
+      <div className={ this.props.visible ? "position-bot the-bot bot-z-index-open": "position-bot the-bot bot-z-index-closed"}>
         <OpenBot ref={el => (this.chatWindow = el)}/>
       </div>
     );

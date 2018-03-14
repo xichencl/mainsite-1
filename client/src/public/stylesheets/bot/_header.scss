@@ -80,6 +80,10 @@
   }
 }
 
+.material-icon-m-bot {
+  font-size: 3.5rem;
+}
+
 /* icon displays for mobile views <600 and links to mbot route */
 .open-bot-icon-m-circle { 
   text-align: center;
@@ -93,8 +97,9 @@
   position: fixed;
   cursor: pointer;
   background-color: $blue-accent-primary;
-  right: 2rem;
+  right: 1rem;
   top: 1rem;
+  z-index: 2000;
   @include sm {
 
   }
@@ -146,7 +151,9 @@ button.close-bot {
 }
 
 /* refresh button */
-button.refresh-bot {
+button.refresh-bot, 
+button.open-bot-settings,
+button.button-chatbot-email {
   background: transparent;
   outline: 0;
   padding: 0;
@@ -157,12 +164,10 @@ button.refresh-bot {
   // display: flex;
 }
 
-button.button-chatbot-email {
-  background-color: $dark-grey-primary;
-}
-
 button.refresh-bot:hover,
-button.close-bot:hover {
+button.close-bot:hover,
+button.open-bot-settings:hover,
+button.button-chatbot-email:hover {
   color: $blue-accent-primary;
   outline: 0;
   padding: 0;
@@ -173,11 +178,9 @@ button.close-bot:hover {
   // transition: 0.2s;
 }
 
-button.button-chatbot-email:hover {
-  background-color: $blue-accent-primary;
-}
-
-button.refresh-bot:active {
+button.refresh-bot:active,
+button.open-bot-settings:active, 
+button.button-chatbot-email:active {
   color: $dark-grey-primary;
   outline: 0;
   padding: 0;

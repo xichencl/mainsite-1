@@ -29,7 +29,11 @@ class Header extends React.Component {
             {this.props.ai.caseType}
           </div> */}
 
-            <button id="email" className="button-chatbot-email">email</button>
+            <button id="email" className="button-chatbot-email">
+              <i className="material-icons" style={{ fontSize: '2.5em' }}>
+              email
+              </i>
+            </button>
 
             <button
               type="button"
@@ -38,6 +42,15 @@ class Header extends React.Component {
               onClick={this.props.onClick.bind(this)}
               >
               <i className="material-icons" style={{ fontSize: '2.5em' }}>refresh</i>
+            </button>
+
+            <button
+              type="button"
+              id="open-settings-button"
+              className="open-bot-settings"
+              onClick={this.props.onClick.bind(this)}
+              >
+              <i className="material-icons open-bot-settings-icon" style={{ fontSize: '2em' }}>settings</i>
             </button>
             
           </div>
@@ -67,6 +80,8 @@ const mapDispatchToProps = dispatch => ({
       }
     } else if (event.currentTarget.id === 'close-button') {
         dispatch({ type: 'TOGGLE_BOT' });
+    } else if (event.currentTarget.id === 'open-settings-button') {
+        this.props.toggleMenu();    
     } else if (event.currentTarget.id === 'email'){
         //email the dialog
         axios.post();

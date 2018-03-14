@@ -40,6 +40,15 @@ class Header extends React.Component {
                 refresh
               </i>
             </button>
+            <button
+              type="button"
+              id="open-settings-button"
+              className="open-bot-settings"
+              onClick={this.props.onClick.bind(this)}
+              >
+              <i className="material-icons open-bot-settings-icon" style={{ fontSize: '2em' }}>settings</i>
+            </button>
+
           </div>
         </div>
       </div>
@@ -61,6 +70,8 @@ const mapDispatchToProps = dispatch => ({
       dispatch({ type: 'RESET_BOT' });
       dispatch({ type: 'General' });
       this.props.resetSession();
+    } else if (event.currentTarget.id === 'open-settings-button') {
+        this.props.toggleMenu();   
     } else {
       // id==='close-button'
       // dispatch({ type: 'TOGGLE_BOT' });

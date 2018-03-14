@@ -16,14 +16,21 @@ const sessionId = uuidv1();
 class ChatContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { id: sessionId };
+    this.state = { 
+      id: sessionId,
+      outerContainerClass: true 
+    };
     this.resetSession = this.resetSession.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   resetSession() {
     this.setState({ id: uuidv1() });
   }
 
+  toggleMenu() {
+    this.setState({ outerContainerClass: !this.state.outerContainerClass })
+  }
 
   render() {
     let botContainer;
@@ -57,11 +64,19 @@ class ChatContainer extends React.Component {
           </div>
         </Menu>*/}
 
+        <div className={this.state.outerContainerClass ? 'outer-container hidden' : 'outer-container' }>
+          <div className="bot-settings">
+            <ThemeIcon className="bot-menu-icon" />
+            <FontSizeIcon className="bot-menu-icon" />
+            <LanguageIcon className="bot-menu-icon" />
+          </div>
+        </div>
+
         <main id="page-wrap">
           {/* botContainer wraps header and chatbar in fixed position*/}
           <div className={botContainer}>
             <Chatbox sessionId={this.state.id} theme={this.props.theme} />
-            <Header resetSession={this.resetSession} theme={this.props.theme} />
+            <Header resetSession={this.resetSession} toggleMenu ={this.toggleMenu} theme={this.props.theme} />
             <Chatbar sessionId={this.state.id} theme={this.props.theme} />
           </div>
         </main>
