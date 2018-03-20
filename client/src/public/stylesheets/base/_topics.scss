@@ -41,7 +41,7 @@ h1.title-line-background {
 // Stage selection + content rendering
 .Stage-top-bar {
   position: relative;
-  z-index: 2000;
+  // z-index: 2000;
   display: block;
   @include sm {
     display: flex;
@@ -50,7 +50,8 @@ h1.title-line-background {
 }
 
 .Stage-menu {
-  z-index: 1000;
+  //z-index: 1000;
+
   // a:hover {
   //   color: $blue-accent-primary;
   // }

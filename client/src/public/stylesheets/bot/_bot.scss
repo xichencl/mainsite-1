@@ -10,17 +10,17 @@
 } 
 
 .bot-z-index-open {
-  z-index: 1003;
+  z-index: 1000;
 }
-// .bot-is-open {
+// .bot-is-open { ignore
 //   z-index: 1003;
 // }
 .bot-is-closed {
-  z-index: -1;
+  //z-index: -1; ignore
 }
 
 .bot-z-index-closed {
-  // z-index: -1;
+  // z-index: -1; ignore
 }
 
 .position-bot {
@@ -34,8 +34,9 @@
   /*padding and margin allow bot to be fully visibile while settings nav is open*/
   padding-left: 7em;
   margin-left: -7em;
-  //z-index: -1;
+  //z-index: -1; ignore
 }
+
 
 /*********************************** below elements work with api.ai responses. make sure doesnt effect rest of app ***********************************/
 .stress {
