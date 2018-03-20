@@ -24,6 +24,8 @@ import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
 import FindCourthouse from './components/pages/find-courthouse';
 
+import SearchResults from './components/pages/search-results-page'
+
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
 import SmallClaimsStage from './components/pages/topics/smallclaims/smallclaims-stage';
@@ -77,9 +79,11 @@ export default class AppRouter extends Component {
           <Switch>
             <Route path="/mbot" history={browserHistory} component={MobileBot} />
             <div className="App">
+              
               <div className="App-mask" />
               <Navbar />
               <Search />
+              
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
               {/*<Bot /> */}
@@ -128,6 +132,8 @@ export default class AppRouter extends Component {
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
+
+                  <Route path="/search-results" component={SearchResults} />
 
 
                   <Route component={NotFoundPage} />

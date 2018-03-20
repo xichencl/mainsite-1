@@ -1,32 +1,8 @@
-import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router';
+import React from 'react';
 
+class SearchResults extends React.Component{
 
-class Search extends Component {
-  constructor(props){
-    super(props);
-    this.state={value: ''};
-    this.handleChange=this.handleChange.bind(this);
-    this.handleSubmit=this.handleSubmit.bind(this);
-  }
-  
-  handleChange(event){
-    this.setState({value: event.target.value});
-    console.log("state:", this.state.value);
-  }
-
-  handleSubmit(event){
-    //process query string
-    console.log("form submitted");
-    let queryStr = this.state.value.trim().toLowerCase();
-    queryStr = '/?q='+encodeURIComponent(queryStr);
-    console.log("query string: ", queryStr);
-    event.preventDefault();
-    console.log("props", this.props);
-    this.props.history.push('/search-results'+queryStr);
-  }
-
-  componentDidMount(){
+	ComponentWillMount(){
             var config = {
           gcseId: '010012988809159316594:zgkefy-h6yk',
           resultsUrl: 'http://localhost:8000/search-results',
@@ -104,27 +80,15 @@ class Search extends Component {
 
   }
 
-  
-
-
-
-  render() {   
-
-    return (
-        <div>
-            <form onSubmit={this.handleSubmit} value="search">         
-             <div className="Search">
-                <input className="Search-bar" type="text" placeholder=" Search our site" onChange={this.handleChange} value={this.state.value} />
-                
-             </div>
-             </form>
-          
-          <div className="gcse-search-wrapper" id="testSearch"></div>
-          {/*<div className="gcse-results-wrapper" id="testResults"></div>*/}
-        </div>
-        
-    );
+  render(){
+  	return (
+    <div>
+  	{/*<div className="gcse-search-wrapper" id="testSearch"></div>*/}
+  	{<div className="gcse-results-wrapper" id="testResults"></div>}
+  	</div>
+  	);
   }
-}
 
-export default withRouter(Search);
+} 
+
+export default SearchResults;	
