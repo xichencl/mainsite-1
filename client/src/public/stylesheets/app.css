@@ -1226,7 +1226,8 @@ hr {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: #ffffff; }
+  color: #ffffff;
+  z-index: -100; }
   .Footer a {
     color: #ffffff;
     text-decoration: none; }
@@ -1990,6 +1991,56 @@ table th {
   font-size: 18px;
   margin-left: 4px; }
 
+.Bot-popup {
+  color: #ffffff;
+  position: fixed;
+  background-color: #333333;
+  bottom: 11rem;
+  right: 2rem;
+  width: 275px;
+  height: 120px;
+  padding: 1.75rem 2rem;
+  display: block;
+  z-index: 1000; }
+  .Bot-popup p {
+    margin: 0;
+    font-size: 1.4rem; }
+  @media only screen and (max-width: 600px) {
+    .Bot-popup {
+      display: none; } }
+  @media (min-width: 1025px) {
+    .Bot-popup {
+      bottom: 10rem;
+      width: 330px;
+      height: 120px; } }
+
+.Bot-popup:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 26px;
+  width: 0;
+  height: 0;
+  border-right: 20px solid transparent;
+  border-top: 17px solid #333333;
+  border-left: 20px solid transparent; }
+
+.Bot-popup-close {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  width: 25px;
+  height: 25px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 25%;
+  text-align: center; }
+  .Bot-popup-close i {
+    color: #333333;
+    margin-top: -0.9rem; }
+
 .open-bot-icon-circle {
   display: flex;
   justify-content: space-evenly;
@@ -2025,7 +2076,11 @@ table th {
   color: #ffffff; }
 
 .open-bot-icon-m i {
-  margin-top: -0.7rem; }
+  margin-top: -0.7rem;
+  font-size: 30px; }
+
+.open-bot-icon i {
+  font-size: 30px; }
 
 .material-icon-m-bot {
   font-size: 3.5rem; }
@@ -2043,7 +2098,7 @@ table th {
   cursor: pointer;
   background-color: #4d9de0;
   right: 1rem;
-  bottom: 1rem; }
+  top: 1rem; }
 
 /* bot header */
 .header-x {

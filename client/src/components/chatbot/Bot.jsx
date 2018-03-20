@@ -21,7 +21,7 @@ class Bot extends Component {
 	render() {
     return (
       <div>
-        <div className={this.props.viewPopup && this.state.botClicked ? "Bot-popup" : "hidden"}>
+        <div className={this.props.viewPopup && !this.state.botClicked ? "Bot-popup" : "hidden"}>
           {/*<div className="Bot-popup-close">
             <i className="material-icons">close</i>
           </div>*/}
