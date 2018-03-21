@@ -20,12 +20,14 @@ class Search extends Component {
   handleSubmit(event){
     //process query string
     console.log("form submitted");
-    // let queryStr = this.state.value.trim().toLowerCase();
-    // queryStr = '?q='+encodeURIComponent(queryStr);
+    let queryStr = this.state.value.trim().toLowerCase().split(/ +/).join(' ');
+    queryStr = encodeURIComponent(queryStr);
+    this.props.history.push('/search-results/'+queryStr);
     // console.log("query string: ", queryStr);
     // event.preventDefault();
     // console.log("props", this.props);
-    this.props.history.push('/search-results', {query: this.state.value});
+    // this.props.history.push('/search-results', {query: this.state.value});
+    
     // axios.get('/api/results/'+queryStr)
     // .then((response)=> {console.log('redirected')})
     // .catch((error) => {console.log(error)});

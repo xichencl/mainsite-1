@@ -10,13 +10,16 @@ class SearchResults extends React.Component{
 
 
 	gcseCallback() {
+	  const {match: {params}} = this.props;
 	  if (document.readyState != 'complete')
 	    return google.setOnLoadCallback(this.gcseCallback, true);
 	  google.search.cse.element.render({gname:'gsearch', div:'testResults', tag:'searchresults-only'});
 	  const element = google.search.cse.element.getElement('gsearch');
-	  console.log("location", this.props.location);
-	  console.log("history", this.props.history);
-	  element.execute(this.props.location.state.query);
+	  // console.log("location", this.props.location);
+	  // console.log("history", this.props.history);
+	  // console.log("match", this.props.match)
+	  // console.log("params", params.query);
+	  element.execute(params.query);
 	};
 
 	componentDidMount(){
@@ -50,4 +53,4 @@ class SearchResults extends React.Component{
 } 
 
 
-export default SearchResults;	
+export default withRouter(SearchResults);

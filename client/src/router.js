@@ -133,7 +133,7 @@ export default class AppRouter extends Component {
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
 
-                  <Route path="/search-results" component={SearchResults} />
+                  <Route path="/search-results/:query" component={SearchResults} />
 
 
                   <Route component={NotFoundPage} />
