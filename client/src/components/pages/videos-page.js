@@ -3,34 +3,80 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import TitleLine from '../template/title-line';
-import { fetchVideos } from '../../actions/content.js';
+import AccordionBoxContainer from '../template/accordion-box/accordion-box-container';
+import { fetchVideos, fetchVideoLinks } from '../../actions/content.js';
+
+const uuid = require('uuid/v4');
 
 
 class Videos extends Component {
   componentWillMount() {
-    if (!this.props.videos) {
+    if (!this.props.videos || this.props.videos.length <= 0) {
       this.props.fetchVideos()
       console.log(this.props.videos, 'this.props.videos')
+    }
+
+    if (!this.props.videoLinks || Object.keys(this.props.videoLinks).length <= 0) {
+      this.props.fetchVideoLinks()
+      console.log(this.props.videoLinks, 'this.props.videoLinks')
     }
   }
 
   renderVideos() {
-    return this.props.videos.map((unit, index) => {
+    const videos = this.props.videos;
+
+    return Object.keys(videos).map((categoryName) => {
+      const category = videos[categoryName];
+
       return (
-        <div className="Square-box-container" key={unit.sys.id}>
-          <Link to={'videos/' + unit.fields.title}>
-            <h1>{unit.fields.title}</h1>
-          </Link>
+        <div key={uuid()} 
+          className="full-size" 
+          style={{ width: '100%', height: '100%' }}
+        >
+          <h2>{category.title}</h2>
+          {this.renderSubcategories(category.subcategories)}
         </div>
       );
-    });
+    })
   }
+
+  renderVideoLinks() {
+    const videoLinks = this.props.videoLinks;
+
+    return (
+      <div className="full-size" style={{ width: '100%', height: '100%' }}>
+        <h2>Informational Videos</h2>
+
+        <AccordionBoxContainer 
+          stageContent={videoLinks} 
+          type='links'
+          linkTo='videos/'
+          itemField={'links'} 
+          tabs={[] /* shush */}
+        />
+      </div>
+    );
+  }
+
+  renderSubcategories(subcategories) {
+    return (
+      <AccordionBoxContainer 
+        stageContent={subcategories} 
+        type='links'
+        linkTo='videos/'
+        itemField={'videos'} 
+        tabs={[] /* shush */}
+      />
+    );
+  }
+
 	render() {
 		return (
 			<div>
         <TitleLine title="Video Resources" />
         <div className="grid grid-pad">
           {this.renderVideos()}
+          {this.renderVideoLinks()}
         </div>
       </div>
 		)
@@ -39,8 +85,9 @@ class Videos extends Component {
 
 function mapStateToProps(state) {
   return { videos: state.content.videos,
+           videoLinks: state.content.videoLinks,
            assets: state.content.assets
    };
 }
 
-export default connect(mapStateToProps, { fetchVideos })(Videos);
+export default connect(mapStateToProps, { fetchVideos, fetchVideoLinks })(Videos);
