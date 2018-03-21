@@ -26,7 +26,7 @@ export default class NavbarBurger extends Component {
         {/*the hamburger part of the menu*/}
         <span></span>
         <span></span>
-        <span>MENU</span>
+        <span><p>MENU</p></span>
 
 				<div className='Menu-links-burger'>
           <NavLink

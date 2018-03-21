@@ -227,7 +227,7 @@ hr {
 
 .Menu-logo {
   position: relative;
-  top: 3rem;
+  top: 3.5rem;
   left: 3rem;
   margin-left: 2rem;
   margin-right: 2rem;
@@ -337,6 +337,7 @@ hr {
     height: 4px;
     margin-bottom: 5px;
     position: relative;
+
     
     background: $dark-grey-primary;
     border-radius: 3px;
@@ -348,13 +349,21 @@ hr {
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 opacity 0.55s ease;
+    p {
+      font-size: 1.3rem;
+      color: $dark-grey-primary;
+      padding-top: 1rem;
+      font-weight: 600;
+      z-index: -1;
     }
+  }
   span:first-child {
     transform-origin: 0% 0%;
   }
-  span:nth-last-child(2) {
+  span:nth-last-child(2), p {
     transform-origin: 0% 100%;
   }
+
 
 
   // display: block;
