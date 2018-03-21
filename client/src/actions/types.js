@@ -65,6 +65,7 @@ export const FETCH_CONTENT = "FETCH_CONTENT";
 export const FETCH_RESOURCE_LINKS = "FETCH_RESOURCE_LINKS";
 export const FETCH_STAGES = "FETCH_STAGES";
 export const FETCH_VIDEOS = "FETCH_VIDEOS";
+export const FETCH_VIDEO_LINKS = "FETCH_VIDEO_LINKS";
 export const STORE_STAGE_ID = "STORE_STAGE_ID";
 /* Not using these =====>
 

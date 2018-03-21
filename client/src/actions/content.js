@@ -6,6 +6,7 @@ import { FETCH_CONTENT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
 import { FETCH_VIDEOS } from './types'
+import { FETCH_VIDEO_LINKS } from './types'
 import { FETCH_ASSET } from './types'
 import { STORE_STAGE_ID } from './types'
 
@@ -59,9 +60,18 @@ export function fetchStages() {
 
 export function fetchVideos() {
   const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=video`)
-  console.log('fetch videos action')
+  console.log('fetchVideos action')
   return {
     type: FETCH_VIDEOS,
+    payload: request
+  };
+}
+
+export function fetchVideoLinks() {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=videoLink`)
+  console.log('fetchVideoLinks action')
+  return {
+    type: FETCH_VIDEO_LINKS,
     payload: request
   };
 }
