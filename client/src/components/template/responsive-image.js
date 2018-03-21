@@ -10,7 +10,7 @@ class Asset extends Component {
   renderAsset() {
     return this.props.assets.map((asset) => {
       console.log('render asset in asset')
-      if (asset.sys.id == this.props.assetId) {
+      if (typeof asset !== 'undefined' && asset.sys.id == this.props.assetId) {
         return (
           <img src={asset.fields.file.url} alt={asset.fields.file.fileName} key={`${asset.sys.id}`}/>
         );
