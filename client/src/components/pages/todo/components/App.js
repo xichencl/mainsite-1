@@ -15,7 +15,7 @@ class App extends React.Component {
     		<hr className="title-line" />
     	</div>
     	<div className="checklist">
-  	    <Footer />
+  	    <Footer party={this.props.location.state.party}/>
         {/*// somewhere here--> need to add logic so that if not logged in, can still view the checklist. */}
   	    { this.props.location.state.caseId ? 
           <VisibleTodoList caseId={this.props.location.state.caseId} caseType={this.props.location.state.caseType} party={this.props.location.state.party}/> :

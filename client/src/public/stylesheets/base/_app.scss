@@ -42,6 +42,7 @@ $box-height: 225px;
 $box-img-height: 160px;
 $box-img-width: 180px;
 $footer-push-height: 20rem; // Footer and Page-footer-push must be same height;
+$footer-push-height-mobile: 40rem; // Footer and Page-footer-push must be same height;
 $footer-push-height-negative: -20rem;
 
 
@@ -100,6 +101,7 @@ h3 {
 h1 {
   font-size: 4rem;
   font-color: $black;
+  margin: 1rem 0 2rem 0;
 }
 
 h2 {
@@ -149,8 +151,8 @@ hr {
     display: block; //display: block; to have fixed on top of screen
     position: fixed;
     margin: -4rem;
-    height: 8.5rem;
-    width: 90%; //vs 100%
+    height: 11.5rem;
+    width: 100%; //vs 90%
     z-index: 100;
   }
 }
@@ -164,15 +166,16 @@ hr {
   // width: 75%;
   @include md {
     margin-left: 1rem; 
+    margin-top: 1rem;
     // width: 100%;
   }
   @include lg {
     margin-left: 20rem;
     position: fixed; // to have search bar fixed on top
   }
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-left: 2rem;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .Search-bar {
@@ -183,9 +186,11 @@ hr {
 }
 
 .Page {
-  margin: 4rem;
+  margin: 4rem 0rem;
   max-width: 95rem;
-  
+  @include sm {
+    margin: 4rem 2rem;
+  }
   @include lg {
     margin: 8rem 10rem 0 20rem;
   }
@@ -199,7 +204,9 @@ hr {
   // display: -webkit-box;
   //   display: -ms-flexbox;
   //   display: flex;
-  z-index: 1000;
+
+  z-index: 100;
+
   margin-top: -3rem;
   margin-left: 2rem;
   padding-bottom: 2rem;
@@ -307,7 +314,7 @@ hr {
       
       opacity: 0; /* hide this */
       border: none;
-      z-index: 2; /* and place it over the hamburger */
+      z-index: 3; /* and place it over the hamburger */
       
       -webkit-touch-callout: none;
   }
@@ -334,7 +341,7 @@ hr {
     background: $dark-grey-primary;
     border-radius: 3px;
     
-    z-index: 1;
+    z-index: 2;
     
     transform-origin: 4px 0px;
     
@@ -379,6 +386,7 @@ hr {
   a:hover {
     color: $blue-accent-primary;
   }
+  z-index: 1;
 }
 
 .Menu-link-burger {
@@ -413,11 +421,11 @@ hr {
 }
 
 .Blue-border {
-  border: 5px solid $black;
+  border-top: 5px solid $black;
 }
 
 .Blue-border:hover {
-  border: 5px solid $blue-accent-primary;
+  border-top: 5px solid $blue-accent-primary;
 }
 
 .Box-container {
@@ -447,7 +455,8 @@ hr {
   // display: inline-block;
   // position: relative;
   // margin: 1rem 0 1rem 0;
-  z-index: 1;
+
+  //z-index: 1;
   p.p2 {
     margin-left: 1.1rem;
   }
@@ -585,9 +594,12 @@ hr {
 }
 
 .Info-box-btn {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 75%;
+  display: none;
+  @include sm {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 75%;
+  }
 }
 
 .Text-icon-box {
@@ -659,11 +671,14 @@ hr {
   left: 0;
   background-color: $dark-grey-primary;
   width: 100%;
-  height: $footer-push-height;
+  height: $footer-push-height-mobile;
   display: -webkit-box;
     display: -ms-flexbox;
     display: flex; // somehow display:flex removes p margin whitespace at bottom
   color: $white;
+
+  z-index: -100;
+
   // margin-top: 5rem;
   a {
     color: $white;
@@ -671,6 +686,9 @@ hr {
   }
   a:hover {
     text-decoration: underline;
+  }
+  @include sm {
+    height: $footer-push-height;
   }
 }
 

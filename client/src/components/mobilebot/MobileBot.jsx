@@ -8,7 +8,7 @@ class MobileBot extends React.Component {
 
   render() {
     return (
-      <div className="position-bot the-bot">
+      <div className={ this.props.visible ? "position-bot the-bot bot-z-index-open": "position-bot the-bot bot-z-index-closed"}>
         <ChatContainer history={this.props.history} />
       </div>
     );

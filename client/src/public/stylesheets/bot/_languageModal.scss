@@ -4,7 +4,7 @@
   display: none;
   position: fixed;
   z-index: 2;
-  right: 100px;
+  right: 0px;
   top: 73px;
   width: 25em;
   height: 100%;
@@ -12,6 +12,16 @@
   background-color: rgba(50, 64, 70, 0.9);
   font-family: $bot-font;
   cursor: default;
+}
+
+.close-lang-modal {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  .material-icons {
+    font-size: 2rem;
+    color: $white;
+  }
 }
 
 .lang-title {

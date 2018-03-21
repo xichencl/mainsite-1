@@ -44,7 +44,8 @@ class SmallClaims extends Component {
   constructor() {
     super();
     this.state = {
-      partyId: ''
+      partyId: '',
+      viewPopup: null
     };
     this.onPartyClick = this.onPartyClick.bind(this)
   }
@@ -54,6 +55,19 @@ class SmallClaims extends Component {
     this.props.fetchParties()
     // this.props.fetchFaqs()
     this.props.fetchResourceLinks(unitLabel)
+  }
+
+  componentDidMount(){
+    //check if they've visited
+    let visited = localStorage["alreadyVisited"];
+    if(visited) {
+     this.setState({ viewPopup: false })
+     //do not view Popup
+    } else {
+     //this is the first time, show popup
+     localStorage["alreadyVisited"] = true;
+     this.setState({ viewPopup: true});
+    }
   }
 
   onPartyClick(_id, e){
@@ -83,7 +97,7 @@ class SmallClaims extends Component {
     })
 
     const renderedParties = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id > b.fields.id)
+    .sort((a, b) => a.fields.id - b.fields.id)
     .map((party) => {
         return (
           <div className="Square-box-container" key={party.sys.id}>
@@ -103,7 +117,7 @@ class SmallClaims extends Component {
     return (
       <div>
           {/* Bot temporarily lives only in Small Claims until all case types are functional in bot */}
-          <Bot />
+          <Bot viewPopup={this.state.viewPopup} />
           <div className="Topic">
             <TitleLine title="Small Claims" />
             <div className="grid grid-pad">

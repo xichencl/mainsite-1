@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import TitleLine from '../../../template/title-line';
 
 import TextIconBox from '../../../template/text-icon-box';
+import SquareBoxStatic from '../../../template/square-box-static';
+
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContentByParty } from '../../../../actions/content.js';
-
+import Bot from '../../../chatbot/Bot.jsx'; 
 
 const partyIds = [
   {
@@ -47,6 +49,7 @@ class SmallClaimsStage extends Component {
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
+    this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
     // before component mounts, load content by selected party
@@ -90,7 +93,7 @@ class SmallClaimsStage extends Component {
         return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
         // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
       }, []); 
-      console.log("7. filledAry", filledAry)
+      // console.log("7. filledAry", filledAry)
       // pass content to AccordionBoxContainer as props
       return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
@@ -99,37 +102,44 @@ class SmallClaimsStage extends Component {
 
   renderMenuLinks() {
 
-    const renderedLinks = [].concat(this.props.stage)
-    .sort((a, b) => a.fields.id > b.fields.id)
+    return [].concat(this.props.stage)
+    // .filter(stage => stage.sys.id !== this.state.selectedStageId )
+    .sort((a, b) => a.fields.id - b.fields.id)
     .map((stage) => {
-      return (
-          <div onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-            <Link to={stage.fields.url}>{stage.fields.title}</Link>
-          </div>
-        )
+      return stage.sys.id !== this.state.selectedStageId && (
+        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
+          <Link to={stage.fields.url}>{stage.fields.title}</Link>
+        </div>
+      )
     })
+  }
 
-    return [
-      <InfoBox 
-          boxTitle="Menu"
-          boxContent={renderedLinks}
-          buttonVisibilityClass="hidden"
-          infoboxClass="Box Info-box xs-box"
-      />
-    ]
+  toUpperCase(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   
   render() {
     const currentTitle = this.state.selectedStageTitle
-
+    const currentSection = this.props.match.params.party
+    
     return (
       <div>
-        <TitleLine title={currentTitle} />
-        <div className="grid grid-pad">
-          {this.renderMenuLinks()} 
-          {this.filterContent(this.props.content, this.state.selectedStageId)}
+        <Bot />
+        <div className="Stage-top-bar">
+          <div className="breadcrumbs">
+            <Link to="/">Home</Link>
+            <span className="breadcrumbs-chevron">></span>
+            <Link to="/smallclaims">Small Claims</Link>
+            <span className="breadcrumbs-chevron">></span> 
+            <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
+          </div>
+          <div className="Stage-menu">
+            {this.renderMenuLinks()}
+          </div>
         </div>
+        <TitleLine title={currentTitle} />
+        {this.filterContent(this.props.content, this.state.selectedStageId)}
       </div>
     )
   } 

@@ -3,13 +3,16 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-const config = {
+const config = (env) => {
+  console.log(env);
+  return {
   context: __dirname,
   entry: ["babel-polyfill", "./client/src/index.js"],
 
   output: {
-    path: __dirname,
-    filename: './bundle.js',
+    path: __dirname + '/client',
+    // publicPath: "/client",
+    filename: 'bundle.js',
   },
   
   // resolve: {
@@ -37,6 +40,7 @@ const config = {
       {
         test: /\.css$/i,
         use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
           use: ['css-loader', 'sass-loader'],
         }),
       },
@@ -44,6 +48,7 @@ const config = {
         test: /\.scss$/i,
         exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
+          fallback:'style-loader',
           use: ['css-loader', 'sass-loader'],
         }),
       },
@@ -64,7 +69,7 @@ const config = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: 'assets/images/[name]-[sha512:hash:base64:7].[ext]',
+          name: '/assets/images/[name]-[sha512:hash:base64:7].[ext]',
         },
         // include: [path.resolve(__dirname, 'src', 'img')]
       },
@@ -100,6 +105,8 @@ const config = {
   devServer: {
     historyApiFallback: true,
     contentBase: './client',
+    // hot: true,
+    // inline: true
     // proxy: { '/api': 'http://localhost:3000' },
     host: '0.0.0.0',
     port: 8000
@@ -109,23 +116,25 @@ const config = {
     */
   },
   plugins: [
+  /*switch to production to enable ExtractTextPlugin for*/
     // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    // new UglifyJSPlugin({
-    //   sourceMap: true,
-    //   uglifyOptions: {
-    //     properties: {
-    //       compress: {
-    //         warnings: false,
-    //         comparisons: false, // don't optimize comparisons
-    //       },
-    //     },
-    //   },
-    // }),
-    new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),
+    new UglifyJSPlugin({
+      sourceMap: true,
+      uglifyOptions: {
+        properties: {
+          compress: {
+            warnings: false,
+            comparisons: false, // don't optimize comparisons
+          },
+        },
+      },
+    }),
+    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: env.NODE_ENV !== 'prod' }),
   ],
+};
 };
 
 module.exports = config;

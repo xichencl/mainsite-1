@@ -135,7 +135,7 @@ export default class AccordionBoxContainer extends Component {
   // 	})
 
 		return (
-			<div className="Box AccordionBoxContainer large-box">
+			<div className="Box AccordionBoxContainer ">
 				<hr />
 
 				{renderedContent}

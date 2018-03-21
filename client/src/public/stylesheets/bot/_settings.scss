@@ -1,30 +1,30 @@
 //styling settings/push out nav
 /* Position and sizing of burger button */
-.bm-burger-button {
-  display: none;
-}
+// .bm-burger-button {
+//   display: none;
+// }
 
-/* Color/shape of settings button cross */
-.bm-cross {
-  background: transparent;
-}
+// /* Color/shape of settings button cross */
+// .bm-cross {
+//   background: transparent;
+// }
 
-/* General sidebar styles */
-.bm-menu {
-  background: $dark-grey-primary;
-  padding-top: 73px;
-  //padding-left: 22px;
-  padding-right: 0px;
-}
+// /* General sidebar styles */
+// .bm-menu {
+//   background: $dark-grey-primary;
+//   padding-top: 73px;
+//   //padding-left: 22px;
+//   padding-right: 0px;
+// }
 
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
+// /* Styling of overlay */
+// .bm-overlay {
+//   background: rgba(0, 0, 0, 0.3);
+// }
 
 .icon-size-O {
-  height: 44px;
-  width: 44px;
+  height: 36px;
+  width: 36px;
   margin-top: 25px;
   margin-bottom: 25px;
   //margin-left: 28px;
@@ -32,6 +32,18 @@
   cursor: pointer;
 }
 
-#outer-container {
-  overflow-y: visible !important;
+.outer-container {
 }
+
+.bot-settings {
+  display: flex;  
+  justify-content: space-evenly;
+  background: $dark-grey-primary;
+  padding: 63px 0 0 0;
+  @include sm {
+    padding: 73px 0 0 0;
+  }
+}
+
+
+ 
