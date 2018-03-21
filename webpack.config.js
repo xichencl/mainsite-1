@@ -109,21 +109,21 @@ const config = {
     */
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
+    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
+    new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
     // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new UglifyJSPlugin({
-      sourceMap: true,
-      uglifyOptions: {
-        properties: {
-          compress: {
-            warnings: false,
-            comparisons: false, // don't optimize comparisons
-          },
-        },
-      },
-    }),
+    // new UglifyJSPlugin({
+    //   sourceMap: true,
+    //   uglifyOptions: {
+    //     properties: {
+    //       compress: {
+    //         warnings: false,
+    //         comparisons: false, // don't optimize comparisons
+    //       },
+    //     },
+    //   },
+    // }),
     new ExtractTextPlugin({ filename: 'src/public/stylesheets/app.css', allChunks: true }),
   ],
 };
