@@ -18,6 +18,63 @@
   margin-left: 4px;
 }
 
+//popup window that appears on first visit
+.Bot-popup {
+  color: $white; 
+  position: fixed;
+  background-color: $dark-grey-primary;
+  bottom: 11rem;
+  right: 2rem;
+  width: 275px;
+  height: 120px;
+  padding: 1.75rem 2rem;
+  p {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  @include mobile {
+    display: none;
+  }
+  @include lg {
+    bottom: 10rem;
+    width: 330px;
+    height: 120px;
+  }
+  display: block;
+  z-index: 1000;
+}
+
+.Bot-popup:before {
+   content:"";
+   position: absolute;
+   top: 100%;
+   right: 26px;
+   width: 0;
+   height: 0;
+   border-right: 20px solid transparent;
+   border-top: 17px solid $dark-grey-primary;
+   border-left: 20px solid transparent;
+}
+
+
+.Bot-popup-close {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  width: 25px;
+  height: 25px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 25%;
+  text-align: center;
+  i {
+    color: $dark-grey-primary;
+    margin-top: -0.9rem
+  }
+}
+
 .open-bot-icon-circle {
   display: flex;
   justify-content: space-evenly;
@@ -34,7 +91,7 @@
   // text-align: center;  
 
   position: fixed;
-  z-index: 1010;
+  // z-index: 1010;
 
   @include xxs {
     right: 2rem;
@@ -77,6 +134,13 @@
 .open-bot-icon-m {
   i {
     margin-top: -0.7rem;
+    font-size: 36px;
+  }
+}
+
+.open-bot-icon {
+  i {
+    font-size: 30px;
   }
 }
 
@@ -94,12 +158,12 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
   text-align: center;  
-  position: fixed;
+  position: absolute;
   cursor: pointer;
   background-color: $blue-accent-primary;
   right: 1rem;
   top: 1rem;
-  z-index: 2000;
+  //z-index: 2000;
   @include sm {
 
   }
@@ -230,7 +294,7 @@ button.button-chatbot-email:active {
   .open-bot-icon-circle {
     position: fixed;
     right: 1.75rem;
-    top: 3.5rem;
+    bottom: 3.5rem;
   }
 }
 

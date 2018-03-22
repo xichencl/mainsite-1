@@ -20,6 +20,7 @@ import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs-page';
 import Videos from './components/pages/videos-page';
+import VideoPlayer from './components/pages/video-player';
 import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
 import FindCourthouse from './components/pages/find-courthouse';
@@ -103,6 +104,7 @@ export default class AppRouter extends Component {
                   <Route path="/logout" component={Logout} />
                   <Route path="/faqs" component={FAQs} />
                   <Route path="/video-resources" component={Videos} />
+                  <Route path="/videos/:videoID" component={VideoPlayer} />
                   <Route path="/forms" component={Forms} />
  {/*                 <Route
                     path="/locations"
