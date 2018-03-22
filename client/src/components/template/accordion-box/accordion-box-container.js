@@ -69,7 +69,7 @@ export default class AccordionBoxContainer extends Component {
                     if (videoLink.hasOwnProperty('link')) {
                       return (
                         <div key={uuid()}>
-                          <a href={videoLink.link}>
+                          <a href={videoLink.link} target="_blank">
                             {videoLink.title}
                           </a>
                         </div>
