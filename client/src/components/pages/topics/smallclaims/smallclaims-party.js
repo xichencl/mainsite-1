@@ -15,6 +15,7 @@ import AccordionBoxContainer from '../../../template/accordion-box/accordion-box
 import SquareBox from '../../../template/square-box';
 //temporarily porting in bot here and on /smallclaims. eventually bring outside of topics pages
 import Bot from '../../../chatbot/Bot.jsx'; 
+import { DEFAULT_LANG } from '../../../../actions/types';
 
 class SmallClaimsParty extends Component {
 	constructor(props) {
@@ -38,24 +39,26 @@ class SmallClaimsParty extends Component {
 	}
 
 	render() {
+    const lang = this.props.language;
 		const resources = this.props.resources.map((item) => {
 			return (
 				<div>
-					<a href={item.fields.url} target="_blank">{item.fields.title}</a>
+          {/*resource link titles not translated, now default to 'en-US'*/}
+					<a href={item.fields.url[DEFAULT_LANG]} target="_blank">{item.fields.title[lang] || item.fields.title[DEFAULT_LANG]}</a>
 				</div>
 			)
 		})
 
     const renderedStages = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id - b.fields.id)
+    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
     .map((stage) => {
       return (
-      <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-        <Link to={`${this.props.match.url}/${stage.fields.url}`}>
+      <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
+        <Link to={`${this.props.match.url}/${stage.fields.url[DEFAULT_LANG]}`}>
           <SquareBox
             id={stage.sys.id}
-            boxTitle={stage.fields.title}
-            assetId={stage.fields.image.sys.id}
+            boxTitle={stage.fields.title[lang]}
+            assetId={stage.fields.image[DEFAULT_LANG].sys.id}
           />
         </Link>
       </div> 
@@ -96,7 +99,8 @@ function mapStateToProps(state) {
   return { 
     content: state.content.stages,
     stageId: state.content.stageId,
-    resources: state.content.resources
+    resources: state.content.resources,
+    language: state.content.language
   };
 }
 

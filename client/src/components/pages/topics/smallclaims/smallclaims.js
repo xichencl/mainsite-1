@@ -15,6 +15,8 @@ import { fetchResourceLinks } from '../../../../actions/content.js';
 import Bot from '../../../chatbot/Bot.jsx';
 import client from '../../../../services/contentful-client'
 
+import { DEFAULT_LANG } from '../../../../actions/types';
+
 //3WOs1Yx3FKWAOwSYg4WsK2 smallclaims id
 
 const temporaryFaqs = [
@@ -78,6 +80,7 @@ class SmallClaims extends Component {
   }
 
   render() {
+    const lang = this.props.language;
     const faqs = temporaryFaqs.map((faq, index) => {
       return (
         <div key={index}>
@@ -91,22 +94,23 @@ class SmallClaims extends Component {
     const resources = this.props.resources.map((item) => {
       return (
         <div>
-          <a href={item.fields.url} target="_blank">{item.fields.title}</a>
+          {/*resource link titles not translated, now default to 'en-US'*/}
+          <a href={item.fields.url[DEFAULT_LANG] } target="_blank">{item.fields.title[lang] || item.fields.title[DEFAULT_LANG]}</a>
         </div>
       )
     })
 
     const renderedParties = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id - b.fields.id)
+    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
     .map((party) => {
         return (
           <div className="Square-box-container" key={party.sys.id}>
-            <Link to={`/smallclaims/${party.fields.url}`}>
+            <Link to={`/smallclaims/${party.fields.url[DEFAULT_LANG]}`}>
               <Squarebox 
                 onClick={(e) => this.onPartyClick(party.sys.id, e)}
                 id={party.sys.id}
-                boxTitle={party.fields.title}  
-                assetId={party.fields.image.sys.id}
+                boxTitle={party.fields.title[lang]}  
+                assetId={party.fields.image[DEFAULT_LANG].sys.id}
               />
             </Link>
           </div>
@@ -122,12 +126,14 @@ class SmallClaims extends Component {
             <TitleLine title="Small Claims" />
             <div className="grid grid-pad">
               {renderedParties}
+              {/*static content, to be linked to faq pages*/}
               <Infobox 
                 boxTitle="Frequently Asked Questions"
                 boxContent={faqs}
                 buttonText="View More"
                 infoboxClass="Box Info-box Grey-background medium-box"
               />
+
               <Infobox 
                 boxTitle="Resources"
                 boxContent={resources}
@@ -145,14 +151,15 @@ class SmallClaims extends Component {
 function mapStateToProps(state) {
   return { 
     content: state.content.parties,
-    resources: state.content.resources
+    resources: state.content.resources,
+    language: state.content.language
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
       fetchParties: bindActionCreators(fetchParties, dispatch),
-      fetchResourceLinks: bindActionCreators(fetchResourceLinks, dispatch)
+      fetchResourceLinks: bindActionCreators(fetchResourceLinks, dispatch),
   };
 }
 

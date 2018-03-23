@@ -6,6 +6,7 @@ import Squarebox from '../template/square-box';
 import Asset from '../template/responsive-image';
 import client from '../../services/contentful-client'
 import TitleLine from '../template/title-line';
+import { DEFAULT_LANG } from '../../actions/types'; 
 /* Testing integration with Contentful CMS */ 
 class HomePage extends React.Component {
   componentWillMount() {
@@ -26,14 +27,16 @@ class HomePage extends React.Component {
   // }
 
   renderCategories() {
+    const lang = this.props.language;
+    console.log("language: ", lang);
     return this.props.categories.map((unit, index) => {
       return (
         <div className="Square-box-container" key={unit.sys.id}>
-          <Link to={unit.fields.url}>
+          <Link to={ unit.fields.url[DEFAULT_LANG]}>
             <Squarebox 
               id={unit.sys.id}
-              boxTitle={unit.fields.title}  
-              assetId={unit.fields.image.sys.id}
+              boxTitle={unit.fields.title[lang] }  
+              assetId={ unit.fields.image[DEFAULT_LANG].sys.id}
             />
           </Link>
         </div>
@@ -54,8 +57,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { categories: state.content.categories,
-           assets: state.content.assets
+  return { 
+    categories: state.content.categories,
+    language: state.content.language
+           // assets: state.content.assets
    };
 }
 

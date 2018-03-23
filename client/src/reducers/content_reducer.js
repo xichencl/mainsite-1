@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   videoURLs: {},
   videoLinks: {},
   stageId: [],
+  language: 'en-US'
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -142,6 +143,9 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, resources: action.payload.data.items };
   case STORE_STAGE_ID:
     return { ...state, stageId: action.payload };
+  
+  case 'TOGGLE_LANGUAGE':
+    return { ...state, language: action.language };
   default:
     return state;
   }
