@@ -11,6 +11,7 @@ import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
 import { fetchContentByParty } from '../../../../actions/content.js';
 import Bot from '../../../chatbot/Bot.jsx'; 
+import { DEFAULT_LANG } from '../../../../actions/types';
 
 const partyIds = [
   {
@@ -86,7 +87,7 @@ class SmallClaimsStage extends Component {
     // first reduce gets each tab 
       const thisTab = tab;
       // second reduce gets each tab's array of stages 
-      const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
+      const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
         // checks if ID is present in stage array
         const tabStage = cat.sys.id.includes(findById);
         // if the ID matches, push the tab content to a new array
@@ -95,6 +96,7 @@ class SmallClaimsStage extends Component {
       }, []); 
       // console.log("7. filledAry", filledAry)
       // pass content to AccordionBoxContainer as props
+      console.log("stageContent: ", filledAry);
       return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
     }, []);
@@ -104,11 +106,11 @@ class SmallClaimsStage extends Component {
 
     return [].concat(this.props.stage)
     // .filter(stage => stage.sys.id !== this.state.selectedStageId )
-    .sort((a, b) => a.fields.id - b.fields.id)
+    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
     .map((stage) => {
       return stage.sys.id !== this.state.selectedStageId && (
-        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-          <Link to={stage.fields.url}>{stage.fields.title}</Link>
+        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[this.props.language], stage.sys.id, e)} key={stage.sys.id}>
+          <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[this.props.language]}</Link>
         </div>
       )
     })
@@ -150,7 +152,8 @@ function mapStateToProps(state) {
     stageContent: state.content.tabs,
     stage: state.content.stages,
     content: state.content, 
-    stageId: state.content.stageId
+    stageId: state.content.stageId,
+    language: state.content.language
   };
 }
 export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
