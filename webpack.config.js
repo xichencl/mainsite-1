@@ -115,7 +115,7 @@ const config = (env) => {
     proxy: {'/api':'http://52.39.81.245:3000'},
     */
   },
-  plugins: [
+  plugins: env.NODE_ENV === 'prod' ? [
   /*switch to production to enable ExtractTextPlugin for*/
     // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
     // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
@@ -132,8 +132,12 @@ const config = (env) => {
         },
       },
     }),
-    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: env.NODE_ENV !== 'prod' }),
-  ],
+    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
+  ] 
+  :
+  [new webpack.optimize.OccurrenceOrderPlugin(),
+   new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: true})]
+  ,
 };
 };
 

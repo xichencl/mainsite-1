@@ -21,9 +21,12 @@ import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs/faqs-page';
 import FaqsSelectedPage from './components/pages/faqs/faqs-page-selected';
 import Videos from './components/pages/videos-page';
+import VideoPlayer from './components/pages/video-player';
 import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
 import FindCourthouse from './components/pages/find-courthouse';
+
+import SearchResults from './components/pages/search-results-page'
 
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
@@ -78,9 +81,11 @@ export default class AppRouter extends Component {
           <Switch>
             <Route path="/mbot" history={browserHistory} component={MobileBot} />
             <div className="App">
+              
               <div className="App-mask" />
               <Navbar />
               <Search />
+              
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
               {/*<Bot /> */}
@@ -101,6 +106,7 @@ export default class AppRouter extends Component {
                   <Route exact path="/faqs" component={FAQs} />
                   <Route path="/faqs/:page" component={FaqsSelectedPage} />
                   <Route path="/video-resources" component={Videos} />
+                  <Route path="/videos/:videoID" component={VideoPlayer} />
                   <Route path="/forms" component={Forms} />
  {/*                 <Route
                     path="/locations"
@@ -130,6 +136,8 @@ export default class AppRouter extends Component {
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
+
+                  <Route path="/search-results/:query" component={SearchResults} />
 
 
                   <Route component={NotFoundPage} />

@@ -52,7 +52,7 @@ class SmallClaims extends Component {
 
   componentWillMount() {
     const unitLabel = "SmallClaims"
-    this.props.fetchParties()
+    this.props.fetchParties()    
     // this.props.fetchFaqs()
     this.props.fetchResourceLinks(unitLabel)
   }
