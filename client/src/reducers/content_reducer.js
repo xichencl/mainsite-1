@@ -65,7 +65,7 @@ export default function(state = INITIAL_STATE, action) {
       const category = item.fields.categoryId;
       const subcategory = item.fields.subcategoryId;
       
-      videoURLs[title] = url;
+      videoURLs[asset.fields.title.toUpperCase()] = url;
 
       if (!videos.hasOwnProperty(category)) {
         videos[category] = {
