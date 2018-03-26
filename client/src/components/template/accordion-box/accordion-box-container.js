@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 // import marked from 'marked';
 import { CSSTransitionGroup } from 'react-transition-group'
 const ReactMarkdown = require('react-markdown')
+import { DEFAULT_LANG } from '../../../actions/types';
+import { connect } from 'react-redux';
 
 const uuid = require('uuid/v4')
 
-export default class AccordionBoxContainer extends Component {
+class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -99,15 +101,16 @@ export default class AccordionBoxContainer extends Component {
       })
     }
     else {
+      const lang = this.props.language;
       renderedContent = renderedContent.concat(this.props.stageContent)
-      .sort((a, b) => a.fields.id > b.fields.id)
+      .sort((a, b) => a.fields.id[DEFAULT_LANG] > b.fields.id[DEFAULT_LANG])
       .map((tab) => {
   		// const renderedContent = this.props.stageContent.map((tab) => {
-  			const input = tab.fields.blockText || '';
+  			const input = tab.fields.blockText[lang] || '';
   			return (
-  				<div className="Accordion-box-item " key={tab.fields.id}>
+  				<div className="Accordion-box-item " key={tab.fields.id[DEFAULT_LANG]}>
   					<h3 onClick={() => this.toggleClass(tab.sys.id)} className={this.state.activeId == tab.sys.id && this.state.pressed == true ? "blue-font": " "} >
-              {tab.fields.title}
+              {tab.fields.title[lang]}
 
               <span className="Accordion-box-icon">
                 {this.state.activeId == tab.sys.id && this.state.pressed == true ? "-" : "+"}
@@ -176,3 +179,8 @@ AccordionBoxContainer.propTypes = {
 	}
 } 
 */
+function mapStateToProps(state){
+  return { language: state.content.language };
+}
+
+export default connect(mapStateToProps)(AccordionBoxContainer);

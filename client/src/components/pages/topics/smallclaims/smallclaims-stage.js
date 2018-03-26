@@ -79,17 +79,20 @@ class SmallClaimsStage extends Component {
     })
   }
 
-  filterContent(content, findById) {
+  filterContent(content, findById, lang) {
     let filledAry = [];
     let emptyAry = [];
     // filter content by party 
     return content.tabs.reduce(function (acc, tab) {
     // first reduce gets each tab 
       const thisTab = tab;
+      console.log("tab", tab);
+      console.log("tabs-lang: ", tab.fields.stage[lang]);
       // second reduce gets each tab's array of stages 
       const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
         // checks if ID is present in stage array
         const tabStage = cat.sys.id.includes(findById);
+        console.log("tabstage: ", tabStage)
         // if the ID matches, push the tab content to a new array
         return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
         // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
@@ -102,15 +105,15 @@ class SmallClaimsStage extends Component {
     }, []);
   }
 
-  renderMenuLinks() {
+  renderMenuLinks(lang) {
 
     return [].concat(this.props.stage)
     // .filter(stage => stage.sys.id !== this.state.selectedStageId )
     .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
     .map((stage) => {
       return stage.sys.id !== this.state.selectedStageId && (
-        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[this.props.language], stage.sys.id, e)} key={stage.sys.id}>
-          <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[this.props.language]}</Link>
+        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
+          <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[lang]}</Link>
         </div>
       )
     })
@@ -124,7 +127,7 @@ class SmallClaimsStage extends Component {
   render() {
     const currentTitle = this.state.selectedStageTitle
     const currentSection = this.props.match.params.party
-    
+    console.log("lang: ", this.props.language);
     return (
       <div>
         <Bot />
@@ -137,11 +140,11 @@ class SmallClaimsStage extends Component {
             <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
           </div>
           <div className="Stage-menu">
-            {this.renderMenuLinks()}
+            {this.renderMenuLinks(this.props.language)}
           </div>
         </div>
-        <TitleLine title={currentTitle} />
-        {this.filterContent(this.props.content, this.state.selectedStageId)}
+        <TitleLine title={this.props.stageId.title} />
+        {this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)}
       </div>
     )
   } 
