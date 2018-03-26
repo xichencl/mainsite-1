@@ -18,7 +18,8 @@ import HomePage from './components/pages/home-page';
 import TestAccordionBox from './components/template/accordion-box/accordion-box-container';
 import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
-import FAQs from './components/pages/faqs-page';
+import FAQs from './components/pages/faqs/faqs-page';
+import FaqsSelectedPage from './components/pages/faqs/faqs-page-selected';
 import Videos from './components/pages/videos-page';
 import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
@@ -97,7 +98,8 @@ export default class AppRouter extends Component {
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
                   <Route path="/logout" component={Logout} />
-                  <Route path="/faqs" component={FAQs} />
+                  <Route exact path="/faqs" component={FAQs} />
+                  <Route path="/faqs/:page" component={FaqsSelectedPage} />
                   <Route path="/video-resources" component={Videos} />
                   <Route path="/forms" component={Forms} />
  {/*                 <Route
