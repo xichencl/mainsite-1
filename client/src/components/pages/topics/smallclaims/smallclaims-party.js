@@ -46,7 +46,7 @@ class SmallClaimsParty extends Component {
 			return (
 				<div key={item.resourceId}>
           {/*unavailable translations now default to 'en-US'*/}
-					<a href={item.url} target="_blank">{item.titles[lang] || item.fields.title['en-US']}</a>
+					<a href={item.url} target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
 				</div>
 			)
 		})
