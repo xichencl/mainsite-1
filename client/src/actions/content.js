@@ -40,8 +40,8 @@ export function fetchParties() {
   };
 }
 
-export function fetchFaqs() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq`);
+export function fetchFaqs(label) {
+  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&fields.categoryLabel=${label}`);
   console.log('fetch faqs action')
   return {
     type: FETCH_FAQS,

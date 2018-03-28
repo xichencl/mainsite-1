@@ -1,19 +1,44 @@
 import React, { Component } from 'react';
 import TitleLine from '../../template/title-line';
+import { fetchFaqs } from '../../../actions/content';
+import { connect } from 'react-redux';
 
-export default class SelectedFaqPage extends Component {
+
+class SelectedFaqPage extends Component {
+	constructor() {
+		super()
+	}
+
+	componentWillMount() {
+		const topic = this.props.match.params.page;
+		this.props.fetchFaqs(topic);
+	}
+
+	renderSubCategories() {
+		const subcatAry = [];
+		const subcategories = this.props.faqs.map((faq) => {
+			const subCatIds = faq.fields.subcategory.map((cat) => { 
+				subcatAry.push(cat.sys.id); 
+				console.log(subcatAry)
+			})};
+			const subCatTitle = faq.fields.subcategory.title
+		})
+	}
+
 	render() {
+
 		return (
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
-				<div>{this.props.match.params.page}</div>
-				<div className="Topic">Prepare and File a Claim</div>
-				<div className="Topic">Serving Court Papers</div>
-				<div className="Topic">After Being Served</div>
-				<div className="Topic">Can't Go to Hearing or Missed Court Date</div>
-				<div className="Topic">Appeal, Collect, or Vacate Judgement</div>
-				<div className="Topic">Examples of Cases Heard</div>
 			</div>
 		)
 	}
 }
+
+function mapStateToProps(state) {
+  return { faqs: state.content.faqs }
+}
+
+export default connect(mapStateToProps, { fetchFaqs })(SelectedFaqPage)
+
+//return (<div className="Topic" key={
