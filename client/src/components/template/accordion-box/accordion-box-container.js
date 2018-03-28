@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 // import marked from 'marked';
 import { CSSTransitionGroup } from 'react-transition-group'
 const ReactMarkdown = require('react-markdown')
+import { DEFAULT_LANG } from '../../../actions/types';
+import { connect } from 'react-redux';
 
 const uuid = require('uuid/v4')
 
-export default class AccordionBoxContainer extends Component {
+class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -99,24 +101,28 @@ export default class AccordionBoxContainer extends Component {
       })
     }
     else {
-      renderedContent = renderedContent.concat(this.props.stageContent)
-      .sort((a, b) => a.fields.id > b.fields.id)
-      .map((tab) => {
-  		// const renderedContent = this.props.stageContent.map((tab) => {
-  			const input = tab.fields.blockText || '';
-  			return (
-  				<div className="Accordion-box-item " key={tab.fields.id}>
-  					<h3 onClick={() => this.toggleClass(tab.sys.id)} className={this.state.activeId == tab.sys.id && this.state.pressed == true ? "blue-font": " "} >
-              {tab.fields.title}
+      const lang = this.props.language;
+    //   renderedContent = renderedContent.concat(this.props.stageContent)
+    //   .sort((a, b) => a.fields.id[DEFAULT_LANG] > b.fields.id[DEFAULT_LANG])
+    //   .map((tab) => {
+  		// // const renderedContent = this.props.stageContent.map((tab) => {
+  		// 	const input = tab.fields.blockText[lang] || '';
+  		renderedContent = this.props.stageContent
+        .map((tab, key) => {
+        // console.log("tab: ", tab);	
+        return (
+  				<div className="Accordion-box-item " key={tab.id}>
+  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+              {tab.titles[lang]}
 
               <span className="Accordion-box-icon">
-                {this.state.activeId == tab.sys.id && this.state.pressed == true ? "-" : "+"}
+                {this.state.activeId == tab.id && this.state.pressed == true ? "-" : "+"}
               </span>
             </h3>
             
-  					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
+  					<div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
   						<div className="Accordion-box-content">
-  							<ReactMarkdown source={input} />
+  							<ReactMarkdown source={tab.blockTexts[lang]} />
 
   							{/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
   						</div>
@@ -144,17 +150,17 @@ export default class AccordionBoxContainer extends Component {
 	}
 } 
 
-AccordionBoxContainer.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.shape({
-    activeId: PropTypes.number.isRequired,
-    // expanded: PropTypes.bool.isRequired,
-    // blockText: PropTypes.string.isRequired, 
+// AccordionBoxContainer.propTypes = {
+//   tabs: PropTypes.arrayOf(PropTypes.shape({
+//     activeId: PropTypes.number.isRequired,
+//     // expanded: PropTypes.bool.isRequired,
+//     // blockText: PropTypes.string.isRequired, 
     
-  }).isRequired).isRequired,
-  	toggleClass: PropTypes.func.isRequired
-  // onTabClick: PropTypes.func.isRequired,
-  // onAccordionClick: PropTypes.func.isRequired,
-}
+//   }).isRequired).isRequired,
+//   	toggleClass: PropTypes.func.isRequired
+//   // onTabClick: PropTypes.func.isRequired,
+//   // onAccordionClick: PropTypes.func.isRequired,
+// }
 
 /* 
 	render() {
@@ -176,3 +182,8 @@ AccordionBoxContainer.propTypes = {
 	}
 } 
 */
+function mapStateToProps(state){
+  return { language: state.content.language };
+}
+
+export default connect(mapStateToProps)(AccordionBoxContainer);
