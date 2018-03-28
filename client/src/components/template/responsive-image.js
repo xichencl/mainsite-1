@@ -8,19 +8,24 @@ class Asset extends Component {
     console.log('componentwillmount in asset')
   }
   renderAsset() {
-    return this.props.assets.map((asset) => {
-      console.log('render asset in asset')
-      if (typeof asset !== 'undefined' && asset.sys.id == this.props.assetId) {
-        return (
-          <img src={asset.fields.file.url} alt={asset.fields.file.fileName} key={`${asset.sys.id}`}/>
+    // return this.props.assets.map((asset) => {
+    //   console.log('render asset in asset')
+    //   if (typeof asset !== 'undefined' && asset.sys.id == this.props.assetId) {
+    //     return (
+    //       <img src={asset.fields.file.url} alt={asset.fields.file.fileName} key={`${asset.sys.id}`}/>
+    //     );
+    //   }
+    // });
+    const asset = this.props.assets.find( asset => asset.assetId === this.props.assetId);
+    return (
+          <img src={asset.url} alt={asset.alt} />
         );
-      }
-    });
   }
   render() {
-    return (
+    const asset = this.props.assets.find( asset => asset.assetId === this.props.assetId);
+    return asset !== undefined && (
       <div>
-        {this.renderAsset()}
+        <img src={asset.url} alt={asset.alt} />
       </div>
     );
   }

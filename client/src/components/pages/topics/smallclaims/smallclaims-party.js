@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStages } from '../../../../actions/content.js';
+import { fetchStages, fetchResourceLinks } from '../../../../actions/content.js';
 import { storeStageId } from '../../../../actions/content.js';
 
 import TitleLine from '../../../template/title-line';
@@ -20,31 +20,33 @@ import { DEFAULT_LANG } from '../../../../actions/types';
 class SmallClaimsParty extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			buttonSelected: false,
-			stageTitle: '',
-      stageId: null
-		}
-		this.onStageSelect = this.onStageSelect.bind(this);
+		// this.state = {
+		// 	buttonSelected: false,
+		// 	stageTitle: '',
+  //     stageId: null
+		// }
+		// this.onStageSelect = this.onStageSelect.bind(this);
 	}
 
   componentWillMount() {
-    this.props.fetchStages()
+    this.props.stages.length === 0 && this.props.fetchStages();
+    this.props.resources.length === 0 && this.props.fetchResourceLinks("SmallClaims");
+
   }
 
-	onStageSelect(title, id, e) {
-    e.stopPropagation();
-    // when stage selected, store stageId in state
-    this.props.storeStageId(title, id);
-	}
+	// onStageSelect(title, id, e) {
+ //    e.stopPropagation();
+ //    // when stage selected, store stageId in state
+ //    this.props.storeStageId(title, id);
+	// }
 
 	render() {
     const lang = this.props.language;
 		const resources = this.props.resources.map((item) => {
 			return (
-				<div>
-          {/*resource link titles not translated, now default to 'en-US'*/}
-					<a href={item.fields.url[DEFAULT_LANG]} target="_blank">{item.fields.title[lang] || item.fields.title[DEFAULT_LANG]}</a>
+				<div key={item.resourceId}>
+          {/*unavailable translations now default to 'en-US'*/}
+					<a href={item.url} target="_blank">{item.titles[lang] || item.fields.title['en-US']}</a>
 				</div>
 			)
 		})
@@ -113,17 +115,14 @@ class SmallClaimsParty extends Component {
 function mapStateToProps(state) {
   return { 
     stages: state.content.stages,
-    stageId: state.content.stageId,
+    // stageId: state.content.stageId,
     resources: state.content.resources,
     language: state.content.language
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-      fetchStages: bindActionCreators(fetchStages, dispatch),
-      storeStageId: bindActionCreators(storeStageId, dispatch)
-  };
+  return bindActionCreators({fetchStages, fetchResourceLinks}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsParty);

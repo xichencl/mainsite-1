@@ -54,9 +54,9 @@ class SmallClaims extends Component {
 
   componentWillMount() {
     const unitLabel = "SmallClaims"
-    this.props.fetchParties()    
+    this.props.parties.length === 0 && this.props.fetchParties()    
     // this.props.fetchFaqs()
-    this.props.fetchResourceLinks(unitLabel)
+    this.props.resources.length === 0 && this.props.fetchResourceLinks(unitLabel)
   }
 
   componentDidMount(){
@@ -93,24 +93,22 @@ class SmallClaims extends Component {
 
     const resources = this.props.resources.map((item) => {
       return (
-        <div>
+        <div key={item.resourceId}>
           {/*resource link titles not translated, now default to 'en-US'*/}
-          <a href={item.fields.url[DEFAULT_LANG] } target="_blank">{item.fields.title[lang] || item.fields.title[DEFAULT_LANG]}</a>
+          <a href={item.url } target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
         </div>
       )
     })
 
-    const renderedParties = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
+    const renderedParties = this.props.parties
     .map((party) => {
         return (
-          <div className="Square-box-container" key={party.sys.id}>
-            <Link to={`/smallclaims/${party.fields.url[DEFAULT_LANG]}`}>
+          <div className="Square-box-container" key={party.id}>
+            <Link to={`/smallclaims/${party.url}`}>
               <Squarebox 
-                onClick={(e) => this.onPartyClick(party.sys.id, e)}
-                id={party.sys.id}
-                boxTitle={party.fields.title[lang]}  
-                assetId={party.fields.image[DEFAULT_LANG].sys.id}
+                id={party.partyId}
+                boxTitle={party.titles[lang]}  
+                assetId={party.imageId}
               />
             </Link>
           </div>
@@ -150,17 +148,14 @@ class SmallClaims extends Component {
 
 function mapStateToProps(state) {
   return { 
-    content: state.content.parties,
+    parties: state.content.parties,
     resources: state.content.resources,
     language: state.content.language
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-      fetchParties: bindActionCreators(fetchParties, dispatch),
-      fetchResourceLinks: bindActionCreators(fetchResourceLinks, dispatch),
-  };
+  return bindActionCreators( {fetchParties, fetchResourceLinks}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SmallClaims);

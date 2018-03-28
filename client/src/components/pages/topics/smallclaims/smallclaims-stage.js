@@ -9,9 +9,10 @@ import SquareBoxStatic from '../../../template/square-box-static';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
-import { fetchContentByParty } from '../../../../actions/content.js';
+import { fetchContentByParty, fetchStages } from '../../../../actions/content.js';
 import Bot from '../../../chatbot/Bot.jsx'; 
 import { DEFAULT_LANG } from '../../../../actions/types';
+import { bindActionCreators } from 'redux';
 
 const partyIds = [
   {
@@ -45,24 +46,24 @@ const stageIds = {
    'after': '4HkTlYlsFqqIgscmGWOCkk'
   };
 
-const stageTitle = {
-  'before': 0,
-  'during': 1,
-  'after': 2
-};
+// const stageTitleIdx = {
+//   'before': 0,
+//   'during': 1,
+//   'after': 2
+// };
 
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStageId: this.props.stageId.id,
-      selectedStageTitle: this.props.stageId.title,
-      selectedContent: [],
+      // selectedStageId: this.props.stageId.id,
+      // selectedStageTitle: this.props.stageId.title,
+      // selectedContent: [],
       selectedParty: '',
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     // this.filterContent = this.filterContent.bind(this)
-    this.onStageSelect = this.onStageSelect.bind(this);
+    // this.onStageSelect = this.onStageSelect.bind(this);
     this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
@@ -75,25 +76,31 @@ class SmallClaimsStage extends Component {
       } else {
          _partyId = partyIds[1].id
       }
+    
+    //fetch stages if not already present in store
+    if (this.props.stages.length === 0){
+      this.props.fetchStages();
+    }
     // fetch and load content on first landing or when changing party
     if (this.props.stageContent.length === 0 || this.state.selectedParty !== this.props.match.params.party ){
       this.props.fetchContentByParty('SmallClaims', _partyId);
       this.setState({...this.state, selectedParty: this.props.match.params.party});
     }
-  }
-
-  componentWillUpdate() {
 
   }
 
-  onStageSelect(title, _id, e) {
-    e.stopPropagation();
-    this.setState({
-      selectedStageId: _id, 
-      selectedStageTitle: title,
-      selectedContent: [] 
-    })
-  }
+  // componentWillUpdate() {
+
+  // }
+
+  // onStageSelect(title, _id, e) {
+  //   e.stopPropagation();
+  //   this.setState({
+  //     selectedStageId: _id, 
+  //     selectedStageTitle: title,
+  //     selectedContent: [] 
+  //   })
+  // }
 
   // filterContent(content, findById, lang) {
   //   let filledAry = [];
@@ -151,8 +158,9 @@ class SmallClaimsStage extends Component {
   render() {
     const currentTitle = this.state.selectedStageTitle
     const currentSection = this.props.match.params.party
+    console.log("current stage: ", this.props.stages);
     console.log("lang: ", this.props.language);
-    return (
+    return this.props.stages.length !== 0 && this.props.stageContent.length !== 0 && (
       <div>
         <Bot />
         <div className="Stage-top-bar">
@@ -168,14 +176,18 @@ class SmallClaimsStage extends Component {
           </div>
         </div>
       {/* place holder, need to work out how to display the title w/out relying on redux store */}
-        <TitleLine title={this.props.match.params.stage} />
+        <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).titles[this.props.language]} />
         {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
         <AccordionBoxContainer stageContent={ 
-          this.props.stageContent.filter(tab => {console.log(tab.stageId); console.log(stageIds[this.props.match.params.stage]); return tab.stageId === stageIds[this.props.match.params.stage]})
+          this.props.stageContent.filter(tab => { return tab.stageId === stageIds[this.props.match.params.stage] })
                       .sort((a, b) => a.id - b.id )} />
       </div>
     )
   } 
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchStages, fetchContentByParty}, dispatch);
 }
 
 function mapStateToProps(state) {
@@ -187,4 +199,4 @@ function mapStateToProps(state) {
     language: state.content.language
   };
 }
-export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
+export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsStage);

@@ -10,10 +10,8 @@ import { DEFAULT_LANG } from '../../actions/types';
 /* Testing integration with Contentful CMS */ 
 class HomePage extends React.Component {
   componentWillMount() {
-    if (!this.props.assets) {
       this.props.fetchCategories()
       console.log(this.props.categories, 'this.props.categories')
-    }
   }
   // constructor() {
   //   super()
@@ -29,14 +27,14 @@ class HomePage extends React.Component {
   renderCategories() {
     const lang = this.props.language;
     console.log("language: ", lang);
-    return this.props.categories.map((unit, index) => {
+    return this.props.categories.map((category) => {
       return (
-        <div className="Square-box-container" key={unit.sys.id}>
-          <Link to={ unit.fields.url[DEFAULT_LANG]}>
+        <div className="Square-box-container" key={category.id}>
+          <Link to={ category.url }>
             <Squarebox 
-              id={unit.sys.id}
-              boxTitle={unit.fields.title[lang] }  
-              assetId={ unit.fields.image[DEFAULT_LANG].sys.id}
+              id={category.id}
+              boxTitle={ category.titles[lang] }  
+              assetId={ category.imageId }
             />
           </Link>
         </div>

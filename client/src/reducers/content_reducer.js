@@ -27,9 +27,9 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
   case FETCH_CATEGORIES:
-    return { ...state, categories: action.payload.data.items };
+    return { ...state, categories: action.payload };
   case FETCH_PARTIES:
-    return { ...state, parties: action.payload.data.items };
+    return { ...state, parties: action.payload };
   case FETCH_FAQS:
     return { ...state, faqs: action.payload.data.items };
   case FETCH_CONTENT:
@@ -140,7 +140,7 @@ export default function(state = INITIAL_STATE, action) {
   }
 
   case FETCH_RESOURCE_LINKS:
-    return { ...state, resources: action.payload.data.items };
+    return { ...state, resources: action.payload };
   case STORE_STAGE_ID:
     return { ...state, stageId: action.payload };
   

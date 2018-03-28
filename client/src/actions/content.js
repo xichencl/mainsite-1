@@ -24,7 +24,7 @@ import {
 
 export function fetchCategories() {
   // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);
-  // console.log('fetch categories action')
+  console.log('fetch categories action')
   // return {
   //   type: FETCH_CATEGORIES,
   //   payload: request
@@ -32,8 +32,17 @@ export function fetchCategories() {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category&locale=*`)
     .then( (response) => { 
-      // dispatch({type: 'STORE_URL', lastCall: {url: url, dispatchAction: FETCH_CATEGORIES}});
-      dispatch({type: FETCH_CATEGORIES, payload: response});
+      console.log("response: ", response);
+      const categories = response.data.items.map((category) => ({
+        categoryId: category.sys.id,
+        url: category.fields.url['en-US'],
+        id: category.fields.id['en-US'],
+        titles: category.fields.title,
+        imageId: category.fields.image['en-US'].sys.id
+      }))
+    .sort((a, b) => a.id - b.id);
+
+      dispatch({type: FETCH_CATEGORIES, payload: categories});
 
       })
     .catch((error)=> console.log("err: ", error));
@@ -50,9 +59,20 @@ export function fetchParties() {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=party&locale=*`)
     .then( (response) => { 
-      // dispatch({type: 'STORE_URL', lastCall: {url: url, dispatchAction: FETCH_PARTIES}});
-      dispatch({type: FETCH_PARTIES, payload: response});
+      //return an ordered parties object
+      const parties = response.data.items.map((party) => ({
+        partyId: party.sys.id, 
+        id: party.fields.id['en-US'],
+        url: party.fields.url['en-US'],
+        titles: party.fields.title,
+        imageId: party.fields.image['en-US'].sys.id
+      }))
+      .sort((a, b) => a.id - b.id);
+
+
+      dispatch({type: FETCH_PARTIES, payload: parties});
       })
+
     .catch((error)=> console.log("err: ", error));
   }
 }
@@ -147,21 +167,55 @@ export function fetchContentByParty(label, party) {
 
 
 export function fetchResourceLinks(label) {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.categoryLabel=${label}&locale=*`);
-  console.log('fetch resource links action')
-  return {
-    type: FETCH_RESOURCE_LINKS,
-    payload: request
-  };
+  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.categoryLabel=${label}&locale=*`);
+  // console.log('fetch resource links action')
+  // return {
+  //   type: FETCH_RESOURCE_LINKS,
+  //   payload: request
+  // };
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=resource&fields.categoryLabel=${label}&locale=*`)
+      .then((response) => {
+        console.log(response.data.items);
+        const resources = response.data.items.map(resource => ({
+          url: resource.fields.url['en-US'], titles: resource.fields.title, resourceId: resource.sys.id
+        }));
+        dispatch({
+          type: FETCH_RESOURCE_LINKS,
+          payload: resources
+        })
+      })
+      .catch((error) => console.log("err: ", error))
+    }
+
+  
 }
 
 export function fetchAsset(id) {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/assets/${id}?access_token=${API_TOKEN}`);
+  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/assets/${id}?access_token=${API_TOKEN}`);
+  // console.log('fetch assets action');
+  // return {
+  //   type: FETCH_ASSET,
+  //   payload: request
+  // };
+
+  return function(dispatch){
+
+     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/assets/${id}?access_token=${API_TOKEN}`)
+     .then((response) => {
+      const asset = {
+            assetId: response.data.sys.id,
+            url: response.data.fields.file.url,
+            alt: response.data.fields.file.fileName,
+     };
+     console.log("asset: ", asset);
+      dispatch({
+        type: FETCH_ASSET,
+        payload: asset })
+    })
+     .catch((error) => console.log("err: ", error))
   console.log('fetch assets action');
-  return {
-    type: FETCH_ASSET,
-    payload: request
-  };
+ }
 }
 
 export const storeStageId = (title, id) => {
