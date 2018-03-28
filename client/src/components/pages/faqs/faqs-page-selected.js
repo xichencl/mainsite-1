@@ -15,14 +15,14 @@ class SelectedFaqPage extends Component {
 	}
 
 	renderSubCategories() {
-		const subcatAry = [];
-		const subcategories = this.props.faqs.map((faq) => {
-			const subCatIds = faq.fields.subcategory.map((cat) => { 
-				subcatAry.push(cat.sys.id); 
-				console.log(subcatAry)
-			})};
-			const subCatTitle = faq.fields.subcategory.title
-		})
+		// const subcatAry = [];
+		// const subcategories = this.props.faqs.map((faq) => {
+		// 	const subCatIds = faq.fields.subcategory.map((cat) => { 
+		// 		subcatAry.push(cat.sys.id); 
+		// 		console.log(subcatAry)
+		// 	})};
+		// 	const subCatTitle = faq.fields.subcategory.title
+		// })
 	}
 
 	render() {

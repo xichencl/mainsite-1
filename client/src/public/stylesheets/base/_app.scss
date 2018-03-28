@@ -185,15 +185,32 @@ hr {
   width: 40rem;
 }
 
+.Search-button {
+  background: $blue-accent-primary;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.7rem 2rem;
+}
+
+.Search-button:disabled {
+  opacity: 0.3;
+}
+
+.Search-button:hover {
+  background: $black;
+}
+
 .Languages {
   align-items: right;
   background-color: $white;
   display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    @include md {
-    margin-left: 1rem; 
-    margin-top: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  @include md {
+  margin-left: 1rem; 
+  margin-top: 1rem;
     // width: 100%;
   }
   @include lg {
@@ -204,6 +221,46 @@ hr {
   margin-left: 5rem;
   z-index: 100;
 }
+
+.Languages {
+  display: inline-block;
+  position: relative;
+  
+  .Languages-btns {
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: white;
+    background-image: none;
+  }
+  
+  .Language-select {
+    position: relative;
+    display: block;
+    width: 10rem;
+    height: 3em;
+    line-height: 3;
+    background: white;
+    overflow: hidden;
+    border-radius: .25em;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+  }
+  
+  .Languages-btns {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    padding: 0 0 0 .5em;
+    color: black;
+    cursor: pointer;
+  }
+}
+
 
 .Page {
   margin: 4rem 0rem;

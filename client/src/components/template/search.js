@@ -127,7 +127,7 @@ class Search extends Component {
             <form onSubmit={this.handleSubmit} value="search">         
              <div className="Search">
                 <input className="Search-bar" type="text" placeholder=" Search our site" onChange={this.handleChange} value={this.state.value} />
-                <input value="search" type="submit"></input>
+                <input className="Search-button" value="search" type="submit"></input>
              </div>
              </form>
           
