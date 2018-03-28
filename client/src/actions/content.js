@@ -208,7 +208,7 @@ export function fetchAsset(id) {
             url: response.data.fields.file.url,
             alt: response.data.fields.file.fileName,
      };
-     console.log("asset: ", asset);
+     // console.log("asset: ", asset);
       dispatch({
         type: FETCH_ASSET,
         payload: asset })
