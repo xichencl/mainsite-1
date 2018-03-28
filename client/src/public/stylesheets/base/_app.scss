@@ -182,7 +182,10 @@ hr {
   height: 3.3rem;
   margin-right: 2rem;
   padding-top: 0;
-  width: 40rem;
+  width: 20rem;
+  @include md {
+    width: 40rem;
+  }
 }
 
 .Search-button {
@@ -203,23 +206,23 @@ hr {
 }
 
 .Languages {
-  align-items: right;
-  background-color: $white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  @include md {
-  margin-left: 1rem; 
-  margin-top: 1rem;
-    // width: 100%;
-  }
-  @include lg {
-    margin-left: 75rem;
-    position: fixed; // to have search bar fixed on top
-  }
-  margin-top: 2rem;
-  margin-left: 5rem;
-  z-index: 100;
+  // align-items: right;
+  // background-color: $white;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
+  // @include md {
+  // margin-left: 1rem; 
+  // margin-top: 1rem;
+  //   // width: 100%;
+  // }
+  // @include lg {
+  //   margin-left: 75rem;
+  //   position: fixed; // to have search bar fixed on top
+  // }
+  // margin-top: 2rem;
+  // margin-left: 5rem;
+  // z-index: 100;
 }
 
 .Languages {
@@ -242,7 +245,6 @@ hr {
     display: block;
     width: 10rem;
     height: 3em;
-    line-height: 3;
     background: white;
     overflow: hidden;
     border-radius: .25em;
@@ -269,7 +271,7 @@ hr {
     margin: 4rem 2rem;
   }
   @include lg {
-    margin: 8rem 10rem 0 20rem;
+    margin: 4rem 10rem 0 20rem;
   }
 }
 

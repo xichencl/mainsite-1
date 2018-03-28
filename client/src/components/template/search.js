@@ -124,10 +124,10 @@ class Search extends Component {
 
     return (
         <div>
-            <form onSubmit={this.handleSubmit} value="search">         
+            <form onSubmit={this.handleSubmit} value="Search">         
              <div className="Search">
                 <input className="Search-bar" type="text" placeholder=" Search our site" onChange={this.handleChange} value={this.state.value} />
-                <input className="Search-button" value="search" type="submit"></input>
+                <input className="Search-button" value="Search" type="submit"></input>
              </div>
              </form>
           
