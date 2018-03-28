@@ -24,20 +24,32 @@ const partyIds = [
    }
 ]
 
-const stageIds = [
-  {
-    name: 'before',
-    id: '1cMyrIaZ680ukwwSi8YscC'
-  },
-  {
-    name: 'during',
-    id: '5iDqJ92Rzqksq88gYWawE4'
-  },
-  {
-    name: 'after',
-    id: '4HkTlYlsFqqIgscmGWOCkk'
-  }
-]
+// const stageIds = [
+//   {
+//     name: 'before',
+//     id: '1cMyrIaZ680ukwwSi8YscC'
+//   },
+//   {
+//     name: 'during',
+//     id: '5iDqJ92Rzqksq88gYWawE4'
+//   },
+//   {
+//     name: 'after',
+//     id: '4HkTlYlsFqqIgscmGWOCkk'
+//   }
+// ]
+
+const stageIds = {
+   'before': '1cMyrIaZ680ukwwSi8YscC',
+   'during': '5iDqJ92Rzqksq88gYWawE4',
+   'after': '4HkTlYlsFqqIgscmGWOCkk'
+  };
+
+const stageTitle = {
+  'before': 0,
+  'during': 1,
+  'after': 2
+};
 
 class SmallClaimsStage extends Component {
   constructor(props) {
@@ -45,10 +57,11 @@ class SmallClaimsStage extends Component {
     this.state = {
       selectedStageId: this.props.stageId.id,
       selectedStageTitle: this.props.stageId.title,
-      selectedContent: []
+      selectedContent: [],
+      selectedParty: '',
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
-    this.filterContent = this.filterContent.bind(this)
+    // this.filterContent = this.filterContent.bind(this)
     this.onStageSelect = this.onStageSelect.bind(this);
     this.toUpperCase = this.toUpperCase.bind(this);
   }
@@ -62,8 +75,11 @@ class SmallClaimsStage extends Component {
       } else {
          _partyId = partyIds[1].id
       }
-    // update state with smallclaims/:party content
-    this.props.fetchContentByParty('SmallClaims', _partyId)
+    // fetch and load content on first landing or when changing party
+    if (this.props.stageContent.length === 0 || this.state.selectedParty !== this.props.match.params.party ){
+      this.props.fetchContentByParty('SmallClaims', _partyId);
+      this.setState({...this.state, selectedParty: this.props.match.params.party});
+    }
   }
 
   componentWillUpdate() {
@@ -79,41 +95,49 @@ class SmallClaimsStage extends Component {
     })
   }
 
-  filterContent(content, findById, lang) {
-    let filledAry = [];
-    let emptyAry = [];
-    // filter content by party 
-    return content.tabs.reduce(function (acc, tab) {
-    // first reduce gets each tab 
-      const thisTab = tab;
-      console.log("tab", tab);
-      console.log("tabs-lang: ", tab.fields.stage[lang]);
-      // second reduce gets each tab's array of stages 
-      const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
-        // checks if ID is present in stage array
-        const tabStage = cat.sys.id.includes(findById);
-        console.log("tabstage: ", tabStage)
-        // if the ID matches, push the tab content to a new array
-        return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
-        // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-      }, []); 
-      // console.log("7. filledAry", filledAry)
-      // pass content to AccordionBoxContainer as props
-      console.log("stageContent: ", filledAry);
-      return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
+  // filterContent(content, findById, lang) {
+  //   let filledAry = [];
+  //   let emptyAry = [];
+  //   // filter content by party 
+  //   return content.tabs.reduce(function (acc, tab) {
+  //   // first reduce gets each tab 
+  //     const thisTab = tab;
+  //     console.log("tab", tab);
+  //     console.log("tabs-lang: ", tab.fields.stage[lang]);
+  //     // second reduce gets each tab's array of stages 
+  //     const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
+  //       // checks if ID is present in stage array
+  //       const tabStage = cat.sys.id.includes(findById);
+  //       console.log("tabstage: ", tabStage)
+  //       // if the ID matches, push the tab content to a new array
+  //       return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+  //       // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+  //     }, []); 
+  //     // console.log("7. filledAry", filledAry)
+  //     // pass content to AccordionBoxContainer as props
+  //     console.log("stageContent: ", filledAry);
+  //     return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
-    }, []);
-  }
+  //   }, []);
+  // }
 
   renderMenuLinks(lang) {
 
-    return [].concat(this.props.stage)
-    // .filter(stage => stage.sys.id !== this.state.selectedStageId )
-    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
+    // return [].concat(this.props.stage)
+    // // .filter(stage => stage.sys.id !== this.state.selectedStageId )
+    // .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
+    // .map((stage) => {
+    //   return stage.sys.id !== this.state.selectedStageId && (
+    //     <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
+    //       <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[lang]}</Link>
+    //     </div>
+    //   )
+    // })
+    return this.props.stages
     .map((stage) => {
-      return stage.sys.id !== this.state.selectedStageId && (
-        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
-          <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[lang]}</Link>
+      return stage.url !== this.props.match.params.stage && (
+        <div className="Stage-menu-item" key={stage.id}>
+          <Link to={stage.url}>{stage.titles[lang]}</Link>
         </div>
       )
     })
@@ -143,8 +167,12 @@ class SmallClaimsStage extends Component {
             {this.renderMenuLinks(this.props.language)}
           </div>
         </div>
-        <TitleLine title={this.props.stageId.title} />
-        {this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)}
+      {/* place holder, need to work out how to display the title w/out relying on redux store */}
+        <TitleLine title={this.props.match.params.stage} />
+        {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
+        <AccordionBoxContainer stageContent={ 
+          this.props.stageContent.filter(tab => {console.log(tab.stageId); console.log(stageIds[this.props.match.params.stage]); return tab.stageId === stageIds[this.props.match.params.stage]})
+                      .sort((a, b) => a.id - b.id )} />
       </div>
     )
   } 
@@ -153,7 +181,7 @@ class SmallClaimsStage extends Component {
 function mapStateToProps(state) {
   return { 
     stageContent: state.content.tabs,
-    stage: state.content.stages,
+    stages: state.content.stages,
     content: state.content, 
     stageId: state.content.stageId,
     language: state.content.language

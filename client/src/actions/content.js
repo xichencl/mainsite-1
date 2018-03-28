@@ -75,12 +75,26 @@ export function fetchFaqs() {
 }
 
 export function fetchStages() {
-  const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`);
-  console.log('fetch stages action')
-  return {
-    type: FETCH_STAGES,
-    payload: request
-  };
+  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`);
+  // console.log('fetch stages action')
+  // return {
+  //   type: FETCH_STAGES,
+  //   payload: request
+  // };
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`)
+    .then((response) => {
+       const stages = response.data.items.map((stage) => ({titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.id['en-US'], url: stage.fields.url['en-US']}))
+                                         .sort((a, b) => a.id - b.id);
+       console.log("returned ordered stages: ", stages);
+       dispatch({
+         type: FETCH_STAGES,
+         payload: stages
+       });                                  
+    })
+    .catch((error) => console.log("err: ", error));
+  }
+  
 }
 
 export function fetchVideos() {
@@ -108,11 +122,24 @@ export function fetchContentByParty(label, party) {
   //   type: FETCH_CONTENT,
   //   payload: request
   // };
+  console.log('fetch stageContent action')
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt&locale=*`)
     .then( (response) => { 
       // dispatch({type: 'STORE_URL', lastCall: {url: url, dispatchAction: FETCH_CONTENT}});
-      dispatch({type: FETCH_CONTENT, payload: response});
+      //retrieve essential data
+      const tabs = response.data.items.reduce((acc, cur) => {
+        //create duplicate entries for different stages if existent
+        for (let i=0; i < cur.fields.stage['en-US'].length; i++){
+             acc.push({titles: cur.fields.title, blockTexts: cur.fields.blockText, id: cur.fields.id['en-US'], 
+                stageId: cur.fields.stage['en-US'][i].sys.id});
+        }
+        return acc;
+        
+      }, []);
+      // console.log("tabs: ", tabs); 
+      // .sort((a, b) => a.id - b.id);
+      dispatch({type: FETCH_CONTENT, payload: tabs});
       })
     .catch((error)=> console.log("err: ", error));
   }

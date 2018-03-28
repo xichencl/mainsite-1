@@ -33,9 +33,9 @@ export default function(state = INITIAL_STATE, action) {
   case FETCH_FAQS:
     return { ...state, faqs: action.payload.data.items };
   case FETCH_CONTENT:
-    return { ...state, tabs: action.payload.data.items };
+    return { ...state, tabs: action.payload };
   case FETCH_STAGES:
-    return { ...state, stages: action.payload.data.items };
+    return { ...state, stages: action.payload };
   case FETCH_VIDEOS: {
     const videos = {};
     const videoURLs = {};

@@ -49,16 +49,31 @@ class SmallClaimsParty extends Component {
 			)
 		})
 
-    const renderedStages = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
+    // const renderedStages = [].concat(this.props.content)
+    // .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
+    // .map((stage) => {
+    //   return (
+    //   <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
+    //     <Link to={`${this.props.match.url}/${stage.fields.url[DEFAULT_LANG]}`}>
+    //       <SquareBox
+    //         id={stage.sys.id}
+    //         boxTitle={stage.fields.title[lang]}
+    //         assetId={stage.fields.image[DEFAULT_LANG].sys.id}
+    //       />
+    //     </Link>
+    //   </div> 
+    //   )
+    // })
+
+    const renderedStages = this.props.stages
     .map((stage) => {
       return (
-      <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
-        <Link to={`${this.props.match.url}/${stage.fields.url[DEFAULT_LANG]}`}>
+      <div  className="Square-box-container" key={stage.id}>
+        <Link to={`${this.props.match.url}/${stage.url}`}>
           <SquareBox
-            id={stage.sys.id}
-            boxTitle={stage.fields.title[lang]}
-            assetId={stage.fields.image[DEFAULT_LANG].sys.id}
+            id={stage.id}
+            boxTitle={stage.titles[lang]}
+            assetId={stage.imageId}
           />
         </Link>
       </div> 
@@ -97,7 +112,7 @@ class SmallClaimsParty extends Component {
 
 function mapStateToProps(state) {
   return { 
-    content: state.content.stages,
+    stages: state.content.stages,
     stageId: state.content.stageId,
     resources: state.content.resources,
     language: state.content.language
