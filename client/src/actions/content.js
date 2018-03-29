@@ -19,7 +19,7 @@ import {
   API_SPACE_ID,
   API_TOKEN,
   SMALL_CLAIMS_ID 
-} from '../../../secret.env'
+} from process.env;
 
 
 export function fetchCategories() {

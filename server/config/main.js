@@ -9,7 +9,7 @@ const { TEST_DB_URL,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
  JWT_SECRET,
- NODE_ENV } = require('../../secret.env');
+ NODE_ENV } = process.env;
 // console.log(process.env);
 
 //auth settings
@@ -34,11 +34,13 @@ const creds = {
 
   // Required, the reply URL registered in AAD for your app
   //local dev
-  redirectUrl: (NODE_ENV === 'dev_server') ? 
-  'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return': 
-  'http://localhost:3000/api/auth/openid/return',
+  // redirectUrl: (NODE_ENV === 'dev_server') ? 
+  // 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return': 
+  // 'http://localhost:3000/api/auth/openid/return',
   //dev server
-  // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',
+  // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',  
+  //DMZ server 
+  redirectUrl: 'http://10.100.254.19/api/auth/openid/return',
 
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: true,
@@ -123,9 +125,11 @@ module.exports = {
 resourceURL: 'https://graph.windows.net',
 
 // The url you need to go to destroy the session with AAD
-destroySessionUrl: (NODE_ENV === 'dev_server') ?
-'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
-'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
+// destroySessionUrl: (NODE_ENV === 'dev_server') ?
+// 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
+// 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
+
+destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://10.100.254.19',
 
 // If you want to use the mongoDB session store for session middleware; otherwise we will use the default
 // session store provided by express-session.
