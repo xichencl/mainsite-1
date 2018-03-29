@@ -15,20 +15,21 @@ class Languages extends React.Component{
 	}
 
 	render(){
-	   return (
-		   <div className="Languages">
-			<button type="button" value="en-US" disabled={this.props.language === 'en-US'} onClick={this.handleClick}>English</button>
-		    <button type="button" value="es" disabled={this.props.language === 'es'} onClick={this.handleClick}>Spanish</button>
-		   </div>
+	  return ( 	
+		  <div className="Languages">
+		  	<div className="Language-select">
+					<select className="Languages-btns" onChange={this.handleClick}>
+						<option value="en-US"  onClick={this.handleClick}><div className="Language-btn" disabled={this.props.language === 'en-US'}>English</div></option>
+				    <option value="es"  onClick={this.handleClick}><div className="Language-btn" disabled={this.props.language === 'es'} >Español</div></option>
+			  	</select>
+			  </div>
+		  </div>
 		);
-
 	}
 }
 
 function mapStateToProps (state) {
 	return {language: state.content.language};
 }
-
-
 
 export default withRouter(connect(mapStateToProps, { toggleLanguages })(Languages));
