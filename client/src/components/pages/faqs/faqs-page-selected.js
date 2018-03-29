@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 class SelectedFaqPage extends Component {
 	constructor() {
 		super()
+	this.renderSubCategories = this.renderSubCategories.bind(this)
 	}
 
 	componentWillMount() {
@@ -15,6 +16,8 @@ class SelectedFaqPage extends Component {
 	}
 
 	renderSubCategories() {
+		console.log(this.props.faqs)
+	
 		// const subcatAry = [];
 		// const subcategories = this.props.faqs.map((faq) => {
 		// 	const subCatIds = faq.fields.subcategory.map((cat) => { 
@@ -30,6 +33,7 @@ class SelectedFaqPage extends Component {
 		return (
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
+				{this.renderSubCategories()}
 			</div>
 		)
 	}

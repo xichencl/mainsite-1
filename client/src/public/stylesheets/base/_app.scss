@@ -164,9 +164,16 @@ hr {
     display: -ms-flexbox;
     display: flex;
   // width: 75%;
+  position: relative; 
+  z-index: 1;
+  @include xs {
+    top: 1rem;
+  }
   @include md {
     margin-left: 1rem; 
     margin-top: 1rem;
+    z-index: 100;
+    top: 3rem;
     // width: 100%;
   }
   @include lg {
@@ -175,16 +182,19 @@ hr {
   }
   margin-top: 2rem;
   margin-left: 2rem;
-  z-index: 100;
+  
 }
 
 .Search-bar {
   height: 3.3rem;
   margin-right: 2rem;
   padding-top: 0;
-  width: 20rem;
+  //width: 8rem;
+  @include xs {
+    width: 10rem;
+  }
   @include md {
-    width: 40rem;
+    width: 30rem;
   }
 }
 
@@ -205,29 +215,29 @@ hr {
   background: $black;
 }
 
-.Languages {
-  // align-items: right;
-  // background-color: $white;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
-  // display: flex;
-  // @include md {
-  // margin-left: 1rem; 
-  // margin-top: 1rem;
-  //   // width: 100%;
-  // }
-  // @include lg {
-  //   margin-left: 75rem;
-  //   position: fixed; // to have search bar fixed on top
-  // }
-  // margin-top: 2rem;
-  // margin-left: 5rem;
-  // z-index: 100;
-}
-
+// Language select
 .Languages {
   display: inline-block;
-  position: relative;
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+
+  z-index: 1;
+  @include lg {
+    z-index: 100;
+    position: fixed;
+    top: 3rem;
+    right: 4rem;
+  }
+  @include xxs {
+    top: 5rem;
+  }
+  @include xs {
+    top: 6rem;
+  }
+  @include md {
+    top: 3rem;
+  }
   
   .Languages-btns {
     -moz-appearance: none;
@@ -243,12 +253,15 @@ hr {
   .Language-select {
     position: relative;
     display: block;
-    width: 10rem;
-    height: 3em;
+    width: 7rem;
+    height: 2.5em;
     background: white;
     overflow: hidden;
     border-radius: .25em;
     box-shadow: 0 0 12px 0 rgba(0,0,0,0.1);
+    @include sm {
+      width: 10rem;
+    }
   }
   
   .Languages-btns {
@@ -271,7 +284,7 @@ hr {
     margin: 4rem 2rem;
   }
   @include lg {
-    margin: 4rem 10rem 0 20rem;
+    margin: 8rem 10rem 0 20rem;
   }
 }
 

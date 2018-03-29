@@ -19,8 +19,8 @@ class Languages extends React.Component{
 		  <div className="Languages">
 		  	<div className="Language-select">
 					<select className="Languages-btns" onChange={this.handleClick}>
-						<option value="en-US"  onClick={this.handleClick}><button className="Language-btn" disabled={this.props.language === 'en-US'}>English</button></option>
-				    <option value="es"  onClick={this.handleClick}><button className="Language-btn" disabled={this.props.language === 'es'} >Español</button></option>
+						<option value="en-US"  onClick={this.handleClick}><div className="Language-btn" disabled={this.props.language === 'en-US'}>English</div></option>
+				    <option value="es"  onClick={this.handleClick}><div className="Language-btn" disabled={this.props.language === 'es'} >Español</div></option>
 			  	</select>
 			  </div>
 		  </div>

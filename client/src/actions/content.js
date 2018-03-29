@@ -79,7 +79,7 @@ export function fetchParties() {
 
 
 /* fetchFaqs(label) => &fields.categoryLabel=${label}*/
-export function fetchFaqs() {
+export function fetchFaqs(label) {
   // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq`);
   // console.log('fetch faqs action')
   // return {
@@ -87,7 +87,7 @@ export function fetchFaqs() {
   //   payload: request
   // };
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&fields.categoryLabel=${label}&locale=*`)
     .then( (response) => { 
       // dispatch({type: 'STORE_URL', lastCall: {url: url, dispatchAction: FETCH_FAQS}});
       dispatch({type: FETCH_FAQS, payload: response});

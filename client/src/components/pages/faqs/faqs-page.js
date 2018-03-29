@@ -7,16 +7,16 @@ export default class FAQs extends Component {
 		return (
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
-
-				<div className="Filter">
-					<Link to="/faqs/general">General</Link>
-					<Link to="/faqs/smallclaims">Small Claims</Link>
-					<Link to="/faqs/eviction">Eviction</Link>
-					<Link to="/faqs/family">Family</Link>
-					<Link to="/faqs/dv">Domestic Violence</Link>
-					<Link to="/faqs/guardianship">Guardianship</Link>
-					<Link to="/faqs/traffic">Traffic</Link>
-				</div>
+				
+				<ul className="Filter">
+					<li className="Filter-topic"><Link to="/faqs/general">General</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/smallclaims">Small Claims</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/eviction">Eviction</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/family">Family</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/dv">Domestic Violence</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/guardianship">Guardianship</Link></li>
+					<li className="Filter-topic"><Link to="/faqs/traffic">Traffic</Link></li>
+				</ul>
 
 			</div>
 		)
