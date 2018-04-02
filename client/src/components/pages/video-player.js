@@ -5,7 +5,7 @@ import { fetchAsset, fetchVideos } from '../../actions/content.js';
 
 class VideoPlayer extends Component {
   componentWillMount() {
-    if (!this.props.videos || this.props.videos.length <= 0) {
+    if (!this.props.videos || Object.keys(this.props.videos).length <= 0) {
       this.props.fetchVideos()
       console.log(this.props.videos, 'this.props.videos')
     }
