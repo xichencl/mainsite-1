@@ -95,7 +95,7 @@ class AccordionBoxContainer extends Component {
 
 
             </div>
-            <hr />
+            <hr className="Accordion-box-line" />
           </div>
         )
       })
@@ -131,7 +131,7 @@ class AccordionBoxContainer extends Component {
 
 
   					</div>
-  					<hr />
+  					<hr className="Accordion-box-line" />
   				</div>
   			)
   		})
@@ -142,7 +142,7 @@ class AccordionBoxContainer extends Component {
 
 		return (
 			<div className="Box AccordionBoxContainer ">
-				<hr />
+				<hr className="Accordion-box-line" />
 
 				{renderedContent}
 			</div>

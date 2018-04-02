@@ -21,6 +21,7 @@ import ContactPage from './components/pages/contact-page';
 import Forms from './components/pages/forms-page';
 import FAQs from './components/pages/faqs/faqs-page';
 import FaqsSelectedPage from './components/pages/faqs/faqs-page-selected';
+import FaqsSelectedSubcategory from './components/pages/faqs/faqs-subcat-selected';
 import Videos from './components/pages/videos-page';
 import VideoPlayer from './components/pages/video-player';
 import Portal from './components/pages/portal-page';
@@ -108,7 +109,8 @@ export default class AppRouter extends Component {
                   <Route path="/login" component={Login} />
                   <Route path="/logout" component={Logout} />
                   <Route exact path="/faqs" component={FAQs} />
-                  <Route path="/faqs/:page" component={FaqsSelectedPage} />
+                  <Route exact path="/faqs/:page" component={FaqsSelectedPage} />
+                  <Route path="/faqs/:page/:subcat" component={FaqsSelectedSubcategory} />
                   <Route path="/video-resources" component={Videos} />
                   <Route path="/videos/:videoID" component={VideoPlayer} />
                   <Route path="/forms" component={Forms} />

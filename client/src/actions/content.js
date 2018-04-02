@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FETCH_CATEGORIES } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FAQS } from './types'
+import { FETCH_FAQ_SUBCATEGORIES } from './types'
 import { FETCH_CONTENT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
@@ -78,19 +79,23 @@ export function fetchParties() {
 }
 
 
-/* fetchFaqs(label) => &fields.categoryLabel=${label}*/
-export function fetchFaqs(label) {
-  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq`);
-  // console.log('fetch faqs action')
-  // return {
-  //   type: FETCH_FAQS,
-  //   payload: request
-  // };
+export function fetchFaqs(label, subcat) {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&fields.categoryLabel=${label}&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&fields.categoryLabel=${label}&fields.subcategory.sys.id=${subcat}&locale=*`)
     .then( (response) => { 
-      // dispatch({type: 'STORE_URL', lastCall: {url: url, dispatchAction: FETCH_FAQS}});
+      console.log('fetch faqs action')
       dispatch({type: FETCH_FAQS, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
+  }
+}
+
+export function fetchFaqSubcategories(label) {
+
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&locale=*`)
+    .then( (response) => { 
+      dispatch({type: FETCH_FAQ_SUBCATEGORIES, payload: response});
       })
     .catch((error) => console.log('err: ', error));
   }

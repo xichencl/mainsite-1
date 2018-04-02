@@ -2,6 +2,7 @@
 import { FETCH_CATEGORIES } from '../actions/types';
 import { FETCH_PARTIES } from '../actions/types';
 import { FETCH_FAQS } from '../actions/types';
+import { FETCH_FAQ_SUBCATEGORIES } from '../actions/types';
 import { FETCH_CONTENT } from '../actions/types';
 import { FETCH_RESOURCE_LINKS } from '../actions/types';
 import { FETCH_STAGES } from '../actions/types';
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   stages: [],
   resources: [],
   faqs: [],
+  faqSubcategories: [],
   tabs: [], 
   videos: [],
   videoURLs: {},
@@ -32,6 +34,8 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, parties: action.payload };
   case FETCH_FAQS:
     return { ...state, faqs: action.payload.data.items };
+  case FETCH_FAQ_SUBCATEGORIES:
+    return { ...state, faqSubcategories: action.payload.data.items };
   case FETCH_CONTENT:
     return { ...state, tabs: action.payload };
   case FETCH_STAGES:

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import TitleLine from '../../template/title-line';
-import { fetchFaqs } from '../../../actions/content';
+import { fetchFaqSubcategories } from '../../../actions/content';
 import { connect } from 'react-redux';
 
 
@@ -11,21 +12,20 @@ class SelectedFaqPage extends Component {
 	}
 
 	componentWillMount() {
-		const topic = this.props.match.params.page;
-		this.props.fetchFaqs(topic);
+		const label = this.props.match.params.page;
+		this.props.fetchFaqSubcategories(label);
 	}
 
 	renderSubCategories() {
-		console.log(this.props.faqs)
-	
-		// const subcatAry = [];
-		// const subcategories = this.props.faqs.map((faq) => {
-		// 	const subCatIds = faq.fields.subcategory.map((cat) => { 
-		// 		subcatAry.push(cat.sys.id); 
-		// 		console.log(subcatAry)
-		// 	})};
-		// 	const subCatTitle = faq.fields.subcategory.title
-		// })
+		return (
+			this.props.faqSubcategories.map((subcat) => {
+				return (
+					<Link key={subcat.sys.id} to={`/faqs/${this.props.match.params.page}/${subcat.sys.id}`} >
+						<div id={subcat.sys.id} >{subcat.fields.title["en-US"]}</div>
+					</Link>
+				)
+			})
+		)
 	}
 
 	render() {
@@ -40,9 +40,9 @@ class SelectedFaqPage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { faqs: state.content.faqs }
+  return { faqSubcategories: state.content.faqSubcategories }
 }
 
-export default connect(mapStateToProps, { fetchFaqs })(SelectedFaqPage)
+export default connect(mapStateToProps, { fetchFaqSubcategories })(SelectedFaqPage)
 
 //return (<div className="Topic" key={
