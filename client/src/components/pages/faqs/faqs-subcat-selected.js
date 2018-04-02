@@ -37,9 +37,20 @@ class FaqsSelectedSubcategory extends Component {
 		const renderedContent = this.props.faqs.map((faq) => {
 			return (
 				<div className="Accordion-box-item " key={faq.fields.id[lang]} >
-				{faq.fields.title[lang]}
 				
 
+					<h3 onClick={() => this.toggleClass(faq.fields.id[lang])} className={this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? "blue-font": " "} >
+            {faq.fields.title[lang]}
+            <span className="Accordion-box-icon">
+              {this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? "-" : "+"}
+            </span>
+          </h3>
+
+          <div className={this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? " ": "hidden"}> 
+						<div className="Accordion-box-content">
+							<ReactMarkdown source={faq.fields.blockText[lang]} />
+						</div>
+					</div>
 				
 					
 					<hr className="Accordion-box-line" />
@@ -54,6 +65,7 @@ class FaqsSelectedSubcategory extends Component {
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
 				<div className="Box AccordionBoxContainer ">
+				<hr className="Accordion-box-line" />
 				{renderedContent}
 				</div>
 			</div>
@@ -69,20 +81,8 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { fetchFaqs })(FaqsSelectedSubcategory)
 
 /*
-<h3 onClick={() => this.toggleClass(faq.fields.id)} className={this.state.activeId == faq.fields.id && this.state.pressed == true ? "blue-font": " "} >
-            {faq.titles[lang]}
 
-            <span className="Accordion-box-icon">
-              {this.state.activeId == faq.fields.id && this.state.pressed == true ? "-" : "+"}
-            </span>
-          </h3>
           
-					<div className={this.state.activeId == faq.fields.id && this.state.pressed == true ? " ": "hidden"}> 
-						<div className="Accordion-box-content">
-							<ReactMarkdown source={faq.blockTexts[lang]} />
-
-						</div>
-							
-					</div>
+					
 
 */
