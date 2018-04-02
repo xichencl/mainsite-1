@@ -124,11 +124,9 @@ class Search extends Component {
 
     return (
         <div>
-            <form onSubmit={this.handleSubmit} value="search">         
-             <div className="Search">
+            <form onSubmit={this.handleSubmit} className="Search" value="Search">         
                 <input className="Search-bar" type="text" placeholder=" Search our site" onChange={this.handleChange} value={this.state.value} />
-                <input value="search" type="submit"></input>
-             </div>
+                <input className="Search-button" value="Search" type="submit"></input>
              </form>
           
           {/*<div className="gcse-search-wrapper" id="testSearch"></div>

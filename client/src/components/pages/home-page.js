@@ -6,13 +6,12 @@ import Squarebox from '../template/square-box';
 import Asset from '../template/responsive-image';
 import client from '../../services/contentful-client'
 import TitleLine from '../template/title-line';
+import { DEFAULT_LANG } from '../../actions/types'; 
 /* Testing integration with Contentful CMS */ 
 class HomePage extends React.Component {
   componentWillMount() {
-    if (!this.props.assets) {
-      this.props.fetchCategories()
+      this.props.categories.length === 0 && this.props.fetchCategories()
       console.log(this.props.categories, 'this.props.categories')
-    }
   }
   // constructor() {
   //   super()
@@ -26,14 +25,16 @@ class HomePage extends React.Component {
   // }
 
   renderCategories() {
-    return this.props.categories.map((unit, index) => {
+    const lang = this.props.language;
+    console.log("language: ", lang);
+    return this.props.categories.map((category) => {
       return (
-        <div className="Square-box-container" key={unit.sys.id}>
-          <Link to={unit.fields.url}>
+        <div className="Square-box-container" key={category.id}>
+          <Link to={ category.url }>
             <Squarebox 
-              id={unit.sys.id}
-              boxTitle={unit.fields.title}  
-              assetId={unit.fields.image.sys.id}
+              id={category.id}
+              boxTitle={ category.titles[lang] }  
+              assetId={ category.imageId }
             />
           </Link>
         </div>
@@ -54,8 +55,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { categories: state.content.categories,
-           assets: state.content.assets
+  return { 
+    categories: state.content.categories,
+    language: state.content.language
+           // assets: state.content.assets
    };
 }
 

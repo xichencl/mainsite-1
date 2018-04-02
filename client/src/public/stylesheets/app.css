@@ -887,7 +887,7 @@ hr {
       z-index: 100; } }
 
 .Search {
-  align-items: center;
+  align-items: right;
   background-color: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -909,6 +909,24 @@ hr {
   margin-right: 2rem;
   padding-top: 0;
   width: 40rem; }
+
+.Languages {
+  align-items: right;
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 5rem;
+  z-index: 100; }
+  @media (min-width: 769px) {
+    .Languages {
+      margin-left: 1rem;
+      margin-top: 1rem; } }
+  @media (min-width: 1025px) {
+    .Languages {
+      margin-left: 75rem;
+      position: fixed; } }
 
 .Page {
   margin: 4rem 0rem;
@@ -987,6 +1005,7 @@ hr {
   position: absolute;
   top: 3rem;
   left: 4rem;
+  z-index: 100;
   -webkit-user-select: none;
   user-select: none; }
   @media (min-width: 1025px) {
@@ -1003,6 +1022,8 @@ hr {
     opacity: 0;
     /* hide this */
     border: none;
+    z-index: 3;
+    /* and place it over the hamburger */
     -webkit-touch-callout: none; }
   .Menu-burger .Menu-burger-checkbox:checked ~ span {
     opacity: 1;
@@ -1021,6 +1042,7 @@ hr {
     position: relative;
     background: #333333;
     border-radius: 3px;
+    z-index: 2;
     transform-origin: 4px 0px;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease; }
   .Menu-burger span:first-child {
@@ -1041,7 +1063,8 @@ hr {
   /* to stop flickering of text in safari */
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1); }
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  z-index: 1; }
   .Menu-links-burger a {
     color: #ffffff; }
   .Menu-links-burger a:hover {
@@ -2077,7 +2100,7 @@ table th {
 
 .open-bot-icon-m i {
   margin-top: -0.7rem;
-  font-size: 30px; }
+  font-size: 36px; }
 
 .open-bot-icon i {
   font-size: 30px; }
@@ -2094,7 +2117,7 @@ table th {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   text-align: center;
-  position: fixed;
+  position: absolute;
   cursor: pointer;
   background-color: #4d9de0;
   right: 1rem;
