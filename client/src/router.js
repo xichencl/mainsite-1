@@ -18,7 +18,8 @@ import MobileBot from './components/mobilebot/MobileBot.jsx';
 import HomePage from './components/pages/home-page';
 import TestAccordionBox from './components/template/accordion-box/accordion-box-container';
 import ContactPage from './components/pages/contact-page';
-import Forms from './components/pages/forms-page';
+import Forms from './components/pages/forms/forms-page';
+import FormsSelectedPage from './components/pages/forms/forms-page-selected';
 import FAQs from './components/pages/faqs/faqs-page';
 import FaqsSelectedPage from './components/pages/faqs/faqs-page-selected';
 import FaqsSelectedSubcategory from './components/pages/faqs/faqs-subcat-selected';
@@ -113,7 +114,8 @@ export default class AppRouter extends Component {
                   <Route path="/faqs/:page/:subcat" component={FaqsSelectedSubcategory} />
                   <Route path="/video-resources" component={Videos} />
                   <Route path="/videos/:videoID" component={VideoPlayer} />
-                  <Route path="/forms" component={Forms} />
+                  <Route exact path="/forms" component={Forms} />
+                  <Route path="/forms/:page" component={FormsSelectedPage} />
  {/*                 <Route
                     path="/locations"
                     component={() =>

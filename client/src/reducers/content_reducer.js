@@ -2,7 +2,9 @@
 import { FETCH_CATEGORIES } from '../actions/types';
 import { FETCH_PARTIES } from '../actions/types';
 import { FETCH_FAQS } from '../actions/types';
+import { FETCH_FORMS } from '../actions/types';
 import { FETCH_FAQ_LAYOUT } from '../actions/types';
+import { FETCH_FORM_LAYOUT } from '../actions/types';
 import { FETCH_FAQ_SUBCATEGORIES } from '../actions/types';
 import { FETCH_CONTENT } from '../actions/types';
 import { FETCH_RESOURCE_LINKS } from '../actions/types';
@@ -17,6 +19,9 @@ const INITIAL_STATE = {
   parties: [],
   stages: [],
   resources: [],
+  formLayout: [],
+  formTopics: [],
+  formLists: [],
   faqs: [],
   faqTopics: [],
   faqLayout: [],
@@ -35,9 +40,14 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, categories: action.payload };
   case FETCH_PARTIES:
     return { ...state, parties: action.payload };
+  case FETCH_FORM_LAYOUT:
+    const sortedFormTopics = action.payload.data.includes.Entry.sort((a, b) => {a.fields.order["en-US"] - b.fields.order["en-US"]})
+    return { ...state, formTopics: sortedFormTopics, formLayout: action.payload.data.items };
+  case FETCH_FORMS:
+    return { ...state, formLists: action.payload.data.items };
   case FETCH_FAQ_LAYOUT:
-    const sortedTopics = action.payload.data.includes.Entry.sort((a, b) => {a.fields.order["en-US"] - b.fields.order["en-US"]})
-    return { ...state, faqTopics: sortedTopics, faqLayout: action.payload.data.items };
+    const sortedFaqTopics = action.payload.data.includes.Entry.sort((a, b) => {a.fields.order["en-US"] - b.fields.order["en-US"]})
+    return { ...state, faqTopics: sortedFaqTopics, faqLayout: action.payload.data.items };
   case FETCH_FAQS:
     return { ...state, faqs: action.payload.data.items };
   case FETCH_FAQ_SUBCATEGORIES:

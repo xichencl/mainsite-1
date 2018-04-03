@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { FETCH_CATEGORIES } from './types'
 import { FETCH_PARTIES } from './types'
+import { FETCH_FORM_LAYOUT } from './types'
+import { FETCH_FORMS } from './types'
 import { FETCH_FAQS } from './types'
 import { FETCH_FAQ_LAYOUT } from './types'
 import { FETCH_FAQ_SUBCATEGORIES } from './types'
@@ -76,6 +78,27 @@ export function fetchParties() {
       })
 
     .catch((error) => console.log("err: ", error));
+  }
+}
+
+export function fetchFormLayout() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=formLayout&locale=*`)
+    .then( (response) => { 
+      console.log('response', response)
+      dispatch({type: FETCH_FORM_LAYOUT, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
+  }
+}
+
+export function fetchForms(label) {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=formList&fields.categoryLabel=${label}&locale=*`)
+    .then( (response) => { 
+      dispatch({type: FETCH_FORMS, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
   }
 }
 

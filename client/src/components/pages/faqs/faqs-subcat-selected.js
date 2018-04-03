@@ -63,7 +63,7 @@ class FaqsSelectedSubcategory extends Component {
 
 		return (
 			<div>
-				<TitleLine title="Frequently Asked Questions" />
+				<TitleLine title={this.props.language == "en-US" ? "Frequently Asked Questions" : "Preguntas frecuentes" }  />
 				<div className="Box AccordionBoxContainer ">
 				<hr className="Accordion-box-line" />
 				{renderedContent}

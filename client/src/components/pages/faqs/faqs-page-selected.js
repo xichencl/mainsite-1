@@ -52,7 +52,7 @@ class SelectedFaqPage extends Component {
 		const currentPageName = this.props.match.params.page
 		return (
 			<div>
-				<TitleLine title="Frequently Asked Questions" />
+				<TitleLine title={this.props.language == "en-US" ? "Frequently Asked Questions" : "Preguntas frecuentes" } />
 				<h3>Browse {pageNames[currentPageName]} Questions</h3>
 				<div className="Filter">{this.renderSubCategories()}</div>
 			</div>
@@ -61,7 +61,9 @@ class SelectedFaqPage extends Component {
 }
 
 function mapStateToProps(state) {
-  return { faqSubcategories: state.content.faqSubcategories }
+  return { 
+  	language: state.content.language,
+  	faqSubcategories: state.content.faqSubcategories }
 }
 
 export default connect(mapStateToProps, { fetchFaqSubcategories })(SelectedFaqPage)
