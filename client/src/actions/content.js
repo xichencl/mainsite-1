@@ -93,7 +93,7 @@ export function fetchFaqs(label, subcat) {
 export function fetchFaqSubcategories(label) {
 
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faqSubcategory&fields.categoryLabel=${label}&order=fields.order&locale=*`)
     .then( (response) => { 
       dispatch({type: FETCH_FAQ_SUBCATEGORIES, payload: response});
       })

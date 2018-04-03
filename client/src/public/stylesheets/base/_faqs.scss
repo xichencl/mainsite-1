@@ -1,0 +1,54 @@
+.Faq-title {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Filter {
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		list-style: none;
+	}
+	padding: 0;
+}
+
+.Filter-list-group {
+	position: relative;
+	width: 100%;
+	padding: 1rem;
+	@include md {
+		width: 30%;
+		padding: 2rem 1.5rem 4rem 1.5rem;
+	}
+}
+
+.Filter-list-group-subcat {
+	position: relative;
+	width: 100%;
+	padding: 1rem;
+	@include md {
+		width: 50%;
+		padding: 2rem 1.5rem 4rem 1.5rem;
+	}
+}
+
+hr.cat-line {
+		width: 100%;
+		border: 2px solid $light-grey-secondary;
+	}
+
+.Filter-topic a {
+	font-size: 1.6rem;
+	color: $dark-grey-primary;
+}
+
+.Filter-topic a:hover {
+	color: $blue-accent-primary;
+}
+
+.Filter-topic-icon {
+	position: absolute;
+	right: 2rem;
+	top: 3.25rem;
+
+}

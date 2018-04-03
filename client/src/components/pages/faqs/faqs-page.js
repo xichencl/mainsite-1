@@ -7,15 +7,44 @@ export default class FAQs extends Component {
 		return (
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
-				
+				<h3 className="Faq-title">Browse By Category</h3>
 				<ul className="Filter">
-					<li className="Filter-topic"><Link to="/faqs/general">General</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/smallclaims">Small Claims</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/eviction">Eviction</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/family">Family</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/dv">Domestic Violence</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/guardianship">Guardianship</Link></li>
-					<li className="Filter-topic"><Link to="/faqs/traffic">Traffic</Link></li>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+						<li className="Filter-topic">
+							<Link to="/faqs/general">General <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+						</li>
+					</div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+						<li className="Filter-topic">
+							<Link to="/faqs/smallclaims">Small Claims <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+						</li></div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to="/faqs/eviction">Eviction <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li></div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to="/faqs/family">Family <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li></div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to="/faqs/dv">Domestic Violence <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li></div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to="/faqs/guardianship">Guardianship <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li></div>
+					<div className="Filter-list-group">
+						<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to="/faqs/traffic">Traffic <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li></div>
 				</ul>
 
 			</div>
