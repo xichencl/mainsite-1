@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FETCH_CATEGORIES } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FAQS } from './types'
+import { FETCH_FAQ_LAYOUT } from './types'
 import { FETCH_FAQ_SUBCATEGORIES } from './types'
 import { FETCH_CONTENT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
@@ -78,12 +79,21 @@ export function fetchParties() {
   }
 }
 
+export function fetchFaqLayout() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faqLayout&locale=*`)
+    .then( (response) => { 
+      console.log('response', response)
+      dispatch({type: FETCH_FAQ_LAYOUT, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
+  }
+}
 
 export function fetchFaqs(label, subcat) {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=faq&fields.categoryLabel=${label}&fields.subcategory.sys.id=${subcat}&locale=*`)
     .then( (response) => { 
-      console.log('fetch faqs action')
       dispatch({type: FETCH_FAQS, payload: response});
       })
     .catch((error) => console.log('err: ', error));

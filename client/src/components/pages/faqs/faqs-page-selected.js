@@ -5,12 +5,19 @@ import { fetchFaqSubcategories } from '../../../actions/content';
 import { connect } from 'react-redux';
 
 const pageNames = {
+	general: "General",
 	smallclaims: "Small Claims",
 	dv: "Domestic Violence",
 	guardianship: "Guardianship",
 	traffic: "Traffic",
 	eviction: "Eviction",
-	family: "Family"
+	family: "Family",
+	"reclamos-menores": "Reclamos menores",
+	dv: "Violencia Domestico",
+	"ley-familiar": "Ley Familiar",
+	desalojo: "Desalojo",
+	"tutela-de-menores": "Tutela de menores",
+	trafico: "Trafíco"
 }
 
 class SelectedFaqPage extends Component {

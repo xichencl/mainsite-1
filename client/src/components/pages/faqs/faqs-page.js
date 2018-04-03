@@ -1,53 +1,56 @@
 import React, { Component } from 'react';
 import TitleLine from '../../template/title-line';
 import { Link } from 'react-router-dom';
+import { fetchFaqLayout } from '../../../actions/content';
+import { connect } from 'react-redux';
 
-export default class FAQs extends Component {
+class FAQs extends Component {
+	constructor() {
+		super()
+	}
+
+	componentWillMount() {
+		this.props.fetchFaqLayout()
+	}
+
 	render() {
+		const lang = this.props.language;
+		const renderedTopics = this.props.faqTopics.map((topic) => {
+			return (
+				<div className="Filter-list-group" key={topic.sys.id}>
+					<hr className="cat-line"/>
+					<li className="Filter-topic">
+						<Link to={`/faqs/${topic.fields.slug[lang]}`}>{topic.fields.title[lang]} <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+					</li>
+				</div>
+			)
+		})
+
+		const renderedText = this.props.faqLayout.map((text) => {
+			return (
+				<h3 key={text.sys.id}>{text.fields.title[lang]}</h3>
+			)
+		})
+
 		return (
 			<div>
 				<TitleLine title="Frequently Asked Questions" />
-				<h3 className="Faq-title">Browse By Category</h3>
+				{renderedText}
 				<ul className="Filter">
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-						<li className="Filter-topic">
-							<Link to="/faqs/general">General <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-						</li>
-					</div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-						<li className="Filter-topic">
-							<Link to="/faqs/smallclaims">Small Claims <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-						</li></div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-					<li className="Filter-topic">
-						<Link to="/faqs/eviction">Eviction <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-					</li></div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-					<li className="Filter-topic">
-						<Link to="/faqs/family">Family <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-					</li></div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-					<li className="Filter-topic">
-						<Link to="/faqs/dv">Domestic Violence <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-					</li></div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-					<li className="Filter-topic">
-						<Link to="/faqs/guardianship">Guardianship <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-					</li></div>
-					<div className="Filter-list-group">
-						<hr className="cat-line"/>
-					<li className="Filter-topic">
-						<Link to="/faqs/traffic">Traffic <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-					</li></div>
+					{renderedTopics}
 				</ul>
 
 			</div>
 		)
 	}
 }
+
+function mapStateToProps(state) {
+  return { 
+  	faqTopics: state.content.faqTopics,
+  	faqLayout: state.content.faqLayout,
+  	language: state.content.language
+  }
+}
+
+export default connect(mapStateToProps, { fetchFaqLayout })(FAQs)
