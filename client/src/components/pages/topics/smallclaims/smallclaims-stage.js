@@ -41,8 +41,8 @@ const partyIds = [
 // ]
 
 const stageIds = {
-   'before': '1cMyrIaZ680ukwwSi8YscC',
-   'during': '5iDqJ92Rzqksq88gYWawE4',
+   'before': '5iDqJ92Rzqksq88gYWawE4',
+   'during': '1cMyrIaZ680ukwwSi8YscC',
    'after': '4HkTlYlsFqqIgscmGWOCkk'
   };
 
