@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchFaqs } from '../../../actions/content';
 import TitleLine from '../../template/title-line';
 import AccordionBox from '../../template/accordion-box/accordion-box-container'
@@ -13,6 +14,8 @@ class FaqsSelectedSubcategory extends Component {
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
+		this.renderBreadcrumbs = this.renderBreadcrumbs.bind(this);
+		this.toUpperCase = this.toUpperCase.bind(this)
 	}
 
 	toggleClass(id) {
@@ -29,6 +32,22 @@ class FaqsSelectedSubcategory extends Component {
 		this.props.fetchFaqs(label, subcatId)
 	}
 
+	toUpperCase(string) {
+   	return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+	renderBreadcrumbs(lang) {
+		const currentSection = this.props.match.params.page
+		return (
+			<div className="breadcrumbs">
+        <Link to="/faqs">FAQs</Link>
+        <span className="breadcrumbs-chevron">></span>
+        <Link to={`/faqs/${this.props.match.params.page}`}>{this.toUpperCase(currentSection)}</Link>
+        <span className="breadcrumbs-chevron">></span>
+        <Link to={`/faqs/${this.props.match.params.page}/${this.props.match.params.subcat}`}>{this.props.match.params.subcat}</Link>
+      </div>
+    )
+	}
 	
 
 	render() {
@@ -64,6 +83,7 @@ class FaqsSelectedSubcategory extends Component {
 		return (
 			<div>
 				<TitleLine title={this.props.language == "en-US" ? "Frequently Asked Questions" : "Preguntas frecuentes" }  />
+				{this.renderBreadcrumbs(this.props.language)}
 				<div className="Box AccordionBoxContainer ">
 				<hr className="Accordion-box-line" />
 				{renderedContent}
@@ -80,9 +100,3 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, { fetchFaqs })(FaqsSelectedSubcategory)
 
-/*
-
-          
-					
-
-*/

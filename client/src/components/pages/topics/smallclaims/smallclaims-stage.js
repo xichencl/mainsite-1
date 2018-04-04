@@ -130,16 +130,6 @@ class SmallClaimsStage extends Component {
 
   renderMenuLinks(lang) {
 
-    // return [].concat(this.props.stage)
-    // // .filter(stage => stage.sys.id !== this.state.selectedStageId )
-    // .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
-    // .map((stage) => {
-    //   return stage.sys.id !== this.state.selectedStageId && (
-    //     <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
-    //       <Link to={stage.fields.url[DEFAULT_LANG]}>{stage.fields.title[lang]}</Link>
-    //     </div>
-    //   )
-    // })
     return this.props.stages
     .map((stage) => {
       return stage.url !== this.props.match.params.stage && (
