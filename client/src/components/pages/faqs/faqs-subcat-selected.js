@@ -6,6 +6,15 @@ import TitleLine from '../../template/title-line';
 import AccordionBox from '../../template/accordion-box/accordion-box-container'
 const ReactMarkdown = require('react-markdown')
 
+const stage = {
+	"2b9rCFvuQ0iyOKQ26uO8ow": "Prepare and File a Claim",
+	"6gfGyfVjEcuEuEAEi2OOWI": "Serving Your Court Papers",
+	"6NhQ3ae4362oeGSiCwseIa": "After Being Served",
+	"5IGXI1SREcyMY6IKYSmoWW": "Rescheduling My Court Date",
+	"hAQbOpDcMSqIqswE26iWC": "Appeal, Collect, or Vacate Judgement",
+	"3i48AXKI7SQEk4seuY8oAY": "Examples of Small Claims Cases Heard"
+}
+
 class FaqsSelectedSubcategory extends Component {
 	constructor() {
 		super()
@@ -38,13 +47,14 @@ class FaqsSelectedSubcategory extends Component {
 
 	renderBreadcrumbs(lang) {
 		const currentSection = this.props.match.params.page
+		const currentStage = this.props.match.params.subcat
 		return (
 			<div className="breadcrumbs">
         <Link to="/faqs">FAQs</Link>
         <span className="breadcrumbs-chevron">></span>
         <Link to={`/faqs/${this.props.match.params.page}`}>{this.toUpperCase(currentSection)}</Link>
         <span className="breadcrumbs-chevron">></span>
-        <Link to={`/faqs/${this.props.match.params.page}/${this.props.match.params.subcat}`}>{this.props.match.params.subcat}</Link>
+        <Link to={`/faqs/${this.props.match.params.page}/${this.props.match.params.subcat}`}>{stage[currentStage]}</Link>
       </div>
     )
 	}

@@ -43,7 +43,7 @@ class Forms extends Component {
 				<ul className="Filter">
 					{renderedTopics}
 				</ul>
-
+				<h3 className="Search-forms"><Link to="/forms/search">Search Forms</Link></h3>
 			</div>
 		)
 	}
