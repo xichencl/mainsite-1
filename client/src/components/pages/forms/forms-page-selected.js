@@ -55,14 +55,14 @@ class FormsPageSelected extends Component {
 				<div className="Accordion-box-item " key={form.fields.id[lang]} >
 				
 
-					<h3 onClick={() => this.toggleClass(form.fields.id[lang])} className={this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
             {form.fields.title[lang]}
             <span className="Accordion-box-icon">
-              {this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? "-" : "+"}
+              {this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}
             </span>
           </h3>
 
-          <div className={this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? " ": "hidden"}> 
+          <div className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">
 							<ReactMarkdown source={form.fields.blockText[lang]} />
 						</div>
