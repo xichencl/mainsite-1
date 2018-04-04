@@ -9,8 +9,10 @@ import SquareBoxStatic from '../../../template/square-box-static';
 import ChecklistIcon from '../../../../img/icn_checklist.svg';
 import InfoBox from '../../../template/info-box';
 import AccordionBoxContainer from '../../../template/accordion-box/accordion-box-container';
-import { fetchContentByParty } from '../../../../actions/content.js';
+import { fetchContentByParty, fetchStages } from '../../../../actions/content.js';
 import Bot from '../../../chatbot/Bot.jsx'; 
+import { DEFAULT_LANG } from '../../../../actions/types';
+import { bindActionCreators } from 'redux';
 
 const partyIds = [
   {
@@ -23,32 +25,45 @@ const partyIds = [
    }
 ]
 
-const stageIds = [
-  {
-    name: 'before',
-    id: '1cMyrIaZ680ukwwSi8YscC'
-  },
-  {
-    name: 'during',
-    id: '5iDqJ92Rzqksq88gYWawE4'
-  },
-  {
-    name: 'after',
-    id: '4HkTlYlsFqqIgscmGWOCkk'
-  }
-]
+// const stageIds = [
+//   {
+//     name: 'before',
+//     id: '1cMyrIaZ680ukwwSi8YscC'
+//   },
+//   {
+//     name: 'during',
+//     id: '5iDqJ92Rzqksq88gYWawE4'
+//   },
+//   {
+//     name: 'after',
+//     id: '4HkTlYlsFqqIgscmGWOCkk'
+//   }
+// ]
+
+const stageIds = {
+   'before': '5iDqJ92Rzqksq88gYWawE4',
+   'during': '1cMyrIaZ680ukwwSi8YscC',
+   'after': '4HkTlYlsFqqIgscmGWOCkk'
+  };
+
+// const stageTitleIdx = {
+//   'before': 0,
+//   'during': 1,
+//   'after': 2
+// };
 
 class SmallClaimsStage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedStageId: this.props.stageId.id,
-      selectedStageTitle: this.props.stageId.title,
-      selectedContent: []
+      // selectedStageId: this.props.stageId.id,
+      // selectedStageTitle: this.props.stageId.title,
+      // selectedContent: [],
+      selectedParty: '',
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
-    this.filterContent = this.filterContent.bind(this)
-    this.onStageSelect = this.onStageSelect.bind(this);
+    // this.filterContent = this.filterContent.bind(this)
+    // this.onStageSelect = this.onStageSelect.bind(this);
     this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
@@ -61,54 +76,65 @@ class SmallClaimsStage extends Component {
       } else {
          _partyId = partyIds[1].id
       }
-    // update state with smallclaims/:party content
-    this.props.fetchContentByParty('SmallClaims', _partyId)
+    
+    //fetch stages if not already present in store
+    if (this.props.stages.length === 0){
+      this.props.fetchStages();
+    }
+    // fetch and load content on first landing or when changing party
+    if (this.props.stageContent.length === 0 || this.state.selectedParty !== this.props.match.params.party ){
+      this.props.fetchContentByParty('SmallClaims', _partyId);
+      this.setState({...this.state, selectedParty: this.props.match.params.party});
+    }
+
   }
 
-  componentWillUpdate() {
+  // componentWillUpdate() {
 
-  }
+  // }
 
-  onStageSelect(title, _id, e) {
-    e.stopPropagation();
-    this.setState({
-      selectedStageId: _id, 
-      selectedStageTitle: title,
-      selectedContent: [] 
-    })
-  }
+  // onStageSelect(title, _id, e) {
+  //   e.stopPropagation();
+  //   this.setState({
+  //     selectedStageId: _id, 
+  //     selectedStageTitle: title,
+  //     selectedContent: [] 
+  //   })
+  // }
 
-  filterContent(content, findById) {
-    let filledAry = [];
-    let emptyAry = [];
-    // filter content by party 
-    return content.tabs.reduce(function (acc, tab) {
-    // first reduce gets each tab 
-      const thisTab = tab;
-      // second reduce gets each tab's array of stages 
-      const aryTabs = tab.fields.stage.reduce(function (acc, cat) {
-        // checks if ID is present in stage array
-        const tabStage = cat.sys.id.includes(findById);
-        // if the ID matches, push the tab content to a new array
-        return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
-        // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-      }, []); 
-      // console.log("7. filledAry", filledAry)
-      // pass content to AccordionBoxContainer as props
-      return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
+  // filterContent(content, findById, lang) {
+  //   let filledAry = [];
+  //   let emptyAry = [];
+  //   // filter content by party 
+  //   return content.tabs.reduce(function (acc, tab) {
+  //   // first reduce gets each tab 
+  //     const thisTab = tab;
+  //     console.log("tab", tab);
+  //     console.log("tabs-lang: ", tab.fields.stage[lang]);
+  //     // second reduce gets each tab's array of stages 
+  //     const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
+  //       // checks if ID is present in stage array
+  //       const tabStage = cat.sys.id.includes(findById);
+  //       console.log("tabstage: ", tabStage)
+  //       // if the ID matches, push the tab content to a new array
+  //       return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+  //       // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+  //     }, []); 
+  //     // console.log("7. filledAry", filledAry)
+  //     // pass content to AccordionBoxContainer as props
+  //     console.log("stageContent: ", filledAry);
+  //     return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
 
-    }, []);
-  }
+  //   }, []);
+  // }
 
-  renderMenuLinks() {
+  renderMenuLinks(lang) {
 
-    return [].concat(this.props.stage)
-    // .filter(stage => stage.sys.id !== this.state.selectedStageId )
-    .sort((a, b) => a.fields.id - b.fields.id)
+    return this.props.stages
     .map((stage) => {
-      return stage.sys.id !== this.state.selectedStageId && (
-        <div className="Stage-menu-item" onClick={(e) => this.onStageSelect(stage.fields.title, stage.sys.id, e)} key={stage.sys.id}>
-          <Link to={stage.fields.url}>{stage.fields.title}</Link>
+      return stage.url !== this.props.match.params.stage && (
+        <div className="Stage-menu-item" key={stage.id}>
+          <Link to={stage.url}>{stage.titles[lang]}</Link>
         </div>
       )
     })
@@ -122,8 +148,9 @@ class SmallClaimsStage extends Component {
   render() {
     const currentTitle = this.state.selectedStageTitle
     const currentSection = this.props.match.params.party
-    
-    return (
+    console.log("current stage: ", this.props.stages);
+    console.log("lang: ", this.props.language);
+    return this.props.stages.length !== 0 && this.props.stageContent.length !== 0 && (
       <div>
         <Bot />
         <div className="Stage-top-bar">
@@ -135,22 +162,31 @@ class SmallClaimsStage extends Component {
             <Link to={`/smallclaims/${this.props.match.params.party}`}>{this.toUpperCase(currentSection)}</Link>
           </div>
           <div className="Stage-menu">
-            {this.renderMenuLinks()}
+            {this.renderMenuLinks(this.props.language)}
           </div>
         </div>
-        <TitleLine title={currentTitle} />
-        {this.filterContent(this.props.content, this.state.selectedStageId)}
+      {/* place holder, need to work out how to display the title w/out relying on redux store */}
+        <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).titles[this.props.language]} />
+        {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
+        <AccordionBoxContainer stageContent={ 
+          this.props.stageContent.filter(tab => { return tab.stageId === stageIds[this.props.match.params.stage] })
+                      .sort((a, b) => a.id - b.id )} />
       </div>
     )
   } 
 }
 
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchStages, fetchContentByParty}, dispatch);
+}
+
 function mapStateToProps(state) {
   return { 
     stageContent: state.content.tabs,
-    stage: state.content.stages,
+    stages: state.content.stages,
     content: state.content, 
-    stageId: state.content.stageId
+    stageId: state.content.stageId,
+    language: state.content.language
   };
 }
-export default connect(mapStateToProps, { fetchContentByParty })(SmallClaimsStage);
+export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsStage);

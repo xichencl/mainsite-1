@@ -54,6 +54,8 @@ export const REQUEST_TASKS = 'REQUEST_TASKS'
 export const INVALIDATE_CHECKLIST = 'INVALIDATE_CHECKLIST'
 export const RECEIVE_TASKS = 'RECEIVE_TASKS'
 
+//default language
+export const DEFAULT_LANG = 'en-US';
 //= =====================
 // Contentful test
 //= =====================
@@ -61,9 +63,15 @@ export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
 export const FETCH_ASSET = "FETCH_ASSET";
 export const FETCH_PARTIES = "FETCH_PARTIES";
 export const FETCH_FAQS = "FETCH_FAQS";
+export const FETCH_FORMS = "FETCH_FORMS";
+export const FETCH_FORM_LAYOUT = "FETCH_FORM_LAYOUT";
+export const FETCH_FAQ_LAYOUT = "FETCH_FAQ_LAYOUT";
+export const FETCH_FAQ_SUBCATEGORIES = "FETCH_FAQ_SUBCATEGORIES";
 export const FETCH_CONTENT = "FETCH_CONTENT";
 export const FETCH_RESOURCE_LINKS = "FETCH_RESOURCE_LINKS";
 export const FETCH_STAGES = "FETCH_STAGES";
+export const FETCH_VIDEOS = "FETCH_VIDEOS";
+export const FETCH_VIDEO_LINKS = "FETCH_VIDEO_LINKS";
 export const STORE_STAGE_ID = "STORE_STAGE_ID";
 /* Not using these =====>
 

@@ -8,6 +8,7 @@ import UnderConstruction from './components/pages/under-construction';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
+import Languages from './components/template/languages';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
 import Bot from './components/chatbot/Bot.jsx';
@@ -17,12 +18,19 @@ import MobileBot from './components/mobilebot/MobileBot.jsx';
 import HomePage from './components/pages/home-page';
 import TestAccordionBox from './components/template/accordion-box/accordion-box-container';
 import ContactPage from './components/pages/contact-page';
-import Forms from './components/pages/forms-page';
-import FAQs from './components/pages/faqs-page';
+import Forms from './components/pages/forms/forms-page';
+import FormSearch from './components/pages/forms-page';
+import FormsSelectedPage from './components/pages/forms/forms-page-selected';
+import FAQs from './components/pages/faqs/faqs-page';
+import FaqsSelectedPage from './components/pages/faqs/faqs-page-selected';
+import FaqsSelectedSubcategory from './components/pages/faqs/faqs-subcat-selected';
 import Videos from './components/pages/videos-page';
+import VideoPlayer from './components/pages/video-player';
 import Portal from './components/pages/portal-page';
 import AzurePortal from './components/pages/azure-portal';
 import FindCourthouse from './components/pages/find-courthouse';
+
+import SearchResults from './components/pages/search-results-page'
 
 import SmallClaims from './components/pages/topics/smallclaims/smallclaims';
 import SmallClaimsParty from './components/pages/topics/smallclaims/smallclaims-party';
@@ -77,9 +85,14 @@ export default class AppRouter extends Component {
           <Switch>
             <Route path="/mbot" history={browserHistory} component={MobileBot} />
             <div className="App">
+              
               <div className="App-mask" />
               <Navbar />
               <Search />
+              
+
+              {/*placeholder for language toggle*/}
+              <Languages />
               {/* DONT DELETE commented Bot out to hide from all views until bot works for all case types.
               for now bot will only live in small claims*/}
               {/*<Bot /> */}
@@ -97,9 +110,16 @@ export default class AppRouter extends Component {
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
                   <Route path="/logout" component={Logout} />
-                  <Route path="/faqs" component={FAQs} />
+                  <Route exact path="/faqs" component={FAQs} />
+                  <Route exact path="/faqs/:page" component={FaqsSelectedPage} />
+                  <Route path="/faqs/:page/:subcat" component={FaqsSelectedSubcategory} />
                   <Route path="/video-resources" component={Videos} />
-                  <Route path="/forms" component={Forms} />
+                  <Route path="/videos/:videoID" component={VideoPlayer} />
+                  <Route path="/forms/search" component={FormSearch} />
+                  <Route exact path="/forms" component={Forms} />
+                  <Route path="/forms/:page" component={FormsSelectedPage} />
+
+
  {/*                 <Route
                     path="/locations"
                     component={() =>
@@ -128,6 +148,8 @@ export default class AppRouter extends Component {
 
                   <Route path="/add-case" component={RequireAuth(NewCase)} />
                   <Route path="/edit-profile" component={RequireAuth(EditProfile)} />
+
+                  <Route path="/search-results/:query" component={SearchResults} />
 
 
                   <Route component={NotFoundPage} />

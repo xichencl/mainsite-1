@@ -41,7 +41,7 @@ h1.title-line-background {
 // Stage selection + content rendering
 .Stage-top-bar {
   position: relative;
-  z-index: 2000;
+  // z-index: 2000;
   display: block;
   @include sm {
     display: flex;
@@ -50,7 +50,8 @@ h1.title-line-background {
 }
 
 .Stage-menu {
-  z-index: 1000;
+  //z-index: 1000;
+
   // a:hover {
   //   color: $blue-accent-primary;
   // }
@@ -78,6 +79,7 @@ h1.title-line-background {
   width: 100%;
   h3 {
     margin: 1.5rem 2.5rem 1rem 0;
+    //padding: 1.5rem 2.5rem 1rem 0;
     font-family: $font-family-sans-serif;
   }
   h3:hover {
@@ -110,6 +112,11 @@ h1.title-line-background {
   a:hover {
     color: $blue-accent-primary;
   }
+} 
+
+.Accordion-box-line {
+  border: 2px solid $light-grey-secondary;
+  padding: 0rem;
 }
 
 .warning {

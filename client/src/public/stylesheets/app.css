@@ -882,19 +882,19 @@ hr {
       display: block;
       position: fixed;
       margin: -4rem;
-      height: 8.5rem;
-      width: 90%;
+      height: 11.5rem;
+      width: 100%;
       z-index: 100; } }
 
 .Search {
-  align-items: center;
+  align-items: right;
   background-color: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-top: 2rem;
   margin-left: 2rem;
-  z-index: 1000; }
+  z-index: 100; }
   @media (min-width: 769px) {
     .Search {
       margin-left: 1rem;
@@ -910,6 +910,24 @@ hr {
   padding-top: 0;
   width: 40rem; }
 
+.Languages {
+  align-items: right;
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 5rem;
+  z-index: 100; }
+  @media (min-width: 769px) {
+    .Languages {
+      margin-left: 1rem;
+      margin-top: 1rem; } }
+  @media (min-width: 1025px) {
+    .Languages {
+      margin-left: 75rem;
+      position: fixed; } }
+
 .Page {
   margin: 4rem 0rem;
   max-width: 95rem; }
@@ -921,7 +939,7 @@ hr {
       margin: 8rem 10rem 0 20rem; } }
 
 .Menu {
-  z-index: 1000;
+  z-index: 100;
   margin-top: -3rem;
   margin-left: 2rem;
   padding-bottom: 2rem; }
@@ -1004,7 +1022,7 @@ hr {
     opacity: 0;
     /* hide this */
     border: none;
-    z-index: 2;
+    z-index: 3;
     /* and place it over the hamburger */
     -webkit-touch-callout: none; }
   .Menu-burger .Menu-burger-checkbox:checked ~ span {
@@ -1024,7 +1042,7 @@ hr {
     position: relative;
     background: #333333;
     border-radius: 3px;
-    z-index: 1;
+    z-index: 2;
     transform-origin: 4px 0px;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease; }
   .Menu-burger span:first-child {
@@ -1045,7 +1063,8 @@ hr {
   /* to stop flickering of text in safari */
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1); }
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+  z-index: 1; }
   .Menu-links-burger a {
     color: #ffffff; }
   .Menu-links-burger a:hover {
@@ -1093,19 +1112,21 @@ hr {
     .Square-box-container {
       width: 33%; } }
 
-.Box {
-  z-index: 1; }
-  .Box h2,
-  .Box h3 {
-    margin: 0; }
-  .Box p.p2 {
-    margin-left: 1.1rem; }
-  .Box p {
-    display: inline; }
-  .Box a {
-    color: #000000; }
-  .Box a:hover {
-    color: #dddddd; }
+.Box h2,
+.Box h3 {
+  margin: 0; }
+
+.Box p.p2 {
+  margin-left: 1.1rem; }
+
+.Box p {
+  display: inline; }
+
+.Box a {
+  color: #000000; }
+
+.Box a:hover {
+  color: #dddddd; }
 
 .Square-box {
   text-align: center;
@@ -1602,15 +1623,11 @@ h1.title-line-background {
 
 .Stage-top-bar {
   position: relative;
-  z-index: 2000;
   display: block; }
   @media (min-width: 500px) {
     .Stage-top-bar {
       display: flex;
       justify-content: space-between; } }
-
-.Stage-menu {
-  z-index: 1000; }
 
 .Stage-menu-item {
   display: inline;
@@ -1963,10 +1980,7 @@ table th {
   -webkit-font-smoothing: antialiased; }
 
 .bot-z-index-open {
-  z-index: 1003; }
-
-.bot-is-closed {
-  z-index: -1; }
+  z-index: 1000; }
 
 .position-bot {
   /*keeps bot fixed, and scrolls bot as more questions are asked/answered*/
@@ -2000,6 +2014,56 @@ table th {
   font-size: 18px;
   margin-left: 4px; }
 
+.Bot-popup {
+  color: #ffffff;
+  position: fixed;
+  background-color: #333333;
+  bottom: 11rem;
+  right: 2rem;
+  width: 275px;
+  height: 120px;
+  padding: 1.75rem 2rem;
+  display: block;
+  z-index: 1000; }
+  .Bot-popup p {
+    margin: 0;
+    font-size: 1.4rem; }
+  @media only screen and (max-width: 600px) {
+    .Bot-popup {
+      display: none; } }
+  @media (min-width: 1025px) {
+    .Bot-popup {
+      bottom: 10rem;
+      width: 330px;
+      height: 120px; } }
+
+.Bot-popup:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 26px;
+  width: 0;
+  height: 0;
+  border-right: 20px solid transparent;
+  border-top: 17px solid #333333;
+  border-left: 20px solid transparent; }
+
+.Bot-popup-close {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  width: 25px;
+  height: 25px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 25%;
+  text-align: center; }
+  .Bot-popup-close i {
+    color: #333333;
+    margin-top: -0.9rem; }
+
 .open-bot-icon-circle {
   display: flex;
   justify-content: space-evenly;
@@ -2011,8 +2075,7 @@ table th {
   -webkit-border-radius: 30px;
   background-color: #4d9de0;
   cursor: pointer;
-  position: fixed;
-  z-index: 1010; }
+  position: fixed; }
   @media (max-width: 320px) {
     .open-bot-icon-circle {
       right: 2rem;
@@ -2036,7 +2099,11 @@ table th {
   color: #ffffff; }
 
 .open-bot-icon-m i {
-  margin-top: -0.7rem; }
+  margin-top: -0.7rem;
+  font-size: 36px; }
+
+.open-bot-icon i {
+  font-size: 30px; }
 
 .material-icon-m-bot {
   font-size: 3.5rem; }
@@ -2050,12 +2117,11 @@ table th {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   text-align: center;
-  position: fixed;
+  position: absolute;
   cursor: pointer;
   background-color: #4d9de0;
   right: 1rem;
-  top: 1rem;
-  z-index: 2000; }
+  top: 1rem; }
 
 /* bot header */
 .header-x {
@@ -2164,7 +2230,7 @@ button.button-chatbot-email:active {
   .open-bot-icon-circle {
     position: fixed;
     right: 1.75rem;
-    top: 3.5rem; } }
+    bottom: 3.5rem; } }
 
 @media (min-width: 600px) and (max-width: 2000px) {
   .open-bot-icon-m-circle {

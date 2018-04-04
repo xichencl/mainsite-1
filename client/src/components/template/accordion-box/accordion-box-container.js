@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router-dom';
 // import marked from 'marked';
 import { CSSTransitionGroup } from 'react-transition-group'
 const ReactMarkdown = require('react-markdown')
+import { DEFAULT_LANG } from '../../../actions/types';
+import { connect } from 'react-redux';
 
-export default class AccordionBoxContainer extends Component {
+const uuid = require('uuid/v4')
+
+class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -35,60 +40,127 @@ export default class AccordionBoxContainer extends Component {
 	render() {
 		// return <div>test</div>
 
-	
+	  let renderedContent = [];
 
-    const renderedContent = [].concat(this.props.stageContent)
-    .sort((a, b) => a.fields.id - b.fields.id)
-    .map((tab) => {
-		// const renderedContent = this.props.stageContent.map((tab) => {
-			const input = tab.fields.blockText
-			return (
-				<div className="Accordion-box-item " key={tab.fields.id}>
-					<h3 onClick={() => this.toggleClass(tab.sys.id)} className={this.state.activeId == tab.sys.id && this.state.pressed == true ? "blue-font": " "} >{tab.fields.title}<span className="Accordion-box-icon">{this.state.activeId == tab.sys.id && this.state.pressed == true ? "-" : "+"}</span></h3>
-					<div className={this.state.activeId == tab.sys.id && this.state.pressed == true ? " ": "hidden"}> 
-						<div className="Accordion-box-content">
-							<ReactMarkdown source={input} />
+    // yuck
+    if (this.props.type === 'links' && this.props.hasOwnProperty('itemField')) {
 
-							{/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
-						</div>
-						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
-						*/}					
+      // also yuck
+      renderedContent = Object.keys(this.props.stageContent)
+      // .sort((a, b) => a.title > b.title)
+      .map((contentKey) => {
+        const tab = this.props.stageContent[contentKey];
+        const links = tab[this.props.itemField];
+
+        return (
+          <div className="Accordion-box-item " key={uuid()}>
+            <h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+              {tab.title}
+
+              <span className="Accordion-box-icon">
+                {this.state.activeId == tab.id && this.state.pressed == true ? "-" : "+"}
+              </span>
+            </h3>
+            
+            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+              <div className="Accordion-box-content">
+                {
+                  Object.keys(links).map((linkKey) => {
+                    const videoLink = links[linkKey];
+
+                    if (videoLink.hasOwnProperty('link')) {
+                      return (
+                        <div key={uuid()}>
+                          <a href={videoLink.link} target="_blank">
+                            {videoLink.title}
+                          </a>
+                        </div>
+                      )
+                    }
+
+                    return (
+                      <div key={uuid()}>
+                        <Link to={this.props.linkTo + videoLink.linkTo}>
+                          {videoLink.title}
+                        </Link>
+                      </div>
+                    )
+                  })
+                }
+
+                {/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
+              </div>
+              {/*           <div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
+              */}         
 
 
-					</div>
-					<hr />
-				</div>
-			)
-		})
+            </div>
+            <hr className="Accordion-box-line" />
+          </div>
+        )
+      })
+    }
+    else {
+      const lang = this.props.language;
+    //   renderedContent = renderedContent.concat(this.props.stageContent)
+    //   .sort((a, b) => a.fields.id[DEFAULT_LANG] > b.fields.id[DEFAULT_LANG])
+    //   .map((tab) => {
+  		// // const renderedContent = this.props.stageContent.map((tab) => {
+  		// 	const input = tab.fields.blockText[lang] || '';
+  		renderedContent = this.props.stageContent
+        .map((tab, key) => {
+        // console.log("tab: ", tab);	
+        return (
+  				<div className="Accordion-box-item " key={tab.id}>
+  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+              {tab.titles[lang]}
+
+              <span className="Accordion-box-icon">
+                {this.state.activeId == tab.id && this.state.pressed == true ? "-" : "+"}
+              </span>
+            </h3>
+            
+  					<div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+  						<div className="Accordion-box-content">
+  							<ReactMarkdown source={tab.blockTexts[lang]} />
+
+  							{/*<div dangerouslySetInnerHTML={ { __html: input } }></div>*/}
+  						</div>
+  						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
+  						*/}					
+
+
+  					</div>
+  					<hr className="Accordion-box-line" />
+  				</div>
+  			)
+  		})
+    }
 		// const newContent = this.props.stageContent.filter((tab) => {
   // 		tab.fields.stage.map((item) => item.sys.id == stageId)
   // 	})
 
 		return (
 			<div className="Box AccordionBoxContainer ">
-				<hr />
-        <CSSTransitionGroup
-			    transitionName="example"
-			    transitionEnterTimeout={500}
-			    transitionLeaveTimeout={300}>
+				<hr className="Accordion-box-line" />
+
 				{renderedContent}
-				</CSSTransitionGroup>
 			</div>
 		)
 	}
 } 
 
-AccordionBoxContainer.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.shape({
-    activeId: PropTypes.number.isRequired,
-    // expanded: PropTypes.bool.isRequired,
-    // blockText: PropTypes.string.isRequired, 
+// AccordionBoxContainer.propTypes = {
+//   tabs: PropTypes.arrayOf(PropTypes.shape({
+//     activeId: PropTypes.number.isRequired,
+//     // expanded: PropTypes.bool.isRequired,
+//     // blockText: PropTypes.string.isRequired, 
     
-  }).isRequired).isRequired,
-  	toggleClass: PropTypes.func.isRequired
-  // onTabClick: PropTypes.func.isRequired,
-  // onAccordionClick: PropTypes.func.isRequired,
-}
+//   }).isRequired).isRequired,
+//   	toggleClass: PropTypes.func.isRequired
+//   // onTabClick: PropTypes.func.isRequired,
+//   // onAccordionClick: PropTypes.func.isRequired,
+// }
 
 /* 
 	render() {
@@ -110,3 +182,8 @@ AccordionBoxContainer.propTypes = {
 	}
 } 
 */
+function mapStateToProps(state){
+  return { language: state.content.language };
+}
+
+export default connect(mapStateToProps)(AccordionBoxContainer);

@@ -15,6 +15,8 @@ import { fetchResourceLinks } from '../../../../actions/content.js';
 import Bot from '../../../chatbot/Bot.jsx';
 import client from '../../../../services/contentful-client'
 
+import { DEFAULT_LANG } from '../../../../actions/types';
+
 //3WOs1Yx3FKWAOwSYg4WsK2 smallclaims id
 
 const temporaryFaqs = [
@@ -44,16 +46,30 @@ class SmallClaims extends Component {
   constructor() {
     super();
     this.state = {
-      partyId: ''
+      partyId: '',
+      viewPopup: null
     };
     this.onPartyClick = this.onPartyClick.bind(this)
   }
 
   componentWillMount() {
     const unitLabel = "SmallClaims"
-    this.props.fetchParties()
+    this.props.parties.length === 0 && this.props.fetchParties()    
     // this.props.fetchFaqs()
-    this.props.fetchResourceLinks(unitLabel)
+    this.props.resources.length === 0 && this.props.fetchResourceLinks(unitLabel)
+  }
+
+  componentDidMount(){
+    //check if they've visited
+    let visited = localStorage["alreadyVisited"];
+    if(visited) {
+     this.setState({ viewPopup: false })
+     //do not view Popup
+    } else {
+     //this is the first time, show popup
+     localStorage["alreadyVisited"] = true;
+     this.setState({ viewPopup: true});
+    }
   }
 
   onPartyClick(_id, e){
@@ -64,6 +80,7 @@ class SmallClaims extends Component {
   }
 
   render() {
+    const lang = this.props.language;
     const faqs = temporaryFaqs.map((faq, index) => {
       return (
         <div key={index}>
@@ -76,23 +93,22 @@ class SmallClaims extends Component {
 
     const resources = this.props.resources.map((item) => {
       return (
-        <div>
-          <a href={item.fields.url} target="_blank">{item.fields.title}</a>
+        <div key={item.resourceId}>
+          {/*resource link titles not translated, now default to 'en-US'*/}
+          <a href={item.url } target="_blank">{item.titles[lang] || item.titles['en-US']}</a>
         </div>
       )
     })
 
-    const renderedParties = [].concat(this.props.content)
-    .sort((a, b) => a.fields.id - b.fields.id)
+    const renderedParties = this.props.parties
     .map((party) => {
         return (
-          <div className="Square-box-container" key={party.sys.id}>
-            <Link to={`/smallclaims/${party.fields.url}`}>
+          <div className="Square-box-container" key={party.id}>
+            <Link to={`/smallclaims/${party.url}`}>
               <Squarebox 
-                onClick={(e) => this.onPartyClick(party.sys.id, e)}
-                id={party.sys.id}
-                boxTitle={party.fields.title}  
-                assetId={party.fields.image.sys.id}
+                id={party.partyId}
+                boxTitle={party.titles[lang]}  
+                assetId={party.imageId}
               />
             </Link>
           </div>
@@ -103,17 +119,19 @@ class SmallClaims extends Component {
     return (
       <div>
           {/* Bot temporarily lives only in Small Claims until all case types are functional in bot */}
-          <Bot />
+          <Bot viewPopup={this.state.viewPopup} />
           <div className="Topic">
             <TitleLine title="Small Claims" />
             <div className="grid grid-pad">
               {renderedParties}
+              {/*static content, to be linked to faq pages*/}
               <Infobox 
                 boxTitle="Frequently Asked Questions"
                 boxContent={faqs}
                 buttonText="View More"
                 infoboxClass="Box Info-box Grey-background medium-box"
               />
+
               <Infobox 
                 boxTitle="Resources"
                 boxContent={resources}
@@ -130,16 +148,14 @@ class SmallClaims extends Component {
 
 function mapStateToProps(state) {
   return { 
-    content: state.content.parties,
-    resources: state.content.resources
+    parties: state.content.parties,
+    resources: state.content.resources,
+    language: state.content.language
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-      fetchParties: bindActionCreators(fetchParties, dispatch),
-      fetchResourceLinks: bindActionCreators(fetchResourceLinks, dispatch)
-  };
+  return bindActionCreators( {fetchParties, fetchResourceLinks}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SmallClaims);
