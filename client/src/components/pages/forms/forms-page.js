@@ -43,7 +43,15 @@ class Forms extends Component {
 				<ul className="Filter">
 					{renderedTopics}
 				</ul>
-				<h3 className="Search-forms"><Link to="/forms/search">Search Forms</Link></h3>
+				<h3 className="Search-forms">Search Forms</h3>
+				<div className="Filter-list-group">
+					<ul className="Filter">
+						<hr className="cat-line"/>
+						<li className="Filter-topic">
+							<Link to="/forms/search">Find a form <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+						</li>
+					</ul>
+				</div>
 			</div>
 		)
 	}
