@@ -20,7 +20,7 @@ class FAQs extends Component {
 				<div className="Filter-list-group" key={topic.sys.id}>
 					<hr className="cat-line"/>
 					<li className="Filter-topic">
-						<Link to={`/faqs/${topic.fields.slug[lang]}`}>{topic.fields.title[lang]} <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
+						<Link to={`/faqs/${topic.fields.slug["en-US"]}`}>{topic.fields.title[lang]} <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
 					</li>
 				</div>
 			)
