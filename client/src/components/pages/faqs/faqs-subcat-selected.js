@@ -65,17 +65,17 @@ class FaqsSelectedSubcategory extends Component {
 		const lang = this.props.language;
 		const renderedContent = this.props.faqs.map((faq) => {
 			return (
-				<div className="Accordion-box-item " key={faq.fields.id[lang]} >
+				<div className="Accordion-box-item " key={faq.fields.id["en-US"]} >
 				
 
-					<h3 onClick={() => this.toggleClass(faq.fields.id[lang])} className={this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(faq.fields.id["en-US"])} className={this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
             {faq.fields.title[lang]}
             <span className="Accordion-box-icon">
-              {this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? "-" : "+"}
+              {this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}
             </span>
           </h3>
 
-          <div className={this.state.activeId == faq.fields.id[lang] && this.state.pressed == true ? " ": "hidden"}> 
+          <div className={this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">
 							<ReactMarkdown source={faq.fields.blockText[lang]} />
 						</div>
