@@ -7,7 +7,7 @@ import { FETCH_RESOURCE_LINKS } from '../actions/types';
 import { FETCH_STAGES } from '../actions/types';
 import { FETCH_VIDEOS } from '../actions/types';
 import { FETCH_VIDEO_LINKS } from '../actions/types';
-import { FETCH_VIDEO_SUBCATEGORIES } from '../actions/types';
+import { FETCH_VIDEO_CATEGORIES } from '../actions/types';
 
 import { STORE_STAGE_ID } from '../actions/types';
 
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
   videos: {},
   videoURLs: {},
   videoLinks: {},
-  videoSubcategories: {},
+  videoCategories: {},
   stageId: [],
 };
 
@@ -40,9 +40,9 @@ export default function(state = INITIAL_STATE, action) {
   case FETCH_STAGES:
     return { ...state, stages: action.payload.data.items };
   
-  case FETCH_VIDEO_SUBCATEGORIES: {
+  case FETCH_VIDEO_CATEGORIES: {
     const videos = { ...state.videos };
-    const videoSubcategories = {};
+    const videoCategories = {};
 
     let items = action.payload.data.items;
 
@@ -61,8 +61,20 @@ export default function(state = INITIAL_STATE, action) {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       const id = item.sys.id;
+      const categoryId = item.fields.categoryId;
+      const categoryTitle = item.fields.categoryTitle;
 
-      videoSubcategories[id] = {
+      if (!has(videoCategories, item.fields.categoryId)) {
+        videoCategories[categoryId] = {
+          id: categoryId,
+          title: categoryTitle,
+          subcategories: {}
+        };
+      }
+
+      const subcategories = videoCategories[categoryId].subcategories;
+
+      subcategories[id] = {
         id,
         title: item.fields.title,
         categoryId: item.fields.categoryId,
@@ -80,7 +92,7 @@ export default function(state = INITIAL_STATE, action) {
       videos[id] = subcategory;
     }
 
-    return { ...state, videoSubcategories, videos };
+    return { ...state, videoCategories, videos };
   }
 
   case FETCH_VIDEOS: {

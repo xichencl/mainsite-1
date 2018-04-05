@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import TitleLine from '../template/title-line';
 import AccordionBoxContainer from '../template/accordion-box/accordion-box-container';
-import { fetchVideos, fetchVideoLinks, fetchVideoSubcategories } from '../../actions/content.js';
+import { fetchVideos, fetchVideoLinks, fetchVideoCategories } from '../../actions/content.js';
 
 const uuid = require('uuid/v4');
 
@@ -12,7 +12,7 @@ const uuid = require('uuid/v4');
 class Videos extends Component {
   componentWillMount() {
     if (!this.props.videos || Object.keys(this.props.videos).length <= 0) {
-      this.props.fetchVideoSubcategories()
+      this.props.fetchVideoCategories()
       this.props.fetchVideos()
       console.log(this.props.videos, 'this.props.videos')
     }
@@ -60,15 +60,20 @@ class Videos extends Component {
   }
 
   renderVideos() {
-    return (
-      <AccordionBoxContainer 
-        stageContent={this.props.videos} 
-        type='links'
-        linkTo='videos/'
-        itemField={'videos'} 
-        tabs={[] /* shush */}
-      />
-    );
+    return Object.keys(this.props.videoCategories).map((categoryId) => {
+      return (
+        <div key={uuid()} className="full-size" style={{ width: '100%', height: '100%' }}>
+          <h2>Form Walkthroughs</h2>
+          <AccordionBoxContainer 
+            stageContent={this.props.videos} 
+            type='links'
+            linkTo='videos/'
+            itemField={'videos'} 
+            tabs={[] /* shush */}
+          />
+        </div>
+      );
+    });
   }
 
 	render() {
@@ -87,8 +92,9 @@ class Videos extends Component {
 function mapStateToProps(state) {
   return { videos: state.content.videos,
            videoLinks: state.content.videoLinks,
+           videoCategories: state.content.videoCategories,
            assets: state.content.assets
    };
 }
 
-export default connect(mapStateToProps, { fetchVideos, fetchVideoLinks, fetchVideoSubcategories })(Videos);
+export default connect(mapStateToProps, { fetchVideos, fetchVideoLinks, fetchVideoCategories })(Videos);
