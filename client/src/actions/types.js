@@ -54,6 +54,8 @@ export const REQUEST_TASKS = 'REQUEST_TASKS'
 export const INVALIDATE_CHECKLIST = 'INVALIDATE_CHECKLIST'
 export const RECEIVE_TASKS = 'RECEIVE_TASKS'
 
+//default language
+export const DEFAULT_LANG = 'en-US';
 //= =====================
 // Contentful test
 //= =====================
