@@ -29,6 +29,11 @@ const defaultState = [
     message: "Types of Cases Heard",
     type:'button',
     isBot: true
+  }, 
+  {
+    message: "Forms",
+    type:'button',
+    isBot: true
   }
   
 

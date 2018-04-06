@@ -10,5 +10,7 @@
 "Prepare for Trial":{"name": "sc_prepare_hearing_event"},
 "SC120 Service Deadlines":{"name": "sc120_when_to_serve_event"},
 "Substituted Service Deadlines": {"name": "sc_substituted_service_deadlines"},
-"Government Agencies": {"name": "sc_sue_gov_event"}
+"Government Agencies": {"name": "sc_sue_gov_event"},
+"Forms": {"name": "sc_forms_event"},
+"No idea where to start": {"name": "sc_how_to_begin_event"}
 }
