@@ -1,9 +1,9 @@
-const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
-
+const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = process.env;
 const apiai = require('apiai');
 const aiSmallClaims = apiai(SC_CHAT_API_KEY);
 const aiGuardianship = apiai(GUARDIANSHIP_CHAT_API_KEY);
-const aiGeneral = apiai(GENERAL_CHAT_API_KEY);
+//GENERAL_CHAT_API_KEY not entered in env vars
+// const aiGeneral = apiai(GENERAL_CHAT_API_KEY);
 const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
