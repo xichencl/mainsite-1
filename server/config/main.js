@@ -42,7 +42,7 @@ const creds = {
   //dev server
   // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',  
   //DMZ server 
-  redirectUrl: 'http://10.100.254.19/api/auth/openid/return',
+  redirectUrl: 'http://dev-vshs.cc-courthelp.org/api/auth/openid/return',
 
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: true,
@@ -131,7 +131,7 @@ resourceURL: 'https://graph.windows.net',
 // 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
 // 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
 
-destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://10.100.254.19',
+destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs.cc-courthelp.org',
 
 // If you want to use the mongoDB session store for session middleware; otherwise we will use the default
 // session store provided by express-session.
