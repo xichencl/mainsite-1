@@ -19,13 +19,15 @@ import { STORE_STAGE_ID } from './types'
 // export const FETCH_POST = 'FETCH_POST';
 // export const FETCH_ASSET = 'FETCH_ASSET';
 
-import {
+const {
   API_BASE_URL,
   API_SPACE_ID,
   API_TOKEN,
   SMALL_CLAIMS_ID 
-} from '../../../secret.env'
+} = process.env;
 
+console.log("api_base_url", process.env.API_BASE_URL);
+console.log("api_space_id", API_SPACE_ID);
 
 export function fetchCategories() {
   // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);
