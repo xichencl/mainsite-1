@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import TitleLine from '../template/title-line';
 import InfoBox from '../template/info-box';
+import { fetchContactPage } from '../../actions/content.js';
+import { connect } from 'react-redux';
 
 const Directories = [
 	{
@@ -24,30 +26,51 @@ const Directories = [
 		url: "http://www.questionpoint.org/crs/servlet/org.oclc.admin.BuildForm?&page=frame&institution=11341&type=2&language=1"
 	}
 ]
+ 
+class Contact extends Component {
+	constructor(props) {
+		super(props)
+		// this.renderSections = this.renderSections.bind(this)
+	}
 
-
-export default class Contact extends Component {
+	componentWillMount() {
+		this.props.fetchContactPage()
+	}
 	
-	render() {
+	// renderSections() {
+	// 				console.log(this.props.contact, 'this.props.contact')
 
-		const renderedDirectories = Directories.map((item) => {
-      return (
-        <div>
-          <a href={item.url} target="_blank">{item.title}</a>
-        </div>
-      )
-    })
+	// 	return (
+	// 		this.props.contact.fields.map((item) => {
+	// 			return (
+	// 				<InfoBox 
+	// 					boxTitle={item.fields.title[lang]}
+	// 					boxContent={item.fields.blockText[lang]}
+	// 					key={item.sys.id} />
+	// 			)
+	// 		})
+	// 	)
+	// }
+
+	render() {
+		const lang = this.props.language
+		//console.log(this.props.contact, 'contact')
+		const renderedSections = this.props.contact.fields.map((item) => {
+				return (
+					<InfoBox 
+						boxTitle={item.fields.title[lang]}
+						boxContent={item.fields.blockText[lang]}
+						key={item.sys.id} />
+				)
+			})
 
 		return (
 			<div>
-				<TitleLine title="Contact Information" />
+				<TitleLine title={this.props.contact} />
 				<div className="grid grid-pad">
-						<InfoBox 
-							boxTitle="Directories"
-							boxContent={renderedDirectories}
-							buttonVisibilityClass="hidden"
-						/>
-						<InfoBox 
+					{/*{this.renderSections()}*/}
+					{renderedSections}
+						{/*<InfoBox 
 							boxTitle="Give us Feedback!"
 							boxContent="Answer our quick online survey​​ and help to make the Self-Help Law Center better! We are working to keep the Self-Help Law Center as updated as possible and will be using public feedback to make improvements to the site.​​​"
 							buttonVisibilityClass="hidden"
@@ -56,9 +79,20 @@ export default class Contact extends Component {
 							boxTitle="Missing or Incorrect Content?"
 							boxContent="If there is any content on the site that should be updated or if there is a link we should add, please let us know​!​​​​​"
 							buttonVisibilityClass="hidden"
-						/>
+						/>*/}
 				</div>
 			</div>
 		)
 	}
 }
+
+function mapStateToProps(state) {
+  return { 
+    contact: state.content.contact,
+    language: state.content.language
+   };
+}
+
+// export default connect(mapStateToProps)(HomePage);
+
+export default connect(mapStateToProps, { fetchContactPage })(Contact);

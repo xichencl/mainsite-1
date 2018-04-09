@@ -7,6 +7,7 @@ import { FETCH_FAQS } from './types'
 import { FETCH_FAQ_LAYOUT } from './types'
 import { FETCH_FAQ_SUBCATEGORIES } from './types'
 import { FETCH_CONTENT } from './types'
+import { FETCH_CONTACT_LAYOUT } from './types'
 import { FETCH_RESOURCE_LINKS } from './types'
 import { FETCH_STAGES } from './types'
 import { FETCH_VIDEOS } from './types'
@@ -229,6 +230,27 @@ export function fetchResourceLinks(label) {
     }
 
   
+}
+
+export function fetchContactPage() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=contact&locale=*`)
+      .then((response) => {
+        //console.log(response.data);
+        const pageTitle = response.data.items[0].fields.title;
+        const pageSections = response.data.includes.Entry;
+        const pageObject = {
+          title: pageTitle,
+          fields: pageSections
+        }
+        //console.log(pageObject, "pageObject")
+        dispatch({
+          type: FETCH_CONTACT_LAYOUT,
+          payload: pageObject
+        })
+      })
+      .catch((error) => console.log("err: ", error))
+    }
 }
 
 export function fetchAsset(id) {

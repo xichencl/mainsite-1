@@ -34,6 +34,7 @@ class SelectedFaqPage extends Component {
 	}
 
 	renderSubCategories() {
+		const lang = this.props.language
 		return (
 			this.props.faqSubcategories.map((subcat) => {
 				return (
@@ -41,7 +42,7 @@ class SelectedFaqPage extends Component {
 						<hr className="cat-line"/>
 						<li className="Filter-topic">
 							<Link to={`/faqs/${this.props.match.params.page}/${subcat.sys.id}`}>
-							{subcat.fields.title["en-US"]}<i className="material-icons Filter-topic-icon">keyboard_arrow_right</i>
+							{subcat.fields.title[lang]}<i className="material-icons Filter-topic-icon">keyboard_arrow_right</i>
 							</Link>
 						</li>
 					</div>
