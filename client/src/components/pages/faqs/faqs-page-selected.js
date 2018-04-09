@@ -4,22 +4,6 @@ import TitleLine from '../../template/title-line';
 import { fetchFaqSubcategories } from '../../../actions/content';
 import { connect } from 'react-redux';
 
-const pageNames = {
-	general: "General",
-	smallclaims: "Small Claims",
-	dv: "Domestic Violence",
-	guardianship: "Guardianship",
-	traffic: "Traffic",
-	eviction: "Eviction",
-	family: "Family",
-	"reclamos-menores": "Reclamos menores",
-	dv: "Violencia Domestico",
-	"ley-familiar": "Ley Familiar",
-	desalojo: "Desalojo",
-	"tutela-de-menores": "Tutela de menores",
-	trafico: "Trafíco"
-}
-
 class SelectedFaqPage extends Component {
 	constructor() {
 		super()
@@ -75,7 +59,7 @@ class SelectedFaqPage extends Component {
         <Link to={`/faqs/${this.props.match.params.page}`}>{this.toUpperCase(currentSection)}</Link>
       </div>
     )
-	}
+	}  
   
 	
 
