@@ -60,8 +60,6 @@ class SelectedFaqPage extends Component {
       </div>
     )
 	}  
-  
-	
 
 	render() {
 		const currentPageName = this.props.match.params.page
