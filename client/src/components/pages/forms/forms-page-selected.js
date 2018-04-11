@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchForms } from '../../../actions/content';
 import TitleLine from '../../template/title-line';
 import AccordionBox from '../../template/accordion-box/accordion-box-container'
@@ -30,6 +31,9 @@ class FormsPageSelected extends Component {
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
+		this.renderBreadcrumbs = this.renderBreadcrumbs.bind(this)
+		this.toUpperCase = this.toUpperCase.bind(this)
+
 	}
 
 	toggleClass(id) {
@@ -45,7 +49,20 @@ class FormsPageSelected extends Component {
 		this.props.fetchForms(label)
 	}
 
-	
+	toUpperCase(string) {
+   	return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
+	renderBreadcrumbs(lang) {
+		const currentSection = this.props.match.params.page
+		return (
+			<div className="breadcrumbs">
+        <Link to="/forms">Forms</Link>
+        <span className="breadcrumbs-chevron">></span>
+        <Link to={`/forms/${currentSection}`}>{this.toUpperCase(currentSection)}</Link>
+      </div>
+    )
+	} 	
 
 	render() {
 
@@ -55,14 +72,14 @@ class FormsPageSelected extends Component {
 				<div className="Accordion-box-item " key={form.fields.id[lang]} >
 				
 
-					<h3 onClick={() => this.toggleClass(form.fields.id[lang])} className={this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
             {form.fields.title[lang]}
             <span className="Accordion-box-icon">
-              {this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? "-" : "+"}
+              {this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}
             </span>
           </h3>
 
-          <div className={this.state.activeId == form.fields.id[lang] && this.state.pressed == true ? " ": "hidden"}> 
+          <div className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? " ": "hidden"}> 
 						<div className="Accordion-box-content">
 							<ReactMarkdown source={form.fields.blockText[lang]} />
 						</div>
@@ -81,6 +98,7 @@ class FormsPageSelected extends Component {
 
 			<div>
 				<TitleLine title={pageNames[currentPageName]} />
+				{this.renderBreadcrumbs(this.props.language)}
 				<div className="Box AccordionBoxContainer ">
 				<hr className="Accordion-box-line" />
 				{renderedContent}
