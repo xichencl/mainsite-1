@@ -8,6 +8,7 @@ import UnderConstruction from './components/pages/under-construction';
 import Navbar from './components/template/navbar';
 import Footer from './components/template/footer';
 import Search from './components/template/search';
+//import Layout from './components/Layout';
 import Languages from './components/template/languages';
 // DONT DELETE commented Bot out to hide from all views until bot works for all case types.
 // for now bot will only live in small claims
