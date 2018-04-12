@@ -60,6 +60,7 @@ export const DEFAULT_LANG = 'en-US';
 // Contentful test
 //= =====================
 export const FETCH_CATEGORIES = "FETCH_CATEGORIES";
+export const FETCH_PAGE = "FETCH_PAGE";
 export const FETCH_ASSET = "FETCH_ASSET";
 export const FETCH_PARTIES = "FETCH_PARTIES";
 export const FETCH_FAQS = "FETCH_FAQS";

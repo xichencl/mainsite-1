@@ -3,6 +3,7 @@ import { FETCH_CATEGORIES } from '../actions/types';
 import { FETCH_PARTIES } from '../actions/types';
 import { FETCH_FAQS } from '../actions/types';
 import { FETCH_FORMS } from '../actions/types';
+import { FETCH_PAGE } from '../actions/types';
 import { FETCH_FAQ_LAYOUT } from '../actions/types';
 import { FETCH_CONTACT_LAYOUT } from '../actions/types';
 import { FETCH_FORM_LAYOUT } from '../actions/types';
@@ -18,7 +19,8 @@ import { STORE_STAGE_ID } from '../actions/types';
 const INITIAL_STATE = { 
   categories: [],
   parties: [],
-  contact: [],
+  contactTitle: [],
+  contactSections: [],
   stages: [],
   resources: [],
   formLayout: [],
@@ -55,7 +57,9 @@ export default function(state = INITIAL_STATE, action) {
   case FETCH_FAQ_SUBCATEGORIES:
     return { ...state, faqSubcategories: action.payload.data.items };
   case FETCH_CONTACT_LAYOUT:
-    return { ...state, contact: action.payload };
+    const contactTitle = action.payload.data.items[0].fields.title;
+    const contactSections = action.payload.data.includes.Entry;
+    return { ...state, contactTitle, contactSections };
   case FETCH_CONTENT:
     return { ...state, tabs: action.payload };
   case FETCH_STAGES:

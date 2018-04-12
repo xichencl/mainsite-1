@@ -7,43 +7,15 @@ import { connect } from 'react-redux';
 class Forms extends Component {
 	constructor() {
 		super()
-		//this.findFormLangToggle = this.findFormLangToggle.bind(this)
 	}
 
 	componentWillMount() {
 		this.props.fetchFormLayout()
 	}
 
-	// findFormLangToggle() {
-	// 	return (
-	// 		if (this.props.language == "en-US") {
-	// 			return (
-	// 				<Link to="/forms/search">Find a form <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-	// 			)
-	// 		} else (
-	// 			return (
-	// 				<Link to"/forms/search">Encuentra un formulario <i className="material-icons Filter-topic-icon">keyboard_arrow_right</i></Link>
-	// 			)
-	// 		)
-	// 	)
-	// }
-
 	render() {
 		const lang = this.props.language;
-		// let formLang;
-		// if (this.props.language == "en-US") {
-		// 		formLang = "Find a form"
-		// 		console.log(formLang, "formLanf")
-		// 		return (
-		// 			formLang
-		// 		)
-		// 	} else {
-		// 		formLang = "Encuentra en formulario"
-		// 		return (
-		// 			formLang
-		// 		)
-		// 	}
-
+		
 		const renderedTopics = this.props.formTopics.map((topic) => {
 			return (
 				<div className="Filter-list-group" key={topic.sys.id}>
