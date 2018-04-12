@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FETCH_CATEGORIES } from './types'
+import { FETCH_PAGE } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FORM_LAYOUT } from './types'
 import { FETCH_FORMS } from './types'
@@ -26,6 +27,15 @@ import {
   SMALL_CLAIMS_ID 
 } from '../../../secret.env'
 
+export function fetchContact() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=contact&locale=*`)
+    .then( (response) => { 
+      dispatch({type: FETCH_PAGE, payload: response});
+      })
+    .catch((error) => console.log('err: ', error));
+  }
+}
 
 export function fetchCategories() {
   // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=category`);
@@ -236,17 +246,17 @@ export function fetchContactPage() {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=contact&locale=*`)
       .then((response) => {
-        //console.log(response.data);
-        const pageTitle = response.data.items[0].fields.title;
-        const pageSections = response.data.includes.Entry;
-        const pageObject = {
-          title: pageTitle,
-          fields: pageSections
-        }
-        //console.log(pageObject, "pageObject")
+        console.log("1");
+        // const pageTitle = response.data.items[0].fields.title;
+        // const pageSections = response.data.includes.Entry;
+        // const pageObject = {
+        //   title: pageTitle,
+        //   fields: pageSections
+        // }
+        // console.log("2")
         dispatch({
           type: FETCH_CONTACT_LAYOUT,
-          payload: pageObject
+          payload: response
         })
       })
       .catch((error) => console.log("err: ", error))
