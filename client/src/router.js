@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link, browserHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { CLIENT_ROOT_URL } from './actions/index';
-
+import { fetchMenuLinks } from './actions/content';
+import { fetchFooter } from './actions/content';
 // Import miscellaneous routes and other requirements
 import NotFoundPage from './components/pages/not-found-page';
 import UnderConstruction from './components/pages/under-construction';
@@ -72,11 +74,15 @@ import NewCase from './components/pages/new-case-page';
 // Import higher order components
 import RequireAuth from './components/auth/require-auth';
 
-export default class AppRouter extends Component {
+class AppRouter extends Component {
   constructor(props) {
       super(props);
   }
 
+  componentWillMount() {
+    this.props.fetchMenuLinks()
+    this.props.fetchFooter()
+  }
 
   render() {
     return (
@@ -88,7 +94,7 @@ export default class AppRouter extends Component {
             <div className="App">
               
               <div className="App-mask" />
-              <Navbar />
+              <Navbar menuLinks={this.props.menuLinks}/>
               <Search />
               
 
@@ -166,6 +172,14 @@ export default class AppRouter extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { 
+    menuLinks: state.content.menuLinks,
+    footer: state.content.footer }
+}
+
+export default connect(mapStateToProps, { fetchMenuLinks, fetchFooter })(AppRouter)
 
 /*
 

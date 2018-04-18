@@ -7,6 +7,8 @@ import { FETCH_PAGE } from '../actions/types';
 import { FETCH_FAQ_LAYOUT } from '../actions/types';
 import { FETCH_CONTACT_LAYOUT } from '../actions/types';
 import { FETCH_FORM_LAYOUT } from '../actions/types';
+import { FETCH_FOOTER_LAYOUT } from '../actions/types';
+import { FETCH_MENU_LINKS } from '../actions/types';
 import { FETCH_FAQ_SUBCATEGORIES } from '../actions/types';
 import { FETCH_CONTENT } from '../actions/types';
 import { FETCH_RESOURCE_LINKS } from '../actions/types';
@@ -30,6 +32,8 @@ const INITIAL_STATE = {
   faqTopics: [],
   faqLayout: [],
   faqSubcategories: [],
+  footer: [],
+  menuLinks: [],
   tabs: [], 
   videos: [],
   videoURLs: {},
@@ -56,6 +60,10 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, faqs: action.payload.data.items };
   case FETCH_FAQ_SUBCATEGORIES:
     return { ...state, faqSubcategories: action.payload.data.items };
+  case FETCH_FOOTER_LAYOUT:
+    return { ...state, footer: action.payload.data };
+  case FETCH_MENU_LINKS:
+    return { ...state, menuLinks: action.payload.data.items };
   case FETCH_CONTACT_LAYOUT:
     const contactTitle = action.payload.data.items[0].fields.title;
     const contactSections = action.payload.data.includes.Entry;

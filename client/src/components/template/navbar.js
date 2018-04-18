@@ -26,7 +26,26 @@ import NavbarBurger from './navbar-burger';
 />
 */
 class Navbar extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  renderMenuLinks() {
+    const lang = this.props.language
+    return (
+      this.props.menuLinks((link) => {
+        <NavLink
+          activeClassName="Menu-link--active"
+          className="Menu-link"
+          exact
+          to={link.fields.slug}>
+          link.fields.title[lang]
+        </NavLink>
+      })
+    )
+  }
   render() {
+
   return (
     <div className='Menu'>
         <div className='Menu-logo'>
@@ -45,6 +64,7 @@ class Navbar extends Component {
           
         </div>
         <NavbarBurger />
+        {/*{this.renderMenuLinks()}*/}
         <div className='Menu-links'>
           <NavLink
             activeClassName='Menu-link--active'
@@ -102,6 +122,11 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = (state) => { return {azure: state.auth.message}; };
+const mapStateToProps = (state) => { 
+  return {
+    azure: state.auth.message,
+    language: state.language
+  }; 
+};
 
 export default connect(mapStateToProps)(Navbar);
