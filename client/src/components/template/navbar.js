@@ -6,16 +6,16 @@ import logoBw from '../../img/logo-219.svg';
 
 import NavbarBurger from './navbar-burger';
 
+
 const Navbar = (props) => {
-  // console.log(props, 'props')
-  // console.log(props.menuLinks, '...props.menuLinks...')
   const lang = props.language
-  // console.log(lang, '..lang..')
   const menuLinks = props.menuLinks.map((link) => {
-    const slug = link.fields.slug[lang]
+    // slug's should always be hard-coded in english so 
+    // that page will route correctly
+    const slug = link.fields.slug["en-US"]
+    // all other text should use props to dynamically update
+    // page language of content
     const title = link.fields.title[lang]
-    //console.log(slug, title, '.....slug, title.....')
-    console.log(title, '....title....')
     return (
       <NavLink
         key={link.sys.id}
