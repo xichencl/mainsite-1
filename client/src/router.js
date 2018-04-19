@@ -94,7 +94,7 @@ class AppRouter extends Component {
             <div className="App">
               
               <div className="App-mask" />
-              <Navbar menuLinks={this.props.menuLinks}/>
+              <Navbar menuLinks={this.props.menuLinks} language={this.props.language}/> //more="menuLinks"
               <Search />
               
 
@@ -106,6 +106,7 @@ class AppRouter extends Component {
               <div className="Page">
                 <Switch>
                   <Route exact path="/" component={HomePage} />
+                  <Route path="/home" component={HomePage} />
                     {/*if I want to load app and navs separately in {App} component, and load CaseType modules here--> */}
                     {/*<IndexRoute component={TopicsList} /> */} 
                   <Route path="/test" component={TestAccordionBox} />
@@ -176,6 +177,7 @@ class AppRouter extends Component {
 function mapStateToProps(state) {
   return { 
     menuLinks: state.content.menuLinks,
+    language: state.content.language,
     footer: state.content.footer }
 }
 

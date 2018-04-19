@@ -267,7 +267,7 @@ export function fetchContactPage() {
 
 export function fetchMenuLinks() {
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=menuLink&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=menuLink&order=fields.order&locale=*`)
       .then((response) => {
         dispatch({
           type: FETCH_MENU_LINKS,

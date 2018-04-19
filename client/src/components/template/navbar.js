@@ -2,131 +2,53 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 // import { CLIENT_ROOT_URL } from '../../actions/index';
-
-// import ccscLogo from '../../img/ccsc-logo.svg';
-// import ccscLogoSm from'../../img/ccsc-logo-sm.svg';
 import logoBw from '../../img/logo-219.svg';
 
 import NavbarBurger from './navbar-burger';
-// import ReactSVG from 'react-svg';
 
-// const path = require('path');
-// const ccscLogo = require(CLIENT_ROOT_URL+'/img/ccsc-logo.svg');
-// const ccscLogoSm = require(CLIENT_ROOT_URL+'/img/ccsc-logo-sm.svg');
-
-/* 
-<img className="Menu-logo-img"
-  alt='Contra Costa Superior Courts logo'
-  src={ ccscLogo }
-/>
-
-<img className="Menu-logo-img-sm"
-  alt='Contra Costa Superior Courts logo'
-  src={ ccscLogoSm }
-/>
-*/
-class Navbar extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  renderMenuLinks() {
-    const lang = this.props.language
+const Navbar = (props) => {
+  // console.log(props, 'props')
+  // console.log(props.menuLinks, '...props.menuLinks...')
+  const lang = props.language
+  // console.log(lang, '..lang..')
+  const menuLinks = props.menuLinks.map((link) => {
+    const slug = link.fields.slug[lang]
+    const title = link.fields.title[lang]
+    //console.log(slug, title, '.....slug, title.....')
+    console.log(title, '....title....')
     return (
-      this.props.menuLinks((link) => {
-        <NavLink
-          activeClassName="Menu-link--active"
-          className="Menu-link"
-          exact
-          to={link.fields.slug}>
-          link.fields.title[lang]
-        </NavLink>
-      })
+      <NavLink
+        key={link.sys.id}
+        activeClassName="Menu-link--active"
+        className="Menu-link"
+        exact
+        to={slug}>
+        {title}
+      </NavLink>
     )
-  }
-  render() {
+  })
 
   return (
-    <div className='Menu'>
-        <div className='Menu-logo'>
-          <NavLink to="/">
-            <img
-              alt='Contra Costa Superior Courts logo'
-              className='Menu-logo-img'
-              src={logoBw}
-            />
-            <img
-              alt='Contra Costa Superior Courts logo'
-              className='Menu-logo-img-sm'
-              src={logoBw}
-            />
-          </NavLink>
-          
-        </div>
-        <NavbarBurger />
-        {/*{this.renderMenuLinks()}*/}
-        <div className='Menu-links'>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            exact
-            to='/'
-          >
-            Home
-          </NavLink>
-          {this.props.azure === 'AZURE'? <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/azure-portal'
-          >
-            My Portal
-          </NavLink> : 
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/portal'
-          >
-            My Portal
-          </NavLink>}
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/forms'
-          >
-            Forms
-          </NavLink>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/faqs'
-          >
-            FAQs
-          </NavLink>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/video-resources'
-          >
-            Video Resources
-          </NavLink>
-          <NavLink
-            activeClassName='Menu-link--active'
-            className='Menu-link'
-            to='/contact-us'
-          >
-            Contact
-          </NavLink>
-        </div>
+    <div className="Menu">
+      <div className='Menu-logo'>
+        <NavLink to="/">
+          <img
+            alt='Contra Costa Superior Courts logo'
+            className='Menu-logo-img'
+            src={logoBw}
+          />
+          <img
+            alt='Contra Costa Superior Courts logo'
+            className='Menu-logo-img-sm'
+            src={logoBw}
+          />
+        </NavLink>
       </div>
-  );
-  }
-}
-
-const mapStateToProps = (state) => { 
-  return {
-    azure: state.auth.message,
-    language: state.language
-  }; 
+      <div className="Menu-links">
+        {menuLinks}
+      </div>
+    </div>
+  )
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default Navbar
