@@ -10,7 +10,7 @@ import NavbarBurger from './navbar-burger';
 const Navbar = (props) => {
   const lang = props.language
   const menuLinks = props.menuLinks.map((link) => {
-    // slug's should always be hard-coded in english so 
+    // slugs should always be hard-coded in english so 
     // that page will route correctly
     const slug = link.fields.slug["en-US"]
     // all other text should use props to dynamically update
@@ -44,6 +44,8 @@ const Navbar = (props) => {
           />
         </NavLink>
       </div>
+      {/*burger menu for mobile screens -->*/}
+      <NavbarBurger menuLinks={props.menuLinks}/>
       <div className="Menu-links">
         {menuLinks}
       </div>

@@ -94,7 +94,7 @@ class AppRouter extends Component {
             <div className="App">
               
               <div className="App-mask" />
-              <Navbar menuLinks={this.props.menuLinks} language={this.props.language}/> //more="menuLinks"
+              <Navbar menuLinks={this.props.menuLinks} language={this.props.language}/> 
               <Search />
               
 

@@ -421,7 +421,12 @@ hr {
   }
    .Menu-burger-checkbox:checked ~ span:nth-last-child(2) {
       transform: rotate(-45deg) translate(0, -1px);
+      p {
+        opacity: 0;
+      }
   }
+
+
 
   span {
     display: block;
