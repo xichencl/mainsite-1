@@ -22,7 +22,7 @@ const Navbar = (props) => {
         activeClassName="Menu-link--active"
         className="Menu-link"
         exact
-        to={slug}>
+        to={`/${slug}`}>
         {title}
       </NavLink>
     )
