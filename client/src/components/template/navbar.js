@@ -27,6 +27,7 @@ const Navbar = (props) => {
       </NavLink>
     )
   })
+  //issue where menu links appending instead of taking over route when not on home page
 
   return (
     <div className="Menu">
