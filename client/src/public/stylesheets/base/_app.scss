@@ -349,6 +349,10 @@ hr {
   }
 }
 
+.Menu-logo:hover {
+  -webkit-font-smoothing: antialiased;
+}
+
 .Menu-links {
   display:none;
   @include lg {
