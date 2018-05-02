@@ -148,17 +148,12 @@ export function fetchFaqSubcategories(label) {
 }
 
 export function fetchStages() {
-  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`);
-  // console.log('fetch stages action')
-  // return {
-  //   type: FETCH_STAGES,
-  //   payload: request
-  // };
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&order=fields.order&locale=*`)
     .then((response) => {
-       const stages = response.data.items.map((stage) => ({titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.id['en-US'], url: stage.fields.url['en-US']}))
-                                         .sort((a, b) => a.id - b.id);
+      console.log('action fetchStages')
+       const stages = response.data.items.map((stage) => ({titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.order['en-US'], url: stage.fields.url['en-US']}))
+                                         .sort((a, b) => a.order - b.order);
        console.log("returned ordered stages: ", stages);
        dispatch({
          type: FETCH_STAGES,
@@ -189,12 +184,6 @@ export function fetchVideoLinks() {
 }
 
 export function fetchContentByParty(label, party) {
-  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt`);
-  // console.log('fetch stageContent action')
-  // return {
-  //   type: FETCH_CONTENT,
-  //   payload: request
-  // };
   console.log('fetch stageContent action')
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt&locale=*`)

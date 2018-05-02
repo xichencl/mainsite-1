@@ -89,7 +89,10 @@ class SmallClaimsParty extends Component {
         <div className="grid grid-pad">
 
           {renderedStages}
+        </div>
 
+        <TitleLine title="Additional Resources" />
+        <div className="grid grid-pad">  
           <TextIconBox 
         		boxTitle="Small Claims Checklist"
         		boxContent="Use our interactive checklist to help you manage your small claims case before you file, during your case, and after a judgement has been made."
@@ -101,7 +104,7 @@ class SmallClaimsParty extends Component {
       		/>
 
         	<InfoBox 
-        		boxTitle="Resources"
+        		boxTitle="Resource Links"
         		boxContent={resources}
         		buttonVisibilityClass="hidden"
         		infoboxClass="Box Info-box small-box col-2"
