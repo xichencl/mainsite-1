@@ -69,6 +69,7 @@ class SmallClaimsParty extends Component {
 
     const renderedStages = this.props.stages
     .map((stage) => {
+      console.log(stage.party['en-US'][0].sys.id, 'stage.party') // this prints ID
       return (
       <div  className="Square-box-container" key={stage.id}>
         <Link to={`${this.props.match.url}/${stage.url}`}>

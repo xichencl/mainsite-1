@@ -151,8 +151,8 @@ export function fetchStages() {
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&order=fields.order&locale=*`)
     .then((response) => {
-      console.log('action fetchStages')
-       const stages = response.data.items.map((stage) => ({titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.order['en-US'], url: stage.fields.url['en-US']}))
+      console.log('action fetchStages response', response)
+       const stages = response.data.items.map((stage) => ({party: stage.fields.party, titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.order['en-US'], url: stage.fields.url['en-US']}))
                                          .sort((a, b) => a.order - b.order);
        console.log("returned ordered stages: ", stages);
        dispatch({
