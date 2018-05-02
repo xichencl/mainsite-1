@@ -34,6 +34,9 @@ class SmallClaimsParty extends Component {
 
   }
 
+  filterStageButtons() {
+    
+  }
 	// onStageSelect(title, id, e) {
  //    e.stopPropagation();
  //    // when stage selected, store stageId in state
