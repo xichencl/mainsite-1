@@ -9,6 +9,7 @@ const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 const path = require('path');
+const nodemailer = require('../config/nodemailer.js');
 let ai, caseType;
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
@@ -198,7 +199,11 @@ exports.getWebhookResponse = (req, res)=>{
   };
 
 
-
+exports.emailChatlog = (req, res) => {
+  console.log("req body for chatlog", req.body.message);
+  nodemailer.sendMail(req.body.receipient, req.body.message);
+  res.send(`The chatlog has been sent to ${req.body.receipient}.`);
+};
 /*
 
 const Conversation = require('../models/conversation'),

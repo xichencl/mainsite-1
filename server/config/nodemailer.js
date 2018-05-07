@@ -2,15 +2,19 @@
 /*
 create a nodemailer transporter to send emails via office 365 smtp service
 */
+const { USER, PASS } = require('../../secret.env');
+
 const nodemailer = require('nodemailer');
+
+// console.log(user, pass);
 
 const smtpOptions = {
 	port: 587,
-	host: smtp.office365.com,
-	secure: true,
+	host: "smtp.office365.com",
+	secure: false,
 	auth: {
-		user: 'xchen@contracosta.courts.ca.gov',
-		password: '1750Lilly@' 
+		user: USER,
+		pass: PASS 
 	}
 };
 
@@ -23,7 +27,8 @@ exports.sendMail = (receipient, message) => {
 		from: '"Xi Chen" <xchen@contracosta.courts.ca.gov>',
 		to: receipient,
 		subject: message.subject,
-		text: message.text
+		text: message.text,
+		html: `<p>${message.text}</p>`
 	};
 	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
