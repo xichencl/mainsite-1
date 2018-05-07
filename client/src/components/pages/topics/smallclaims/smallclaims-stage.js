@@ -41,9 +41,13 @@ const partyIds = [
 // ]
 
 const stageIds = {
-   'before': '5iDqJ92Rzqksq88gYWawE4',
-   'during': '1cMyrIaZ680ukwwSi8YscC',
-   'after': '4HkTlYlsFqqIgscmGWOCkk'
+   'overview': '2rfORKm0KQe4K0uuEuoQci',
+   'filing-a-case': '5iDqJ92Rzqksq88gYWawE4',
+   'responding-to-a-claim': '60tEp7giyceYKSuaoIUgUy',
+   'day-in-court': '4HkTlYlsFqqIgscmGWOCkk',
+   'judges-decision': '1cMyrIaZ680ukwwSi8YscC',
+   'paying-a-judgement': '30KxWcbWQEwgMO8CKYmQCG',
+   'collecting-a-judgement': '2ucYI8L74Qs6mWag6aygCo'
   };
 
 // const stageTitleIdx = {
