@@ -3,6 +3,8 @@ import { FETCH_CATEGORIES } from './types'
 import { FETCH_PAGE } from './types'
 import { FETCH_PARTIES } from './types'
 import { FETCH_FORM_LAYOUT } from './types'
+import { FETCH_FOOTER_LAYOUT } from './types'
+import { FETCH_MENU_LINKS } from './types'
 import { FETCH_FORMS } from './types'
 import { FETCH_FAQS } from './types'
 import { FETCH_FAQ_LAYOUT } from './types'
@@ -146,17 +148,12 @@ export function fetchFaqSubcategories(label) {
 }
 
 export function fetchStages() {
-  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`);
-  // console.log('fetch stages action')
-  // return {
-  //   type: FETCH_STAGES,
-  //   payload: request
-  // };
   return function(dispatch){
-    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&locale=*`)
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stage&order=fields.order&locale=*`)
     .then((response) => {
-       const stages = response.data.items.map((stage) => ({titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.id['en-US'], url: stage.fields.url['en-US']}))
-                                         .sort((a, b) => a.id - b.id);
+      console.log('action fetchStages response', response)
+       const stages = response.data.items.map((stage) => ({partyLabel: stage.fields.partyLabel, party: stage.fields.party, titles: stage.fields.title, imageId: stage.fields.image['en-US'].sys.id, id: stage.fields.order['en-US'], url: stage.fields.url['en-US']}))
+                                         .sort((a, b) => a.order - b.order);
        console.log("returned ordered stages: ", stages);
        dispatch({
          type: FETCH_STAGES,
@@ -187,12 +184,6 @@ export function fetchVideoLinks() {
 }
 
 export function fetchContentByParty(label, party) {
-  // const request = axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt`);
-  // console.log('fetch stageContent action')
-  // return {
-  //   type: FETCH_CONTENT,
-  //   payload: request
-  // };
   console.log('fetch stageContent action')
   return function(dispatch){
     axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=stageContent&fields.label=${label}&fields.parties.sys.id=${party}&order=sys.createdAt&locale=*`)
@@ -256,6 +247,32 @@ export function fetchContactPage() {
         // console.log("2")
         dispatch({
           type: FETCH_CONTACT_LAYOUT,
+          payload: response
+        })
+      })
+      .catch((error) => console.log("err: ", error))
+    }
+}
+
+export function fetchMenuLinks() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=menuLink&order=fields.order&locale=*`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_MENU_LINKS,
+          payload: response
+        })
+      })
+      .catch((error) => console.log("err: ", error))
+    }
+}
+
+export function fetchFooter() {
+  return function(dispatch){
+    axios.get(`${API_BASE_URL}/spaces/${API_SPACE_ID}/entries?access_token=${API_TOKEN}&content_type=footer&locale=*`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_FOOTER_LAYOUT,
           payload: response
         })
       })

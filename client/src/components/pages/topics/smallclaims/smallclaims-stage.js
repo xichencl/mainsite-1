@@ -41,9 +41,13 @@ const partyIds = [
 // ]
 
 const stageIds = {
-   'before': '5iDqJ92Rzqksq88gYWawE4',
-   'during': '1cMyrIaZ680ukwwSi8YscC',
-   'after': '4HkTlYlsFqqIgscmGWOCkk'
+   'overview': '4ai240PycUw00eWUQqMwW4',
+   'filing-a-case': '5iDqJ92Rzqksq88gYWawE4',
+   'responding-to-a-claim': '60tEp7giyceYKSuaoIUgUy',
+   'day-in-court': '4HkTlYlsFqqIgscmGWOCkk',
+   'judges-decision': '1cMyrIaZ680ukwwSi8YscC',
+   'paying-a-judgement': '30KxWcbWQEwgMO8CKYmQCG',
+   'collecting-a-judgement': '2ucYI8L74Qs6mWag6aygCo'
   };
 
 // const stageTitleIdx = {
@@ -88,45 +92,6 @@ class SmallClaimsStage extends Component {
     }
 
   }
-
-  // componentWillUpdate() {
-
-  // }
-
-  // onStageSelect(title, _id, e) {
-  //   e.stopPropagation();
-  //   this.setState({
-  //     selectedStageId: _id, 
-  //     selectedStageTitle: title,
-  //     selectedContent: [] 
-  //   })
-  // }
-
-  // filterContent(content, findById, lang) {
-  //   let filledAry = [];
-  //   let emptyAry = [];
-  //   // filter content by party 
-  //   return content.tabs.reduce(function (acc, tab) {
-  //   // first reduce gets each tab 
-  //     const thisTab = tab;
-  //     console.log("tab", tab);
-  //     console.log("tabs-lang: ", tab.fields.stage[lang]);
-  //     // second reduce gets each tab's array of stages 
-  //     const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
-  //       // checks if ID is present in stage array
-  //       const tabStage = cat.sys.id.includes(findById);
-  //       console.log("tabstage: ", tabStage)
-  //       // if the ID matches, push the tab content to a new array
-  //       return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
-  //       // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
-  //     }, []); 
-  //     // console.log("7. filledAry", filledAry)
-  //     // pass content to AccordionBoxContainer as props
-  //     console.log("stageContent: ", filledAry);
-  //     return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
-
-  //   }, []);
-  // }
 
   renderMenuLinks(lang) {
 
@@ -190,3 +155,43 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SmallClaimsStage);
+
+
+  // componentWillUpdate() {
+
+  // }
+
+  // onStageSelect(title, _id, e) {
+  //   e.stopPropagation();
+  //   this.setState({
+  //     selectedStageId: _id, 
+  //     selectedStageTitle: title,
+  //     selectedContent: [] 
+  //   })
+  // }
+
+  // filterContent(content, findById, lang) {
+  //   let filledAry = [];
+  //   let emptyAry = [];
+  //   // filter content by party 
+  //   return content.tabs.reduce(function (acc, tab) {
+  //   // first reduce gets each tab 
+  //     const thisTab = tab;
+  //     console.log("tab", tab);
+  //     console.log("tabs-lang: ", tab.fields.stage[lang]);
+  //     // second reduce gets each tab's array of stages 
+  //     const aryTabs = tab.fields.stage[DEFAULT_LANG].reduce(function (acc, cat) {
+  //       // checks if ID is present in stage array
+  //       const tabStage = cat.sys.id.includes(findById);
+  //       console.log("tabstage: ", tabStage)
+  //       // if the ID matches, push the tab content to a new array
+  //       return !tabStage ? emptyAry.push(thisTab) : filledAry.push(thisTab)
+  //       // return !tabStage ? acc : acc.concat(Object.assign({}, cat, { tabStage }));
+  //     }, []); 
+  //     // console.log("7. filledAry", filledAry)
+  //     // pass content to AccordionBoxContainer as props
+  //     console.log("stageContent: ", filledAry);
+  //     return !filledAry.length ? <AccordionBoxContainer stageContent={null} /> : <AccordionBoxContainer stageContent={filledAry} />
+
+  //   }, []);
+  // }
