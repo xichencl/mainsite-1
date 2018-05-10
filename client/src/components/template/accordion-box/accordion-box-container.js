@@ -42,10 +42,9 @@ class AccordionBoxContainer extends Component {
 
 	  let renderedContent = [];
 
-    // yuck
+    // used to render videolinks
     if (this.props.type === 'links' && this.props.hasOwnProperty('itemField')) {
 
-      // also yuck
       renderedContent = Object.keys(this.props.stageContent)
       // .sort((a, b) => a.title > b.title)
       .map((contentKey) => {
@@ -62,7 +61,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+            <div className={this.state.activeId == tab.id ? " ": "hidden"}> {/*&& this.state.pressed == true */}
               <div className="Accordion-box-content">
                 {
                   Object.keys(links).map((linkKey) => {
@@ -120,7 +119,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-  					<div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+  					<div className={this.state.activeId == tab.id ? " ": "hidden"}> 
   						<div className="Accordion-box-content">
   							<ReactMarkdown source={tab.blockTexts[lang]} />
 
