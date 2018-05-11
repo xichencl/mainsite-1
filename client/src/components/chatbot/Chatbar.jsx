@@ -2,6 +2,8 @@ import React from 'react';
 import { connect, dispatch } from 'react-redux';
 
 import axios from 'axios';
+
+const spawn = require('child_process').spawn;
 // import ChatButton from './ChatButton.jsx';
 
 // import and set up SpeechRecognition object
@@ -134,6 +136,7 @@ const mapDispatchToProps = (dispatch) => {
       type: 'USER_INPUT',
       payload: data,
     });
+
 
     const inputData = { payload: data, id: sessionId };
     if (!caseTypeSelected) {
@@ -362,8 +365,12 @@ const mapDispatchToProps = (dispatch) => {
           if (!userInput || /^\s*$/.test(userInput)) {
             return;
           }
-          const data = { message: userInput, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, speak, this.props.ai.selected);
+          let queries = processData(userInput);
+          queries.forEach((q) => {
+            const data = { message: q, type: 'text', isBot: false };
+            postAndDispatch(data, this.props.sessionId, speak, this.props.ai.selected);
+          });
+          
           recognition.stop();
         };
 
@@ -394,7 +401,11 @@ const mapDispatchToProps = (dispatch) => {
         // clears textbox
         this.textInput.value = '';
         console.log('message:', data);
-        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
+        let queries = processData(userInput);
+        queries.forEach((q) => {
+          const data = { message: q, type: 'text', isBot: false };
+          postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
+        });
       }
     },
     onKeyUp(event) {
@@ -411,10 +422,36 @@ const mapDispatchToProps = (dispatch) => {
         // clear input bar
         this.textInput.value = '';
 
-        postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
+        let queries = processData(userInput);
+        queries.forEach((q) => {
+          const data = { message: q, type: 'text', isBot: false };
+          postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
+        });
       }
     },
   };
+};
+
+const processData = (msg) => {
+  let queries = [];
+  if (msg.length > 30){    
+    //further processing
+    console.log("string is longer than 30 chars")
+    const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), msg]);
+    pythonProcess.stdout.on('data', function(data){
+      // console.log("buffer received: ", data);
+      data = JSON.parse(data.toString('utf-8'));
+      // console.log("data received: ", data);
+      queries.push( ...data );
+      console.log(queries);
+      if (queries.length == 0){
+        queries.push(msg);
+      }
+    });
+  }else{
+    queries.push(msg);
+  }
+  return queries;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatbar);

@@ -10,6 +10,9 @@ const fs = require('fs');
 const opn = require('opn');
 const path = require('path');
 const nodemailer = require('../config/nodemailer.js');
+// const natural = require('natural');
+const spawn = require('child_process').spawn;
+
 let ai, caseType;
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
@@ -47,7 +50,7 @@ exports.selectCaseType = (req, res, callback) => {
 
 
 
-exports.getMessageResponse = (req, res) => {
+exports.getMessageResponse = (req, res) => 
       {
         // console.log('/message', req.body);
         //to launch a webpage in user default browser
@@ -95,24 +98,68 @@ exports.getMessageResponse = (req, res) => {
         }
         //send text request to api.ai 
         else if (req.body.payload.type=='text'){
-          const request_to_ai = ai.textRequest(req.body.payload.message, options);
-          request_to_ai.on('response', (response_from_ai)=>{
-            // console.log('Response:', response_from_ai);
-            const code = response_from_ai.status.code;
-            response_from_ai['caseType'] = caseType;
-            res.writeHead(code);
-            if (code == 200){
-              //send response object form api.ai to front end
-              res.write(JSON.stringify(response_from_ai));
-            }   
-            res.end();
-          });
-          request_to_ai.on('error', (error)=> {
-            console.error("Error:", error)
-          } );
-          request_to_ai.end();
-          
+           
+          const msg = req.body.payload.message;
+          // let queries = [];
+          // if (msg.length > 30){
+          //   //further processing
+          //   console.log("string is longer than 30 chars")
+          //   const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), msg]);
+          //   pythonProcess.stdout.on('data', function(data){
+          //     // console.log("buffer received: ", data);
+          //     data = JSON.parse(data.toString('utf-8'));
+          //     // console.log("data received: ", data);
+          //     queries.push( ...data );
+          //     console.log(queries);
+          //     if (queries.length == 0){
+          //       queries.push(msg);
+          //     }
+              
+          //     queries.map(message => {
+          //       const request_to_ai = ai.textRequest(message, options);
+          //       request_to_ai.on('response', (response_from_ai)=>{
+          //         console.log('Response:', response_from_ai);
+          //         const code = response_from_ai.status.code;
+          //         response_from_ai['caseType'] = caseType;
+                  
+          //         res.writeHead(code);
+          //         if (code == 200){
+          //           //send response object form api.ai to front end
+          //           res.send(JSON.stringify(response_from_ai));
+          //         }   
+          //       });
+          //       request_to_ai.on('error', (error)=> {
+          //         console.error("Error:", error)
+          //       } );
+          //       request_to_ai.end();
+          //     });
+              
+          //   });
+          // } else {
+
+            //when message is less than 30 chars long, send directly to dialogflow
+            const request_to_ai = ai.textRequest(msg, options);
+            request_to_ai.on('response', (response_from_ai)=>{
+              // console.log('Response:', response_from_ai);
+              const code = response_from_ai.status.code;
+              response_from_ai['caseType'] = caseType;
+              res.writeHead(code);
+              if (code == 200){
+                //send response object form api.ai to front end
+                res.write(JSON.stringify(response_from_ai));
+              }   
+              res.end();
+            });
+            request_to_ai.on('error', (error)=> {
+              console.error("Error:", error)
+            } );
+            request_to_ai.end();
+          // }
+            
         }
+
+          
+      
         //send voice request to api.ai
         // else{
         //   const request_to_ai = ai.voiceRequest(options);
@@ -142,8 +189,8 @@ exports.getMessageResponse = (req, res) => {
           
         // }
 
-      }
-    };
+     }; 
+  
 
 
 exports.getWebhookResponse = (req, res)=>{
