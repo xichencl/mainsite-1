@@ -15,8 +15,11 @@ import { FETCH_RESOURCE_LINKS } from '../actions/types';
 import { FETCH_STAGES } from '../actions/types';
 import { FETCH_VIDEOS } from '../actions/types';
 import { FETCH_VIDEO_LINKS } from '../actions/types';
+import { FETCH_VIDEO_CATEGORIES } from '../actions/types';
 
 import { STORE_STAGE_ID } from '../actions/types';
+
+const has = require('has-own-property-x');
 
 const INITIAL_STATE = { 
   categories: [],
@@ -35,9 +38,10 @@ const INITIAL_STATE = {
   footer: [],
   menuLinks: [],
   tabs: [], 
-  videos: [],
+  videos: {},
   videoURLs: {},
   videoLinks: {},
+  videoCategories: {},
   stageId: [],
   language: 'en-US'
 };
@@ -72,8 +76,64 @@ export default function(state = INITIAL_STATE, action) {
     return { ...state, tabs: action.payload };
   case FETCH_STAGES:
     return { ...state, stages: action.payload };
+  
+  case FETCH_VIDEO_CATEGORIES: {
+    const videos = { ...state.videos };
+    const videoCategories = {};
+
+    let items = action.payload.data.items;
+
+    items.sort((a, b) => {
+      if (a.fields.categoryId > b.fields.categoryId) {
+        return 1;
+      }
+
+      if (a.fields.categoryId < b.fields.categoryId) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const id = item.sys.id;
+      const categoryId = item.fields.categoryId;
+      const categoryTitle = item.fields.categoryTitle;
+
+      if (!has(videoCategories, item.fields.categoryId)) {
+        videoCategories[categoryId] = {
+          id: categoryId,
+          title: categoryTitle,
+          subcategories: {}
+        };
+      }
+
+      const subcategories = videoCategories[categoryId].subcategories;
+
+      subcategories[id] = {
+        id,
+        title: item.fields.title,
+        categoryId: item.fields.categoryId,
+        categoryTitle: item.fields.categoryTitle,
+      };
+
+      if (!has(videos, id)) {
+        videos[id] = {
+          id,
+          videos: {}
+        };
+      }
+
+      const subcategory = { ...videos[id], title: item.fields.title };
+      videos[id] = subcategory;
+    }
+
+    return { ...state, videoCategories, videos };
+  }
+
   case FETCH_VIDEOS: {
-    const videos = {};
+    const videos = { ...state.videos };
     const videoURLs = {};
 
     const assets = action.payload.data.includes.Asset;
@@ -99,38 +159,27 @@ export default function(state = INITIAL_STATE, action) {
 
       const item = items[i];
       const title = item.fields.title;
-      const category = item.fields.categoryId;
-      const subcategory = item.fields.subcategoryId;
+      const subcategoryId = item.fields.subcategory.sys.id;
       
-      videoURLs[asset.fields.title.toUpperCase()] = url;
+      videoURLs[asset.fields.title] = url;
 
-      if (!videos.hasOwnProperty(category)) {
-        videos[category] = {
-          id: item.fields.categoryId,
-          title: item.fields.categoryTitle,
-
-          subcategories: {
-            [subcategory]: {
-              id: item.fields.subcategoryId,
-              title: item.fields.subcategoryTitle,
-              videos: {},
-            }
-          }
-        };
-      }
-
-      const categoryObj = videos[category];
-
-      if (!categoryObj.subcategories.hasOwnProperty(subcategory)) {
-        categoryObj.subcategories[subcategory] = {
-          id: item.fields.subcategoryId,
-          title: item.fields.subcategoryTitle,
+      if (!has(videos, subcategoryId)) {
+        videos[subcategoryId] = {
+          id: subcategoryId,
+          title: '',
           videos: {}
         };
       }
 
-      const subcategoryObj = categoryObj.subcategories[subcategory];
-      subcategoryObj.videos[item.sys.id] = { id: item.sys.id, linkTo: title, title };
+      const subcategory = videos[subcategoryId];
+
+      subcategory.videos[item.sys.id] = {
+        id: item.sys.id,
+        linkTo: asset.fields.title,
+        subcategory: subcategoryId,
+        url,
+        title,
+      };
     }
 
     return { ...state, videos, videoURLs };
@@ -155,7 +204,7 @@ export default function(state = INITIAL_STATE, action) {
       const item = items[i];
       const categoryId = item.fields.categoryId;
 
-      if (!videoLinks.hasOwnProperty(categoryId)) {
+      if (!has(videoLinks, categoryId)) {
         videoLinks[categoryId] = {
           id: categoryId,
           title: item.fields.categoryTitle,
