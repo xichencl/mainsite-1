@@ -6,9 +6,12 @@ def main():
 	msg = sys.argv[1]
 	# print(msg)
 	sents = sent_tokenize(msg)
-	queries = [s for s in sents if s.endswith('?')]
-	# if len(queries) == 0:
-	print(queries)
+	queryStr = ''
+	for s in sents:		
+		if s.endswith('?'):
+			queryStr += s + '###'
+
+	print(queryStr[: -3])
 	sys.stdout.flush()  
 
 if __name__ == '__main__':

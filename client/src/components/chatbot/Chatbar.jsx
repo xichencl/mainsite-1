@@ -3,7 +3,7 @@ import { connect, dispatch } from 'react-redux';
 
 import axios from 'axios';
 
-const spawn = require('child_process').spawn;
+// const spawn = require('child_process').spawn;
 // import ChatButton from './ChatButton.jsx';
 
 // import and set up SpeechRecognition object
@@ -127,11 +127,8 @@ const mapDispatchToProps = (dispatch) => {
   // send post requests to api.ai, process response, and dispatch action to reducers
 
   const postAndDispatch = function (data, sessionId, speak, caseTypeSelected) {
-    console.log('SESSIONID: ', sessionId);
-    dispatch({
-      type: 'CHAT_ADD_MESSAGE',
-      payload: data,
-    });
+    console.log('SESSIONID: ', sessionId);    
+    //store user input
     dispatch({
       type: 'USER_INPUT',
       payload: data,
@@ -305,6 +302,28 @@ const mapDispatchToProps = (dispatch) => {
     synth.speak(utt);
   };
 
+  const processAndSendRequest = (data, sessionId, speak, ai) => {
+    if (data.message.length > 40){
+          //process at the back end
+          axios.post('/api/chat/process', {userInput: data.message})
+          .then((response) => {
+            if (response.data.length > 0){ //detected questions
+              response.data.forEach((query) => {
+                if (query.length > 0){
+                  //send to dialogflow
+                  postAndDispatch({message: query, type: 'text', isBot: false}, sessionId, speak, ai);
+                }
+              });
+            }else{ //no question detected
+              postAndDispatch(data, sessionId, speak, ai);
+            }
+          })
+          .catch((err) => console.log("error: ", err));
+        }else{ //shorter than 40 chars
+          postAndDispatch(data, sessionId, speak, ai);
+        }
+  }
+
   return {
     // controls onclick events on buttons in chatbar
     onClick(event) {
@@ -365,11 +384,12 @@ const mapDispatchToProps = (dispatch) => {
           if (!userInput || /^\s*$/.test(userInput)) {
             return;
           }
-          let queries = processData(userInput);
-          queries.forEach((q) => {
-            const data = { message: q, type: 'text', isBot: false };
-            postAndDispatch(data, this.props.sessionId, speak, this.props.ai.selected);
+          const data = { message: userInput, type: 'text', isBot: false };
+          dispatch({ 
+            type: 'CHAT_ADD_MESSAGE',
+            payload: data
           });
+          processAndSendRequest(data, this.props.sessionId, null, this.props.ai.selected);
           
           recognition.stop();
         };
@@ -398,14 +418,16 @@ const mapDispatchToProps = (dispatch) => {
           type: 'text',
           isBot: false,
         };
+        dispatch({ 
+          type: 'CHAT_ADD_MESSAGE',
+          payload: data
+        });
+
         // clears textbox
         this.textInput.value = '';
-        console.log('message:', data);
-        let queries = processData(userInput);
-        queries.forEach((q) => {
-          const data = { message: q, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
-        });
+        // console.log('message:', data);
+        processAndSendRequest(data, this.props.sessionId, null, this.props.ai.selected);
+        
       }
     },
     onKeyUp(event) {
@@ -419,39 +441,45 @@ const mapDispatchToProps = (dispatch) => {
           return;
         }
         const data = { message: userInput, type: 'text', isBot: false };
+        dispatch({ 
+          type: 'CHAT_ADD_MESSAGE',
+          payload: data
+        });
         // clear input bar
         this.textInput.value = '';
-
-        let queries = processData(userInput);
-        queries.forEach((q) => {
-          const data = { message: q, type: 'text', isBot: false };
-          postAndDispatch(data, this.props.sessionId, null, this.props.ai.selected);
-        });
+        processAndSendRequest(data, this.props.sessionId, null, this.props.ai.selected);
       }
     },
   };
 };
 
-const processData = (msg) => {
-  let queries = [];
-  if (msg.length > 30){    
-    //further processing
-    console.log("string is longer than 30 chars")
-    const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), msg]);
-    pythonProcess.stdout.on('data', function(data){
-      // console.log("buffer received: ", data);
-      data = JSON.parse(data.toString('utf-8'));
-      // console.log("data received: ", data);
-      queries.push( ...data );
-      console.log(queries);
-      if (queries.length == 0){
-        queries.push(msg);
-      }
-    });
-  }else{
-    queries.push(msg);
-  }
-  return queries;
-};
+// const processData = (msg) => {
+//   let queries = [];
+//   // if (msg.length > 30){    
+//     //further processing
+//     console.log("string is longer than 30 chars");
+//     axios.post('/api/chat/process', {query: msg})
+//     .then((response) => {
+//       response.data.forEach(
+//         (d) => postAndDispatch({});
+//         );
+//     })
+//     .catch((error) => console.log("error: ", error));
+//     // const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), msg]);
+//     // pythonProcess.stdout.on('data', function(data){
+//     //   // console.log("buffer received: ", data);
+//     //   data = JSON.parse(data.toString('utf-8'));
+//     //   // console.log("data received: ", data);
+//     //   queries.push( ...data );
+//     //   console.log(queries);
+//     //   if (queries.length == 0){
+//     //     queries.push(msg);
+//     //   }
+//     // });
+//   // }else{
+//   //   queries.push(msg);
+//   // }
+//   // return queries;
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatbar);

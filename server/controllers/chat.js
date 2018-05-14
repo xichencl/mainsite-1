@@ -100,44 +100,6 @@ exports.getMessageResponse = (req, res) =>
         else if (req.body.payload.type=='text'){
            
           const msg = req.body.payload.message;
-          // let queries = [];
-          // if (msg.length > 30){
-          //   //further processing
-          //   console.log("string is longer than 30 chars")
-          //   const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), msg]);
-          //   pythonProcess.stdout.on('data', function(data){
-          //     // console.log("buffer received: ", data);
-          //     data = JSON.parse(data.toString('utf-8'));
-          //     // console.log("data received: ", data);
-          //     queries.push( ...data );
-          //     console.log(queries);
-          //     if (queries.length == 0){
-          //       queries.push(msg);
-          //     }
-              
-          //     queries.map(message => {
-          //       const request_to_ai = ai.textRequest(message, options);
-          //       request_to_ai.on('response', (response_from_ai)=>{
-          //         console.log('Response:', response_from_ai);
-          //         const code = response_from_ai.status.code;
-          //         response_from_ai['caseType'] = caseType;
-                  
-          //         res.writeHead(code);
-          //         if (code == 200){
-          //           //send response object form api.ai to front end
-          //           res.send(JSON.stringify(response_from_ai));
-          //         }   
-          //       });
-          //       request_to_ai.on('error', (error)=> {
-          //         console.error("Error:", error)
-          //       } );
-          //       request_to_ai.end();
-          //     });
-              
-          //   });
-          // } else {
-
-            //when message is less than 30 chars long, send directly to dialogflow
             const request_to_ai = ai.textRequest(msg, options);
             request_to_ai.on('response', (response_from_ai)=>{
               // console.log('Response:', response_from_ai);
@@ -154,7 +116,6 @@ exports.getMessageResponse = (req, res) =>
               console.error("Error:", error)
             } );
             request_to_ai.end();
-          // }
             
         }
 
@@ -245,6 +206,17 @@ exports.getWebhookResponse = (req, res)=>{
     
   };
 
+
+exports.processQueries = (req, res) => {
+  // console.log("Request: ", req.body.userInput);
+  let queries = [];
+  console.log("process user input")
+  const pythonProcess = spawn('python', [path.join(__dirname, '../nlp-ml.py'), req.body.userInput]);
+  pythonProcess.stdout.on('data', function(data){
+     queries.push(...data.toString('utf-8').trim().split('###'));
+     res.send(JSON.stringify(queries));
+  });
+};
 
 exports.emailChatlog = (req, res) => {
   console.log("req body for chatlog", req.body.message);

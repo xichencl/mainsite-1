@@ -109,6 +109,8 @@ module.exports = function (app) {
   chatRoutes.post('/webhook', (req, res) => {ChatController.getWebhookResponse(req, res)});
 
   chatRoutes.post('/email', (req, res) => {ChatController.emailChatlog(req, res)});
+
+  chatRoutes.post('/process', (req, res) => {ChatController.processQueries(req, res)});
 /*
   // Set chat routes as a subgroup/middleware to apiRoutes
   apiRoutes.use('/chat', chatRoutes);
