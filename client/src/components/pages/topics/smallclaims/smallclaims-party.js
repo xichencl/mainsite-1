@@ -155,7 +155,7 @@ class SmallClaimsParty extends Component {
 
         </div>
 
-        <TitleLine title="Additional Resources" />
+        <TitleLine title="More Resources" />
         <div className="grid grid-pad">  
           <TextIconBox 
         		boxTitle="Small Claims Checklist"
