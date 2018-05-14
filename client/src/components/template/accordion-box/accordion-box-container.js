@@ -61,7 +61,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-            <div className={this.state.activeId == tab.id ? " ": "hidden"}> {/*&& this.state.pressed == true */}
+            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> {/*&& this.state.pressed == true */}
               <div className="Accordion-box-content">
                 {
                   Object.keys(links).map((linkKey) => {
@@ -99,6 +99,7 @@ class AccordionBoxContainer extends Component {
         )
       })
     }
+    // used to render non-videoLink stageContent
     else {
       const lang = this.props.language;
     //   renderedContent = renderedContent.concat(this.props.stageContent)
@@ -111,7 +112,7 @@ class AccordionBoxContainer extends Component {
         // console.log("tab: ", tab);	
         return (
   				<div className="Accordion-box-item " key={tab.id}>
-  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
               {tab.titles[lang]}
 
               <span className="Accordion-box-icon">
@@ -119,7 +120,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-  					<div className={this.state.activeId == tab.id ? " ": "hidden"}> 
+  					<div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
   						<div className="Accordion-box-content">
   							<ReactMarkdown source={tab.blockTexts[lang]} />
 
