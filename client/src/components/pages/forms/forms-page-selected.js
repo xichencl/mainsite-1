@@ -37,10 +37,19 @@ class FormsPageSelected extends Component {
 	}
 
 	toggleClass(id) {
-		this.setState({ 
-			activeId: id,
-			pressed: !this.state.pressed 
-		});
+    if (this.state.activeId === id) {
+      console.log(id, 'selected id')
+      this.setState({ 
+        activeId: id,
+        pressed: !this.state.pressed 
+      });
+    } else {
+      this.setState({ 
+        activeId: id,
+        pressed: true 
+      });
+    } 
+		//console.log(this.state, 'print this.state for toggleClass')
   }
 
 
@@ -70,9 +79,8 @@ class FormsPageSelected extends Component {
 		const renderedContent = this.props.forms.map((form) => {
 			return (
 				<div className="Accordion-box-item " key={form.fields.id[lang]} >
-				
 
-					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
             {form.fields.title[lang]}
             <span className="Accordion-box-icon">
               {this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}
@@ -85,17 +93,13 @@ class FormsPageSelected extends Component {
 						</div>
 					</div>
 				
-					
 					<hr className="Accordion-box-line" />
 				</div>
-
-
 			)    
 		})
 			
 		const currentPageName = this.props.match.params.page
 		return (
-
 			<div>
 				<TitleLine title={pageNames[currentPageName]} />
 				{this.renderBreadcrumbs(this.props.language)}
