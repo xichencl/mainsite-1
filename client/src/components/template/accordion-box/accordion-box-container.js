@@ -12,7 +12,7 @@ class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeId: 0,
+			activeId: null,
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
@@ -20,12 +20,29 @@ class AccordionBoxContainer extends Component {
 	}
 
 	toggleClass(id) {
-		this.setState({ 
-			activeId: id,
-			pressed: !this.state.pressed 
-		});
-		// console.log(this.state, 'print this.state for toggleClass')
+    // this.setState({
+    //   activeId: id,
+    //   pressed: !this.state.pressed
+    // })
+    if (this.state.activeId === id) {
+      console.log(id, 'selected id')
+      this.setState({ 
+        activeId: id,
+        pressed: !this.state.pressed 
+      });
+    } else {
+      this.setState({ 
+        activeId: id,
+        pressed: true 
+      });
+    } 
+
+		
+		console.log(this.state, 'print this.state for toggleClass')
   }
+
+  // when the active id is pressed, need to have it display open the box that is clicked... 
+  // so should I store the class in the state?
 
   componentWillMount() {
   	// console.log("Next Page: this.props.stageContent", this.props.stageContent)
@@ -129,10 +146,9 @@ class AccordionBoxContainer extends Component {
   						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
   						*/}					
 
-
   					</div>
   					<hr className="Accordion-box-line" />
-  				</div>
+  				</div> 
   			)
   		})
     }
