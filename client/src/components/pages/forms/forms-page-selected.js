@@ -79,7 +79,6 @@ class FormsPageSelected extends Component {
 		const renderedContent = this.props.forms.map((form) => {
 			return (
 				<div className="Accordion-box-item " key={form.fields.id[lang]} >
-				
 
 					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
             {form.fields.title[lang]}
@@ -94,17 +93,13 @@ class FormsPageSelected extends Component {
 						</div>
 					</div>
 				
-					
 					<hr className="Accordion-box-line" />
 				</div>
-
-
 			)    
 		})
 			
 		const currentPageName = this.props.match.params.page
 		return (
-
 			<div>
 				<TitleLine title={pageNames[currentPageName]} />
 				{this.renderBreadcrumbs(this.props.language)}

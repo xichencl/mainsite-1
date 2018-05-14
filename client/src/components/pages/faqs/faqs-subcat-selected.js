@@ -85,7 +85,6 @@ class FaqsSelectedSubcategory extends Component {
 		const renderedContent = this.props.faqs.map((faq) => {
 			return (
 				<div className="Accordion-box-item " key={faq.fields.id["en-US"]} >
-				
 
 					<h3 onClick={() => this.toggleClass(faq.fields.id["en-US"])} className={this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
             {faq.fields.title[lang]}
@@ -100,11 +99,8 @@ class FaqsSelectedSubcategory extends Component {
 						</div>
 					</div>
 				
-					
 					<hr className="Accordion-box-line" />
 				</div>
-
-
 			)    
 		})
 			

@@ -34,14 +34,8 @@ class SmallClaimsParty extends Component {
 
   }
 
-  filterStageButtons() {
-    
+  filterStageButtons() {  
   }
-	// onStageSelect(title, id, e) {
-  //    e.stopPropagation();
-  //    // when stage selected, store stageId in state
-  //    this.props.storeStageId(title, id);
-	// }
 
 	render() {
     const lang = this.props.language;
@@ -54,80 +48,10 @@ class SmallClaimsParty extends Component {
 			)
 		})
 
-    // const renderedStages = [].concat(this.props.content)
-    // .sort((a, b) => a.fields.id[DEFAULT_LANG] - b.fields.id[DEFAULT_LANG])
-    // .map((stage) => {
-    //   return (
-    //   <div  className="Square-box-container" onClick={(e) => this.onStageSelect(stage.fields.title[lang], stage.sys.id, e)} key={stage.sys.id}>
-    //     <Link to={`${this.props.match.url}/${stage.fields.url[DEFAULT_LANG]}`}>
-    //       <SquareBox
-    //         id={stage.sys.id}
-    //         boxTitle={stage.fields.title[lang]}
-    //         assetId={stage.fields.image[DEFAULT_LANG].sys.id}
-    //       />
-    //     </Link>
-    //   </div> 
-    //   )
-    // })
-
-    // plaintiff id 2zYmskK1EUW22uukow4CaU
-    // defendant id mI8A9AawXACAmYEmSyU0g
-
     const partyIds = {
       plaintiff: '2zYmskK1EUW22uukow4CaU',
       defendant: 'mI8A9AawXACAmYEmSyU0g'
     }
-    // const renderedStages = this.props.stages
-    // .map((stage) => {
-    //   console.log(stage.party['en-US'][0].sys.id, 'stage.party') // this prints ID
-    //   if (stage.party['en-US'][0].sys.id == partyIds.plaintiff) {
-    //     return (
-    //       <div  className="Square-box-container" key={stage.id}>
-    //         <Link to={`${this.props.match.url}/${stage.url}`}>
-    //           <SquareBox
-    //             id={stage.id}
-    //             boxTitle={stage.titles[lang]}
-    //             assetId={stage.imageId}
-    //           />
-    //         </Link>
-    //       </div> 
-    //     )
-    //   }
-    //   else {
-    //     return (
-    //       <div  className="Square-box-container" key={stage.id}>
-    //         <Link to={`${this.props.match.url}/${stage.url}`}>
-    //           <SquareBox
-    //             id={stage.id}
-    //             boxTitle={stage.titles[lang]}
-    //             assetId={stage.imageId}
-    //           />
-    //         </Link>
-    //       </div> 
-    //     )
-    //   } 
-      // return (
-      // <div  className="Square-box-container" key={stage.id}>
-      //   <Link to={`${this.props.match.url}/${stage.url}`}>
-      //     <SquareBox
-      //       id={stage.id}
-      //       boxTitle={stage.titles[lang]}
-      //       assetId={stage.imageId}
-      //     />
-      //   </Link>
-      // </div> 
-      // )
-    //})
-
-    // const findSinglePartyStages = this.props.stages
-    // .filter((stage) => {
-    //   //console.log(currentParty, 'currentParty======')
-    //   if (stage.party['en-US'].length === 1) {
-    //     if (stage.party['en-US'][0].sys.id == partyIds.currentParty) {
-    //       return stage
-    //     }
-    //   }
-    // })
 
     const renderedStages = this.props.stages.map((stage) => {
       const currentParty = this.props.match.params.party;
@@ -150,9 +74,7 @@ class SmallClaimsParty extends Component {
         <Bot />
   			<TitleLine title="Small Claims" />
         <div className="grid grid-pad">
-
           {renderedStages}
-
         </div>
 
         <TitleLine title="More Resources" />
@@ -166,7 +88,6 @@ class SmallClaimsParty extends Component {
             caseType='smallClaims'
             party={this.props.match.params.party}
       		/>
-
         	<InfoBox 
         		boxTitle="Resource Links"
         		boxContent={resources}
