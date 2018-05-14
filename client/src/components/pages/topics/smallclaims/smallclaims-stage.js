@@ -54,7 +54,7 @@ const stageIds = {
 //   'before': 0,
 //   'during': 1,
 //   'after': 2
-// };
+// }; 
 
 class SmallClaimsStage extends Component {
   constructor(props) {
@@ -63,7 +63,7 @@ class SmallClaimsStage extends Component {
       // selectedStageId: this.props.stageId.id,
       // selectedStageTitle: this.props.stageId.title,
       // selectedContent: [],
-      selectedParty: '',
+      selectedParty: '',  
     }
     this.renderMenuLinks = this.renderMenuLinks.bind(this)
     // this.filterContent = this.filterContent.bind(this)
@@ -71,7 +71,7 @@ class SmallClaimsStage extends Component {
     this.toUpperCase = this.toUpperCase.bind(this);
   }
   componentWillMount() {
-    // before component mounts, load content by selected party
+    // before component mounts, load content by selected party 
     let _partyId;
     // check if params.party matches the partyId[x].name
     if (this.props.match.params.party === partyIds[0].name) {
@@ -118,7 +118,7 @@ class SmallClaimsStage extends Component {
     return this.props.stages.length !== 0 && this.props.stageContent.length !== 0 && (
       <div>
         <Bot />
-        <div className="Stage-top-bar">
+        {/*<div className="Stage-top-bar">
           <div className="breadcrumbs">
             <Link to="/">Home</Link>
             <span className="breadcrumbs-chevron">></span>
@@ -129,7 +129,7 @@ class SmallClaimsStage extends Component {
           <div className="Stage-menu">
             {this.renderMenuLinks(this.props.language)}
           </div>
-        </div>
+        </div>*/}
       {/* place holder, need to work out how to display the title w/out relying on redux store */}
         <TitleLine title={this.props.stages.find(stage => stage.url === this.props.match.params.stage).titles[this.props.language]} />
         {/*this.filterContent(this.props.content, this.state.selectedStageId, this.props.language)*/}
