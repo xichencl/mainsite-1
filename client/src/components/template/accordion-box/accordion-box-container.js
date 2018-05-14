@@ -20,10 +20,6 @@ class AccordionBoxContainer extends Component {
 	}
 
 	toggleClass(id) {
-    // this.setState({
-    //   activeId: id,
-    //   pressed: !this.state.pressed
-    // })
     if (this.state.activeId === id) {
       console.log(id, 'selected id')
       this.setState({ 
@@ -36,9 +32,7 @@ class AccordionBoxContainer extends Component {
         pressed: true 
       });
     } 
-
-		
-		console.log(this.state, 'print this.state for toggleClass')
+		//console.log(this.state, 'print this.state for toggleClass')
   }
 
   // when the active id is pressed, need to have it display open the box that is clicked... 
@@ -70,7 +64,7 @@ class AccordionBoxContainer extends Component {
 
         return (
           <div className="Accordion-box-item " key={uuid()}>
-            <h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+            <h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
               {tab.title}
 
               <span className="Accordion-box-icon">

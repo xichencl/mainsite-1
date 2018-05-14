@@ -37,10 +37,19 @@ class FormsPageSelected extends Component {
 	}
 
 	toggleClass(id) {
-		this.setState({ 
-			activeId: id,
-			pressed: !this.state.pressed 
-		});
+    if (this.state.activeId === id) {
+      console.log(id, 'selected id')
+      this.setState({ 
+        activeId: id,
+        pressed: !this.state.pressed 
+      });
+    } else {
+      this.setState({ 
+        activeId: id,
+        pressed: true 
+      });
+    } 
+		//console.log(this.state, 'print this.state for toggleClass')
   }
 
 
@@ -72,7 +81,7 @@ class FormsPageSelected extends Component {
 				<div className="Accordion-box-item " key={form.fields.id[lang]} >
 				
 
-					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(form.fields.id["en-US"])} className={this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
             {form.fields.title[lang]}
             <span className="Accordion-box-icon">
               {this.state.activeId == form.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}

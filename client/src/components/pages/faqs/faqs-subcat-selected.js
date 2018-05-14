@@ -28,10 +28,19 @@ class FaqsSelectedSubcategory extends Component {
 	}
 
 	toggleClass(id) {
-		this.setState({ 
-			activeId: id,
-			pressed: !this.state.pressed 
-		});
+    if (this.state.activeId === id) {
+      console.log(id, 'selected id')
+      this.setState({ 
+        activeId: id,
+        pressed: !this.state.pressed 
+      });
+    } else {
+      this.setState({ 
+        activeId: id,
+        pressed: true 
+      });
+    } 
+		//console.log(this.state, 'print this.state for toggleClass')
   }
 
 
@@ -78,7 +87,7 @@ class FaqsSelectedSubcategory extends Component {
 				<div className="Accordion-box-item " key={faq.fields.id["en-US"]} >
 				
 
-					<h3 onClick={() => this.toggleClass(faq.fields.id["en-US"])} className={this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "blue-font": " "} >
+					<h3 onClick={() => this.toggleClass(faq.fields.id["en-US"])} className={this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
             {faq.fields.title[lang]}
             <span className="Accordion-box-icon">
               {this.state.activeId == faq.fields.id["en-US"] && this.state.pressed == true ? "-" : "+"}
