@@ -12,7 +12,7 @@ class AccordionBoxContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeId: 0,
+			activeId: null,
 			pressed: false
 		}
 		this.toggleClass = this.toggleClass.bind(this);
@@ -20,12 +20,23 @@ class AccordionBoxContainer extends Component {
 	}
 
 	toggleClass(id) {
-		this.setState({ 
-			activeId: id,
-			pressed: !this.state.pressed 
-		});
-		// console.log(this.state, 'print this.state for toggleClass')
+    if (this.state.activeId === id) {
+      console.log(id, 'selected id')
+      this.setState({ 
+        activeId: id,
+        pressed: !this.state.pressed 
+      });
+    } else {
+      this.setState({ 
+        activeId: id,
+        pressed: true 
+      });
+    } 
+		//console.log(this.state, 'print this.state for toggleClass')
   }
+
+  // when the active id is pressed, need to have it display open the box that is clicked... 
+  // so should I store the class in the state?
 
   componentWillMount() {
   	// console.log("Next Page: this.props.stageContent", this.props.stageContent)
@@ -42,10 +53,9 @@ class AccordionBoxContainer extends Component {
 
 	  let renderedContent = [];
 
-    // yuck
+    // used to render videolinks
     if (this.props.type === 'links' && this.props.hasOwnProperty('itemField')) {
 
-      // also yuck
       renderedContent = Object.keys(this.props.stageContent)
       // .sort((a, b) => a.title > b.title)
       .map((contentKey) => {
@@ -54,7 +64,7 @@ class AccordionBoxContainer extends Component {
 
         return (
           <div className="Accordion-box-item " key={uuid()}>
-            <h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+            <h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
               {tab.title}
 
               <span className="Accordion-box-icon">
@@ -62,7 +72,7 @@ class AccordionBoxContainer extends Component {
               </span>
             </h3>
             
-            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> 
+            <div className={this.state.activeId == tab.id && this.state.pressed == true ? " ": "hidden"}> {/*&& this.state.pressed == true */}
               <div className="Accordion-box-content">
                 {
                   Object.keys(links).map((linkKey) => {
@@ -100,6 +110,7 @@ class AccordionBoxContainer extends Component {
         )
       })
     }
+    // used to render non-videoLink stageContent
     else {
       const lang = this.props.language;
     //   renderedContent = renderedContent.concat(this.props.stageContent)
@@ -112,7 +123,7 @@ class AccordionBoxContainer extends Component {
         // console.log("tab: ", tab);	
         return (
   				<div className="Accordion-box-item " key={tab.id}>
-  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font": " "} >
+  					<h3 onClick={() => this.toggleClass(tab.id)} className={this.state.activeId == tab.id && this.state.pressed == true ? "blue-font Accordion-box-grey": " "} >
               {tab.titles[lang]}
 
               <span className="Accordion-box-icon">
@@ -129,10 +140,9 @@ class AccordionBoxContainer extends Component {
   						{/*						<div dangerouslySetInnerHTML={this.getParsedMarkdown(input)}></div>
   						*/}					
 
-
   					</div>
   					<hr className="Accordion-box-line" />
-  				</div>
+  				</div> 
   			)
   		})
     }
