@@ -12,5 +12,7 @@
 "Substituted Service Deadlines": {"name": "sc_substituted_service_deadlines"},
 "Government Agencies": {"name": "sc_sue_gov_event"},
 "Forms": {"name": "sc_forms_event"},
-"No idea where to start": {"name": "sc_how_to_begin_event"}
+"No idea where to start": {"name": "sc_how_to_begin_event"},
+"Security Deposit": {"name": "sc_security_deposit"},
+"Car Accident": {"name": "sc_car_accident"}
 }
