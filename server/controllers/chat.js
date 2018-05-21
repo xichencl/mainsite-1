@@ -17,6 +17,20 @@ let ai, caseType;
 //Courntey_SmallClaims
 ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
+// const Storage = require('@google-cloud/storage');
+// const storage = new Storage({
+//   path.join(__dirname, "Courtney-SmallClaims-Test-49ee3be58ac8");
+// });
+
+const projectId = "courtney-smallclaims-test";
+const dialogflow = require('dialogflow');
+const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, "../../Courtney-SmallClaims-Test-49ee3be58ac8.json")});
+//language hard-coded as "en-US"
+const languageCode = 'en-US';
+
+
+
+
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){
       //check existing case types
@@ -57,7 +71,9 @@ exports.getMessageResponse = (req, res) => {
           return;
         }
         
-        const options = {sessionId: req.body.id};
+        // const options = {sessionId: req.body.id};
+        const sessionPath = sessionClient.sessionPath(projectId, req.body.id);
+
 
         //sends event request to api.ai and response to front end
         if (req.body.payload.type=='button'){
@@ -94,22 +110,59 @@ exports.getMessageResponse = (req, res) => {
         }
         //send text request to api.ai 
         else if (req.body.payload.type=='text'){
-          const request_to_ai = ai.textRequest(req.body.payload.message, options);
-          request_to_ai.on('response', (response_from_ai)=>{
-            // console.log('Response:', response_from_ai);
-            const code = response_from_ai.status.code;
-            response_from_ai['caseType'] = caseType;
-            res.writeHead(code);
-            if (code == 200){
-              //send response object form api.ai to front end
-              res.write(JSON.stringify(response_from_ai));
-            }   
-            res.end();
-          });
-          request_to_ai.on('error', (error)=> {
-            console.error("Error:", error)
-          } );
-          request_to_ai.end();
+          const request = {
+            session: sessionPath,
+            queryInput: {
+              text: {
+                text: req.body.payload.message,
+                languageCode: languageCode
+              }
+            }
+          };
+
+          sessionClient
+            .detectIntent(request)
+            .then(responses => {
+              console.log('Detected intent');
+              console.log("num of responses", responses.length);
+              const result = responses[0].queryResult;
+              console.log(responses[0]);
+              fs.writeFileSync(path.join(__dirname, '../../dialogflow_v2_response_structure'), JSON.stringify(responses[0]), 
+                (err) => {
+                  if (err) {
+                    if (err.code === 'EEXIST') {
+                      console.error('my file already exists');
+                      return;
+                    }
+                    throw err;
+                  }
+
+                }
+
+
+                )
+            })
+            .catch(err => {
+              console.log("error: ", err)
+            })
+
+
+          // const request_to_ai = ai.textRequest(req.body.payload.message, options);
+          // request_to_ai.on('response', (response_from_ai)=>{
+          //   // console.log('Response:', response_from_ai);
+          //   const code = response_from_ai.status.code;
+          //   response_from_ai['caseType'] = caseType;
+          //   res.writeHead(code);
+          //   if (code == 200){
+          //     //send response object form api.ai to front end
+          //     res.write(JSON.stringify(response_from_ai));
+          //   }   
+          //   res.end();
+          // });
+          // request_to_ai.on('error', (error)=> {
+          //   console.error("Error:", error)
+          // } );
+          // request_to_ai.end();
           
         }
         //send voice request to api.ai
