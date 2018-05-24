@@ -1,3 +1,4 @@
+exports.courtAddresses = 
 {
   "cc": {
     "address": "725 Court Street, Martinez, CA 94553, 1000 Center Drive, Pittsburg, CA 94565, or 100 37th Street, Richmond, CA 94805",

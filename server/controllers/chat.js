@@ -29,9 +29,7 @@ const dialogflow = require('dialogflow');
 const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, "../../Courtney-SmallClaims-Test-49ee3be58ac8.json")});
 //language hard-coded as "en-US"
 const languageCode = 'en-US';
-
-
-
+const events = require('../buttons2Events.js').buttons2Events;
 
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){
@@ -81,14 +79,14 @@ exports.getMessageResponse = (req, res) => {
         //sends event request to api.ai and response to front end
         console.log("event: ", req.body.payload.message);
         if (req.body.payload.type=='button'){
-          const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
+          // const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
           const ev = {};
           const msg = req.body.payload.message;
           if (msg in events){
             // console.log(msg);
             ev.name=events[msg].name;
             ev.data=events[msg].data;
-            // console.log(ev.name);
+            console.log(ev.name);
           }else{
             return;
           }
@@ -114,39 +112,7 @@ exports.getMessageResponse = (req, res) => {
               console.log("Error: ", err)
             });
 
-
-
-          // const msg = req.body.payload.message;
-          // // console.log("dir ", __dirname);
-          // const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
-          // const ev = {};
-          // if (msg in events){
-          //   // console.log(msg);
-          //   ev.name=events[msg].name;
-          //   ev.data=events[msg].data;
-          //   // console.log(ev.name);
-          // }else{
-          //   return;
-          // }
-          
-          // console.log("event: ", ev);
-          // const request_to_ai = ai.eventRequest(ev, options);
-          // // console.log(request_to_ai);
-          // request_to_ai.on('response', (response_from_ai) => {
-          //   console.log('Response:', response_from_ai);
-          //   const code = response_from_ai.status.code;
-          //   response_from_ai['caseType'] = caseType;
-          //   // console.log(response_from_ai);
-          //   res.writeHead(code);
-          //   if (code == 200) {
-          //     res.end(JSON.stringify(response_from_ai));
-          //   }
-          //   });
-          // request_to_ai.on('error', (error)=> {
-          //   console.error("Error:", error)
-          // } );
-          // request_to_ai.end();
-        }
+         }
         //send text request to api.ai 
         else if (req.body.payload.type=='text'){
           const request = {
@@ -220,14 +186,10 @@ exports.getWebhookResponse = (req, res)=>{
 
     switch (action){
       case 'small_claims.court_lookup':
-      //this appears to be sync
         console.log("court_lookup chosen");
         functions.small_claims_court_lookup(req.body.queryResult.parameters, respondToAPI);
-        // console.log('Response Object:', response);
-        // res.setHeader('Content-Type', 'application/json');
-        // res.end(JSON.stringify(response));       
-        // response.displayText = response.speech;
         break;
+
       // case 'small_claims.sue_gov.resources':
       //   console.log("small claims sue gov resources chosen");
       //   response = functions.small_claims_sue_gov_resource(req.body.queryResult.parameters);

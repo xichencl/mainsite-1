@@ -5,11 +5,10 @@ import axios from 'axios';
 // import ChatButton from './ChatButton.jsx';
 
 // import and set up SpeechRecognition object
-let msg,
-  recognition,
+let recognition,
   synth,
-  voices,
-  utt;
+  voices;
+
 let defaultVoiceIdx = 0;
 const defaultVoiceNames = {
   pc: 'Microsoft Zira Desktop - English (United States)',
@@ -29,7 +28,6 @@ try {
 
   recognition = new SpeechRecognition();
   recognition.lang = 'en-US';
-  // const result = {};
   synth = window.speechSynthesis;
   // SpeechSynthesis.getVoices is async operation
   // voices=synth.getVoices();
@@ -44,6 +42,7 @@ try {
   };
 } catch (e) {
   // do nothing yet, user will be alerted later when they press the mic button
+  console.log("error: ", e);
 }
 
 class Chatbar extends React.Component {
@@ -146,12 +145,15 @@ const mapDispatchToProps = (dispatch) => {
     axios
       .post('/api/chat/message', inputData)
       .then((response) => {
-        // console.log('Response:', response);
+        let speech;
         // response.data is a data envelope by redux
         // it contains the fulfillment section of the data object which the backend chooses to return.
+        
+        //dialogflow fulfillment messages, possible multiple messages and multiple formats 
         response.data.fulfillmentMessages.forEach((ffmtMsg ) => {
           
           if (ffmtMsg.message === 'text'){ //text response
+            speech += ffmtMsg.text.text[0]
             dispatch({
               type: 'CHAT_ADD_MESSAGE',
               payload: {
@@ -189,16 +191,6 @@ const mapDispatchToProps = (dispatch) => {
                     isBot: true,
                   },
                 });
-            // //if map in payload
-            // ffmtMsg.payload.fields.map &&
-            // dispatch({
-            //       type: 'CHAT_ADD_MESSAGE',
-            //       payload: {
-            //         message: ffmtMsg.payload.fields.map,
-            //         type: 'map',
-            //         isBot: true,
-            //       },
-            //     });
           }
         });
 
@@ -218,168 +210,29 @@ const mapDispatchToProps = (dispatch) => {
             }
           });
 
-          webhookPayload.fields.table &&
-          console.log('table', webhookPayload.fields.table);
+          // console.log(webhookPayload.fields);
+          webhookPayload.fields.table &&           
           dispatch({
             type: 'CHAT_ADD_MESSAGE',
             payload: {
-              message: {
+              message: { table:
                 webhookPayload.fields.table.listValue.values.map((item) => {
-                   item.structValue.fields.map((f) => {
-                    return {
-                      f.agentOfService.stringValue,
-                      f.companyName.stringValue,
-                      f.entityNum.stringValue,
-                      f.jurisdiction.stringValue
-                    }
-                  });
-                })
-              },
+                  return {
+                      agentOfService: item.structValue.fields.agentOfService.stringValue,
+                      companyName: item.structValue.fields.companyName.stringValue,
+                      entityNum: item.structValue.fields.entityNum.stringValue,
+                      jurisdiction: item.structValue.fields.jurisdiction.stringValue
+                    };
+                  }),
+                url: webhookPayload.fields.url.stringValue
+                },
+              
               type: 'table',
               isBot: true
             }
           });
         }
 
-        // msg = response.data.fulfillmentText;
-        // if (response.status === 200) {
-        //   if (!msg.startsWith('\\n')) {
-        //     dispatch({
-        //       type: 'CHAT_ADD_MESSAGE',
-        //       payload: {
-        //         message: msg,
-        //         type: 'text',
-        //         source: 'dialogflow',
-        //         isBot: true,
-        //       },
-        //     });
-        //   } else {
-        //     // multi-paragraphs
-        //     const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
-        //     console.log(paragraphs);
-        //     paragraphs.forEach(p => {
-        //       dispatch({
-        //         type: 'CHAT_ADD_MESSAGE',
-        //         payload: {
-        //           message: p.trim(),
-        //           type: 'text',
-        //           isBot: true,
-        //         }
-        //       });
-        //     });
-        //     // let i = 0;
-        //     // msg = '';
-        //     // for (i = 0; i < paragraphs.length; i++) {
-        //     //   msg += paragraphs[i];
-        //     //   dispatch({
-        //     //     type: 'CHAT_ADD_MESSAGE',
-        //     //     payload: {
-        //     //       message: paragraphs[i].trim(),
-        //     //       type: 'text',
-        //     //       isBot: true,
-        //     //     },
-        //     //   });
-        //     // }
-        //   }
-        //   // console.log('case type: ', response.data.caseType.toLowerCase());
-        //   response.data.caseType && dispatch({ type: response.data.caseType });
-        //   let customPayload;
-        //   if (response.data.fulfillmentMessages.length > 1) {
-        //     const payloadMessage = response.data.fulfillmentMessages[1];
-
-        //       // buttons in payload
-        //       if (payloadMessage.payload.fields.buttons) {
-        //         // get custom payload from api.ai
-        //         // console.log("buttons:", response.data.messages[1].payload.buttons);
-        //         customPayload = payloadMessage.payload.fields.buttons.listValue.values;
-        //         customPayload.forEach((btn) => {
-        //           dispatch({
-        //             type: 'CHAT_ADD_MESSAGE',
-        //             payload: {
-        //               message: btn.stringValue,
-        //               type: 'button',
-        //               isBot: true,
-        //             },
-        //           });
-        //         });
-        //       }
-        //       // if image in payload
-        //       if (payloadMessage.payload.fields.image) {
-        //         customPayload = payloadMessage.payload.fields.image;
-        //         dispatch({
-        //           type: 'CHAT_ADD_MESSAGE',
-        //           payload: {
-        //             message: customPayload,
-        //             type: 'image',
-        //             isBot: true,
-        //           },
-        //         });
-        //       }
-        //       // if map in payload
-        //       if (messages[1].payload.map) {
-        //         customPayload = messages[1].payload.map;
-        //         dispatch({
-        //           type: 'CHAT_ADD_MESSAGE',
-        //           payload: {
-        //             message: customPayload,
-        //             type: 'map',
-        //             isBot: true,
-        //           },
-        //         });
-        //       }
-        //     }
-        //   } else {
-        //     // server response
-        //     const data = response.data.result.fulfillment.data;
-        //     if (data.buttons) {
-        //       customPayload = data.buttons;
-        //       customPayload.forEach((btn) => {
-        //         dispatch({
-        //           type: 'CHAT_ADD_MESSAGE',
-        //           payload: {
-        //             message: btn,
-        //             type: 'button',
-        //             isBot: true,
-        //           },
-        //         });
-        //       });
-        //     }
-        //     if (data.image) {
-        //       customPayload = data.image;
-        //       dispatch({
-        //         type: 'CHAT_ADD_MESSAGE',
-        //         payload: {
-        //           message: customPayload,
-        //           type: 'image',
-        //           isBot: true,
-        //         },
-        //       });
-        //     }
-        //     if (data.map) {
-        //       customPayload = data.map;
-        //       dispatch({
-        //         type: 'CHAT_ADD_MESSAGE',
-        //         payload: {
-        //           message: customPayload,
-        //           type: 'map',
-        //           isBot: true,
-        //         },
-        //       });
-        //     }
-        //     if (data.table) {
-        //       customPayload = data;
-        //       console.log('CUSTOMPAYLOAD', customPayload);
-        //       dispatch({
-        //         type: 'CHAT_ADD_MESSAGE',
-        //         payload: {
-        //           message: customPayload,
-        //           type: 'table',
-        //           isBot: true,
-        //         },
-        //       });
-        //     }
-        //   }
-        // }
         if (speak) {
           speak();
         }
@@ -390,11 +243,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 
   // speech synthesis for reading responses from api.ai
-  const speak = function () {
-    utt = new SpeechSynthesisUtterance();
+  const speak = function (speech) {
+    const utt = new SpeechSynthesisUtterance();
     utt.lang = defaultLang;
-    utt.text = msg;
-    // console.log(msg);
+    utt.text = speech;
     utt.voice = voices[defaultVoiceIdx];
     utt.rate = defaultRate;
     utt.pitch = defaultPitch;
@@ -423,30 +275,6 @@ const mapDispatchToProps = (dispatch) => {
           // recognition.abort();
           synth.cancel();
         }
-        // else{
-        // try {
-        // const SpeechRecognition =
-        // SpeechRecognition || webkitSpeechRecognition;
-        // const SpeechGrammarList =
-        // SpeechGrammarList || webkitSpeechGrammarList;
-        // const SpeechRecognitionEvent =
-        // SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-
-        // recognition = new SpeechRecognition();
-        // recognition.lang = 'en-US';
-        // // const result = {};
-        // synth = window.speechSynthesis;
-        // // SpeechSynthesis.getVoices is async operation
-        // voices=synth.getVoices();
-        // synth.onvoiceschanged = ()=> {
-        // voices = synth.getVoices();
-        // }
-        // console.log('voices: ', voices);
-        // } catch (e) {
-        // alert('your browser may not support speech recognition');
-        // return;
-        // }
-        // }
         try {
           recognition.start();
         } catch (e) {

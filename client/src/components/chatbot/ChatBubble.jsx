@@ -37,9 +37,6 @@ class ChatBubble extends React.Component {
         </div>
       );
     } else if (this.props.type === 'image') {
-      // className = 'rcorner';
-      // console.log(this.props.message);
-      // const attr = JSON.parse(this.props.message);
       return <ImageViewer src={this.props.message.src} alt={this.props.message.alt} />;
     } else if (this.props.type === 'map') {
       return (
@@ -51,6 +48,7 @@ class ChatBubble extends React.Component {
       console.log('executed');
       return (
         <div>
+          <a href={this.props.message.url} target='_blank'>
           <table onClick={this.props.onClick.bind(this)}>
             <thead>
               <tr>
@@ -81,6 +79,7 @@ class ChatBubble extends React.Component {
               )}
             </tbody>
           </table>
+          </a>
         </div>
       );
     } else if (this.props.isBot === false) {
@@ -147,7 +146,7 @@ const mapDispatchToProps = dispatch => ({
       inputData.ai = true;
     }
     axios
-      .post('/api/chat/message', inputData) // redux way of saying once we send a POST request to server, then if we receive a response(Promise) from server
+      .post('/api/chat/message', inputData) 
       .then((response) => {
         console.log('Response:', response);
         response.data.fulfillmentMessages.forEach((ffmtMsg ) => {
@@ -163,7 +162,7 @@ const mapDispatchToProps = dispatch => ({
               }
             });
           }else if (ffmtMsg.message == 'payload'){ // payload response
-            console.log("payload buttons: ", ffmtMsg.payload.fields.buttons)
+            // console.log("payload buttons: ", ffmtMsg.payload.fields.buttons)
             //if buttons in payload
             ffmtMsg.payload.fields.buttons &&
             ffmtMsg.payload.fields.buttons.listValue.values.forEach((btn) => {

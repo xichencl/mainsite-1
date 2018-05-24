@@ -11,6 +11,8 @@ const path = require('path');
 const agentOfServiceHost = 'businesssearch.sos.ca.gov';
 const agentOfServicePath = '/CBS/SearchResults?';
 
+const courtAddresses = require('../courtAddresses.js').courtAddresses;
+
 functions.small_claims_court_lookup = function(params, respondToAPI){
 // let params = JSON.parse(para);
 	console.log("params: %s", params);
@@ -28,36 +30,34 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 		}else{
 			response.fulfillmentText = "I'm sorry, but your entry was invalid. Please enter or say a city or county name or a valid CA zip code.";
 			respondToAPI(response);
-			// return;
+			return;
 		}
 	}
 	
 	
-	//load court_addresses
-	console.log("curr path", __dirname);
-	console.log("file path", __filename);
-	const court_addresses = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/small_claims_court_addresses.json')));
-	// console.log("Court addresses: ", court_addresses);
+	//load courtAddresses
+	// const courtAddresses = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/small_claims_courtAddresses.json')));
+	// console.log("Court addresses: ", courtAddresses);
 	// console.log("Place:" locale);
 	
-	if (court_addresses[locale]){
+	if (courtAddresses[locale]){
 		
-		locale_id = court_addresses[locale];
+		locale_id = courtAddresses[locale];
 		console.log("localeIdx: %s", locale_id);	
-		console.log(court_addresses[locale_id].placeId);
-		if (court_addresses[locale_id].placeId){
-			response.fulfillmentText = "The small claims court for {0} is located at {1} {2}.".format(locale, court_addresses[locale_id].name, court_addresses[locale_id].address);
+		console.log(courtAddresses[locale_id].placeId);
+		if (courtAddresses[locale_id].placeId){
+			response.fulfillmentText = "The small claims court for {0} is located at {1} {2}.".format(locale, courtAddresses[locale_id].name, courtAddresses[locale_id].address);
 			// console.log(response.fulfillmentText);
-			response.payload = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, court_addresses[locale_id].placeId), 
-			"name": court_addresses[locale_id].name
+			response.payload = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, courtAddresses[locale_id].placeId), 
+			"name": courtAddresses[locale_id].name
 			}};
 			response.source = "server";
 			
 			// return response;
 		}else {
-			response.fulfillmentText = court_addresses[locale_id].name+ " are located at "+court_addresses[locale_id].address+".";
-			response.payload = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, court_addresses[locale_id].name.split(/\s+/).join("+")),
-			"name": court_addresses[locale_id].name
+			response.fulfillmentText = courtAddresses[locale_id].name+ " are located at "+courtAddresses[locale_id].address+".";
+			response.payload = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, courtAddresses[locale_id].name.split(/\s+/).join("+")),
+			"name": courtAddresses[locale_id].name
 			}};
 			response.source= "server";
 			
@@ -86,7 +86,7 @@ functions.small_claims_sue_gov_resource = function(params){
 		}
 	}
 	const sue_gov_resources = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/small_claims_sue_gov_resources.json')));
-	// console.log("court addresses: %s", court_addresses);
+	// console.log("court addresses: %s", courtAddresses);
 	
 	if (locale in sue_gov_resources){
 		return "Here's a few links to relevant information regarding filing a claim aginst "+ locale + ": "+sue_gov_resources[locale] + ". Please let me know if you have more questions.";

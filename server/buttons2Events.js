@@ -1,3 +1,4 @@
+exports.buttons2Events = 
 {
   "Small Claims": {
     "name": "small_claims_event"
