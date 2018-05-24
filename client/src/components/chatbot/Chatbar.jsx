@@ -146,140 +146,240 @@ const mapDispatchToProps = (dispatch) => {
     axios
       .post('/api/chat/message', inputData)
       .then((response) => {
-        console.log('Response:', response);
+        // console.log('Response:', response);
         // response.data is a data envelope by redux
         // it contains the fulfillment section of the data object which the backend chooses to return.
-        msg = response.data.result.fulfillment.speech;
-        if (response.status === 200) {
-          if (!msg.startsWith('\\n')) {
+        response.data.fulfillmentMessages.forEach((ffmtMsg ) => {
+          
+          if (ffmtMsg.message === 'text'){ //text response
             dispatch({
               type: 'CHAT_ADD_MESSAGE',
               payload: {
-                message: msg,
+                message: ffmtMsg.text.text[0],
                 type: 'text',
                 source: 'dialogflow',
                 isBot: true,
-              },
+              }
             });
-          } else {
-            // multi-paragraphs
-
-            const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
-            console.log(paragraphs);
-            let i = 0;
-            msg = '';
-            for (i = 0; i < paragraphs.length; i++) {
-              msg += paragraphs[i];
+          }else if (ffmtMsg.message == 'payload'){ // payload response
+            console.log("payload buttons: ", ffmtMsg.payload.fields.buttons)
+            //if buttons in payload
+            ffmtMsg.payload.fields.buttons &&
+            ffmtMsg.payload.fields.buttons.listValue.values.forEach((btn) => {
+              
               dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: paragraphs[i].trim(),
-                  type: 'text',
-                  isBot: true,
-                },
-              });
-            }
-          }
-          // console.log('case type: ', response.data.caseType.toLowerCase());
-          response.data.caseType && dispatch({ type: response.data.caseType });
-          let customPayload;
-          if (!response.data.result.fulfillment.data) {
-            const messages = response.data.result.fulfillment.messages;
-            console.log('Messages:', messages);
-            if (messages.length > 1 && messages[1].type == 4) {
-              // buttons in payload
-              if (messages[1].payload.buttons) {
-                // get custom payload from api.ai
-                // console.log("buttons:", response.data.messages[1].payload.buttons);
-                customPayload = messages[1].payload.buttons;
-                customPayload.forEach((btn) => {
-                  dispatch({
                     type: 'CHAT_ADD_MESSAGE',
                     payload: {
-                      message: btn,
+                      message: btn.stringValue,
                       type: 'button',
                       isBot: true,
                     },
                   });
-                });
-              }
-              // if image in payload
-              if (messages[1].payload.image) {
-                customPayload = messages[1].payload.image;
-                dispatch({
+            });
+            //if image in payload
+            ffmtMsg.payload.fields.image &&
+            dispatch({
                   type: 'CHAT_ADD_MESSAGE',
                   payload: {
-                    message: customPayload,
+                    message: {
+                      src: ffmtMsg.payload.fields.image.structValue.fields.src.stringValue,
+                      alt: ffmtMsg.payload.fields.image.structValue.fields.alt.stringValue
+                    },
                     type: 'image',
                     isBot: true,
                   },
                 });
-              }
-              // if map in payload
-              if (messages[1].payload.map) {
-                customPayload = messages[1].payload.map;
-                dispatch({
-                  type: 'CHAT_ADD_MESSAGE',
-                  payload: {
-                    message: customPayload,
-                    type: 'map',
-                    isBot: true,
-                  },
-                });
-              }
-            }
-          } else {
-            // server response
-            const data = response.data.result.fulfillment.data;
-            if (data.buttons) {
-              customPayload = data.buttons;
-              customPayload.forEach((btn) => {
-                dispatch({
-                  type: 'CHAT_ADD_MESSAGE',
-                  payload: {
-                    message: btn,
-                    type: 'button',
-                    isBot: true,
-                  },
-                });
-              });
-            }
-            if (data.image) {
-              customPayload = data.image;
-              dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: customPayload,
-                  type: 'image',
-                  isBot: true,
-                },
-              });
-            }
-            if (data.map) {
-              customPayload = data.map;
-              dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: customPayload,
-                  type: 'map',
-                  isBot: true,
-                },
-              });
-            }
-            if (data.table) {
-              customPayload = data;
-              console.log('CUSTOMPAYLOAD', customPayload);
-              dispatch({
-                type: 'CHAT_ADD_MESSAGE',
-                payload: {
-                  message: customPayload,
-                  type: 'table',
-                  isBot: true,
-                },
-              });
-            }
+            // //if map in payload
+            // ffmtMsg.payload.fields.map &&
+            // dispatch({
+            //       type: 'CHAT_ADD_MESSAGE',
+            //       payload: {
+            //         message: ffmtMsg.payload.fields.map,
+            //         type: 'map',
+            //         isBot: true,
+            //       },
+            //     });
           }
+        });
+
+        //webhookPayload
+        const webhookPayload = response.data.webhookPayload;
+        if (webhookPayload) {
+          webhookPayload.fields.map &&
+          dispatch({
+            type: 'CHAT_ADD_MESSAGE',
+            payload: {
+              message: {
+                src: webhookPayload.fields.map.structValue.fields.src.stringValue, 
+                name: webhookPayload.fields.map.structValue.fields.name.stringValue
+              },
+              type: 'map',
+              isBot: true,
+            }
+          });
+
+          webhookPayload.fields.table &&
+          console.log('table', webhookPayload.fields.table);
+          dispatch({
+            type: 'CHAT_ADD_MESSAGE',
+            payload: {
+              message: {
+                webhookPayload.fields.table.listValue.values.map((item) => {
+                   item.structValue.fields.map((f) => {
+                    return {
+                      f.agentOfService.stringValue,
+                      f.companyName.stringValue,
+                      f.entityNum.stringValue,
+                      f.jurisdiction.stringValue
+                    }
+                  });
+                })
+              },
+              type: 'table',
+              isBot: true
+            }
+          });
         }
+
+        // msg = response.data.fulfillmentText;
+        // if (response.status === 200) {
+        //   if (!msg.startsWith('\\n')) {
+        //     dispatch({
+        //       type: 'CHAT_ADD_MESSAGE',
+        //       payload: {
+        //         message: msg,
+        //         type: 'text',
+        //         source: 'dialogflow',
+        //         isBot: true,
+        //       },
+        //     });
+        //   } else {
+        //     // multi-paragraphs
+        //     const paragraphs = msg.slice(2, -1).trim().split(/\\n/);
+        //     console.log(paragraphs);
+        //     paragraphs.forEach(p => {
+        //       dispatch({
+        //         type: 'CHAT_ADD_MESSAGE',
+        //         payload: {
+        //           message: p.trim(),
+        //           type: 'text',
+        //           isBot: true,
+        //         }
+        //       });
+        //     });
+        //     // let i = 0;
+        //     // msg = '';
+        //     // for (i = 0; i < paragraphs.length; i++) {
+        //     //   msg += paragraphs[i];
+        //     //   dispatch({
+        //     //     type: 'CHAT_ADD_MESSAGE',
+        //     //     payload: {
+        //     //       message: paragraphs[i].trim(),
+        //     //       type: 'text',
+        //     //       isBot: true,
+        //     //     },
+        //     //   });
+        //     // }
+        //   }
+        //   // console.log('case type: ', response.data.caseType.toLowerCase());
+        //   response.data.caseType && dispatch({ type: response.data.caseType });
+        //   let customPayload;
+        //   if (response.data.fulfillmentMessages.length > 1) {
+        //     const payloadMessage = response.data.fulfillmentMessages[1];
+
+        //       // buttons in payload
+        //       if (payloadMessage.payload.fields.buttons) {
+        //         // get custom payload from api.ai
+        //         // console.log("buttons:", response.data.messages[1].payload.buttons);
+        //         customPayload = payloadMessage.payload.fields.buttons.listValue.values;
+        //         customPayload.forEach((btn) => {
+        //           dispatch({
+        //             type: 'CHAT_ADD_MESSAGE',
+        //             payload: {
+        //               message: btn.stringValue,
+        //               type: 'button',
+        //               isBot: true,
+        //             },
+        //           });
+        //         });
+        //       }
+        //       // if image in payload
+        //       if (payloadMessage.payload.fields.image) {
+        //         customPayload = payloadMessage.payload.fields.image;
+        //         dispatch({
+        //           type: 'CHAT_ADD_MESSAGE',
+        //           payload: {
+        //             message: customPayload,
+        //             type: 'image',
+        //             isBot: true,
+        //           },
+        //         });
+        //       }
+        //       // if map in payload
+        //       if (messages[1].payload.map) {
+        //         customPayload = messages[1].payload.map;
+        //         dispatch({
+        //           type: 'CHAT_ADD_MESSAGE',
+        //           payload: {
+        //             message: customPayload,
+        //             type: 'map',
+        //             isBot: true,
+        //           },
+        //         });
+        //       }
+        //     }
+        //   } else {
+        //     // server response
+        //     const data = response.data.result.fulfillment.data;
+        //     if (data.buttons) {
+        //       customPayload = data.buttons;
+        //       customPayload.forEach((btn) => {
+        //         dispatch({
+        //           type: 'CHAT_ADD_MESSAGE',
+        //           payload: {
+        //             message: btn,
+        //             type: 'button',
+        //             isBot: true,
+        //           },
+        //         });
+        //       });
+        //     }
+        //     if (data.image) {
+        //       customPayload = data.image;
+        //       dispatch({
+        //         type: 'CHAT_ADD_MESSAGE',
+        //         payload: {
+        //           message: customPayload,
+        //           type: 'image',
+        //           isBot: true,
+        //         },
+        //       });
+        //     }
+        //     if (data.map) {
+        //       customPayload = data.map;
+        //       dispatch({
+        //         type: 'CHAT_ADD_MESSAGE',
+        //         payload: {
+        //           message: customPayload,
+        //           type: 'map',
+        //           isBot: true,
+        //         },
+        //       });
+        //     }
+        //     if (data.table) {
+        //       customPayload = data;
+        //       console.log('CUSTOMPAYLOAD', customPayload);
+        //       dispatch({
+        //         type: 'CHAT_ADD_MESSAGE',
+        //         payload: {
+        //           message: customPayload,
+        //           type: 'table',
+        //           isBot: true,
+        //         },
+        //       });
+        //     }
+        //   }
+        // }
         if (speak) {
           speak();
         }

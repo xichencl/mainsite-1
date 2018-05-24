@@ -26,7 +26,7 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 		}else if ('zip-code' in entity){
 			locale = entity.zip-code;
 		}else{
-			response.speech = "I'm sorry, but your entry was invalid. Please enter or say a city or county name or a valid CA zip code.";
+			response.fulfillmentText = "I'm sorry, but your entry was invalid. Please enter or say a city or county name or a valid CA zip code.";
 			respondToAPI(response);
 			// return;
 		}
@@ -46,19 +46,17 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 		console.log("localeIdx: %s", locale_id);	
 		console.log(court_addresses[locale_id].placeId);
 		if (court_addresses[locale_id].placeId){
-			response.speech = "The small claims court for {0} is located at {1} {2}.".format(locale, court_addresses[locale_id].name, court_addresses[locale_id].address);
-			console.log(response.speech);
-			// response.displayText = response.speech;
-			// response.data = {};
-			response.data = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, court_addresses[locale_id].placeId), 
+			response.fulfillmentText = "The small claims court for {0} is located at {1} {2}.".format(locale, court_addresses[locale_id].name, court_addresses[locale_id].address);
+			// console.log(response.fulfillmentText);
+			response.payload = {"map":{"src": "https://www.google.com/maps/embed/v1/place?key={0}&q=place_id:{1}".format(googleMapEmbedKey, court_addresses[locale_id].placeId), 
 			"name": court_addresses[locale_id].name
 			}};
 			response.source = "server";
 			
 			// return response;
 		}else {
-			response.speech = court_addresses[locale_id].name+ " are located at "+court_addresses[locale_id].address+".";
-			response.data = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, court_addresses[locale_id].name.split(/\s+/).join("+")),
+			response.fulfillmentText = court_addresses[locale_id].name+ " are located at "+court_addresses[locale_id].address+".";
+			response.payload = {"map":{"src":"https://www.google.com/maps/embed/v1/search?key={0}&q={1}".format(googleMapEmbedKey, court_addresses[locale_id].name.split(/\s+/).join("+")),
 			"name": court_addresses[locale_id].name
 			}};
 			response.source= "server";
@@ -68,7 +66,7 @@ functions.small_claims_court_lookup = function(params, respondToAPI){
 			
 	}
 	else{
-		response.speech= "I cannot find any court location for "+locale+" in the State of California. Please double-check your entry.";
+		response.fulfillmentText= "I cannot find any court location for "+locale+" in the State of California. Please double-check your entry.";
 		// return response;
 	}	
 	respondToAPI(response);
@@ -98,7 +96,7 @@ functions.small_claims_sue_gov_resource = function(params){
 };
 
 
-functions.agent_of_service_lookup = function(contexts, searchType, respondToAPI){
+functions.agent_of_service_lookup = function(query, searchType, respondToAPI){
 	let response = {};
 	// const searchType1 = "LPLLC", searchType2="CORP";
 	// let searchType;
@@ -114,8 +112,8 @@ functions.agent_of_service_lookup = function(contexts, searchType, respondToAPI)
 		response.source = "server";
 		respondToAPI(response);		
 	}*/
-	const origEntry = contexts[0].parameters.any;
-	let searchTerms = origEntry.toLowerCase().trim().split(/\s+/);
+	const origEntry = query;
+	let searchTerms = query.toLowerCase().trim().split(/\s+/);
 	searchTerms = searchTerms.join('+');
 	
 	// let path = agentOfServiceHost+agentOfServicePath+'SearchType='+searchType+'&SearchCriteria='+searchTerms+'&SearchSubType=Keyword'
@@ -177,19 +175,19 @@ functions.agent_of_service_lookup = function(contexts, searchType, respondToAPI)
 		}
 		console.log("NO OF ENTRIES: ", numEntriesFound);
 		if (numEntriesFound>5){
-			response.speech = "I have found {} companies matching the name \"{}\", whose registration is currently active. Here's the top five matches. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
+			response.fulfillmentText = "I have found {} companies matching the name \"{}\", whose registration is currently active. Here's the top five matches. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
-			response.data = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
+			response.payload = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
 			console.log(listOfResults);
 		}else if (numEntriesFound>0 && numEntriesFound<6){
 			
-			response.speech = "I have found {} company/ies matching the name \"{}\", whose registration is currently active. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
+			response.fulfillmentText = "I have found {} company/ies matching the name \"{}\", whose registration is currently active. If you would like more information, simply click on the table below and you will be taken to the California Secretary of State website.".format(numEntriesFound, origEntry);
 			response.source = "server";			
-			response.data = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
+			response.payload = {'table': listOfResults, 'url':'https://'+options.hostname+options.path};
 			console.log(listOfResults);
 		}else{
-			response.speech = "Sorry, I cannot find a match for the company under the name {} and business type {}, whose registration is currently active. You may try an alternative business type or name, or consult the company website.".format(origEntry, searchType);
-			response.data = {'buttons': ["Sole Proprietorship",
+			response.fulfillmentText = "Sorry, I cannot find a match for the company under the name {} and business type {}, whose registration is currently active. You may try an alternative business type or name, or consult the company website.".format(origEntry, searchType);
+			response.payload = {'buttons': ["Sole Proprietorship",
 						"Partnership",
 						"Corporation/Association",
 						"LLC/LLP/LP"]};
