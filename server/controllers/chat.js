@@ -1,21 +1,24 @@
-const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
+// const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
 
+/*
 const apiai = require('apiai');
 const aiSmallClaims = apiai(SC_CHAT_API_KEY);
 const aiGuardianship = apiai(GUARDIANSHIP_CHAT_API_KEY);
 const aiGeneral = apiai(GENERAL_CHAT_API_KEY);
 const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
+*/
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 const path = require('path');
 let ai, caseType;
+
 /*set the ai temporarily to small claims agent only*/
 // ai = aiSmallClaims;
 //TEST_SmallClaims
 // ai = apiai('1e399876a4544a4ba6f941e320b43ef7');
 //Courntey_SmallClaims
-ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
+// ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
 // const Storage = require('@google-cloud/storage');
 // const storage = new Storage({

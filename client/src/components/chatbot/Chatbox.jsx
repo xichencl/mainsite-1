@@ -31,7 +31,7 @@ class Chatbox extends React.Component {
 
     return (
       <div className={className}>
-        this.props.chatlog.map((value, key) => {
+        {this.props.chatlog.map((value, key) => {
           console.log(value);
           return (
             <ChatBubble
