@@ -12,22 +12,17 @@ const express = require('express'),
   MongoStore = require('connect-mongo')(expressSession),
   passport = require('passport'),
   cookieParser = require('cookie-parser');
+  require('dotenv').config(); //import all vars from .env as process.env
 
+console.log("NODE_ENV: ", process.env.NODE_ENV);
 // Database Setup
 mongoose.Promise = require('bluebird');
 //connect to test database
-mongoose.connect(config.test_database, { useMongoClient: true })
+mongoose.connect(config.database, { useMongoClient: true })
         .then(
             ()=> {console.log("Connected to DB")},
             (err) => {console.log("error: ", err)}
-          );
-//connec to database
-// mongoose.connect(config.database, { useMongoClient: true })
-//         .then(
-//             ()=> {console.log("Connected to DB")},
-//             (err) => {console.log("error: ", err)}
-//           );
-
+          )
 
 // Start the server
 let server;

@@ -1,12 +1,3 @@
-// const {SC_CHAT_API_KEY, GUARDIANSHIP_CHAT_API_KEY, GENERAL_CHAT_API_KEY} = require('../../secret.env');
-
-/*
-const apiai = require('apiai');
-const aiSmallClaims = apiai(SC_CHAT_API_KEY);
-const aiGuardianship = apiai(GUARDIANSHIP_CHAT_API_KEY);
-const aiGeneral = apiai(GENERAL_CHAT_API_KEY);
-const ais = {'Small Claims':{caseType: "Small Claims", bot: aiSmallClaims}, 'Guardianship': {caseType: "Guardianship", bot: aiGuardianship} }
-*/
 const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
@@ -20,19 +11,18 @@ let ai, caseType;
 //Courntey_SmallClaims
 // ai = apiai('8fcfe02fdf5b42628700e6458795e6d4');
 
-// const Storage = require('@google-cloud/storage');
-// const storage = new Storage({
-//   path.join(__dirname, "Courtney-SmallClaims-Test-49ee3be58ac8");
-// });
 
-const projectId = "courtney-smallclaims-test";
-const dialogflow = require('dialogflow');
+// const projectId = "courtney-smallclaims-test"; //no need to provide projectId, already in json file
+const environmentId = process.env.ENVIRONMENT_ID;
+const dialogflow = require('dialogflow').v2beta1;
 //import json to gRPC struct converter
 // const structjson = require('./structjson.js');
 const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, "../../Courtney-SmallClaims-Test-49ee3be58ac8.json")});
-//language hard-coded as "en-US"
+//language hard-coded as "en-US" for now
 const languageCode = 'en-US';
+//import events dictionary
 const events = require('../buttons2Events.js').buttons2Events;
+
 
 exports.selectCaseType = (req, res, callback) => {
     if (req.body.ai === false){
@@ -75,12 +65,16 @@ exports.getMessageResponse = (req, res) => {
           return;
         }
         
+        const sessionId = req.body.id;
         // const options = {sessionId: req.body.id};
-        const sessionPath = sessionClient.sessionPath(projectId, req.body.id);
+        const sessionPath = 
+        sessionClient.environmentSessionPath(projectId, environmentId, user, sessionId) :
+        // sessionClient.sessionPath(projectId, sessionId);
 
+        console.log("SessionPath: ", sessionPath);
 
         //sends event request to api.ai and response to front end
-        console.log("event: ", req.body.payload.message);
+        // console.log("event: ", req.body.payload.message);
         if (req.body.payload.type=='button'){
           // const events = JSON.parse(fs.readFileSync(path.join(__dirname, '../static_files/bot_buttons_and_events.json')));
           const ev = {};
@@ -94,6 +88,7 @@ exports.getMessageResponse = (req, res) => {
             return;
           }
 
+          
           const request = {
             session: sessionPath,
             queryInput: {
@@ -132,7 +127,7 @@ exports.getMessageResponse = (req, res) => {
             .detectIntent(request)
             .then(responses => {
               // console.log('Detected intent');
-              // console.log("num of responses", responses.length);
+              console.log("Response", JSON.stringify(responses));
               const result = responses[0].queryResult;
               res.send(result);
             })

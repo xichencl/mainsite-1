@@ -9,8 +9,8 @@ const { TEST_DB_URL,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
  JWT_SECRET,
- NODE_ENV } = require('../../secret.env');
-// console.log(process.env);
+ NODE_ENV } = process.env;
+console.log(process.env);
 
 //auth settings
 const creds = {
@@ -34,9 +34,19 @@ const creds = {
 
   // Required, the reply URL registered in AAD for your app
   //local dev
-  redirectUrl: (NODE_ENV === 'dev_server') ? 
-  'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return': 
-  'http://localhost:3000/api/auth/openid/return',
+  redirectUrl: 
+  function(){
+    switch (NODE_ENV){
+      case 'local':
+        return 'http://localhost:3000/api/auth/openid/return';
+        break;
+      case 'dev':
+        return 'http://dev-vshs.cc-courthelp.org/api/auth/openid/return';
+        break;
+      default:
+        return;
+    }
+  }(),
   //dev server
   // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',
 
@@ -96,7 +106,11 @@ module.exports = {
   //Cosmos DB Emulator
   test_database: 'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true',
   // test_db_url: 'https://localhost:8081',
-  database: COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
+  database: 
+    NODE_ENV !== 'prod' ? 
+    'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true' : 
+    COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb"
+  ,
   // Setting port for server
   // port: 3000,
   // Configuring Mailgun API for sending transactional email
@@ -123,9 +137,19 @@ module.exports = {
 resourceURL: 'https://graph.windows.net',
 
 // The url you need to go to destroy the session with AAD
-destroySessionUrl: (NODE_ENV === 'dev_server') ?
-'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
-'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
+destroySessionUrl: 
+  function(){
+    switch (NODE_ENV){
+      case 'local':
+        return 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000';
+        break;
+      case 'dev':
+        return 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs.cc-courthelp.org';
+        break;
+      default: //prod
+        return;
+    }
+  }(),
 
 // If you want to use the mongoDB session store for session middleware; otherwise we will use the default
 // session store provided by express-session.
