@@ -14,7 +14,7 @@ const express = require('express'),
   cookieParser = require('cookie-parser');
   require('dotenv').config(); //import all vars from .env as process.env
 
-console.log("NODE_ENV: ", process.env.NODE_ENV);
+console.log("process.env");
 // Database Setup
 mongoose.Promise = require('bluebird');
 //connect to test database

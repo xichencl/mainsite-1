@@ -68,7 +68,7 @@ exports.getMessageResponse = (req, res) => {
         const sessionId = req.body.id;
         // const options = {sessionId: req.body.id};
         const sessionPath = 
-        sessionClient.environmentSessionPath(projectId, environmentId, user, sessionId) :
+        sessionClient.environmentSessionPath(projectId, environmentId, user, sessionId); 
         // sessionClient.sessionPath(projectId, sessionId);
 
         console.log("SessionPath: ", sessionPath);

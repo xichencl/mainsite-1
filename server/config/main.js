@@ -1,4 +1,5 @@
-// var env = require('dotenv').load();
+require('dotenv').config();
+
 const { TEST_DB_URL,
  MAILGUN_KEY,
  MAILGUN_DOMAIN,
@@ -78,7 +79,7 @@ const creds = {
   // Required if `useCookieInsteadOfSession` is set to true. You can provide multiple set of key/iv pairs for key
   // rollover purpose. We always use the first set of key/iv pair to encrypt cookie, but we will try every set of
   // key/iv pair to decrypt cookie. Key can be any string of length 32, and iv can be any string of length 12.
-  cookieEncryptionKeys: COOKIE_ENCRYPTION_KEYS,
+  cookieEncryptionKeys: JSON.parse(COOKIE_ENCRYPTION_KEYS),
 
   // Optional. The additional scope you want besides 'openid', for example: ['email', 'profile'].
   scope: null,
