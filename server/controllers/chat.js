@@ -2,6 +2,7 @@ const functions = require('./chatFunctions.js');
 const fs = require('fs');
 const opn = require('opn');
 const path = require('path');
+const config = require('../config/main.js');
 let ai, caseType;
 
 /*set the ai temporarily to small claims agent only*/
@@ -13,13 +14,17 @@ let ai, caseType;
 
 
 // const projectId = "courtney-smallclaims-test"; //no need to provide projectId, already in json file
-const environmentId = process.env.ENVIRONMENT_ID;
 const dialogflow = require('dialogflow').v2beta1;
-//import json to gRPC struct converter
-// const structjson = require('./structjson.js');
-const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, "../../Courtney-SmallClaims-Test-49ee3be58ac8.json")});
+// const keyFilename = process.env.KEY_FILENAME_PATH;
+// const environmentId = process.env.ENVIRONMENT_ID;
+const user = '-';
 //language hard-coded as "en-US" for now
 const languageCode = 'en-US';
+//import json to gRPC struct converter
+// const structjson = require('./structjson.js');
+const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, config.keyFilename)});
+
+
 //import events dictionary
 const events = require('../buttons2Events.js').buttons2Events;
 
@@ -68,7 +73,7 @@ exports.getMessageResponse = (req, res) => {
         const sessionId = req.body.id;
         // const options = {sessionId: req.body.id};
         const sessionPath = 
-        sessionClient.environmentSessionPath(projectId, environmentId, user, sessionId); 
+        sessionClient.environmentSessionPath(projectId, config.environmentId, user, sessionId); 
         // sessionClient.sessionPath(projectId, sessionId);
 
         console.log("SessionPath: ", sessionPath);

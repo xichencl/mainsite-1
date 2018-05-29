@@ -12,9 +12,7 @@ const express = require('express'),
   MongoStore = require('connect-mongo')(expressSession),
   passport = require('passport'),
   cookieParser = require('cookie-parser');
-  require('dotenv').config(); //import all vars from .env as process.env
 
-console.log("process.env");
 // Database Setup
 mongoose.Promise = require('bluebird');
 //connect to test database
