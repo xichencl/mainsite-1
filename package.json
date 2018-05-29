@@ -4,8 +4,8 @@
   "description": "working code for mainsite",
   "main": "index.js",
   "scripts": {
-    "test": "webpack-dev-server --env.NODE_ENV=local --hot --inline",
-    "start": "webpack --env.NODE_ENV=prod && nodemon ./server/index.js"
+    "test": "webpack-dev-server --env.NODE_ENV=frontend_test --hot --inline",
+    "start": "webpack --env.NODE_ENV=full_test && nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "deepcopy": "^0.6.3",
     "dialogflow": "^0.4.0",
     "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.5",
     "express": "^4.13.4",
     "express-session": "^1.15.6",
     "file-loader": "^0.11.2",

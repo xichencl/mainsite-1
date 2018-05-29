@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = (env) => {
   console.log(env);
@@ -115,31 +116,62 @@ const config = (env) => {
     proxy: {'/api':'http://52.39.81.245:3000'},
     */
   },
-  plugins: [new webpack.DefinePlugin({ 'process.env':  
-        { 
-          API_BASE_URL: JSON.stringify(process.env.API_BASE_URL),
-          API_SPACE_ID: JSON.stringify(process.env.API_SPACE_ID),
-          API_TOKEN: JSON.stringify(process.env.API_TOKEN),
-          SMALL_CLAIMS_ID: JSON.stringify(process.env.SMALL_CLAIMS_ID) 
-        } 
-        })].concat(env.NODE_ENV === 'prod' ? [ //env.NODE_ENV is set when webpack is called on cmd
-          new webpack.optimize.OccurrenceOrderPlugin(),
-          new UglifyJSPlugin({
-            sourceMap: true,
-            uglifyOptions: {
-              properties: {
-                compress: {
-                  warnings: false,
-                  comparisons: false, // don't optimize comparisons
+  plugins: 
+    function(){
+      switch (env.NODE_ENV) {
+        case 'prod' || 'dev':
+        //prod env vars already set up in server
+          return [
+            new webpack.DefinePlugin({ 'process.env':  
+                { 
+                  API_BASE_URL: JSON.stringify(process.env.API_BASE_URL),
+                  API_SPACE_ID: JSON.stringify(process.env.API_SPACE_ID),
+                  API_TOKEN: JSON.stringify(process.env.API_TOKEN),
+                  SMALL_CLAIMS_ID: JSON.stringify(process.env.SMALL_CLAIMS_ID) 
+                } 
+            }), 
+            new webpack.optimize.OccurrenceOrderPlugin(),
+            new UglifyJSPlugin({
+              sourceMap: true,
+              uglifyOptions: {
+                properties: {
+                  compress: {
+                    warnings: false,
+                    comparisons: false, // don't optimize comparisons
+                  },
                 },
               },
-            },
-          }),
-          new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
-        ] 
-        :
-        [new webpack.optimize.OccurrenceOrderPlugin(),
-         new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: true})])
+            }),
+            new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
+          ];
+        case 'full_test':
+        //extract env vars from .env file
+          return [
+            new Dotenv(), 
+            new webpack.optimize.OccurrenceOrderPlugin(),
+            new UglifyJSPlugin({
+              sourceMap: true,
+              uglifyOptions: {
+                properties: {
+                  compress: {
+                    warnings: false,
+                    comparisons: false, // don't optimize comparisons
+                  },
+                },
+              },
+            }),
+            new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
+          ];
+        case 'frontend_test':
+          return [
+            new Dotenv(), 
+            new webpack.optimize.OccurrenceOrderPlugin(),
+            new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
+          ];
+        default:
+          return;
+      }
+    }()
   };
 };
 
