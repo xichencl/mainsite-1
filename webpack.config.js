@@ -115,30 +115,32 @@ const config = (env) => {
     proxy: {'/api':'http://52.39.81.245:3000'},
     */
   },
-  plugins: env.NODE_ENV === 'prod' ? [
-  /*switch to production to enable ExtractTextPlugin for*/
-    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') } }),
-    // new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('development') } }),
-    // new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new UglifyJSPlugin({
-      sourceMap: true,
-      uglifyOptions: {
-        properties: {
-          compress: {
-            warnings: false,
-            comparisons: false, // don't optimize comparisons
-          },
-        },
-      },
-    }),
-    new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
-  ] 
-  :
-  [new webpack.optimize.OccurrenceOrderPlugin(),
-   new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: true})]
-  ,
-};
+  plugins: [new webpack.DefinePlugin({ 'process.env':  
+        { 
+          API_BASE_URL: JSON.stringify(process.env.API_BASE_URL),
+          API_SPACE_ID: JSON.stringify(process.env.API_SPACE_ID),
+          API_TOKEN: JSON.stringify(process.env.API_TOKEN),
+          SMALL_CLAIMS_ID: JSON.stringify(process.env.SMALL_CLAIMS_ID) 
+        } 
+        })].concat(env.NODE_ENV === 'prod' ? [ //env.NODE_ENV is set when webpack is called on cmd
+          new webpack.optimize.OccurrenceOrderPlugin(),
+          new UglifyJSPlugin({
+            sourceMap: true,
+            uglifyOptions: {
+              properties: {
+                compress: {
+                  warnings: false,
+                  comparisons: false, // don't optimize comparisons
+                },
+              },
+            },
+          }),
+          new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: false}),
+        ] 
+        :
+        [new webpack.optimize.OccurrenceOrderPlugin(),
+         new ExtractTextPlugin({ filename: '/src/public/stylesheets/app.css', allChunks: true, disable: true})])
+  };
 };
 
 module.exports = config;

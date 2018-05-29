@@ -24,7 +24,7 @@ mongoose.connect(config.database, { useMongoClient: true })
 
 // Start the server
 let server;
-const port = process.env.PORT || config.test_port; 
+const port = process.env.PORT || config.testPort; 
 server = app.listen(port);
 console.log(`Your server is running on port ${port}.`);
 

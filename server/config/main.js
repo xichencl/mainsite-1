@@ -14,6 +14,8 @@ const { TEST_DB_URL,
  DESTROY_URL,
  KEY_FILENAME_PATH,
  ENVIRONMENT_ID,
+ PROJECT_ID,
+ USER,
  NODE_ENV } = process.env;
 // console.log(process.env);
 
@@ -87,6 +89,7 @@ const creds = {
 };
 
 module.exports = {
+  testPort: 3000,
   // Secret key for JWT signing and encryption
   secret: JWT_SECRET,
   
@@ -130,6 +133,8 @@ module.exports = {
 
 //dialogflow
   keyFilename: KEY_FILENAME_PATH,
-  environmentId: ENVIRONMENT_ID
+  environmentId: ENVIRONMENT_ID,
+  projectId: PROJECT_ID,
+  user: USER
 
 };

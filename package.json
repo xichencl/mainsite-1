@@ -4,7 +4,7 @@
   "description": "working code for mainsite",
   "main": "index.js",
   "scripts": {
-    "test": "webpack-dev-server --env.NODE_ENV=dev --hot --inline",
+    "test": "webpack-dev-server --env.NODE_ENV=local --hot --inline",
     "start": "webpack --env.NODE_ENV=prod && nodemon ./server/index.js"
   },
   "repository": {
