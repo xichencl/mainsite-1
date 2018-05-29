@@ -16,6 +16,8 @@ const { TEST_DB_URL,
  ENVIRONMENT_ID,
  PROJECT_ID,
  USER,
+ CLIENT_EMAIL,
+ PRIVATE_KEY,
  NODE_ENV } = process.env;
 // console.log(process.env);
 
@@ -135,6 +137,8 @@ module.exports = {
   keyFilename: KEY_FILENAME_PATH,
   environmentId: ENVIRONMENT_ID,
   projectId: PROJECT_ID,
-  user: USER
+  user: USER,
+  clientEmail: CLIENT_EMAIL,
+  privateKey: PRIVATE_KEY
 
 };

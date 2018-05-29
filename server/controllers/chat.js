@@ -22,7 +22,14 @@ const user = '-';
 const languageCode = 'en-US';
 //import json to gRPC struct converter
 // const structjson = require('./structjson.js');
-const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, config.keyFilename)});
+// const sessionClient = new dialogflow.SessionsClient({keyFilename: path.join(__dirname, config.keyFilename)});
+const options = { 
+  credentials : {
+    client_email: config.clientEmail,
+    private_key: config.privateKey
+  }
+}
+const sessionClient = new dialogflow.SessionsClient(options);
 
 
 //import events dictionary
@@ -72,9 +79,11 @@ exports.getMessageResponse = (req, res) => {
         
         const sessionId = req.body.id;
         // const options = {sessionId: req.body.id};
-        const sessionPath = 
-        sessionClient.environmentSessionPath(config.projectId, config.environmentId, config.user, sessionId); 
-        // sessionClient.sessionPath(projectId, sessionId);
+        const sessionPath = process.env.NODE_ENV === 'prod' ?
+        //a stable version
+        sessionClient.environmentSessionPath(config.projectId, config.environmentId, config.user, sessionId) : 
+        //the draft version
+        sessionClient.sessionPath(config.projectId, sessionId);
 
         console.log("SessionPath: ", sessionPath);
 
