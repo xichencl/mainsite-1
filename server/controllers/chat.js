@@ -117,7 +117,7 @@ exports.getMessageResponse = (req, res) => {
           sessionClient
             .detectIntent(request)
             .then(responses => {
-              console.log(JSON.stringify(responses));
+              // console.log(JSON.stringify(responses));
               res.send(responses[0].queryResult);
             })
             .catch(err => {
@@ -141,7 +141,7 @@ exports.getMessageResponse = (req, res) => {
             .detectIntent(request)
             .then(responses => {
               // console.log('Detected intent');
-              console.log("Response", JSON.stringify(responses));
+              // console.log("Response", JSON.stringify(responses));
               const result = responses[0].queryResult;
               res.send(result);
             })

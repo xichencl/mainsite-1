@@ -188,5 +188,11 @@ exports.buttons2Events =
   },
   "Car Accident": {
     "name": "sc_car_accident"
+  },
+  "Suing": {
+    "name": "sc_how_to_begin_event"
+  },
+  "Being Sued": {
+    "name": "sc_being_sued_event"
   }
 }
