@@ -1,4 +1,5 @@
-// var env = require('dotenv').load();
+require('dotenv').config();
+
 const { TEST_DB_URL,
  MAILGUN_KEY,
  MAILGUN_DOMAIN,
@@ -9,9 +10,15 @@ const { TEST_DB_URL,
  COSMOSDB_CONNSTR,
  COSMOSDB_DBNAME,
  JWT_SECRET,
+ REDIRECT_URL,
+ DESTROY_URL,
+ KEY_FILENAME_PATH,
+ ENVIRONMENT_ID,
+ PROJECT_ID,
+ USER,
+ CLIENT_EMAIL,
+ PRIVATE_KEY,
  NODE_ENV } = process.env;
- 
- console.log("COOKIE encryption keys: ", COOKIE_ENCRYPTION_KEYS);
 // console.log(process.env);
 
 //auth settings
@@ -35,14 +42,7 @@ const creds = {
   responseMode: 'form_post', 
 
   // Required, the reply URL registered in AAD for your app
-  //local dev
-  // redirectUrl: (NODE_ENV === 'dev_server') ? 
-  // 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return': 
-  // 'http://localhost:3000/api/auth/openid/return',
-  //dev server
-  // redirectUrl: 'http://dev-vshs-portal.ad.cc-courts.org/api/auth/openid/return',  
-  //DMZ server 
-  redirectUrl: 'http://dev-vshs.cc-courthelp.org/api/auth/openid/return',
+  redirectUrl: REDIRECT_URL,
 
   // Required if we use http for redirectUrl
   allowHttpForRedirectUrl: true,
@@ -91,18 +91,20 @@ const creds = {
 };
 
 module.exports = {
+  testPort: 3000,
   // Secret key for JWT signing and encryption
   secret: JWT_SECRET,
-  // Database connection information
-  // database: 'mongodb://localhost:27017',
-  // test_database: TEST_DB_URL,
+  
+  //TEMPORARY - USE COSMOSDB EMULATOR FOR BOTH LOCAL AND DMZ DEV 
+  database: 
+    NODE_ENV !== 'prod' ? 
+    // use cosmos db emulator for 
+    TEST_DB_URL : 
+    //azure cosmos db
+    COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb"
+  ,
 
-  //Cosmos DB Emulator
-  test_database: 'mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true',
-  // test_db_url: 'https://localhost:8081',
-  database: COSMOSDB_CONNSTR+COSMOSDB_DBNAME+"?ssl=true&replicaSet=globaldb",
-  // Setting port for server
-  // port: 3000,
+//smtp mail setup
   // Configuring Mailgun API for sending transactional email
   // Rt now using authorized accounts only for testing -->
   mailgun_priv_key: MAILGUN_KEY,
@@ -114,31 +116,29 @@ module.exports = {
   sendgridApiKey: 'sendgrid api key here',
   // Stripe API key
   stripeApiKey: 'stripe api key goes here',
-  // necessary in order to run tests in parallel of the main app
-  test_port: 3000,
-  test_db: 'mern-starter-test',
-  // dev_server: 'development',
+  
+//credentials for Azure sign-in
   creds: creds,
+    // Optional.
+  // If you want to get access_token for a specific resource, you can provide the resource here; otherwise, 
+  // set the value to null.
+  // Note that in order to get access_token, the responseType must be 'code', 'code id_token' or 'id_token code'.
+  resourceURL: 'https://graph.windows.net',
+  // The url you need to go to destroy the session with AAD
+  destroySessionUrl: DESTROY_URL,
+  // If you want to use the mongoDB session store for session middleware; otherwise we will use the default
+  // session store provided by express-session.
+  // Note that the default session store is designed for development purpose only.
+  useMongoDBSessionStore: true,
+  // How long you want to keep session in mongoDB.
+  mongoDBSessionMaxAge: 24 * 60 * 60,  // 1 day (unit is second),
 
-  // Optional.
-// If you want to get access_token for a specific resource, you can provide the resource here; otherwise, 
-// set the value to null.
-// Note that in order to get access_token, the responseType must be 'code', 'code id_token' or 'id_token code'.
-resourceURL: 'https://graph.windows.net',
+//dialogflow
+  keyFilename: KEY_FILENAME_PATH,
+  environmentId: ENVIRONMENT_ID,
+  projectId: PROJECT_ID,
+  user: USER,
+  clientEmail: CLIENT_EMAIL,
+  privateKey: PRIVATE_KEY
 
-// The url you need to go to destroy the session with AAD
-// destroySessionUrl: (NODE_ENV === 'dev_server') ?
-// 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs-portal.ad.cc-courts.org':
-// 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://localhost:3000',
-
-destroySessionUrl: 'https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=http://dev-vshs.cc-courthelp.org',
-
-// If you want to use the mongoDB session store for session middleware; otherwise we will use the default
-// session store provided by express-session.
-// Note that the default session store is designed for development purpose only.
-useMongoDBSessionStore: true,
-
-
-// How long you want to keep session in mongoDB.
-mongoDBSessionMaxAge: 24 * 60 * 60  // 1 day (unit is second)
 };
