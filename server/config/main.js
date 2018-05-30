@@ -139,6 +139,6 @@ module.exports = {
   projectId: PROJECT_ID,
   user: USER,
   clientEmail: CLIENT_EMAIL,
-  privateKey: PRIVATE_KEY
+  privateKey: process.env.NODE_ENV === 'local' ? PRIVATE_KEY : JSON.parse(PRIVATE_KEY) //use JSON.parse in dev and prod env to parse env vars
 
 };
