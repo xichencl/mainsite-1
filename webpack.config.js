@@ -119,7 +119,8 @@ const config = (env) => {
   plugins: 
     function(){
       switch (env.NODE_ENV) {
-        case 'prod' || 'dev':
+        case 'dev':
+        case 'prod':
         //prod env vars already set up in server
           return [
             new webpack.DefinePlugin({ 'process.env':  
