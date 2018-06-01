@@ -7,6 +7,8 @@ class Chatbox extends React.Component {
   constructor(props) {
     super(props);
     this.scrollToBottom = this.scrollToBottom.bind(this);
+    this.state = { key: 0 };
+    this.newMsgRef = React.createRef();
   }
 
   scrollToBottom() {
@@ -15,10 +17,12 @@ class Chatbox extends React.Component {
 
   componentDidMount() {
     this.scrollToBottom();
+    this.setState({ key: this.props.chatlog.length })
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
+    this.setState({ key: this.props.chatlog.length })
   }
   render() {
     let className = '';
@@ -31,23 +35,28 @@ class Chatbox extends React.Component {
 
     return (
       <div className={className}>
+
         {this.props.chatlog.map((value, key) => {
-          console.log(value);
+          console.log(value, key);
+          console.log("state key: ", this.state.key)
           return (
             <ChatBubble
               {...value} // spread operator
               key={key}
               sessionId={this.props.sessionId}
               theme={this.props.theme}
+              ref={(this.state.key === key) ?  this.newMsgRef : null}
             />
           );
         })}
-        <div
+
+       {/* <div
           className="clear"
           ref={(el) => {
             this.messagesEnd = el;
           }}
-        />
+        /> */} 
+        
       </div>
     );
   }
